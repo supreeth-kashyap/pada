@@ -1,8 +1,92 @@
 .button {
-  background-color: #007bff;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-2);
+  font-weight: 500;
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.button:focus {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+/* Variants */
+.button--primary {
+  background-color: var(--color-primary-500);
+  color: white;
+  border: 1px solid var(--color-primary-500);
+}
+.button--primary:hover {
+  background-color: var(--color-primary-600);
+}
+
+.button--secondary {
+  background-color: var(--color-secondary-100);
+  color: var(--color-secondary-700);
+  border: 1px solid var(--color-secondary-200);
+}
+.button--secondary:hover {
+  background-color: var(--color-secondary-200);
+}
+
+.button--ghost {
+  background-color: transparent;
+  color: var(--color-fg);
+  border: 1px solid transparent;
+}
+.button--ghost:hover {
+  background-color: var(--color-secondary-100);
+}
+
+.button--link {
+  background-color: transparent;
+  color: var(--color-primary-500);
+  border: 1px solid transparent;
+  text-decoration: underline;
+}
+.button--link:hover {
+  color: var(--color-primary-600);
+}
+
+.button--destructive {
+  background-color: var(--color-red-500);
+  color: white;
+  border: 1px solid var(--color-red-500);
+}
+.button--destructive:hover {
+  background-color: var(--color-red-600);
+}
+
+/* Sizes */
+.button--xs {
+  padding: var(--space-1) var(--space-2);
+  font-size: var(--font-1);
+}
+
+.button--sm {
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--font-2);
+}
+
+.button--md {
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--font-3);
+}
+
+.button--lg {
+  padding: var(--space-3) var(--space-5);
+  font-size: var(--font-4);
+}
+
+.button--xl {
+  padding: var(--space-4) var(--space-6);
+  font-size: var(--font-5);
+}
+
+.button--2xl {
+  padding: var(--space-5) var(--space-6);
+  font-size: var(--font-6);
 }

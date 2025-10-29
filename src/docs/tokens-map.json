@@ -1,0 +1,28 @@
+{
+  "color": [
+    {
+      "semantic": "--color-primary-600",
+      "primitive": "--tw-color-indigo-600"
+    },
+    {
+      "semantic": "--color-secondary-500",
+      "primitive": "--tw-color-slate-500"
+    },
+    {
+      "semantic": "--color-accent-400",
+      "primitive": "--tw-color-emerald-400"
+    }
+  ],
+  "space": [
+    {
+      "semantic": "--space-4",
+      "primitive": "--tw-spacing-6"
+    }
+  ],
+  "radius": [
+    {
+      "semantic": "--radius-3",
+      "primitive": "--tw-radius-md"
+    }
+  ]
+}
