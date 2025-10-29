@@ -6,7 +6,8 @@
         "-y",
         "firebase-tools@latest",
         "experimental:mcp"
-      ]
+      ],
+      "timeout": 600000
     }
   }
 }
