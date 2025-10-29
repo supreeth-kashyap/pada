@@ -72,7 +72,7 @@ const App = () => {
 
   return (
     <div style={{ padding: 'var(--space-6)', backgroundColor:'var(--color-bg)' }}>
-      <h1>Design System Demo</h1>
+      <h1>Pada Design System</h1>
       <button onClick={toggleTheme}>Toggle Theme</button>
 
       <h2>Modal</h2>

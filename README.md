@@ -1,13 +1,15 @@
-# myapp
+# Pada Design System
+
+![Pada Design System Demo](src/assets/pada-design-system-demo.png)
 
 This is a React design system built with Vite. It includes a set of reusable components and a demo application to showcase them.
 
 ## Installation
 
-To install the dependencies, run:
+To install the design system, run:
 
 ```bash
-npm install
+npm install pada
 ```
 
 ## Usage
@@ -40,8 +42,8 @@ Here are some examples of how to use the components:
 
 ```jsx
 import React from 'react';
-import { Button } from './components/Button';
-import { Input } from './components/Input';
+import { Button } from 'pada/components/Button';
+import { Input } from 'pada/components/Input';
 
 const App = () => (
   <div>
