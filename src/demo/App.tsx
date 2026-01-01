@@ -12,6 +12,7 @@ import { Tabs, TabPanel } from '../components/Tabs';
 import { Select } from '../components/Select';
 import { Tooltip } from '../components/Tooltip';
 import { Progress } from '../components/Progress';
+import { Icon, type IconSize, type IconColor, type IconVariant } from '../components/Icon';
 
 const App = () => {
   const [theme, setTheme] = useState('light');
@@ -57,6 +58,9 @@ const App = () => {
   const shades = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900];
   const buttonVariants: ButtonVariant[] = ['primary', 'secondary', 'ghost', 'link', 'destructive'];
   const buttonSizes: ButtonSize[] = ['xs', 'sm', 'md', 'lg', 'xl', '2xl'];
+  const iconSizes: IconSize[] = ['xs', 'sm', 'md', 'lg', 'xl', '2xl'];
+  const iconColors: IconColor[] = ['Icy', 'Green', 'Yellow', 'Red', 'Blue', 'Purple', 'Magenta', 'Tangerine', 'White'];
+  const iconVariants: IconVariant[] = ['outlined', 'filled'];
   const radioOptions = [
     { label: 'React', value: 'react' },
     { label: 'Vue', value: 'vue' },
@@ -127,6 +131,72 @@ const App = () => {
         </Tooltip>
         <Progress label="Loading..." value={progressValue} />
         <Button onClick={() => setProgressValue(Math.random() * 100)}>Randomize Progress</Button>
+      </div>
+
+      <h2>Icons</h2>
+      
+      <h3>Icon Sizes</h3>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)', marginBottom: 'var(--space-6)' }}>
+        {iconSizes.map(size => (
+          <div key={size} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-2)' }}>
+            <Icon name="alert_1" size={size} color="Icy" />
+            <span style={{ fontSize: '12px' }}>{size}</span>
+          </div>
+        ))}
+      </div>
+
+      <h3>Icon Colors (Outlined)</h3>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)', marginBottom: 'var(--space-6)', flexWrap: 'wrap' }}>
+        {iconColors.map(color => (
+          <div key={color} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-2)' }}>
+            <Icon name="security" size="lg" color={color} variant="outlined" />
+            <span style={{ fontSize: '12px' }}>{color}</span>
+          </div>
+        ))}
+      </div>
+
+      <h3>Icon Colors (Filled)</h3>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)', marginBottom: 'var(--space-6)', flexWrap: 'wrap' }}>
+        {iconColors.map(color => (
+          <div key={color} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-2)' }}>
+            <Icon name="security" size="lg" color={color} variant="filled" />
+            <span style={{ fontSize: '12px' }}>{color}</span>
+          </div>
+        ))}
+      </div>
+
+      <h3>Icons with Background</h3>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)', marginBottom: 'var(--space-6)', flexWrap: 'wrap' }}>
+        {iconColors.slice(0, 5).map(color => (
+          <div key={color} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-2)' }}>
+            <Icon name="approve" size="lg" color={color} variant="outlined" background={true} />
+            <span style={{ fontSize: '12px' }}>{color} + bg</span>
+          </div>
+        ))}
+      </div>
+
+      <h3>Icon Variants Comparison</h3>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-6)', marginBottom: 'var(--space-6)' }}>
+        {iconVariants.map(variant => (
+          <div key={variant} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-2)' }}>
+            <Icon name="bell" size="xl" color="Blue" variant={variant} />
+            <span style={{ fontSize: '12px' }}>{variant}</span>
+          </div>
+        ))}
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-2)' }}>
+          <Icon name="bell" size="xl" color="Blue" variant="outlined" background={true} />
+          <span style={{ fontSize: '12px' }}>with background</span>
+        </div>
+      </div>
+
+      <h3>Different Icons Showcase</h3>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(120px, 1fr))', gap: 'var(--space-4)', marginBottom: 'var(--space-6)' }}>
+        {['alert_1', 'security', 'approve', 'bell', 'dashboard', 'cog', 'user_default', 'search', 'help', 'info'].map(iconName => (
+          <div key={iconName} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-2)' }}>
+            <Icon name={iconName} size="lg" color="Icy" />
+            <span style={{ fontSize: '11px', textAlign: 'center' }}>{iconName}</span>
+          </div>
+        ))}
       </div>
 
       <h2>Buttons</h2>

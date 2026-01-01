@@ -1,0 +1,144 @@
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.icon__svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Sizes */
+.icon--xs {
+  width: 12px;
+  height: 12px;
+}
+
+.icon--sm {
+  width: 16px;
+  height: 16px;
+}
+
+.icon--md {
+  width: 20px;
+  height: 20px;
+}
+
+.icon--lg {
+  width: 24px;
+  height: 24px;
+}
+
+.icon--xl {
+  width: 32px;
+  height: 32px;
+}
+
+.icon--2xl {
+  width: 40px;
+  height: 40px;
+}
+
+/* Color variants - Icy (default/gray) */
+.icon--icy .icon__svg {
+  filter: brightness(0) saturate(100%) invert(13%) sepia(8%) saturate(1015%) hue-rotate(169deg) brightness(95%) contrast(89%);
+}
+
+/* Color variants - Green */
+.icon--green .icon__svg {
+  filter: brightness(0) saturate(100%) invert(60%) sepia(98%) saturate(1352%) hue-rotate(88deg) brightness(95%) contrast(85%);
+}
+
+/* Color variants - Yellow */
+.icon--yellow .icon__svg {
+  filter: brightness(0) saturate(100%) invert(88%) sepia(98%) saturate(1352%) hue-rotate(358deg) brightness(105%) contrast(95%);
+}
+
+/* Color variants - Red */
+.icon--red .icon__svg {
+  filter: brightness(0) saturate(100%) invert(27%) sepia(95%) saturate(1352%) hue-rotate(346deg) brightness(95%) contrast(85%);
+}
+
+/* Color variants - Blue */
+.icon--blue .icon__svg {
+  filter: brightness(0) saturate(100%) invert(40%) sepia(98%) saturate(1352%) hue-rotate(195deg) brightness(95%) contrast(95%);
+}
+
+/* Color variants - Purple */
+.icon--purple .icon__svg {
+  filter: brightness(0) saturate(100%) invert(48%) sepia(98%) saturate(1352%) hue-rotate(250deg) brightness(95%) contrast(95%);
+}
+
+/* Color variants - Magenta */
+.icon--magenta .icon__svg {
+  filter: brightness(0) saturate(100%) invert(45%) sepia(98%) saturate(1352%) hue-rotate(290deg) brightness(95%) contrast(95%);
+}
+
+/* Color variants - Tangerine */
+.icon--tangerine .icon__svg {
+  filter: brightness(0) saturate(100%) invert(60%) sepia(98%) saturate(1352%) hue-rotate(5deg) brightness(95%) contrast(95%);
+}
+
+/* Color variants - White */
+.icon--white .icon__svg {
+  filter: brightness(0) saturate(100%) invert(100%);
+}
+
+/* Variant - Filled */
+.icon--filled .icon__svg {
+  /* For filled variants, we may need to adjust the SVG or use different approach */
+  /* This will depend on how the SVG files are structured */
+}
+
+/* Background variants */
+.icon--background {
+  border-radius: var(--tw-radius, 0.25rem);
+  padding: var(--tw-spacing-1, 0.25rem);
+}
+
+/* Light background colors (pastel) */
+.icon--icy.icon--background {
+  background-color: var(--tw-color-slate-100, #f1f5f9);
+}
+
+.icon--green.icon--background {
+  background-color: var(--tw-color-green-100, #dcfce7);
+}
+
+.icon--yellow.icon--background {
+  background-color: var(--tw-color-yellow-100, #fef9c3);
+}
+
+.icon--red.icon--background {
+  background-color: var(--tw-color-red-100, #fee2e2);
+}
+
+.icon--blue.icon--background {
+  background-color: var(--tw-color-blue-100, #dbeafe);
+}
+
+.icon--purple.icon--background {
+  background-color: var(--tw-color-purple-100, #f3e8ff);
+}
+
+.icon--magenta.icon--background {
+  background-color: var(--tw-color-fuchsia-100, #fae8ff);
+}
+
+.icon--tangerine.icon--background {
+  background-color: var(--tw-color-orange-100, #ffedd5);
+}
+
+.icon--white.icon--background {
+  background-color: var(--tw-color-gray-800, #1f2937);
+}
+
+/* Dark background variant (for white icons) */
+.icon--white.icon--background {
+  background-color: var(--tw-color-gray-800, #1f2937);
+}
+
