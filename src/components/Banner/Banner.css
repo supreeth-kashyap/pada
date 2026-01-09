@@ -1,0 +1,115 @@
+.banner {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: var(--spacing-3);
+  border-radius: var(--radius-xl);
+  border: 1px solid;
+  gap: var(--spacing-4);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.banner__content {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-2);
+  flex: 1;
+  min-width: 0;
+}
+
+.banner__icon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.banner__main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-0-5);
+}
+
+.banner__header-row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  flex-wrap: wrap;
+}
+
+.banner__header {
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  line-height: var(--line-height-base);
+  flex: 1;
+  min-width: 0;
+}
+
+.banner__text {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-base);
+  color: var(--color-neutral-900);
+}
+
+.banner__close {
+  flex-shrink: 0;
+  padding: var(--spacing-1);
+  min-width: auto;
+}
+
+.banner__close:hover {
+  opacity: 0.7;
+}
+
+/* Variants */
+.banner--info {
+  background-color: var(--color-accent-blue-50);
+  border-color: var(--color-accent-blue-400);
+  color: var(--color-accent-blue-700);
+}
+
+.banner--info .banner__header {
+  color: var(--color-accent-blue-700);
+}
+
+.banner--success {
+  background-color: var(--color-accent-green-50);
+  border-color: var(--color-accent-green-400);
+  color: var(--color-accent-green-700);
+}
+
+.banner--success .banner__header {
+  color: var(--color-accent-green-700);
+}
+
+.banner--warning {
+  background-color: var(--color-accent-yellow-50);
+  border-color: var(--color-accent-yellow-400);
+  color: var(--color-accent-yellow-700);
+}
+
+.banner--warning .banner__header {
+  color: var(--color-accent-yellow-700);
+}
+
+.banner--error {
+  background-color: var(--color-accent-red-50);
+  border-color: var(--color-accent-red-400);
+  color: var(--color-accent-red-700);
+}
+
+.banner--error .banner__header {
+  color: var(--color-accent-red-700);
+}
+
+.banner--neutral {
+  background-color: var(--color-accent-neutral-50);
+  border-color: var(--color-accent-neutral-300);
+  color: var(--color-accent-neutral-700);
+}
+
+.banner--neutral .banner__header {
+  color: var(--color-accent-neutral-900);
+}

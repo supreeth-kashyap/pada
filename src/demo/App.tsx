@@ -15,6 +15,7 @@ import { Progress } from '../components/Progress';
 import { Icon, type IconSize, type IconColor, type IconVariant } from '../components/Icon';
 import { Text, TextSize, TextWeight, TextFamily, TextLineHeight } from '../components/Text';
 import { Accordion } from '../components/Accordion';
+import { Banner } from '../components/Banner';
 
 const App = () => {
   const [theme, setTheme] = useState<string | null>(null);
@@ -24,6 +25,17 @@ const App = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectValue, setSelectValue] = useState('react');
   const [progressValue, setProgressValue] = useState(25);
+  const [bannerVisible, setBannerVisible] = useState({
+    info: true,
+    success: true,
+    warning: true,
+    error: true,
+    neutral: true,
+    noIcon: true,
+    noButton: true,
+    noClose: true,
+    simple: true,
+  });
 
   useEffect(() => {
     if (theme) {
@@ -364,6 +376,135 @@ const App = () => {
             your view and gain deeper insights into your data.
           </Text>
         </Accordion>
+      </div>
+
+      <h2>Banner</h2>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', maxWidth: '800px' }}>
+        {bannerVisible.info && (
+          <Banner
+            header="This is the title"
+            iconName="info"
+            buttonLabel="Action"
+            onButtonClick={() => alert('Action clicked!')}
+            text="This is the body content that provides additional information about the banner message."
+            variant="info"
+            onClose={() => {
+              console.log('Info banner closed');
+              setBannerVisible(prev => ({ ...prev, info: false }));
+            }}
+          />
+        )}
+
+        {bannerVisible.success && (
+          <Banner
+            header="This is the title"
+            iconName="approve"
+            buttonLabel="Action"
+            onButtonClick={() => alert('Action clicked!')}
+            text="This is the body content that provides additional information about the banner message."
+            variant="success"
+            onClose={() => {
+              console.log('Success banner closed');
+              setBannerVisible(prev => ({ ...prev, success: false }));
+            }}
+          />
+        )}
+
+        {bannerVisible.warning && (
+          <Banner
+            header="This is the title"
+            iconName="alert_1"
+            buttonLabel="Action"
+            onButtonClick={() => alert('Action clicked!')}
+            text="This is the body content that provides additional information about the banner message."
+            variant="warning"
+            onClose={() => {
+              console.log('Warning banner closed');
+              setBannerVisible(prev => ({ ...prev, warning: false }));
+            }}
+          />
+        )}
+
+        {bannerVisible.error && (
+          <Banner
+            header="This is the title"
+            iconName="alert_2"
+            buttonLabel="Action"
+            onButtonClick={() => alert('Action clicked!')}
+            text="This is the body content that provides additional information about the banner message."
+            variant="error"
+            onClose={() => {
+              console.log('Error banner closed');
+              setBannerVisible(prev => ({ ...prev, error: false }));
+            }}
+          />
+        )}
+
+        {bannerVisible.neutral && (
+          <Banner
+            header="This is the title"
+            iconName="info"
+            buttonLabel="Action"
+            onButtonClick={() => alert('Action clicked!')}
+            text="This is the body content that provides additional information about the banner message."
+            variant="neutral"
+            onClose={() => {
+              console.log('Neutral banner closed');
+              setBannerVisible(prev => ({ ...prev, neutral: false }));
+            }}
+          />
+        )}
+
+        {bannerVisible.noIcon && (
+          <Banner
+            header="Banner without icon"
+            buttonLabel="Action"
+            onButtonClick={() => alert('Action clicked!')}
+            text="This banner doesn't have an icon because iconName is not provided."
+            variant="info"
+            onClose={() => {
+              console.log('No icon banner closed');
+              setBannerVisible(prev => ({ ...prev, noIcon: false }));
+            }}
+          />
+        )}
+
+        {bannerVisible.noButton && (
+          <Banner
+            header="Banner without button"
+            iconName="info"
+            text="This banner doesn't have an action button."
+            variant="info"
+            onClose={() => {
+              console.log('No button banner closed');
+              setBannerVisible(prev => ({ ...prev, noButton: false }));
+            }}
+          />
+        )}
+
+        {bannerVisible.noClose && (
+          <Banner
+            header="Banner without close button"
+            iconName="info"
+            buttonLabel="Action"
+            onButtonClick={() => alert('Action clicked!')}
+            text="This banner doesn't have a close button."
+            variant="info"
+          />
+        )}
+
+        {bannerVisible.simple && (
+          <Banner
+            header="Simple banner with just header and text"
+            iconName="info"
+            text="This is a simple banner with only header and body text, no buttons."
+            variant="info"
+            onClose={() => {
+              console.log('Simple banner closed');
+              setBannerVisible(prev => ({ ...prev, simple: false }));
+            }}
+          />
+        )}
       </div>
 
       <h2>Buttons</h2>
