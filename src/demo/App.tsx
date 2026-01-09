@@ -15,7 +15,7 @@ import { Progress } from '../components/Progress';
 import { Icon, type IconSize, type IconColor, type IconVariant } from '../components/Icon';
 
 const App = () => {
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState<string | null>(null);
   const [isChecked, setIsChecked] = useState(false);
   const [radioValue, setRadioValue] = useState('react');
   const [isSwitchOn, setIsSwitchOn] = useState(false);
@@ -24,11 +24,20 @@ const App = () => {
   const [progressValue, setProgressValue] = useState(25);
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
+    if (theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+    }
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
+    setTheme(prevTheme => {
+      if (prevTheme === 'light') return 'dark';
+      if (prevTheme === 'dark') return 'light';
+      // If null, toggle to light (CSS will handle system preference when null)
+      return 'light';
+    });
   };
 
   const ColorSwatch = ({ colorName, colorVar }) => (
