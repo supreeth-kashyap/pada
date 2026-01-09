@@ -13,6 +13,7 @@ import { Select } from '../components/Select';
 import { Tooltip } from '../components/Tooltip';
 import { Progress } from '../components/Progress';
 import { Icon, type IconSize, type IconColor, type IconVariant } from '../components/Icon';
+import { Text, TextSize, TextWeight, TextFamily, TextLineHeight } from '../components/Text';
 
 const App = () => {
   const [theme, setTheme] = useState<string | null>(null);
@@ -206,6 +207,96 @@ const App = () => {
             <span style={{ fontSize: '11px', textAlign: 'center' }}>{iconName}</span>
           </div>
         ))}
+      </div>
+
+      <h2>Text</h2>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
+        <div>
+          <h3>Text Sizes</h3>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
+            <Text size={TextSize.XS}>Extra Small Text (XS)</Text>
+            <Text size={TextSize.SM}>Small Text (SM)</Text>
+            <Text size={TextSize.BASE}>Base Text (BASE)</Text>
+            <Text size={TextSize.LG}>Large Text (LG)</Text>
+            <Text size={TextSize.XL}>Extra Large Text (XL)</Text>
+            <Text size={TextSize['2XL']}>2XL Text</Text>
+            <Text size={TextSize['3XL']}>3XL Text</Text>
+            <Text size={TextSize['4XL']}>4XL Text</Text>
+          </div>
+        </div>
+
+        <div>
+          <h3>Font Weights</h3>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
+            <Text weight={TextWeight.THIN}>Thin (100)</Text>
+            <Text weight={TextWeight.LIGHT}>Light (300)</Text>
+            <Text weight={TextWeight.NORMAL}>Normal (400)</Text>
+            <Text weight={TextWeight.MEDIUM}>Medium (500)</Text>
+            <Text weight={TextWeight.SEMIBOLD}>Semibold (600)</Text>
+            <Text weight={TextWeight.BOLD}>Bold (700)</Text>
+            <Text weight={TextWeight.EXTRABOLD}>Extra Bold (800)</Text>
+            <Text weight={TextWeight.BLACK}>Black (900)</Text>
+          </div>
+        </div>
+
+        <div>
+          <h3>Font Families</h3>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
+            <Text family={TextFamily.SANS}>Sans Serif Font Family</Text>
+            <Text family={TextFamily.SERIF}>Serif Font Family</Text>
+            <Text family={TextFamily.MONO}>Monospace Font Family</Text>
+          </div>
+        </div>
+
+        <div>
+          <h3>Line Heights</h3>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)', maxWidth: '400px' }}>
+            <Text lineHeight={TextLineHeight.XS}>Extra Small Line Height - This is a longer text to demonstrate how line height affects the spacing between lines of text.</Text>
+            <Text lineHeight={TextLineHeight.SM}>Small Line Height - This is a longer text to demonstrate how line height affects the spacing between lines of text.</Text>
+            <Text lineHeight={TextLineHeight.BASE}>Base Line Height - This is a longer text to demonstrate how line height affects the spacing between lines of text.</Text>
+            <Text lineHeight={TextLineHeight.LG}>Large Line Height - This is a longer text to demonstrate how line height affects the spacing between lines of text.</Text>
+            <Text lineHeight={TextLineHeight.XL}>Extra Large Line Height - This is a longer text to demonstrate how line height affects the spacing between lines of text.</Text>
+          </div>
+        </div>
+
+        <div>
+          <h3>Colors</h3>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
+            <Text>Default color (neutral-900)</Text>
+            <Text color="var(--color-blue-500)">Blue text</Text>
+            <Text color="var(--color-red-600)">Red text</Text>
+            <Text color="var(--color-green-600)">Green text</Text>
+            <Text color="var(--color-purple-600)">Purple text</Text>
+            <Text color="var(--color-neutral-500)">Muted neutral text</Text>
+          </div>
+        </div>
+
+        <div>
+          <h3>As Different Elements</h3>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
+            <Text as="span">Span element</Text>
+            <Text as="p">Paragraph element</Text>
+            <Text as="div">Div element</Text>
+            <Text as="h1" size={TextSize['4XL']} weight={TextWeight.BOLD}>Heading 1</Text>
+            <Text as="h2" size={TextSize['3XL']} weight={TextWeight.BOLD}>Heading 2</Text>
+            <Text as="h3" size={TextSize['2XL']} weight={TextWeight.SEMIBOLD}>Heading 3</Text>
+          </div>
+        </div>
+
+        <div>
+          <h3>Combined Examples</h3>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
+            <Text size={TextSize.LG} weight={TextWeight.BOLD} color="var(--color-blue-600)">
+              Large, Bold, Blue Text
+            </Text>
+            <Text size={TextSize.XL} weight={TextWeight.SEMIBOLD} family={TextFamily.MONO} color="var(--color-purple-600)">
+              XL, Semibold, Monospace, Purple Text
+            </Text>
+            <Text as="h2" size={TextSize['3XL']} weight={TextWeight.BOLD} lineHeight={TextLineHeight.LG} color="var(--color-green-700)">
+              Heading with Custom Line Height
+            </Text>
+          </div>
+        </div>
       </div>
 
       <h2>Buttons</h2>
