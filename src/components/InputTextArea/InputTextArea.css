@@ -1,0 +1,67 @@
+.input-textarea-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-1);
+}
+
+.input-textarea {
+    font-family: inherit;
+    font-size: var(--font-size-sm);
+    font-weight: 400;
+    line-height: var(--line-height-base);
+    padding: var(--spacing-2-5) var(--spacing-3);
+    border: 1px solid var(--color-neutral-300);
+    border-radius: var(--radius-md);
+    background-color: var(--color-white);
+    color: var(--color-neutral-900);
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    min-height: 80px;
+    resize: vertical;
+    width: 100%;
+}
+
+.input-textarea::placeholder {
+    color: var(--color-neutral-400);
+}
+
+.input-textarea:hover:not(:disabled) {
+    border-color: var(--color-neutral-400);
+}
+
+.input-textarea:focus {
+    outline: none;
+    border-color: var(--color-primary-600);
+    box-shadow: 0 0 0 3px var(--color-primary-50);
+}
+
+.input-textarea--error {
+    border-color: var(--color-accent-red-500);
+}
+
+.input-textarea--error:focus {
+    border-color: var(--color-accent-red-500);
+    box-shadow: 0 0 0 3px var(--color-accent-red-50);
+}
+
+.input-textarea:disabled {
+    background-color: var(--color-neutral-50);
+    color: var(--color-neutral-400);
+    cursor: not-allowed;
+    border-color: var(--color-neutral-200);
+}
+
+.input-textarea-description,
+.input-textarea-error {
+    font-size: var(--font-size-xs);
+    line-height: var(--line-height-base);
+    margin: 0;
+    margin-top: var(--spacing-1);
+}
+
+.input-textarea-description {
+    color: var(--color-neutral-600);
+}
+
+.input-textarea-error {
+    color: var(--color-accent-red-600);
+}
