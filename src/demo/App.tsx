@@ -16,6 +16,7 @@ import { Icon, type IconSize, type IconColor, type IconVariant } from '../compon
 import { Text, TextSize, TextWeight, TextFamily, TextLineHeight } from '../components/Text';
 import { Accordion } from '../components/Accordion';
 import { Banner } from '../components/Banner';
+import { ButtonGroup, type ButtonGroupVariant, type ButtonGroupSize } from '../components/ButtonGroup';
 
 const App = () => {
   const [theme, setTheme] = useState<string | null>(null);
@@ -80,7 +81,7 @@ const App = () => {
   ];
   const shades = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900];
   const buttonVariants: ButtonVariant[] = ['primary', 'secondary', 'ghost', 'link', 'destructive'];
-  const buttonSizes: ButtonSize[] = ['xs', 'sm', 'md', 'lg', 'xl', '2xl'];
+  const buttonSizes: ButtonSize[] = [ 'sm', 'md', 'lg'];
   const iconSizes: IconSize[] = ['xs', 'sm', 'md', 'lg', 'xl', '2xl'];
   const iconColors: IconColor[] = ['Icy', 'Green', 'Yellow', 'Red', 'Blue', 'Purple', 'Magenta', 'Tangerine', 'White'];
   const iconVariants: IconVariant[] = ['outlined', 'filled'];
@@ -508,17 +509,229 @@ const App = () => {
       </div>
 
       <h2>Buttons</h2>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)'}}>
-            {buttonVariants.map(variant => (
-                <div key={variant} style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)'}}>
-                <h3 style={{width: '100px'}}>{variant}</h3>
-                {buttonSizes.map(size => (
-                    <Button key={size} variant={variant} size={size}>
-                    Button
-                    </Button>
-                ))}
-                </div>
-            ))}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)'}}>
+            <div>
+              <h3>All Variants & Sizes</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)'}}>
+                  {buttonVariants.map(variant => (
+                      <div key={variant} style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)', flexWrap: 'wrap'}}>
+                      <h4 style={{width: '120px', minWidth: '120px'}}>{variant}</h4>
+                      {buttonSizes.map(size => (
+                          <Button key={size} variant={variant} size={size}>
+                          Button
+                          </Button>
+                      ))}
+                      </div>
+                  ))}
+              </div>
+            </div>
+
+            <div>
+              <h3>With Icons</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)'}}>
+                  {buttonVariants.map(variant => (
+                      <div key={variant} style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)', flexWrap: 'wrap'}}>
+                      <h4 style={{width: '120px', minWidth: '120px'}}>{variant}</h4>
+                      <Button variant={variant} size="md" leftIcon="security">
+                        With Left Icon
+                      </Button>
+                      <Button variant={variant} size="md" rightIcon="approve">
+                        With Right Icon
+                      </Button>
+                      <Button variant={variant} size="md" leftIcon="security" rightIcon="approve">
+                        Both Icons
+                      </Button>
+                      </div>
+                  ))}
+              </div>
+            </div>
+
+            <div>
+              <h3>States</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)'}}>
+                  {buttonVariants.map(variant => (
+                      <div key={variant} style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)', flexWrap: 'wrap'}}>
+                      <h4 style={{width: '120px', minWidth: '120px'}}>{variant}</h4>
+                      <Button variant={variant} size="md">
+                        Normal
+                      </Button>
+                      <Button variant={variant} size="md" disabled>
+                        Disabled
+                      </Button>
+                      <Button variant={variant} size="md" loading>
+                        Loading
+                      </Button>
+                      </div>
+                  ))}
+              </div>
+            </div>
+        </div>
+
+      <h2>Button Groups</h2>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)'}}>
+            <div>
+              <h3>All Variants & Sizes</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)'}}>
+                  {(['primary', 'secondary'] as ButtonGroupVariant[]).map(variant => (
+                      <div key={variant} style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)'}}>
+                      <h4>{variant}</h4>
+                      {(['sm', 'md', 'lg'] as ButtonGroupSize[]).map(size => (
+                          <div key={size} style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)', flexWrap: 'wrap'}}>
+                          <span style={{width: '60px', minWidth: '60px'}}>{size}</span>
+                          <ButtonGroup 
+                            variant={variant} 
+                            size={size}
+                            items={[
+                              { leftIcon: 'security', children: 'Button' },
+                              { leftIcon: 'security', children: 'Button' }
+                            ]}
+                          />
+                          </div>
+                      ))}
+                      </div>
+                  ))}
+              </div>
+            </div>
+
+            <div>
+              <h3>Button Configurations</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)'}}>
+                  {(['primary', 'secondary'] as ButtonGroupVariant[]).map(variant => (
+                      <div key={variant} style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)'}}>
+                      <h4>{variant}</h4>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)'}}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)', flexWrap: 'wrap'}}>
+                          <span style={{width: '120px', minWidth: '120px'}}>Icon + Label</span>
+                          <ButtonGroup 
+                            variant={variant} 
+                            size="md"
+                            items={[
+                              { leftIcon: 'security', children: 'Button' },
+                              { leftIcon: 'security', children: 'Button' }
+                            ]}
+                          />
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)', flexWrap: 'wrap'}}>
+                          <span style={{width: '120px', minWidth: '120px'}}>Label Only</span>
+                          <ButtonGroup 
+                            variant={variant} 
+                            size="md"
+                            items={[
+                              { children: 'Button' },
+                              { children: 'Button' },
+                              { children: 'Button' }
+                            ]}
+                          />
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)', flexWrap: 'wrap'}}>
+                          <span style={{width: '120px', minWidth: '120px'}}>Icon Only</span>
+                          <ButtonGroup 
+                            variant={variant} 
+                            size="md"
+                            items={[
+                              { leftIcon: 'security' },
+                              { leftIcon: 'approve' },
+                              { leftIcon: 'info' }
+                            ]}
+                          />
+                        </div>
+                      </div>
+                      </div>
+                  ))}
+              </div>
+            </div>
+
+            <div>
+              <h3>Split Action with Overflow (5+ items)</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)'}}>
+                  {(['primary', 'secondary'] as ButtonGroupVariant[]).map(variant => (
+                      <div key={variant} style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)'}}>
+                      <h4>{variant}</h4>
+                      {(['sm', 'md', 'lg'] as ButtonGroupSize[]).map(size => (
+                          <div key={size} style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)', flexWrap: 'wrap'}}>
+                          <span style={{width: '60px', minWidth: '60px'}}>{size}</span>
+                          <ButtonGroup 
+                            variant={variant} 
+                            size={size}
+                            items={[
+                              { leftIcon: 'security', children: 'Button 1', onClick: () => alert('Button 1 clicked') },
+                              { leftIcon: 'security', children: 'Button 2', onClick: () => alert('Button 2 clicked') },
+                              { leftIcon: 'security', children: 'Button 3', onClick: () => alert('Button 3 clicked') },
+                              { leftIcon: 'approve', children: 'Button 4', onClick: () => alert('Button 4 clicked') },
+                              { leftIcon: 'info', children: 'Button 5', onClick: () => alert('Button 5 clicked') },
+                              { children: 'Button 6 (no icon)', onClick: () => alert('Button 6 clicked') },
+                              { children: 'Disabled Button', disabled: true },
+                            ]}
+                          />
+                          </div>
+                      ))}
+                      </div>
+                  ))}
+              </div>
+            </div>
+
+            <div>
+              <h3>Multiple Buttons in Group</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)'}}>
+                  {(['primary', 'secondary'] as ButtonGroupVariant[]).map(variant => (
+                      <div key={variant} style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)'}}>
+                      <h4>{variant}</h4>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)'}}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)', flexWrap: 'wrap'}}>
+                          <span style={{width: '100px', minWidth: '100px'}}>2 buttons</span>
+                          <ButtonGroup 
+                            variant={variant} 
+                            size="md"
+                            items={[
+                              { leftIcon: 'security', children: 'Button' },
+                              { leftIcon: 'security', children: 'Button' }
+                            ]}
+                          />
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)', flexWrap: 'wrap'}}>
+                          <span style={{width: '100px', minWidth: '100px'}}>3 buttons</span>
+                          <ButtonGroup 
+                            variant={variant} 
+                            size="md"
+                            items={[
+                              { leftIcon: 'security', children: 'Button' },
+                              { leftIcon: 'security', children: 'Button' },
+                              { leftIcon: 'security', children: 'Button' }
+                            ]}
+                          />
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)', flexWrap: 'wrap'}}>
+                          <span style={{width: '100px', minWidth: '100px'}}>4 buttons</span>
+                          <ButtonGroup 
+                            variant={variant} 
+                            size="md"
+                            items={[
+                              { leftIcon: 'security', children: 'Button' },
+                              { leftIcon: 'security', children: 'Button' },
+                              { leftIcon: 'security', children: 'Button' },
+                              { leftIcon: 'security', children: 'Button' }
+                            ]}
+                          />
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)', flexWrap: 'wrap'}}>
+                          <span style={{width: '100px', minWidth: '100px'}}>5 buttons</span>
+                          <ButtonGroup 
+                            variant={variant} 
+                            size="md"
+                            items={[
+                              { leftIcon: 'security', children: 'Button' },
+                              { leftIcon: 'security', children: 'Button' },
+                              { leftIcon: 'security', children: 'Button' },
+                              { leftIcon: 'security', children: 'Button' },
+                              { leftIcon: 'security', children: 'Button' }
+                            ]}
+                          />
+                        </div>
+                      </div>
+                      </div>
+                  ))}
+              </div>
+            </div>
         </div>
 
       <h2>Colors</h2>
