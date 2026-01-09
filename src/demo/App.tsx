@@ -14,6 +14,7 @@ import { Tooltip } from '../components/Tooltip';
 import { Progress } from '../components/Progress';
 import { Icon, type IconSize, type IconColor, type IconVariant } from '../components/Icon';
 import { Text, TextSize, TextWeight, TextFamily, TextLineHeight } from '../components/Text';
+import { Accordion } from '../components/Accordion';
 
 const App = () => {
   const [theme, setTheme] = useState<string | null>(null);
@@ -297,6 +298,72 @@ const App = () => {
             </Text>
           </div>
         </div>
+      </div>
+
+      <h2>Accordion</h2>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', width: '100vw', maxWidth: '600px' }}>
+        <Accordion
+          header={
+            <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--spacing-2)' }}>
+              <Icon name="info" size="sm" color="Icy" />
+              <Text weight={TextWeight.MEDIUM}>Secrets Beneath the Surface</Text>
+              <span style={{ 
+                backgroundColor: 'var(--color-orange-500)', 
+                color: 'white', 
+                padding: '2px 8px', 
+                borderRadius: '4px', 
+                fontSize: '10px', 
+                fontWeight: 600,
+                marginLeft: 'auto',
+                marginRight: 'var(--spacing-2)'
+              }}>
+                Tag
+              </span>
+            </div>
+          }
+        >
+          <Text>
+            An accordion is a versatile musical instrument that produces sound through the movement of air. 
+            It consists of a bellows, which the player compresses and expands, and a series of keys or buttons 
+            that control the pitch. Originating in the early 19th century, the accordion has become popular 
+            in various music genres, including folk, classical, and even pop. Its rich, expressive tones can 
+            evoke a range of emotions, making it a favorite among musicians. Whether played solo or as part of 
+            an ensemble, the accordion adds a unique flavor to any musical performance.
+          </Text>
+        </Accordion>
+
+        <Accordion
+          header={
+            <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--spacing-2)' }}>
+              <Icon name="security" size="sm" color="Blue" />
+              <Text weight={TextWeight.MEDIUM}>Security Best Practices</Text>
+            </div>
+          }
+          defaultOpen={true}
+        >
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-2)' }}>
+            <Text>• Use strong, unique passwords for each account</Text>
+            <Text>• Enable two-factor authentication whenever possible</Text>
+            <Text>• Keep your software and systems up to date</Text>
+            <Text>• Be cautious with email attachments and links</Text>
+            <Text>• Regularly review your privacy settings</Text>
+          </div>
+        </Accordion>
+
+        <Accordion
+          header={
+            <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--spacing-2)' }}>
+              <Icon name="dashboard" size="sm" color="Purple" />
+              <Text weight={TextWeight.MEDIUM}>Dashboard Overview</Text>
+            </div>
+          }
+        >
+          <Text>
+            This dashboard provides a comprehensive view of your system's performance metrics, 
+            user activity, and key statistics. Use the filters and date ranges to customize 
+            your view and gain deeper insights into your data.
+          </Text>
+        </Accordion>
       </div>
 
       <h2>Buttons</h2>
