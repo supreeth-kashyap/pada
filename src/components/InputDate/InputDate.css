@@ -1,0 +1,105 @@
+.input-date-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-1);
+    position: relative;
+}
+
+.input-date-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 32px;
+    max-height: 32px;
+    width: fit-content;
+    min-width: 320px;
+    border: 1px solid var(--color-neutral-300);
+    border-radius: var(--radius-md);
+    background-color: var(--color-white);
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.input-date-container:hover:not(:has(.input-date--disabled)) {
+    border-color: var(--color-neutral-400);
+}
+
+.input-date-container:focus-within {
+    border-color: var(--color-primary-600);
+    box-shadow: 0 0 0 3px var(--color-primary-50);
+    outline: none;
+}
+
+.input-date-container:has(.input-date--error) {
+    border-color: var(--color-accent-red-500);
+}
+
+.input-date-container:has(.input-date--error):focus-within {
+    border-color: var(--color-accent-red-500);
+    box-shadow: 0 0 0 3px var(--color-accent-red-50);
+}
+
+.input-date {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-0-5) var(--spacing-2-5);
+    font-size: var(--font-size-sm);
+    font-weight: 400;
+    line-height: var(--line-height-base);
+    border: none;
+    background-color: transparent;
+    color: var(--color-neutral-900);
+    cursor: pointer;
+    min-height: var(--spacing-10);
+    gap: var(--spacing-2);
+}
+
+.input-date:focus {
+    outline: none;
+}
+
+.input-date--disabled {
+    background-color: var(--color-neutral-50);
+    color: var(--color-neutral-400);
+    cursor: not-allowed;
+}
+
+.input-date-container:has(.input-date--disabled) {
+    background-color: var(--color-neutral-50);
+    border-color: var(--color-neutral-200);
+    cursor: not-allowed;
+}
+
+.input-date__placeholder {
+    color: var(--color-neutral-400);
+}
+
+.input-date__dropdown {
+    position: absolute;
+    top: calc(100% + var(--spacing-1));
+    left: 0;
+    z-index: 1000;
+    background-color: var(--color-white);
+    border: 1px solid var(--color-neutral-300);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    padding: var(--spacing-3);
+    min-width: 300px;
+}
+
+.input-date-description,
+.input-date-error {
+    font-size: var(--font-size-xs);
+    line-height: var(--line-height-base);
+    margin: 0;
+    margin-top: var(--spacing-1);
+}
+
+.input-date-description {
+    color: var(--color-neutral-600);
+}
+
+.input-date-error {
+    color: var(--color-accent-red-600);
+}
