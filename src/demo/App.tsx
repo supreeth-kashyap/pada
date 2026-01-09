@@ -135,8 +135,6 @@ const App = () => {
         <Input label="Email" placeholder="you@example.com" error="Please enter a valid email." />
         <Input label="Website" prefix="https://" placeholder="example.com" />
         <Input label="Amount" suffix="USD" placeholder="0.00" description="Please enter the amount in USD." />
-        <Checkbox label="Uncontrolled Checkbox" />
-        <Checkbox label="Controlled Checkbox" checked={isChecked} onChange={() => setIsChecked(!isChecked)} />
         <RadioGroup
             name="framework"
             label="Choose a framework"
@@ -146,6 +144,101 @@ const App = () => {
         />
         <Switch label="Uncontrolled Switch" />
         <Switch label="Controlled Switch" checked={isSwitchOn} onChange={() => setIsSwitchOn(!isSwitchOn)} />
+      </div>
+
+      <h2>Checkboxes</h2>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)'}}>
+        <div>
+          <h3>With Label</h3>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)'}}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)', flexWrap: 'wrap'}}>
+              <Checkbox label="Unchecked" />
+              <Checkbox label="Checked" defaultChecked />
+              <Checkbox label="Indeterminate (Mixed)" indeterminate />
+              <Checkbox label="Controlled Checkbox" checked={isChecked} onChange={() => setIsChecked(!isChecked)} />
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h3>Without Label</h3>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)', flexWrap: 'wrap'}}>
+            <Checkbox />
+            <Checkbox defaultChecked />
+            <Checkbox indeterminate />
+            <Checkbox checked={isChecked} onChange={() => setIsChecked(!isChecked)} />
+          </div>
+        </div>
+
+        <div>
+          <h3>Disabled States</h3>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)'}}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)', flexWrap: 'wrap'}}>
+              <span style={{width: '150px', minWidth: '150px'}}>With Label:</span>
+              <Checkbox label="Disabled Unchecked" disabled />
+              <Checkbox label="Disabled Checked" disabled defaultChecked />
+              <Checkbox label="Disabled Indeterminate" disabled indeterminate />
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)', flexWrap: 'wrap'}}>
+              <span style={{width: '150px', minWidth: '150px'}}>Without Label:</span>
+              <Checkbox disabled />
+              <Checkbox disabled defaultChecked />
+              <Checkbox disabled indeterminate />
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h3>With Click Handlers</h3>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)'}}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)', flexWrap: 'wrap'}}>
+              <Checkbox 
+                label="Click me" 
+                onClick={() => alert('Checkbox clicked!')}
+              />
+              <Checkbox 
+                label="With onChange" 
+                onChange={(e) => console.log('Checked:', e.target.checked)}
+              />
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h3>All Combinations</h3>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 'var(--space-4)'}}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)'}}>
+              <h4>Unchecked</h4>
+              <Checkbox label="With label" />
+              <Checkbox />
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)'}}>
+              <h4>Checked</h4>
+              <Checkbox label="With label" defaultChecked />
+              <Checkbox defaultChecked />
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)'}}>
+              <h4>Disabled Unchecked</h4>
+              <Checkbox label="With label" disabled />
+              <Checkbox disabled />
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)'}}>
+              <h4>Disabled Checked</h4>
+              <Checkbox label="With label" disabled defaultChecked />
+              <Checkbox disabled defaultChecked />
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)'}}>
+              <h4>Indeterminate</h4>
+              <Checkbox label="With label" indeterminate />
+              <Checkbox indeterminate />
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)'}}>
+              <h4>Disabled Indeterminate</h4>
+              <Checkbox label="With label" disabled indeterminate />
+              <Checkbox disabled indeterminate />
+            </div>
+          </div>
+        </div>
       </div>
 
       <h2>Feedback</h2>
