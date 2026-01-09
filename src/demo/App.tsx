@@ -83,7 +83,7 @@ const App = () => {
   const buttonVariants: ButtonVariant[] = ['primary', 'secondary', 'ghost', 'link', 'destructive'];
   const buttonSizes: ButtonSize[] = [ 'sm', 'md', 'lg'];
   const iconSizes: IconSize[] = ['xs', 'sm', 'md', 'lg', 'xl', '2xl'];
-  const iconColors: IconColor[] = ['Icy', 'Green', 'Yellow', 'Red', 'Blue', 'Purple', 'Magenta', 'Tangerine', 'White'];
+  const iconColors: IconColor[] = ['Icy', 'Green', 'Yellow', 'Red', 'Blue', 'Purple', 'Magenta', 'Tangerine', 'White', 'Indigo', 'Teal', 'Cyan'];
   const iconVariants: IconVariant[] = ['outlined', 'filled'];
   const radioOptions = [
     { label: 'React', value: 'react' },
@@ -251,69 +251,147 @@ const App = () => {
       </div>
 
       <h2>Icons</h2>
-      
-      <h3>Icon Sizes</h3>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)', marginBottom: 'var(--space-6)' }}>
-        {iconSizes.map(size => (
-          <div key={size} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-2)' }}>
-            <Icon name="alert_1" size={size} color="Icy" />
-            <span style={{ fontSize: '12px' }}>{size}</span>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)'}}>
+        <div>
+          <h3>All Sizes</h3>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)', flexWrap: 'wrap'}}>
+            {iconSizes.map(size => (
+              <div key={size} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-2)' }}>
+                <Icon name="alert_1" size={size} color="Icy" />
+                <span style={{ fontSize: '12px' }}>{size}</span>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-
-      <h3>Icon Colors (Outlined)</h3>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)', marginBottom: 'var(--space-6)', flexWrap: 'wrap' }}>
-        {iconColors.map(color => (
-          <div key={color} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-2)' }}>
-            <Icon name="security" size="lg" color={color} variant="outlined" />
-            <span style={{ fontSize: '12px' }}>{color}</span>
-          </div>
-        ))}
-      </div>
-
-      <h3>Icon Colors (Filled)</h3>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)', marginBottom: 'var(--space-6)', flexWrap: 'wrap' }}>
-        {iconColors.map(color => (
-          <div key={color} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-2)' }}>
-            <Icon name="security" size="lg" color={color} variant="filled" />
-            <span style={{ fontSize: '12px' }}>{color}</span>
-          </div>
-        ))}
-      </div>
-
-      <h3>Icons with Background</h3>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)', marginBottom: 'var(--space-6)', flexWrap: 'wrap' }}>
-        {iconColors.slice(0, 5).map(color => (
-          <div key={color} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-2)' }}>
-            <Icon name="approve" size="lg" color={color} variant="outlined" background={true} />
-            <span style={{ fontSize: '12px' }}>{color} + bg</span>
-          </div>
-        ))}
-      </div>
-
-      <h3>Icon Variants Comparison</h3>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-6)', marginBottom: 'var(--space-6)' }}>
-        {iconVariants.map(variant => (
-          <div key={variant} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-2)' }}>
-            <Icon name="bell" size="xl" color="Blue" variant={variant} />
-            <span style={{ fontSize: '12px' }}>{variant}</span>
-          </div>
-        ))}
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-2)' }}>
-          <Icon name="bell" size="xl" color="Blue" variant="outlined" background={true} />
-          <span style={{ fontSize: '12px' }}>with background</span>
         </div>
-      </div>
 
-      <h3>Different Icons Showcase</h3>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(120px, 1fr))', gap: 'var(--space-4)', marginBottom: 'var(--space-6)' }}>
-        {['alert_1', 'security', 'approve', 'bell', 'dashboard', 'cog', 'user_default', 'search', 'help', 'info'].map(iconName => (
-          <div key={iconName} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-2)' }}>
-            <Icon name={iconName} size="lg" color="Icy" />
-            <span style={{ fontSize: '11px', textAlign: 'center' }}>{iconName}</span>
+        <div>
+          <h3>All Colors - Outlined</h3>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)', flexWrap: 'wrap'}}>
+            {iconColors.map(color => (
+              <div key={color} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-2)' }}>
+                <Icon name="security" size="lg" color={color} variant="outlined" />
+                <span style={{ fontSize: '12px' }}>{color}</span>
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
+
+        <div>
+          <h3>All Colors - Filled</h3>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)', flexWrap: 'wrap'}}>
+            {iconColors.map(color => (
+              <div key={color} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-2)' }}>
+                <Icon name="security" size="lg" color={color} variant="filled" />
+                <span style={{ fontSize: '12px' }}>{color}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <h3>Icons with Background - All Colors</h3>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)', flexWrap: 'wrap'}}>
+            {iconColors.map(color => (
+              <div key={color} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-2)' }}>
+                <Icon name="approve" size="lg" color={color} variant="outlined" background={true} />
+                <span style={{ fontSize: '12px' }}>{color}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <h3>Icons with Background - All Sizes</h3>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)', flexWrap: 'wrap'}}>
+            {iconSizes.map(size => (
+              <div key={size} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-2)' }}>
+                <Icon name="approve" size={size} color="Blue" variant="outlined" background={true} />
+                <span style={{ fontSize: '12px' }}>{size}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <h3>Variants Comparison</h3>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-6)', flexWrap: 'wrap'}}>
+            {iconVariants.map(variant => (
+              <div key={variant} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-2)' }}>
+                <Icon name="bell" size="xl" color="Blue" variant={variant} />
+                <span style={{ fontSize: '12px' }}>{variant}</span>
+              </div>
+            ))}
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-2)' }}>
+              <Icon name="bell" size="xl" color="Blue" variant="outlined" background={true} />
+              <span style={{ fontSize: '12px' }}>with background</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h3>All Combinations - Size × Variant × Background</h3>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)'}}>
+            {iconSizes.map(size => (
+              <div key={size} style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)'}}>
+                <h4>Size: {size}</h4>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)', flexWrap: 'wrap'}}>
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-2)' }}>
+                    <Icon name="security" size={size} color="Blue" variant="outlined" />
+                    <span style={{ fontSize: '11px' }}>Outlined</span>
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-2)' }}>
+                    <Icon name="security" size={size} color="Blue" variant="filled" />
+                    <span style={{ fontSize: '11px' }}>Filled</span>
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-2)' }}>
+                    <Icon name="security" size={size} color="Blue" variant="outlined" background={true} />
+                    <span style={{ fontSize: '11px' }}>Outlined + BG</span>
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-2)' }}>
+                    <Icon name="security" size={size} color="Blue" variant="filled" background={true} />
+                    <span style={{ fontSize: '11px' }}>Filled + BG</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <h3>All Colors with Background - Outlined</h3>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)', flexWrap: 'wrap'}}>
+            {iconColors.map(color => (
+              <div key={color} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-2)' }}>
+                <Icon name="approve" size="md" color={color} variant="outlined" background={true} />
+                <span style={{ fontSize: '12px' }}>{color}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <h3>All Colors with Background - Filled</h3>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)', flexWrap: 'wrap'}}>
+            {iconColors.map(color => (
+              <div key={color} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-2)' }}>
+                <Icon name="approve" size="md" color={color} variant="filled" background={true} />
+                <span style={{ fontSize: '12px' }}>{color}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <h3>Different Icons Showcase</h3>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(120px, 1fr))', gap: 'var(--space-4)'}}>
+            {['alert_1', 'security', 'approve', 'bell', 'dashboard', 'cog', 'user_default', 'search', 'help', 'info'].map(iconName => (
+              <div key={iconName} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'var(--space-2)' }}>
+                <Icon name={iconName} size="lg" color="Icy" />
+                <span style={{ fontSize: '11px', textAlign: 'center' }}>{iconName}</span>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
       <h2>Text</h2>
