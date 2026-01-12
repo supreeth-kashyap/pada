@@ -1,0 +1,53 @@
+.key-value {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-4);
+  width: 100%;
+}
+
+.key-value__label-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-1-5);
+  flex-shrink: 0;
+  min-width: 200px;
+  max-width: 200px;
+}
+
+.key-value__info-icon-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: help;
+  flex-shrink: 0;
+}
+
+.key-value__info-icon {
+  flex-shrink: 0;
+}
+
+.key-value__value-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+}
+
+/* Allow value section to wrap if needed */
+.key-value__value-section > * {
+  flex-shrink: 0;
+}
+
+/* If value is text, allow it to wrap */
+.key-value__value-section > span,
+.key-value__value-section > p,
+.key-value__value-section > div:not([class*="button"]):not([class*="input"]) {
+  flex-shrink: 1;
+  word-break: break-word;
+}

@@ -11,6 +11,8 @@ import {
   DropdownSection,
   DropdownFooter,
 } from '../components/Dropdown';
+import { KeyValue } from '../components/KeyValue';
+import { Text } from '../components/Text';
 
 const App = () => {
   const [selectedSingle, setSelectedSingle] = useState<string[]>([]);
@@ -182,6 +184,40 @@ const App = () => {
             </DropdownFooter>
           </DropdownContent>
         </Dropdown>
+      </div>
+
+      <h1 style={{ marginTop: 'var(--spacing-12)' }}>Key Value Component</h1>
+      
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-4)', maxWidth: '600px', width: '100%' }}>
+        <h2>Basic Key Value</h2>
+        <KeyValue label="Name">
+          <Text>John Doe</Text>
+        </KeyValue>
+        
+        <KeyValue label="Email" infoTooltip="This is your registered email address">
+          <Text>john.doe@example.com</Text>
+        </KeyValue>
+        
+        <KeyValue label="Status">
+          <Button variant="secondary" size="sm">Active</Button>
+        </KeyValue>
+        
+        <KeyValue label="Role" infoTooltip="Your current role in the organization">
+          <Text>Administrator</Text>
+        </KeyValue>
+        
+        <KeyValue label="Actions">
+          <div style={{ display: 'flex', gap: 'var(--spacing-2)' }}>
+            <Button variant="ghost" size="sm">Edit</Button>
+            <Button variant="ghost" size="sm">Delete</Button>
+          </div>
+        </KeyValue>
+        
+        <KeyValue label="Description" infoTooltip="Additional information about this field">
+          <Text size="sm" color="var(--color-neutral-600)">
+            This is a longer description that can wrap to multiple lines if needed.
+          </Text>
+        </KeyValue>
       </div>
 
     </div>
