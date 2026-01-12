@@ -1,0 +1,138 @@
+.step-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  flex-shrink: 0;
+  position: relative;
+}
+
+/* ============================================
+   SIZES
+   ============================================ */
+
+.step-icon--sm {
+  width: 20px;
+  height: 20px;
+  font-size: var(--font-size-xs);
+}
+
+.step-icon--md {
+  width: 24px;
+  height: 24px;
+  font-size: var(--font-size-sm);
+}
+
+.step-icon--lg {
+  width: 32px;
+  height: 32px;
+  font-size: var(--font-size-base);
+}
+
+/* ============================================
+   ACTIVE STATUS
+   ============================================ */
+
+/* Active - Number (Dark grey background, white number) */
+.step-icon--active.step-icon--number {
+  background-color: var(--color-neutral-900);
+  color: var(--color-white);
+}
+
+.step-icon--active.step-icon--number .step-icon__number {
+  font-weight: 600;
+  line-height: 1;
+}
+
+/* Active - Dot (Light grey background, dark grey dot) */
+.step-icon--active.step-icon--dot {
+  background-color: var(--color-neutral-200);
+}
+
+.step-icon--active.step-icon--dot .step-icon__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-neutral-700);
+}
+
+.step-icon--active.step-icon--dot.step-icon--sm .step-icon__dot {
+  width: 4px;
+  height: 4px;
+}
+
+.step-icon--active.step-icon--dot.step-icon--lg .step-icon__dot {
+  width: 8px;
+  height: 8px;
+}
+
+/* Active - Symbol (Dark grey background, white symbol) */
+.step-icon--active.step-icon--symbol {
+  background-color: var(--color-neutral-900);
+  color: var(--color-white);
+}
+
+.step-icon--active.step-icon--symbol .step-icon__symbol {
+  font-weight: 600;
+  line-height: 1;
+  font-size: 1.2em;
+}
+
+/* ============================================
+   COMPLETED STATUS
+   ============================================ */
+
+.step-icon--completed {
+  background-color: var(--color-green-100);
+  color: var(--color-green-700);
+}
+
+.step-icon--completed .step-icon__checkmark {
+  color: var(--color-green-700);
+}
+
+/* ============================================
+   ERROR STATUS
+   ============================================ */
+
+.step-icon--error {
+  background-color: var(--color-red-100);
+  color: var(--color-red-700);
+}
+
+.step-icon--error .step-icon__exclamation {
+  color: var(--color-red-700);
+}
+
+/* ============================================
+   CONTENT STYLING
+   ============================================ */
+
+.step-icon__number,
+.step-icon__symbol {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  line-height: 1;
+}
+
+.step-icon__dot {
+  display: block;
+}
+
+.step-icon__checkmark,
+.step-icon__exclamation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ============================================
+   TRANSITIONS
+   ============================================ */
+
+.step-icon {
+  transition: all 0.2s ease;
+}

@@ -1,0 +1,131 @@
+.step-indicator {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ============================================
+   SIZES
+   ============================================ */
+
+.step-indicator--sm {
+  width: 12px;
+  height: 12px;
+}
+
+.step-indicator--md {
+  width: 16px;
+  height: 16px;
+}
+
+.step-indicator--lg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ============================================
+   CONCENTRIC TYPE (Ring with Inner Circle)
+   ============================================ */
+
+.step-indicator--concentric {
+  position: relative;
+}
+
+.step-indicator--concentric .step-indicator__outer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid;
+  box-sizing: border-box;
+}
+
+.step-indicator--concentric .step-indicator__inner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+}
+
+/* Concentric - Size specific inner circle sizes */
+.step-indicator--concentric.step-indicator--sm .step-indicator__inner {
+  width: 6px;
+  height: 6px;
+}
+
+.step-indicator--concentric.step-indicator--md .step-indicator__inner {
+  width: 8px;
+  height: 8px;
+}
+
+.step-indicator--concentric.step-indicator--lg .step-indicator__inner {
+  width: 10px;
+  height: 10px;
+}
+
+/* Concentric - Rest State (Grey) */
+.step-indicator--concentric.step-indicator--rest .step-indicator__outer {
+  border-color: var(--color-neutral-300);
+}
+
+.step-indicator--concentric.step-indicator--rest .step-indicator__inner {
+  background-color: var(--color-neutral-400);
+}
+
+/* Concentric - Hover State (Blue) */
+.step-indicator--concentric.step-indicator--hover .step-indicator__outer {
+  border-color: var(--color-blue-300);
+}
+
+.step-indicator--concentric.step-indicator--hover .step-indicator__inner {
+  background-color: var(--color-blue-600);
+}
+
+/* Concentric - Active State (Dark Grey/Black) */
+.step-indicator--concentric.step-indicator--active .step-indicator__outer {
+  border-color: var(--color-neutral-600);
+}
+
+.step-indicator--concentric.step-indicator--active .step-indicator__inner {
+  background-color: var(--color-neutral-900);
+}
+
+/* ============================================
+   SOLID TYPE (Filled Circle)
+   ============================================ */
+
+.step-indicator--solid .step-indicator__fill {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+/* Solid - Rest State (Medium-Dark Grey) */
+.step-indicator--solid.step-indicator--rest .step-indicator__fill {
+  background-color: var(--color-neutral-500);
+}
+
+/* Solid - Hover/Active State (Vibrant Blue) */
+.step-indicator--solid.step-indicator--hover .step-indicator__fill {
+  background-color: var(--color-blue-600);
+}
+
+/* Solid - Active State (Very Dark Grey/Black) */
+.step-indicator--solid.step-indicator--active .step-indicator__fill {
+  background-color: var(--color-neutral-900);
+}
+
+/* ============================================
+   TRANSITIONS
+   ============================================ */
+
+.step-indicator__outer,
+.step-indicator__inner,
+.step-indicator__fill {
+  transition: all 0.2s ease;
+}
