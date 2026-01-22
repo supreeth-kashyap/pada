@@ -1,0 +1,61 @@
+.base-toolbar-menu {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-1) var(--spacing-2);
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  color: var(--color-neutral-900);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-base);
+  font-weight: 600;
+  max-width: 200px;
+  width: 131px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.base-toolbar-menu__title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.base-toolbar-menu__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  padding: 2px 4px;
+  border-radius: 24px;
+  background-color: var(--color-neutral-200);
+}
+
+.base-toolbar-menu__badge-text {
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-xs);
+  font-weight: 600;
+  color: var(--color-neutral-900);
+}
+
+.base-toolbar-menu:hover:not(:disabled),
+.base-toolbar-menu--hover {
+  background-color: var(--color-neutral-50);
+}
+
+.base-toolbar-menu:active:not(:disabled),
+.base-toolbar-menu--active {
+  background-color: var(--color-neutral-100);
+}
+
+.base-toolbar-menu:focus-visible,
+.base-toolbar-menu--focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-white), 0 0 0 4px var(--color-secondary-600);
+}
+
+.base-toolbar-menu:disabled,
+.base-toolbar-menu--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

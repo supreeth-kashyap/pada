@@ -1,0 +1,105 @@
+.filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-0-5) var(--spacing-2);
+  height: 24px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-neutral-200);
+  background-color: var(--color-white);
+  color: var(--color-neutral-800);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-base);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.filter-chip:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-white), 0 0 0 4px var(--color-secondary-600);
+}
+
+.filter-chip--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.filter-chip__remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 20px;
+}
+
+.filter-chip__remove-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.filter-chip__divider {
+  width: 0;
+  height: 14px;
+  border-right: 1px solid var(--color-neutral-300);
+}
+
+.filter-chip__content {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+.filter-chip__label {
+  color: var(--color-neutral-800);
+  font-weight: 400;
+}
+
+.filter-chip__colon {
+  color: var(--color-neutral-800);
+  font-weight: 300;
+}
+
+.filter-chip__value {
+  font-weight: 600;
+  color: var(--color-secondary-700);
+}
+
+.filter-chip__button-label {
+  font-weight: 600;
+  color: var(--color-secondary-700);
+}
+
+.filter-chip--filled:hover:not(:disabled) {
+  background-color: var(--color-neutral-50);
+}
+
+.filter-chip--filled:active:not(:disabled) {
+  background-color: var(--color-neutral-100);
+}
+
+.filter-chip--prompt {
+  border-style: dashed;
+  border-color: var(--color-neutral-400);
+}
+
+.filter-chip--prompt:hover:not(:disabled) {
+  background-color: var(--color-neutral-50);
+  border-color: var(--color-neutral-500);
+}
+
+.filter-chip--prompt:active:not(:disabled) {
+  background-color: var(--color-neutral-100);
+}
+
+.filter-chip--button {
+  border-color: var(--color-secondary-500);
+}
+
+.filter-chip--button:hover:not(:disabled) {
+  background-color: var(--color-secondary-50);
+}
+
+.filter-chip--button:active:not(:disabled) {
+  background-color: var(--color-secondary-100);
+}

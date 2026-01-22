@@ -1,0 +1,24 @@
+.list-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  padding: var(--spacing-4);
+  background-color: var(--color-white);
+  border-bottom: 1px solid var(--color-neutral-200);
+  overflow: hidden;
+  min-height: 50px;
+  box-sizing: border-box;
+}
+
+.list-item__drag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.list-item__content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+}

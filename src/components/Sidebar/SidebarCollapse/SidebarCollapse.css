@@ -1,0 +1,30 @@
+.sidebar-collapse {
+  /* Sidebar collapse styles */
+}
+
+.sidebar-collapse__trigger {
+  /* Sidebar collapse trigger button styles */
+}
+
+.sidebar-collapse__label {
+  /* Sidebar collapse label styles */
+}
+
+.sidebar-collapse__icon {
+  /* Sidebar collapse icon styles */
+  transition: transform 0.2s;
+}
+
+.sidebar-collapse__icon--open {
+  transform: rotate(180deg);
+}
+
+.sidebar-collapse__content {
+  /* Sidebar collapse content styles */
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+
+.sidebar-collapse__content--open {
+  /* Sidebar collapse content open state */
+}

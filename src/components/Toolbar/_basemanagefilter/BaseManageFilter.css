@@ -1,0 +1,26 @@
+.base-manage-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  padding-left: var(--spacing-3);
+}
+
+.base-manage-filter__menu {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: var(--radius-md);
+  background: transparent;
+  cursor: pointer;
+}
+
+.base-manage-filter__menu:hover:not(:disabled) {
+  background-color: var(--color-neutral-50);
+}
+
+.base-manage-filter__menu:active:not(:disabled) {
+  background-color: var(--color-neutral-100);
+}

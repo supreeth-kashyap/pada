@@ -1,0 +1,135 @@
+.segment-control {
+  display: inline-flex;
+  position: relative;
+}
+
+.segment-control__container {
+  display: inline-flex;
+  position: relative;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-neutral-300);
+  border-radius: var(--radius-lg);
+  padding: 0;
+  gap: 0;
+  overflow: hidden;
+}
+
+.segment-control__option {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-1-5);
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  font-weight: 400;
+  line-height: var(--line-height-base);
+  color: var(--color-neutral-600);
+  background-color: var(--color-white);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  white-space: nowrap;
+  outline: none;
+}
+
+.segment-control__option:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: -2px;
+  z-index: 2;
+}
+
+.segment-control__option--selected {
+  color: var(--color-primary-600);
+  background-color: var(--color-primary-50);
+}
+
+.segment-control__option--disabled {
+  color: var(--color-neutral-400);
+  background-color: var(--color-neutral-50);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.segment-control__option:not(.segment-control__option--disabled):not(.segment-control__option--selected):hover {
+  background-color: var(--color-neutral-50);
+}
+
+.segment-control__option--selected:not(.segment-control__option--disabled):hover {
+  background-color: var(--color-primary-100);
+}
+
+.segment-control__icon {
+  flex-shrink: 0;
+}
+
+.segment-control__label {
+  flex-shrink: 0;
+}
+
+.segment-control__divider {
+  width: 1px;
+  background-color: var(--color-neutral-300);
+  flex-shrink: 0;
+  z-index: 1;
+  height: 60%;
+  align-self: center;
+}
+
+.segment-control__option--selected + .segment-control__divider {
+  background-color: var(--color-primary-200);
+}
+
+.segment-control__divider + .segment-control__option--selected {
+  background-color: var(--color-primary-200);
+}
+
+/* Sizes */
+.segment-control--sm .segment-control__option {
+  padding: var(--spacing-1-5) var(--spacing-3);
+  font-size: var(--font-size-xs);
+  min-height: var(--spacing-6);
+}
+
+.segment-control--md .segment-control__option {
+  padding: var(--spacing-2) var(--spacing-4);
+  font-size: var(--font-size-sm);
+  min-height: var(--spacing-8);
+}
+
+.segment-control--lg .segment-control__option {
+  padding: var(--spacing-2-5) var(--spacing-5);
+  font-size: var(--font-size-base);
+  min-height: var(--spacing-10);
+}
+
+/* Icon-only mode */
+.segment-control--icon-only .segment-control__option {
+  padding: var(--spacing-2);
+}
+
+.segment-control--sm.segment-control--icon-only .segment-control__option {
+  padding: var(--spacing-1-5);
+  min-width: var(--spacing-6);
+}
+
+.segment-control--md.segment-control--icon-only .segment-control__option {
+  padding: var(--spacing-2);
+  min-width: var(--spacing-8);
+}
+
+.segment-control--lg.segment-control--icon-only .segment-control__option {
+  padding: var(--spacing-2-5);
+  min-width: var(--spacing-10);
+}
+
+/* Disabled state */
+.segment-control--disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.segment-control--disabled .segment-control__option {
+  cursor: not-allowed;
+}

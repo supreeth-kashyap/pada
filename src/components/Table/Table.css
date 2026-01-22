@@ -1,0 +1,20 @@
+.table {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border: 1px solid var(--color-neutral-200);
+  background-color: var(--color-white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.table__toolbar {
+  border-bottom: 1px solid var(--color-neutral-200);
+  padding: var(--spacing-2) var(--spacing-3);
+}
+
+.table__content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}

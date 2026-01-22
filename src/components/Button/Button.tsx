@@ -3,7 +3,7 @@ import './Button.css';
 import { Icon } from '../Icon';
 import { Logo } from '../Logo';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'link' | 'destructive';
+export type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'ghost' | 'link' | 'destructive';
 export type ButtonSize = 'sm' | 'md' | 'lg';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -50,6 +50,7 @@ export const Button = ({
   const getIconColor = (): 'Blue' | 'Green' | 'Yellow' | 'Red' | 'Icy' | 'White' => {
     if (variant === 'primary') return 'White';
     if (variant === 'secondary') return 'Icy';
+    if (variant === 'tertiary') return 'Icy';
     if (variant === 'ghost') return 'Icy';
     if (variant === 'link') return 'Blue';
     if (variant === 'destructive') return 'White';

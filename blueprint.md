@@ -29,3 +29,8 @@ This is a React design system built with Vite. It includes a set of reusable com
 *   **Vite**: The project is set up with Vite for fast development and bundling.
 *   **TypeScript**: The project uses TypeScript for type safety.
 *   **ESLint**: The project is configured with ESLint for code quality.
+*   **Node setup**: If `node` or `npm` is not found, load them by running:
+    ```
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+    ```

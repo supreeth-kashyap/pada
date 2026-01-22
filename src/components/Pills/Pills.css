@@ -1,0 +1,103 @@
+.pills {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-family: inherit;
+}
+
+.pills:focus-within {
+  outline: none;
+}
+
+/* Sizes */
+.pills--sm .pills__pill {
+  padding: var(--spacing-1-5) var(--spacing-3);
+  font-size: var(--font-size-xs);
+  min-height: var(--spacing-6);
+}
+
+.pills--md .pills__pill {
+  padding: var(--spacing-2) var(--spacing-4);
+  font-size: var(--font-size-sm);
+  min-height: var(--spacing-7);
+}
+
+.pills--lg .pills__pill {
+  padding: var(--spacing-2-5) var(--spacing-5);
+  font-size: var(--font-size-base);
+  min-height: var(--spacing-8);
+}
+
+/* Pill Button */
+.pills__pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-white);
+  color: var(--color-neutral-600);
+  border: 1px solid var(--color-neutral-300);
+  border-radius: var(--radius-full);
+  font-weight: 500;
+  line-height: var(--line-height-base);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  white-space: nowrap;
+  position: relative;
+  outline: none;
+}
+
+.pills__pill:focus {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+.pills__pill:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Unselected State */
+.pills__pill:not(.pills__pill--selected):not(:disabled):hover {
+  background-color: var(--color-neutral-50);
+  border-color: var(--color-neutral-400);
+  color: var(--color-neutral-800);
+}
+
+.pills__pill:not(.pills__pill--selected):not(:disabled):active {
+  background-color: var(--color-neutral-100);
+  border-color: var(--color-neutral-400);
+}
+
+/* Selected State */
+.pills__pill--selected {
+  background-color: var(--color-neutral-50);
+  color: var(--color-neutral-900);
+  border: 1px solid var(--color-neutral-400);
+  font-weight: 600;
+}
+
+.pills__pill--selected:not(:disabled):hover {
+  background-color: var(--color-neutral-100);
+  border-color: var(--color-neutral-500);
+}
+
+.pills__pill--selected:not(:disabled):active {
+  background-color: var(--color-neutral-100);
+  border-color: var(--color-neutral-500);
+}
+
+/* Disabled State */
+.pills__pill--disabled,
+.pills__pill:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+  background-color: var(--color-white);
+  border-color: var(--color-neutral-200);
+  color: var(--color-neutral-400);
+}
+
+.pills--disabled .pills__pill {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}

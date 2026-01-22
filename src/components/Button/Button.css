@@ -138,6 +138,27 @@
   cursor: not-allowed;
 }
 
+/* Tertiary Variant */
+.button--tertiary {
+  background-color: transparent;
+  color: var(--color-neutral-900);
+  border-color: transparent;
+}
+
+.button--tertiary:hover:not(:disabled) {
+  background-color: var(--color-neutral-100);
+}
+
+.button--tertiary:active:not(:disabled) {
+  background-color: var(--color-neutral-200);
+}
+
+.button--tertiary:disabled,
+.button--tertiary.button--disabled {
+  color: var(--color-neutral-300);
+  cursor: not-allowed;
+}
+
 /* Link Variant */
 .button--link {
   background-color: transparent;

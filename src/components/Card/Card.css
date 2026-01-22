@@ -1,0 +1,9 @@
+.card {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-neutral-200);
+  border-radius: 8px;
+  width: 1092px;
+  height: 400px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
