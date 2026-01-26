@@ -34,7 +34,7 @@
 }
 
 .button-splitter--secondary {
-  background-color: var(--color-end-white);
+  background-color: var(--color-bg);
   color: var(--color-neutral-900);
   border-color: var(--color-neutral-200);
   border-left-color: var(--color-neutral-200);

@@ -61,30 +61,30 @@
 }
 
 .button--secondary {
-  background-color: var(--color-end-white);
+  background-color: var(--color-bg);
   color: var(--color-fg);
   border-color: var(--color-neutral-200);
 }
 
 .button--secondary:hover:not(:disabled) {
-  background-color: var(--color-end-white);
+  background-color: var(--color-bg);
   border-color: var(--color-primary-600);
   color: var(--color-primary-700);
 }
 
 .button--secondary:disabled {
-  background-color: var(--color-end-white);
+  background-color: var(--color-bg);
   color: var(--color-neutral-400);
   border-color: var(--color-neutral-200);
 }
 
 .button--ghost {
-  background-color: var(--color-end-white);
+  background-color: var(--color-bg);
   color: var(--color-fg);
 }
 
 .button--ghost:hover:not(:disabled) {
-  background-color: var(--color-end-white);
+  background-color: var(--color-bg);
   color: var(--color-primary-700);
 }
 
