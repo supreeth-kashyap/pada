@@ -1,0 +1,14 @@
+.combo-box {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-0-5);
+  padding: var(--spacing-4) var(--spacing-3);
+  min-width: 225px;
+  max-width: 400px;
+  width: fit-content;
+  background-color: var(--color-bg);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  max-height: calc((var(--spacing-2) + var(--spacing-8)) * 6 + var(--spacing-4));
+  overflow-y: auto;
+}
