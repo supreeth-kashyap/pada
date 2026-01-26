@@ -69,7 +69,7 @@ export const Notification: React.FC<NotificationProps> = ({
             {description && <p className="notification__description">{description}</p>}
           </div>
           {actionLabel && (
-            <Button size="sm" variant="secondary" onClick={onAction}>
+            <Button variant="secondary" onClick={onAction}>
               {actionLabel}
             </Button>
           )}

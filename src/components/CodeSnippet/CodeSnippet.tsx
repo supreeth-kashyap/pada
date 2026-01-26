@@ -75,9 +75,9 @@ export const CodeSnippet: React.FC<CodeSnippetProps> = ({
       <div className="code-snippet__header">
         <span className="code-snippet__label">{displayLabel}</span>
         {showCopy && (
-          <Button size="sm" variant="secondary" leftIcon="copy" onClick={handleCopy}>
-            {copied ? 'Copied' : 'Copy'}
-          </Button>
+        <Button variant="secondary" leftIcon="copy" onClick={handleCopy}>
+          {copied ? 'Copied' : 'Copy'}
+        </Button>
         )}
       </div>
       <pre className="code-snippet__body" aria-label={`${language} code`}>

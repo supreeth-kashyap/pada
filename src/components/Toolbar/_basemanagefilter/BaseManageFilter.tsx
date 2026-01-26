@@ -21,14 +21,13 @@ export const BaseManageFilter: React.FC<BaseManageFilterProps> = ({
   return (
     <div className={`base-manage-filter ${className}`.trim()}>
       <Button
-        size="sm"
         variant="secondary"
         onClick={onSaveFilter}
         rightIcon={saveCopy ? 'chevron_down' : undefined}
       >
         Save filter
       </Button>
-      <Button size="sm" variant="ghost" onClick={onClear}>
+      <Button variant="ghost" onClick={onClear}>
         Clear
       </Button>
       <button type="button" className="base-manage-filter__menu" onClick={onMenuClick} aria-label="More options">

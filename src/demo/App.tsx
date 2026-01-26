@@ -1,23 +1,32 @@
 import '../styles/global.css';
 import '../styles/primitives.css';
-import { Banner } from '../components/Banner';
 import { Button } from '../components/Button';
-import { Icon } from '../components/Icon';
 
 const App = () => {
-  const handleBannerAction = () => {
-    window.alert('Banner action clicked');
+  const handleSplitClick = () => {
+    window.alert('Splitter clicked');
   };
 
   return (
     <main style={{ minHeight: '100vh', padding: 'var(--spacing-6)', backgroundColor: 'var(--color-bg)' }}>
-      <Banner
-        title="Banner title"
-        subtitle="This is a subtitle that can wrap to a second line if needed."
-        visual={<Icon name="info" size="lg" />}
-        button={<Button variant="secondary">Action</Button>}
-        onButtonClick={handleBannerAction}
-      />
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-4)' }}>
+        <Button variant="primary">Primary</Button>
+        <Button variant="secondary">Secondary</Button>
+        <Button variant="ghost">Ghost</Button>
+        <Button variant="destructive">Destructive</Button>
+        <Button variant="primary" leftIcon="info" rightIcon="chevron_down">
+          With Icons
+        </Button>
+        <Button variant="primary" leftIcon="info" aria-label="Primary info" />
+        <Button variant="secondary" leftIcon="info" aria-label="Secondary info" />
+        <Button variant="ghost" leftIcon="info" aria-label="Ghost info" />
+        <Button variant="secondary" leftIcon="info" split>
+          Split Button
+        </Button>
+        <Button variant="secondary" leftIcon="info" split onSplitClick={handleSplitClick}>
+          Split With Action
+        </Button>
+      </div>
     </main>
   );
 };

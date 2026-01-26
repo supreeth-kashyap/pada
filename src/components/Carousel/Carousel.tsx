@@ -47,8 +47,7 @@ export const Carousel: React.FC<CarouselProps> = ({
         <div className="carousel__nav carousel__nav--left">
           <Button
             className="carousel__nav-button"
-            size="sm"
-            variant="tertiary"
+            variant="ghost"
             leftIcon="chevron_left"
             onClick={handlePrev}
             disabled={totalSlides <= 1}
@@ -85,8 +84,7 @@ export const Carousel: React.FC<CarouselProps> = ({
         <div className="carousel__nav carousel__nav--right">
           <Button
             className="carousel__nav-button"
-            size="sm"
-            variant="tertiary"
+            variant="ghost"
             leftIcon="chevron_right"
             onClick={handleNext}
             disabled={totalSlides <= 1}

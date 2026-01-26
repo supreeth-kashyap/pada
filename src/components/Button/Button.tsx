@@ -1,118 +1,102 @@
 import React from 'react';
 import './Button.css';
 import { Icon } from '../Icon';
-import { Logo } from '../Logo';
+import { Splitter } from './Splitter/Splitter';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'ghost' | 'link' | 'destructive';
-export type ButtonSize = 'sm' | 'md' | 'lg';
+export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'destructive';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   variant?: ButtonVariant;
-  size?: ButtonSize;
   leftIcon?: string;
   rightIcon?: string;
-  leftLogo?: string;
-  rightLogo?: string;
-  loading?: boolean;
+  split?: boolean;
+  onSplitClick?: () => void;
   disabled?: boolean;
 }
 
 export const Button = ({
   children, 
   variant = 'primary', 
-  size = 'md',
   leftIcon,
   rightIcon,
-  leftLogo,
-  rightLogo,
-  loading = false,
+  split = false,
+  onSplitClick,
   disabled = false,
   className = '',
   ...props 
 }: ButtonProps) => {
-  // Check if button is icon-only (no text content, only icons/logos)
-  const hasTextContent = typeof children === 'string' ? children.trim().length > 0 : Boolean(children);
-  const isIconOnly = !hasTextContent && !loading && (leftIcon || rightIcon || leftLogo || rightLogo);
-  
+  if (leftIcon && rightIcon) {
+    console.warn('Button: use either leftIcon or rightIcon, not both.');
+  }
+
+  const resolvedLeftIcon = leftIcon;
+  const resolvedRightIcon = leftIcon ? undefined : rightIcon;
+
   const buttonClasses = [
     'button',
     `button--${variant}`,
-    `button--${size}`,
-    loading && 'button--loading',
-    disabled && 'button--disabled',
-    isIconOnly && 'button--icon-only',
+    split && (variant === 'primary' || variant === 'secondary') && 'button--split-main',
     className
   ].filter(Boolean).join(' ');
 
-  const iconSize = 'xs';
-  
-  const getIconColor = (): 'Blue' | 'Green' | 'Yellow' | 'Red' | 'Icy' | 'White' => {
+  const iconSize = 'sm';
+
+  const getIconColor = (): 'Icy' | 'White' => {
     if (variant === 'primary') return 'White';
-    if (variant === 'secondary') return 'Icy';
-    if (variant === 'tertiary') return 'Icy';
-    if (variant === 'ghost') return 'Icy';
-    if (variant === 'link') return 'Blue';
     if (variant === 'destructive') return 'White';
     return 'Icy';
   };
 
   const renderLeftVisual = () => {
-    if (loading) return null;
-    if (leftIcon) {
-      return <Icon name={leftIcon} size={iconSize} color={getIconColor()} className="button__icon" />;
-    }
-    if (leftLogo) {
-      return <Logo name={leftLogo} size={iconSize} className="button__logo" />;
+    if (resolvedLeftIcon) {
+      return <Icon name={resolvedLeftIcon} size={iconSize} color={getIconColor()} className="button__icon" />;
     }
     return null;
   };
 
   const renderRightVisual = () => {
-    if (loading) return null;
-    if (rightIcon) {
-      return <Icon name={rightIcon} size={iconSize} color={getIconColor()} className="button__icon" />;
-    }
-    if (rightLogo) {
-      return <Logo name={rightLogo} size={iconSize} className="button__logo" />;
+    const canSplit = split && (variant === 'primary' || variant === 'secondary');
+    if (resolvedRightIcon && !canSplit) {
+      return <Icon name={resolvedRightIcon} size={iconSize} color={getIconColor()} className="button__icon" />;
     }
     return null;
   };
 
-  const renderContent = () => {
-    if (loading) {
-      return (
-        <span className="button__spinner" aria-label="Loading">
-          <svg
-            className="button__spinner-svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <circle
-              className="button__spinner-circle"
-              cx="12"
-              cy="12"
-              r="10"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-          </svg>
-        </span>
-      );
-    }
-    return children;
-  };
+  const canSplit = split && (variant === 'primary' || variant === 'secondary');
+
+  if (canSplit) {
+    return (
+      <div className={`button-split ${className}`}>
+        <button
+          className={['button', `button--${variant}`, 'button--split-main'].join(' ')}
+          disabled={disabled}
+          {...props}
+        >
+          {renderLeftVisual()}
+          {children ? children : null}
+        </button>
+        <Splitter
+          variant={variant}
+          onClick={(event) => {
+            event.stopPropagation();
+            onSplitClick?.();
+          }}
+          disabled={disabled}
+          aria-label="More options"
+        />
+      </div>
+    );
+  }
 
   return (
     <button
       className={buttonClasses}
-      disabled={disabled || loading}
+      disabled={disabled}
       {...props}
     >
       {renderLeftVisual()}
-      {renderContent()}
+      {children ? children : null}
       {renderRightVisual()}
     </button>
   );
