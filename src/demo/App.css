@@ -1,0 +1,69 @@
+.demo-shell {
+  background: #f4f5fb;
+  min-height: 100vh;
+  padding: 40px 32px;
+}
+
+.demo-section-tag {
+  background: #ffffff;
+  border: 1px solid #e3e3e8;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(24, 24, 32, 0.08);
+  color: #14151a;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 10px 16px;
+}
+
+.demo-panel {
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(20, 21, 26, 0.12);
+  margin-top: 20px;
+  padding: 48px 40px;
+}
+
+.demo-grid {
+  align-items: center;
+  border: 2px dashed #9d7bff;
+  border-radius: 20px;
+  display: grid;
+  gap: 28px 32px;
+  grid-template-columns: 160px repeat(3, 76px);
+  justify-content: center;
+  padding: 32px 24px;
+}
+
+.demo-col-label {
+  color: #8f62ff;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.demo-row-label {
+  color: #8f62ff;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: right;
+}
+
+.demo-grid-spacer {
+  height: 1px;
+}
+
+@media (max-width: 720px) {
+  .demo-grid {
+    gap: 20px 16px;
+    grid-template-columns: 1fr repeat(3, 64px);
+    padding: 24px 16px;
+  }
+
+  .demo-row-label {
+    font-size: 16px;
+  }
+
+  .demo-col-label {
+    font-size: 16px;
+  }
+}
