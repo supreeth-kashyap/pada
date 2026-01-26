@@ -1,0 +1,11 @@
+.accordion__body {
+  padding: var(--spacing-2) var(--spacing-4) var(--spacing-6);
+  background-color: var(--color-bg);
+  box-sizing: border-box;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) .accordion__body {
+    background-color: var(--color-end-white);
+  }
+}

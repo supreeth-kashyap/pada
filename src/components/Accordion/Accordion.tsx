@@ -1,23 +1,28 @@
 import React, { useState } from 'react';
 import './Accordion.css';
-import { Icon } from '../Icon';
+import { AccordionHeader } from './AccordionHeader/AccordionHeader';
+import { AccordionContent } from './AccordionContent/AccordionContent';
 
 export interface AccordionProps {
   header: React.ReactNode;
+  headerIconName?: string;
   children: React.ReactNode;
   defaultOpen?: boolean;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
   className?: string;
+  disabled?: boolean;
 }
 
 export const Accordion: React.FC<AccordionProps> = ({
   header,
   children,
+  headerIconName,
   defaultOpen = false,
   open: controlledOpen,
   onOpenChange,
   className = '',
+  disabled = false,
 }) => {
   const [internalOpen, setInternalOpen] = useState(defaultOpen);
   const headerId = React.useId();
@@ -27,6 +32,7 @@ export const Accordion: React.FC<AccordionProps> = ({
   const isOpen = controlledOpen !== undefined ? controlledOpen : internalOpen;
   
   const handleToggle = () => {
+    if (disabled) return;
     const newOpen = !isOpen;
     if (controlledOpen === undefined) {
       setInternalOpen(newOpen);
@@ -34,45 +40,26 @@ export const Accordion: React.FC<AccordionProps> = ({
     onOpenChange?.(newOpen);
   };
 
-  const handleKeyDown = (event: React.KeyboardEvent) => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault();
-      handleToggle();
-    }
-  };
-
   return (
     <div className={`accordion ${className}`}>
-      <button
+      <AccordionHeader
         id={headerId}
-        className={`accordion__header ${isOpen ? 'accordion__header--open' : ''}`}
+        title={header}
+        iconName={headerIconName}
+        collapsed={!isOpen}
         onClick={handleToggle}
-        onKeyDown={handleKeyDown}
         aria-expanded={isOpen}
         aria-controls={contentId}
-        type="button"
-      >
-        <div className="accordion__header-content">
-          {header}
-        </div>
-        <div className="accordion__header-icon">
-          <Icon 
-            name="chevron_down" 
-            size="sm" 
-            color="Icy"
-            className={`accordion__chevron ${isOpen ? 'accordion__chevron--open' : ''}`}
-          />
-        </div>
-      </button>
+        disabled={disabled}
+      />
       {isOpen && (
-        <div 
+        <AccordionContent
           id={contentId}
-          className="accordion__body"
           role="region"
           aria-labelledby={headerId}
         >
           {children}
-        </div>
+        </AccordionContent>
       )}
     </div>
   );
