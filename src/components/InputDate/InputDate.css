@@ -14,19 +14,30 @@
     width: fit-content;
     min-width: 320px;
     border: 1px solid var(--color-neutral-300);
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-lg);
     background-color: var(--color-white);
     transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
+.input-date-container .date_picker {
+    position: absolute;
+    top: calc(100% + var(--spacing-1));
+    left: 0;
+    z-index: 1000;
+}
+
 .input-date-container:hover:not(:has(.input-date--disabled)) {
-    border-color: var(--color-neutral-400);
+    border-color: var(--color-neutral-500);
 }
 
 .input-date-container:focus-within {
     border-color: var(--color-primary-600);
     box-shadow: 0 0 0 3px var(--color-primary-50);
     outline: none;
+}
+
+.input-date-container:has(.input-date--active) {
+    border-color: var(--color-neutral-500);
 }
 
 .input-date-container:has(.input-date--error) {
@@ -43,20 +54,32 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: var(--spacing-0-5) var(--spacing-2-5);
-    font-size: var(--font-size-sm);
+    padding: var(--spacing-2) var(--spacing-4);
+    font-size: var(--font-size-base);
     font-weight: 400;
     line-height: var(--line-height-base);
     border: none;
     background-color: transparent;
-    color: var(--color-neutral-900);
+    color: var(--color-neutral-400);
     cursor: pointer;
-    min-height: var(--spacing-10);
+    min-height: 32px;
     gap: var(--spacing-2);
 }
 
 .input-date:focus {
     outline: none;
+}
+
+.input-date__placeholder {
+    color: var(--color-neutral-400);
+}
+
+.input-date--filled {
+    color: var(--color-neutral-900);
+}
+
+.input-date--active {
+    color: var(--color-neutral-900);
 }
 
 .input-date--disabled {
@@ -71,21 +94,12 @@
     cursor: not-allowed;
 }
 
-.input-date__placeholder {
-    color: var(--color-neutral-400);
-}
-
-.input-date__dropdown {
-    position: absolute;
-    top: calc(100% + var(--spacing-1));
-    left: 0;
-    z-index: 1000;
-    background-color: var(--color-white);
-    border: 1px solid var(--color-neutral-300);
-    border-radius: var(--radius-lg);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    padding: var(--spacing-3);
-    min-width: 300px;
+.input-date__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--color-neutral-600);
 }
 
 .input-date-description,

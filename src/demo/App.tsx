@@ -1,12 +1,14 @@
 import '../styles/global.css';
 import '../styles/primitives.css';
 import './App.css';
-import { Icon } from '../components/Icon';
+import { InputDate } from '../components/InputDate';
 
 const App = () => {
   return (
     <main className="demo-shell">
-      <Icon src="e88a" size={24} color="var(--color-neutral-600)" />
+      <div className="demo-input-date">
+        <InputDate label="Date" placeholder="01/01/2026" />
+      </div>
     </main>
   );
 };
