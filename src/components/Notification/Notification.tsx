@@ -61,7 +61,7 @@ export const Notification: React.FC<NotificationProps> = ({
     <div className={`notification notification--${position} ${open ? 'notification--open' : ''}`.trim()}>
       <div className={`notification__card notification__card--${variant} ${className}`.trim()}>
         <div className="notification__icon">
-          <Icon name={iconByVariant[variant]} size="sm" color="Icy" />
+          <Icon name={iconByVariant[variant]} size={16} color="var(--color-neutral-600)" />
         </div>
         <div className="notification__content">
           <div className="notification__text">
@@ -80,7 +80,7 @@ export const Notification: React.FC<NotificationProps> = ({
           aria-label="Dismiss notification"
           onClick={() => onOpenChange(false)}
         >
-          <Icon name="cross_2" size="xs" color="Icy" />
+          <Icon name="cross_2" size={12} color="var(--color-neutral-600)" />
         </button>
       </div>
     </div>

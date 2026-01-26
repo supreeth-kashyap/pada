@@ -51,18 +51,18 @@ export const Tags: React.FC<TagsProps> = ({
     className
   ].filter(Boolean).join(' ');
 
-  const iconSize = size === 'sm' ? 'xs' : size === 'md' ? 'xs' : 'sm';
+  const iconSize = size === 'sm' ? 12 : size === 'md' ? 12 : 16;
   
   // Get icon color based on variant - match the text color
-  const getIconColor = (): 'Blue' | 'Green' | 'Yellow' | 'Red' | 'Icy' | 'White' | 'Purple' | 'Magenta' | 'Tangerine' => {
-    if (variant === 'primary' || variant === 'blue') return 'Blue';
-    if (variant === 'green') return 'Green';
-    if (variant === 'yellow') return 'Yellow';
-    if (variant === 'red') return 'Red';
-    if (variant === 'purple' || variant === 'deep-purple') return 'Purple';
-    if (variant === 'pink') return 'Magenta';
-    if (variant === 'orange') return 'Tangerine';
-    return 'Icy'; // Default for gray
+  const getIconColor = (): string => {
+    if (variant === 'primary' || variant === 'blue') return 'var(--color-blue-600)';
+    if (variant === 'green') return 'var(--color-green-600)';
+    if (variant === 'yellow') return 'var(--color-yellow-600)';
+    if (variant === 'red') return 'var(--color-red-600)';
+    if (variant === 'purple' || variant === 'deep-purple') return 'var(--color-purple-600)';
+    if (variant === 'pink') return 'var(--color-fuchsia-600)';
+    if (variant === 'orange') return 'var(--color-orange-600)';
+    return 'var(--color-neutral-600)'; // Default for gray
   };
   
   const iconColor = getIconColor();
@@ -94,7 +94,7 @@ export const Tags: React.FC<TagsProps> = ({
         >
           <Icon 
             name="cross_1" 
-            size="xs" 
+            size={12} 
             color={iconColor}
             className="tags__icon"
           />

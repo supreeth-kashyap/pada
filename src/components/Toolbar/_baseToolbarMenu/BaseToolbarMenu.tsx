@@ -40,7 +40,7 @@ export const BaseToolbarMenu: React.FC<BaseToolbarMenuProps> = ({
           <span className="base-toolbar-menu__badge-text">{count}</span>
         </span>
       )}
-      {dropdown && <Icon name="chevron_down" size="xs" color="Icy" />}
+      {dropdown && <Icon name="chevron_down" size={12} color="var(--color-neutral-600)" />}
     </button>
   );
 };

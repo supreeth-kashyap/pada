@@ -40,9 +40,8 @@ export const StepIcon = ({
       return (
         <Icon 
           name="tick_1" 
-          size="sm" 
-          color="Green" 
-          variant="filled"
+          size={16} 
+          color="var(--color-green-600)" 
           className="step-icon__checkmark"
         />
       );
@@ -52,9 +51,8 @@ export const StepIcon = ({
       return (
         <Icon 
           name="alert_1" 
-          size="sm" 
-          color="Red" 
-          variant="filled"
+          size={16} 
+          color="var(--color-red-600)" 
           className="step-icon__exclamation"
         />
       );

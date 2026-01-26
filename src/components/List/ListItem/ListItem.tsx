@@ -36,7 +36,7 @@ export const ListItem: React.FC<ListItemProps> = ({ id, children, className = ''
     >
       {draggable && (
         <span className="list-item__drag">
-          <Icon name="drag_vertical" size="xs" color="Icy" />
+          <Icon name="drag_vertical" size={12} color="var(--color-neutral-600)" />
         </span>
       )}
       <div className="list-item__content">{children}</div>

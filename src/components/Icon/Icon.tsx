@@ -1,16 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './Icon.css';
 
-export type IconSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
-export type IconColor = 'Icy' | 'Green' | 'Yellow' | 'Red' | 'Blue' | 'Purple' | 'Magenta' | 'Tangerine' | 'White' | 'Indigo' | 'Teal' | 'Cyan';
-export type IconVariant = 'outlined' | 'filled';
-
 export interface IconProps extends React.HTMLAttributes<HTMLDivElement> {
-  name: string;
-  size?: IconSize;
-  color?: IconColor;
-  variant?: IconVariant;
-  background?: boolean;
+  name?: string;
+  src?: string;
+  size?: number | string;
+  color?: string;
 }
 
 // Helper function to get icon path
@@ -18,56 +13,81 @@ const getIconPath = (name: string): string => {
   return new URL(`../../assets/icons/${name}.svg`, import.meta.url).href;
 };
 
-// Fetch and load SVG content
-const loadSVG = async (path: string): Promise<string | null> => {
+const MATERIAL_ICON_FONT = 'Material Icons';
+let materialFontLoaded = false;
+
+const ensureMaterialFont = () => {
+  if (materialFontLoaded || typeof document === 'undefined') return;
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = 'https://fonts.googleapis.com/icon?family=Material+Icons';
+  document.head.appendChild(link);
+  materialFontLoaded = true;
+};
+
+const toMaterialSvg = (glyph: string) => {
+  const content = /^[0-9a-fA-F]{4,6}$/.test(glyph) ? `&#x${glyph};` : glyph;
+  return `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <text x="12" y="20" text-anchor="middle" font-family="${MATERIAL_ICON_FONT}" font-size="24">${content}</text>
+    </svg>
+  `;
+};
+
+const loadSVG = async (input: string): Promise<string | null> => {
   try {
-    const response = await fetch(path);
+    if (input.trim().startsWith('<svg')) {
+      return input;
+    }
+    if (/^[0-9a-fA-F]{4,6}$/.test(input) || /^[a-z0-9_]+$/i.test(input)) {
+      ensureMaterialFont();
+      return toMaterialSvg(input);
+    }
+    const response = await fetch(input);
     if (!response.ok) return null;
     return await response.text();
   } catch (error) {
-    console.warn(`Failed to load SVG from ${path}:`, error);
+    console.warn(`Failed to load SVG from ${input}:`, error);
     return null;
   }
 };
 
 export const Icon = ({ 
-  name, 
-  size = 'md', 
-  color = 'Icy', 
-  variant = 'outlined',
-  background = false,
+  name,
+  src,
+  size = 20,
+  color = 'currentColor',
   className = '',
+  style,
   ...props 
 }: IconProps) => {
   const [svgContent, setSvgContent] = useState<string | null>(null);
-  const iconPath = getIconPath(name);
+  const iconSource = src ?? (name ? getIconPath(name) : '');
 
   useEffect(() => {
-    if (iconPath) {
-      loadSVG(iconPath).then(setSvgContent);
+    if (iconSource) {
+      loadSVG(iconSource).then(setSvgContent);
     }
-  }, [iconPath]);
+  }, [iconSource]);
 
-  if (!iconPath) {
-    console.warn(`Icon "${name}" not found in assets/icons directory`);
+  if (!iconSource) {
+    console.warn('Icon requires either a "name" or "src" prop.');
     return null;
   }
 
-  const classes = [
-    'icon',
-    `icon--${size}`,
-    `icon--${color.toLowerCase()}`,
-    `icon--${variant}`,
-    background && 'icon--background',
-    className
-  ].filter(Boolean).join(' ');
+  const resolvedSize = typeof size === 'number' ? `${size}px` : size;
+
+  const classes = ['icon', className].filter(Boolean).join(' ');
+  const mergedStyle = {
+    width: resolvedSize,
+    height: resolvedSize,
+    color,
+    ...style,
+  };
 
   if (!svgContent) {
     return (
-      <div 
-        className={classes}
-        {...props}
-      >
+      <div className={classes} style={mergedStyle} {...props}>
         <div className="icon__svg" />
       </div>
     );
@@ -88,10 +108,7 @@ export const Icon = ({
   );
 
   return (
-    <div 
-      className={classes}
-      {...props}
-    >
+    <div className={classes} style={mergedStyle} {...props}>
       <div 
         className="icon__svg"
         dangerouslySetInnerHTML={{ __html: coloredSVG }}

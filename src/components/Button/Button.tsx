@@ -40,12 +40,12 @@ export const Button = ({
     className
   ].filter(Boolean).join(' ');
 
-  const iconSize = 'sm';
+  const iconSize = 16;
 
-  const getIconColor = (): 'Icy' | 'White' => {
-    if (variant === 'primary') return 'White';
-    if (variant === 'destructive') return 'White';
-    return 'Icy';
+  const getIconColor = (): string => {
+    if (variant === 'primary') return 'var(--color-white)';
+    if (variant === 'destructive') return 'var(--color-white)';
+    return 'var(--color-neutral-600)';
   };
 
   const renderLeftVisual = () => {

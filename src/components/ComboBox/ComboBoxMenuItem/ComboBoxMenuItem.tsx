@@ -33,13 +33,13 @@ export const ComboBoxMenuItem: React.FC<ComboBoxMenuItemProps> = ({
     >
       {iconName && (
         <span className="combo-box-menu-item__icon" aria-hidden="true">
-          <Icon name={iconName} size="sm" />
+          <Icon name={iconName} size={16} />
         </span>
       )}
       <span className="combo-box-menu-item__label">{label}</span>
       {multiSelect && (
         <span className="combo-box-menu-item__tick" aria-hidden="true">
-          <Icon name="tick_1" size="xs" />
+          <Icon name="tick_1" size={12} />
         </span>
       )}
     </button>

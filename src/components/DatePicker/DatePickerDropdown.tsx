@@ -40,6 +40,7 @@ export const DatePickerDropdown = ({
   maxDate,
 }: DatePickerDropdownProps) => {
   const resolvedSelection: DatePickerSelection = isRange ? 'range' : selection;
+  const resolvedValue: Date | [Date, Date?] | null = value ?? null;
   const [viewDate, setViewDate] = useState(value instanceof Date ? value : new Date());
   const [rangeStart, setRangeStart] = useState<Date | null>(
     Array.isArray(value) && value[0] ? value[0] : null
@@ -159,7 +160,7 @@ export const DatePickerDropdown = ({
             onClick={() => handleNavigateMonth('prev')}
             aria-label="Previous month"
           >
-            <Icon name="chevron_left" size="xs" color="Icy" />
+            <Icon name="chevron_left" size={12} color="var(--color-neutral-600)" />
           </button>
           <button
             type="button"
@@ -174,7 +175,7 @@ export const DatePickerDropdown = ({
             onClick={() => handleNavigateMonth('next')}
             aria-label="Next month"
           >
-            <Icon name="chevron_right" size="xs" color="Icy" />
+            <Icon name="chevron_right" size={12} color="var(--color-neutral-600)" />
           </button>
         </div>
         <div className="date_picker_weekday_header">
@@ -185,7 +186,7 @@ export const DatePickerDropdown = ({
         <div data-grid="days">
           {days.map((day, index) => {
             const isCurrentMonth = day.getMonth() === currentMonth;
-            const selected = isDateSelected(day, resolvedSelection, value, rangeStart, rangeEnd);
+            const selected = isDateSelected(day, resolvedSelection, resolvedValue, rangeStart, rangeEnd);
             let inRange = isDateInRange(day, resolvedSelection, rangeStart, rangeEnd);
             const disabled = isDateDisabled(day, minDate, maxDate);
             const isToday =
@@ -237,7 +238,7 @@ export const DatePickerDropdown = ({
             onClick={() => handleNavigateYear('prev')}
             aria-label="Previous year"
           >
-            <Icon name="chevron_left" size="xs" color="Icy" />
+            <Icon name="chevron_left" size={12} color="var(--color-neutral-600)" />
           </button>
           <button
             type="button"
@@ -252,12 +253,19 @@ export const DatePickerDropdown = ({
             onClick={() => handleNavigateYear('next')}
             aria-label="Next year"
           >
-            <Icon name="chevron_right" size="xs" color="Icy" />
+            <Icon name="chevron_right" size={12} color="var(--color-neutral-600)" />
           </button>
         </div>
         <div data-grid="months">
           {MONTHS.map((month, index) => {
-            const selected = isMonthSelected(index, viewDate.getFullYear(), resolvedSelection, value, rangeStart, rangeEnd);
+            const selected = isMonthSelected(
+              index,
+              viewDate.getFullYear(),
+              resolvedSelection,
+              resolvedValue,
+              rangeStart,
+              rangeEnd
+            );
             let inRange = isMonthInRange(index, viewDate.getFullYear(), resolvedSelection, rangeStart, rangeEnd);
             const isToday =
               index === today.getMonth() &&
@@ -310,7 +318,7 @@ export const DatePickerDropdown = ({
             onClick={() => handleNavigateDecade('prev')}
             aria-label="Previous decade"
           >
-            <Icon name="chevron_left" size="xs" color="Icy" />
+            <Icon name="chevron_left" size={12} color="var(--color-neutral-600)" />
           </button>
           <div className="date_picker_view_select">
             {years[0]} - {years[years.length - 1]}
@@ -321,12 +329,12 @@ export const DatePickerDropdown = ({
             onClick={() => handleNavigateDecade('next')}
             aria-label="Next decade"
           >
-            <Icon name="chevron_right" size="xs" color="Icy" />
+            <Icon name="chevron_right" size={12} color="var(--color-neutral-600)" />
           </button>
         </div>
         <div data-grid="years">
           {years.map(year => {
-            const selected = isYearSelected(year, resolvedSelection, value, rangeStart, rangeEnd);
+            const selected = isYearSelected(year, resolvedSelection, resolvedValue, rangeStart, rangeEnd);
             let inRange = isYearInRange(year, resolvedSelection, rangeStart, rangeEnd);
             const isCurrent = year === currentYear;
             const visualState = selected ? 'active' : inRange ? 'hover' : 'rest';

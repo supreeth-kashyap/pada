@@ -18,7 +18,7 @@ export const Splitter: React.FC<SplitterProps> = ({
       className={`button-splitter button-splitter--${variant} ${className}`}
       {...props}
     >
-      <Icon name="chevron_down" size="xs" />
+      <Icon name="chevron_down" size={12} />
     </button>
   );
 };

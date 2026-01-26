@@ -31,7 +31,7 @@ export const BaseManageFilter: React.FC<BaseManageFilterProps> = ({
         Clear
       </Button>
       <button type="button" className="base-manage-filter__menu" onClick={onMenuClick} aria-label="More options">
-        <Icon name="menu_vertical" size="xs" color="Icy" />
+        <Icon name="menu_vertical" size={12} color="var(--color-neutral-600)" />
       </button>
     </div>
   );

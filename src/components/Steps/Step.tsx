@@ -65,9 +65,8 @@ export const Step = ({
         <div className="step__icon step__icon--completed">
           <Icon 
             name="tick_1" 
-            size="xs" 
-            color="White" 
-            variant="filled"
+            size={12} 
+            color="var(--color-white)" 
             className="step__icon--checkmark"
           />
         </div>
@@ -112,7 +111,7 @@ export const Step = ({
         {status === 'current' && <div className="step__box" />}
         {title && (
           <Text 
-            size="sm" 
+            size={16} 
             weight={TextWeight.MEDIUM} 
             className="step__title"
           >
@@ -121,7 +120,7 @@ export const Step = ({
         )}
         {description && (
           <Text 
-            size="xs" 
+            size={12} 
             weight={TextWeight.NORMAL} 
             className="step__description"
           >

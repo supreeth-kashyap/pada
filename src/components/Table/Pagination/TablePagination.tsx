@@ -42,7 +42,7 @@ export const TablePagination: React.FC<TablePaginationProps> = ({
               </option>
             ))}
           </select>
-          <Icon name="chevron_down" size="xs" color="Icy" />
+          <Icon name="chevron_down" size={12} color="var(--color-neutral-600)" />
         </div>
       </div>
 
@@ -58,7 +58,7 @@ export const TablePagination: React.FC<TablePaginationProps> = ({
             onClick={() => onPageChange(page - 1)}
             aria-label="Previous page"
           >
-            <Icon name="chevron_left" size="xs" color="Icy" />
+            <Icon name="chevron_left" size={12} color="var(--color-neutral-600)" />
           </button>
           <button
             type="button"
@@ -67,7 +67,7 @@ export const TablePagination: React.FC<TablePaginationProps> = ({
             onClick={() => onPageChange(page + 1)}
             aria-label="Next page"
           >
-            <Icon name="chevron_right" size="xs" color="Icy" />
+            <Icon name="chevron_right" size={12} color="var(--color-neutral-600)" />
           </button>
         </div>
       </div>

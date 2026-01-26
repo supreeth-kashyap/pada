@@ -99,8 +99,8 @@ export const SegmentControl: React.FC<SegmentControlProps> = ({
                 {option.icon && (
                   <Icon 
                     name={option.icon} 
-                    size="sm" 
-                    color={isSelected ? 'Blue' : 'Icy'}
+                    size={16} 
+                    color={isSelected ? 'var(--color-blue-600)' : 'var(--color-neutral-600)'}
                     className="segment-control__icon"
                   />
                 )}

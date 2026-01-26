@@ -130,7 +130,7 @@ export const InputDate = ({
           <span className={getDisplayValue() ? '' : 'input-date__placeholder'}>
             {getDisplayValue() || placeholder}
           </span>
-          <Icon name="calendar_3" size="xs" color="Icy" />
+          <Icon name="calendar_3" size={12} color="var(--color-neutral-600)" />
         </button>
         {isOpen && (
           <div className="input-date__dropdown" ref={dropdownRef}>

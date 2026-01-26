@@ -23,8 +23,8 @@ export const Checkbox = ({
       />
       <Icon 
         name="tick_1" 
-        size="xs" 
-        color="White" 
+        size={12} 
+        color="var(--color-white)" 
         className="checkbox-icon checkbox-icon--tick"
       />
     </div>

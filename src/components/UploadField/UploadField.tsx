@@ -214,7 +214,7 @@ export const UploadField: React.FC<UploadFieldProps> = ({
         <div className="upload-field-dropzone">
           {files.length === 0 ? (
             <>
-              <Icon name="upload_2" size="md" color="Icy" className="upload-field-icon" />
+              <Icon name="upload_2" size={20} color="var(--color-neutral-600)" className="upload-field-icon" />
               <div className="upload-field-content">
                 <p className="upload-field-text">
                   Drag and drop or click to upload files
@@ -232,7 +232,7 @@ export const UploadField: React.FC<UploadFieldProps> = ({
             </>
           ) : (
             <div className="upload-field-content upload-field-content--with-files">
-              <Icon name="upload_2" size="md" color="Icy" className="upload-field-icon" />
+              <Icon name="upload_2" size={20} color="var(--color-neutral-600)" className="upload-field-icon" />
               <p className="upload-field-text">
                 Drag and drop or click to upload files
               </p>
@@ -253,11 +253,11 @@ export const UploadField: React.FC<UploadFieldProps> = ({
               {files.map((file) => (
                 <div key={file.id} className={`upload-field-file ${file.status ? `upload-field-file--${file.status}` : ''}`}>
                   {file.status === 'success' ? (
-                    <Icon name="tick_1" size="sm" color="Green" />
+                    <Icon name="tick_1" size={16} color="var(--color-green-600)" />
                   ) : file.status === 'error' ? (
-                    <Icon name="upload_fail" size="sm" color="Red" />
+                    <Icon name="upload_fail" size={16} color="var(--color-red-600)" />
                   ) : (
-                    <Icon name="attachment_1" size="sm" color="Icy" />
+                    <Icon name="attachment_1" size={16} color="var(--color-neutral-600)" />
                   )}
                   <div className="upload-field-file-info">
                     <div className="upload-field-file-header">
@@ -298,7 +298,7 @@ export const UploadField: React.FC<UploadFieldProps> = ({
                         }}
                         aria-label={`Remove ${file.file.name}`}
                       >
-                        <Icon name="delete" size="xs" color="Icy" />
+                        <Icon name="delete" size={12} color="var(--color-neutral-600)" />
                       </button>
                     )}
                   </div>

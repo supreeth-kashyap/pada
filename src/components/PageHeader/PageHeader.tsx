@@ -137,7 +137,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
       <div className="page-header__actions">
         <button type="button" className="page-header__command" onClick={onCommandClick}>
           <span className="page-header__command-left">
-            <Icon name="search" size="xs" color="Icy" />
+            <Icon name="search" size={12} color="var(--color-neutral-600)" />
             <span className="page-header__command-text">{commandLabel}</span>
           </span>
           <span className="page-header__command-shortcut">{commandShortcut}</span>
@@ -153,7 +153,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
             className="page-header__profile-trigger"
             onClick={() => setProfileOpen((prev) => !prev)}
           >
-            {profileTrigger ?? <Icon name="user_default" size="xs" color="Icy" />}
+            {profileTrigger ?? <Icon name="user_default" size={12} color="var(--color-neutral-600)" />}
           </button>
           {profileOpen && profileMenu && (
             <div className="page-header__profile-menu">
