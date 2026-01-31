@@ -2,35 +2,23 @@ import '../styles/global.css';
 import '../styles/primitives.css';
 import './App.css';
 import { useState } from 'react';
-import { Notification } from '../components/Notification/Notification';
-import { Pills } from '../components/Pills/Pills';
+import { RadioGroup } from '../components/RadioGroup/RadioGroup';
 
 const App = () => {
-  const [isOpen, setIsOpen] = useState(true);
-  const [selectedPill, setSelectedPill] = useState('option-1');
+  const [selectedRadio, setSelectedRadio] = useState('option-1');
 
   return (
     <main className="demo-shell">
-      <Notification
-        open={isOpen}
-        onOpenChange={setIsOpen}
-        title="Update complete"
-        description="Your changes have been saved and synced."
-        actionLabel="Undo"
-        onAction={() => setIsOpen(false)}
-        variant="success"
-        position="top-right"
-      />
-
       <section style={{ padding: '40px' }}>
-        <h2>Pills Component</h2>
+        <h2>RadioGroup Component</h2>
 
         <div style={{ marginBottom: '32px' }}>
-          <h3>Size: Small</h3>
-          <Pills
-            size="sm"
-            value={selectedPill}
-            onChange={setSelectedPill}
+          <h3>Basic RadioGroup</h3>
+          <RadioGroup
+            name="basic-radio"
+            label="Select an option"
+            value={selectedRadio}
+            onChange={setSelectedRadio}
             options={[
               { value: 'option-1', label: 'Option 1' },
               { value: 'option-2', label: 'Option 2' },
@@ -40,39 +28,13 @@ const App = () => {
         </div>
 
         <div style={{ marginBottom: '32px' }}>
-          <h3>Size: Medium (default)</h3>
-          <Pills
-            size="md"
-            value={selectedPill}
-            onChange={setSelectedPill}
-            options={[
-              { value: 'option-1', label: 'Option 1' },
-              { value: 'option-2', label: 'Option 2' },
-              { value: 'option-3', label: 'Option 3' },
-            ]}
-          />
-        </div>
-
-        <div style={{ marginBottom: '32px' }}>
-          <h3>Size: Large</h3>
-          <Pills
-            size="lg"
-            value={selectedPill}
-            onChange={setSelectedPill}
-            options={[
-              { value: 'option-1', label: 'Option 1' },
-              { value: 'option-2', label: 'Option 2' },
-              { value: 'option-3', label: 'Option 3' },
-            ]}
-          />
-        </div>
-
-        <div style={{ marginBottom: '32px' }}>
-          <h3>Disabled</h3>
-          <Pills
+          <h3>Disabled RadioGroup</h3>
+          <RadioGroup
+            name="disabled-radio"
+            label="Disabled group"
+            value={selectedRadio}
+            onChange={setSelectedRadio}
             disabled
-            value={selectedPill}
-            onChange={setSelectedPill}
             options={[
               { value: 'option-1', label: 'Option 1' },
               { value: 'option-2', label: 'Option 2' },
@@ -83,9 +45,11 @@ const App = () => {
 
         <div style={{ marginBottom: '32px' }}>
           <h3>With Disabled Items</h3>
-          <Pills
-            value={selectedPill}
-            onChange={setSelectedPill}
+          <RadioGroup
+            name="partial-disabled-radio"
+            label="Some options disabled"
+            value={selectedRadio}
+            onChange={setSelectedRadio}
             options={[
               { value: 'option-1', label: 'Option 1' },
               { value: 'option-2', label: 'Option 2', disabled: true },
