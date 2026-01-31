@@ -1,31 +1,39 @@
+/* Root */
 .search-field {
   display: flex;
   align-items: center;
-  height: 32px;
+  height: var(--spacing-8);
   width: 240px;
   background-color: var(--color-white);
   border: 1px solid var(--color-neutral-300);
-  border-radius: 6px;
+  border-radius: var(--radius-md);
   box-sizing: border-box;
+  transition: all 0.2s ease-in-out;
 }
 
 .search-field:focus-within {
-  border: 2px solid var(--color-secondary-600);
+  border-color: var(--color-neutral-900);
+  box-shadow: 0 0 0 2px var(--color-focus-ring);
 }
 
-.search-field--disabled {
-  opacity: 0.5;
+.search-field:disabled {
+  opacity: 0.6;
   pointer-events: none;
+  background-color: var(--color-neutral-50);
 }
 
-.search-field__icon {
+/* Icon */
+.search-icon {
   display: flex;
   align-items: center;
   justify-content: center;
   padding-left: var(--spacing-2);
+  color: var(--color-neutral-600);
+  flex-shrink: 0;
 }
 
-.search-field__input {
+/* Input */
+.search-input {
   flex: 1;
   padding: 0 var(--spacing-2);
   height: 100%;
@@ -34,24 +42,39 @@
   font-size: var(--font-size-sm);
   line-height: var(--line-height-base);
   color: var(--color-neutral-900);
-}
-
-.search-field__input::placeholder {
-  color: var(--color-neutral-500);
-}
-
-.search-field__input:focus {
   outline: none;
 }
 
-.search-field__clear {
+.search-input::placeholder {
+  color: var(--color-neutral-500);
+}
+
+.search-input:disabled {
+  color: var(--color-neutral-400);
+  cursor: not-allowed;
+}
+
+/* Clear button */
+.search-clear {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-right: var(--spacing-1);
-  padding-left: var(--spacing-1);
+  padding: 0 var(--spacing-1);
   height: 100%;
   border: none;
   background: transparent;
   cursor: pointer;
+  color: var(--color-neutral-600);
+  transition: color 0.2s ease-in-out;
+  flex-shrink: 0;
+  outline: none;
+}
+
+.search-clear:hover {
+  color: var(--color-neutral-900);
+}
+
+.search-clear:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
 }
