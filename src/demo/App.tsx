@@ -2,81 +2,96 @@ import '../styles/global.css';
 import '../styles/primitives.css';
 import './App.css';
 import { useState } from 'react';
-import { SegmentControl } from '../components/SegmentControl/SegmentControl';
+import { Select } from '../components/Select/Select';
 
 const App = () => {
-  const [selectedSegment, setSelectedSegment] = useState('option-1');
+  const [selectedValue, setSelectedValue] = useState<string | number>('option-1');
+  const [errorValue, setErrorValue] = useState<string | number>('');
 
   return (
     <main className="demo-shell">
       <section style={{ padding: '40px' }}>
-        <h2>SegmentControl Component</h2>
+        <h2>Select Component</h2>
 
-        <div style={{ marginBottom: '32px' }}>
-          <h3>Size: Small</h3>
-          <SegmentControl
-            size="sm"
-            value={selectedSegment}
-            onChange={setSelectedSegment}
+        <div style={{ marginBottom: '32px', maxWidth: '300px' }}>
+          <h3>Basic Select</h3>
+          <Select
+            label="Choose an option"
+            name="basic-select"
+            id="basic-select"
+            value={selectedValue}
+            onChange={setSelectedValue}
             options={[
-              { value: 'option-1', label: 'Option 1' },
-              { value: 'option-2', label: 'Option 2' },
-              { value: 'option-3', label: 'Option 3' },
+              { label: 'Option 1', value: 'option-1' },
+              { label: 'Option 2', value: 'option-2' },
+              { label: 'Option 3', value: 'option-3' },
             ]}
           />
         </div>
 
-        <div style={{ marginBottom: '32px' }}>
-          <h3>Size: Medium (default)</h3>
-          <SegmentControl
-            size="md"
-            value={selectedSegment}
-            onChange={setSelectedSegment}
+        <div style={{ marginBottom: '32px', maxWidth: '300px' }}>
+          <h3>Select with Description</h3>
+          <Select
+            label="Choose an option"
+            name="description-select"
+            id="description-select"
+            value={selectedValue}
+            onChange={setSelectedValue}
+            description="This is a helpful description"
             options={[
-              { value: 'option-1', label: 'Option 1' },
-              { value: 'option-2', label: 'Option 2' },
-              { value: 'option-3', label: 'Option 3' },
+              { label: 'Option 1', value: 'option-1' },
+              { label: 'Option 2', value: 'option-2' },
+              { label: 'Option 3', value: 'option-3' },
             ]}
           />
         </div>
 
-        <div style={{ marginBottom: '32px' }}>
-          <h3>Size: Large</h3>
-          <SegmentControl
-            size="lg"
-            value={selectedSegment}
-            onChange={setSelectedSegment}
+        <div style={{ marginBottom: '32px', maxWidth: '300px' }}>
+          <h3>Select with Error</h3>
+          <Select
+            label="Choose an option"
+            name="error-select"
+            id="error-select"
+            value={errorValue}
+            onChange={setErrorValue}
+            error="This field is required"
             options={[
-              { value: 'option-1', label: 'Option 1' },
-              { value: 'option-2', label: 'Option 2' },
-              { value: 'option-3', label: 'Option 3' },
+              { label: 'Option 1', value: 'option-1' },
+              { label: 'Option 2', value: 'option-2' },
+              { label: 'Option 3', value: 'option-3' },
             ]}
           />
         </div>
 
-        <div style={{ marginBottom: '32px' }}>
-          <h3>Disabled</h3>
-          <SegmentControl
+        <div style={{ marginBottom: '32px', maxWidth: '300px' }}>
+          <h3>Disabled Select</h3>
+          <Select
+            label="Choose an option"
+            name="disabled-select"
+            id="disabled-select"
+            value={selectedValue}
+            onChange={setSelectedValue}
             disabled
-            value={selectedSegment}
-            onChange={setSelectedSegment}
             options={[
-              { value: 'option-1', label: 'Option 1' },
-              { value: 'option-2', label: 'Option 2' },
-              { value: 'option-3', label: 'Option 3' },
+              { label: 'Option 1', value: 'option-1' },
+              { label: 'Option 2', value: 'option-2' },
+              { label: 'Option 3', value: 'option-3' },
             ]}
           />
         </div>
 
-        <div style={{ marginBottom: '32px' }}>
-          <h3>With Disabled Items</h3>
-          <SegmentControl
-            value={selectedSegment}
-            onChange={setSelectedSegment}
+        <div style={{ marginBottom: '32px', maxWidth: '300px' }}>
+          <h3>Select with Disabled Options</h3>
+          <Select
+            label="Choose an option"
+            name="partial-disabled-select"
+            id="partial-disabled-select"
+            value={selectedValue}
+            onChange={setSelectedValue}
             options={[
-              { value: 'option-1', label: 'Option 1' },
-              { value: 'option-2', label: 'Option 2', disabled: true },
-              { value: 'option-3', label: 'Option 3' },
+              { label: 'Option 1', value: 'option-1' },
+              { label: 'Option 2 (disabled)', value: 'option-2', disabled: true },
+              { label: 'Option 3', value: 'option-3' },
             ]}
           />
         </div>
