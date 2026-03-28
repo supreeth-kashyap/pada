@@ -1,8 +1,17 @@
 # Pada Design System
 
-![Pada Design System Demo](src/assets/pada-design-system-demo.png)
+![Pada Design System Demo](src/assets/pada-ds-cover-image.png)
 
 This is a React design system built with Vite. It includes a set of reusable components and a demo application to showcase them.
+
+[Visit Pada.design to learn more](https://supreeth-kashyap.notion.site/Pada-Design-System-2c6a6474ca5a80cea166ed78587299a2)
+
+## Figma design file
+
+Avail the Figma file of the design system in the community for free
+
+[Figma file](https://www.figma.com/community/file/1619638623779328209)
+
 
 ## Installation
 
@@ -26,15 +35,47 @@ This will open the demo application in your browser.
 
 This design system includes the following components:
 
-*   **Button**: A customizable button component with different variants and sizes.
-*   **Input**: A form input field with support for labels, descriptions, and error messages.
-*   **Checkbox**: A checkbox component.
-*   **RadioGroup**: A group of radio buttons.
-*   **Switch**: A toggle switch component.
-*   **Modal**: A modal dialog that can be opened and closed.
-*   **Tabs**: A tabbed navigation component.
-*   **Select**: A dropdown select component.
-*   **Tooltip**: A tooltip that appears when hovering over an element.
+- **Accordion**: Collapsible sections to show/hide content.
+- **Banner**: Notices and important messages display.
+- **Button**: Clickable control for primary actions.
+- **Card**: Container for grouped related content.
+- **Carousel**: Scrollable content carousel with controls.
+- **Checkbox**: Binary selection with label support.
+- **CodeSnippet**: Display formatted, copyable code blocks.
+- **ComboBox**: Filterable list dropdown with options.
+- **DatePicker**: Select dates via calendar UI.
+- **FormLabel**: Accessible labels for form fields.
+- **Icon**: Reusable SVG icons for UI.
+- **Indexer**: Alphabetical index navigation component.
+- **InputDate**: Single-line date input field.
+- **InputText**: Single-line text input field.
+- **InputTextArea**: Multi-line text input area.
+- **KeyValue**: Render key/value metadata pairs.
+- **List**: Generic list rendering component.
+- **Loader**: Indicate loading state visually.
+- **Logo**: Project or brand logo component.
+- **Modal**: Overlay dialog for focused tasks.
+- **Notification**: Transient alert messages and toasts.
+- **PageHeader**: Page title and actions area.
+- **Pills**: Compact, selectable pill-style buttons.
+- **Popover**: Floating container for contextual content.
+- **Progress**: Visual progress indicators for tasks.
+- **RadioGroup**: Grouped single-choice radio buttons.
+- **SearchField**: Text search input with clear.
+- **SegmentControl**: Segmented button toggle control.
+- **Select**: Dropdown selection with ComboBox.
+- **SideDrawer**: Slide-in side panel for navigation.
+- **Sidebar**: Fixed side navigation area.
+- **Slider**: Range selection slider control.
+- **Steps**: Multi-step progress indicator component.
+- **Switch**: Toggle between on/off states.
+- **Table**: Responsive tabular data display component.
+- **Tabs**: Tabbed navigation interface component.
+- **Tags**: Compact label tags for metadata.
+- **Text**: Typography primitives and helpers.
+- **Toolbar**: Action toolbar with controls.
+- **Tooltip**: Hover tooltip for extra info.
+- **UploadField**: File upload field with progress.
 
 ### Examples
 
