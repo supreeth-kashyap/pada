@@ -1,7 +1,7 @@
 import React from 'react';
 import './Steps.css';
 import { Icon } from '../Icon';
-import { Text } from '../Text';
+import { Text, TextSize } from '../Text';
 import { TextWeight } from '../Text/helpers';
 
 export type StepStatus = 'upcoming' | 'current' | 'completed';
@@ -111,7 +111,7 @@ export const Step = ({
         {status === 'current' && <div className="step__box" />}
         {title && (
           <Text 
-            size={16} 
+            size={TextSize.BASE} 
             weight={TextWeight.MEDIUM} 
             className="step__title"
           >
@@ -120,7 +120,7 @@ export const Step = ({
         )}
         {description && (
           <Text 
-            size={12} 
+            size={TextSize.SM} 
             weight={TextWeight.NORMAL} 
             className="step__description"
           >

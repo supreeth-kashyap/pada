@@ -3,7 +3,7 @@ import './AccordionHeader.css';
 import { Icon } from '../../Icon';
 
 export interface AccordionHeaderProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'title'> {
   title: React.ReactNode;
   iconName?: string;
   collapsed?: boolean;

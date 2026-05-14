@@ -2,7 +2,7 @@ import React from 'react';
 import './KeyValue.css';
 import { Icon } from '../Icon';
 import { Tooltip } from '../Tooltip';
-import { Text } from '../Text';
+import { Text, TextSize } from '../Text';
 import { TextWeight } from '../Text/helpers';
 
 export interface KeyValueProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -34,7 +34,7 @@ export const KeyValue = ({
       return labelComponent;
     }
     return (
-      <Text size={16} weight={TextWeight.MEDIUM} color="var(--color-neutral-900)">
+      <Text size={TextSize.BASE} weight={TextWeight.MEDIUM} color="var(--color-neutral-900)">
         {label}
       </Text>
     );

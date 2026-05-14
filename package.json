@@ -1,22 +1,39 @@
 {
-  "name": "pada",
+  "name": "pada-ds",
   "private": false,
-  "version": "0.0.1",
+  "version": "1.0.0",
+  "description": "Singular design system for React applications, built with TypeScript and Vite.",
+  "license": "MIT",
   "type": "module",
+  "main": "dist/pada.js",
+  "module": "dist/pada.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/pada.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": ["dist"],
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build:types": "tsc -p tsconfig.package.json",
+    "build": "npm run build:types && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "prismjs": "^1.30.0",
+    "prismjs": "^1.30.0"
+  },
+  "peerDependencies": {
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
     "@types/node": "^24.6.0",
+    "@types/prismjs": "^1.26.6",
     "@types/react": "^19.1.16",
     "@types/react-dom": "^19.1.9",
     "@vitejs/plugin-react": "^5.0.4",

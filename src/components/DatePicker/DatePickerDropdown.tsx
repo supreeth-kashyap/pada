@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './DatePicker.css';
 import { Icon } from '../Icon';
 import { PickerBox } from './_PickerBox/PickerBox';

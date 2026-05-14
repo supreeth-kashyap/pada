@@ -26,7 +26,6 @@ export const FilterChip: React.FC<FilterChipProps> = ({
   className = ''
 }) => {
   const isButton = variant === 'button';
-  const isPrompt = variant === 'prompt';
   const isFilled = variant === 'filled';
 
   return (

@@ -17,7 +17,7 @@ export const TabPanel: React.FC<TabPanelProps> = ({ children }) => {
 
 export const Tabs: React.FC<TabsProps> = ({ children, label }) => {
   const [activeTab, setActiveTab] = useState(0);
-  const tabs = Children.toArray(children).filter(isValidElement);
+  const tabs = Children.toArray(children).filter(isValidElement) as React.ReactElement<TabPanelProps>[];
 
   const handleTabClick = (index: number) => {
     setActiveTab(index);
@@ -41,34 +41,40 @@ export const Tabs: React.FC<TabsProps> = ({ children, label }) => {
   return (
     <div className="tabs">
       <div role="tablist" aria-label={label} className="tabs__list">
-        {tabs.map((tab, index) => (
-          <button
-            key={index}
-            id={`tab-${index}`}
-            role="tab"
-            aria-selected={activeTab === index}
-            aria-controls={`tabpanel-${index}`}
-            className={`tabs__tab ${activeTab === index ? 'tabs__tab--active' : ''}`}
-            onClick={() => handleTabClick(index)}
-            onKeyDown={(e) => handleKeyDown(e, index)}
-            tabIndex={activeTab === index ? 0 : -1}
-          >
-            {tab.props.label}
-          </button>
-        ))}
+        {tabs.map((tab, index) => {
+          const tabProps = tab.props as TabPanelProps;
+          return (
+            <button
+              key={index}
+              id={`tab-${index}`}
+              role="tab"
+              aria-selected={activeTab === index}
+              aria-controls={`tabpanel-${index}`}
+              className={`tabs__tab ${activeTab === index ? 'tabs__tab--active' : ''}`}
+              onClick={() => handleTabClick(index)}
+              onKeyDown={(e) => handleKeyDown(e, index)}
+              tabIndex={activeTab === index ? 0 : -1}
+            >
+              {tabProps.label}
+            </button>
+          );
+        })}
       </div>
-      {tabs.map((tab, index) => (
-        <div
-          key={index}
-          id={`tabpanel-${index}`}
-          role="tabpanel"
-          aria-labelledby={`tab-${index}`}
-          className="tabs__panel"
-          hidden={activeTab !== index}
-        >
-          {cloneElement(tab, { ...tab.props })}
-        </div>
-      ))}
+      {tabs.map((tab, index) => {
+        const tabProps = tab.props as TabPanelProps;
+        return (
+          <div
+            key={index}
+            id={`tabpanel-${index}`}
+            role="tabpanel"
+            aria-labelledby={`tab-${index}`}
+            className="tabs__panel"
+            hidden={activeTab !== index}
+          >
+            {cloneElement(tab, { ...tabProps })}
+          </div>
+        );
+      })}
     </div>
   );
 };

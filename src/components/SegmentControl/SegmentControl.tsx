@@ -43,7 +43,7 @@ export const SegmentControl: React.FC<SegmentControlProps> = ({
     onChange?.(optionValue);
   };
 
-  const handleKeyDown = (event: React.KeyboardEvent, optionValue: string, index: number) => {
+  const handleKeyDown = (event: React.KeyboardEvent, index: number) => {
     if (disabled) return;
 
     if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
@@ -95,7 +95,7 @@ export const SegmentControl: React.FC<SegmentControlProps> = ({
                 data-index={index}
                 className="segment-option"
                 onClick={() => handleChange(option.value)}
-                onKeyDown={(e) => handleKeyDown(e, option.value, index)}
+                onKeyDown={(e) => handleKeyDown(e, index)}
                 disabled={isDisabled}
                 tabIndex={isSelected ? 0 : -1}
               >

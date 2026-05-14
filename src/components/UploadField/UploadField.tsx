@@ -2,7 +2,6 @@ import React, { useRef, useState, useCallback } from 'react';
 import './UploadField.css';
 import { FormLabel } from '../FormLabel';
 import { Icon } from '../Icon';
-import { Button } from '../Button';
 
 export interface UploadedFile {
   id: string;
@@ -47,7 +46,6 @@ export const UploadField: React.FC<UploadFieldProps> = ({
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [internalFiles, setInternalFiles] = useState<UploadedFile[]>([]);
   const [isDragging, setIsDragging] = useState(false);
-  const [isUploading, setIsUploading] = useState(false);
 
   const isControlled = controlledFiles !== undefined;
   const files = isControlled ? controlledFiles : internalFiles;
@@ -90,7 +88,7 @@ export const UploadField: React.FC<UploadFieldProps> = ({
           error
         } as UploadedFile;
       })
-      .filter((uploadedFile, index) => {
+      .filter((uploadedFile) => {
         if (uploadedFile.error) {
           return true; // Keep error files to show error message
         }
@@ -106,7 +104,6 @@ export const UploadField: React.FC<UploadFieldProps> = ({
 
     // Auto-upload if onUpload is provided
     if (onUpload && validatedFiles.some(f => !f.error)) {
-      setIsUploading(true);
       const filesToUpload = validatedFiles.filter(f => !f.error).map(f => f.file);
       try {
         await onUpload(filesToUpload);
@@ -131,8 +128,6 @@ export const UploadField: React.FC<UploadFieldProps> = ({
           setInternalFiles(errorFiles);
         }
         onFilesChange?.(errorFiles);
-      } finally {
-        setIsUploading(false);
       }
     }
   }, [files, multiple, maxFiles, maxSize, isControlled, onFilesChange, onUpload]);

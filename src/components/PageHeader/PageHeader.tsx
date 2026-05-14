@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import './PageHeader.css';
 import { Icon } from '../Icon';
-import { Button } from '../Button';
 
 export interface BreadcrumbItem {
   label: string;
