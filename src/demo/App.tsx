@@ -1,40 +1,101 @@
 import '../styles/global.css';
 import '../styles/primitives.css';
 import './App.css';
-import React, { useState } from 'react';
-import { Button } from '../components/Button';
-import { InputText } from '../components/InputText';
-import { InputTextArea } from '../components/InputTextArea';
-import { Loader } from '../components/Loader';
-import { Modal } from '../components/Modal';
-import { Notification } from '../components/Notification';
+import { useState } from 'react';
+import { Select } from '../components/Select/Select';
 
 const App = () => {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [notificationOpen, setNotificationOpen] = useState(false);
+  const [selectedValue, setSelectedValue] = useState<string | number>('option-1');
+  const [errorValue, setErrorValue] = useState<string | number>('');
 
   return (
     <main className="demo-shell">
-      <div style={{ marginBottom: '1rem' }}>
-        <Button onClick={() => setModalOpen(true)} style={{ marginRight: '0.5rem' }}>
-          Open Modal
-        </Button>
-        <Button variant="secondary" onClick={() => setNotificationOpen(true)}>
-          Show Notification
-        </Button>
-      </div>
+      <section style={{ padding: '40px' }}>
+        <h2>Select Component</h2>
 
-      <Modal open={modalOpen} onOpenChange={setModalOpen} title="Demo Modal">
-        <p>This is a demo modal. Click outside or the close button to dismiss.</p>
-      </Modal>
+        <div style={{ marginBottom: '32px', maxWidth: '300px' }}>
+          <h3>Basic Select</h3>
+          <Select
+            label="Choose an option"
+            name="basic-select"
+            id="basic-select"
+            value={selectedValue}
+            onChange={setSelectedValue}
+            options={[
+              { label: 'Option 1', value: 'option-1' },
+              { label: 'Option 2', value: 'option-2' },
+              { label: 'Option 3', value: 'option-3' },
+            ]}
+          />
+        </div>
 
-      <Notification
-        open={notificationOpen}
-        onOpenChange={setNotificationOpen}
-        title="Heads up!"
-        subtitle="This is a demo notification. You can close it with the X."
-      />
+        <div style={{ marginBottom: '32px', maxWidth: '300px' }}>
+          <h3>Select with Description</h3>
+          <Select
+            label="Choose an option"
+            name="description-select"
+            id="description-select"
+            value={selectedValue}
+            onChange={setSelectedValue}
+            description="This is a helpful description"
+            options={[
+              { label: 'Option 1', value: 'option-1' },
+              { label: 'Option 2', value: 'option-2' },
+              { label: 'Option 3', value: 'option-3' },
+            ]}
+          />
+        </div>
 
+        <div style={{ marginBottom: '32px', maxWidth: '300px' }}>
+          <h3>Select with Error</h3>
+          <Select
+            label="Choose an option"
+            name="error-select"
+            id="error-select"
+            value={errorValue}
+            onChange={setErrorValue}
+            error="This field is required"
+            options={[
+              { label: 'Option 1', value: 'option-1' },
+              { label: 'Option 2', value: 'option-2' },
+              { label: 'Option 3', value: 'option-3' },
+            ]}
+          />
+        </div>
+
+        <div style={{ marginBottom: '32px', maxWidth: '300px' }}>
+          <h3>Disabled Select</h3>
+          <Select
+            label="Choose an option"
+            name="disabled-select"
+            id="disabled-select"
+            value={selectedValue}
+            onChange={setSelectedValue}
+            disabled
+            options={[
+              { label: 'Option 1', value: 'option-1' },
+              { label: 'Option 2', value: 'option-2' },
+              { label: 'Option 3', value: 'option-3' },
+            ]}
+          />
+        </div>
+
+        <div style={{ marginBottom: '32px', maxWidth: '300px' }}>
+          <h3>Select with Disabled Options</h3>
+          <Select
+            label="Choose an option"
+            name="partial-disabled-select"
+            id="partial-disabled-select"
+            value={selectedValue}
+            onChange={setSelectedValue}
+            options={[
+              { label: 'Option 1', value: 'option-1' },
+              { label: 'Option 2 (disabled)', value: 'option-2', disabled: true },
+              { label: 'Option 3', value: 'option-3' },
+            ]}
+          />
+        </div>
+      </section>
     </main>
   );
 };

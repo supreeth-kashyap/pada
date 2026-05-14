@@ -1,42 +1,52 @@
+/* Root */
 .pills {
   display: inline-flex;
   align-items: center;
   gap: var(--spacing-2);
   font-family: inherit;
+  --pill-padding: var(--spacing-2) var(--spacing-4);
+  --pill-font-size: var(--font-size-sm);
+  --pill-min-height: var(--spacing-7);
+  --pill-bg-color: var(--color-white);
+  --pill-color: var(--color-neutral-900);
+  --pill-border-color: var(--color-neutral-200);
+
+  --pill-border-color-hover: var(--color-primary-200);
+  --pill-bg-color-hover: var(--color-white);
+  --pill-color-hover: var(--color-primary-800);
+
+  --pill-bg-color-active: var(--color-primary-200);
 }
 
 .pills:focus-within {
   outline: none;
 }
 
-/* Sizes */
-.pills--sm .pills__pill {
-  padding: var(--spacing-1-5) var(--spacing-3);
-  font-size: var(--font-size-xs);
-  min-height: var(--spacing-6);
+/* Variant: Size */
+.pills[data-size="sm"] {
+  --pill-padding: var(--spacing-1-5) var(--spacing-3);
+  --pill-font-size: var(--font-size-xs);
+  --pill-min-height: var(--spacing-6);
 }
 
-.pills--md .pills__pill {
-  padding: var(--spacing-2) var(--spacing-4);
-  font-size: var(--font-size-sm);
-  min-height: var(--spacing-7);
-}
-
-.pills--lg .pills__pill {
-  padding: var(--spacing-2-5) var(--spacing-5);
-  font-size: var(--font-size-base);
-  min-height: var(--spacing-8);
+.pills[data-size="lg"] {
+  --pill-padding: var(--spacing-2-5) var(--spacing-5);
+  --pill-font-size: var(--font-size-base);
+  --pill-min-height: var(--spacing-8);
 }
 
 /* Pill Button */
-.pills__pill {
+.pill {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--color-white);
-  color: var(--color-neutral-600);
-  border: 1px solid var(--color-neutral-300);
+  background-color: var(--pill-bg-color);
+  color: var(--pill-color);
+  border: 1px solid var(--pill-border-color);
   border-radius: var(--radius-full);
+  padding: var(--pill-padding);
+  font-size: var(--pill-font-size);
+  min-height: var(--pill-min-height);
   font-weight: 500;
   line-height: var(--line-height-base);
   cursor: pointer;
@@ -46,58 +56,47 @@
   outline: none;
 }
 
-.pills__pill:focus {
+.pill:focus-visible {
   outline: 2px solid var(--color-focus-ring);
   outline-offset: 2px;
 }
 
-.pills__pill:focus:not(:focus-visible) {
-  outline: none;
-}
-
 /* Unselected State */
-.pills__pill:not(.pills__pill--selected):not(:disabled):hover {
-  background-color: var(--color-neutral-50);
-  border-color: var(--color-neutral-400);
-  color: var(--color-neutral-800);
+.pill:not([aria-selected="true"]):not(:disabled):hover {
+  background-color: var(--pill-bg-color-hover);
+  border-color: var(--pill-border-color-hover);
+  color: var(--pill-color-hover);
 }
 
-.pills__pill:not(.pills__pill--selected):not(:disabled):active {
-  background-color: var(--color-neutral-100);
-  border-color: var(--color-neutral-400);
+.pill:not([aria-selected="true"]):not(:disabled):active {
+  background-color: var(--pill-bg-color-active);
+  border-color: var(--pill-border-color-hover);
 }
 
 /* Selected State */
-.pills__pill--selected {
-  background-color: var(--color-neutral-50);
-  color: var(--color-neutral-900);
-  border: 1px solid var(--color-neutral-400);
+.pill[aria-selected="true"] {
+  background-color: var(--color-primary-50);
+  color: var(--color-primary-700);
+  border: 1px solid var(--color-primary-200);
   font-weight: 600;
 }
 
-.pills__pill--selected:not(:disabled):hover {
-  background-color: var(--color-neutral-100);
-  border-color: var(--color-neutral-500);
+.pill[aria-selected="true"]:not(:disabled):hover {
+  background-color: var(--color-primary-100);
+  border-color: var(--color-primary-200);
 }
 
-.pills__pill--selected:not(:disabled):active {
-  background-color: var(--color-neutral-100);
-  border-color: var(--color-neutral-500);
+.pill[aria-selected="true"]:not(:disabled):active {
+  background-color: var(--color-primary-100);
+  border-color: var(--color-primray-200);
 }
 
 /* Disabled State */
-.pills__pill--disabled,
-.pills__pill:disabled {
+.pill:disabled {
   opacity: 0.6;
   cursor: not-allowed;
   pointer-events: none;
-  background-color: var(--color-white);
+  background-color: var(--color-neutral-50);
   border-color: var(--color-neutral-200);
   color: var(--color-neutral-400);
-}
-
-.pills--disabled .pills__pill {
-  opacity: 0.6;
-  cursor: not-allowed;
-  pointer-events: none;
 }
