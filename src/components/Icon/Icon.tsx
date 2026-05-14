@@ -29,7 +29,15 @@ const toMaterialSvg = (glyph: string) => {
   const content = /^[0-9a-fA-F]{4,6}$/.test(glyph) ? `&#x${glyph};` : glyph;
   return `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-      <text x="12" y="20" text-anchor="middle" font-family="${MATERIAL_ICON_FONT}" font-size="24">${content}</text>
+      <text
+        x="12"
+        y="12"
+        text-anchor="middle"
+        dominant-baseline="middle"
+        font-family="${MATERIAL_ICON_FONT}"
+        font-size="24"
+        fill="currentColor"
+      >${content}</text>
     </svg>
   `;
 };

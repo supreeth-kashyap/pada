@@ -13,17 +13,14 @@
 
 .modal {
     background-color: var(--color-bg);
-    padding: var(--space-4);
-    border-radius: var(--radius-3);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 16px 24px;
+    border: 1px solid var(--color-neutral-100);
+    border-radius: 16px;
+    box-shadow: var(--shadow-lg);
     position: relative;
-    max-width: 500px;
-    width: 90%;
-}
-
-.modal:focus {
-    outline: 2px solid var(--color-focus-ring);
-    outline-offset: 2px;
+    width: fit-content;
+    max-width: 90%;
+    max-height: 80%;
 }
 
 .modal--open {
@@ -42,11 +39,16 @@
 
 .modal-close {
     position: absolute;
-    top: var(--space-2);
-    right: var(--space-2);
+    top: 12px;
+    right: 12px;
     background: none;
     border: none;
-    font-size: var(--font-5);
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
     color: var(--color-fg-muted);
 }

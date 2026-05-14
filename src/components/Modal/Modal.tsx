@@ -1,16 +1,19 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import './Modal.css';
+import { Icon } from '../Icon';
+import { Text, TextSize } from '../Text';
+
 
 export interface ModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   children: React.ReactNode;
   title?: string;
+  width?: number | string;
+  height?: number | string;
 }
 
-export const Modal: React.FC<ModalProps> = ({ open, onOpenChange, children, title }) => {
-  const modalRef = useRef<HTMLDivElement>(null);
-
+export const Modal: React.FC<ModalProps> = ({ open, onOpenChange, children, title, width, height }) => {
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
@@ -20,7 +23,6 @@ export const Modal: React.FC<ModalProps> = ({ open, onOpenChange, children, titl
 
     if (open) {
       document.addEventListener('keydown', handleEscape);
-      modalRef.current?.focus();
     } else {
       document.removeEventListener('keydown', handleEscape);
     }
@@ -37,19 +39,23 @@ export const Modal: React.FC<ModalProps> = ({ open, onOpenChange, children, titl
   return (
     <div className="modal-overlay" onClick={() => onOpenChange(false)}>
       <div
-        ref={modalRef}
         className="modal"
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-title"
         onClick={(e) => e.stopPropagation()}
-        tabIndex={-1}
+        style={{
+          ...(width ? { width } : {}),
+          ...(height ? { height } : {}),
+        }}
       >
-        {title && <h2 id="modal-title" className="modal-title">{title}</h2>}
+        {title && <Text size={TextSize.BASE}>{title}</Text>}
         <div className="modal-content">
           {children}
         </div>
-        <button className="modal-close" onClick={() => onOpenChange(false)} aria-label="Close modal">&times;</button>
+        <button className="modal-close" onClick={() => onOpenChange(false)} aria-label="Close modal" type="button">
+          <Icon name="close" src="e5cd" size={16} color="var(--color-neutral-600)" />
+        </button>
       </div>
     </div>
   );
