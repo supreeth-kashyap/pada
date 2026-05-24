@@ -10,6 +10,7 @@ export default defineConfig({
       entry: path.resolve(__dirname, 'src/index.ts'),
       name: 'Pada',
       fileName: 'pada',
+      cssFileName: 'pada',
       formats: ['es'],
     },
     rollupOptions: {

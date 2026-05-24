@@ -1,26 +1,39 @@
 {
   "name": "pada-ds",
   "private": false,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Singular design system for React applications, built with TypeScript and Vite.",
   "license": "MIT",
   "type": "module",
   "main": "dist/pada.js",
   "module": "dist/pada.js",
   "types": "dist/index.d.ts",
+  "sideEffects": [
+    "**/*.css"
+  ],
   "exports": {
     ".": {
       "import": "./dist/pada.js",
       "types": "./dist/index.d.ts"
-    }
+    },
+    "./styles.css": "./dist/pada.css",
+    "./tokens.css": "./dist/tokens.css"
   },
-  "files": ["dist"],
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
   "scripts": {
     "dev": "vite",
     "build:types": "tsc -p tsconfig.package.json",
-    "build": "npm run build:types && vite build",
+    "build:styles": "vite build",
+    "build:tokens": "node ./scripts/build-tokens-css.mjs",
+    "build": "npm run build:styles && npm run build:types && npm run build:tokens",
     "lint": "eslint .",
     "preview": "vite preview",
+    "smoke:consumer": "node ./scripts/smoke-consumer.mjs",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {

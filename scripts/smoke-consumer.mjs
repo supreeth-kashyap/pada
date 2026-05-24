@@ -1,0 +1,100 @@
+import { mkdtemp, readFile, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { spawnSync } from 'node:child_process';
+
+function run(command, args, options = {}) {
+  const result = spawnSync(command, args, {
+    stdio: 'inherit',
+    shell: false,
+    ...options,
+  });
+
+  if (result.status !== 0) {
+    throw new Error(`Command failed: ${command} ${args.join(' ')}`);
+  }
+}
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const rootDir = path.resolve(__dirname, '..');
+
+run('npm', ['run', 'build'], { cwd: rootDir });
+
+const packResult = spawnSync('npm', ['pack', '--silent'], {
+  cwd: rootDir,
+  encoding: 'utf8',
+});
+
+if (packResult.status !== 0) {
+  throw new Error(packResult.stderr || 'npm pack failed');
+}
+
+const tarballName = packResult.stdout.trim().split('\n').pop();
+if (!tarballName) {
+  throw new Error('Failed to resolve packed tarball name');
+}
+
+const tarballPath = path.join(rootDir, tarballName);
+const tempRoot = await mkdtemp(path.join(tmpdir(), 'pada-ds-smoke-'));
+const appDir = path.join(tempRoot, 'consumer-app');
+
+run('npm', ['create', 'vite@latest', 'consumer-app', '--', '--template', 'react-ts'], {
+  cwd: tempRoot,
+  env: {
+    ...process.env,
+    npm_config_yes: 'true',
+  },
+});
+
+run('npm', ['install'], { cwd: appDir });
+run('npm', ['install', tarballPath], { cwd: appDir });
+
+await writeFile(
+  path.join(appDir, 'src/App.tsx'),
+  `import { Button } from 'pada-ds';\n\nfunction App() {\n  return (\n    <div>\n      <Button variant=\"primary\">Smoke test button</Button>\n    </div>\n  );\n}\n\nexport default App;\n`,
+  'utf8',
+);
+
+await writeFile(
+  path.join(appDir, 'src/main.tsx'),
+  `import { StrictMode } from 'react';\nimport { createRoot } from 'react-dom/client';\nimport 'pada-ds/tokens.css';\nimport 'pada-ds/styles.css';\nimport './index.css';\nimport App from './App';\n\ncreateRoot(document.getElementById('root')!).render(\n  <StrictMode>\n    <App />\n  </StrictMode>,\n);\n`,
+  'utf8',
+);
+
+run('npm', ['run', 'build'], { cwd: appDir });
+
+const packageCss = await readFile(path.join(appDir, 'node_modules/pada-ds/dist/pada.css'), 'utf8');
+if (!packageCss.includes('.button--primary') || !packageCss.includes('var(--color-primary-600)')) {
+  throw new Error('Expected primary button styles were not found in dist/pada.css');
+}
+
+const tokensCss = await readFile(path.join(appDir, 'node_modules/pada-ds/dist/tokens.css'), 'utf8');
+const requiredTokens = [
+  '--color-primary-600',
+  '--spacing-4',
+  '--radius-lg',
+  '--font-family-sans',
+  '--shadow-lg',
+];
+
+for (const token of requiredTokens) {
+  if (!tokensCss.includes(token)) {
+    throw new Error(`Missing required token in dist/tokens.css: ${token}`);
+  }
+}
+
+const appTsx = await readFile(path.join(appDir, 'src/App.tsx'), 'utf8');
+if (appTsx.includes('declare module')) {
+  throw new Error('Consumer app contains declaration hack unexpectedly');
+}
+
+run('node', [
+  '--input-type=module',
+  '--eval',
+  `import React from 'react'; import { renderToString } from 'react-dom/server'; import { Button } from 'pada-ds'; const html = renderToString(React.createElement(Button, { variant: 'primary' }, 'Smoke test button')); if (!html.includes('button--primary')) { throw new Error('Button primary class not rendered.'); }`,
+], { cwd: appDir });
+
+console.log('Consumer smoke test passed.');
+console.log(`App directory: ${appDir}`);

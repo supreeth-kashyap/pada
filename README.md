@@ -18,18 +18,16 @@ Avail the Figma file of the design system in the community for free
 To install the design system, run:
 
 ```bash
-npm install pada
+npm install pada-ds
 ```
 
 ## Usage
 
-To start the development server, run:
-
-```bash
-npm run dev
+```tsx
+import 'pada-ds/tokens.css';
+import 'pada-ds/styles.css';
+import { Button } from 'pada-ds';
 ```
-
-This will open the demo application in your browser.
 
 ## Components
 
@@ -83,13 +81,13 @@ Here are some examples of how to use the components:
 
 ```jsx
 import React from 'react';
-import { Button } from 'pada/components/Button';
-import { Input } from 'pada/components/Input';
+import 'pada-ds/tokens.css';
+import 'pada-ds/styles.css';
+import { Button } from 'pada-ds';
 
 const App = () => (
   <div>
-    <Button>Click me</Button>
-    <Input label="Name" placeholder="Enter your name" />
+    <Button variant="primary">Click me</Button>
   </div>
 );
 ```

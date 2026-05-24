@@ -7,7 +7,8 @@
     "emitDeclarationOnly": true,
     "noEmit": false,
     "composite": false,
-    "sourceMap": false
+    "sourceMap": false,
+    "types": ["prismjs", "react", "react-dom"]
   },
-  "include": ["src/index.ts", "src/components"]
+  "include": ["src/index.ts", "src/components", "src/types/styles.d.ts"]
 }

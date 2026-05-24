@@ -297,8 +297,8 @@
     --color-border: var(--color-slate-700);
     --color-focus-ring: var(--color-indigo-500);
 
-    --color-white: var(--color-end-black:);
-    --color-black: var(--color-end-white:);
+    --color-white: var(--color-end-black);
+    --color-black: var(--color-end-white);
   }
 }
 
