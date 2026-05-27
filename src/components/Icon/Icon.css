@@ -20,13 +20,14 @@
   overflow: visible;
 }
 
-/* Apply color to SVG paths using currentColor */
-.icon__svg svg path,
-.icon__svg svg circle,
-.icon__svg svg rect,
-.icon__svg svg polygon,
-.icon__svg svg line,
-.icon__svg svg polyline {
-  stroke: currentColor;
-  fill: currentColor;
+/*
+ * Painting is handled inline by the Icon component (it rewrites the SVG to set
+ * either stroke="currentColor" + fill="none" or fill="currentColor" + stroke="none"
+ * on every visible shape). This file only ensures the icon's `color` is inherited
+ * from its parent so `currentColor` resolves correctly through state changes.
+ */
+.icon,
+.icon__svg,
+.icon__svg svg {
+  color: inherit;
 }

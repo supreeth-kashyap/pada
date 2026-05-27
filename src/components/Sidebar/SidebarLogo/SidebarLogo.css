@@ -1,3 +1,54 @@
 .sidebar-logo {
-  /* Sidebar logo styles */
+  align-items: center;
+  background: var(--color-white, #ffffff);
+  box-sizing: border-box;
+  display: flex;
+  gap: 8px;
+  height: 60px;
+  padding: 24px 16px;
+  width: 100%;
+}
+
+.sidebar-logo__link {
+  align-items: center;
+  color: inherit;
+  display: flex;
+  gap: 8px;
+  text-decoration: none;
+  width: 100%;
+}
+
+.sidebar-logo__mark {
+  display: block;
+  flex-shrink: 0;
+  height: 32px;
+  object-fit: contain;
+  width: 32px;
+}
+
+.sidebar-logo__mark--ds {
+  height: 32px;
+  width: 32px;
+}
+
+.sidebar-logo__title {
+  color: var(--color-slate-900, #0f172a);
+  flex: 1 1 auto;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sidebar-logo__wordmark {
+  display: block;
+  flex-shrink: 0;
+  /* matches Figma: 109.484 x 15.875 */
+  height: 16px;
+  width: auto;
+  object-fit: contain;
 }

@@ -5,6 +5,12 @@
   padding: 40px 32px;
 }
 
+.demo-shell--with-sidebar {
+  align-items: stretch;
+  display: flex;
+  padding: 0;
+}
+
 .demo-section-tag {
   background: #ffffff;
   border: 1px solid #e3e3e8;

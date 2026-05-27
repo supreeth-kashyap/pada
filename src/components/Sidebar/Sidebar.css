@@ -1,3 +1,22 @@
 .sidebar {
-  /* Sidebar styles */
+  background: var(--color-white, #ffffff);
+  border-right: 1px solid var(--color-stone-100, #f5f5f4);
+  box-sizing: border-box;
+  color: var(--color-slate-900, #0f172a);
+  display: flex;
+  flex-direction: column;
+  font-family: inherit;
+  height: 100%;
+  min-height: 100vh;
+  width: 200px;
+}
+
+.sidebar__body {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 4px 16px;
+  width: 100%;
 }

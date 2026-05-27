@@ -5,7 +5,12 @@ export * from './SidebarLogo';
 export * from './SidebarSection';
 export * from './SidebarSectionMenu';
 export * from './SidebarCollapse';
-export type { SidebarProps } from './Sidebar';
+export type {
+  SidebarProps,
+  SidebarData,
+  SidebarSectionData,
+  SidebarMenuItemData,
+} from './Sidebar';
 export type { SidebarMenuProps } from './SidebarMenu';
 export type { SidebarSearchProps } from './SidebarSearch';
 export type { SidebarLogoProps } from './SidebarLogo';
