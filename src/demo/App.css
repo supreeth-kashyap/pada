@@ -8,6 +8,10 @@
 .demo-shell--with-sidebar {
   align-items: stretch;
   display: flex;
+  /* Constrain the shell to the viewport so child overflow (sidebar + main) is internal. */
+  height: 100vh;
+  min-height: 0;
+  overflow: hidden;
   padding: 0;
 }
 
