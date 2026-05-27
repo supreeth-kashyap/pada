@@ -1,23 +1,25 @@
 {
   "name": "pada-ds",
   "private": false,
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Singular design system for React applications, built with TypeScript and Vite.",
   "license": "MIT",
   "type": "module",
-  "main": "dist/pada.js",
-  "module": "dist/pada.js",
-  "types": "dist/index.d.ts",
+  "main": "./dist/pada.js",
+  "module": "./dist/pada.js",
+  "types": "./dist/index.d.ts",
   "sideEffects": [
     "**/*.css"
   ],
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/pada.js",
-      "types": "./dist/index.d.ts"
+      "default": "./dist/pada.js"
     },
     "./styles.css": "./dist/pada.css",
-    "./tokens.css": "./dist/tokens.css"
+    "./tokens.css": "./dist/tokens.css",
+    "./package.json": "./package.json"
   },
   "files": [
     "dist",
@@ -25,12 +27,28 @@
     "LICENSE",
     "CHANGELOG.md"
   ],
+  "keywords": [
+    "react",
+    "design-system",
+    "components",
+    "ui",
+    "typescript",
+    "pada",
+    "design-tokens"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "dev": "vite",
+    "clean": "rm -rf dist",
     "build:types": "tsc -p tsconfig.package.json",
     "build:styles": "vite build",
     "build:tokens": "node ./scripts/build-tokens-css.mjs",
-    "build": "npm run build:styles && npm run build:types && npm run build:tokens",
+    "build": "npm run clean && npm run build:styles && npm run build:types && npm run build:tokens",
     "lint": "eslint .",
     "preview": "vite preview",
     "smoke:consumer": "node ./scripts/smoke-consumer.mjs",

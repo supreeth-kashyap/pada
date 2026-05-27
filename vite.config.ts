@@ -3,8 +3,11 @@ import react from '@vitejs/plugin-react'
 import path from 'path'
 
 // https://vite.dev/config/
-export default defineConfig({
+// `command` is `serve` for `vite dev` and `build` for `vite build`. The published library
+// build skips copying `public/` into `dist/`; the demo dev server still serves it.
+export default defineConfig(({ command }) => ({
   plugins: [react()],
+  publicDir: command === 'build' ? false : 'public',
   build: {
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),
@@ -14,13 +17,17 @@ export default defineConfig({
       formats: ['es'],
     },
     rollupOptions: {
-      external: ['react', 'react-dom'],
+      // Anything matched here is left as an `import` in the bundle and resolved by the
+      // consumer's package manager. `react`/`react-dom` are peer deps; `prismjs` is a
+      // runtime dependency. The regex catches deep imports like `prismjs/components/...`.
+      external: (id) => id === 'react' || id === 'react-dom' || /^prismjs(\/|$)/.test(id),
       output: {
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM',
+          prismjs: 'Prism',
         },
       },
     },
   },
-})
+}))
