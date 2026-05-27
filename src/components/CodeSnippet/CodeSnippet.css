@@ -26,11 +26,11 @@
 .code-snippet__body {
   margin: 0;
   padding: var(--spacing-3);
-  background-color: var(--color-neutral-950);
+  background-color: var(--color-neutral-900);
   color: var(--color-neutral-100);
   font-size: var(--font-size-sm);
   line-height: var(--line-height-sm);
-  height: 436px;
+  height: auto;
   overflow: auto;
 }
 
