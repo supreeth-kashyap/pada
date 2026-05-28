@@ -59,7 +59,7 @@ const PAGES = [
     designPara:
       'An Accordion contains one or more items, each composed of an <code>AccordionHeader</code> (the always-visible trigger) and an <code>AccordionContent</code> (the disclosed body). Items can be expanded one at a time or independently.',
     designRender: SHOWCASE(
-      `<div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 8 }}><Accordion header="What is Pada?" defaultOpen>Pada is a singular React design system focused on dense product UIs.</Accordion><Accordion header="How do I install it?">Install via <code>npm install pada-ds</code>.</Accordion></div>`,
+      `<div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 8 }}><Accordion header="What is Pada?" headerIconName="help_outline" defaultOpen>Pada is a singular React design system focused on dense product UIs.</Accordion><Accordion header="How do I install it?" headerIconName="download">Install via <code>npm install pada-ds</code>.</Accordion><Accordion header="No leading icon">When <code>headerIconName</code> is omitted the icon slot is hidden entirely \u2014 the label sits flush against the left padding.</Accordion></div>`,
       'column'
     ),
     dev: DEV(
@@ -68,8 +68,13 @@ const PAGES = [
 
 export function FAQ() {
   return (
-    <Accordion header="Section title" defaultOpen>
-      Hidden body shown only when expanded.
+    <Accordion
+      header="Section title"
+      headerIconName="help_outline"
+      defaultOpen
+    >
+      Hidden body shown only when expanded. The right chevron swaps between
+      \`keyboard_arrow_down\` (collapsed) and \`keyboard_arrow_up\` (expanded).
     </Accordion>
   );
 }`

@@ -26,12 +26,15 @@ export const AccordionHeader: React.FC<AccordionHeaderProps> = ({
     >
       {iconName ? (
         <div className="accordion-header__icon">
-          <Icon name={iconName} size={12} />
+          <Icon name={iconName} size={20} />
         </div>
       ) : null}
       <div className="accordion-header__title">{title}</div>
       <div className="accordion-header__chevron">
-        <Icon name="chevron_down" size={12} />
+        <Icon
+          name={collapsed ? 'keyboard_arrow_down' : 'keyboard_arrow_up'}
+          size={20}
+        />
       </div>
     </button>
   );
