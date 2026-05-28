@@ -993,38 +993,10 @@ export function NotificationToggle() {
     ),
   }),
 
-  c('table', 'Table', 'Table', {
-    imports: `import { Table } from '../../../components/Table';`,
-    purpose:
-      'Table presents structured rows and columns of data — records, transactions, audit logs. Use it when users need to scan, sort, or compare across rows. For free-form lists or single-record details, prefer List or KeyValue.',
-    designPara:
-      'Table supports column configuration (label, sortable, alignment), row-level actions, sticky headers, and pagination. Empty and loading states are first-class.',
-    designRender: SHOWCASE(
-      `<div style={{ width: '100%' }}><Table columns={[{ id: 'name', label: 'Name' }, { id: 'role', label: 'Role' }]}><div style={{ padding: 12, color: 'var(--color-stone-500)', fontSize: 12 }}>Render &lt;Row&gt; / &lt;Cell&gt; children to populate the table.</div></Table></div>`
-    ),
-    dev: DEV(
-      'Table',
-      `import { Table, Row, Cell } from 'pada-ds';
-
-export function UsersTable({ users }) {
-  return (
-    <Table columns={[{ id: 'name', label: 'Name' }, { id: 'email', label: 'Email' }]}>
-      {users.map((u) => (
-        <Row key={u.id}>
-          <Cell>{u.name}</Cell>
-          <Cell>{u.email}</Cell>
-        </Row>
-      ))}
-    </Table>
-  );
-}`
-    ),
-    a11y: A11Y(
-      'Uses semantic <code>&lt;table&gt;</code>, <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code> markup so screen readers announce headers, rows, and cells.',
-      'Sortable columns expose <code>aria-sort</code> on the header.',
-      'Selected rows use <code>aria-selected</code>; row actions are reachable by keyboard within the table tab order.'
-    ),
-  }),
+  // NOTE: `table-demo.tsx` is hand-maintained (see also `table-demo.data.ts`) because
+  // it renders a fully wired Table with toolbar, header, body rows, and pagination
+  // state. Do not regenerate it from this script — re-running this generator skips
+  // the `table` slug entirely.
 
   c('tabs', 'Tabs', 'Tabs', {
     imports: `import { Tabs, TabPanel } from '../../../components/Tabs/Tabs';`,
