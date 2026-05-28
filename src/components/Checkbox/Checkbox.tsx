@@ -21,10 +21,10 @@ export const Checkbox = ({
         className={`checkbox ${className}`.trim()}
         {...props}
       />
-      <Icon 
-        name="tick_1" 
-        size={12} 
-        color="var(--color-white)" 
+      <Icon
+        name="check_small"
+        size={16}
+        color="var(--color-white)"
         className="checkbox-icon checkbox-icon--tick"
       />
     </div>

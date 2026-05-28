@@ -1,43 +1,80 @@
+/* Tabs — Figma node 2:2612.
+   Tablist:    bottom 1px stone-100 separator, 24px gap between tabs.
+   Tab item:   12px vertical padding only, no horizontal padding; 8px gap
+               between label and notification dot.
+   Active tab: 2px indigo-600 bottom border + indigo-700 label colour.
+   Hover:      indigo-700 label colour (border unchanged for inactive). */
+
 .tabs {
     width: 100%;
 }
 
 .tabs__list {
     display: flex;
-    border-bottom: 1px solid var(--color-border);
+    align-items: stretch;
+    gap: var(--spacing-6);
+    border-bottom: 1px solid var(--color-stone-100);
 }
 
 .tabs__tab {
     font-family: inherit;
-    font-size: var(--font-3);
-    padding: var(--space-2) var(--space-4);
+    font-size: var(--font-size-base);
+    font-weight: 500;
+    line-height: 20px;
+    /* No horizontal padding per Figma; the 24px tablist gap separates items. */
+    padding: var(--spacing-3) 0;
     border: none;
     background-color: transparent;
     cursor: pointer;
-    color: var(--color-fg-muted);
+    color: var(--color-stone-900);
     position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-2);
+    white-space: nowrap;
+    /* Reserve the active-state 2px bar at all times so toggling doesn't shift
+       layout. `margin-bottom: -1px` lets the bar overlap the 1px tablist
+       separator below it. */
     border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+
+.tabs__tab:hover:not([aria-disabled='true']) {
+    color: var(--color-primary-700);
 }
 
 .tabs__tab--active {
-    color: var(--color-primary-500);
-    border-bottom-color: var(--color-primary-500);
+    color: var(--color-primary-700);
+    border-bottom-color: var(--color-primary-600);
 }
 
 .tabs__tab:focus {
     outline: none;
-    background-color: var(--color-primary-100);
 }
 
 .tabs__tab:focus-visible {
-    outline: 2px solid var(--color-focus-ring);
-    outline-offset: -2px;
+    box-shadow: var(--shadow-focus-ring);
+    border-radius: var(--radius);
 }
 
+.tabs__tab-label {
+    display: inline-block;
+}
+
+/* Notification dot per Figma: 8×8 red-600 disc with a 2px white ring so the
+   dot still reads when sitting against a stone or indigo underline. */
+.tabs__tab-indicator {
+    width: 8px;
+    height: 8px;
+    background-color: var(--color-red-600);
+    border: 2px solid var(--color-white);
+    border-radius: 9999px;
+    box-sizing: content-box;
+    flex-shrink: 0;
+}
 
 .tabs__panel {
-    padding: var(--space-4);
-    border: 1px solid var(--color-border);
-    border-top: none;
-    border-radius: 0 0 var(--radius-2) var(--radius-2);
+    padding-top: var(--spacing-4);
 }

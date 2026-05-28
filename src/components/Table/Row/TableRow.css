@@ -1,9 +1,6 @@
 .table-row {
   display: grid;
   width: 100%;
-  border-bottom: 1px solid var(--color-neutral-200);
-}
-
-.table-row:last-child {
-  border-bottom: none;
+  /* Border-bottom moved onto each cell so that hover / selected states can
+     re-tint the border-colour alongside the bg. See `.table-cell`. */
 }

@@ -19,13 +19,16 @@
   min-width: fit-content;
 }
 
+/* Slider geometry per Figma node 2:1807:
+   container 16px tall (matches knob), 12px tall track centered (top:2px),
+   24×16 rounded-rect knob with a 2px white notch border. */
 .slider-container {
   position: relative;
   display: flex;
   align-items: center;
   width: 100%;
-  height: var(--spacing-6);
-  padding: var(--spacing-2) 0;
+  height: var(--spacing-4);
+  padding: 0;
 }
 
 .slider-container--disabled {
@@ -44,17 +47,20 @@
 .slider-track {
   position: absolute;
   width: 100%;
-  height: var(--spacing-1);
-  background-color: var(--color-neutral-200);
-  border-radius: var(--radius-full);
+  height: var(--spacing-3);
+  top: 2px;
+  background-color: var(--color-stone-300);
+  border-radius: var(--radius);
   pointer-events: none;
 }
 
 .slider-fill {
   position: absolute;
+  top: 0;
+  left: 0;
   height: 100%;
   background-color: var(--color-primary-500);
-  border-radius: var(--radius-full);
+  border-radius: var(--radius) 0 0 var(--radius);
   transition: width 0.1s ease-out;
   pointer-events: none;
 }
@@ -62,7 +68,7 @@
 .slider {
   position: relative;
   width: 100%;
-  height: var(--spacing-6);
+  height: var(--spacing-4);
   margin: 0;
   padding: 0;
   background: transparent;
@@ -76,53 +82,47 @@
   outline: none;
 }
 
+/* Focus ring is drawn on the thumb itself (see ::-webkit-slider-thumb rule
+   below) so it follows the knob, not the whole input element. */
 .slider:focus-visible {
-  outline: 2px solid var(--color-focus-ring);
-  outline-offset: 4px;
-  border-radius: var(--radius-sm);
+  outline: none;
 }
 
 .slider:disabled {
   cursor: not-allowed;
 }
 
-/* Webkit/Blink (Chrome, Safari, Edge) */
+/* Webkit/Blink thumb (Chrome, Safari, Edge) —
+   24×16 indigo-600 rectangle with 4px radius and 2px white "notch" border. */
 .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: var(--spacing-4);
+  width: var(--spacing-6);
   height: var(--spacing-4);
-  border-radius: var(--radius-full);
-  background-color: var(--color-primary-500);
-  border: 2px solid var(--color-white);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  margin-top: calc((var(--spacing-1) - var(--spacing-4)) / 2);
-}
-
-.slider:hover:not(:disabled)::-webkit-slider-thumb {
+  border-radius: var(--radius);
   background-color: var(--color-primary-600);
-  transform: scale(1.1);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 2px solid var(--color-white);
+  cursor: pointer;
+  transition: background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  /* Track is 12px tall at top:2px; thumb is 16px. Margin centres the thumb on
+     the track (offset = (track_height - thumb_height) / 2 = -2px). */
+  margin-top: -2px;
 }
 
+.slider:hover:not(:disabled)::-webkit-slider-thumb,
 .slider:active:not(:disabled)::-webkit-slider-thumb,
 .slider--dragging::-webkit-slider-thumb {
   background-color: var(--color-primary-700);
-  transform: scale(1.15);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
 .slider:disabled::-webkit-slider-thumb {
-  background-color: var(--color-neutral-400);
-  border-color: var(--color-neutral-200);
+  background-color: var(--color-primary-300);
+  border-color: var(--color-white);
   cursor: not-allowed;
-  transform: none;
 }
 
 .slider:focus-visible::-webkit-slider-thumb {
-  box-shadow: 0 0 0 3px var(--color-primary-50), 0 2px 4px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-focus-ring);
 }
 
 .slider-container--error .slider::-webkit-slider-thumb {
@@ -141,48 +141,39 @@
 
 .slider::-webkit-slider-runnable-track {
   width: 100%;
-  height: var(--spacing-1);
+  height: var(--spacing-3);
   background: transparent;
   border: none;
-  border-radius: var(--radius-full);
+  border-radius: var(--radius);
 }
 
-/* Firefox */
+/* Firefox thumb — same rectangle as the webkit thumb above. */
 .slider::-moz-range-thumb {
-  width: var(--spacing-4);
+  width: var(--spacing-6);
   height: var(--spacing-4);
-  border-radius: var(--radius-full);
-  background-color: var(--color-primary-500);
+  border-radius: var(--radius);
+  background-color: var(--color-primary-600);
   border: 2px solid var(--color-white);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
+  transition: background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   -moz-appearance: none;
   appearance: none;
 }
 
-.slider:hover:not(:disabled)::-moz-range-thumb {
-  background-color: var(--color-primary-600);
-  transform: scale(1.1);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
+.slider:hover:not(:disabled)::-moz-range-thumb,
 .slider:active:not(:disabled)::-moz-range-thumb,
 .slider--dragging::-moz-range-thumb {
   background-color: var(--color-primary-700);
-  transform: scale(1.15);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
 .slider:disabled::-moz-range-thumb {
-  background-color: var(--color-neutral-400);
-  border-color: var(--color-neutral-200);
+  background-color: var(--color-primary-300);
+  border-color: var(--color-white);
   cursor: not-allowed;
-  transform: none;
 }
 
 .slider:focus-visible::-moz-range-thumb {
-  box-shadow: 0 0 0 3px var(--color-primary-50), 0 2px 4px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-focus-ring);
 }
 
 .slider-container--error .slider::-moz-range-thumb {
@@ -201,10 +192,10 @@
 
 .slider::-moz-range-track {
   width: 100%;
-  height: var(--spacing-1);
+  height: var(--spacing-3);
   background: transparent;
   border: none;
-  border-radius: var(--radius-full);
+  border-radius: var(--radius);
 }
 
 .slider-description,

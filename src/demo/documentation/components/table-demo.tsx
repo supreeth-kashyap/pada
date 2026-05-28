@@ -30,6 +30,16 @@ function UsersTablePreview() {
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  // Bulk-row-selection state. Click a row to toggle. Preview ships with the
+  // first user pre-selected so the indigo wash is visible at first paint.
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(() => new Set([USERS[0]?.id].filter(Boolean) as string[]));
+  const toggleSelected = (id: string) => {
+    setSelectedIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id); else next.add(id);
+      return next;
+    });
+  };
 
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
@@ -86,7 +96,11 @@ function UsersTablePreview() {
           ))}
         </TableRow>
         {visible.map((u) => (
-          <TableRow key={u.id}>
+          <TableRow
+            key={u.id}
+            selected={selectedIds.has(u.id)}
+            onClick={() => toggleSelected(u.id)}
+          >
             <TableCell columnId="name">{u.name}</TableCell>
             <TableCell columnId="email">
               <span style={{ color: 'var(--color-stone-600)' }}>{u.email}</span>

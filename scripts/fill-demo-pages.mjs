@@ -88,32 +88,47 @@ export function FAQ() {
   }),
 
   c('banner', 'Banner', 'Banner', {
-    imports: `import { Banner } from '../../../components/Banner';`,
+    imports: `import { Banner } from '../../../components/Banner';\nimport { Button } from '../../../components/Button';`,
     purpose:
       'Banner displays a persistent, page-level message — system status, important warnings, or required actions that affect the entire workspace. Use it sparingly; one banner at a time keeps the message in focus. Banners are not for transient feedback (use Notification for that).',
     designPara:
-      'Banner shows a title, optional subtitle, optional leading visual, and an optional call-to-action button. Place it at the top of the surface it applies to.',
+      'Banner is composed of an optional leading visual (icon or image, wrapped in a 12&nbsp;px-radius stone-100 frame), a title with optional subtitle, and an optional trailing call-to-action button. Container padding is 16&nbsp;\u00d7&nbsp;24&nbsp;px with a 24&nbsp;px gap and a 16&nbsp;px outer radius.',
     designRender: SHOWCASE(
-      `<div style={{ display: 'flex', flexDirection: 'column', gap: 8, width: '100%' }}><Banner title="A new version is available." subtitle="Upgrade now to get the latest features." /><Banner title="Settings saved successfully." /><Banner title="Trial ends in 3 days." subtitle="Pick a plan to keep your workspace active." /></div>`,
+      `<div style={{ display: 'flex', flexDirection: 'column', gap: 12, width: '100%' }}><Banner visualIcon="campaign" title="Auctor in at id eget diam bibendum egestas sapien sed sit ridiculus." subtitle="Purus fusce sit porta facilisis sagittis enim pellentesque vitae ac bibendum diam fames non nisi platea sapien id viverra nulla auctor nulla id amet etiam scelerisque et nec venenatis volutpat." button={<Button variant="primary" leftIcon="accessibility">Button</Button>} /><Banner visualIcon="download" title="A new version is available." subtitle="Upgrade now to get the latest features." button={<Button variant="primary">Update</Button>} /><Banner visualImage="/vite.svg" visualAlt="Integration logo" title="Connect your data source." subtitle="Link Airtable, Notion, or your warehouse to start syncing records." /><Banner title="Settings saved successfully." subtitle="Your workspace preferences will apply on the next session." /></div>`,
       'column'
     ),
     dev: DEV(
       'Banner',
-      `import { Banner } from 'pada-ds';
+      `import { Banner, Button } from 'pada-ds';
 
 export function MaintenanceNotice() {
   return (
     <Banner
+      visualIcon="campaign"
       title="Scheduled maintenance"
       subtitle="The workspace will be unavailable from 2am to 3am UTC."
+      button={<Button variant="primary">Acknowledge</Button>}
+    />
+  );
+}
+
+// Image-based visual (e.g. an integration logo)
+export function IntegrationNotice() {
+  return (
+    <Banner
+      visualImage="/logos/airtable.svg"
+      visualAlt="Airtable"
+      title="Connect Airtable"
+      subtitle="Sync records to and from your Airtable bases."
     />
   );
 }`
     ),
     a11y: A11Y(
-      'Each severity meets AA 4.5:1 text contrast against its tinted surface.',
-      'Banners use <code>role="status"</code> for non-critical messages and <code>role="alert"</code> for errors so screen readers announce changes.',
-      'When a banner is dismissible, focus returns to a logical neighbor after dismissal.'
+      'Title and subtitle both clear AA 4.5:1 contrast against the white container.',
+      'Banner uses <code>role="status"</code> for non-critical messages and <code>role="alert"</code> for errors so screen readers announce changes.',
+      'When <code>visualImage</code> is decorative, pass an empty <code>visualAlt=""</code>; when meaningful (e.g. a brand logo) pass the brand name so screen readers can announce it.',
+      'The trailing button is a real <code>&lt;button&gt;</code> from the design system, so focus, keyboard activation, and disabled states behave normally.'
     ),
   }),
 
@@ -794,21 +809,36 @@ export function ListSearch() {
     designPara:
       'SegmentControl renders a horizontal capsule with each segment as an equal-width option. The selected segment shows a contrasting surface.',
     designRender: SHOWCASE(
-      `<SegmentControl value="month" onChange={() => {}} options={[{ value: 'day', label: 'Day' }, { value: 'week', label: 'Week' }, { value: 'month', label: 'Month' }]} />`
+      `<SegmentControl defaultValue="month" onChange={(value, option) => console.log('SegmentControl ->', value, option)} options={[{ value: 'day', label: 'Day' }, { value: 'week', label: 'Week' }, { value: 'month', label: 'Month' }]} />`
     ),
     dev: DEV(
       'SegmentControl',
-      `import { SegmentControl } from 'pada-ds';
+      `import { useState } from 'react';
+import { SegmentControl } from 'pada-ds';
 
 export function RangePicker() {
+  // Controlled: keep the active value in state and update it from onChange.
+  const [range, setRange] = useState('week');
   return (
     <SegmentControl
-      value="week"
-      onChange={() => {}}
-      options={[{ value: 'day', label: 'Day' }, { value: 'week', label: 'Week' }]}
+      value={range}
+      onChange={(value, option) => {
+        // \`value\` is the newly active value; \`option\` is the full
+        // SegmentOption (label / icon / disabled / etc.) for convenience.
+        console.log('clicked', option.label);
+        setRange(value);
+      }}
+      options={[
+        { value: 'day', label: 'Day' },
+        { value: 'week', label: 'Week' },
+        { value: 'month', label: 'Month' },
+      ]}
     />
   );
-}`
+}
+
+// Or uncontrolled — the component tracks its own active segment:
+// <SegmentControl defaultValue="week" onChange={(value) => save(value)} options={...} />`
     ),
     a11y: A11Y(
       'Implements the radio pattern with <code>role="radiogroup"</code> and <code>role="radio"</code> children.',
@@ -824,22 +854,36 @@ export function RangePicker() {
     designPara:
       'Select renders a button-styled trigger that opens a menu of options on click. It supports labels, descriptions, errors, and disabled options.',
     designRender: SHOWCASE(
-      `<div style={{ width: 280 }}><Select label="Choose a plan" options={[{ value: 'free', label: 'Free' }, { value: 'pro', label: 'Pro' }, { value: 'team', label: 'Team' }]} value="pro" onChange={() => {}} /></div>`
+      `<div style={{ width: 280 }}><Select label="Choose a plan" defaultValue="pro" onChange={(value, option) => console.log('Select ->', value, option)} options={[{ value: 'free', label: 'Free' }, { value: 'pro', label: 'Pro' }, { value: 'team', label: 'Team' }]} /></div>`
     ),
     dev: DEV(
       'Select',
-      `import { Select } from 'pada-ds';
+      `import { useState } from 'react';
+import { Select } from 'pada-ds';
 
 export function PlanSelect() {
+  // Controlled: keep the value in state and update it from onChange.
+  const [plan, setPlan] = useState('pro');
   return (
     <Select
       label="Plan"
-      options={[{ value: 'free', label: 'Free' }, { value: 'pro', label: 'Pro' }]}
-      value="pro"
-      onChange={() => {}}
+      value={plan}
+      onChange={(value, option) => {
+        // \`value\` is the picked value; \`option\` is the full SelectOption.
+        console.log('picked', option.label);
+        setPlan(value);
+      }}
+      options={[
+        { value: 'free', label: 'Free' },
+        { value: 'pro', label: 'Pro' },
+        { value: 'team', label: 'Team' },
+      ]}
     />
   );
-}`
+}
+
+// Or uncontrolled \u2014 the trigger updates itself from the click:
+// <Select label="Plan" defaultValue="pro" onChange={(v) => save(v)} options={...} />`
     ),
     a11y: A11Y(
       'Implements the WAI-ARIA listbox pattern with <code>role="listbox"</code> and <code>role="option"</code> items.',
@@ -976,18 +1020,41 @@ export function Onboarding() {
     designPara:
       'Switch renders a horizontal track with a sliding thumb. The "on" state uses an indigo surface; the "off" state uses a stone surface. Disabled and focus states are explicit.',
     designRender: SHOWCASE(
-      `<label style={{ display: 'flex', alignItems: 'center', gap: 8 }}><Switch /> Off</label><label style={{ display: 'flex', alignItems: 'center', gap: 8 }}><Switch defaultChecked /> On</label><label style={{ display: 'flex', alignItems: 'center', gap: 8 }}><Switch disabled /> Disabled</label>`,
+      `<div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, max-content)', columnGap: 32, rowGap: 16, alignItems: 'center' }}><Switch label="Off \u2014 default" onChange={(e) => console.log('Switch off->on?', e.currentTarget.checked)} /><Switch defaultChecked label="On \u2014 default" onChange={(e) => console.log('Switch checked?', e.currentTarget.checked)} /><Switch disabled label="Off \u2014 disabled" /><Switch defaultChecked disabled label="On \u2014 disabled" /><Switch loading label="Off \u2014 loading" /><Switch defaultChecked loading label="On \u2014 loading" /><Switch autoFocus label="Off \u2014 focus (tab here)" /><Switch defaultChecked label="On \u2014 (focus via Tab)" /></div>`,
       'column'
     ),
     dev: DEV(
       'Switch',
-      `import { Switch } from 'pada-ds';
+      `import { useState } from 'react';
+import { Switch } from 'pada-ds';
 
 export function NotificationToggle() {
+  // Uncontrolled \u2014 the Switch tracks its own checked state and fires onChange.
   return (
-    <label>
-      <Switch /> Email notifications
-    </label>
+    <Switch
+      label="Email notifications"
+      onChange={(event) => console.log('checked?', event.currentTarget.checked)}
+    />
+  );
+}
+
+export function AsyncToggle() {
+  // Controlled + loading state while persisting to a server.
+  const [enabled, setEnabled] = useState(false);
+  const [saving, setSaving] = useState(false);
+  return (
+    <Switch
+      label="Two-factor auth"
+      checked={enabled}
+      loading={saving}
+      onChange={async (event) => {
+        const next = event.currentTarget.checked;
+        setSaving(true);
+        await fetch('/api/2fa', { method: 'PUT', body: JSON.stringify({ enabled: next }) });
+        setEnabled(next);
+        setSaving(false);
+      }}
+    />
   );
 }`
     ),
@@ -1010,17 +1077,25 @@ export function NotificationToggle() {
     designPara:
       'Tabs renders a horizontal tablist with the active tab underlined. Panels mount only when active. Keyboard navigation cycles through tabs.',
     designRender: SHOWCASE(
-      `<div style={{ width: '100%' }}><Tabs label="Demo tabs"><TabPanel label="Overview"><div style={{ padding: 12 }}>Overview content</div></TabPanel><TabPanel label="Activity"><div style={{ padding: 12 }}>Activity content</div></TabPanel><TabPanel label="Settings"><div style={{ padding: 12 }}>Settings content</div></TabPanel></Tabs></div>`
+      `<div style={{ width: '100%' }}><Tabs label="Demo tabs" onChange={(index) => console.log('Tabs ->', index)}><TabPanel label="Overview"><div style={{ padding: 12 }}>Overview content</div></TabPanel><TabPanel label="Activity" notification><div style={{ padding: 12 }}>This tab has unread updates \u2014 note the red indicator dot on the tab label.</div></TabPanel><TabPanel label="Files"><div style={{ padding: 12 }}>Files content</div></TabPanel><TabPanel label="Settings"><div style={{ padding: 12 }}>Settings content</div></TabPanel></Tabs></div>`
     ),
     dev: DEV(
       'Tabs',
       `import { Tabs, TabPanel } from 'pada-ds';
 
-export function RecordDetail() {
+export function RecordDetail({ hasUnreadActivity }: { hasUnreadActivity: boolean }) {
   return (
-    <Tabs label="Record detail">
+    <Tabs
+      label="Record detail"
+      // \`onChange\` fires with the newly active tab index whenever the
+      // user clicks a tab or moves with the arrow keys.
+      onChange={(index) => console.log('active tab', index)}
+    >
       <TabPanel label="Overview">...</TabPanel>
-      <TabPanel label="Activity">...</TabPanel>
+      {/* \`notification\` shows a red dot on the label \u2014 use it to flag
+          unread / new content inside the panel. */}
+      <TabPanel label="Activity" notification={hasUnreadActivity}>...</TabPanel>
+      <TabPanel label="Settings">...</TabPanel>
     </Tabs>
   );
 }`

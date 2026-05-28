@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import type { ComboBoxItem } from '../ComboBox/ComboBox';
 import { ComboBox } from '../ComboBox/ComboBox';
+import { Icon } from '../Icon';
 import './Select.css';
 
 export interface SelectOption {
@@ -12,8 +13,18 @@ export interface SelectOption {
 export interface SelectProps {
   label: string;
   options: SelectOption[];
+  /** Controlled value. When provided, the parent owns selection state and MUST update it from `onChange` for the trigger to reflect the click. */
   value?: string | number;
-  onChange?: (value: string | number) => void;
+  /** Uncontrolled initial value. Ignored when `value` is provided. */
+  defaultValue?: string | number;
+  /** Placeholder shown when no value is selected. */
+  placeholder?: string;
+  /**
+   * Fired after the user picks an option from the dropdown. Receives the
+   * newly selected `value` plus the full `SelectOption` (label / disabled /
+   * etc.) so consumers don't have to look it up.
+   */
+  onChange?: (value: string | number, option: SelectOption) => void;
   description?: string;
   error?: string;
   disabled?: boolean;
@@ -25,7 +36,9 @@ export interface SelectProps {
 export const Select: React.FC<SelectProps> = ({
   label,
   options,
-  value,
+  value: controlledValue,
+  defaultValue,
+  placeholder = 'Select an option',
   onChange,
   description,
   error,
@@ -36,21 +49,33 @@ export const Select: React.FC<SelectProps> = ({
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
-  const selectedOption = options.find(opt => opt.value === value);
-  const displayText = selectedOption?.label || 'Select an option';
+
+  // Support both controlled (`value`) and uncontrolled (`defaultValue`) usage.
+  // Without internal state the trigger would never reflect a click unless the
+  // parent rewired `value` from `onChange`, which silently broke consumers
+  // that wanted a "fire and forget" dropdown.
+  const isControlled = controlledValue !== undefined;
+  const [internalValue, setInternalValue] = useState<string | number | undefined>(defaultValue);
+  const currentValue = isControlled ? controlledValue : internalValue;
+
+  const selectedOption = options.find(opt => opt.value === currentValue);
+  const displayText = selectedOption?.label || placeholder;
 
   const handleItemClick = (item: ComboBoxItem) => {
     const option = options.find(opt => opt.value.toString() === item.id);
-    if (option) {
-      onChange?.(option.value);
-      setIsOpen(false);
+    if (!option || option.disabled) return;
+
+    if (!isControlled) {
+      setInternalValue(option.value);
     }
+    onChange?.(option.value, option);
+    setIsOpen(false);
   };
 
   const comboBoxItems: ComboBoxItem[] = options.map(option => ({
     id: option.value.toString(),
     label: option.label,
-    selected: option.value === value,
+    selected: option.value === currentValue,
     disabled: option.disabled,
   }));
 
@@ -72,9 +97,20 @@ export const Select: React.FC<SelectProps> = ({
           aria-haspopup="listbox"
           aria-expanded={isOpen}
           aria-label={`${label}: ${displayText}`}
+          data-filled={selectedOption ? '' : undefined}
         >
-          <span className="select-trigger-text">{displayText}</span>
-          <span className="select-icon" aria-hidden="true" />
+          <span
+            className="select-trigger-text"
+            data-placeholder={selectedOption ? undefined : ''}
+          >
+            {displayText}
+          </span>
+          <Icon
+            name="keyboard_arrow_down"
+            size={12}
+            className="select-icon"
+            aria-hidden="true"
+          />
         </button>
         {isOpen && (
           <div className="select-dropdown">

@@ -1,8 +1,8 @@
 .indexer {
   --indexer-rail-color: var(--color-neutral-200);
-  --indexer-active-color: var(--color-blue-600);
-  --indexer-hover-color: var(--color-blue-500);
-  --indexer-focus-ring: var(--color-blue-200);
+  --indexer-active-color: var(--color-indigo-600);
+  --indexer-hover-color: var(--color-indigo-500);
+  --indexer-focus-ring: var(--color-indigo-200);
   display: flex;
   flex-direction: column;
   gap: 0px;
@@ -40,7 +40,7 @@
   border-radius: 10px;
   color: var(--color-neutral-600);
   cursor: pointer;
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-md);
   font-weight: 500;
   padding: 8px 12px;
   position: relative;
@@ -67,7 +67,7 @@
 }
 
 .indexer-item:focus-visible {
-  background: var(--color-blue-50);
+  background: var(--color-indigo-50);
   border-color: var(--indexer-focus-ring);
   box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25);
   outline: none;

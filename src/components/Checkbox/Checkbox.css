@@ -17,7 +17,7 @@
   appearance: none;
   width: var(--spacing-5);
   height: var(--spacing-5);
-  border: 1px solid var(--color-neutral-400);
+  border: 1px solid var(--color-neutral-600);
   border-radius: var(--radius);
   background-color: var(--color-bg);
   cursor: pointer;
@@ -60,9 +60,11 @@
   --checkbox-tick-color: var(--color-primary-600);
 }
 
+/* Focus ring per Figma: 2px white inner + 3px indigo-600 outer spread. The base
+   border color is NOT overridden on focus — stone-600 for unselected, indigo-600
+   for selected stay intact and only the outer ring changes. */
 .checkbox:focus-visible {
   box-shadow: var(--shadow-focus-ring);
-  border-color: var(--color-primary-600);
   outline: none;
 }
 
@@ -75,8 +77,11 @@
   opacity: 1;
 }
 
+/* Hover + selected per Figma: bg shifts to a light indigo wash (indigo-100) while
+   the border stays indigo-600 and the tick glyph re-colors to indigo-600 for AA
+   contrast on the lighter fill. */
 .checkbox:checked:hover:not(:disabled) {
-  background-color: var(--color-primary-600);
+  background-color: var(--color-primary-100);
   border-color: var(--color-primary-600);
 }
 
@@ -86,15 +91,15 @@
 
 .checkbox:disabled {
   background-color: var(--color-bg);
-  border-color: var(--color-neutral-200);
+  border-color: var(--color-neutral-300);
   cursor: not-allowed;
   opacity: 1;
 }
 
 
 .checkbox:disabled:checked {
-  background-color: var(--color-primary-200);
-  border-color: var(--color-primary-200);
+  background-color: var(--color-primary-300);
+  border-color: var(--color-primary-300);
 }
 
 .checkbox:disabled ~ .checkbox-icon--tick {
@@ -107,7 +112,7 @@
 }
 
 .checkbox:checked:hover:not(:disabled) ~ .checkbox-icon--tick {
-  --checkbox-tick-color: var(--color-primary-50);
+  --checkbox-tick-color: var(--color-primary-600);
 }
 
 .checkbox-label {

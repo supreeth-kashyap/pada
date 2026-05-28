@@ -29,53 +29,69 @@
   gap: var(--spacing-2);
 }
 
-/* Radio input */
+/* Radio input — sized & coloured per Figma node 1:21699. Mirrors the Checkbox
+   state matrix: stone-600 rest border, indigo-600 hover/selected border, a
+   12&nbsp;px indigo-600 inner disc when selected, and a 2&nbsp;px-white +
+   3&nbsp;px-indigo focus ring that leaves the base border colour intact. */
 .radio {
   -webkit-appearance: none;
   appearance: none;
-  width: 16px;
-  height: 16px;
-  min-width: 16px;
-  min-height: 16px;
+  width: var(--spacing-5);
+  height: var(--spacing-5);
+  min-width: var(--spacing-5);
+  min-height: var(--spacing-5);
   border-radius: 50%;
-  border: 1px solid var(--color-neutral-500);
-  background-color: var(--color-white);
+  border: 1px solid var(--color-neutral-600);
+  background-color: var(--color-bg);
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
   outline: none;
+  /* Inner dot rendered via radial-gradient so we avoid a stacking-context fight
+     with the focus ring. Default: fully transparent (unselected). */
+  background-image: radial-gradient(
+    circle,
+    transparent 0 6px,
+    transparent 6px
+  );
 }
 
 .radio:hover:not(:disabled) {
-  border-color: var(--color-neutral-400);
+  border-color: var(--color-primary-600);
 }
 
+/* Focus ring per Figma. Border colour deliberately NOT overridden \u2014 unselected
+   keeps stone-600, selected keeps indigo-600. */
 .radio:focus-visible {
-  outline: 2px solid var(--color-focus-ring);
-  outline-offset: 2px;
+  box-shadow: var(--shadow-focus-ring);
+  outline: none;
 }
 
-/* Checked state */
+/* Selected: indigo-600 border + 12&nbsp;px indigo-600 inner disc, white field. */
 .radio:checked {
-  background-color: var(--color-primary-700);
-  border-color: var(--color-primary-700);
+  background-color: var(--color-bg);
+  border-color: var(--color-primary-600);
+  background-image: radial-gradient(
+    circle,
+    var(--color-primary-600) 0 6px,
+    transparent 6px
+  );
 }
 
-.radio:checked::after {
-  content: "";
-  display: block;
-  width: 4px;
-  height: 4px;
-  margin: 35%;
-  border-radius: 50%;
-  background-color: var(--color-white);
-}
-
-/* Disabled state */
+/* Disabled */
 .radio:disabled {
-  opacity: 0.6;
   cursor: not-allowed;
   border-color: var(--color-neutral-300);
-  background-color: var(--color-neutral-50);
+  background-color: var(--color-bg);
+}
+
+.radio:disabled:checked {
+  border-color: var(--color-primary-300);
+  background-image: radial-gradient(
+    circle,
+    var(--color-primary-300) 0 6px,
+    transparent 6px
+  );
 }
 
 /* Radio label */

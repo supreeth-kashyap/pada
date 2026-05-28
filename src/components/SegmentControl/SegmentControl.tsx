@@ -13,9 +13,16 @@ export interface SegmentControlProps {
   options: SegmentOption[];
   value?: string;
   defaultValue?: string;
-  onChange?: (value: string) => void;
+  /**
+   * Fired whenever the active segment changes (via click or keyboard).
+   * The callback receives the newly active option's `value` as well as the
+   * full `SegmentOption` so consumers can read label/icon/etc. without an
+   * extra lookup. When operating in controlled mode (`value` prop supplied),
+   * the consumer MUST update the `value` from this callback for the visible
+   * active segment to shift.
+   */
+  onChange?: (value: string, option: SegmentOption) => void;
   className?: string;
-  size?: 'sm' | 'md' | 'lg';
   disabled?: boolean;
 }
 
@@ -25,7 +32,6 @@ export const SegmentControl: React.FC<SegmentControlProps> = ({
   defaultValue,
   onChange,
   className = '',
-  size = 'md',
   disabled = false
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -33,14 +39,14 @@ export const SegmentControl: React.FC<SegmentControlProps> = ({
   const isControlled = controlledValue !== undefined;
   const currentValue = isControlled ? controlledValue : internalValue;
 
-  const handleChange = (optionValue: string) => {
-    if (disabled) return;
+  const handleChange = (option: SegmentOption) => {
+    if (disabled || option.disabled) return;
 
     if (!isControlled) {
-      setInternalValue(optionValue);
+      setInternalValue(option.value);
     }
 
-    onChange?.(optionValue);
+    onChange?.(option.value, option);
   };
 
   const handleKeyDown = (event: React.KeyboardEvent, index: number) => {
@@ -51,7 +57,7 @@ export const SegmentControl: React.FC<SegmentControlProps> = ({
       const nextIndex = (index + 1) % options.length;
       const nextOption = options[nextIndex];
       if (!nextOption.disabled) {
-        handleChange(nextOption.value);
+        handleChange(nextOption);
         const nextButton = containerRef.current?.querySelector(`[data-index="${nextIndex}"]`) as HTMLButtonElement;
         nextButton?.focus();
       }
@@ -60,15 +66,12 @@ export const SegmentControl: React.FC<SegmentControlProps> = ({
       const prevIndex = (index - 1 + options.length) % options.length;
       const prevOption = options[prevIndex];
       if (!prevOption.disabled) {
-        handleChange(prevOption.value);
+        handleChange(prevOption);
         const prevButton = containerRef.current?.querySelector(`[data-index="${prevIndex}"]`) as HTMLButtonElement;
         prevButton?.focus();
       }
     }
   };
-
-  // Determine if this is icon-only mode (all options have icons but no labels)
-  const isIconOnly = options.every(opt => opt.icon && !opt.label);
 
   return (
     <div
@@ -76,15 +79,12 @@ export const SegmentControl: React.FC<SegmentControlProps> = ({
       className={['segment-control', className].filter(Boolean).join(' ')}
       role="tablist"
       aria-label="Segment control"
-      data-size={size}
-      data-icon-only={isIconOnly ? '' : undefined}
       data-disabled={disabled ? '' : undefined}
     >
       <div className="segment-options">
         {options.map((option, index) => {
           const isSelected = option.value === currentValue;
           const isDisabled = disabled || option.disabled;
-          const isLast = index === options.length - 1;
 
           return (
             <React.Fragment key={option.value}>
@@ -94,7 +94,7 @@ export const SegmentControl: React.FC<SegmentControlProps> = ({
                 aria-selected={isSelected}
                 data-index={index}
                 className="segment-option"
-                onClick={() => handleChange(option.value)}
+                onClick={() => handleChange(option)}
                 onKeyDown={(e) => handleKeyDown(e, index)}
                 disabled={isDisabled}
                 tabIndex={isSelected ? 0 : -1}
@@ -103,7 +103,7 @@ export const SegmentControl: React.FC<SegmentControlProps> = ({
                   <Icon
                     name={option.icon}
                     size={16}
-                    color={isSelected ? 'var(--color-primary-600)' : 'var(--color-neutral-600)'}
+                    color={isSelected ? 'var(--color-primary-700)' : 'var(--color-stone-900)'}
                     className="segment-icon"
                   />
                 )}
@@ -111,9 +111,6 @@ export const SegmentControl: React.FC<SegmentControlProps> = ({
                   <span className="segment-label">{option.label}</span>
                 )}
               </button>
-              {!isLast && (
-                <div className="segment-divider" />
-              )}
             </React.Fragment>
           );
         })}

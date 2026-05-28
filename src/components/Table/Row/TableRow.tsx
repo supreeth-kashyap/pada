@@ -6,9 +6,15 @@ import type { TableCellProps } from '../Cells';
 export interface TableRowProps {
   children: React.ReactNode;
   className?: string;
+  /** When true, all cells in the row render with the selected (indigo wash) state. */
+  selected?: boolean;
+  /** Click handler on the entire row \u2014 useful for bulk-select toggling. */
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
+  /** Sets `role="row"` semantics if you need to override the default `<div>`. */
+  role?: string;
 }
 
-export const TableRow: React.FC<TableRowProps> = ({ children, className = '' }) => {
+export const TableRow: React.FC<TableRowProps> = ({ children, className = '', selected, onClick, role }) => {
   const context = useContext(TableContext);
   const gridTemplate = context?.gridTemplate ?? '';
   const columns = context?.columns ?? [];
@@ -29,7 +35,14 @@ export const TableRow: React.FC<TableRowProps> = ({ children, className = '' }) 
   const finalCells = [...orderedCells, ...unnamedCells];
 
   return (
-    <div className={`table-row ${className}`.trim()} style={{ gridTemplateColumns: gridTemplate }}>
+    <div
+      className={`table-row ${className}`.trim()}
+      style={{ gridTemplateColumns: gridTemplate }}
+      data-selected={selected ? '' : undefined}
+      aria-selected={selected || undefined}
+      onClick={onClick}
+      role={role}
+    >
       {finalCells}
     </div>
   );

@@ -18,71 +18,86 @@
     position: relative;
 }
 
-/* Trigger button - looks like native select */
+/* Trigger button per Figma node 2:971.
+   32px tall, 8px/16px padding, 8px gap between text and chevron, 8px radius,
+   13px (size/base) Regular 400 label at 20px leading, min-width 300px.
+   Placeholder text colour: stone/400. Filled text colour: stone/900. */
 .select-trigger {
     width: 100%;
-    padding: var(--spacing-2) var(--spacing-3);
-    font-size: var(--font-size-sm);
-    line-height: var(--line-height-base);
-    border-radius: var(--radius-md);
-    border: 1px solid var(--color-neutral-300);
+    min-width: 300px;
+    height: 32px;
+    min-height: 32px;
+    max-height: 32px;
+    padding: var(--spacing-2) var(--spacing-4);
+    gap: var(--spacing-2);
+    font-size: var(--font-size-base);
+    line-height: 20px;
+    font-weight: 400;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-stone-200);
     background-color: var(--color-white);
-    color: var(--color-neutral-900);
+    color: var(--color-stone-900);
     cursor: pointer;
-    transition: all 0.2s ease-in-out;
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out,
+        box-shadow 0.2s ease-in-out;
     outline: none;
     display: flex;
     align-items: center;
     justify-content: space-between;
     font-family: inherit;
+    box-sizing: border-box;
 }
 
-.select-trigger:hover:not(:disabled) {
-    border-color: var(--color-neutral-400);
+.select-trigger:hover:not(:disabled),
+.select-trigger[aria-expanded="true"]:not(:disabled) {
+    border-color: var(--color-stone-400);
 }
 
+/* Focus ring per Figma: 2px white inner + 3px indigo-600 outer. Base border
+   colour intentionally NOT overridden so it reflects rest/hover/error state. */
 .select-trigger:focus-visible {
-    border-color: var(--color-neutral-900);
-    box-shadow: 0 0 0 2px var(--color-focus-ring);
+    box-shadow: var(--shadow-focus-ring);
 }
 
 .select-trigger:disabled {
-    opacity: 0.6;
     cursor: not-allowed;
-    background-color: var(--color-neutral-50);
-    border-color: var(--color-neutral-200);
+    background-color: var(--color-stone-50);
+    border-color: var(--color-stone-200);
 }
 
-.select-trigger[aria-expanded="true"] {
-    border-color: var(--color-neutral-900);
+.select-trigger:disabled .select-trigger-text,
+.select-trigger:disabled .select-icon {
+    opacity: 0.5;
 }
 
 /* Trigger text */
 .select-trigger-text {
     flex: 1;
     text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
-/* Error state on container */
+/* Placeholder colour when no value is selected. */
+.select-trigger-text[data-placeholder] {
+    color: var(--color-stone-400);
+}
+
+/* Error state on container — red/400 border per Figma. */
 .select-container[data-error] .select-trigger {
-    border-color: var(--color-red-500);
+    border-color: var(--color-red-400);
 }
 
-.select-container[data-error] .select-trigger:focus-visible {
-    box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.1);
+.select-container[data-error] .select-trigger:hover:not(:disabled),
+.select-container[data-error] .select-trigger[aria-expanded="true"]:not(:disabled) {
+    border-color: var(--color-red-400);
 }
 
-/* Icon */
+/* Chevron */
 .select-icon {
     flex-shrink: 0;
-    width: 1.2em;
-    height: 1.2em;
-    color: var(--color-neutral-600);
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-    margin-left: var(--spacing-2);
+    --icon-color: var(--color-stone-900);
 }
 
 /* Dropdown menu */
