@@ -1,0 +1,121 @@
+/* Filter \u2014 toolbar chip + popover. Figma node 22:731 + 22:947. */
+
+.toolbar-filter {
+  position: relative;
+  display: inline-flex;
+}
+
+/* Chip trigger. 6px / 16px padding, 8px radius, 1px gray-200 border. */
+.toolbar-filter__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  height: 32px;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-stone-200);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--color-stone-900);
+  cursor: pointer;
+  white-space: nowrap;
+  box-sizing: border-box;
+  transition: border-color 0.15s ease-in-out, background-color 0.15s ease-in-out;
+}
+
+.toolbar-filter__chip:hover:not(:disabled) {
+  border-color: var(--color-stone-400);
+}
+
+.toolbar-filter__chip:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus-ring);
+}
+
+.toolbar-filter__chip[data-open] {
+  border-color: var(--color-stone-400);
+}
+
+.toolbar-filter__chip[data-active] {
+  /* Active = has at least one committed selection. Tint border + label so
+     consumers can scan filter state quickly across the toolbar. */
+  border-color: var(--color-primary-600);
+  color: var(--color-primary-700);
+}
+
+.toolbar-filter__chip:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.toolbar-filter__label {
+  display: inline-block;
+}
+
+/* Count badge \u2014 small pill showing how many options are selected. */
+.toolbar-filter__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 6px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--color-white);
+  background-color: var(--color-primary-600);
+  border-radius: 9999px;
+}
+
+.toolbar-filter__dash {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-stone-500);
+}
+
+.toolbar-filter__chevron {
+  color: var(--color-stone-600);
+}
+
+.toolbar-filter__chip[data-active] .toolbar-filter__chevron {
+  color: var(--color-primary-700);
+}
+
+/* Popover. Absolutely positioned just below the trigger. */
+.toolbar-filter__popover {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-white);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  min-width: 240px;
+  overflow: hidden;
+}
+
+/* Re-skin the embedded ComboBox so it loses its own shadow / radius / max-width
+   and sits cleanly inside the popover container. */
+.toolbar-filter__popover .combo-box {
+  box-shadow: none;
+  border-radius: 0;
+  max-width: none;
+  min-width: 240px;
+}
+
+.toolbar-filter__footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 8px 12px;
+  border-top: 1px solid var(--color-stone-100);
+  background-color: var(--color-white);
+}

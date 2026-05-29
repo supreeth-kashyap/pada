@@ -1,76 +1,41 @@
+/* TablePagination — Figma node 22:886.
+   Layout: 4px vertical padding, no top border, no bg. "Show" + page-size select
+   on the left, "1-50 of 1000" + prev/next chevrons on the right. */
+
 .table-pagination {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--spacing-3) var(--spacing-4);
-  background-color: var(--color-white);
-  border-top: 1px solid var(--color-neutral-200);
+  padding: 4px 12px;
+  width: 100%;
+  /* Include padding in the 100% width — otherwise the row measures
+     `100% + 24px` and the right-side buttons get pushed past the table's
+     rounded border (which is `overflow: hidden`). */
+  box-sizing: border-box;
+  background-color: transparent;
 }
 
-.table-pagination__left {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-2);
-}
-
-.table-pagination__label {
-  font-size: var(--font-size-sm);
-  color: var(--color-neutral-900);
-}
-
-.table-pagination__select {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--spacing-1);
-  padding: var(--spacing-1) var(--spacing-2);
-  border: 1px solid var(--color-neutral-300);
-  border-radius: var(--radius-lg);
-  background-color: var(--color-white);
-}
-
-.table-pagination__select select {
-  border: none;
-  background: transparent;
-  font-size: var(--font-size-sm);
-  color: var(--color-neutral-800);
-  outline: none;
-  appearance: none;
-}
-
+.table-pagination__left,
 .table-pagination__right {
   display: flex;
   align-items: center;
-  gap: var(--spacing-2);
+  gap: 12px;
 }
 
+.table-pagination__label,
 .table-pagination__range {
-  font-size: var(--font-size-sm);
-  color: var(--color-neutral-900);
+  /* Figma calls for 14px / 20 here. Pada's --font-size-sm token is 11px, so
+     we set the literal value to stay faithful to the spec. */
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: var(--color-stone-600);
 }
 
-.table-pagination__range-strong {
-  font-weight: 600;
-}
-
+/* Prev / Next nav uses the design-system ghost <Button>, so styling is
+   inherited from Button. Only the inter-button spacing lives here. */
 .table-pagination__nav {
   display: flex;
   align-items: center;
-  gap: var(--spacing-2);
-}
-
-.table-pagination__nav-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: var(--radius-lg);
-  border: none;
-  background: transparent;
-  cursor: pointer;
-}
-
-.table-pagination__nav-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+  gap: 2px;
 }

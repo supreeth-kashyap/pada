@@ -30,7 +30,7 @@
 .modal-title {
     font-size: var(--font-5);
     font-weight: bold;
-    margin-bottom: var(--space-3);
+    margin-bottom: var(--spacing-3);
 }
 
 .modal-content {

@@ -6,9 +6,7 @@ import { TableRow } from '../../../components/Table/Row';
 import { TableCell } from '../../../components/Table/Cells';
 import { HeaderCell } from '../../../components/Table/HeaderCell';
 import { TablePagination } from '../../../components/Table/Pagination';
-import { Toolbar } from '../../../components/Toolbar';
-import { SearchField } from '../../../components/SearchField';
-import { Button } from '../../../components/Button';
+import { Toolbar, Filter, MoreFilter } from '../../../components/Toolbar';
 import { Tags } from '../../../components/Tags';
 import type { TableColumn } from '../../../components/Table';
 import { USERS, STATUS_VARIANT, formatJoined } from './table-demo.data';
@@ -26,10 +24,28 @@ const COLUMNS: TableColumn[] = [
  * filtered + paged TableRow body, and TablePagination footer. Filter and pagination
  * state live locally to the preview so this stays a self-contained example.
  */
+// Filter option lists drawn from the mock USERS data so the dropdown contents
+// match the rows the user actually sees.
+const STATUS_OPTIONS = [
+  { value: 'Active', label: 'Active' },
+  { value: 'Invited', label: 'Invited' },
+  { value: 'Suspended', label: 'Suspended' }
+];
+const ROLE_OPTIONS = [
+  { value: 'Owner', label: 'Owner' },
+  { value: 'Admin', label: 'Admin' },
+  { value: 'Editor', label: 'Editor' },
+  { value: 'Viewer', label: 'Viewer' }
+];
+
 function UsersTablePreview() {
-  const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(25);
+  // Toolbar filter state. Status / Role show as their own chips; the rest are
+  // tucked behind the MoreFilter (joined-year here for demo purposes).
+  const [statusFilter, setStatusFilter] = useState<string[]>([]);
+  const [roleFilter, setRoleFilter] = useState<string[]>([]);
+  const [moreFilters, setMoreFilters] = useState<Record<string, string[]>>({});
   // Bulk-row-selection state. Click a row to toggle. Preview ships with the
   // first user pre-selected so the indigo wash is visible at first paint.
   const [selectedIds, setSelectedIds] = useState<Set<string>>(() => new Set([USERS[0]?.id].filter(Boolean) as string[]));
@@ -41,17 +57,17 @@ function UsersTablePreview() {
     });
   };
 
+  const joinedYears = Array.from(new Set(USERS.map((u) => u.joined.slice(0, 4)))).sort();
+
   const filtered = useMemo(() => {
-    const q = search.trim().toLowerCase();
-    if (!q) return USERS;
-    return USERS.filter(
-      (u) =>
-        u.name.toLowerCase().includes(q) ||
-        u.email.toLowerCase().includes(q) ||
-        u.role.toLowerCase().includes(q) ||
-        u.status.toLowerCase().includes(q)
-    );
-  }, [search]);
+    return USERS.filter((u) => {
+      if (statusFilter.length > 0 && !statusFilter.includes(u.status)) return false;
+      if (roleFilter.length > 0 && !roleFilter.includes(u.role)) return false;
+      const yearFilter = moreFilters.joinedYear ?? [];
+      if (yearFilter.length > 0 && !yearFilter.includes(u.joined.slice(0, 4))) return false;
+      return true;
+    });
+  }, [statusFilter, roleFilter, moreFilters]);
 
   const total = filtered.length;
   const start = (page - 1) * rowsPerPage;
@@ -70,24 +86,55 @@ function UsersTablePreview() {
       <Table
         columns={COLUMNS}
         toolbar={
-          <Toolbar>
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <SearchField
-                value={search}
-                onChange={(value) => {
-                  setSearch(value);
-                  setPage(1);
-                }}
-                placeholder="Search users by name, email, role…"
-              />
-            </div>
-            <Button variant="secondary" leftIcon="filter_list">
-              Filters
-            </Button>
-            <Button variant="primary" leftIcon="add">
-              Invite user
-            </Button>
-          </Toolbar>
+          <Toolbar
+            left={
+              <>
+                <Filter
+                  label="Status"
+                  multiSelect
+                  options={STATUS_OPTIONS}
+                  value={statusFilter}
+                  onChange={(values) => {
+                    setStatusFilter(values);
+                    setPage(1);
+                  }}
+                />
+                <Filter
+                  label="Role"
+                  multiSelect
+                  options={ROLE_OPTIONS}
+                  value={roleFilter}
+                  onChange={(values) => {
+                    setRoleFilter(values);
+                    setPage(1);
+                  }}
+                />
+                <MoreFilter
+                  filters={[
+                    {
+                      id: 'joinedYear',
+                      label: 'Joined year',
+                      multiSelect: true,
+                      options: joinedYears.map((y) => ({ value: y, label: y })),
+                    },
+                  ]}
+                  value={moreFilters}
+                  onChange={(values) => {
+                    setMoreFilters(values);
+                    setPage(1);
+                  }}
+                />
+              </>
+            }
+            actions={[
+              // Search is the first ghost action on the right cluster \u2014 wire
+              // it to a popover with a SearchField when ready.
+              { id: 'search',   leftIcon: 'search',   'aria-label': 'Search users' },
+              { id: 'export',   leftIcon: 'download', 'aria-label': 'Export users' },
+              { id: 'settings', leftIcon: 'settings', 'aria-label': 'Table settings' },
+            ]}
+            primaryAction={{ id: 'invite', leftIcon: 'add', children: 'Invite user' }}
+          />
         }
       >
         <TableRow>
@@ -107,7 +154,7 @@ function UsersTablePreview() {
             </TableCell>
             <TableCell columnId="role">{u.role}</TableCell>
             <TableCell columnId="status">
-              <Tags variant={STATUS_VARIANT[u.status]} size="sm">
+              <Tags variant={STATUS_VARIANT[u.status]}>
                 {u.status}
               </Tags>
             </TableCell>
@@ -123,7 +170,7 @@ function UsersTablePreview() {
               fontSize: 13
             }}
           >
-            No users match “{search}”.
+            No users match the current filters.
           </div>
         )}
         <TablePagination
@@ -198,7 +245,7 @@ const COLUMNS = [
 export function UsersTable({ users }) {
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(25);
 
   const filtered = useMemo(
     () => users.filter((u) => u.name.toLowerCase().includes(search.toLowerCase())),
@@ -227,7 +274,7 @@ export function UsersTable({ users }) {
           <TableCell columnId="email">{u.email}</TableCell>
           <TableCell columnId="role">{u.role}</TableCell>
           <TableCell columnId="status">
-            <Tags variant="green" size="sm">{u.status}</Tags>
+            <Tags variant="green">{u.status}</Tags>
           </TableCell>
         </TableRow>
       ))}

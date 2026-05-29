@@ -1,6 +1,31 @@
+/* Toolbar \u2014 Figma node 22:947.
+   Legacy children mode keeps the original flex-wrap behaviour.
+   Split mode (left + right slots) lays out two clusters with `space-between`. */
+
 .toolbar {
   display: flex;
   align-items: center;
   gap: var(--spacing-2);
   flex-wrap: wrap;
+}
+
+.toolbar--split {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 4px 0;
+  flex-wrap: wrap;
+}
+
+.toolbar__cluster {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  /* The Filter / MoreFilter chips sit inside an inner 8-gap group, so the
+     16-gap is between major groups (view + filters | filters + buttons). */
+}
+
+.toolbar__cluster--right {
+  gap: 8px;
 }

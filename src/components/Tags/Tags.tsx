@@ -2,104 +2,92 @@ import React from 'react';
 import './Tags.css';
 import { Icon } from '../Icon';
 
-export type TagsVariant = 'gray' | 'orange' | 'green' | 'yellow' | 'red' | 'blue' | 'purple' | 'pink' | 'deep-purple' | 'primary';
-export type TagsSize = 'sm' | 'md' | 'lg';
+/**
+ * Figma variant names (preferred). Each maps to a tinted-50 bg, tinted-100
+ * border, and tinted-700 text in its hue.
+ *
+ * Legacy hue names (`gray`, `blue`, `green`, `yellow`, `red`, `purple`,
+ * `deep-purple`, `pink`, `orange`) are kept as aliases so existing call
+ * sites keep working — they all resolve to the closest Figma variant.
+ */
+export type TagsVariant =
+  | 'neutral'
+  | 'primary'
+  | 'secondary'
+  | 'success'
+  | 'danger'
+  | 'royal'
+  /** @deprecated use `neutral` */ | 'gray'
+  /** @deprecated use `primary` */ | 'blue'
+  /** @deprecated use `secondary` */ | 'yellow'
+  /** @deprecated use `secondary` */ | 'orange'
+  /** @deprecated use `success` */ | 'green'
+  /** @deprecated use `danger` */ | 'red'
+  /** @deprecated use `royal` */ | 'purple'
+  /** @deprecated use `royal` */ | 'deep-purple'
+  /** @deprecated use `royal` */ | 'pink';
 
 export interface TagsProps {
   children: React.ReactNode;
   variant?: TagsVariant;
-  size?: TagsSize;
-  onClose?: () => void;
-  onClick?: () => void;
-  leftIcon?: string;
-  disabled?: boolean;
+  /**
+   * Optional leading visual. Accepts:
+   *  - a Material-symbol name string (renders an `<Icon>`), or
+   *  - any React node (an `<Icon />`, `<img />`, emoji, etc.) rendered as-is.
+   * When omitted, only the label is shown.
+   */
+  icon?: React.ReactNode | string;
   className?: string;
 }
 
+/** Map legacy hue aliases to the Figma variant they live under. */
+const VARIANT_ALIAS: Record<TagsVariant, string> = {
+  neutral: 'neutral',
+  primary: 'primary',
+  secondary: 'secondary',
+  success: 'success',
+  danger: 'danger',
+  royal: 'royal',
+  gray: 'neutral',
+  blue: 'primary',
+  yellow: 'secondary',
+  orange: 'secondary',
+  green: 'success',
+  red: 'danger',
+  purple: 'royal',
+  'deep-purple': 'royal',
+  pink: 'royal',
+};
+
 export const Tags: React.FC<TagsProps> = ({
   children,
-  variant = 'gray',
-  size = 'md',
-  onClose,
-  onClick,
-  leftIcon,
-  disabled = false,
+  variant = 'neutral',
+  icon,
   className = ''
 }) => {
-  const handleClose = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (!disabled && onClose) {
-      onClose();
-    }
-  };
-
-  const handleClick = () => {
-    if (!disabled && onClick) {
-      onClick();
-    }
-  };
-
-  const isClickable = !disabled && !!onClick;
-  const hasClose = !disabled && !!onClose;
+  const resolvedVariant = VARIANT_ALIAS[variant] ?? 'neutral';
 
   const tagClasses = [
     'tags',
-    `tags--${variant}`,
-    `tags--${size}`,
-    isClickable && 'tags--clickable',
-    disabled && 'tags--disabled',
+    `tags--${resolvedVariant}`,
     className
   ].filter(Boolean).join(' ');
 
-  const iconSize = size === 'sm' ? 12 : size === 'md' ? 12 : 16;
-  
-  // Get icon color based on variant - match the text color
-  const getIconColor = (): string => {
-    if (variant === 'primary' || variant === 'blue') return 'var(--color-blue-600)';
-    if (variant === 'green') return 'var(--color-green-600)';
-    if (variant === 'yellow') return 'var(--color-yellow-600)';
-    if (variant === 'red') return 'var(--color-red-600)';
-    if (variant === 'purple' || variant === 'deep-purple') return 'var(--color-purple-600)';
-    if (variant === 'pink') return 'var(--color-fuchsia-600)';
-    if (variant === 'orange') return 'var(--color-orange-600)';
-    return 'var(--color-neutral-600)'; // Default for gray
-  };
-  
-  const iconColor = getIconColor();
+  // If a node was passed in `icon`, render it as-is so consumers can pass any
+  // element (most commonly a pre-built `<Icon />`). If a string was passed,
+  // render the `<Icon>` component sized to the Figma 12px slot.
+  let leadingVisual: React.ReactNode = null;
+  if (icon !== undefined && icon !== null && icon !== false) {
+    leadingVisual =
+      typeof icon === 'string'
+        ? <Icon name={icon} size={12} className="tags__icon" />
+        : <span className="tags__icon">{icon}</span>;
+  }
 
   return (
-    <span
-      className={tagClasses}
-      onClick={handleClick}
-      role={isClickable ? 'button' : undefined}
-      tabIndex={isClickable && !disabled ? 0 : undefined}
-      aria-disabled={disabled}
-    >
-      {leftIcon && (
-        <Icon 
-          name={leftIcon} 
-          size={iconSize} 
-          color={iconColor}
-          className="tags__icon tags__icon--left"
-        />
-      )}
+    <span className={tagClasses}>
+      {leadingVisual}
       <span className="tags__content">{children}</span>
-      {hasClose && (
-        <button
-          type="button"
-          className="tags__close"
-          onClick={handleClose}
-          aria-label="Remove tag"
-          tabIndex={-1}
-        >
-          <Icon 
-            name="cross_1" 
-            size={12} 
-            color={iconColor}
-            className="tags__icon"
-          />
-        </button>
-      )}
     </span>
   );
 };

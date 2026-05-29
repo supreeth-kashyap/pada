@@ -16,9 +16,9 @@ export interface UserRecord {
 }
 
 export const STATUS_VARIANT: Record<UserStatus, TagsVariant> = {
-  Active: 'green',
-  Invited: 'blue',
-  Suspended: 'red'
+  Active: 'success',
+  Invited: 'primary',
+  Suspended: 'danger'
 };
 
 export const USERS: UserRecord[] = [

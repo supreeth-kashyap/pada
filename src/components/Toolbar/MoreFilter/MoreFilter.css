@@ -1,0 +1,198 @@
+/* MoreFilter \u2014 tandem combo-box popover that fans out from a single chip. */
+
+.more-filter {
+  position: relative;
+  display: inline-flex;
+}
+
+/* Chip trigger \u2014 same visual contract as `.toolbar-filter__chip`. We don't
+   reuse the class so each component can evolve independently. */
+.more-filter__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  height: 32px;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-stone-200);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--color-stone-900);
+  cursor: pointer;
+  white-space: nowrap;
+  box-sizing: border-box;
+  transition: border-color 0.15s ease-in-out;
+}
+
+.more-filter__chip:hover:not(:disabled) {
+  border-color: var(--color-stone-400);
+}
+
+.more-filter__chip:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus-ring);
+}
+
+.more-filter__chip[data-open] {
+  border-color: var(--color-stone-400);
+}
+
+.more-filter__chip[data-active] {
+  border-color: var(--color-primary-600);
+  color: var(--color-primary-700);
+}
+
+.more-filter__chip[data-active] .more-filter__chevron {
+  color: var(--color-primary-700);
+}
+
+.more-filter__chip:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.more-filter__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 6px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--color-white);
+  background-color: var(--color-primary-600);
+  border-radius: 9999px;
+}
+
+.more-filter__dash {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-stone-500);
+}
+
+.more-filter__chevron {
+  color: var(--color-stone-600);
+}
+
+/* Cascading menu container \u2014 just an anchor point. The primary list flows
+   in-document; the submenu (when an item is active) floats to its right. */
+.more-filter__menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: -20;
+  z-index: 20;
+  display: flex;
+  align-items: flex-start;
+}
+
+/* Primary list \u2014 same visual contract as the ComboBox card. */
+.more-filter__primary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-0-5);
+  padding: var(--spacing-2) var(--spacing-1);
+  min-width: 225px;
+  max-width: 400px;
+  width: fit-content;
+  background-color: var(--color-bg);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+/* A row in the primary list. Markup mirrors ComboBoxMenuItem so the visual
+   weight matches the submenu's ComboBox items pixel-for-pixel. */
+.more-filter__row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--color-stone-900);
+  cursor: pointer;
+  text-align: left;
+}
+
+.more-filter__row:hover,
+.more-filter__row[data-active] {
+  background-color: var(--color-stone-50);
+  color: var(--color-primary-700);
+}
+
+.more-filter__row[data-active] .more-filter__row-chevron {
+  color: var(--color-primary-700);
+}
+
+.more-filter__row-label {
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.more-filter__row-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 6px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--color-primary-700);
+  background-color: var(--color-primary-50);
+  border-radius: 9999px;
+}
+
+.more-filter__row-chevron {
+  color: var(--color-stone-500);
+  flex-shrink: 0;
+}
+
+/* Submenu \u2014 cascading popover. Sits to the right of the primary list with
+   an 8px gutter so they read as two distinct cards. */
+.more-filter__submenu {
+  margin-left: 8px;
+  display: flex;
+  flex-direction: column;
+  min-width: 240px;
+  background-color: var(--color-white);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+
+/* Re-skin the embedded ComboBox so it sits cleanly inside the submenu card. */
+.more-filter__submenu .combo-box {
+  box-shadow: none;
+  border-radius: 0;
+  max-width: none;
+  min-width: 240px;
+  max-height: 280px;
+}
+
+.more-filter__footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 8px 12px;
+  border-top: 1px solid var(--color-stone-100);
+  background-color: var(--color-white);
+}
