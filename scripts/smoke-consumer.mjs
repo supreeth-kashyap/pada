@@ -124,5 +124,19 @@ run('node', [
   `import React from 'react'; import { renderToString } from 'react-dom/server'; import { Icon, iconNames } from 'pada-ds'; const html = renderToString(React.createElement(Icon, { name: 'tick_1' })); if (!html.includes('<svg')) { throw new Error('Built-in icon tick_1 did not render an <svg> during SSR: ' + html); } if (!iconNames.includes('tick_1')) { throw new Error('iconNames does not list tick_1.'); } if (!html.includes('currentColor') || html.includes('#111827')) { throw new Error('Built-in icon tick_1 was not recolored to currentColor: ' + html); }`,
 ], { cwd: appDir });
 
+// The component manifest resolves through the `pada-ds/manifest.json` export and lists Button's props.
+run('node', [
+  '--input-type=module',
+  '--eval',
+  `import { createRequire } from 'node:module'; const require = createRequire(process.cwd() + '/package.json'); const manifest = require('pada-ds/manifest.json'); const button = manifest.components.find((c) => c.name === 'Button'); if (!button || !button.props.some((p) => p.name === 'variant')) { throw new Error('pada-ds/manifest.json does not describe Button.variant.'); }`,
+], { cwd: appDir });
+
+for (const llmsFile of ['llms.txt', 'llms-full.txt']) {
+  const content = await readFile(path.join(appDir, 'node_modules/pada-ds', llmsFile), 'utf8');
+  if (!content.includes("import { Button } from 'pada-ds'")) {
+    throw new Error(`Expected Button import in published ${llmsFile}`);
+  }
+}
+
 console.log('Consumer smoke test passed.');
 console.log(`App directory: ${appDir}`);
