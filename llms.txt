@@ -1,0 +1,98 @@
+# Pada Design System
+
+> Pada (`pada-ds`) is a React design system written in TypeScript: components, CSS design tokens, and light/dark theming. It needs `react` and `react-dom` 19 as peer dependencies.
+
+## Install
+
+```bash
+npm install pada-ds
+```
+
+## Usage
+
+Import the tokens and the component styles once at the app root, then import components by name from the package root:
+
+```tsx
+import 'pada-ds/tokens.css';
+import 'pada-ds/styles.css';
+import { Button } from 'pada-ds';
+
+<Button variant="primary">Save</Button>
+```
+
+- `pada-ds/tokens.css`: design tokens (CSS custom properties) only.
+- `pada-ds/styles.css`: styles for every component.
+- `pada-ds/base.css` (optional): document base styles (`body` background, color and font; zero `p` margins).
+- `pada-ds/manifest.json`: machine-readable component API (props, types, defaults, descriptions).
+
+## Theming
+
+By default the theme follows the operating system (`prefers-color-scheme`). Set `data-theme="light"` or `data-theme="dark"` on `<html>` or on any container to force a theme for that subtree. Remove the attribute to follow the OS again.
+
+## Components
+
+Every component is a named export: `import { Name } from 'pada-ds'`. Props marked `?` are optional. Full prop tables with types, defaults and examples are in llms-full.txt.
+
+- Accordion: header, headerIconName?, children, defaultOpen?, open?, onOpenChange?, className?, disabled?
+- AccordionContent: children; extends React.HTMLAttributes<HTMLDivElement>
+- AccordionHeader: title, iconName?, collapsed?; extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'title'>
+- Banner: title, subtitle?, visualIcon?, visualImage?, visualAlt?, button?, onButtonClick?, className?
+- BaseManageFilter: saveCopy?, onSaveFilter?, onClear?, onMenuClick?, className?
+- BaseToolbarMenu: title?, count?, showCount?, dropdown?, disabled?, state?, className?, onClick?
+- Button: children?, variant?, leftIcon?, rightIcon?, split?, onSplitClick?, disabled?; extends React.ButtonHTMLAttributes<HTMLButtonElement>
+- Card: children?, className?
+- Carousel: children, autoPlay?, interval?, className?, showDots?, showNav?
+- Checkbox: label?; extends React.InputHTMLAttributes<HTMLInputElement>
+- CodeSnippet: code, language, type?, label?, showCopy?, className?
+- ComboBox: items, multiSelect?, onItemClick?; extends React.HTMLAttributes<HTMLDivElement>
+- ComboBoxMenuItem: iconName?, label, selected?, disabled?, multiSelect?; extends React.ButtonHTMLAttributes<HTMLButtonElement>
+- DatePickerDropdown: mode?, selection?, isRange?, value?, onChange?, minDate?, maxDate?
+- Filter: label, options, multiSelect?, value?, defaultValue?, onChange?, applyLabel?, clearLabel?, disabled?, className?
+- FilterChip: variant?, label?, value?, showClose?, disabled?, onRemove?, onClick?, className?
+- FormLabel: children, required?, optional?, htmlFor?; extends React.LabelHTMLAttributes<HTMLLabelElement>
+- HeaderCell: columnId, label, className?
+- Icon: name?, src?, size?, color?, variant?; extends React.HTMLAttributes<HTMLDivElement>
+- Indexer: items, activeIndex?, offset?, onActiveChange?; extends React.HTMLAttributes<HTMLElement>
+- InputDate: label?, error?, description?, required?, optional?, disabled?, placeholder?, filled?, mode?, selection?, value?, onChange?, minDate?, maxDate?, className?
+- InputText: label?, error?, description?, prefix?, suffix?, required?, optional?; extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'prefix' | 'suffix'>
+- InputTextArea: label?, error?, description?, required?, optional?; extends React.TextareaHTMLAttributes<HTMLTextAreaElement>
+- KeyValue: label, children, infoTooltip?, labelComponent?; extends React.HTMLAttributes<HTMLDivElement>
+- List: children, draggable?, className?, onReorder?
+- ListItem: id?, children, className?
+- Loader: size?, className?
+- Logo: name, size?, background?, tooltip?; extends React.HTMLAttributes<HTMLDivElement>
+- Modal: open, onOpenChange, children, title?, width?, height?
+- MoreFilter: label?, filters, value?, defaultValue?, onChange?, applyLabel?, clearLabel?, disabled?, className?
+- Notification: open, onOpenChange, title, subtitle?, visual?, position?, direction?, className?
+- PageHeader: breadcrumbs, onCommandClick?, commandLabel?, commandShortcut?, onAiClick?, aiLabel?, profileTrigger?, profileMenu?, className?
+- Pills: options, value?, defaultValue?, onChange?, className?, size?, disabled?
+- Popover: open, onOpenChange, children, trigger?, position?, title?, variant?, showClose?, className?, clickPosition?
+- Progress: value, max?, label?
+- RadioGroup: name, label?, options, value, onChange, disabled?, className?
+- SearchField: value?, defaultValue?, onChange?, onClear?, className?; extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'onChange' | 'value' | 'defaultValue'>
+- SegmentControl: options, value?, defaultValue?, onChange?, className?, disabled?
+- Select: label, options, value?, defaultValue?, placeholder?, onChange?, description?, error?, disabled?, name?, id?, className?
+- SideDrawer: open, onOpenChange, children, size?, className?
+- Sidebar: data?, activeId?, onItemClick?, children?, className?; extends React.HTMLAttributes<HTMLElement>
+- SidebarCollapse: children, defaultOpen?, label?, className?
+- SidebarLogo: src?, alt?, name?, size?, title?, href?, onClick?, className?; extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'>
+- SidebarMenu: label, icon?, selected?, trailing?, href?, onClick?, disabled?, className?; extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onClick'>
+- SidebarSearch: placeholder?, value?, onChange?, className?
+- SidebarSection: label?, icon?, children?, className?; extends React.HTMLAttributes<HTMLDivElement>
+- SidebarSectionMenu: children, className?
+- Slider: label?, description?, error?, value?, defaultValue?, min?, max?, step?, onChange?, onValueChange?, showValue?, disabled?, className?; extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'onChange'>
+- Splitter: variant; extends React.ButtonHTMLAttributes<HTMLButtonElement>
+- Step: title?, description?, stepValue?, status?, isLast?, onClick?, clickable?, onSelect?; extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onClick' | 'onSelect'>
+- Steps: steps, defaultStatus?, currentStep?, onStepChange?; extends React.HTMLAttributes<HTMLDivElement>
+- Switch: label?, loading?; extends React.InputHTMLAttributes<HTMLInputElement>
+- TabPanel: label, children, notification?
+- Table: columns, children, toolbar?, className?, onColumnsChange?
+- TableCell: children, columnId?, className?
+- TablePagination: total, page, rowsPerPage, rowsPerPageOptions?, onPageChange, onRowsPerPageChange, onNextPage?, onPrevPage?, className?
+- TableRow: children, className?, selected?, onClick?, role?
+- Tabs: children, label, defaultValue?, value?, onChange?
+- Tags: children, variant?, icon?, className?
+- Text: children, size?, weight?, family?, lineHeight?, color?, as?; extends React.HTMLAttributes<HTMLSpanElement>
+- Toolbar: left?, actions?, primaryAction?, children?, className?
+- Tooltip: content, children, position?
+- UploadField: label?, description?, error?, accept?, multiple?, maxSize?, maxFiles?, files?, onFilesChange?, onUpload?, disabled?, required?, className?

@@ -1,0 +1,1265 @@
+# Pada Design System: full component reference
+
+> Pada (`pada-ds`) is a React design system written in TypeScript: components, CSS design tokens, and light/dark theming. It needs `react` and `react-dom` 19 as peer dependencies.
+
+## Install
+
+```bash
+npm install pada-ds
+```
+
+## Usage
+
+Import the tokens and the component styles once at the app root, then import components by name from the package root:
+
+```tsx
+import 'pada-ds/tokens.css';
+import 'pada-ds/styles.css';
+import { Button } from 'pada-ds';
+
+<Button variant="primary">Save</Button>
+```
+
+- `pada-ds/tokens.css`: design tokens (CSS custom properties) only.
+- `pada-ds/styles.css`: styles for every component.
+- `pada-ds/base.css` (optional): document base styles (`body` background, color and font; zero `p` margins).
+- `pada-ds/manifest.json`: machine-readable component API (props, types, defaults, descriptions).
+
+## Theming
+
+By default the theme follows the operating system (`prefers-color-scheme`). Set `data-theme="light"` or `data-theme="dark"` on `<html>` or on any container to force a theme for that subtree. Remove the attribute to follow the OS again.
+
+## Components
+
+### Accordion
+
+`import { Accordion } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| header | `React.ReactNode` | yes | - | - |
+| headerIconName | `string` | no | - | - |
+| children | `React.ReactNode` | yes | - | - |
+| defaultOpen | `boolean` | no | `false` | - |
+| open | `boolean` | no | - | - |
+| onOpenChange | `(open: boolean) => void` | no | - | - |
+| className | `string` | no | `''` | - |
+| disabled | `boolean` | no | `false` | - |
+
+```tsx
+import { Accordion } from 'pada-ds';
+
+<Accordion header="...">...</Accordion>
+```
+
+### AccordionContent
+
+`import { AccordionContent } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| children | `React.ReactNode` | yes | - | - |
+
+Also accepts the props of `React.HTMLAttributes<HTMLDivElement>`.
+
+```tsx
+import { AccordionContent } from 'pada-ds';
+
+<AccordionContent>...</AccordionContent>
+```
+
+### AccordionHeader
+
+`import { AccordionHeader } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| title | `React.ReactNode` | yes | - | - |
+| iconName | `string` | no | - | - |
+| collapsed | `boolean` | no | `true` | - |
+
+Also accepts the props of `Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'title'>`.
+
+```tsx
+import { AccordionHeader } from 'pada-ds';
+
+<AccordionHeader title="..." />
+```
+
+### Banner
+
+`import { Banner } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| title | `React.ReactNode` | yes | - | - |
+| subtitle | `React.ReactNode` | no | - | - |
+| visualIcon | `string` | no | - | Optional leading visual. Pass either: - `visualIcon` — a Material Symbols icon name (e.g. `"campaign"`), or - `visualImage` — an image URL (rendered as `<img>`). When either is set the visual is wrapped in a 12&nbsp;px-radius, stone-100 background frame per the design spec. If neither is set, the visual slot is omitted entirely so the title sits flush against the left padding. |
+| visualImage | `string` | no | - | - |
+| visualAlt | `string` | no | - | Alt text for `visualImage`. Ignored when `visualIcon` is used. Defaults to `""` (decorative). |
+| button | `React.ReactElement<typeof Button>` | no | - | - |
+| onButtonClick | `() => void` | no | - | - |
+| className | `string` | no | `''` | - |
+
+```tsx
+import { Banner } from 'pada-ds';
+
+<Banner title="..." />
+```
+
+### BaseManageFilter
+
+`import { BaseManageFilter } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| saveCopy | `boolean` | no | `false` | - |
+| onSaveFilter | `() => void` | no | - | - |
+| onClear | `() => void` | no | - | - |
+| onMenuClick | `() => void` | no | - | - |
+| className | `string` | no | `''` | - |
+
+```tsx
+import { BaseManageFilter } from 'pada-ds';
+
+<BaseManageFilter />
+```
+
+### BaseToolbarMenu
+
+`import { BaseToolbarMenu } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| title | `string` | no | `'menu'` | - |
+| count | `number \| string` | no | `1232` | - |
+| showCount | `boolean` | no | `true` | - |
+| dropdown | `boolean` | no | `true` | - |
+| disabled | `boolean` | no | `false` | - |
+| state | `BaseToolbarMenuState` | no | `'default'` | - |
+| className | `string` | no | `''` | - |
+| onClick | `() => void` | no | - | - |
+
+```tsx
+import { BaseToolbarMenu } from 'pada-ds';
+
+<BaseToolbarMenu />
+```
+
+### Button
+
+`import { Button } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| children | `React.ReactNode` | no | - | - |
+| variant | `ButtonVariant` | no | `'primary'` | - |
+| leftIcon | `string` | no | - | - |
+| rightIcon | `string` | no | - | - |
+| split | `boolean` | no | `false` | - |
+| onSplitClick | `() => void` | no | - | - |
+| disabled | `boolean` | no | `false` | - |
+
+Also accepts the props of `React.ButtonHTMLAttributes<HTMLButtonElement>`.
+
+```tsx
+import { Button } from 'pada-ds';
+
+<Button />
+```
+
+### Card
+
+`import { Card } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| children | `React.ReactNode` | no | - | - |
+| className | `string` | no | `''` | - |
+
+```tsx
+import { Card } from 'pada-ds';
+
+<Card />
+```
+
+### Carousel
+
+`import { Carousel } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| children | `React.ReactNode` | yes | - | - |
+| autoPlay | `boolean` | no | `true` | - |
+| interval | `number` | no | `3000` | - |
+| className | `string` | no | `''` | - |
+| showDots | `boolean` | no | `true` | - |
+| showNav | `boolean` | no | `true` | - |
+
+```tsx
+import { Carousel } from 'pada-ds';
+
+<Carousel>...</Carousel>
+```
+
+### Checkbox
+
+`import { Checkbox } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| label | `string` | no | - | - |
+
+Also accepts the props of `React.InputHTMLAttributes<HTMLInputElement>`.
+
+```tsx
+import { Checkbox } from 'pada-ds';
+
+<Checkbox />
+```
+
+### CodeSnippet
+
+`import { CodeSnippet } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| code | `string` | yes | - | - |
+| language | `string` | yes | - | - |
+| type | `CodeSnippetType` | no | `'multi-line'` | - |
+| label | `string` | no | - | - |
+| showCopy | `boolean` | no | `true` | - |
+| className | `string` | no | `''` | - |
+
+```tsx
+import { CodeSnippet } from 'pada-ds';
+
+<CodeSnippet code="..." language="..." />
+```
+
+### ComboBox
+
+`import { ComboBox } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| items | `ComboBoxItem[]` | yes | - | - |
+| multiSelect | `boolean` | no | `false` | - |
+| onItemClick | `(item: ComboBoxItem, index: number) => void` | no | - | - |
+
+Also accepts the props of `React.HTMLAttributes<HTMLDivElement>`.
+
+```tsx
+import { ComboBox } from 'pada-ds';
+
+<ComboBox items={[]} />
+```
+
+### ComboBoxMenuItem
+
+`import { ComboBoxMenuItem } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| iconName | `string` | no | - | - |
+| label | `React.ReactNode` | yes | - | - |
+| selected | `boolean` | no | `false` | - |
+| disabled | `boolean` | no | `false` | - |
+| multiSelect | `boolean` | no | `false` | - |
+
+Also accepts the props of `React.ButtonHTMLAttributes<HTMLButtonElement>`.
+
+```tsx
+import { ComboBoxMenuItem } from 'pada-ds';
+
+<ComboBoxMenuItem label="..." />
+```
+
+### DatePickerDropdown
+
+`import { DatePickerDropdown } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| mode | `DatePickerMode` | no | `'date'` | - |
+| selection | `DatePickerSelection` | no | `'single'` | - |
+| isRange | `boolean` | no | `false` | - |
+| value | `Date \| [Date, Date?] \| null` | no | - | - |
+| onChange | `(value: Date \| [Date, Date?] \| null) => void` | no | - | - |
+| minDate | `Date` | no | - | - |
+| maxDate | `Date` | no | - | - |
+
+```tsx
+import { DatePickerDropdown } from 'pada-ds';
+
+<DatePickerDropdown />
+```
+
+### Filter
+
+`import { Filter } from 'pada-ds';`
+
+Filter — a toolbar chip backed by a popover-driven ComboBox. Single-select: clicking an option commits immediately and closes the popover. Multi-select : the popover stages selections in a local draft, then commits on Apply (or discards on outside-click). The chip shows a count badge whenever there is at least one selection.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| label | `string` | yes | - | Label shown on the chip (e.g. "Status"). |
+| options | `FilterOption[]` | yes | - | Options the user can pick from. |
+| multiSelect | `boolean` | no | `false` | When true, the popover shows ticks for every option and keeps itself open until the user clicks Apply / Clear. When false, picking an option fires `onChange` and closes the popover immediately. |
+| value | `string[]` | no | - | Controlled selection. Always an array — use `[value]` for single-select. |
+| defaultValue | `string[]` | no | `[]` | Uncontrolled initial selection. |
+| onChange | `(values: string[], options: FilterOption[]) => void` | no | - | Fired whenever the selection commits: - single-select: on every click - multi-select: on Apply / Clear only Receives the new array of selected values plus the matching `FilterOption[]`. |
+| applyLabel | `string` | no | `'Apply'` | Override the Apply button label. Defaults to "Apply". |
+| clearLabel | `string` | no | `'Clear'` | Override the Clear button label. Defaults to "Clear". |
+| disabled | `boolean` | no | `false` | - |
+| className | `string` | no | `''` | - |
+
+```tsx
+import { Filter } from 'pada-ds';
+
+<Filter label="..." options={[]} />
+```
+
+### FilterChip
+
+`import { FilterChip } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| variant | `FilterChipVariant` | no | `'filled'` | - |
+| label | `string` | no | `'Field'` | - |
+| value | `string` | no | `'Attribute'` | - |
+| showClose | `boolean` | no | `true` | - |
+| disabled | `boolean` | no | `false` | - |
+| onRemove | `() => void` | no | - | - |
+| onClick | `() => void` | no | - | - |
+| className | `string` | no | `''` | - |
+
+```tsx
+import { FilterChip } from 'pada-ds';
+
+<FilterChip />
+```
+
+### FormLabel
+
+`import { FormLabel } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| children | `React.ReactNode` | yes | - | - |
+| required | `boolean` | no | `false` | - |
+| optional | `boolean` | no | `false` | - |
+| htmlFor | `string` | no | - | - |
+
+Also accepts the props of `React.LabelHTMLAttributes<HTMLLabelElement>`.
+
+```tsx
+import { FormLabel } from 'pada-ds';
+
+<FormLabel>...</FormLabel>
+```
+
+### HeaderCell
+
+`import { HeaderCell } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| columnId | `string` | yes | - | - |
+| label | `string` | yes | - | - |
+| className | `string` | no | `''` | - |
+
+```tsx
+import { HeaderCell } from 'pada-ds';
+
+<HeaderCell columnId="..." label="..." />
+```
+
+### Icon
+
+`import { Icon } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| name | `string` | no | - | Icon name (snake_case). Built-in names (see the exported `iconNames`, e.g. `tick_1`, `chevron_down`, `cross_1`, `search`) are bundled with the library and render synchronously — no network request, and they work during SSR. Any other name falls back to Material Symbols, fetched from a CDN (browse https://fonts.google.com/icons, set "Material Symbols"). If the name doesn't resolve in either place, nothing is rendered. |
+| src | `string` | no | - | Custom SVG source URL or raw SVG markup. Takes precedence over `name` when set. |
+| size | `number \| string` | no | `20` | Pixel size of the icon. Defaults to 20. |
+| color | `string` | no | `'currentColor'` | Color override. Defaults to `currentColor` so the icon inherits text color. |
+| variant | `IconVariant` | no | `'stroke'` | Only applies to the Material Symbols fallback, which ships several styles. The two we expose: - `'stroke'` (default): the **outlined** style — lines / outlines. - `'fill'`: the **filled** style — solid silhouettes. The two are mutually exclusive at the asset level (we fetch a different file each way), so an icon can never accidentally show both at once. Built-in icons have one style. |
+
+Also accepts the props of `React.HTMLAttributes<HTMLDivElement>`.
+
+```tsx
+import { Icon } from 'pada-ds';
+
+<Icon />
+```
+
+### Indexer
+
+`import { Indexer } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| items | `IndexerItem[]` | yes | - | - |
+| activeIndex | `number` | no | - | - |
+| offset | `number` | no | - | - |
+| onActiveChange | `(index: number) => void` | no | - | - |
+
+Also accepts the props of `React.HTMLAttributes<HTMLElement>`.
+
+```tsx
+import { Indexer } from 'pada-ds';
+
+<Indexer items={[]} />
+```
+
+### InputDate
+
+`import { InputDate } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| label | `string` | no | - | - |
+| error | `string` | no | - | - |
+| description | `string` | no | - | - |
+| required | `boolean` | no | `false` | - |
+| optional | `boolean` | no | `false` | - |
+| disabled | `boolean` | no | `false` | - |
+| placeholder | `string` | no | `'Select date'` | - |
+| filled | `boolean` | no | - | - |
+| mode | `DatePickerMode` | no | `'date'` | - |
+| selection | `DatePickerSelection` | no | `'single'` | - |
+| value | `Date \| [Date, Date?] \| null` | no | - | - |
+| onChange | `(value: Date \| [Date, Date?] \| null) => void` | no | - | - |
+| minDate | `Date` | no | - | - |
+| maxDate | `Date` | no | - | - |
+| className | `string` | no | `''` | - |
+
+```tsx
+import { InputDate } from 'pada-ds';
+
+<InputDate />
+```
+
+### InputText
+
+`import { InputText } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| label | `string` | no | - | - |
+| error | `string` | no | - | - |
+| description | `string` | no | - | - |
+| prefix | `React.ReactNode` | no | - | - |
+| suffix | `React.ReactNode` | no | - | - |
+| required | `boolean` | no | `false` | - |
+| optional | `boolean` | no | `false` | - |
+
+Also accepts the props of `Omit<React.InputHTMLAttributes<HTMLInputElement>, 'prefix' | 'suffix'>`.
+
+```tsx
+import { InputText } from 'pada-ds';
+
+<InputText />
+```
+
+### InputTextArea
+
+`import { InputTextArea } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| label | `string` | no | - | - |
+| error | `string` | no | - | - |
+| description | `string` | no | - | - |
+| required | `boolean` | no | `false` | - |
+| optional | `boolean` | no | `false` | - |
+
+Also accepts the props of `React.TextareaHTMLAttributes<HTMLTextAreaElement>`.
+
+```tsx
+import { InputTextArea } from 'pada-ds';
+
+<InputTextArea />
+```
+
+### KeyValue
+
+`import { KeyValue } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| label | `string` | yes | - | The key or label text displayed on the left side |
+| children | `React.ReactNode` | yes | - | The value displayed on the right side. Can be any React node, including other components |
+| infoTooltip | `React.ReactNode` | no | - | Optional tooltip content for the info icon. If not provided, info icon won't be shown |
+| labelComponent | `React.ReactNode` | no | - | Optional custom label component. If provided, overrides the default Text component |
+
+Also accepts the props of `React.HTMLAttributes<HTMLDivElement>`.
+
+```tsx
+import { KeyValue } from 'pada-ds';
+
+<KeyValue label="...">...</KeyValue>
+```
+
+### List
+
+`import { List } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| children | `React.ReactNode` | yes | - | - |
+| draggable | `boolean` | no | `false` | - |
+| className | `string` | no | `''` | - |
+| onReorder | `(order: string[]) => void` | no | - | - |
+
+```tsx
+import { List } from 'pada-ds';
+
+<List>...</List>
+```
+
+### ListItem
+
+`import { ListItem } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| id | `string` | no | - | - |
+| children | `React.ReactNode` | yes | - | - |
+| className | `string` | no | `''` | - |
+
+```tsx
+import { ListItem } from 'pada-ds';
+
+<ListItem>...</ListItem>
+```
+
+### Loader
+
+`import { Loader } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| size | `LoaderSize` | no | `'xs'` | - |
+| className | `string` | no | `''` | - |
+
+```tsx
+import { Loader } from 'pada-ds';
+
+<Loader />
+```
+
+### Logo
+
+`import { Logo } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| name | `string` | yes | - | - |
+| size | `LogoSize` | no | `'md'` | - |
+| background | `boolean` | no | `false` | - |
+| tooltip | `string` | no | - | - |
+
+Also accepts the props of `React.HTMLAttributes<HTMLDivElement>`.
+
+```tsx
+import { Logo } from 'pada-ds';
+
+<Logo name="..." />
+```
+
+### Modal
+
+`import { Modal } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| open | `boolean` | yes | - | - |
+| onOpenChange | `(open: boolean) => void` | yes | - | - |
+| children | `React.ReactNode` | yes | - | - |
+| title | `string` | no | - | - |
+| width | `number \| string` | no | - | - |
+| height | `number \| string` | no | - | - |
+
+```tsx
+import { Modal } from 'pada-ds';
+
+<Modal open={true} onOpenChange={() => {}}>...</Modal>
+```
+
+### MoreFilter
+
+`import { MoreFilter } from 'pada-ds';`
+
+MoreFilter — a single chip that opens a tandem ComboBox popover: left column = list of filter names right column = options for the focused filter footer = Apply / Clear Useful when the toolbar can't fit every filter as a standalone chip.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| label | `string` | no | `'More'` | Chip label. Defaults to "More". |
+| filters | `MoreFilterDescriptor[]` | yes | - | Descriptors for every filter that lives behind the More popover. |
+| value | `MoreFilterValues` | no | - | Controlled value: a map of `filterId → selectedValues[]`. |
+| defaultValue | `MoreFilterValues` | no | `{}` | Uncontrolled initial value. |
+| onChange | `(values: MoreFilterValues, count: number) => void` | no | - | Fires when the user clicks Apply. Receives the full values map plus a convenience `count` aggregate so consumers don't have to recompute it. |
+| applyLabel | `string` | no | `'Apply'` | - |
+| clearLabel | `string` | no | `'Clear all'` | - |
+| disabled | `boolean` | no | `false` | - |
+| className | `string` | no | `''` | - |
+
+```tsx
+import { MoreFilter } from 'pada-ds';
+
+<MoreFilter filters={[]} />
+```
+
+### Notification
+
+`import { Notification } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| open | `boolean` | yes | - | - |
+| onOpenChange | `(open: boolean) => void` | yes | - | - |
+| title | `React.ReactNode` | yes | - | - |
+| subtitle | `React.ReactNode` | no | - | - |
+| visual | `React.ReactElement<typeof Icon>` | no | - | - |
+| position | `NotificationPosition` | no | `'top-right'` | Where the toast appears and slides in from. Default: 'top-right'. |
+| direction | `NotificationPosition` | no | - | Alias for position; if provided it overrides position. |
+| className | `string` | no | `''` | - |
+
+```tsx
+import { Notification } from 'pada-ds';
+
+<Notification open={true} onOpenChange={() => {}} title="..." />
+```
+
+### PageHeader
+
+`import { PageHeader } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| breadcrumbs | `BreadcrumbItem[]` | yes | - | - |
+| onCommandClick | `() => void` | no | - | - |
+| commandLabel | `string` | no | `'Search'` | - |
+| commandShortcut | `string` | no | `'⌘+K'` | - |
+| onAiClick | `() => void` | no | - | - |
+| aiLabel | `string` | no | `'AI'` | - |
+| profileTrigger | `React.ReactNode` | no | - | - |
+| profileMenu | `React.ReactNode` | no | - | - |
+| className | `string` | no | `''` | - |
+
+```tsx
+import { PageHeader } from 'pada-ds';
+
+<PageHeader breadcrumbs={[]} />
+```
+
+### Pills
+
+`import { Pills } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| options | `PillOption[]` | yes | - | - |
+| value | `string` | no | - | - |
+| defaultValue | `string` | no | - | - |
+| onChange | `(value: string) => void` | no | - | - |
+| className | `string` | no | - | - |
+| size | `'sm' \| 'md' \| 'lg'` | no | `'md'` | - |
+| disabled | `boolean` | no | `false` | - |
+
+```tsx
+import { Pills } from 'pada-ds';
+
+<Pills options={[]} />
+```
+
+### Popover
+
+`import { Popover } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| open | `boolean` | yes | - | - |
+| onOpenChange | `(open: boolean) => void` | yes | - | - |
+| children | `React.ReactNode` | yes | - | - |
+| trigger | `React.ReactElement` | no | - | - |
+| position | `PopoverPosition` | no | `'auto'` | - |
+| title | `string` | no | - | - |
+| variant | `PopoverVariant` | no | `'default'` | - |
+| showClose | `boolean` | no | `true` | - |
+| className | `string` | no | `''` | - |
+| clickPosition | `{ x: number; y: number }` | no | - | - |
+
+```tsx
+import { Popover } from 'pada-ds';
+
+<Popover open={true} onOpenChange={() => {}}>...</Popover>
+```
+
+### Progress
+
+`import { Progress } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| value | `number` | yes | - | - |
+| max | `number` | no | `100` | - |
+| label | `string` | no | - | - |
+
+```tsx
+import { Progress } from 'pada-ds';
+
+<Progress value={0} />
+```
+
+### RadioGroup
+
+`import { RadioGroup } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| name | `string` | yes | - | - |
+| label | `string` | no | - | - |
+| options | `RadioOption[]` | yes | - | - |
+| value | `string` | yes | - | - |
+| onChange | `(value: string) => void` | yes | - | - |
+| disabled | `boolean` | no | `false` | - |
+| className | `string` | no | - | - |
+
+```tsx
+import { RadioGroup } from 'pada-ds';
+
+<RadioGroup name="..." options={[]} value="..." onChange={() => {}} />
+```
+
+### SearchField
+
+`import { SearchField } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| value | `string` | no | - | - |
+| defaultValue | `string` | no | - | - |
+| onChange | `(value: string) => void` | no | - | - |
+| onClear | `() => void` | no | - | - |
+| className | `string` | no | `''` | - |
+
+Also accepts the props of `Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'onChange' | 'value' | 'defaultValue'>`.
+
+```tsx
+import { SearchField } from 'pada-ds';
+
+<SearchField />
+```
+
+### SegmentControl
+
+`import { SegmentControl } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| options | `SegmentOption[]` | yes | - | - |
+| value | `string` | no | - | - |
+| defaultValue | `string` | no | - | - |
+| onChange | `(value: string, option: SegmentOption) => void` | no | - | Fired whenever the active segment changes (via click or keyboard). The callback receives the newly active option's `value` as well as the full `SegmentOption` so consumers can read label/icon/etc. without an extra lookup. When operating in controlled mode (`value` prop supplied), the consumer MUST update the `value` from this callback for the visible active segment to shift. |
+| className | `string` | no | `''` | - |
+| disabled | `boolean` | no | `false` | - |
+
+```tsx
+import { SegmentControl } from 'pada-ds';
+
+<SegmentControl options={[]} />
+```
+
+### Select
+
+`import { Select } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| label | `string` | yes | - | - |
+| options | `SelectOption[]` | yes | - | - |
+| value | `string \| number` | no | - | Controlled value. When provided, the parent owns selection state and MUST update it from `onChange` for the trigger to reflect the click. |
+| defaultValue | `string \| number` | no | - | Uncontrolled initial value. Ignored when `value` is provided. |
+| placeholder | `string` | no | `'Select an option'` | Placeholder shown when no value is selected. |
+| onChange | `(value: string \| number, option: SelectOption) => void` | no | - | Fired after the user picks an option from the dropdown. Receives the newly selected `value` plus the full `SelectOption` (label / disabled / etc.) so consumers don't have to look it up. |
+| description | `string` | no | - | - |
+| error | `string` | no | - | - |
+| disabled | `boolean` | no | `false` | - |
+| name | `string` | no | - | - |
+| id | `string` | no | - | - |
+| className | `string` | no | - | - |
+
+```tsx
+import { Select } from 'pada-ds';
+
+<Select label="..." options={[]} />
+```
+
+### SideDrawer
+
+`import { SideDrawer } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| open | `boolean` | yes | - | - |
+| onOpenChange | `(open: boolean) => void` | yes | - | - |
+| children | `React.ReactNode` | yes | - | - |
+| size | `SideDrawerSize` | no | `'sm'` | - |
+| className | `string` | no | `''` | - |
+
+```tsx
+import { SideDrawer } from 'pada-ds';
+
+<SideDrawer open={true} onOpenChange={() => {}}>...</SideDrawer>
+```
+
+### Sidebar
+
+`import { Sidebar } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| data | `SidebarData` | no | - | Data-driven configuration. When provided, Sidebar renders logo + sections + items automatically. |
+| activeId | `string` | no | - | Currently active menu item id (controlled). Used when items don't set `selected` explicitly. |
+| onItemClick | `(item: SidebarMenuItemData, event: React.MouseEvent<HTMLElement>) => void` | no | - | Fires when any menu item in the data-driven mode is clicked |
+| children | `React.ReactNode` | no | - | Composition mode — pass `SidebarLogo`, `SidebarSection`, `SidebarMenu` children directly |
+| className | `string` | no | `''` | - |
+
+Also accepts the props of `React.HTMLAttributes<HTMLElement>`.
+
+```tsx
+import { Sidebar } from 'pada-ds';
+
+<Sidebar />
+```
+
+### SidebarCollapse
+
+`import { SidebarCollapse } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| children | `React.ReactNode` | yes | - | - |
+| defaultOpen | `boolean` | no | `false` | - |
+| label | `string` | no | - | - |
+| className | `string` | no | `''` | - |
+
+```tsx
+import { SidebarCollapse } from 'pada-ds';
+
+<SidebarCollapse>...</SidebarCollapse>
+```
+
+### SidebarLogo
+
+`import { SidebarLogo } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| src | `string` | no | - | Image source (png / svg / data URL) shown as the logo mark. Takes precedence over `name`. |
+| alt | `string` | no | `''` | Alt text for the image |
+| name | `string` | no | - | Look up a built-in logo by name from the design system asset library |
+| size | `LogoSize` | no | `'md'` | Size of the built-in Logo component when `name` is used |
+| title | `React.ReactNode` | no | - | Optional wordmark / title rendered next to the logo |
+| href | `string` | no | - | Render as a clickable link when provided |
+| onClick | `(event: React.MouseEvent<HTMLElement>) => void` | no | - | Click handler (applies to wrapper if no href) |
+| className | `string` | no | `''` | - |
+
+Also accepts the props of `Omit<React.HTMLAttributes<HTMLDivElement>, 'title'>`.
+
+```tsx
+import { SidebarLogo } from 'pada-ds';
+
+<SidebarLogo />
+```
+
+### SidebarMenu
+
+`import { SidebarMenu } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| label | `React.ReactNode` | yes | - | Visible text for the menu item |
+| icon | `React.ReactNode \| string` | no | - | Optional leading icon (16x16). Can be a ReactNode or an image src URL |
+| selected | `boolean` | no | `false` | Whether the item is currently selected (active route) |
+| trailing | `React.ReactNode` | no | - | Optional badge / trailing content |
+| href | `string` | no | - | Renders as an anchor when provided; otherwise renders as a button |
+| onClick | `(event: React.MouseEvent<HTMLElement>) => void` | no | - | Click handler – receives the synthetic event |
+| disabled | `boolean` | no | `false` | - |
+| className | `string` | no | `''` | - |
+
+Also accepts the props of `Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onClick'>`.
+
+```tsx
+import { SidebarMenu } from 'pada-ds';
+
+<SidebarMenu label="..." />
+```
+
+### SidebarSearch
+
+`import { SidebarSearch } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| placeholder | `string` | no | `'Search...'` | - |
+| value | `string` | no | - | - |
+| onChange | `(value: string) => void` | no | - | - |
+| className | `string` | no | `''` | - |
+
+```tsx
+import { SidebarSearch } from 'pada-ds';
+
+<SidebarSearch />
+```
+
+### SidebarSection
+
+`import { SidebarSection } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| label | `React.ReactNode` | no | - | Section heading label. When omitted, the section renders only its children (acts as a group container). |
+| icon | `React.ReactNode \| string` | no | - | Optional icon shown before the label |
+| children | `React.ReactNode` | no | - | Menu items / arbitrary children belonging to the section |
+| className | `string` | no | `''` | - |
+
+Also accepts the props of `React.HTMLAttributes<HTMLDivElement>`.
+
+```tsx
+import { SidebarSection } from 'pada-ds';
+
+<SidebarSection />
+```
+
+### SidebarSectionMenu
+
+`import { SidebarSectionMenu } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| children | `React.ReactNode` | yes | - | - |
+| className | `string` | no | `''` | - |
+
+```tsx
+import { SidebarSectionMenu } from 'pada-ds';
+
+<SidebarSectionMenu>...</SidebarSectionMenu>
+```
+
+### Slider
+
+`import { Slider } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| label | `string` | no | - | - |
+| description | `string` | no | - | - |
+| error | `string` | no | - | - |
+| value | `number` | no | - | - |
+| defaultValue | `number` | no | `0` | - |
+| min | `number` | no | `0` | - |
+| max | `number` | no | `100` | - |
+| step | `number` | no | `1` | - |
+| onChange | `(event: React.ChangeEvent<HTMLInputElement>) => void` | no | - | - |
+| onValueChange | `(value: number) => void` | no | - | - |
+| showValue | `boolean` | no | `false` | - |
+| disabled | `boolean` | no | `false` | - |
+| className | `string` | no | `''` | - |
+
+Also accepts the props of `Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'onChange'>`.
+
+```tsx
+import { Slider } from 'pada-ds';
+
+<Slider />
+```
+
+### Splitter
+
+`import { Splitter } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| variant | `'primary' \| 'secondary'` | yes | - | - |
+
+Also accepts the props of `React.ButtonHTMLAttributes<HTMLButtonElement>`.
+
+```tsx
+import { Splitter } from 'pada-ds';
+
+<Splitter variant="primary" />
+```
+
+### Step
+
+`import { Step } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| title | `string` | no | - | Optional title text |
+| description | `string` | no | - | Optional description text |
+| stepValue | `number \| string` | no | - | Step number or value. Defaults to auto-generated based on position |
+| status | `StepStatus` | no | `'upcoming'` | Status of the step |
+| isLast | `boolean` | no | `false` | Whether this is the last step (controls line extension) |
+| onClick | `(stepValue?: number \| string) => void` | no | - | Click handler for the step |
+| clickable | `boolean` | no | `true` | Whether the step is clickable |
+| onSelect | `(stepValue?: number \| string) => void` | no | - | Callback when step is selected (changes to current) |
+
+Also accepts the props of `Omit<React.HTMLAttributes<HTMLDivElement>, 'onClick' | 'onSelect'>`.
+
+```tsx
+import { Step } from 'pada-ds';
+
+<Step />
+```
+
+### Steps
+
+`import { Steps } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| steps | `StepData[]` | yes | - | Array of step data |
+| defaultStatus | `StepProps['status']` | no | `'upcoming'` | Default status for all steps (can be overridden per step) |
+| currentStep | `number \| string` | no | - | Controlled current step value |
+| onStepChange | `(stepValue: number \| string) => void` | no | - | Callback when a step becomes current (clicked) |
+
+Also accepts the props of `React.HTMLAttributes<HTMLDivElement>`.
+
+```tsx
+import { Steps } from 'pada-ds';
+
+<Steps steps={[]} />
+```
+
+### Switch
+
+`import { Switch } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| label | `string` | no | - | - |
+| loading | `boolean` | no | `false` | When `true`, renders an in-knob spinner and disables interaction. Use this for async toggles (saving a server-side preference). |
+
+Also accepts the props of `React.InputHTMLAttributes<HTMLInputElement>`.
+
+```tsx
+import { Switch } from 'pada-ds';
+
+<Switch />
+```
+
+### TabPanel
+
+`import { TabPanel } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| label | `string` | yes | - | - |
+| children | `React.ReactNode` | yes | - | - |
+| notification | `boolean` | no | - | When `true`, renders a small red notification dot next to the tab's label to signal that this section has new / unread content. |
+
+```tsx
+import { TabPanel } from 'pada-ds';
+
+<TabPanel label="...">...</TabPanel>
+```
+
+### Table
+
+`import { Table } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| columns | `TableColumn[]` | yes | - | - |
+| children | `React.ReactNode` | yes | - | - |
+| toolbar | `React.ReactNode` | no | - | - |
+| className | `string` | no | `''` | - |
+| onColumnsChange | `(columns: TableColumn[]) => void` | no | - | - |
+
+```tsx
+import { Table } from 'pada-ds';
+
+<Table columns={[]}>...</Table>
+```
+
+### TableCell
+
+`import { TableCell } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| children | `React.ReactNode` | yes | - | - |
+| columnId | `string` | no | - | - |
+| className | `string` | no | `''` | - |
+
+```tsx
+import { TableCell } from 'pada-ds';
+
+<TableCell>...</TableCell>
+```
+
+### TablePagination
+
+`import { TablePagination } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| total | `number` | yes | - | - |
+| page | `number` | yes | - | - |
+| rowsPerPage | `number` | yes | - | - |
+| rowsPerPageOptions | `number[]` | no | `[25, 50, 100]` | - |
+| onPageChange | `(page: number, context: TablePaginationContext) => void` | yes | - | Fires when the user clicks Previous / Next. |
+| onRowsPerPageChange | `(rowsPerPage: number, context: TablePaginationContext) => void` | yes | - | Fires when the user picks a new page-size. Page resets to 1. |
+| onNextPage | `(context: TablePaginationContext) => void` | no | - | Fires when the user clicks the Next chevron. Convenience alias for filtering page changes. |
+| onPrevPage | `(context: TablePaginationContext) => void` | no | - | Fires when the user clicks the Previous chevron. |
+| className | `string` | no | `''` | - |
+
+```tsx
+import { TablePagination } from 'pada-ds';
+
+<TablePagination total={0} page={0} rowsPerPage={0} onPageChange={() => {}} onRowsPerPageChange={() => {}} />
+```
+
+### TableRow
+
+`import { TableRow } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| children | `React.ReactNode` | yes | - | - |
+| className | `string` | no | `''` | - |
+| selected | `boolean` | no | - | When true, all cells in the row render with the selected (indigo wash) state. |
+| onClick | `React.MouseEventHandler<HTMLDivElement>` | no | - | Click handler on the entire row — useful for bulk-select toggling. |
+| role | `string` | no | - | Sets `role="row"` semantics if you need to override the default `<div>`. |
+
+```tsx
+import { TableRow } from 'pada-ds';
+
+<TableRow>...</TableRow>
+```
+
+### Tabs
+
+`import { Tabs } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| children | `React.ReactNode` | yes | - | - |
+| label | `string` | yes | - | - |
+| defaultValue | `number` | no | `0` | Initial active index in uncontrolled mode. Ignored when `value` is set. |
+| value | `number` | no | - | Controlled active index. |
+| onChange | `(index: number) => void` | no | - | Fires whenever the active tab changes. |
+
+```tsx
+import { Tabs } from 'pada-ds';
+
+<Tabs label="...">...</Tabs>
+```
+
+### Tags
+
+`import { Tags } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| children | `React.ReactNode` | yes | - | - |
+| variant | `TagsVariant` | no | `'neutral'` | - |
+| icon | `React.ReactNode \| string` | no | - | Optional leading visual. Accepts: - a Material-symbol name string (renders an `<Icon>`), or - any React node (an `<Icon />`, `<img />`, emoji, etc.) rendered as-is. When omitted, only the label is shown. |
+| className | `string` | no | `''` | - |
+
+```tsx
+import { Tags } from 'pada-ds';
+
+<Tags>...</Tags>
+```
+
+### Text
+
+`import { Text } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| children | `React.ReactNode` | yes | - | - |
+| size | `TextSize` | no | `TextSize.BASE` | - |
+| weight | `TextWeight` | no | `TextWeight.NORMAL` | - |
+| family | `TextFamily` | no | - | - |
+| lineHeight | `TextLineHeight` | no | `TextLineHeight.BASE` | - |
+| color | `string` | no | `'var(--color-neutral-900)'` | - |
+| as | `'span' \| 'p' \| 'div' \| 'h1' \| 'h2' \| 'h3' \| 'h4' \| 'h5' \| 'h6'` | no | `'span'` | - |
+
+Also accepts the props of `React.HTMLAttributes<HTMLSpanElement>`.
+
+```tsx
+import { Text } from 'pada-ds';
+
+<Text>...</Text>
+```
+
+### Toolbar
+
+`import { Toolbar } from 'pada-ds';`
+
+Toolbar — Figma node 22:947. Two-slot layout: a left cluster of filters / view-switcher, a right cluster built from typed Button descriptors. The right cluster always renders design-system `<Button>` components — consumers can't slip in custom button markup.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| left | `React.ReactNode` | no | - | Content rendered on the left side of the toolbar. Typically a view-switching Select / SegmentControl followed by `<Filter>` and `<MoreFilter>` chips. |
+| actions | `ToolbarActionProps[]` | no | - | Optional ghost / tertiary buttons rendered in the right cluster, in order, to the left of `primaryAction`. Toolbar renders these as `<Button>` components so the right cluster is design-system-pure by construction. Defaults each entry to `variant: 'ghost'`. |
+| primaryAction | `ToolbarActionProps` | no | - | Optional single primary call-to-action rendered at the far right. Defaults to `variant: 'secondary'`. |
+| children | `React.ReactNode` | no | - | Legacy pass-through. If `children` is set and the structured props above are not, the toolbar behaves as a single-slot flex container. |
+| className | `string` | no | `''` | - |
+
+```tsx
+import { Toolbar } from 'pada-ds';
+
+<Toolbar />
+```
+
+### Tooltip
+
+`import { Tooltip } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| content | `React.ReactNode` | yes | - | - |
+| children | `React.ReactElement` | yes | - | - |
+| position | `'top' \| 'bottom' \| 'left' \| 'right'` | no | `'top'` | - |
+
+```tsx
+import { Tooltip } from 'pada-ds';
+
+<Tooltip content="..."><span>...</span></Tooltip>
+```
+
+### UploadField
+
+`import { UploadField } from 'pada-ds';`
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| label | `string` | no | - | - |
+| description | `string` | no | - | - |
+| error | `string` | no | - | - |
+| accept | `string` | no | - | - |
+| multiple | `boolean` | no | `false` | - |
+| maxSize | `number` | no | - | - |
+| maxFiles | `number` | no | - | - |
+| files | `UploadedFile[]` | no | - | - |
+| onFilesChange | `(files: UploadedFile[]) => void` | no | - | - |
+| onUpload | `(files: File[]) => Promise<void> \| void` | no | - | - |
+| disabled | `boolean` | no | `false` | - |
+| required | `boolean` | no | `false` | - |
+| className | `string` | no | `''` | - |
+
+```tsx
+import { UploadField } from 'pada-ds';
+
+<UploadField />
+```

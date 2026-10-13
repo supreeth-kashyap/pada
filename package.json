@@ -20,10 +20,15 @@
     "./styles.css": "./dist/pada.css",
     "./tokens.css": "./dist/tokens.css",
     "./base.css": "./dist/base.css",
+    "./manifest.json": "./dist/manifest.json",
+    "./llms.txt": "./llms.txt",
+    "./llms-full.txt": "./llms-full.txt",
     "./package.json": "./package.json"
   },
   "files": [
     "dist",
+    "llms.txt",
+    "llms-full.txt",
     "README.md",
     "LICENSE",
     "CHANGELOG.md"
@@ -49,9 +54,12 @@
     "build:types": "tsc -p tsconfig.package.json",
     "build:styles": "vite build",
     "build:tokens": "node ./scripts/build-tokens-css.mjs",
-    "build": "npm run clean && npm run build:styles && npm run build:types && npm run build:tokens",
+    "build:manifest": "node ./scripts/gen-manifest.mjs",
+    "build": "npm run clean && npm run build:styles && npm run build:types && npm run build:tokens && npm run build:manifest",
+    "check:manifest": "node ./scripts/gen-manifest.mjs --check",
     "lint": "eslint .",
     "preview": "vite preview",
+    "test": "node --test scripts/component-manifest.test.mjs",
     "smoke:consumer": "node ./scripts/smoke-consumer.mjs",
     "prepublishOnly": "npm run build"
   },

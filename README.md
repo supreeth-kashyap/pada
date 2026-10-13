@@ -51,6 +51,16 @@ document.documentElement.dataset.theme = 'dark'; // or 'light'
 delete document.documentElement.dataset.theme; // follow the OS again
 ```
 
+## For AI coding agents
+
+The package ships a machine-readable API description, generated from the TypeScript source by `npm run build:manifest` (part of `npm run build`):
+
+- `pada-ds/manifest.json`: every exported component with its import path and props (name, type, required, default, JSDoc description).
+- `llms.txt`: a short index: install, imports, stylesheets, theming, and one line per component.
+- `llms-full.txt`: a prop table and a minimal usage example for every component.
+
+`llms.txt` and `llms-full.txt` are also committed at the repo root. `npm test` fails if they are stale or if an exported component is missing from the manifest.
+
 ## Components
 
 This design system includes the following components:
