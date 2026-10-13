@@ -29,6 +29,28 @@ import 'pada-ds/styles.css';
 import { Button } from 'pada-ds';
 ```
 
+`pada-ds/tokens.css` only defines CSS custom properties. To also use Pada's document base styles (`body` background, color and font, and zero `p` margins), import the optional `pada-ds/base.css`:
+
+```tsx
+import 'pada-ds/base.css';
+```
+
+## Theming
+
+By default the theme follows the operating system (`prefers-color-scheme`). To force a theme, set `data-theme="light"` or `data-theme="dark"` on `<html>` or on any container. Only that subtree is themed, so one section of a page can use a different theme:
+
+```html
+<html data-theme="dark">
+  ...
+  <section data-theme="light">Always light</section>
+</html>
+```
+
+```ts
+document.documentElement.dataset.theme = 'dark'; // or 'light'
+delete document.documentElement.dataset.theme; // follow the OS again
+```
+
 ## Components
 
 This design system includes the following components:

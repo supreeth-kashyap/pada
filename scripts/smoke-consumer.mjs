@@ -85,6 +85,27 @@ for (const token of requiredTokens) {
   }
 }
 
+const requiredThemeSelectors = [
+  '[data-theme="light"]',
+  '[data-theme="dark"]',
+  ':root:not([data-theme])',
+];
+
+for (const selector of requiredThemeSelectors) {
+  if (!tokensCss.includes(selector)) {
+    throw new Error(`Missing theme selector in dist/tokens.css: ${selector}`);
+  }
+}
+
+if (/(^|[\s,}])(body|p)\s*[{,]/m.test(tokensCss)) {
+  throw new Error('dist/tokens.css must not contain body or p rules');
+}
+
+const baseCss = await readFile(path.join(appDir, 'node_modules/pada-ds/dist/base.css'), 'utf8');
+if (!baseCss.includes('body {') || !baseCss.includes('p {')) {
+  throw new Error('Expected body and p rules in dist/base.css');
+}
+
 const appTsx = await readFile(path.join(appDir, 'src/App.tsx'), 'utf8');
 if (appTsx.includes('declare module')) {
   throw new Error('Consumer app contains declaration hack unexpectedly');
