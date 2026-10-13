@@ -60,6 +60,13 @@
   color: var(--color-primary-700);
 }
 
+/* Active descendant of a combobox: keyboard focus stays on the trigger. */
+.combo-box-menu-item[data-active] {
+  border-color: var(--color-primary-600);
+  background-color: var(--color-neutral-50);
+  color: var(--color-primary-700);
+}
+
 .combo-box-menu-item:focus-visible {
   outline: none;
   box-shadow: var(--shadow-focus-ring);

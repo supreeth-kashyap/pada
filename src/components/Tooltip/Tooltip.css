@@ -14,6 +14,10 @@
     white-space: nowrap;
 }
 
+.tooltip[hidden] {
+    display: none;
+}
+
 .tooltip--top {
     bottom: 100%;
     left: 50%;
