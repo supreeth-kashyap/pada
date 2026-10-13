@@ -22,7 +22,7 @@ export const Checkbox = ({
         {...props}
       />
       <Icon
-        name="check_small"
+        name="tick_1"
         size={16}
         color="var(--color-white)"
         className="checkbox-icon checkbox-icon--tick"

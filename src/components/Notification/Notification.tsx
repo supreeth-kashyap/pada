@@ -68,7 +68,7 @@ export const Notification: React.FC<NotificationProps> = ({
     <div className={`notification notification--${resolvedPosition} ${open ? 'notification--open' : ''}`.trim()}>
       <div className={`notification__card ${className}`.trim()}>
         <div className="notification__icon">
-          {visual ?? <Icon src="e5cd" size={24} color="var(--color-neutral-600)" />}
+          {visual ?? <Icon name="bell" size={24} color="var(--color-neutral-600)" />}
         </div>
         <div className="notification__content">
           <div className="notification__text">
@@ -77,7 +77,7 @@ export const Notification: React.FC<NotificationProps> = ({
           </div>
         </div>
         <Icon
-          src="e5cd"
+          name="cross_1"
           size={16}
           color="var(--color-neutral-600)"
           className="notification__dismiss"

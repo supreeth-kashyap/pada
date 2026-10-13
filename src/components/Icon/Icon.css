@@ -21,10 +21,11 @@
 }
 
 /*
- * Painting is handled inline by the Icon component (it rewrites the SVG to set
- * either stroke="currentColor" + fill="none" or fill="currentColor" + stroke="none"
- * on every visible shape). This file only ensures the icon's `color` is inherited
- * from its parent so `currentColor` resolves correctly through state changes.
+ * Painting is handled inline by the Icon component (it rewrites explicit, non-`none`
+ * fill/stroke values to `currentColor` and leaves `fill="none"` outlines alone).
+ * Don't set `fill`/`stroke` here: CSS would override those presentation attributes.
+ * This file only ensures the icon's `color` is inherited from its parent so
+ * `currentColor` resolves correctly through state changes.
  */
 .icon,
 .icon__svg,
