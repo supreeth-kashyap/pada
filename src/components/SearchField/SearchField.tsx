@@ -47,7 +47,7 @@ export const SearchField: React.FC<SearchFieldProps> = ({
       data-empty={!hasValue ? '' : undefined}
     >
       <span className="search-icon">
-        <Icon name="search" src='e8b6' size={16} color="var(--color-neutral-600)" />
+        <Icon name="search" size={16} color="var(--color-neutral-600)" />
       </span>
       <input
         className="search-input"
@@ -66,7 +66,7 @@ export const SearchField: React.FC<SearchFieldProps> = ({
           onClick={handleClear}
           aria-label="Clear search"
         >
-          <Icon name="cross_1" src="f508" size={12} color="var(--color-neutral-600)" />
+          <Icon name="cross_1" size={12} color="var(--color-neutral-600)" />
         </button>
       )}
     </div>

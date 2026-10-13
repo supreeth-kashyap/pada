@@ -96,5 +96,12 @@ run('node', [
   `import React from 'react'; import { renderToString } from 'react-dom/server'; import { Button } from 'pada-ds'; const html = renderToString(React.createElement(Button, { variant: 'primary' }, 'Smoke test button')); if (!html.includes('button--primary')) { throw new Error('Button primary class not rendered.'); }`,
 ], { cwd: appDir });
 
+// Built-in icons are bundled and must render synchronously (no fetch), so SSR emits the SVG.
+run('node', [
+  '--input-type=module',
+  '--eval',
+  `import React from 'react'; import { renderToString } from 'react-dom/server'; import { Icon, iconNames } from 'pada-ds'; const html = renderToString(React.createElement(Icon, { name: 'tick_1' })); if (!html.includes('<svg')) { throw new Error('Built-in icon tick_1 did not render an <svg> during SSR: ' + html); } if (!iconNames.includes('tick_1')) { throw new Error('iconNames does not list tick_1.'); } if (!html.includes('currentColor') || html.includes('#111827')) { throw new Error('Built-in icon tick_1 was not recolored to currentColor: ' + html); }`,
+], { cwd: appDir });
+
 console.log('Consumer smoke test passed.');
 console.log(`App directory: ${appDir}`);
