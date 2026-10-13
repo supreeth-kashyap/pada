@@ -1,6 +1,19 @@
-/* Default theme based on system preference */
+/* Theming: light is the default (`:root`) and can be forced with data-theme="light".
+   With no data-theme attribute the system preference decides. data-theme="dark" forces
+   dark; its rule is generated from the block below by scripts/theme-css.mjs, so the dark
+   set is written only once. Both attributes work on <html> or on any container. */
 :root {
   color-scheme: light dark;
+}
+
+:root[data-theme="light"],
+[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"],
+[data-theme="dark"] {
+  color-scheme: dark;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -302,8 +315,9 @@
   }
 }
 
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme]) {
+/* Light theme (default) */
+:root,
+[data-theme="light"] {
     --color-white: var(--color-end-white);
     --color-black: var(--color-end-black);
 
@@ -598,7 +612,6 @@
     --color-fg: var(--color-slate-900);
     --color-border: var(--color-slate-200);
     --color-focus-ring: var(--color-indigo-500);
-  }
 }
 
 :root {
@@ -642,20 +655,10 @@
   --size-72: var(--spacing-72);
   --size-80: var(--spacing-80);
   --size-96: var(--spacing-96);
+}
 
+/* Re-declared on themed containers so it resolves against that container's primary color */
+:root,
+[data-theme] {
   --shadow-focus-ring: 0 0 0 2px var(--color-end-white), 0 0 0 3px var(--color-primary-600);
-}
-
-body {
-  background-color: var(--color-bg);
-  color: var(--color-fg);
-  font-family: var(--font-family-sans);
-  font-size: var(--font-size-base);
-  line-height: var(--line-height-base);
-  margin: 0;
-}
-
-p {
-  margin: 0;
-  padding: 0;
 }

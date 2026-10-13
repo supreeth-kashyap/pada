@@ -19,6 +19,7 @@
     },
     "./styles.css": "./dist/pada.css",
     "./tokens.css": "./dist/tokens.css",
+    "./base.css": "./dist/base.css",
     "./package.json": "./package.json"
   },
   "files": [

@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Added explicit `data-theme="light"` and `data-theme="dark"` token sets. They work on `<html>` or any container. With no attribute the theme still follows the OS. Previously, setting `data-theme` removed every semantic token.
+- Moved the `body` and `p` rules out of `dist/tokens.css` into a new optional `pada-ds/base.css` export, so importing the tokens no longer overrides an app's own styles.
+
 ## 1.1.0 - 2026-05-27
 
 - Externalized `prismjs` from the bundle. It is still listed under `dependencies`, so consumers get it auto-installed, but the published `dist/pada.js` no longer ships its own copy.

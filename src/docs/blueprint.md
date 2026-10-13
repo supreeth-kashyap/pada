@@ -18,7 +18,8 @@ Our design system uses a token-based approach to manage styles. The pipeline con
 
 -   `src/styles`: Contains the CSS files for the design system.
     -   `primitives.css`: Raw style values (Tailwind v3 tokens).
-    -   `global.css`: Semantic style values and theme definitions.
+    -   `global.css`: Semantic style values and theme definitions. The light set is the default (`:root`, `[data-theme="light"]`). The dark set is written once under `prefers-color-scheme: dark`. `scripts/theme-css.mjs` copies it to `[data-theme="dark"]`, for both `dist/tokens.css` and the demo.
+    -   `base.css`: Optional `body`/`p` base styles, shipped separately as `pada-ds/base.css`.
 -   `src/docs`: Contains documentation for the design system.
     -   `blueprint.md`: This file.
     -   `tokens-map.json`: A map of semantic tokens to their primitive counterparts.

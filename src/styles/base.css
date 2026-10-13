@@ -1,0 +1,15 @@
+/* Optional document-level base styles, shipped as `pada-ds/base.css`. Kept out of
+   tokens.css so importing the tokens never overrides an app's own body/p styles. */
+body {
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  margin: 0;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}

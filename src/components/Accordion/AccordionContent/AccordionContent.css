@@ -4,8 +4,5 @@
   box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme]) .accordion__body {
-    background-color: var(--color-end-white);
-  }
-}
+/* No per-theme override: `--color-bg` is already `--color-end-white` in the light theme
+   (global.css), and it follows data-theme on <html> or any ancestor. */
