@@ -59,7 +59,7 @@
     "check:manifest": "node ./scripts/gen-manifest.mjs --check",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "node --test scripts/component-manifest.test.mjs",
+    "test": "node --test scripts/component-manifest.test.mjs scripts/a11y.test.mjs",
     "smoke:consumer": "node ./scripts/smoke-consumer.mjs",
     "prepublishOnly": "npm run build"
   },
