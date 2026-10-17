@@ -160,11 +160,14 @@ import { BaseToolbarMenu } from 'pada-ds';
 | --- | --- | --- | --- | --- |
 | children | `React.ReactNode` | no | - | - |
 | variant | `ButtonVariant` | no | `'primary'` | - |
+| size | `ButtonSize` | no | `'md'` | Height and padding: sm 28px, md 32px, lg 40px (scaled by density). |
 | leftIcon | `string` | no | - | - |
 | rightIcon | `string` | no | - | - |
 | split | `boolean` | no | `false` | - |
 | onSplitClick | `() => void` | no | - | - |
 | disabled | `boolean` | no | `false` | - |
+| loading | `boolean` | no | `false` | Shows a spinner in place of the label and ignores clicks, keeping the button's width and focus. Announced through `aria-busy`. |
+| ref | `React.Ref<HTMLButtonElement>` | no | - | - |
 
 Also accepts the props of `React.ButtonHTMLAttributes<HTMLButtonElement>`.
 
@@ -193,14 +196,17 @@ import { Card } from 'pada-ds';
 
 `import { Carousel } from 'pada-ds';`
 
+A rotating set of slides (WAI-ARIA APG Carousel). Auto-rotation pauses while the pointer or keyboard focus is inside it, can be paused with its rotation button, and is off when the user prefers reduced motion.
+
 | Prop | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
 | children | `React.ReactNode` | yes | - | - |
-| autoPlay | `boolean` | no | `true` | - |
+| autoPlay | `boolean` | no | `true` | Advance automatically. Pauses on hover and focus, and never runs under reduced motion. |
 | interval | `number` | no | `3000` | - |
 | className | `string` | no | `''` | - |
 | showDots | `boolean` | no | `true` | - |
 | showNav | `boolean` | no | `true` | - |
+| label | `string` | no | `'Carousel'` | Accessible name of the carousel region. |
 
 ```tsx
 import { Carousel } from 'pada-ds';
@@ -215,6 +221,8 @@ import { Carousel } from 'pada-ds';
 | Prop | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
 | label | `string` | no | - | - |
+| indeterminate | `boolean` | no | `false` | Mixed state, e.g. a "select all" box when only some items are selected. Announced as "mixed". |
+| ref | `React.Ref<HTMLInputElement>` | no | - | - |
 
 Also accepts the props of `React.InputHTMLAttributes<HTMLInputElement>`.
 

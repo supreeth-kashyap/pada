@@ -45,10 +45,10 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - Banner: title, subtitle?, visualIcon?, visualImage?, visualAlt?, button?, onButtonClick?, className?
 - BaseManageFilter: saveCopy?, onSaveFilter?, onClear?, onMenuClick?, className?
 - BaseToolbarMenu: title?, count?, showCount?, dropdown?, disabled?, state?, className?, onClick?
-- Button: children?, variant?, leftIcon?, rightIcon?, split?, onSplitClick?, disabled?; extends React.ButtonHTMLAttributes<HTMLButtonElement>
+- Button: children?, variant?, size?, leftIcon?, rightIcon?, split?, onSplitClick?, disabled?, loading?, ref?; extends React.ButtonHTMLAttributes<HTMLButtonElement>
 - Card: children?, className?
-- Carousel: children, autoPlay?, interval?, className?, showDots?, showNav?
-- Checkbox: label?; extends React.InputHTMLAttributes<HTMLInputElement>
+- Carousel: children, autoPlay?, interval?, className?, showDots?, showNav?, label?
+- Checkbox: label?, indeterminate?, ref?; extends React.InputHTMLAttributes<HTMLInputElement>
 - CodeSnippet: code, language, type?, label?, showCopy?, className?
 - ComboBox: items, multiSelect?, onItemClick?; extends React.HTMLAttributes<HTMLDivElement>
 - ComboBoxMenuItem: iconName?, label, selected?, disabled?, multiSelect?; extends React.ButtonHTMLAttributes<HTMLButtonElement>

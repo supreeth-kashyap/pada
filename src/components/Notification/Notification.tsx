@@ -66,7 +66,8 @@ export const Notification: React.FC<NotificationProps> = ({
 
   return (
     <div className={`notification notification--${resolvedPosition} ${open ? 'notification--open' : ''}`.trim()}>
-      <div className={`notification__card ${className}`.trim()}>
+      {/* A polite live region, so screen readers announce the notification when it appears. */}
+      <div className={`notification__card ${className}`.trim()} role="status" aria-live="polite" aria-atomic="true">
         <div className="notification__icon">
           {visual ?? <Icon name="bell" size={24} color="var(--pada-color-neutral-600)" />}
         </div>
@@ -76,22 +77,9 @@ export const Notification: React.FC<NotificationProps> = ({
             {subtitle && <p className="notification__description">{subtitle}</p>}
           </div>
         </div>
-        <Icon
-          name="cross_1"
-          size={16}
-          color="var(--pada-color-neutral-600)"
-          className="notification__dismiss"
-          role="button"
-          tabIndex={0}
-          aria-label="Dismiss notification"
-          onClick={() => onOpenChange(false)}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              e.preventDefault();
-              onOpenChange(false);
-            }
-          }}
-        />
+        <button type="button" className="notification__dismiss" aria-label="Dismiss notification" onClick={() => onOpenChange(false)}>
+          <Icon name="cross_1" size={16} color="var(--pada-color-neutral-600)" aria-hidden="true" />
+        </button>
       </div>
     </div>
   );

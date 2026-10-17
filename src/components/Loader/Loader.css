@@ -27,6 +27,13 @@
   animation: loader-pulse 1.6s linear infinite;
 }
 
+/* Reduced motion: a slower, calmer pulse (the loader still has to show progress). */
+@media (prefers-reduced-motion: reduce) {
+  .loader__bar {
+    animation-duration: 4s;
+  }
+}
+
 @keyframes loader-pulse {
   0%,
   20% {

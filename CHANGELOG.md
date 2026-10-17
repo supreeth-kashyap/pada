@@ -6,6 +6,14 @@
 - Moved the `body` and `p` rules out of `dist/tokens.css` into a new optional `pada-ds/base.css` export, so importing the tokens no longer overrides an app's own styles.
 - Added a component API manifest for AI coding agents. `npm run build` now reads every exported component's props from the TypeScript source and writes `dist/manifest.json` (exported as `pada-ds/manifest.json`), `llms.txt` and `llms-full.txt`. Both llms files ship in the package and are committed at the repo root. `npm test` fails if they are stale or if an exported component is missing from the manifest.
 
+- **Accessibility and API fixes (phase 3).**
+  - `Button`: new `size` (`sm`, `md`, `lg`, density-aware) and `loading` (spinner over the hidden label so the width holds; stays focusable, sets `aria-busy`, ignores clicks). Buttons now default to `type="button"`, so they no longer submit forms by accident (pass `type="submit"` explicitly). Styles moved to `--pada-button-*` component tokens; icons follow the text colour; a press scales the button slightly and a trailing icon nudges forward on hover.
+  - `Checkbox`: new `indeterminate` (shows a dash, announced as "mixed"); a consumer `id` now keeps the label wired; the tick springs in.
+  - `InputText` / `InputTextArea`: a consumer `id` no longer breaks the label, and a consumer `aria-describedby` is kept alongside the description or error.
+  - `Select`: `name` now submits the value with forms (hidden input); the description and error describe the trigger, and errors set `aria-invalid`.
+  - `Carousel` follows the APG carousel pattern: a labelled region (`label` prop) of slide groups, auto-rotation pauses on hover and focus, never runs under reduced motion, and has a pause/play button; dots are buttons with `aria-current` (not a tablist without tabs); slides fade in and the current dot widens. Fixed the controls being pushed out of view by tall slides.
+  - `Notification` is a polite live region and its dismiss control is a real button.
+  - `Loader` pulses more slowly under reduced motion.
 - **Overlays rebuilt on the headless parts (phase 3).**
   - New `Dialog` (`Dialog.Root`, `Trigger`, `Content` with `size` auto/sm/md/lg/xl/full, `Header`, `Title`, `Description`, `Body`, `Footer`, `Close`, `CloseButton`), `Drawer` (the same parts, with `Drawer.Content side="left|right|top|bottom"` and sizes) and `DropdownMenu` (items with `icon`, `shortcut` and `tone="danger"`, checkbox and radio items, labels, separators, submenus).
   - `Popover` and `Tooltip` keep their 1.x props and are now also namespaces of parts (`Popover.Root`, `Popover.Content`, `Popover.Title`, `Popover.Arrow`, `Popover.CloseButton`; `Tooltip.Provider`, `Tooltip.Root`, `Tooltip.Content`, `Tooltip.Arrow`). They render in a portal, position with collision handling, and close on Escape and outside clicks; Popover closes when focus leaves it and labels itself from its title.

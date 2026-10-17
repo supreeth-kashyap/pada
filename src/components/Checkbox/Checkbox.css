@@ -26,7 +26,8 @@
   padding: 0;
 }
 
-.checkbox:checked {
+.checkbox:checked,
+.checkbox:indeterminate {
   background-color: var(--pada-color-accent-solid);
   border-color: var(--pada-color-accent-solid);
 }
@@ -39,7 +40,10 @@
   transform: translate(-50%, -50%);
   pointer-events: none;
   opacity: 0;
-  transition: opacity var(--pada-duration-normal) var(--pada-ease-standard);
+  scale: 0.6;
+  transition:
+    opacity var(--pada-duration-normal) var(--pada-ease-standard),
+    scale var(--pada-duration-normal) var(--pada-ease-spring);
 }
 
 .checkbox-icon--tick {
@@ -75,6 +79,33 @@
 
 .checkbox:checked ~ .checkbox-icon--tick {
   opacity: 1;
+  scale: 1;
+}
+
+/* Indeterminate: a dash replaces the tick. */
+.checkbox-dash {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 10px;
+  height: 2px;
+  border-radius: var(--pada-radius-full);
+  background-color: var(--pada-color-accent-on-solid);
+  pointer-events: none;
+  opacity: 0;
+  scale: 0 1;
+  transition:
+    opacity var(--pada-duration-fast) var(--pada-ease-standard),
+    scale var(--pada-duration-normal) var(--pada-ease-emphasized);
+}
+
+.checkbox:indeterminate ~ .checkbox-dash {
+  opacity: 1;
+  scale: 1 1;
+}
+
+.checkbox:indeterminate ~ .checkbox-icon--tick {
+  opacity: 0;
 }
 
 /* Hover + selected per Figma: bg shifts to a light indigo wash (indigo-100) while

@@ -207,6 +207,8 @@ export const Select: React.FC<SelectProps> = ({
           aria-expanded={isOpen}
           aria-controls={isOpen ? listboxId : undefined}
           aria-activedescendant={isOpen && activeIndex >= 0 ? `${listboxId}-option-${activeIndex}` : undefined}
+          aria-invalid={error ? true : undefined}
+          aria-describedby={[description ? `${triggerId}-description` : '', error ? `${triggerId}-error` : ''].filter(Boolean).join(' ') || undefined}
           data-filled={selectedOption ? '' : undefined}
         >
           <span
@@ -222,6 +224,8 @@ export const Select: React.FC<SelectProps> = ({
             aria-hidden="true"
           />
         </button>
+        {/* A button cannot carry a form value; this hidden input submits the selection. */}
+        {name && <input type="hidden" name={name} value={currentValue ?? ''} disabled={disabled} />}
         {isOpen && (
           <div className="select-dropdown">
             <ComboBox
@@ -234,8 +238,8 @@ export const Select: React.FC<SelectProps> = ({
           </div>
         )}
       </div>
-      {description && <p className="select-description">{description}</p>}
-      {error && <p className="select-error">{error}</p>}
+      {description && <p id={`${triggerId}-description`} className="select-description">{description}</p>}
+      {error && <p id={`${triggerId}-error`} className="select-error">{error}</p>}
     </div>
   );
 };

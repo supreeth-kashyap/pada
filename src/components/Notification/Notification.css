@@ -132,8 +132,15 @@
   justify-content: center;
   width: 20px;
   height: 20px;
+  padding: 0;
   border-radius: var(--pada-radius-full);
   border: none;
+  background: transparent;
   cursor: pointer;
   flex-shrink: 0;
+}
+
+.notification__dismiss:focus-visible {
+  outline: none;
+  box-shadow: var(--pada-shadow-focus);
 }

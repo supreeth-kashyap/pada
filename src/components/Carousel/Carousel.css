@@ -43,6 +43,10 @@
 
 .carousel__viewport {
   flex: 1;
+  /* Without this the slide's content grows the viewport and pushes the controls out of the
+     fixed-height carousel, where they would be focusable but invisible. */
+  min-height: 0;
+  overflow: hidden;
   width: 100%;
   display: flex;
   align-items: center;
@@ -57,26 +61,67 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  /* Each slide mounts fresh (keyed by index), so it fades and drifts in. */
+  animation: carousel-enter var(--pada-duration-slow) var(--pada-ease-emphasized);
+}
+
+@keyframes carousel-enter {
+  from {
+    opacity: 0;
+    translate: var(--pada-motion-distance-md) 0;
+  }
+}
+
+.carousel__controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--pada-space-2);
+  flex-shrink: 0;
+  padding: var(--pada-space-1-5) 0;
 }
 
 .carousel__dots {
   display: flex;
-  justify-content: center;
   align-items: center;
   gap: 4px;
-  padding-bottom: 8px;
-  height: 6px;
 }
 
 .carousel__dot {
   width: 6px;
   height: 6px;
-  border-radius: 50%;
+  padding: 0;
+  border-radius: var(--pada-radius-full);
   border: none;
   background-color: var(--pada-color-neutral-300);
   cursor: pointer;
+  transition:
+    width var(--pada-duration-normal) var(--pada-ease-emphasized),
+    background-color var(--pada-duration-normal) var(--pada-ease-standard);
 }
 
-.carousel__dot--active {
+/* The current dot widens into a short bar. */
+.carousel__dot[aria-current="true"] {
+  width: 16px;
   background-color: var(--pada-color-neutral-700);
+}
+
+.carousel__dot:focus-visible,
+.carousel__rotation:focus-visible {
+  outline: none;
+  box-shadow: var(--pada-shadow-focus);
+}
+
+.carousel__rotation {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border: none;
+  border-radius: var(--pada-radius-full);
+  background: transparent;
+  color: var(--pada-color-fg-muted);
+  cursor: pointer;
 }
