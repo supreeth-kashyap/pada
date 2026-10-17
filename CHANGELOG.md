@@ -6,6 +6,27 @@
 - Moved the `body` and `p` rules out of `dist/tokens.css` into a new optional `pada-ds/base.css` export, so importing the tokens no longer overrides an app's own styles.
 - Added a component API manifest for AI coding agents. `npm run build` now reads every exported component's props from the TypeScript source and writes `dist/manifest.json` (exported as `pada-ds/manifest.json`), `llms.txt` and `llms-full.txt`. Both llms files ship in the package and are committed at the repo root. `npm test` fails if they are stale or if an exported component is missing from the manifest.
 
+- **New components (wave 2): form inputs.**
+  - `RangeSlider` has two thumbs for a low and high value:
+    - Each thumb is a named `slider` with a formatted `aria-valuetext`, bounded by the other thumb (`minStepsBetweenThumbs`).
+    - Keys: arrows, PageUp/PageDown and Home/End. Pressing the track moves the nearest thumb.
+    - `onValueChange` fires while dragging and `onValueCommit` when the drag ends. It also accepts `formatOptions`, a description, an error and `name`.
+    - It is built on new headless `Slider` parts (`Root`, `Track`, `Range`, `Thumb`) that support any number of thumbs.
+  - `PasswordInput` is a password field:
+    - A show/hide toggle (`aria-pressed`).
+    - An optional strength `meter` (`strength`, or pass your own 0–4 score), plus `estimatePasswordStrength`.
+    - `autoComplete` defaults to `current-password`.
+  - `PinInput` has one box per character for codes and PINs:
+    - Typing advances, Backspace goes back, the arrows and Home/End move, and pasting or SMS autofill (`one-time-code`) fills every box.
+    - `onComplete`, `mask`, `numeric` or `alphanumeric`, `groupSize` separators and `name`.
+    - It also comes as headless `PinInput` parts.
+  - `TagInput` takes free-form tags in one field:
+    - Enter or a comma adds a tag, and pasting a list adds them all.
+    - `validate`, `maxTags` and duplicate prevention, with the reason shown as an error.
+    - Backspace moves to the tags, the arrows move between them, and Delete removes one. Changes are announced, and `name` submits each tag.
+  - `RadioCardGroup` is a single choice shown as cards (title, description, icon, meta such as a price) on native radios in a named fieldset. It has columns that wrap, and the indicator animates.
+  - `Rating` is a star rating built as a radio group (click the current value to clear it, with a hover preview). Read-only ratings are one image named "4.3 out of 5 stars", with partial stars.
+- `RadioGroup`'s label now names the radio group (it was a `<label>` pointing at nothing).
 - **New components (wave 2): Stat, Timeline and ScrollArea.**
   - `Stat` is a key figure:
     - A label and a value formatted with `formatOptions`. The value counts up to its new number when it changes; screen readers hear only the final value, and the count is skipped under reduced motion.

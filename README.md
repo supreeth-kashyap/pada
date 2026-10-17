@@ -59,7 +59,7 @@ import { Dialog } from 'pada-ds/headless';
 .my-dialog[data-state="open"] { animation: fade-in var(--pada-duration-slow) var(--pada-ease-emphasized); }
 ```
 
-Available parts: `Dialog`, `Popover`, `Tooltip` (with `Tooltip.Provider` for shared delays), `DropdownMenu` (items, checkbox and radio items, groups, labels, separators, submenus), `Tabs`, `Accordion`, `Collapsible`, `Field`, `Toggle` / `ToggleGroup`, `Combobox` (single or multiple, with a pluggable filter), `NumberInput`, `Calendar`, `Tree`, `HoverCard` and `ContextMenu`. Each follows the matching WAI-ARIA Authoring Practices pattern. Any part that renders an element accepts `asChild`, which merges its behaviour onto your own element (a router link, a custom button) instead of rendering a new one.
+Available parts: `Dialog`, `Popover`, `Tooltip` (with `Tooltip.Provider` for shared delays), `DropdownMenu` (items, checkbox and radio items, groups, labels, separators, submenus), `Tabs`, `Accordion`, `Collapsible`, `Field`, `Toggle` / `ToggleGroup`, `Combobox` (single or multiple, with a pluggable filter), `NumberInput`, `Calendar`, `Tree`, `HoverCard`, `ContextMenu`, `Slider` (any number of thumbs) and `PinInput`. Each follows the matching WAI-ARIA Authoring Practices pattern. Any part that renders an element accepts `asChild`, which merges its behaviour onto your own element (a router link, a custom button) instead of rendering a new one.
 
 Portalled parts render into `document.body`, or into the element provided by `PortalContainerContext` (`ThemeProvider` provides one, so overlays keep a subtree's theme).
 
@@ -175,10 +175,15 @@ This design system includes the following components:
 - **NumberInput**: Number field with steppers and locale formatting.
 - **PageHeader**: Page title and actions area.
 - **Pagination**: Page navigation with ellipses.
+- **PasswordInput**: Password field with show/hide and a strength meter.
 - **Pills**: Compact, selectable pill-style buttons.
+- **PinInput**: One box per character for codes and PINs.
 - **Popover**: Floating container for contextual content; also `Popover.Root`, `Popover.Content`, … parts.
 - **Progress**: Visual progress indicators for tasks.
+- **RadioCardGroup**: Single choice shown as cards.
 - **RadioGroup**: Grouped single-choice radio buttons.
+- **RangeSlider**: Two-thumb slider for a range.
+- **Rating**: Star rating, interactive or read-only.
 - **ScrollArea**: Native scrolling with themed scrollbars and edge fades.
 - **SearchField**: Text search input with clear.
 - **SegmentControl**: Segmented button toggle control.
@@ -195,6 +200,7 @@ This design system includes the following components:
 - **Switch**: Toggle between on/off states.
 - **Table**: Responsive tabular data display component.
 - **Tabs**: Tabbed navigation interface component.
+- **TagInput**: Free-form tags in one field.
 - **Tags**: Compact label tags for metadata.
 - **Text**: Typography primitives and helpers.
 - **Timeline**: Ordered list of events.

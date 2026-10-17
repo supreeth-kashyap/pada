@@ -1,0 +1,122 @@
+/* Root: a box that wraps the tags and the input. Reads the Field's input tokens. */
+.tag-input {
+  /* Component tokens */
+  --pada-tag-input-min-height: var(--pada-control-height-md);
+  --pada-tag-bg: var(--pada-color-neutral-subtle);
+  --pada-tag-fg: var(--pada-color-fg);
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--pada-space-1);
+  box-sizing: border-box;
+  width: 100%;
+  min-height: var(--pada-tag-input-min-height);
+  padding: var(--pada-space-1) var(--pada-space-2);
+  border: var(--pada-border-width-thin) solid var(--pada-field-input-border);
+  border-radius: var(--pada-field-input-radius);
+  background-color: var(--pada-field-input-bg);
+  cursor: text;
+  transition:
+    border-color var(--pada-duration-fast) var(--pada-ease-standard),
+    box-shadow var(--pada-duration-fast) var(--pada-ease-standard);
+}
+
+/* States */
+.tag-input:hover:not([data-disabled]) {
+  border-color: var(--pada-field-input-border-hover);
+}
+
+.tag-input:focus-within {
+  border-color: var(--pada-field-input-border-focus);
+  box-shadow: 0 0 0 3px var(--pada-field-input-ring);
+}
+
+.tag-input[data-disabled] {
+  background-color: var(--pada-color-surface-sunken);
+  cursor: not-allowed;
+}
+
+/* Child elements */
+.tag-input-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--pada-space-1);
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tag-input-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--pada-space-1);
+  max-width: 100%;
+  padding: var(--pada-space-0-5) var(--pada-space-1) var(--pada-space-0-5) var(--pada-space-2);
+  border-radius: var(--pada-radius-md);
+  background-color: var(--pada-tag-bg);
+  color: var(--pada-tag-fg);
+  font-size: var(--pada-font-size-sm);
+  animation: tag-input-tag-in var(--pada-duration-fast) var(--pada-ease-emphasized);
+}
+
+.tag-input-tag-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tag-input-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border: none;
+  border-radius: var(--pada-radius-sm);
+  background: none;
+  color: var(--pada-color-fg-muted);
+  cursor: pointer;
+}
+
+.tag-input-remove:hover:not(:disabled) {
+  background-color: var(--pada-color-neutral-subtle-hover);
+  color: var(--pada-color-fg);
+}
+
+.tag-input-remove:focus-visible {
+  outline: none;
+  box-shadow: var(--pada-shadow-focus);
+}
+
+/* A focused tag (Backspace from the input) is highlighted as a whole. */
+.tag-input-tag:has(.tag-input-remove:focus-visible) {
+  background-color: var(--pada-color-accent-subtle);
+  color: var(--pada-color-accent-fg);
+}
+
+.tag-input-input {
+  flex: 1;
+  min-width: 8ch;
+  height: calc(var(--pada-tag-input-min-height) - var(--pada-space-2) - 2px);
+  padding: 0 var(--pada-space-1);
+  border: none;
+  background: none;
+  color: var(--pada-color-fg);
+  font: inherit;
+  font-size: var(--pada-font-size-md);
+  outline: none;
+}
+
+.tag-input-input::placeholder {
+  color: var(--pada-color-fg-subtle);
+}
+
+@keyframes tag-input-tag-in {
+  from {
+    opacity: 0;
+    scale: 0.9;
+  }
+}

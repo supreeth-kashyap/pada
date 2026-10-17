@@ -161,7 +161,9 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - NumberInput: label, description?, error?, required?, optional?, placeholder?, stepper?, size?, value?, defaultValue?, onValueChange?, min?, max?, step?, largeStep?, formatOptions?, locale?, disabled?, readOnly?, name?; extends Omit<Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'onChange'>, 'children' | 'inputId'>
 - PageHeader: breadcrumbs, onCommandClick?, commandLabel?, commandShortcut?, onAiClick?, aiLabel?, profileTrigger?, profileMenu?, className?
 - Pagination: page, totalPages, onPageChange, siblingCount?, boundaryCount?, label?; extends Omit<ComponentPropsWithRef<'nav'>, 'onChange'>
+- PasswordInput: label, description?, error?, optional?, strength?, defaultVisible?, size?; extends Omit<ComponentPropsWithRef<'input'>, 'type' | 'size'>
 - Pills: options, value?, defaultValue?, onChange?, className?, size?, disabled?
+- PinInput: label, description?, error?, groupSize?, size?, length, value?, defaultValue?, onValueChange?, onComplete?, type?, mask?, otp?, disabled?, placeholder?, name?; extends Omit<Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'onChange'>, 'children'>
 - Popover: open, onOpenChange, children, trigger?, position?, title?, variant?, showClose?, className?, clickPosition?
 - Popover.Anchor: asChild?; extends ComponentPropsWithRef<'div'>
 - Popover.Arrow: asChild?; extends ComponentPropsWithRef<'span'>
@@ -172,7 +174,10 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - Popover.Title: asChild?; extends ComponentPropsWithRef<'h2'>
 - Popover.Trigger: asChild?; extends ComponentPropsWithRef<'button'>
 - Progress: value, max?, label?
+- RadioCardGroup: label, options, value?, defaultValue?, onValueChange?, description?, name?, columns?, disabled?, required?, className?
 - RadioGroup: name, label?, options, value, onChange, disabled?, className?
+- RangeSlider: label, value?, defaultValue?, onValueChange?, onValueCommit?, min?, max?, step?, minStepsBetweenThumbs?, formatOptions?, locale?, showValue?, thumbLabels?, description?, error?, disabled?, name?, className?
+- Rating: label, value?, defaultValue?, onValueChange?, max?, readOnly?, disabled?, allowClear?, showLabel?, size?, name?, className?
 - ScrollArea: orientation?, maxHeight?, maxWidth?, fade?, scrollbar?; extends ComponentPropsWithRef<'div'>
 - SearchField: value?, defaultValue?, onChange?, onClear?, className?; extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'onChange' | 'value' | 'defaultValue'>
 - SegmentControl: options, value?, defaultValue?, onChange?, className?, disabled?
@@ -205,6 +210,7 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - Tabs.List: loop?; extends ComponentPropsWithRef<'div'>
 - Tabs.Root: variant?, value?, defaultValue?, onValueChange?, orientation?, activationMode?, dir?; extends Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'dir'>
 - Tabs.Trigger: notification?, value, asChild?; extends ComponentPropsWithRef<'button'>
+- TagInput: label, value?, defaultValue?, onValueChange?, placeholder?, description?, error?, separators?, maxTags?, allowDuplicates?, validate?, addOnBlur?, disabled?, required?, name?, className?
 - Tags: children, variant?, icon?, className?
 - Text: children, size?, weight?, family?, lineHeight?, color?, as?; extends React.HTMLAttributes<HTMLSpanElement>
 - ThemeProvider: children?, defaultTheme?, onThemeChange?, target?, storageKey?, theme?, accent?, neutral?, density?, radius?, motion?, contrast?

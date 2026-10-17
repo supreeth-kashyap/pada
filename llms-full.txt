@@ -2573,6 +2573,30 @@ import { Pagination } from 'pada-ds';
 <Pagination page={0} totalPages={0} onPageChange={() => {}} />
 ```
 
+### PasswordInput
+
+`import { PasswordInput } from 'pada-ds';`
+
+A password field with a show/hide toggle and an optional strength meter. Defaults to `autoComplete="current-password"`; use `"new-password"` on sign-up and change forms.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| label | `string` | yes | - | - |
+| description | `string` | no | - | - |
+| error | `string` | no | - | - |
+| optional | `boolean` | no | - | Show "(optional)" after the label. |
+| strength | `boolean \| PasswordStrength` | no | - | Show a strength meter: `true` uses `estimatePasswordStrength`; a number (0–4) uses your own score. |
+| defaultVisible | `boolean` | no | `false` | Initially show the password as text. |
+| size | `'sm' \| 'md' \| 'lg'` | no | `'md'` | - |
+
+Also accepts the props of `Omit<ComponentPropsWithRef<'input'>, 'type' | 'size'>`.
+
+```tsx
+import { PasswordInput } from 'pada-ds';
+
+<PasswordInput label="..." />
+```
+
 ### Pills
 
 `import { Pills } from 'pada-ds';`
@@ -2591,6 +2615,39 @@ import { Pagination } from 'pada-ds';
 import { Pills } from 'pada-ds';
 
 <Pills options={[]} />
+```
+
+### PinInput
+
+`import { PinInput } from 'pada-ds';`
+
+A code or PIN field with one box per character. Typing moves to the next box, Backspace goes back, and pasting (or a phone autofilling a code from a text message) fills every box.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| label | `string` | yes | - | - |
+| description | `string` | no | - | - |
+| error | `string` | no | - | - |
+| groupSize | `number` | no | - | Put a separator after every `groupSize` boxes (3 makes "123–456"). |
+| size | `'sm' \| 'md' \| 'lg'` | no | `'md'` | - |
+| length | `number` | yes | - | Number of characters. |
+| value | `string` | no | - | Controlled value (may be shorter than `length` while typing). |
+| defaultValue | `string` | no | - | - |
+| onValueChange | `(value: string) => void` | no | - | Called with the characters so far; a blank box between filled ones is a space. |
+| onComplete | `(value: string) => void` | no | - | Called once every box is filled. |
+| type | `'numeric' \| 'alphanumeric'` | no | - | Accepted characters. |
+| mask | `boolean` | no | - | Hide the characters, like a password. |
+| otp | `boolean` | no | - | One-time code: lets browsers and phones autofill it from a text message. |
+| disabled | `boolean` | no | - | - |
+| placeholder | `string` | no | - | Placeholder in each empty box. |
+| name | `string` | no | - | Submits the joined value with forms under this name. |
+
+Also accepts the props of `Omit<Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'onChange'>, 'children'>`.
+
+```tsx
+import { PinInput } from 'pada-ds';
+
+<PinInput label="..." length={0} />
 ```
 
 ### Popover
@@ -2796,6 +2853,32 @@ import { Progress } from 'pada-ds';
 <Progress value={0} />
 ```
 
+### RadioCardGroup
+
+`import { RadioCardGroup } from 'pada-ds';`
+
+A single choice presented as cards with a title, description, icon and extra content (plans, shipping speeds, templates). Built on native radio inputs: Tab reaches the group, arrow keys move and select, and the value submits with forms.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| label | `ReactNode` | yes | - | - |
+| options | `RadioCardOption[]` | yes | - | - |
+| value | `string` | no | - | - |
+| defaultValue | `string` | no | - | - |
+| onValueChange | `(value: string) => void` | no | - | - |
+| description | `ReactNode` | no | - | Help text under the label. |
+| name | `string` | no | - | Name for form submission. Generated when omitted. |
+| columns | `number` | no | `3` | Cards per row (they wrap to fewer on narrow screens). |
+| disabled | `boolean` | no | `false` | - |
+| required | `boolean` | no | - | - |
+| className | `string` | no | - | - |
+
+```tsx
+import { RadioCardGroup } from 'pada-ds';
+
+<RadioCardGroup label="..." options={[]} />
+```
+
 ### RadioGroup
 
 `import { RadioGroup } from 'pada-ds';`
@@ -2814,6 +2897,66 @@ import { Progress } from 'pada-ds';
 import { RadioGroup } from 'pada-ds';
 
 <RadioGroup name="..." options={[]} value="..." onChange={() => {}} />
+```
+
+### RangeSlider
+
+`import { RangeSlider } from 'pada-ds';`
+
+A slider with two thumbs for picking a range (price, dates, size). Each thumb is a slider in its own right: arrow keys step, PageUp/PageDown take ten steps, Home/End jump as far as the other thumb allows. Pressing the track moves the nearest thumb.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| label | `string` | yes | - | - |
+| value | `[number, number]` | no | - | Controlled `[low, high]`. |
+| defaultValue | `[number, number]` | no | - | Initial `[low, high]` when uncontrolled. |
+| onValueChange | `(value: [number, number]) => void` | no | - | Called on every change while dragging or pressing keys. |
+| onValueCommit | `(value: [number, number]) => void` | no | - | Called when a drag ends or a key press changes the value. |
+| min | `number` | no | `0` | - |
+| max | `number` | no | `100` | - |
+| step | `number` | no | `1` | - |
+| minStepsBetweenThumbs | `number` | no | `0` | Steps kept between the two thumbs. |
+| formatOptions | `Intl.NumberFormatOptions` | no | - | Number format for the values shown and announced. |
+| locale | `string` | no | - | - |
+| showValue | `boolean` | no | `true` | Show the selected range next to the label. |
+| thumbLabels | `[string, string]` | no | - | Accessible names of the thumbs. |
+| description | `string` | no | - | - |
+| error | `string` | no | - | - |
+| disabled | `boolean` | no | `false` | - |
+| name | `string` | no | - | Submits both values with forms under this name. |
+| className | `string` | no | - | - |
+
+```tsx
+import { RangeSlider } from 'pada-ds';
+
+<RangeSlider label="..." />
+```
+
+### Rating
+
+`import { Rating } from 'pada-ds';`
+
+A star rating. Interactive ratings are a radio group (Tab in, arrow keys to change, and the value submits with forms); hovering previews. Read-only ratings are a single image named "4.5 out of 5 stars".
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| label | `string` | yes | - | - |
+| value | `number` | no | - | - |
+| defaultValue | `number` | no | `0` | - |
+| onValueChange | `(value: number) => void` | no | - | - |
+| max | `number` | no | `5` | - |
+| readOnly | `boolean` | no | `false` | Show the rating without letting people change it; fractions (3.5) are drawn partly filled. |
+| disabled | `boolean` | no | `false` | - |
+| allowClear | `boolean` | no | `true` | Clicking the current rating again clears it. |
+| showLabel | `boolean` | no | `true` | Visible label beside the stars, or hide it (it still names the control). |
+| size | `'sm' \| 'md' \| 'lg'` | no | `'md'` | - |
+| name | `string` | no | - | Name for form submission. |
+| className | `string` | no | - | - |
+
+```tsx
+import { Rating } from 'pada-ds';
+
+<Rating label="..." />
 ```
 
 ### ScrollArea
@@ -3469,6 +3612,37 @@ Also accepts the props of `ComponentPropsWithRef<'button'>`.
 import { Tabs } from 'pada-ds';
 
 <Tabs.Trigger value="..." />
+```
+
+### TagInput
+
+`import { TagInput } from 'pada-ds';`
+
+Free-form tags (emails, keywords, labels) typed into one field. Enter or a comma adds the text as a tag; pasting a comma- or line-separated list adds them all. Backspace in the empty field moves to the tags, where Backspace or Delete removes one and the arrow keys move between them. For picking from known options, use Autocomplete with `multiple`.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| label | `string` | yes | - | - |
+| value | `string[]` | no | - | Controlled tags. |
+| defaultValue | `string[]` | no | `[]` | Initial tags when uncontrolled. |
+| onValueChange | `(value: string[]) => void` | no | - | - |
+| placeholder | `string` | no | - | - |
+| description | `string` | no | - | - |
+| error | `string` | no | - | - |
+| separators | `string[]` | no | `['Enter', ',']` | Keys that turn the typed text into a tag. |
+| maxTags | `number` | no | - | Maximum number of tags. |
+| allowDuplicates | `boolean` | no | `false` | Allow the same tag twice. |
+| validate | `(tag: string) => string \| null \| undefined` | no | - | Return an error message to reject a tag. |
+| addOnBlur | `boolean` | no | `true` | Turn left-over text into a tag when the field loses focus. |
+| disabled | `boolean` | no | `false` | - |
+| required | `boolean` | no | - | - |
+| name | `string` | no | - | Submits each tag with forms under this name. |
+| className | `string` | no | - | - |
+
+```tsx
+import { TagInput } from 'pada-ds';
+
+<TagInput label="..." />
 ```
 
 ### Tags

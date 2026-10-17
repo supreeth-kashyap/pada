@@ -35,8 +35,12 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({
 
   return (
     <div className={['radiogroup', className].filter(Boolean).join(' ')}>
-      {label && <label className="radiogroup-label">{label}</label>}
-      <div role="radiogroup" className="radiogroup-options">
+      {label && (
+        <span id={`${id}-label`} className="radiogroup-label">
+          {label}
+        </span>
+      )}
+      <div role="radiogroup" aria-labelledby={label ? `${id}-label` : undefined} className="radiogroup-options">
         {options.map(option => {
           const isDisabled = disabled || option.disabled;
           const optionId = `${id}-${option.value}`;

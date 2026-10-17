@@ -16,6 +16,8 @@ export * from './NumberInput';
 export * from './Calendar';
 export * from './Tree';
 export * from './HoverCard';
+export * from './Slider';
+export * from './PinInput';
 
 export { Slot, type SlotProps } from './utils/Slot';
 export { Portal, type PortalProps } from './utils/Portal';
