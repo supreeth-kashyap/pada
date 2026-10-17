@@ -43,12 +43,22 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - AccordionContent: children; extends React.HTMLAttributes<HTMLDivElement>
 - AccordionHeader: title, iconName?, collapsed?; extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'title'>
 - Alert: tone?, title?, icon?, actions?, onDismiss?, live?; extends Omit<ComponentPropsWithRef<'div'>, 'title'>
+- AlertDialog.Action: children?, variant?, size?, leftIcon?, rightIcon?, split?, onSplitClick?, disabled?, loading?, ref?; extends React.ButtonHTMLAttributes<HTMLButtonElement>
+- AlertDialog.Cancel: children?, variant?, size?, leftIcon?, rightIcon?, split?, onSplitClick?, disabled?, loading?, ref?; extends React.ButtonHTMLAttributes<HTMLButtonElement>
+- AlertDialog.Content: onOpenAutoFocus?, size?, container?, overlayProps?, forceMount?, onCloseAutoFocus?, onEscapeKeyDown?; extends Omit<ComponentPropsWithRef<'div'>, 'onPointerDownOutside' | 'onInteractOutside'>
+- AlertDialog.Description: asChild?; extends ComponentPropsWithRef<'p'>
+- AlertDialog.Footer: justify?; extends ComponentPropsWithRef<'div'>
+- AlertDialog.Header: no props; extends ComponentPropsWithRef<'div'>
+- AlertDialog.Root: children?, open?, defaultOpen?, onOpenChange?, modal?
+- AlertDialog.Title: asChild?; extends ComponentPropsWithRef<'h2'>
+- AlertDialog.Trigger: asChild?; extends ComponentPropsWithRef<'button'>
 - Avatar: src?, name?, alt?, size?, shape?, status?; extends Omit<ComponentPropsWithRef<'span'>, 'children'>
 - AvatarGroup: max?, size?, label?; extends ComponentPropsWithRef<'div'>
 - Badge: tone?, variant?, size?, count?, max?, dot?; extends ComponentPropsWithRef<'span'>
 - Banner: title, subtitle?, visualIcon?, visualImage?, visualAlt?, button?, onButtonClick?, className?
 - BaseManageFilter: saveCopy?, onSaveFilter?, onClear?, onMenuClick?, className?
 - BaseToolbarMenu: title?, count?, showCount?, dropdown?, disabled?, state?, className?, onClick?
+- Breadcrumbs: items, maxItems?, renderLink?, label?; extends Omit<ComponentPropsWithRef<'nav'>, 'children'>
 - Button: children?, variant?, size?, leftIcon?, rightIcon?, split?, onSplitClick?, disabled?, loading?, ref?; extends React.ButtonHTMLAttributes<HTMLButtonElement>
 - Card: children?, className?
 - Carousel: children, autoPlay?, interval?, className?, showDots?, showNav?, label?
@@ -91,6 +101,11 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - DropdownMenu.SubTrigger: disabled?, textValue?, icon?; extends Omit<Omit<Omit<ComponentPropsWithRef<'div'>, 'onSelect'>, 'onSelect'>, 'asChild'>
 - DropdownMenu.Trigger: asChild?; extends ComponentPropsWithRef<'button'>
 - EmptyState: media?, title, description?, actions?, size?, headingLevel?; extends Omit<ComponentPropsWithRef<'div'>, 'title'>
+- Field.Control: asChild?; extends ComponentPropsWithRef<'input'>
+- Field.Description: no props; extends ComponentPropsWithRef<'p'>
+- Field.Error: forceMount?; extends ComponentPropsWithRef<'p'>
+- Field.Label: optional?; extends ComponentPropsWithRef<'label'>
+- Field.Root: invalid?, required?, disabled?, controlId?; extends ComponentPropsWithRef<'div'>
 - Filter: label, options, multiSelect?, value?, defaultValue?, onChange?, applyLabel?, clearLabel?, disabled?, className?
 - FilterChip: variant?, label?, value?, showClose?, disabled?, onRemove?, onClick?, className?
 - FormLabel: children, required?, optional?, htmlFor?; extends React.LabelHTMLAttributes<HTMLLabelElement>
@@ -112,6 +127,7 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - MoreFilter: label?, filters, value?, defaultValue?, onChange?, applyLabel?, clearLabel?, disabled?, className?
 - Notification: open, onOpenChange, title, subtitle?, visual?, position?, direction?, className?
 - PageHeader: breadcrumbs, onCommandClick?, commandLabel?, commandShortcut?, onAiClick?, aiLabel?, profileTrigger?, profileMenu?, className?
+- Pagination: page, totalPages, onPageChange, siblingCount?, boundaryCount?, label?; extends Omit<ComponentPropsWithRef<'nav'>, 'onChange'>
 - Pills: options, value?, defaultValue?, onChange?, className?, size?, disabled?
 - Popover: open, onOpenChange, children, trigger?, position?, title?, variant?, showClose?, className?, clickPosition?
 - Popover.Anchor: asChild?; extends ComponentPropsWithRef<'div'>
@@ -156,6 +172,11 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - Tabs.Trigger: notification?, value, asChild?; extends ComponentPropsWithRef<'button'>
 - Tags: children, variant?, icon?, className?
 - Text: children, size?, weight?, family?, lineHeight?, color?, as?; extends React.HTMLAttributes<HTMLSpanElement>
+- ThemeProvider: children?, defaultTheme?, onThemeChange?, target?, storageKey?, theme?, accent?, neutral?, density?, radius?, motion?, contrast?
+- ThemeToggle: className?, size?
+- Toggle: icon?, size?, pressed?, defaultPressed?, onPressedChange?, asChild?; extends ComponentPropsWithRef<'button'>
+- ToggleGroup.Item: icon?, value, asChild?; extends ComponentPropsWithRef<'button'>
+- ToggleGroup.Root: size?; extends ToggleGroupSingleProps | ToggleGroupMultipleProps
 - Toolbar: left?, actions?, primaryAction?, children?, className?
 - Tooltip: content, children, position?, delayDuration?
 - Tooltip.Arrow: asChild?; extends ComponentPropsWithRef<'span'>

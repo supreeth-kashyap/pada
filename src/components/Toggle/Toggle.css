@@ -1,0 +1,61 @@
+/* Shared by Toggle and ToggleGroup items. */
+.toggle {
+  /* Component tokens */
+  /* Inside a ToggleGroup, the group's size tokens win. */
+  --pada-toggle-height: var(--pada-toggle-group-height, var(--pada-control-height-md));
+  --pada-toggle-pad-x: var(--pada-toggle-group-pad-x, var(--pada-space-2-5));
+  --pada-toggle-bg: transparent;
+  --pada-toggle-bg-hover: var(--pada-color-neutral-subtle-hover);
+  --pada-toggle-bg-on: var(--pada-color-accent-subtle);
+  --pada-toggle-fg: var(--pada-color-fg-muted);
+  --pada-toggle-fg-on: var(--pada-color-accent-fg);
+  --pada-toggle-radius: var(--pada-radius-md);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--pada-space-1-5);
+  height: var(--pada-toggle-height);
+  min-width: var(--pada-toggle-height);
+  box-sizing: border-box;
+  padding: 0 var(--pada-toggle-pad-x);
+  border: none;
+  border-radius: var(--pada-toggle-radius);
+  background-color: var(--pada-toggle-bg);
+  color: var(--pada-toggle-fg);
+  font-family: var(--pada-font-sans);
+  font-size: var(--pada-font-size-md);
+  font-weight: var(--pada-font-weight-medium);
+  cursor: pointer;
+  transition:
+    background-color var(--pada-duration-fast) var(--pada-ease-standard),
+    color var(--pada-duration-fast) var(--pada-ease-standard),
+    scale var(--pada-duration-instant) var(--pada-ease-standard);
+}
+
+.toggle[data-size="sm"] { --pada-toggle-height: var(--pada-control-height-sm); --pada-toggle-pad-x: var(--pada-space-2); }
+.toggle[data-size="lg"] { --pada-toggle-height: var(--pada-control-height-lg); --pada-toggle-pad-x: var(--pada-space-3); }
+
+.toggle:hover:not(:disabled) {
+  background-color: var(--pada-toggle-bg-hover);
+  color: var(--pada-color-fg);
+}
+
+.toggle:active:not(:disabled) {
+  scale: var(--pada-motion-scale-press);
+}
+
+.toggle[data-state="on"] {
+  background-color: var(--pada-toggle-bg-on);
+  color: var(--pada-toggle-fg-on);
+}
+
+.toggle:disabled {
+  color: var(--pada-color-fg-disabled);
+  cursor: not-allowed;
+}
+
+.toggle:focus-visible {
+  outline: none;
+  box-shadow: var(--pada-shadow-focus);
+}

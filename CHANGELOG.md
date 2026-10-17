@@ -6,6 +6,13 @@
 - Moved the `body` and `p` rules out of `dist/tokens.css` into a new optional `pada-ds/base.css` export, so importing the tokens no longer overrides an app's own styles.
 - Added a component API manifest for AI coding agents. `npm run build` now reads every exported component's props from the TypeScript source and writes `dist/manifest.json` (exported as `pada-ds/manifest.json`), `llms.txt` and `llms-full.txt`. Both llms files ship in the package and are committed at the repo root. `npm test` fails if they are stale or if an exported component is missing from the manifest.
 
+- **New components (wave 1, interaction).**
+  - `Field` (`Field.Root`, `Label`, `Control`, `Description`, `Error`): wires any control's id, `aria-describedby`, `aria-invalid`, `required` and `disabled`; the error is announced and the control shakes once (not under reduced motion). Also headless in `pada-ds/headless`.
+  - `Toggle` (`aria-pressed`) and `ToggleGroup` (single or multiple, one tab stop, arrow keys). Also headless.
+  - `Breadcrumbs` (navigation landmark, `aria-current="page"`, collapsing long trails behind an expand button, `renderLink` for router links). PageHeader now reuses its `BreadcrumbItem` type.
+  - `Pagination` (previous/next, numbered pages with ellipses, `aria-current="page"`) and the `paginationRange` helper.
+  - `AlertDialog` (`role="alertdialog"`, focus starts on Cancel, no dismissal by clicking outside).
+  - `ThemeProvider` (sets every theme axis on `<html>` or a subtree, remembers the choice in localStorage), `useTheme()`, and `ThemeToggle` (sun/moon morph; the new theme spreads from the button with a view transition where supported).
 - **New components (wave 1, display).**
   - `Avatar` (image with initials or icon fallback, a stable colour per name, sizes, square shape, presence status) and `AvatarGroup` (overlap and a "+N" counter).
   - `Badge` (tones, subtle/solid/outline, counts with a `max`, a status dot, and a bump when the count changes).

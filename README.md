@@ -133,9 +133,11 @@ This design system includes the following components:
 
 - **Accordion**: Collapsible sections to show/hide content.
 - **Alert**: Inline callout by tone with actions.
+- **AlertDialog**: Confirmation that needs an answer.
 - **Avatar**: User picture with initials fallback; `AvatarGroup` for stacks.
 - **Badge**: Status label or count.
 - **Banner**: Notices and important messages display.
+- **Breadcrumbs**: Location trail with collapsing.
 - **Button**: Clickable control for primary actions.
 - **Card**: Container for grouped related content.
 - **Carousel**: Scrollable content carousel with controls.
@@ -147,6 +149,7 @@ This design system includes the following components:
 - **Drawer**: Dialog panel that slides in from any edge.
 - **DropdownMenu**: Menu button with items, checkbox and radio items, and submenus.
 - **EmptyState**: First-use and no-results placeholder.
+- **Field**: Label, control, description and error wiring.
 - **FormLabel**: Accessible labels for form fields.
 - **Icon**: Reusable SVG icons for UI.
 - **IconButton**: Labelled icon-only button.
@@ -163,6 +166,7 @@ This design system includes the following components:
 - **Modal**: Overlay dialog for focused tasks (1.x API; wraps `Dialog`).
 - **Notification**: Transient alert messages and toasts.
 - **PageHeader**: Page title and actions area.
+- **Pagination**: Page navigation with ellipses.
 - **Pills**: Compact, selectable pill-style buttons.
 - **Popover**: Floating container for contextual content; also `Popover.Root`, `Popover.Content`, … parts.
 - **Progress**: Visual progress indicators for tasks.
@@ -183,6 +187,8 @@ This design system includes the following components:
 - **Tabs**: Tabbed navigation interface component.
 - **Tags**: Compact label tags for metadata.
 - **Text**: Typography primitives and helpers.
+- **ThemeProvider / ThemeToggle**: Theme axes for a page or subtree; `useTheme()`.
+- **Toggle / ToggleGroup**: Pressed-state buttons and segmented groups.
 - **Toolbar**: Action toolbar with controls.
 - **Tooltip**: Hover and focus tooltip; also `Tooltip.Provider`, `Tooltip.Root`, … parts.
 - **UploadField**: File upload field with progress.

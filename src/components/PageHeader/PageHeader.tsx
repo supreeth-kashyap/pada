@@ -2,11 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import './PageHeader.css';
 import { Icon } from '../Icon';
 
-export interface BreadcrumbItem {
-  label: string;
-  onClick?: () => void;
-  href?: string;
-}
+import type { BreadcrumbItem } from '../Breadcrumbs/Breadcrumbs';
 
 export interface PageHeaderProps {
   breadcrumbs: BreadcrumbItem[];

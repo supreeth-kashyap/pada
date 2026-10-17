@@ -115,6 +115,192 @@ import { Alert } from 'pada-ds';
 <Alert />
 ```
 
+### AlertDialog.Action
+
+`import { AlertDialog } from 'pada-ds';`
+
+The confirming action. Closes the dialog after `onClick`, unless the handler prevents it.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| children | `React.ReactNode` | no | - | - |
+| variant | `ButtonVariant` | no | `'primary'` | - |
+| size | `ButtonSize` | no | - | Height and padding: sm 28px, md 32px, lg 40px (scaled by density). |
+| leftIcon | `string` | no | - | - |
+| rightIcon | `string` | no | - | - |
+| split | `boolean` | no | - | - |
+| onSplitClick | `() => void` | no | - | - |
+| disabled | `boolean` | no | - | - |
+| loading | `boolean` | no | - | Shows a spinner in place of the label and ignores clicks, keeping the button's width and focus. Announced through `aria-busy`. |
+| ref | `React.Ref<HTMLButtonElement>` | no | - | - |
+
+Also accepts the props of `React.ButtonHTMLAttributes<HTMLButtonElement>`.
+
+```tsx
+import { AlertDialog } from 'pada-ds';
+
+<AlertDialog.Action />
+```
+
+### AlertDialog.Cancel
+
+`import { AlertDialog } from 'pada-ds';`
+
+The safe choice. Closes the dialog.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| children | `React.ReactNode` | no | - | - |
+| variant | `ButtonVariant` | no | `'secondary'` | - |
+| size | `ButtonSize` | no | - | Height and padding: sm 28px, md 32px, lg 40px (scaled by density). |
+| leftIcon | `string` | no | - | - |
+| rightIcon | `string` | no | - | - |
+| split | `boolean` | no | - | - |
+| onSplitClick | `() => void` | no | - | - |
+| disabled | `boolean` | no | - | - |
+| loading | `boolean` | no | - | Shows a spinner in place of the label and ignores clicks, keeping the button's width and focus. Announced through `aria-busy`. |
+| ref | `React.Ref<HTMLButtonElement>` | no | - | - |
+
+Also accepts the props of `React.ButtonHTMLAttributes<HTMLButtonElement>`.
+
+```tsx
+import { AlertDialog } from 'pada-ds';
+
+<AlertDialog.Cancel />
+```
+
+### AlertDialog.Content
+
+`import { AlertDialog } from 'pada-ds';`
+
+The confirmation panel: `role="alertdialog"`. Unlike a dialog it does not close on a click outside: the user has to choose. Focus starts on Cancel.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| onOpenAutoFocus | `HeadlessContentProps['onOpenAutoFocus']` | no | - | Called when focus moves in. By default it lands on the Cancel button, the safe choice. |
+| size | `DialogSize` | no | `'sm'` | Width preset: auto (fits the content), sm 24rem, md 32rem, lg 44rem, xl 56rem, full (fills the viewport less a margin). |
+| container | `Element \| null` | no | - | Element to portal into. Defaults to `document.body`. |
+| overlayProps | `ComponentPropsWithRef<'div'>` | no | - | Props for the backdrop behind the dialog. |
+| forceMount | `boolean` | no | - | Keep mounted while closed, for animation libraries that manage presence themselves. |
+| onCloseAutoFocus | `(event: AutoFocusEvent) => void` | no | - | Called when focus returns to the trigger on close. Prevent it to focus something else. |
+| onEscapeKeyDown | `(event: DismissEvent<KeyboardEvent>) => void` | no | - | Called on Escape. Prevent it to keep the dialog open. |
+
+Also accepts the props of `Omit<ComponentPropsWithRef<'div'>, 'onPointerDownOutside' | 'onInteractOutside'>`.
+
+```tsx
+import { AlertDialog } from 'pada-ds';
+
+<AlertDialog.Content />
+```
+
+### AlertDialog.Description
+
+`import { AlertDialog } from 'pada-ds';`
+
+Supporting text under the title, announced after it.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| asChild | `boolean` | no | - | Render the description's behaviour on your own element. |
+
+Also accepts the props of `ComponentPropsWithRef<'p'>`.
+
+```tsx
+import { AlertDialog } from 'pada-ds';
+
+<AlertDialog.Description />
+```
+
+### AlertDialog.Footer
+
+`import { AlertDialog } from 'pada-ds';`
+
+Bottom section for actions. Defaults to right-aligned buttons.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| justify | `'start' \| 'end' \| 'between'` | no | `'end'` | Main axis alignment of the section's children. |
+
+Also accepts the props of `ComponentPropsWithRef<'div'>`.
+
+```tsx
+import { AlertDialog } from 'pada-ds';
+
+<AlertDialog.Footer />
+```
+
+### AlertDialog.Header
+
+`import { AlertDialog } from 'pada-ds';`
+
+Top section: the title, description and close button.
+
+No props.
+
+Also accepts the props of `ComponentPropsWithRef<'div'>`.
+
+```tsx
+import { AlertDialog } from 'pada-ds';
+
+<AlertDialog.Header />
+```
+
+### AlertDialog.Root
+
+`import { AlertDialog } from 'pada-ds';`
+
+Holds the open state for a dialog. Renders no element. WAI-ARIA APG: Dialog (Modal).
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| children | `ReactNode` | no | - | - |
+| open | `boolean` | no | - | Controlled open state. |
+| defaultOpen | `boolean` | no | `false` | Initial open state when uncontrolled. |
+| onOpenChange | `(open: boolean) => void` | no | - | Called when the dialog asks to open or close. |
+| modal | `boolean` | no | `true` | Modal dialogs trap focus, lock page scroll and hide the rest of the page from assistive technology. Non-modal dialogs do none of that and close when focus leaves them. |
+
+```tsx
+import { AlertDialog } from 'pada-ds';
+
+<AlertDialog.Root />
+```
+
+### AlertDialog.Title
+
+`import { AlertDialog } from 'pada-ds';`
+
+The dialog's accessible name, styled as its heading.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| asChild | `boolean` | no | - | Render the title's behaviour on your own heading element. |
+
+Also accepts the props of `ComponentPropsWithRef<'h2'>`.
+
+```tsx
+import { AlertDialog } from 'pada-ds';
+
+<AlertDialog.Title />
+```
+
+### AlertDialog.Trigger
+
+`import { AlertDialog } from 'pada-ds';`
+
+Opens the dialog. Gets `aria-expanded`, `aria-controls` and `data-state`.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| asChild | `boolean` | no | - | Merge the trigger's behaviour onto its only child instead of rendering a `<button>`. |
+
+Also accepts the props of `ComponentPropsWithRef<'button'>`.
+
+```tsx
+import { AlertDialog } from 'pada-ds';
+
+<AlertDialog.Trigger />
+```
+
 ### Avatar
 
 `import { Avatar } from 'pada-ds';`
@@ -239,6 +425,27 @@ import { BaseManageFilter } from 'pada-ds';
 import { BaseToolbarMenu } from 'pada-ds';
 
 <BaseToolbarMenu />
+```
+
+### Breadcrumbs
+
+`import { Breadcrumbs } from 'pada-ds';`
+
+Where the current page sits in the hierarchy (WAI-ARIA APG Breadcrumb).
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| items | `BreadcrumbItem[]` | yes | - | Trail from the root to the current page. The last item is the current page. |
+| maxItems | `number` | no | - | Collapse the middle of long trails: show the first item, an expand button, and the last `maxItems - 1` items. |
+| renderLink | `(item: BreadcrumbItem, props: { className: string; children: ReactNode }) => ReactNode` | no | - | Render each link yourself (for router links). Receives the item and its default props. |
+| label | `string` | no | `'Breadcrumb'` | Accessible name of the navigation landmark. |
+
+Also accepts the props of `Omit<ComponentPropsWithRef<'nav'>, 'children'>`.
+
+```tsx
+import { Breadcrumbs } from 'pada-ds';
+
+<Breadcrumbs items={[]} />
 ```
 
 ### Button
@@ -1069,6 +1276,97 @@ import { EmptyState } from 'pada-ds';
 <EmptyState title="..." />
 ```
 
+### Field.Control
+
+`import { Field } from 'pada-ds';`
+
+The input, styled. Pass `asChild` to wire your own control (a select, a textarea) instead; it then keeps its own styles.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| asChild | `boolean` | no | - | Merge the wiring onto your own control (a textarea, a select, a custom input). |
+
+Also accepts the props of `ComponentPropsWithRef<'input'>`.
+
+```tsx
+import { Field } from 'pada-ds';
+
+<Field.Control />
+```
+
+### Field.Description
+
+`import { Field } from 'pada-ds';`
+
+Help text under the control.
+
+No props.
+
+Also accepts the props of `ComponentPropsWithRef<'p'>`.
+
+```tsx
+import { Field } from 'pada-ds';
+
+<Field.Description />
+```
+
+### Field.Error
+
+`import { Field } from 'pada-ds';`
+
+Validation message, shown while the field is `invalid`.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| forceMount | `boolean` | no | - | Render even when the field is valid. |
+
+Also accepts the props of `ComponentPropsWithRef<'p'>`.
+
+```tsx
+import { Field } from 'pada-ds';
+
+<Field.Error />
+```
+
+### Field.Label
+
+`import { Field } from 'pada-ds';`
+
+The label. Required fields show an asterisk (hidden from screen readers: the input is `required`).
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| optional | `boolean` | no | - | Show "(optional)" after the label. Required fields get a marker automatically. |
+
+Also accepts the props of `ComponentPropsWithRef<'label'>`.
+
+```tsx
+import { Field } from 'pada-ds';
+
+<Field.Label />
+```
+
+### Field.Root
+
+`import { Field } from 'pada-ds';`
+
+A form field: label, control, description and error, wired for assistive technology.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| invalid | `boolean` | no | - | Marks the control invalid (`aria-invalid`) and shows Field.Error. |
+| required | `boolean` | no | - | Marks the control required. |
+| disabled | `boolean` | no | - | Disables the control. |
+| controlId | `string` | no | - | Id for the control. Generated when omitted. |
+
+Also accepts the props of `ComponentPropsWithRef<'div'>`.
+
+```tsx
+import { Field } from 'pada-ds';
+
+<Field.Root />
+```
+
 ### Filter
 
 `import { Filter } from 'pada-ds';`
@@ -1495,6 +1793,29 @@ import { Notification } from 'pada-ds';
 import { PageHeader } from 'pada-ds';
 
 <PageHeader breadcrumbs={[]} />
+```
+
+### Pagination
+
+`import { Pagination } from 'pada-ds';`
+
+Page navigation: previous, numbered pages with ellipses, next. The current page has `aria-current`.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| page | `number` | yes | - | Current page, starting at 1. |
+| totalPages | `number` | yes | - | Number of pages. |
+| onPageChange | `(page: number) => void` | yes | - | Called with the requested page. |
+| siblingCount | `number` | no | `1` | Pages shown on each side of the current one. |
+| boundaryCount | `number` | no | `1` | Pages always shown at each end. |
+| label | `string` | no | `'Pagination'` | Accessible name of the navigation landmark. |
+
+Also accepts the props of `Omit<ComponentPropsWithRef<'nav'>, 'onChange'>`.
+
+```tsx
+import { Pagination } from 'pada-ds';
+
+<Pagination page={0} totalPages={0} onPageChange={() => {}} />
 ```
 
 ### Pills
@@ -2375,6 +2696,111 @@ Also accepts the props of `React.HTMLAttributes<HTMLSpanElement>`.
 import { Text } from 'pada-ds';
 
 <Text>...</Text>
+```
+
+### ThemeProvider
+
+`import { ThemeProvider } from 'pada-ds';`
+
+Sets Pada's theme axes (`data-theme`, `data-accent`, `data-density`, …) for the page or a subtree, and shares them through `useTheme()`.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| children | `ReactNode` | no | - | - |
+| defaultTheme | `ThemeMode` | no | `'system'` | Initial theme when uncontrolled (and nothing is stored). |
+| onThemeChange | `(theme: ThemeMode) => void` | no | - | Called when `setTheme` changes the theme. |
+| target | `'root' \| 'element'` | no | `'element'` | `root` applies the attributes to `<html>` (the whole page); `element` wraps the children in a `display: contents` element, so a section can have its own theme. |
+| storageKey | `string` | no | - | Remember the chosen theme in localStorage under this key. |
+| theme | `ThemeMode` | no | - | Light, dark, or follow the operating system. |
+| accent | `string` | no | - | Accent palette: any palette hue (`indigo`, `amber`, `emerald`, …) or `custom` (uses `--pada-accent-hue`). |
+| neutral | `'stone' \| 'slate' \| 'gray' \| 'zinc' \| 'neutral'` | no | - | Neutral palette for surfaces, text and borders. |
+| density | `'compact' \| 'comfortable' \| 'spacious'` | no | - | - |
+| radius | `'none' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | no | - | - |
+| motion | `'reduced' \| 'full'` | no | - | Override the OS reduced-motion setting. |
+| contrast | `'standard' \| 'more'` | no | - | - |
+
+```tsx
+import { ThemeProvider } from 'pada-ds';
+
+<ThemeProvider />
+```
+
+### ThemeToggle
+
+`import { ThemeToggle } from 'pada-ds';`
+
+Switches between light and dark. Where the browser supports view transitions (and motion is allowed) the new theme spreads from the button in a circle.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| className | `string` | no | - | - |
+| size | `'sm' \| 'md' \| 'lg'` | no | `'md'` | sm 28px, md 32px, lg 40px. |
+
+```tsx
+import { ThemeToggle } from 'pada-ds';
+
+<ThemeToggle />
+```
+
+### Toggle
+
+`import { Toggle } from 'pada-ds';`
+
+A button that stays pressed: bold, italic, "show archived". Announced with `aria-pressed`.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| icon | `string` | no | - | Built-in icon name shown before the label. |
+| size | `'sm' \| 'md' \| 'lg'` | no | `'md'` | sm 28px, md 32px, lg 40px. |
+| pressed | `boolean` | no | - | Controlled pressed state. |
+| defaultPressed | `boolean` | no | - | Initial pressed state when uncontrolled. |
+| onPressedChange | `(pressed: boolean) => void` | no | - | Called with the new pressed state. |
+| asChild | `boolean` | no | - | Merge the behaviour onto your own button. |
+
+Also accepts the props of `ComponentPropsWithRef<'button'>`.
+
+```tsx
+import { Toggle } from 'pada-ds';
+
+<Toggle />
+```
+
+### ToggleGroup.Item
+
+`import { ToggleGroup } from 'pada-ds';`
+
+One item in a ToggleGroup.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| icon | `string` | no | - | Built-in icon name shown before the label. Icon-only items need an `aria-label`. |
+| value | `string` | yes | - | This item's value. |
+| asChild | `boolean` | no | - | Merge the behaviour onto your own button. |
+
+Also accepts the props of `ComponentPropsWithRef<'button'>`.
+
+```tsx
+import { ToggleGroup } from 'pada-ds';
+
+<ToggleGroup.Item value="..." />
+```
+
+### ToggleGroup.Root
+
+`import { ToggleGroup } from 'pada-ds';`
+
+A segmented set of toggles. Name it with `aria-label`.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| size | `'sm' \| 'md' \| 'lg'` | no | `'md'` | sm 28px, md 32px, lg 40px. |
+
+Also accepts the props of `ToggleGroupSingleProps | ToggleGroupMultipleProps`.
+
+```tsx
+import { ToggleGroup } from 'pada-ds';
+
+<ToggleGroup.Root />
 ```
 
 ### Toolbar
