@@ -293,6 +293,7 @@ const INTRO = [
   `- \`${PACKAGE_NAME}/tokens.css\`: design tokens (CSS custom properties, all prefixed \`--pada-\`) only.`,
   `- \`${PACKAGE_NAME}/tokens\`: token names as \`var()\` strings and breakpoints for JS (\`import { tokens, breakpoints } from '${PACKAGE_NAME}/tokens'\`); \`${PACKAGE_NAME}/tokens.scss\` and \`${PACKAGE_NAME}/tokens.json\` carry the same tokens for Sass and design tools.`,
   `- \`${PACKAGE_NAME}/styles.css\`: styles for every component.`,
+  `- \`${PACKAGE_NAME}/headless\`: unstyled, accessible parts with no CSS (\`Dialog\`, \`Popover\`, \`Tooltip\`, \`DropdownMenu\`, plus \`Slot\`, \`Portal\`, \`VisuallyHidden\` and hooks). Compose them as \`<Dialog.Root><Dialog.Trigger/><Dialog.Portal><Dialog.Overlay/><Dialog.Content><Dialog.Title/></Dialog.Content></Dialog.Portal></Dialog.Root>\`; style them through \`data-state\`, \`data-side\` and \`aria-*\` attributes; \`asChild\` merges a part onto your own element.`,
   `- \`${PACKAGE_NAME}/base.css\` (optional): document base styles (\`body\` background, color and font; zero \`p\` margins).`,
   `- \`${PACKAGE_NAME}/manifest.json\`: machine-readable component API (props, types, defaults, descriptions).`,
   '',

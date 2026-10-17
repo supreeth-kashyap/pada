@@ -126,6 +126,13 @@ run('node', [
   `import React from 'react'; import { renderToString } from 'react-dom/server'; import { Button } from 'pada-ds'; const html = renderToString(React.createElement(Button, { variant: 'primary' }, 'Smoke test button')); if (!html.includes('button--primary')) { throw new Error('Button primary class not rendered.'); }`,
 ], { cwd: appDir });
 
+// The headless entry resolves, renders without any stylesheet, and exposes ARIA wiring.
+run('node', [
+  '--input-type=module',
+  '--eval',
+  `import React from 'react'; import { renderToString } from 'react-dom/server'; import { Dialog } from 'pada-ds/headless'; const html = renderToString(React.createElement(Dialog.Root, null, React.createElement(Dialog.Trigger, null, 'Open'))); if (!html.includes('aria-haspopup="dialog"') || !html.includes('aria-expanded="false"')) { throw new Error('pada-ds/headless Dialog.Trigger did not render its ARIA attributes: ' + html); }`,
+], { cwd: appDir });
+
 // The JS token entry resolves and maps names to var() references.
 run('node', [
   '--input-type=module',

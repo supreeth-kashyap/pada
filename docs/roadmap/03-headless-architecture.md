@@ -175,3 +175,12 @@ Overlay: fade, duration-normal. Content: scale 0.96 → 1 + fade, ease-emphasize
 - **axe** checks on every part in every state.
 - **Playwright** keyboard tests against the docs site for overlay stacking, focus restore and scroll lock.
 - **Headless purity test:** the headless bundle has no CSS imports and sets no visual inline styles.
+
+## 6. As built (phase 2)
+
+- `pada-ds/headless` ships `Dialog`, `Popover`, `Tooltip` and `DropdownMenu` (with submenus, checkbox and radio items), plus the utilities in §2. Parts use React 19 ref-as-prop; there is no `forwardRef`.
+- Positioning uses `@floating-ui/react-dom` with `top`/`left` (not `transform`), so the styled layer can animate `transform` freely. Floating parts get `data-side`, `data-align` and the CSS variables `--pada-floating-available-width/height`, `--pada-floating-anchor-width/height` and `--pada-floating-transform-origin`.
+- Every open layer carries `data-pada-layer`. The dismiss stack, the focus trap and `useHideOthers` use it so nested overlays (a menu inside a dialog) behave as one stack.
+- `usePresence` keeps a closing part mounted for its longest transition or animation, read from computed styles, so exit motion needs CSS only. With reduced motion every duration is 0 and parts unmount at once.
+- Not done yet: `DirectionProvider` (a `dir` prop exists on `DropdownMenu.Root`), pointer "safe triangle" for submenus, and manifest/llms entries for the headless parts (they are described in the llms introduction for now).
+- Tests: Vitest + Testing Library + axe-core in jsdom, 28 tests across the four components covering the APG keyboard maps, focus movement and return, layering and ARIA.

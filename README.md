@@ -35,6 +35,34 @@ import { Button } from 'pada-ds';
 import 'pada-ds/base.css';
 ```
 
+## Headless parts
+
+`pada-ds/headless` ships the behaviour behind the components (state, keyboard handling, focus management, ARIA wiring and positioning) with no styles at all. Use it when you have your own visual language; every part exposes its state as `data-state`, `data-side`, `data-highlighted`, `data-disabled` and `aria-*` attributes for you to style.
+
+```tsx
+import { Dialog } from 'pada-ds/headless';
+
+<Dialog.Root>
+  <Dialog.Trigger className="my-button">Edit profile</Dialog.Trigger>
+  <Dialog.Portal>
+    <Dialog.Overlay className="my-overlay" />
+    <Dialog.Content className="my-dialog">
+      <Dialog.Title>Edit profile</Dialog.Title>
+      <Dialog.Description>Changes save automatically.</Dialog.Description>
+      <Dialog.Close>Done</Dialog.Close>
+    </Dialog.Content>
+  </Dialog.Portal>
+</Dialog.Root>
+```
+
+```css
+.my-dialog[data-state="open"] { animation: fade-in var(--pada-duration-slow) var(--pada-ease-emphasized); }
+```
+
+Available parts: `Dialog`, `Popover`, `Tooltip` (with `Tooltip.Provider` for shared delays) and `DropdownMenu` (items, checkbox and radio items, groups, labels, separators, submenus). Each follows the matching WAI-ARIA Authoring Practices pattern. Any part that renders an element accepts `asChild`, which merges its behaviour onto your own element (a router link, a custom button) instead of rendering a new one.
+
+The building blocks are exported too: `Slot`, `Portal`, `VisuallyHidden`, `useControllableState`, `usePresence` (keeps an element mounted until its exit transition ends), `useDismissable` (Escape and outside clicks, layered), `useFocusScope`, `useScrollLock`, `useHideOthers`, `useFloatingPosition`, `useTypeahead` and list navigation helpers.
+
 ## Theming
 
 By default the theme follows the operating system (`prefers-color-scheme`). To force a theme, set `data-theme="light"` or `data-theme="dark"` on `<html>` or on any container. Only that subtree is themed, so one section of a page can use a different theme:

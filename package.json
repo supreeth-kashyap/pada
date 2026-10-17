@@ -17,6 +17,11 @@
       "import": "./dist/pada.js",
       "default": "./dist/pada.js"
     },
+    "./headless": {
+      "types": "./dist/headless/index.d.ts",
+      "import": "./dist/headless.js",
+      "default": "./dist/headless.js"
+    },
     "./styles.css": "./dist/pada.css",
     "./tokens.css": "./dist/tokens.css",
     "./tokens.scss": "./dist/tokens.scss",
@@ -69,13 +74,16 @@
     "check:manifest": "node ./scripts/gen-manifest.mjs --check",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "node --test scripts/*.test.mjs",
+    "test": "node --test scripts/*.test.mjs && vitest run",
+    "test:unit": "vitest run",
+    "test:watch": "vitest",
     "check:tokens": "node ./scripts/build-tokens.mjs --check && node ./scripts/check-tokens.mjs",
     "smoke:consumer": "node ./scripts/smoke-consumer.mjs",
     "prepublishOnly": "npm run build",
     "tokens:sync": "node ./scripts/sync-tokens-angular.mjs"
   },
   "dependencies": {
+    "@floating-ui/react-dom": "^2.1.9",
     "prismjs": "^1.30.0"
   },
   "peerDependencies": {
@@ -85,19 +93,26 @@
   "devDependencies": {
     "@eslint/js": "^9.36.0",
     "@playwright/test": "^1.56.1",
+    "@testing-library/dom": "^10.4.2",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.8",
     "@types/node": "^24.6.0",
     "@types/prismjs": "^1.26.6",
     "@types/react": "^19.1.16",
     "@types/react-dom": "^19.1.9",
     "@vitejs/plugin-react": "^5.0.4",
+    "axe-core": "^4.14.0",
     "eslint": "^9.36.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.22",
     "globals": "^16.4.0",
+    "jsdom": "^26.1.0",
     "react-router-dom": "^7.15.1",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.45.0",
-    "vite": "^7.1.7"
+    "vite": "^7.1.7",
+    "vitest": "^3.2.7"
   },
   "bin": {
     "pada-tokens-migrate": "./scripts/migrate-tokens.mjs"
