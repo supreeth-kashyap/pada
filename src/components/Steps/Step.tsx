@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useId } from 'react';
 import './Steps.css';
 import { Icon } from '../Icon';
 import { Text, TextSize } from '../Text';
 import { TextWeight } from '../Text/helpers';
+import { VisuallyHidden } from '../../headless/utils/VisuallyHidden';
+
+const STATUS_LABEL = { upcoming: 'not started', current: 'current step', completed: 'completed' } as const;
 
 export type StepStatus = 'upcoming' | 'current' | 'completed';
 
@@ -39,6 +42,7 @@ export const Step = ({
 }: StepProps) => {
   // Determine if step should be interactive (upcoming and completed steps are clickable)
   const isInteractive = clickable && (status === 'upcoming' || status === 'completed');
+  const descriptionId = useId();
 
   const handleClick = () => {
     if (isInteractive) {
@@ -89,39 +93,52 @@ export const Step = ({
     );
   };
 
+  // Steps without a title still get a name for assistive technology.
+  const titleText = title ? (
+    <Text size={TextSize.BASE} weight={TextWeight.MEDIUM} className="step__title">
+      {title}
+    </Text>
+  ) : (
+    <VisuallyHidden>{`Step ${stepValue ?? ''}`.trim()}</VisuallyHidden>
+  );
+
   return (
-    <div 
+    <div
+      role="listitem"
       className={classes}
-      onClick={handleClick}
-      role={isInteractive ? 'button' : undefined}
-      tabIndex={isInteractive ? 0 : undefined}
-      onKeyDown={(e) => {
-        if (isInteractive && (e.key === 'Enter' || e.key === ' ')) {
-          e.preventDefault();
-          handleClick();
-        }
-      }}
+      data-status={status}
+      data-clickable={isInteractive ? '' : undefined}
+      aria-current={status === 'current' ? 'step' : undefined}
       {...props}
     >
-      <div className="step__icon-container">
+      <div className="step__icon-container" aria-hidden="true">
         {renderIcon()}
         {!isLast && <div className="step__line" />}
       </div>
       <div className="step__content">
         {status === 'current' && <div className="step__box" />}
-        {title && (
-          <Text 
-            size={TextSize.BASE} 
-            weight={TextWeight.MEDIUM} 
-            className="step__title"
+        {isInteractive ? (
+          // The button's hit area stretches over the whole step (see .step__action::after).
+          <button
+            type="button"
+            className="step__action"
+            aria-describedby={description ? descriptionId : undefined}
+            onClick={handleClick}
           >
-            {title}
-          </Text>
+            {titleText}
+            <VisuallyHidden>{` (${STATUS_LABEL[status]})`}</VisuallyHidden>
+          </button>
+        ) : (
+          <span className="step__label">
+            {titleText}
+            <VisuallyHidden>{` (${STATUS_LABEL[status]})`}</VisuallyHidden>
+          </span>
         )}
         {description && (
-          <Text 
-            size={TextSize.SM} 
-            weight={TextWeight.NORMAL} 
+          <Text
+            id={descriptionId}
+            size={TextSize.SM}
+            weight={TextWeight.NORMAL}
             className="step__description"
           >
             {description}

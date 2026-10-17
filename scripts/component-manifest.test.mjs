@@ -67,10 +67,11 @@ test('props, types, defaults and descriptions come from the source', () => {
   const accordion = byName.get('Accordion');
   assert.deepEqual(
     accordion.props.map((prop) => prop.name),
-    ['header', 'headerIconName', 'children', 'defaultOpen', 'open', 'onOpenChange', 'className', 'disabled'],
+    ['header', 'headerIconName', 'children', 'defaultOpen', 'open', 'onOpenChange', 'className', 'disabled', 'headingLevel'],
   );
-  // `open: controlledOpen` is renamed in the destructuring and has no default.
+  // Destructured without a default, so none is reported.
   assert.equal(accordion.props.find((prop) => prop.name === 'open').default, null);
+  assert.equal(accordion.props.find((prop) => prop.name === 'headingLevel').default, '3');
   assert.equal(accordion.props.find((prop) => prop.name === 'header').required, true);
 
   // forwardRef components and non-exported props interfaces are both read.

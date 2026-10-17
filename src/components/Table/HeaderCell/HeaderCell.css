@@ -32,3 +32,73 @@
   height: 100%;
   cursor: col-resize;
 }
+
+/* Sortable header: the label is a button; the arrow shows the direction. */
+.table-header-cell {
+  --pada-table-sort-icon-opacity: 0;
+  --pada-table-sort-icon-rotate: 0deg;
+}
+
+.table-header-cell[data-sort="ascending"] {
+  --pada-table-sort-icon-opacity: 1;
+  --pada-table-sort-icon-rotate: 180deg;
+}
+
+.table-header-cell[data-sort="descending"] {
+  --pada-table-sort-icon-opacity: 1;
+}
+
+.table-header-cell__sort {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--pada-space-1);
+  min-width: 0;
+  margin: calc(var(--pada-space-1) * -1);
+  padding: var(--pada-space-1);
+  border: none;
+  border-radius: var(--pada-radius-sm);
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.table-header-cell__sort:hover {
+  --pada-table-sort-icon-hover-opacity: 0.5;
+}
+
+.table-header-cell__sort:focus-visible {
+  outline: none;
+  box-shadow: var(--pada-shadow-focus);
+}
+
+.table-header-cell__sort-icon {
+  flex-shrink: 0;
+  opacity: max(var(--pada-table-sort-icon-opacity), var(--pada-table-sort-icon-hover-opacity, 0));
+  rotate: var(--pada-table-sort-icon-rotate);
+  transition:
+    opacity var(--pada-duration-fast) var(--pada-ease-standard),
+    rotate var(--pada-duration-normal) var(--pada-ease-emphasized);
+}
+
+/* The resize handle shows a line on hover and keyboard focus. */
+.table-header-cell__resizer::after {
+  content: "";
+  position: absolute;
+  inset-block: var(--pada-space-2);
+  right: 2px;
+  width: 2px;
+  border-radius: var(--pada-radius-full);
+  background-color: var(--pada-color-accent-solid);
+  opacity: 0;
+  transition: opacity var(--pada-duration-fast) var(--pada-ease-standard);
+}
+
+.table-header-cell__resizer:hover::after,
+.table-header-cell__resizer:focus-visible::after {
+  opacity: 1;
+}
+
+.table-header-cell__resizer:focus-visible {
+  outline: none;
+}

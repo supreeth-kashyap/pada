@@ -41,21 +41,106 @@ Style custom UI with semantic tokens rather than raw colours: `--pada-color-surf
 
 `import { Accordion } from 'pada-ds';`
 
+Collapsible sections (WAI-ARIA APG Accordion). `<Accordion header="…">` is one standalone section (the 1.x API). For a group, compose the parts: `Accordion.Root` (`type="single"` with optional `collapsible`, or `type="multiple"`), `Accordion.Item`, `Accordion.Trigger` and `Accordion.Content`. Arrow keys and Home/End move between the triggers of a group.
+
 | Prop | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
 | header | `React.ReactNode` | yes | - | - |
-| headerIconName | `string` | no | - | - |
+| headerIconName | `string` | no | - | Built-in icon name shown before the header. |
 | children | `React.ReactNode` | yes | - | - |
 | defaultOpen | `boolean` | no | `false` | - |
 | open | `boolean` | no | - | - |
 | onOpenChange | `(open: boolean) => void` | no | - | - |
-| className | `string` | no | `''` | - |
+| className | `string` | no | - | - |
 | disabled | `boolean` | no | `false` | - |
+| headingLevel | `HeadingLevel` | no | `3` | Level of the heading that wraps the header button. |
 
 ```tsx
 import { Accordion } from 'pada-ds';
 
 <Accordion header="...">...</Accordion>
+```
+
+### Accordion.Content
+
+`import { Accordion } from 'pada-ds';`
+
+The section's content; its height animates open and closed.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| forceMount | `boolean` | no | - | Keep the children mounted (with `hidden`) while closed, e.g. to preserve form state. |
+
+Also accepts the props of `ComponentPropsWithRef<'div'>`.
+
+```tsx
+import { Accordion } from 'pada-ds';
+
+<Accordion.Content />
+```
+
+### Accordion.Item
+
+`import { Accordion } from 'pada-ds';`
+
+One section.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| value | `string` | yes | - | Identifies the item in the root's `value`. |
+| disabled | `boolean` | no | - | - |
+
+Also accepts the props of `ComponentPropsWithRef<'div'>`.
+
+```tsx
+import { Accordion } from 'pada-ds';
+
+<Accordion.Item value="..." />
+```
+
+### Accordion.Root
+
+`import { Accordion } from 'pada-ds';`
+
+Holds which items are open: `type="single"` (optionally `collapsible`) or `type="multiple"`.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| type | `'single'` | yes | - | One item open at a time. |
+| value | `string` | no | - | Controlled open item (`''` for none). |
+| defaultValue | `string` | no | - | Initially open item when uncontrolled. |
+| onValueChange | `(value: string) => void` | no | - | Called with the newly open item (`''` when it closed). |
+| collapsible | `boolean` | no | - | Let the open item close again, leaving none open. |
+| disabled | `boolean` | no | - | Disables every item. |
+| orientation | `Orientation` | no | - | Arrow keys follow the orientation: Up/Down when vertical, Left/Right when horizontal. |
+| dir | `'ltr' \| 'rtl'` | no | - | Reading direction, for horizontal arrow keys. |
+
+Also accepts the props of `Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'dir'>`.
+
+```tsx
+import { Accordion } from 'pada-ds';
+
+<Accordion.Root type="single" />
+```
+
+### Accordion.Trigger
+
+`import { Accordion } from 'pada-ds';`
+
+The section's heading and toggle button, with an optional leading icon and a chevron.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| iconName | `string` | no | - | Built-in icon name shown before the title. |
+| headingLevel | `HeadingLevel` | no | `3` | Level of the heading that wraps the trigger. |
+| asChild | `boolean` | no | - | Merge the trigger's behaviour onto its only child instead of rendering a `<button>`. |
+
+Also accepts the props of `ComponentPropsWithRef<'button'>`.
+
+```tsx
+import { Accordion } from 'pada-ds';
+
+<Accordion.Trigger />
 ```
 
 ### AccordionContent
@@ -1489,11 +1574,15 @@ import { FormLabel } from 'pada-ds';
 
 `import { HeaderCell } from 'pada-ds';`
 
+A column header (`role="columnheader"`). Drag it onto another header to reorder columns; drag its right edge, or focus the edge and press Left/Right, to resize. With `onSort`, the label is a button and the header reports `aria-sort`.
+
 | Prop | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
 | columnId | `string` | yes | - | - |
 | label | `string` | yes | - | - |
 | className | `string` | no | `''` | - |
+| sortDirection | `SortDirection` | no | - | Current sort of this column. Set it (with `onSort`) to make the header a sort button. |
+| onSort | `() => void` | no | - | Called when the header is activated; flip `sortDirection` in response. |
 
 ```tsx
 import { HeaderCell } from 'pada-ds';
@@ -1697,12 +1786,15 @@ import { Link } from 'pada-ds';
 
 `import { List } from 'pada-ds';`
 
+A vertical list of `ListItem`s, optionally reorderable by drag and drop or keyboard.
+
 | Prop | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
 | children | `React.ReactNode` | yes | - | - |
-| draggable | `boolean` | no | `false` | - |
+| draggable | `boolean` | no | `false` | Lets users reorder items: drag an item, or focus its handle, press Space to lift it, move it with the arrow keys and press Space again to drop it (Escape puts it back). |
 | className | `string` | no | `''` | - |
-| onReorder | `(order: string[]) => void` | no | - | - |
+| onReorder | `(order: string[]) => void` | no | - | Called with the item ids in their new order. |
+| label | `string` | no | - | Accessible name of the list. |
 
 ```tsx
 import { List } from 'pada-ds';
@@ -1713,6 +1805,8 @@ import { List } from 'pada-ds';
 ### ListItem
 
 `import { ListItem } from 'pada-ds';`
+
+One row of a `List`. In a draggable list it gets a handle for mouse and keyboard reordering.
 
 | Prop | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
@@ -2544,10 +2638,12 @@ import { TabPanel } from 'pada-ds';
 | Prop | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
 | columns | `TableColumn[]` | yes | - | - |
-| children | `React.ReactNode` | yes | - | - |
+| children | `React.ReactNode` | yes | - | `TableRow`s (the first one of `HeaderCell`s), then optionally a `TablePagination`. |
 | toolbar | `React.ReactNode` | no | - | - |
 | className | `string` | no | `''` | - |
 | onColumnsChange | `(columns: TableColumn[]) => void` | no | - | - |
+| label | `string` | no | - | Accessible name of the table. |
+| labelledBy | `string` | no | - | Id of the element that names the table (instead of `label`). |
 
 ```tsx
 import { Table } from 'pada-ds';
@@ -2564,6 +2660,8 @@ import { Table } from 'pada-ds';
 | children | `React.ReactNode` | yes | - | - |
 | columnId | `string` | no | - | - |
 | className | `string` | no | `''` | - |
+| rowHeader | `boolean` | no | - | Marks the cell as the header of its row (`role="rowheader"`), e.g. a name column. |
+| span | `number \| 'all'` | no | - | Columns the cell spans; `'all'` for a full-width cell such as an empty-state message. |
 
 ```tsx
 import { TableCell } from 'pada-ds';
@@ -2603,7 +2701,7 @@ import { TablePagination } from 'pada-ds';
 | className | `string` | no | `''` | - |
 | selected | `boolean` | no | - | When true, all cells in the row render with the selected (indigo wash) state. |
 | onClick | `React.MouseEventHandler<HTMLDivElement>` | no | - | Click handler on the entire row — useful for bulk-select toggling. |
-| role | `string` | no | - | Sets `role="row"` semantics if you need to override the default `<div>`. |
+| role | `string` | no | `'row'` | ARIA role of the row. |
 
 ```tsx
 import { TableRow } from 'pada-ds';

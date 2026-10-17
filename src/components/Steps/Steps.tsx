@@ -57,7 +57,7 @@ export const Steps = ({
   const current = currentStep !== undefined ? currentStep : internalCurrent;
 
   return (
-    <div className={classes} {...props}>
+    <div role="list" className={classes} {...props}>
       {steps.map((step, index) => {
         const isLast = index === steps.length - 1;
         const stepValue = step.stepValue !== undefined 
@@ -68,8 +68,11 @@ export const Steps = ({
         // - If this step is the current one, use 'current'
         // - If step has explicit status and it's not current, use that
         // - Otherwise use default status
+        // Without a current step (controlled or clicked), each step's own status is used as is.
         let stepStatus: StepProps['status'];
-        if (current === stepValue) {
+        if (current === undefined) {
+          stepStatus = step.status ?? defaultStatus;
+        } else if (current === stepValue) {
           stepStatus = 'current';
         } else if (step.status && step.status !== 'current') {
           // Use the step's original status if it's not being overridden by current

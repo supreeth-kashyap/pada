@@ -9,6 +9,7 @@ import { TablePagination } from '../../../components/Table/Pagination';
 import { Toolbar, Filter, MoreFilter } from '../../../components/Toolbar';
 import { Tags } from '../../../components/Tags';
 import type { TableColumn } from '../../../components/Table';
+import type { SortDirection } from '../../../components/Table/HeaderCell';
 import { USERS, STATUS_VARIANT, formatJoined } from './table-demo.data';
 
 const COLUMNS: TableColumn[] = [
@@ -46,6 +47,7 @@ function UsersTablePreview() {
   const [statusFilter, setStatusFilter] = useState<string[]>([]);
   const [roleFilter, setRoleFilter] = useState<string[]>([]);
   const [moreFilters, setMoreFilters] = useState<Record<string, string[]>>({});
+  const [nameSort, setNameSort] = useState<SortDirection>('none');
   // Bulk-row-selection state. Click a row to toggle. Preview ships with the
   // first user pre-selected so the indigo wash is visible at first paint.
   const [selectedIds, setSelectedIds] = useState<Set<string>>(() => new Set([USERS[0]?.id].filter(Boolean) as string[]));
@@ -66,8 +68,8 @@ function UsersTablePreview() {
       const yearFilter = moreFilters.joinedYear ?? [];
       if (yearFilter.length > 0 && !yearFilter.includes(u.joined.slice(0, 4))) return false;
       return true;
-    });
-  }, [statusFilter, roleFilter, moreFilters]);
+    }).sort((a, b) => (nameSort === 'none' ? 0 : a.name.localeCompare(b.name) * (nameSort === 'ascending' ? 1 : -1)));
+  }, [statusFilter, roleFilter, moreFilters, nameSort]);
 
   const total = filtered.length;
   const start = (page - 1) * rowsPerPage;
@@ -85,6 +87,7 @@ function UsersTablePreview() {
     <div style={{ width: '100%' }}>
       <Table
         columns={COLUMNS}
+        label="Users"
         toolbar={
           <Toolbar
             left={
@@ -138,9 +141,19 @@ function UsersTablePreview() {
         }
       >
         <TableRow>
-          {COLUMNS.map((c) => (
-            <HeaderCell key={c.id} columnId={c.id} label={c.label} />
-          ))}
+          {COLUMNS.map((c) =>
+            c.id === 'name' ? (
+              <HeaderCell
+                key={c.id}
+                columnId={c.id}
+                label={c.label}
+                sortDirection={nameSort}
+                onSort={() => setNameSort(nameSort === 'ascending' ? 'descending' : 'ascending')}
+              />
+            ) : (
+              <HeaderCell key={c.id} columnId={c.id} label={c.label} />
+            ),
+          )}
         </TableRow>
         {visible.map((u) => (
           <TableRow
@@ -148,9 +161,9 @@ function UsersTablePreview() {
             selected={selectedIds.has(u.id)}
             onClick={() => toggleSelected(u.id)}
           >
-            <TableCell columnId="name">{u.name}</TableCell>
+            <TableCell columnId="name" rowHeader>{u.name}</TableCell>
             <TableCell columnId="email">
-              <span style={{ color: 'var(--color-stone-600)' }}>{u.email}</span>
+              <span style={{ color: 'var(--pada-color-fg-muted)' }}>{u.email}</span>
             </TableCell>
             <TableCell columnId="role">{u.role}</TableCell>
             <TableCell columnId="status">
@@ -162,16 +175,11 @@ function UsersTablePreview() {
           </TableRow>
         ))}
         {visible.length === 0 && (
-          <div
-            style={{
-              padding: '24px 16px',
-              textAlign: 'center',
-              color: 'var(--color-stone-500)',
-              fontSize: 13
-            }}
-          >
-            No users match the current filters.
-          </div>
+          <TableRow>
+            <TableCell span="all">
+              <span style={{ textAlign: 'center', color: 'var(--pada-color-fg-muted)' }}>No users match the current filters.</span>
+            </TableCell>
+          </TableRow>
         )}
         <TablePagination
           total={total}
@@ -207,7 +215,7 @@ export default function TableDemo() {
             <code>HeaderCell</code>s, body <code>TableRow</code>s of{' '}
             <code>TableCell</code>s, and a <code>TablePagination</code> footer. Columns
             are configured once via the <code>columns</code> prop — widths, min-widths,
-            and reorder/resize state are handled internally.
+            and reorder/resize state are handled internally. Click the Name header to sort.
           </p>
           <div className="demo-page__showcase" style={{ flexDirection: 'column', gap: 16 }}>
             <UsersTablePreview />
@@ -258,6 +266,7 @@ export function UsersTable({ users }) {
   return (
     <Table
       columns={COLUMNS}
+      label="Users"
       toolbar={
         <Toolbar>
           <SearchField value={search} onChange={setSearch} placeholder="Search users" />
@@ -270,7 +279,7 @@ export function UsersTable({ users }) {
       </TableRow>
       {visible.map((u) => (
         <TableRow key={u.id}>
-          <TableCell columnId="name">{u.name}</TableCell>
+          <TableCell columnId="name" rowHeader>{u.name}</TableCell>
           <TableCell columnId="email">{u.email}</TableCell>
           <TableCell columnId="role">{u.role}</TableCell>
           <TableCell columnId="status">
@@ -296,8 +305,17 @@ export function UsersTable({ users }) {
       accessibility={
         <ul style={{ margin: 0, paddingLeft: 20, display: 'flex', flexDirection: 'column', gap: 6 }}>
           <li>
-            Header cells expose <code>aria-sort</code> when sortable so screen readers
-            announce the active sort state.
+            The rows sit in a <code>role="table"</code> named by <code>label</code>; rows,
+            column headers, row headers (<code>rowHeader</code>) and cells carry their
+            table roles, so screen readers announce positions and headers as you move.
+          </li>
+          <li>
+            Pass <code>sortDirection</code> and <code>onSort</code> to a <code>HeaderCell</code>{' '}
+            to make it a sort button; the header reports <code>aria-sort</code>.
+          </li>
+          <li>
+            Each column's resize handle is a focusable separator: <kbd>←</kbd> /{' '}
+            <kbd>→</kbd> resize it by 16px and its width is announced.
           </li>
           <li>
             Pagination controls have explicit <code>aria-label</code>s (

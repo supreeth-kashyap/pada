@@ -18,3 +18,9 @@
   flex-direction: column;
   width: 100%;
 }
+
+.table__grid {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}

@@ -6,6 +6,24 @@
 - Moved the `body` and `p` rules out of `dist/tokens.css` into a new optional `pada-ds/base.css` export, so importing the tokens no longer overrides an app's own styles.
 - Added a component API manifest for AI coding agents. `npm run build` now reads every exported component's props from the TypeScript source and writes `dist/manifest.json` (exported as `pada-ds/manifest.json`), `llms.txt` and `llms-full.txt`. Both llms files ship in the package and are committed at the repo root. `npm test` fails if they are stale or if an exported component is missing from the manifest.
 
+- **Accordion, Table, Steps and List rebuilt for keyboard and screen-reader use (phase 3).**
+  - `Accordion` is rebuilt on new headless `Accordion` and `Collapsible` parts (`pada-ds/headless`). The 1.x props still work, plus a new `headingLevel`. Groups are composed from `Accordion.Root` (`type="single"` with optional `collapsible`, or `type="multiple"`), `Accordion.Item`, `Accordion.Trigger` (with `iconName`) and `Accordion.Content`. Arrow keys, Home and End move between headers. Each header button now sits in a heading (`h3` by default). The open header of a group that cannot collapse is `aria-disabled`. Content height animates open and closed, and the chevron turns instead of swapping glyphs. It now uses a bundled icon, so it shows without network access. The panel body sets its own text colour. `AccordionHeader` and `AccordionContent` are deprecated.
+  - `Table` exposes table semantics:
+    - `role="table"` (named by the new `label` or `labelledBy`), `row`, `columnheader` and `cell`.
+    - New `TableCell` props: `rowHeader` and `span` (`'all'` for full-width messages).
+    - `TablePagination` renders outside the table role.
+    - `HeaderCell` takes `sortDirection` and `onSort`, which make the label a sort button and set `aria-sort`.
+    - Each column's resize handle is a focusable separator: Left and Right resize the column by 16px, and the width is announced. Resizing a column without a set width now starts from its rendered width instead of jumping to 120px.
+  - `Steps` is a list:
+    - Clickable steps are real buttons whose hit area covers the whole step.
+    - The current step has `aria-current="step"`, and each step's status ("completed", "current step", "not started") is announced.
+    - The connector below a completed step fills in.
+    - Fixed `status: 'current'` being ignored unless `currentStep` was set.
+  - `List`:
+    - Exposes list semantics, with a new `label` prop.
+    - In a `draggable` list each item has a handle button. Space or Enter lifts the item, the arrow keys and Home/End move it, Space or Enter drops it and Escape cancels. Each step is announced.
+    - Items slide to their new positions (FLIP).
+    - A parent re-render no longer resets the user's order, and `onReorder` is no longer called from inside a state updater.
 - **New components (wave 1, feedback and search).**
   - `Toaster` and `toast()`: call `toast('Saved')`, `toast.success(...)`, `toast.warning(...)`, `toast.danger(...)`, `toast.info(...)` or `toast.dismiss(id)` from anywhere, with one `<Toaster />` mounted. Toasts take a title, description, tone, one action (e.g. Undo) and a duration, and an `id` updates a toast in place. They stack in a corner and fan out on hover or focus. Timers pause while the stack is hovered or focused or the window is in the background. Swipe or press Escape to dismiss, and F8 jumps to the region. Each toast is a polite live region (danger is assertive).
   - `Autocomplete`: a text field with a filtered list of options, single or `multiple` (removable chips), with a description, error, `name` for forms, a custom `filter`, or `filter={false}` plus `onInputValueChange` for server-side search.

@@ -1,8 +1,0 @@
-.accordion__body {
-  padding: var(--pada-space-2) var(--pada-space-4) var(--pada-space-6);
-  background-color: var(--pada-color-surface);
-  box-sizing: border-box;
-}
-
-/* No per-theme override: `--color-bg` is already `--color-end-white` in the light theme
-   (global.css), and it follows data-theme on <html> or any ancestor. */

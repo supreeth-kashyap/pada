@@ -59,7 +59,7 @@ import { Dialog } from 'pada-ds/headless';
 .my-dialog[data-state="open"] { animation: fade-in var(--pada-duration-slow) var(--pada-ease-emphasized); }
 ```
 
-Available parts: `Dialog`, `Popover`, `Tooltip` (with `Tooltip.Provider` for shared delays), `DropdownMenu` (items, checkbox and radio items, groups, labels, separators, submenus), `Tabs`, `Field`, `Toggle` / `ToggleGroup` and `Combobox` (single or multiple, with a pluggable filter). Each follows the matching WAI-ARIA Authoring Practices pattern. Any part that renders an element accepts `asChild`, which merges its behaviour onto your own element (a router link, a custom button) instead of rendering a new one.
+Available parts: `Dialog`, `Popover`, `Tooltip` (with `Tooltip.Provider` for shared delays), `DropdownMenu` (items, checkbox and radio items, groups, labels, separators, submenus), `Tabs`, `Accordion`, `Collapsible`, `Field`, `Toggle` / `ToggleGroup` and `Combobox` (single or multiple, with a pluggable filter). Each follows the matching WAI-ARIA Authoring Practices pattern. Any part that renders an element accepts `asChild`, which merges its behaviour onto your own element (a router link, a custom button) instead of rendering a new one.
 
 Portalled parts render into `document.body`, or into the element provided by `PortalContainerContext` (`ThemeProvider` provides one, so overlays keep a subtree's theme).
 
@@ -133,7 +133,7 @@ The package ships a machine-readable API description, generated from the TypeScr
 
 This design system includes the following components:
 
-- **Accordion**: Collapsible sections to show/hide content.
+- **Accordion**: Collapsible sections; `Accordion.Root`, `Item`, `Trigger`, `Content` for groups.
 - **Alert**: Inline callout by tone with actions.
 - **Autocomplete**: Text field with filtered suggestions, single or multiple.
 - **AlertDialog**: Confirmation that needs an answer.

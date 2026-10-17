@@ -6,6 +6,10 @@
 }
 
 .step-container {
+  /* Component tokens. Status only reassigns these. */
+  --pada-step-line-fill: 0;
+  --pada-step-line-fill-color: var(--pada-color-green-300);
+
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -16,12 +20,50 @@
   transition: all var(--pada-duration-normal) var(--pada-ease-standard);
 }
 
-.step-container.step--clickable {
+.step-container[data-status="completed"] {
+  --pada-step-line-fill: 1;
+}
+
+.step-container[data-clickable] {
   cursor: pointer;
 }
 
-.step-container.step--clickable:hover .step__content {
+.step-container[data-clickable]:hover .step__content {
   opacity: 0.9;
+}
+
+/* The step's button: looks like plain text; its hit area covers the icon and the content. */
+.step__action {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+
+.step__action::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 0 calc((20px + var(--pada-space-3)) * -1);
+  z-index: 2;
+  border-radius: var(--pada-radius-md);
+}
+
+.step__action:focus-visible {
+  outline: none;
+}
+
+.step__action:focus-visible::after {
+  box-shadow: var(--pada-shadow-focus);
+}
+
+.step__label {
+  display: block;
 }
 
 .step__icon-container {
@@ -98,6 +140,18 @@
   border-left: 1px dashed var(--pada-color-neutral-300);
   background: none;
   height: calc(100% - 4px);
+}
+
+/* The connector fills downward when its step completes. */
+.step__line::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 -1px;
+  width: 1px;
+  background-color: var(--pada-step-line-fill-color);
+  transform: scaleY(var(--pada-step-line-fill));
+  transform-origin: top;
+  transition: transform var(--pada-duration-slow) var(--pada-ease-emphasized);
 }
 
 .step--last .step__line {
@@ -289,12 +343,4 @@
    ACCESSIBILITY
    ============================================ */
 
-.step-container.step--clickable:focus {
-  outline: 2px solid var(--pada-color-blue-500);
-  outline-offset: 2px;
-  border-radius: var(--pada-radius-xs);
-}
-
-.step-container.step--clickable:focus:not(:focus-visible) {
-  outline: none;
-}
+/* Focus is shown on .step__action (above). */

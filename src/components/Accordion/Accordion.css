@@ -1,6 +1,137 @@
+/* Root: a group of items. */
+.accordion-root {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Item (and the standalone 1.x Accordion). Component tokens; states only reassign these. */
 .accordion {
+  --pada-accordion-bg: var(--pada-color-surface);
+  --pada-accordion-border: var(--pada-color-neutral-100);
+  --pada-accordion-fg: var(--pada-color-neutral-900);
+  --pada-accordion-fg-hover: var(--pada-color-accent-700);
+  --pada-accordion-body-fg: var(--pada-color-fg);
+  --pada-accordion-header-pad-y: var(--pada-space-2);
+  --pada-accordion-header-pad-x: var(--pada-space-4);
+  --pada-accordion-body-pad: var(--pada-space-2) var(--pada-space-4) var(--pada-space-6);
+  --pada-accordion-duration: var(--pada-duration-normal);
+  --pada-accordion-ease: var(--pada-ease-emphasized);
+
   width: 100%;
   min-width: 300px;
-  background-color: var(--pada-color-surface);
+  background-color: var(--pada-accordion-bg);
+  box-sizing: border-box;
+}
+
+.accordion-heading {
+  margin: 0;
+  font: inherit;
+}
+
+/* Header button */
+.accordion-header {
+  --pada-accordion-header-fg: var(--pada-accordion-fg);
+  --pada-accordion-chevron-rotate: 0deg;
+
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--pada-space-3);
+  padding: var(--pada-accordion-header-pad-y) var(--pada-accordion-header-pad-x);
+  background-color: var(--pada-accordion-bg, var(--pada-color-surface));
+  box-sizing: border-box;
+  border: none;
+  border-top: var(--pada-border-width-thin) solid var(--pada-accordion-border, var(--pada-color-neutral-100));
+  border-radius: 0;
+  cursor: pointer;
+  text-align: left;
+  color: var(--pada-accordion-header-fg);
+  font: inherit;
+  transition: color var(--pada-duration-fast) var(--pada-ease-standard);
+}
+
+.accordion-header[data-state="open"] {
+  --pada-accordion-chevron-rotate: 180deg;
+}
+
+.accordion-header:hover:not([data-disabled]) {
+  --pada-accordion-header-fg: var(--pada-accordion-fg-hover, var(--pada-color-accent-700));
+}
+
+.accordion-header:focus-visible {
+  outline: none;
+  box-shadow: var(--pada-shadow-focus);
+}
+
+.accordion-header[data-disabled] {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* The open item of a single accordion that cannot collapse. */
+.accordion-header[aria-disabled="true"] {
+  cursor: default;
+}
+
+/* Child elements */
+.accordion-header__icon,
+.accordion-header__chevron {
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.accordion-header .icon {
+  --icon-color: var(--pada-accordion-header-fg);
+}
+
+.accordion-header__chevron {
+  rotate: var(--pada-accordion-chevron-rotate);
+  transition: rotate var(--pada-accordion-duration, var(--pada-duration-normal)) var(--pada-accordion-ease, var(--pada-ease-emphasized));
+}
+
+.accordion-header__title {
+  flex: 1;
+  min-width: 0;
+  font-size: var(--pada-font-size-md);
+  font-weight: var(--pada-font-weight-medium);
+}
+
+/* Content: the grid row animates between 0fr and 1fr, so the height follows the content. */
+.accordion-content {
+  display: grid;
+  grid-template-rows: 1fr;
+  opacity: 1;
+  transition:
+    grid-template-rows var(--pada-accordion-duration) var(--pada-accordion-ease),
+    opacity var(--pada-accordion-duration) var(--pada-ease-standard);
+
+  @starting-style {
+    grid-template-rows: 0fr;
+    opacity: 0;
+  }
+}
+
+.accordion-content[data-state="closed"] {
+  grid-template-rows: 0fr;
+  opacity: 0;
+}
+
+.accordion-content[hidden] {
+  display: none;
+}
+
+.accordion-content-clip {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.accordion__body {
+  padding: var(--pada-accordion-body-pad, var(--pada-space-2) var(--pada-space-4) var(--pada-space-6));
+  background-color: var(--pada-accordion-bg, var(--pada-color-surface));
+  color: var(--pada-accordion-body-fg, var(--pada-color-fg));
   box-sizing: border-box;
 }

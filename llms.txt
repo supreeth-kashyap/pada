@@ -39,7 +39,11 @@ Style custom UI with semantic tokens rather than raw colours: `--pada-color-surf
 
 Every component is a named export: `import { Name } from 'pada-ds'`. Props marked `?` are optional. Full prop tables with types, defaults and examples are in llms-full.txt.
 
-- Accordion: header, headerIconName?, children, defaultOpen?, open?, onOpenChange?, className?, disabled?
+- Accordion: header, headerIconName?, children, defaultOpen?, open?, onOpenChange?, className?, disabled?, headingLevel?
+- Accordion.Content: forceMount?; extends ComponentPropsWithRef<'div'>
+- Accordion.Item: value, disabled?; extends ComponentPropsWithRef<'div'>
+- Accordion.Root: type, value?, defaultValue?, onValueChange?, collapsible?, disabled?, orientation?, dir?; extends Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'dir'>
+- Accordion.Trigger: iconName?, headingLevel?, asChild?; extends ComponentPropsWithRef<'button'>
 - AccordionContent: children; extends React.HTMLAttributes<HTMLDivElement>
 - AccordionHeader: title, iconName?, collapsed?; extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'title'>
 - Alert: tone?, title?, icon?, actions?, onDismiss?, live?; extends Omit<ComponentPropsWithRef<'div'>, 'title'>
@@ -111,7 +115,7 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - Filter: label, options, multiSelect?, value?, defaultValue?, onChange?, applyLabel?, clearLabel?, disabled?, className?
 - FilterChip: variant?, label?, value?, showClose?, disabled?, onRemove?, onClick?, className?
 - FormLabel: children, required?, optional?, htmlFor?; extends React.LabelHTMLAttributes<HTMLLabelElement>
-- HeaderCell: columnId, label, className?
+- HeaderCell: columnId, label, className?, sortDirection?, onSort?
 - Icon: name?, src?, size?, color?, variant?; extends React.HTMLAttributes<HTMLDivElement>
 - IconButton: icon, label, tooltip?, variant?, size?, disabled?, loading?, ref?; extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'children' | 'leftIcon' | 'rightIcon' | 'split' | 'onSplitClick' | 'aria-label'>
 - Indexer: items, activeIndex?, offset?, onActiveChange?; extends React.HTMLAttributes<HTMLElement>
@@ -121,7 +125,7 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - Kbd: keys?; extends ComponentPropsWithRef<'kbd'>
 - KeyValue: label, children, infoTooltip?, labelComponent?; extends React.HTMLAttributes<HTMLDivElement>
 - Link: tone?, underline?, external?, asChild?; extends ComponentPropsWithRef<'a'>
-- List: children, draggable?, className?, onReorder?
+- List: children, draggable?, className?, onReorder?, label?
 - ListItem: id?, children, className?
 - Loader: size?, className?
 - Logo: name, size?, background?, tooltip?; extends React.HTMLAttributes<HTMLDivElement>
@@ -163,8 +167,8 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - Steps: steps, defaultStatus?, currentStep?, onStepChange?; extends React.HTMLAttributes<HTMLDivElement>
 - Switch: label?, loading?; extends React.InputHTMLAttributes<HTMLInputElement>
 - TabPanel: label, children, notification?
-- Table: columns, children, toolbar?, className?, onColumnsChange?
-- TableCell: children, columnId?, className?
+- Table: columns, children, toolbar?, className?, onColumnsChange?, label?, labelledBy?
+- TableCell: children, columnId?, className?, rowHeader?, span?
 - TablePagination: total, page, rowsPerPage, rowsPerPageOptions?, onPageChange, onRowsPerPageChange, onNextPage?, onPrevPage?, className?
 - TableRow: children, className?, selected?, onClick?, role?
 - Tabs: children, label, defaultValue?, value?, onChange?
