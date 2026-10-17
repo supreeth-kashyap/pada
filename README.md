@@ -59,7 +59,7 @@ import { Dialog } from 'pada-ds/headless';
 .my-dialog[data-state="open"] { animation: fade-in var(--pada-duration-slow) var(--pada-ease-emphasized); }
 ```
 
-Available parts: `Dialog`, `Popover`, `Tooltip` (with `Tooltip.Provider` for shared delays), `DropdownMenu` (items, checkbox and radio items, groups, labels, separators, submenus), `Tabs`, `Accordion`, `Collapsible`, `Field`, `Toggle` / `ToggleGroup` and `Combobox` (single or multiple, with a pluggable filter). Each follows the matching WAI-ARIA Authoring Practices pattern. Any part that renders an element accepts `asChild`, which merges its behaviour onto your own element (a router link, a custom button) instead of rendering a new one.
+Available parts: `Dialog`, `Popover`, `Tooltip` (with `Tooltip.Provider` for shared delays), `DropdownMenu` (items, checkbox and radio items, groups, labels, separators, submenus), `Tabs`, `Accordion`, `Collapsible`, `Field`, `Toggle` / `ToggleGroup`, `Combobox` (single or multiple, with a pluggable filter), `NumberInput` and `Calendar`. Each follows the matching WAI-ARIA Authoring Practices pattern. Any part that renders an element accepts `asChild`, which merges its behaviour onto your own element (a router link, a custom button) instead of rendering a new one.
 
 Portalled parts render into `document.body`, or into the element provided by `PortalContainerContext` (`ThemeProvider` provides one, so overlays keep a subtree's theme).
 
@@ -142,6 +142,7 @@ This design system includes the following components:
 - **Banner**: Notices and important messages display.
 - **Breadcrumbs**: Location trail with collapsing.
 - **Button**: Clickable control for primary actions.
+- **Calendar**: Month grid for a day or a range.
 - **Card**: Container for grouped related content.
 - **Carousel**: Scrollable content carousel with controls.
 - **Checkbox**: Binary selection with label support.
@@ -169,6 +170,7 @@ This design system includes the following components:
 - **Logo**: Project or brand logo component.
 - **Modal**: Overlay dialog for focused tasks (1.x API; wraps `Dialog`).
 - **Notification**: Transient alert messages and toasts.
+- **NumberInput**: Number field with steppers and locale formatting.
 - **PageHeader**: Page title and actions area.
 - **Pagination**: Page navigation with ellipses.
 - **Pills**: Compact, selectable pill-style buttons.

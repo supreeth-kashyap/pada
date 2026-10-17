@@ -65,6 +65,12 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - BaseToolbarMenu: title?, count?, showCount?, dropdown?, disabled?, state?, className?, onClick?
 - Breadcrumbs: items, maxItems?, renderLink?, label?; extends Omit<ComponentPropsWithRef<'nav'>, 'children'>
 - Button: children?, variant?, size?, leftIcon?, rightIcon?, split?, onSplitClick?, disabled?, loading?, ref?; extends React.ButtonHTMLAttributes<HTMLButtonElement>
+- Calendar: mode?, value?, defaultValue?, onValueChange?, month?, defaultMonth?, onMonthChange?, min?, max?, isDateUnavailable?, weekStartsOn?, locale?, disabled?, readOnly?; extends Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'onChange'>
+- Calendar.Grid: renderDay?, hideOutsideDays?, dayClassName?; extends Omit<ComponentPropsWithRef<'table'>, 'children'>
+- Calendar.Heading: asChild?; extends ComponentPropsWithRef<'h2'>
+- Calendar.NextButton: asChild?; extends ComponentPropsWithRef<'button'>
+- Calendar.PrevButton: asChild?; extends ComponentPropsWithRef<'button'>
+- Calendar.Root: mode?, value?, defaultValue?, onValueChange?, month?, defaultMonth?, onMonthChange?, min?, max?, isDateUnavailable?, weekStartsOn?, locale?, disabled?, readOnly?; extends Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'onChange'>
 - Card: children?, className?
 - Carousel: children, autoPlay?, interval?, className?, showDots?, showNav?, label?
 - Checkbox: label?, indeterminate?, ref?; extends React.InputHTMLAttributes<HTMLInputElement>
@@ -72,7 +78,7 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - ComboBox: items, multiSelect?, onItemClick?; extends React.HTMLAttributes<HTMLDivElement>
 - ComboBoxMenuItem: iconName?, label, selected?, disabled?, multiSelect?; extends React.ButtonHTMLAttributes<HTMLButtonElement>
 - CommandPalette: commands, open?, onOpenChange?, placeholder?, emptyMessage?, hotkey?, label?
-- DatePickerDropdown: mode?, selection?, isRange?, value?, onChange?, minDate?, maxDate?
+- DatePickerDropdown: mode?, selection?, isRange?, value?, onChange?, minDate?, maxDate?, isDateUnavailable?, weekStartsOn?, locale?
 - Dialog.Body: no props; extends ComponentPropsWithRef<'div'>
 - Dialog.Close: asChild?; extends ComponentPropsWithRef<'button'>
 - Dialog.CloseButton: label?; extends Omit<ComponentPropsWithRef<'button'>, 'children' | 'asChild'>
@@ -119,7 +125,7 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - Icon: name?, src?, size?, color?, variant?; extends React.HTMLAttributes<HTMLDivElement>
 - IconButton: icon, label, tooltip?, variant?, size?, disabled?, loading?, ref?; extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'children' | 'leftIcon' | 'rightIcon' | 'split' | 'onSplitClick' | 'aria-label'>
 - Indexer: items, activeIndex?, offset?, onActiveChange?; extends React.HTMLAttributes<HTMLElement>
-- InputDate: label?, error?, description?, required?, optional?, disabled?, placeholder?, filled?, mode?, selection?, value?, onChange?, minDate?, maxDate?, className?
+- InputDate: label?, error?, description?, required?, optional?, disabled?, placeholder?, filled?, mode?, selection?, value?, onChange?, minDate?, maxDate?, isDateUnavailable?, weekStartsOn?, className?
 - InputText: label?, error?, description?, prefix?, suffix?, required?, optional?; extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'prefix' | 'suffix'>
 - InputTextArea: label?, error?, description?, required?, optional?; extends React.TextareaHTMLAttributes<HTMLTextAreaElement>
 - Kbd: keys?; extends ComponentPropsWithRef<'kbd'>
@@ -132,6 +138,7 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - Modal: open, onOpenChange, children, title?, width?, height?
 - MoreFilter: label?, filters, value?, defaultValue?, onChange?, applyLabel?, clearLabel?, disabled?, className?
 - Notification: open, onOpenChange, title, subtitle?, visual?, position?, direction?, className?
+- NumberInput: label, description?, error?, required?, optional?, placeholder?, stepper?, size?, value?, defaultValue?, onValueChange?, min?, max?, step?, largeStep?, formatOptions?, locale?, disabled?, readOnly?, name?; extends Omit<Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'onChange'>, 'children' | 'inputId'>
 - PageHeader: breadcrumbs, onCommandClick?, commandLabel?, commandShortcut?, onAiClick?, aiLabel?, profileTrigger?, profileMenu?, className?
 - Pagination: page, totalPages, onPageChange, siblingCount?, boundaryCount?, label?; extends Omit<ComponentPropsWithRef<'nav'>, 'onChange'>
 - Pills: options, value?, defaultValue?, onChange?, className?, size?, disabled?

@@ -12,6 +12,8 @@ export * from './Toggle';
 export * from './Combobox';
 export * from './Collapsible';
 export * from './Accordion';
+export * from './NumberInput';
+export * from './Calendar';
 
 export { Slot, type SlotProps } from './utils/Slot';
 export { Portal, type PortalProps } from './utils/Portal';

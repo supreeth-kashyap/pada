@@ -1,9 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import './InputDate.css';
 import { FormLabel } from '../FormLabel';
 import { Icon } from '../Icon';
 import { DatePickerDropdown } from '../DatePicker';
 import type { DatePickerMode, DatePickerSelection } from '../DatePicker';
+import { PopoverContent, PopoverPortal, PopoverRoot, PopoverTrigger } from '../../headless/Popover/Popover';
 
 export interface InputDateProps {
   label?: string;
@@ -20,6 +21,10 @@ export interface InputDateProps {
   onChange?: (value: Date | [Date, Date?] | null) => void;
   minDate?: Date;
   maxDate?: Date;
+  /** Marks other days unavailable (weekends, holidays, booked dates). */
+  isDateUnavailable?: (date: Date) => boolean;
+  /** First day of the week: 0 = Sunday … 6 = Saturday. @default 0 */
+  weekStartsOn?: number;
   className?: string;
 }
 
@@ -41,6 +46,10 @@ const formatRange = (start: Date | null, end: Date | null, mode: DatePickerMode)
   return `${formatDate(start, mode)} -> ${formatDate(end, mode)}`;
 };
 
+/**
+ * A date field: a button showing the chosen date (or range) that opens the date picker in a
+ * popover. Focus moves to the selected day; Escape closes the picker and returns to the field.
+ */
 export const InputDate = ({
   label,
   error,
@@ -56,45 +65,18 @@ export const InputDate = ({
   onChange,
   minDate,
   maxDate,
+  isDateUnavailable,
+  weekStartsOn,
   className = '',
 }: InputDateProps) => {
   const id = React.useId();
   const [isOpen, setIsOpen] = useState(false);
-  const [internalFilled, setInternalFilled] = useState(false);
   const [internalValue, setInternalValue] = useState<Date | [Date, Date?] | null>(null);
-  const wrapperRef = useRef<HTMLDivElement>(null);
   const hasError = !!error;
-  const isFilled = typeof filled === 'boolean' ? filled : internalFilled;
   const resolvedValue = value !== undefined ? value : internalValue;
+  const hasValue = selection === 'range' ? Array.isArray(resolvedValue) && !!resolvedValue[0] : resolvedValue instanceof Date;
+  const isFilled = typeof filled === 'boolean' ? filled : hasValue;
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
-    };
-
-    if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [isOpen]);
-
-  useEffect(() => {
-    if (typeof filled === 'boolean') {
-      return;
-    }
-    if (selection === 'range') {
-      const start = Array.isArray(resolvedValue) && resolvedValue[0] ? resolvedValue[0] : null;
-      const end = Array.isArray(resolvedValue) && resolvedValue[1] ? resolvedValue[1] : null;
-      setInternalFilled(!!start || !!end);
-      return;
-    }
-    setInternalFilled(resolvedValue instanceof Date);
-  }, [filled, selection, resolvedValue]);
 
   const getDisplayValue = (): string => {
     if (selection === 'range') {
@@ -108,68 +90,64 @@ export const InputDate = ({
     return '';
   };
 
-  const handleToggle = () => {
-    if (!disabled) {
-      setIsOpen(!isOpen);
-    }
-  };
-
   const handleChange = (newValue: Date | [Date, Date?] | null) => {
-    if (typeof filled !== 'boolean') {
-      if (selection === 'range') {
-        const start = Array.isArray(newValue) && newValue[0] ? newValue[0] : null;
-        const end = Array.isArray(newValue) && newValue[1] ? newValue[1] : null;
-        setInternalFilled(!!start || !!end);
-      } else {
-        setInternalFilled(newValue instanceof Date);
-      }
-    }
     if (value === undefined) {
       setInternalValue(newValue);
     }
     onChange?.(newValue);
-    if (selection === 'single') {
+    // Close once the choice is complete: one date, or both ends of a range.
+    if (selection === 'single' || (Array.isArray(newValue) && newValue[1])) {
       setIsOpen(false);
     }
   };
 
+  const describedBy = hasError ? `${id}-error` : description ? `${id}-description` : undefined;
+
   return (
-    <div className={`input-date-wrapper ${className}`} ref={wrapperRef}>
+    <div className={`input-date-wrapper ${className}`}>
       {label && (
         <FormLabel htmlFor={id} required={required} optional={optional}>
           {label}
         </FormLabel>
       )}
       <div className="input-date-container">
-        <button
-          id={id}
-          type="button"
-          className={`input-date ${isFilled ? 'input-date--filled' : ''} ${hasError ? 'input-date--error' : ''} ${disabled ? 'input-date--disabled' : ''} ${isOpen ? 'input-date--active' : ''}`}
-          onClick={handleToggle}
-          disabled={disabled}
-          aria-expanded={isOpen}
-          aria-haspopup="true"
-          aria-invalid={hasError}
-        >
-          <span className={getDisplayValue() ? '' : 'input-date__placeholder'}>
-            {getDisplayValue() || placeholder}
-          </span>
-          <span className="input-date__icon">
-            <Icon name="calendar_3" size={12} color="var(--pada-color-neutral-600)" />
-          </span>
-        </button>
-        {isOpen && (
-
-          <DatePickerDropdown
-            mode={mode}
-            selection={selection}
-            value={resolvedValue}
-            onChange={handleChange}
-            minDate={minDate}
-            maxDate={maxDate}
-          />
-
-        )}
+        <PopoverRoot open={isOpen} onOpenChange={(open) => setIsOpen(open && !disabled)}>
+          <PopoverTrigger
+            id={id}
+            className={`input-date ${isFilled ? 'input-date--filled' : ''} ${hasError ? 'input-date--error' : ''} ${disabled ? 'input-date--disabled' : ''} ${isOpen ? 'input-date--active' : ''}`}
+            disabled={disabled}
+            aria-invalid={hasError}
+            aria-describedby={describedBy}
+            aria-required={required || undefined}
+          >
+            <span className={getDisplayValue() ? '' : 'input-date__placeholder'}>
+              {getDisplayValue() || placeholder}
+            </span>
+            <span className="input-date__icon" aria-hidden="true">
+              <Icon name="calendar_3" size={12} color="var(--pada-color-neutral-600)" />
+            </span>
+          </PopoverTrigger>
+          <PopoverPortal>
+            <PopoverContent
+              className="input-date-popover"
+              aria-label={label ? `Choose ${label}` : 'Choose date'}
+              side="bottom"
+              align="start"
+              sideOffset={4}
+            >
+              <DatePickerDropdown
+                mode={mode}
+                selection={selection}
+                value={resolvedValue}
+                onChange={handleChange}
+                minDate={minDate}
+                maxDate={maxDate}
+                isDateUnavailable={isDateUnavailable}
+                weekStartsOn={weekStartsOn}
+              />
+            </PopoverContent>
+          </PopoverPortal>
+        </PopoverRoot>
       </div>
       {description && !hasError && (
         <p id={`${id}-description`} className="input-date-description">

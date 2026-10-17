@@ -589,6 +589,142 @@ import { Button } from 'pada-ds';
 <Button />
 ```
 
+### Calendar
+
+`import { Calendar } from 'pada-ds';`
+
+A month calendar for picking a day or a range (WAI-ARIA APG date grid). Arrow keys move by day and week, Home/End to the week's ends, PageUp/PageDown by month (Shift: by year). Compose your own header with `Calendar.Root`, `Calendar.PrevButton`, `Calendar.Heading`, `Calendar.NextButton` and `Calendar.Grid`.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| mode | `'single'` | no | - | Pick one day. |
+| value | `Date \| null` | no | - | - |
+| defaultValue | `Date \| null` | no | - | - |
+| onValueChange | `(value: Date \| null) => void` | no | - | - |
+| month | `Date` | no | - | Visible month (any day in it). Controlled. |
+| defaultMonth | `Date` | no | - | Initially visible month when uncontrolled. Defaults to the selection, else today. |
+| onMonthChange | `(month: Date) => void` | no | - | Called when the visible month changes, with its first day. |
+| min | `Date` | no | - | Earliest selectable day. |
+| max | `Date` | no | - | Latest selectable day. |
+| isDateUnavailable | `(date: Date) => boolean` | no | - | Marks other days unavailable (weekends, holidays, booked dates). |
+| weekStartsOn | `number` | no | - | First day of the week: 0 = Sunday … 6 = Saturday. |
+| locale | `string` | no | - | Locale for month and day names. Defaults to the browser's. |
+| disabled | `boolean` | no | - | - |
+| readOnly | `boolean` | no | - | - |
+
+Also accepts the props of `Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'onChange'>`.
+
+```tsx
+import { Calendar } from 'pada-ds';
+
+<Calendar />
+```
+
+### Calendar.Grid
+
+`import { Calendar } from 'pada-ds';`
+
+The day grid.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| renderDay | `(state: CalendarDayState) => ReactNode` | no | - | Content of each day button. Defaults to the day of the month. |
+| hideOutsideDays | `boolean` | no | - | Hide days of the previous and next months instead of showing them muted. |
+| dayClassName | `string` | no | - | Class name for each day button. |
+
+Also accepts the props of `Omit<ComponentPropsWithRef<'table'>, 'children'>`.
+
+```tsx
+import { Calendar } from 'pada-ds';
+
+<Calendar.Grid />
+```
+
+### Calendar.Heading
+
+`import { Calendar } from 'pada-ds';`
+
+The month and year.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| asChild | `boolean` | no | - | Merge onto your own element (a button that opens a month picker) instead of an `<h2>`. The element gets the month label as its content unless it has content of its own. |
+
+Also accepts the props of `ComponentPropsWithRef<'h2'>`.
+
+```tsx
+import { Calendar } from 'pada-ds';
+
+<Calendar.Heading />
+```
+
+### Calendar.NextButton
+
+`import { Calendar } from 'pada-ds';`
+
+Next-month button with a chevron.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| asChild | `boolean` | no | - | - |
+
+Also accepts the props of `ComponentPropsWithRef<'button'>`.
+
+```tsx
+import { Calendar } from 'pada-ds';
+
+<Calendar.NextButton />
+```
+
+### Calendar.PrevButton
+
+`import { Calendar } from 'pada-ds';`
+
+Previous-month button with a chevron.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| asChild | `boolean` | no | - | - |
+
+Also accepts the props of `ComponentPropsWithRef<'button'>`.
+
+```tsx
+import { Calendar } from 'pada-ds';
+
+<Calendar.PrevButton />
+```
+
+### Calendar.Root
+
+`import { Calendar } from 'pada-ds';`
+
+Holds the selection, the visible month and the limits.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| mode | `'single'` | no | - | Pick one day. |
+| value | `Date \| null` | no | - | - |
+| defaultValue | `Date \| null` | no | - | - |
+| onValueChange | `(value: Date \| null) => void` | no | - | - |
+| month | `Date` | no | - | Visible month (any day in it). Controlled. |
+| defaultMonth | `Date` | no | - | Initially visible month when uncontrolled. Defaults to the selection, else today. |
+| onMonthChange | `(month: Date) => void` | no | - | Called when the visible month changes, with its first day. |
+| min | `Date` | no | - | Earliest selectable day. |
+| max | `Date` | no | - | Latest selectable day. |
+| isDateUnavailable | `(date: Date) => boolean` | no | - | Marks other days unavailable (weekends, holidays, booked dates). |
+| weekStartsOn | `number` | no | - | First day of the week: 0 = Sunday … 6 = Saturday. |
+| locale | `string` | no | - | Locale for month and day names. Defaults to the browser's. |
+| disabled | `boolean` | no | - | - |
+| readOnly | `boolean` | no | - | - |
+
+Also accepts the props of `Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'onChange'>`.
+
+```tsx
+import { Calendar } from 'pada-ds';
+
+<Calendar.Root />
+```
+
 ### Card
 
 `import { Card } from 'pada-ds';`
@@ -729,6 +865,8 @@ import { CommandPalette } from 'pada-ds';
 
 `import { DatePickerDropdown } from 'pada-ds';`
 
+The date picker panel. Days are a keyboard-navigable `Calendar` grid (arrow keys, Home/End, PageUp/PageDown); the month heading opens a month view, and the year a year view.
+
 | Prop | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
 | mode | `DatePickerMode` | no | `'date'` | - |
@@ -738,6 +876,9 @@ import { CommandPalette } from 'pada-ds';
 | onChange | `(value: Date \| [Date, Date?] \| null) => void` | no | - | - |
 | minDate | `Date` | no | - | - |
 | maxDate | `Date` | no | - | - |
+| isDateUnavailable | `(date: Date) => boolean` | no | - | Marks other days unavailable (weekends, holidays, booked dates). |
+| weekStartsOn | `number` | no | - | First day of the week: 0 = Sunday … 6 = Saturday. |
+| locale | `string` | no | - | Locale for month and day names. |
 
 ```tsx
 import { DatePickerDropdown } from 'pada-ds';
@@ -1662,6 +1803,8 @@ import { Indexer } from 'pada-ds';
 
 `import { InputDate } from 'pada-ds';`
 
+A date field: a button showing the chosen date (or range) that opens the date picker in a popover. Focus moves to the selected day; Escape closes the picker and returns to the field.
+
 | Prop | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
 | label | `string` | no | - | - |
@@ -1678,6 +1821,8 @@ import { Indexer } from 'pada-ds';
 | onChange | `(value: Date \| [Date, Date?] \| null) => void` | no | - | - |
 | minDate | `Date` | no | - | - |
 | maxDate | `Date` | no | - | - |
+| isDateUnavailable | `(date: Date) => boolean` | no | - | Marks other days unavailable (weekends, holidays, booked dates). |
+| weekStartsOn | `number` | no | - | First day of the week: 0 = Sunday … 6 = Saturday. |
 | className | `string` | no | `''` | - |
 
 ```tsx
@@ -1922,6 +2067,43 @@ import { MoreFilter } from 'pada-ds';
 import { Notification } from 'pada-ds';
 
 <Notification open={true} onOpenChange={() => {}} title="..." />
+```
+
+### NumberInput
+
+`import { NumberInput } from 'pada-ds';`
+
+A number field (WAI-ARIA APG Spinbutton): type a value, or use Up/Down, PageUp/PageDown and Home/End, or the steppers (hold to repeat). Values are formatted with `formatOptions` (currency, percent, units) and typed text is parsed in the same locale.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| label | `string` | yes | - | - |
+| description | `string` | no | - | Help text under the field. |
+| error | `string` | no | - | Error message; marks the field invalid. |
+| required | `boolean` | no | - | - |
+| optional | `boolean` | no | - | Show "(optional)" after the label. |
+| placeholder | `string` | no | - | - |
+| stepper | `'stacked' \| 'split' \| 'none'` | no | `'stacked'` | `stacked`: up/down arrows at the end; `split`: minus at the start and plus at the end; `none`. |
+| size | `'sm' \| 'md' \| 'lg'` | no | `'md'` | Control height. |
+| value | `number \| null` | no | - | Controlled value; `null` when empty. |
+| defaultValue | `number \| null` | no | - | Initial value when uncontrolled. |
+| onValueChange | `(value: number \| null) => void` | no | - | Called with the committed value (on step, Enter or blur), `null` when cleared. |
+| min | `number` | no | - | - |
+| max | `number` | no | - | - |
+| step | `number` | no | - | Arrow keys and the steppers change the value by this much. |
+| largeStep | `number` | no | - | PageUp and PageDown change the value by this much. |
+| formatOptions | `Intl.NumberFormatOptions` | no | - | Display format: currency, percent, units, fraction digits. |
+| locale | `string` | no | - | Locale for formatting and parsing. Defaults to the browser's. |
+| disabled | `boolean` | no | - | - |
+| readOnly | `boolean` | no | - | - |
+| name | `string` | no | - | Submits the raw number (not the formatted text) with forms under this name. |
+
+Also accepts the props of `Omit<Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'onChange'>, 'children' | 'inputId'>`.
+
+```tsx
+import { NumberInput } from 'pada-ds';
+
+<NumberInput label="..." />
 ```
 
 ### PageHeader

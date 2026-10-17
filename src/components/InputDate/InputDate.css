@@ -19,11 +19,31 @@
     transition: border-color var(--pada-duration-normal) var(--pada-ease-standard), box-shadow var(--pada-duration-normal) var(--pada-ease-standard);
 }
 
-.input-date-container .date_picker {
-    position: absolute;
-    top: calc(100% + var(--pada-space-1));
-    left: 0;
-    z-index: var(--pada-z-dropdown);
+/* The picker: portalled and positioned under the field (it flips when there is no room). */
+.input-date-popover {
+    z-index: var(--pada-z-popover);
+    transform-origin: var(--pada-floating-transform-origin);
+    transition:
+        opacity var(--pada-duration-normal) var(--pada-ease-enter),
+        scale var(--pada-duration-normal) var(--pada-ease-enter);
+}
+
+.input-date-popover[data-state="closed"] {
+    opacity: 0;
+    scale: var(--pada-motion-scale-enter);
+    transition-duration: var(--pada-duration-fast);
+    transition-timing-function: var(--pada-ease-exit);
+}
+
+@starting-style {
+    .input-date-popover[data-state="open"] {
+        opacity: 0;
+        scale: var(--pada-motion-scale-enter);
+    }
+}
+
+.input-date-popover:focus-visible {
+    outline: none;
 }
 
 .input-date-container:hover:not(:has(.input-date--disabled)) {

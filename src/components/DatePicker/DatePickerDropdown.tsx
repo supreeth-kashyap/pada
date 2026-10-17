@@ -1,19 +1,15 @@
 import { useState, useEffect } from 'react';
 import './DatePicker.css';
 import { Icon } from '../Icon';
+import { Calendar } from '../Calendar';
+import type { CalendarRootProps } from '../../headless/Calendar/Calendar';
 import { PickerBox } from './_PickerBox/PickerBox';
 import type { DatePickerMode, DatePickerSelection } from './types';
 import {
   MONTHS,
-  DAYS_OF_WEEK,
-  getDaysInMonth,
   getYears,
-  navigateMonth,
   navigateYear,
   navigateDecade,
-  isDateInRange,
-  isDateSelected,
-  isDateDisabled,
   isMonthInRange,
   isMonthSelected,
   isYearInRange,
@@ -28,8 +24,18 @@ export interface DatePickerDropdownProps {
   onChange?: (value: Date | [Date, Date?] | null) => void;
   minDate?: Date;
   maxDate?: Date;
+  /** Marks other days unavailable (weekends, holidays, booked dates). */
+  isDateUnavailable?: (date: Date) => boolean;
+  /** First day of the week: 0 = Sunday … 6 = Saturday. @default 0 */
+  weekStartsOn?: number;
+  /** Locale for month and day names. */
+  locale?: string;
 }
 
+/**
+ * The date picker panel. Days are a keyboard-navigable `Calendar` grid (arrow keys, Home/End,
+ * PageUp/PageDown); the month heading opens a month view, and the year a year view.
+ */
 export const DatePickerDropdown = ({
   mode = 'date',
   selection = 'single',
@@ -38,6 +44,9 @@ export const DatePickerDropdown = ({
   onChange,
   minDate,
   maxDate,
+  isDateUnavailable,
+  weekStartsOn,
+  locale,
 }: DatePickerDropdownProps) => {
   const resolvedSelection: DatePickerSelection = isRange ? 'range' : selection;
   const resolvedValue: Date | [Date, Date?] | null = value ?? null;
@@ -51,7 +60,6 @@ export const DatePickerDropdown = ({
   const [currentView, setCurrentView] = useState<'calendar' | 'month' | 'year'>(
     mode === 'date' ? 'calendar' : mode === 'month' ? 'month' : 'year'
   );
-  const [hoveredDate, setHoveredDate] = useState<Date | null>(null);
   const [hoveredMonth, setHoveredMonth] = useState<number | null>(null);
   const [hoveredYear, setHoveredYear] = useState<number | null>(null);
 
@@ -67,24 +75,6 @@ export const DatePickerDropdown = ({
       setRangeEnd(null);
     }
   }, [value]);
-
-  const handleDateSelect = (date: Date) => {
-    if (resolvedSelection === 'range') {
-      if (!rangeStart || (rangeStart && rangeEnd)) {
-        setRangeStart(date);
-        setRangeEnd(null);
-        onChange?.([date]);
-      } else {
-        const start = rangeStart < date ? rangeStart : date;
-        const end = rangeStart < date ? date : rangeStart;
-        setRangeStart(start);
-        setRangeEnd(end);
-        onChange?.([start, end]);
-      }
-    } else {
-      onChange?.(date);
-    }
-  };
 
   const handleMonthSelect = (month: number) => {
     const newDate = new Date(viewDate.getFullYear(), month, 1);
@@ -134,10 +124,6 @@ export const DatePickerDropdown = ({
     }
   };
 
-  const handleNavigateMonth = (direction: 'prev' | 'next') => {
-    setViewDate(navigateMonth(viewDate, direction));
-  };
-
   const handleNavigateYear = (direction: 'prev' | 'next') => {
     setViewDate(navigateYear(viewDate, direction));
   };
@@ -146,86 +132,47 @@ export const DatePickerDropdown = ({
     setViewDate(navigateDecade(viewDate, direction));
   };
 
-  const renderCalendar = () => {
-    const days = getDaysInMonth(viewDate);
-    const currentMonth = viewDate.getMonth();
-    const today = new Date();
-    
-    return (
-      <div className="date_picker">
-        <div data-section="header">
-          <button
-            type="button"
-            className="date_picker_chevron"
-            onClick={() => handleNavigateMonth('prev')}
-            aria-label="Previous month"
-          >
-            <Icon name="chevron_left" size={12} color="var(--pada-color-neutral-600)" />
-          </button>
-          <button
-            type="button"
-            className="date_picker_view_select"
-            onClick={() => setCurrentView('month')}
-          >
-            {MONTHS[viewDate.getMonth()]} {viewDate.getFullYear()}
-          </button>
-          <button
-            type="button"
-            className="date_picker_chevron"
-            onClick={() => handleNavigateMonth('next')}
-            aria-label="Next month"
-          >
-            <Icon name="chevron_right" size={12} color="var(--pada-color-neutral-600)" />
-          </button>
-        </div>
-        <div className="date_picker_weekday_header">
-          {DAYS_OF_WEEK.map(day => (
-            <span key={day}>{day}</span>
-          ))}
-        </div>
-        <div data-grid="days">
-          {days.map((day, index) => {
-            const isCurrentMonth = day.getMonth() === currentMonth;
-            const selected = isDateSelected(day, resolvedSelection, resolvedValue, rangeStart, rangeEnd);
-            let inRange = isDateInRange(day, resolvedSelection, rangeStart, rangeEnd);
-            const disabled = isDateDisabled(day, minDate, maxDate);
-            const isToday =
-              day.getDate() === today.getDate() &&
-              day.getMonth() === today.getMonth() &&
-              day.getFullYear() === today.getFullYear();
-            const visualState = selected ? 'active' : inRange ? 'hover' : 'rest';
-            
-            // Show hover preview for range selection
-            if (resolvedSelection === 'range' && rangeStart && !rangeEnd && hoveredDate) {
-              const hoverStart = rangeStart < hoveredDate ? rangeStart : hoveredDate;
-              const hoverEnd = rangeStart < hoveredDate ? hoveredDate : rangeStart;
-              const dayTime = day.getTime();
-              if (dayTime >= hoverStart.getTime() && dayTime <= hoverEnd.getTime()) {
-                inRange = true;
-              }
-            }
-            
-            return (
-              <PickerBox
-                key={index}
-                label={day.getDate()}
-                isActive={selected}
-                isToday={isToday}
-                isMuted={!isCurrentMonth}
-                disabled={disabled}
-                state={visualState}
-                onClick={() => !disabled && handleDateSelect(day)}
-                onMouseEnter={() =>
-                  !disabled && resolvedSelection === 'range' && rangeStart && !rangeEnd && setHoveredDate(day)
-                }
-                onMouseLeave={() => setHoveredDate(null)}
-              />
-            );
-          })}
-        </div>
+  // Days: the Calendar grid owns keyboard navigation and the range preview. Its value is
+  // controlled only when this picker's is.
+  const calendarProps: CalendarRootProps =
+    resolvedSelection === 'range'
+      ? {
+          mode: 'range',
+          ...(value !== undefined && { value: Array.isArray(value) ? value : null }),
+          onValueChange: (next) => {
+            setRangeStart(next?.[0] ?? null);
+            setRangeEnd(next?.[1] ?? null);
+            onChange?.(next);
+          },
+        }
+      : {
+          mode: 'single',
+          ...(value !== undefined && { value: value instanceof Date ? value : null }),
+          onValueChange: (next) => onChange?.(next),
+        };
+
+  const renderCalendar = () => (
+    <Calendar.Root
+      {...calendarProps}
+      month={viewDate}
+      onMonthChange={setViewDate}
+      min={minDate}
+      max={maxDate}
+      isDateUnavailable={isDateUnavailable}
+      weekStartsOn={weekStartsOn}
+      locale={locale}
+      className="date_picker"
+    >
+      <div data-section="header">
+        <Calendar.PrevButton className="date_picker_chevron" />
+        <Calendar.Heading asChild>
+          <button type="button" className="date_picker_view_select" onClick={() => setCurrentView('month')} />
+        </Calendar.Heading>
+        <Calendar.NextButton className="date_picker_chevron" />
       </div>
-    );
-  };
+      <Calendar.Grid />
+    </Calendar.Root>
+  );
 
   const renderMonthPicker = () => {
     const today = new Date();

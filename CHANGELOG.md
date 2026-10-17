@@ -6,6 +6,25 @@
 - Moved the `body` and `p` rules out of `dist/tokens.css` into a new optional `pada-ds/base.css` export, so importing the tokens no longer overrides an app's own styles.
 - Added a component API manifest for AI coding agents. `npm run build` now reads every exported component's props from the TypeScript source and writes `dist/manifest.json` (exported as `pada-ds/manifest.json`), `llms.txt` and `llms-full.txt`. Both llms files ship in the package and are committed at the repo root. `npm test` fails if they are stale or if an exported component is missing from the manifest.
 
+- **New components (wave 2): NumberInput and Calendar.**
+  - `NumberInput` is a number field built as a `spinbutton`:
+    - Keys: Up/Down step, PageUp/PageDown take a `largeStep`, Home/End jump to `min`/`max`.
+    - Steppers can be `stacked` (default), `split` or `none`. They repeat while held and are out of the tab order.
+    - Values are formatted with `formatOptions` (currency, percent, units) through `Intl.NumberFormat`. Typed text is parsed in the same `locale` and committed on Enter or blur.
+    - Stepping is free of floating-point noise. The `aria-valuetext` is formatted, and `name` submits the raw number.
+    - It also comes as headless `NumberInput` parts (`Root`, `Input`, `Increment`, `Decrement`) with `createNumberFormatter`.
+  - `Calendar` is a month grid, single day or range (`mode="range"`):
+    - Keys: arrows move by day and week, Home/End to the week's ends, PageUp/PageDown by month (Shift: by year), Enter or Space selects.
+    - Options: `min`, `max`, `isDateUnavailable`, `weekStartsOn`, `locale` and a controllable visible month.
+    - A range previews while you choose its end.
+    - It also comes as headless `Calendar` parts (`Root`, `Heading`, `PrevButton`, `NextButton`, `Grid` with `renderDay`).
+  - `DatePickerDropdown`'s day view is now this Calendar, so it gets the keyboard grid, full date names for screen readers and unavailable days. New props: `isDateUnavailable`, `weekStartsOn` and `locale`. The month and year views are unchanged.
+  - `InputDate` opens its picker in a popover dialog:
+    - Focus starts on the selected day (or today), and Escape or an outside click closes it and returns focus to the field.
+    - The picker flips above the field when there is no room.
+    - The field reports `aria-haspopup="dialog"` and is described by its description or error.
+    - A range picker now closes once both ends are chosen.
+    - New props: `isDateUnavailable` and `weekStartsOn`.
 - **Toolbar, Select, ComboBox and UploadField (phase 3).**
   - Toolbar `Filter` and `MoreFilter` open on the headless Popover. They render in a portal, flip when there is no room, and animate in and out. Escape and outside clicks close them, and focus moves into them on open and returns to the chip on close. `MoreFilter`'s filter names are now a vertical tab list (Up/Down move between them; previously `menuitem`s around a listbox). The selection count is announced as "N selected".
   - `FilterChip` no longer nests a clickable `<span>` inside its button. The remove control is its own button ("Remove filter Owner: Ada") next to the chip's main button.

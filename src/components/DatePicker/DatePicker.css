@@ -14,6 +14,28 @@
     margin-bottom: 18px;
 }
 
+/* The day view is a Calendar inside the card; the card supplies the spacing. */
+.date_picker.calendar {
+    display: flex;
+    gap: 0;
+}
+
+.date_picker_chevron:hover:not(:disabled),
+.date_picker_view_select:hover {
+    background-color: var(--pada-color-neutral-subtle-hover);
+}
+
+.date_picker_chevron:focus-visible,
+.date_picker_view_select:focus-visible {
+    outline: none;
+    box-shadow: var(--pada-shadow-focus);
+}
+
+.date_picker_chevron:disabled {
+    color: var(--pada-color-fg-disabled);
+    cursor: not-allowed;
+}
+
 .date_picker_chevron {
     align-items: center;
     background-color: transparent;
@@ -42,35 +64,11 @@
 }
 
 
-.date_picker_weekday_header {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 8px;
-    margin-bottom: 12px;
-    text-align: center;
-    font-size: var(--pada-font-size-sm);
-    font-weight: var(--pada-font-weight-semibold);
-    color: var(--pada-color-neutral-500);
-}
-
-.date_picker_weekday_header span {
-    padding: 4px 0;
-}
-
 .date_picker [data-grid] {
     display: grid;
     column-gap: 2px;
     row-gap: 2px;
     justify-items: center;
-}
-
-.date_picker [data-grid="days"] {
-    grid-template-columns: repeat(7, 1fr);
-    grid-auto-rows: 32px;
-}
-
-.date_picker [data-grid="days"] .picker-box {
-    height: 100%;
 }
 
 .date_picker [data-grid="months"],
