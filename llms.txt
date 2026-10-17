@@ -173,6 +173,7 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - Popover.Trigger: asChild?; extends ComponentPropsWithRef<'button'>
 - Progress: value, max?, label?
 - RadioGroup: name, label?, options, value, onChange, disabled?, className?
+- ScrollArea: orientation?, maxHeight?, maxWidth?, fade?, scrollbar?; extends ComponentPropsWithRef<'div'>
 - SearchField: value?, defaultValue?, onChange?, onClear?, className?; extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'onChange' | 'value' | 'defaultValue'>
 - SegmentControl: options, value?, defaultValue?, onChange?, className?, disabled?
 - Select: label, options, value?, defaultValue?, placeholder?, onChange?, description?, error?, disabled?, name?, id?, className?
@@ -190,6 +191,7 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - Spinner: size?, label?; extends ComponentPropsWithRef<'span'>
 - Splitter: variant; extends React.ButtonHTMLAttributes<HTMLButtonElement>
 - Stack: direction?, gap?, align?, justify?, wrap?, as?; extends ComponentPropsWithRef<'div'>
+- Stat: label, value, formatOptions?, locale?, delta?, deltaFormatOptions?, deltaLabel?, trend?, invertTrend?, description?, chart?, animate?, size?, className?
 - Step: title?, description?, stepValue?, status?, isLast?, onClick?, clickable?, onSelect?; extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onClick' | 'onSelect'>
 - Steps: steps, defaultStatus?, currentStep?, onStepChange?; extends React.HTMLAttributes<HTMLDivElement>
 - Switch: label?, loading?; extends React.InputHTMLAttributes<HTMLInputElement>
@@ -207,6 +209,9 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - Text: children, size?, weight?, family?, lineHeight?, color?, as?; extends React.HTMLAttributes<HTMLSpanElement>
 - ThemeProvider: children?, defaultTheme?, onThemeChange?, target?, storageKey?, theme?, accent?, neutral?, density?, radius?, motion?, contrast?
 - ThemeToggle: className?, size?
+- Timeline: items?, children?, density?; extends Omit<ComponentPropsWithRef<'ol'>, 'children'>
+- Timeline.Item: title, time?, icon?, tone?, pending?, children?; extends Omit<ComponentPropsWithRef<'li'>, 'title'>
+- TimelineItem: title, time?, icon?, tone?, pending?, children?; extends Omit<ComponentPropsWithRef<'li'>, 'title'>
 - Toaster: position?, visibleToasts?, label?, hotkey?, className?
 - Toggle: icon?, size?, pressed?, defaultPressed?, onPressedChange?, asChild?; extends ComponentPropsWithRef<'button'>
 - ToggleGroup.Item: icon?, value, asChild?; extends ComponentPropsWithRef<'button'>

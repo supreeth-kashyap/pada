@@ -179,6 +179,7 @@ This design system includes the following components:
 - **Popover**: Floating container for contextual content; also `Popover.Root`, `Popover.Content`, … parts.
 - **Progress**: Visual progress indicators for tasks.
 - **RadioGroup**: Grouped single-choice radio buttons.
+- **ScrollArea**: Native scrolling with themed scrollbars and edge fades.
 - **SearchField**: Text search input with clear.
 - **SegmentControl**: Segmented button toggle control.
 - **Select**: Dropdown selection with ComboBox.
@@ -189,12 +190,14 @@ This design system includes the following components:
 - **Slider**: Range selection slider control.
 - **Spinner**: Indeterminate loading indicator.
 - **Stack**: Flex layout with token gaps.
+- **Stat**: Key figure with a counting value and a delta.
 - **Steps**: Multi-step progress indicator component.
 - **Switch**: Toggle between on/off states.
 - **Table**: Responsive tabular data display component.
 - **Tabs**: Tabbed navigation interface component.
 - **Tags**: Compact label tags for metadata.
 - **Text**: Typography primitives and helpers.
+- **Timeline**: Ordered list of events.
 - **ThemeProvider / ThemeToggle**: Theme axes for a page or subtree; `useTheme()`.
 - **Toaster / toast()**: Stacked, swipeable toast notifications.
 - **Toggle / ToggleGroup**: Pressed-state buttons and segmented groups.

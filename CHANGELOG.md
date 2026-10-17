@@ -6,6 +6,17 @@
 - Moved the `body` and `p` rules out of `dist/tokens.css` into a new optional `pada-ds/base.css` export, so importing the tokens no longer overrides an app's own styles.
 - Added a component API manifest for AI coding agents. `npm run build` now reads every exported component's props from the TypeScript source and writes `dist/manifest.json` (exported as `pada-ds/manifest.json`), `llms.txt` and `llms-full.txt`. Both llms files ship in the package and are committed at the repo root. `npm test` fails if they are stale or if an exported component is missing from the manifest.
 
+- **New components (wave 2): Stat, Timeline and ScrollArea.**
+  - `Stat` is a key figure:
+    - A label and a value formatted with `formatOptions`. The value counts up to its new number when it changes; screen readers hear only the final value, and the count is skipped under reduced motion.
+    - A `delta` with a spoken direction, coloured by whether the change is good (`invertTrend` for costs and errors).
+    - `deltaLabel`, `description`, a `chart` slot and three sizes.
+    - The counter is also exported as the headless hook `useAnimatedNumber`.
+  - `Timeline` is an ordered list of events with tone- and icon-able markers, `<time>` dates, details, pending (hollow, dashed) events, a compact density and a staggered entrance. Pass `items` or `Timeline.Item` children.
+  - `ScrollArea` is a natively scrolling region:
+    - Slim themed scrollbars that show on hover or scroll (or `always`) and fade at the edges where more content is hidden.
+    - Vertical, horizontal or both, with `maxHeight` and `maxWidth`.
+    - It becomes focusable (and a named region) when its content overflows.
 - **New components (wave 2): Tree, HoverCard and ContextMenu.**
   - `Tree` is a tree view for file browsers, sectioned navigation and nested settings. Pass nested `items`, or compose `Tree.Root`, `Item`, `ItemRow` (with an `icon`), `ItemLabel` and `Group`.
     - Keys: Up/Down move, Right expands or enters, Left collapses or goes to the parent, Home/End jump, `*` expands the siblings, and typing jumps to an item.

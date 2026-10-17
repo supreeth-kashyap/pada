@@ -32,3 +32,4 @@ export { useScrollLock, useHideOthers } from './utils/modal';
 export { useFloatingPosition, type FloatingOptions, type Side, type Align } from './utils/floating';
 export { findNextIndex, findTypeaheadIndex, keyToNavigation, type NavigableItem, type NavigationKey } from './utils/navigation';
 export { useTypeahead } from './utils/useTypeahead';
+export { useAnimatedNumber, type AnimatedNumberOptions } from './utils/useAnimatedNumber';

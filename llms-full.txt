@@ -2816,6 +2816,28 @@ import { RadioGroup } from 'pada-ds';
 <RadioGroup name="..." options={[]} value="..." onChange={() => {}} />
 ```
 
+### ScrollArea
+
+`import { ScrollArea } from 'pada-ds';`
+
+A scrolling region with slim, themed scrollbars and faded edges. Scrolling stays native (touch, wheel, keyboard, scroll snapping, find-in-page). When content overflows, the region becomes focusable so keyboard users can scroll it; give it an `aria-label` then.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| orientation | `'vertical' \| 'horizontal' \| 'both'` | no | `'vertical'` | Which way it scrolls. |
+| maxHeight | `number \| string` | no | - | Maximum height (vertical) before it scrolls, e.g. 320 or "50vh". |
+| maxWidth | `number \| string` | no | - | Maximum width (horizontal) before it scrolls. |
+| fade | `boolean` | no | `true` | Fade the edges where more content is hidden. |
+| scrollbar | `'auto' \| 'always'` | no | `'auto'` | `auto` shows the thin scrollbar while hovering or scrolling; `always` keeps it. |
+
+Also accepts the props of `ComponentPropsWithRef<'div'>`.
+
+```tsx
+import { ScrollArea } from 'pada-ds';
+
+<ScrollArea />
+```
+
 ### SearchField
 
 `import { SearchField } from 'pada-ds';`
@@ -3164,6 +3186,35 @@ import { Stack } from 'pada-ds';
 <Stack />
 ```
 
+### Stat
+
+`import { Stat } from 'pada-ds';`
+
+A key figure (KPI): a label, a big value that counts to its new number when it changes, an optional delta coloured by whether the change is good, a description and a chart slot.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| label | `ReactNode` | yes | - | - |
+| value | `number \| ReactNode` | yes | - | A number (formatted and animated) or any content. |
+| formatOptions | `Intl.NumberFormatOptions` | no | - | Number format for `value`: currency, percent, compact notation, units. |
+| locale | `string` | no | - | - |
+| delta | `number` | no | - | Change since the comparison period, e.g. 0.125 with a percent format, or 12. |
+| deltaFormatOptions | `Intl.NumberFormatOptions` | no | - | Number format for `delta`. Defaults to `formatOptions` with a sign. |
+| deltaLabel | `ReactNode` | no | - | Comparison text after the delta, e.g. "vs last week". |
+| trend | `StatTrend` | no | - | Direction of the delta. Defaults to the delta's sign. |
+| invertTrend | `boolean` | no | `false` | When going down is good (costs, errors, latency): down shows as positive. |
+| description | `ReactNode` | no | - | Help text under the value. |
+| chart | `ReactNode` | no | - | Slot for a sparkline or small chart. |
+| animate | `boolean` | no | `true` | Count up from the previous value when it changes. |
+| size | `'sm' \| 'md' \| 'lg'` | no | `'md'` | - |
+| className | `string` | no | - | - |
+
+```tsx
+import { Stat } from 'pada-ds';
+
+<Stat label="..." value="..." />
+```
+
 ### Step
 
 `import { Step } from 'pada-ds';`
@@ -3501,6 +3552,72 @@ Switches between light and dark. Where the browser supports view transitions (an
 import { ThemeToggle } from 'pada-ds';
 
 <ThemeToggle />
+```
+
+### Timeline
+
+`import { Timeline } from 'pada-ds';`
+
+An ordered list of events (activity feeds, audit logs, order tracking) joined by a line. Events appear one after another on mount; pending events are drawn hollow and dashed.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| items | `TimelineEvent[]` | no | - | The events, oldest first (or newest first: the order is yours). |
+| children | `ReactNode` | no | - | `Timeline.Item`s, instead of `items`. |
+| density | `'compact' \| 'comfortable'` | no | `'comfortable'` | Gap between events. |
+
+Also accepts the props of `Omit<ComponentPropsWithRef<'ol'>, 'children'>`.
+
+```tsx
+import { Timeline } from 'pada-ds';
+
+<Timeline />
+```
+
+### Timeline.Item
+
+`import { Timeline } from 'pada-ds';`
+
+One event: a marker on the line, then its title, time and details.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| title | `ReactNode` | yes | - | - |
+| time | `Date \| ReactNode` | no | - | When it happened: a Date (rendered in a `<time>`) or any text. |
+| icon | `string` | no | - | Built-in icon name inside the marker; a dot when omitted. |
+| tone | `TimelineTone` | no | `'neutral'` | Marker colour. |
+| pending | `boolean` | no | - | `pending` events (still to come) get a hollow marker and a dashed connector. |
+| children | `ReactNode` | no | - | Details under the title. |
+
+Also accepts the props of `Omit<ComponentPropsWithRef<'li'>, 'title'>`.
+
+```tsx
+import { Timeline } from 'pada-ds';
+
+<Timeline.Item title="..." />
+```
+
+### TimelineItem
+
+`import { TimelineItem } from 'pada-ds';`
+
+One event: a marker on the line, then its title, time and details.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| title | `ReactNode` | yes | - | - |
+| time | `Date \| ReactNode` | no | - | When it happened: a Date (rendered in a `<time>`) or any text. |
+| icon | `string` | no | - | Built-in icon name inside the marker; a dot when omitted. |
+| tone | `TimelineTone` | no | `'neutral'` | Marker colour. |
+| pending | `boolean` | no | - | `pending` events (still to come) get a hollow marker and a dashed connector. |
+| children | `ReactNode` | no | - | Details under the title. |
+
+Also accepts the props of `Omit<ComponentPropsWithRef<'li'>, 'title'>`.
+
+```tsx
+import { TimelineItem } from 'pada-ds';
+
+<TimelineItem title="..." />
 ```
 
 ### Toaster

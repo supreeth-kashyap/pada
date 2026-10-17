@@ -1,0 +1,148 @@
+/* Root */
+.timeline {
+  /* Component tokens */
+  --pada-timeline-marker-size: 24px;
+  --pada-timeline-line: var(--pada-color-border);
+  --pada-timeline-gap: var(--pada-space-6);
+  --pada-timeline-stagger: calc(60ms * var(--pada-motion-scale));
+
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--pada-font-sans);
+  color: var(--pada-color-fg);
+}
+
+/* Variant variables */
+.timeline[data-density="compact"] {
+  --pada-timeline-gap: var(--pada-space-3);
+}
+
+/* Item */
+.timeline-item {
+  /* Tone variables */
+  --pada-timeline-marker-bg: var(--pada-color-neutral-subtle);
+  --pada-timeline-marker-fg: var(--pada-color-fg-muted);
+  --pada-timeline-marker-border: var(--pada-color-border);
+  --pada-timeline-line-style: solid;
+
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--pada-timeline-marker-size) 1fr;
+  column-gap: var(--pada-space-3);
+  padding-bottom: var(--pada-timeline-gap);
+  animation: timeline-item-in var(--pada-duration-slow) var(--pada-ease-enter) backwards;
+  animation-delay: calc(var(--pada-timeline-index, 0) * var(--pada-timeline-stagger));
+}
+
+.timeline-item[data-tone="accent"] {
+  --pada-timeline-marker-bg: var(--pada-color-accent-subtle);
+  --pada-timeline-marker-fg: var(--pada-color-accent-fg);
+  --pada-timeline-marker-border: var(--pada-color-accent-border);
+}
+
+.timeline-item[data-tone="success"] {
+  --pada-timeline-marker-bg: var(--pada-color-success-subtle);
+  --pada-timeline-marker-fg: var(--pada-color-success-fg);
+  --pada-timeline-marker-border: var(--pada-color-success-border);
+}
+
+.timeline-item[data-tone="warning"] {
+  --pada-timeline-marker-bg: var(--pada-color-warning-subtle);
+  --pada-timeline-marker-fg: var(--pada-color-warning-fg);
+  --pada-timeline-marker-border: var(--pada-color-warning-border);
+}
+
+.timeline-item[data-tone="danger"] {
+  --pada-timeline-marker-bg: var(--pada-color-danger-subtle);
+  --pada-timeline-marker-fg: var(--pada-color-danger-fg);
+  --pada-timeline-marker-border: var(--pada-color-danger-border);
+}
+
+.timeline-item[data-pending] {
+  --pada-timeline-marker-bg: var(--pada-color-surface);
+  --pada-timeline-line-style: dashed;
+}
+
+/* The connector runs from under this marker to the next one. */
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  top: calc(var(--pada-timeline-marker-size) + var(--pada-space-1));
+  bottom: var(--pada-space-1);
+  inset-inline-start: calc(var(--pada-timeline-marker-size) / 2);
+  border-inline-start: var(--pada-border-width-thin) var(--pada-timeline-line-style) var(--pada-timeline-line);
+}
+
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.timeline-item:last-child::before {
+  display: none;
+}
+
+/* Child elements */
+.timeline-marker {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: var(--pada-timeline-marker-size);
+  height: var(--pada-timeline-marker-size);
+  border: var(--pada-border-width-thin) solid var(--pada-timeline-marker-border);
+  border-radius: var(--pada-radius-full);
+  background-color: var(--pada-timeline-marker-bg);
+  color: var(--pada-timeline-marker-fg);
+}
+
+.timeline-marker .icon {
+  --icon-color: var(--pada-timeline-marker-fg);
+}
+
+.timeline-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--pada-radius-full);
+  background-color: currentColor;
+}
+
+.timeline-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pada-space-1);
+  min-width: 0;
+  padding-top: 2px;
+}
+
+.timeline-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  column-gap: var(--pada-space-3);
+}
+
+.timeline-title {
+  font-size: var(--pada-font-size-md);
+  font-weight: var(--pada-font-weight-medium);
+}
+
+.timeline-time {
+  font-size: var(--pada-font-size-sm);
+  color: var(--pada-color-fg-subtle);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.timeline-description {
+  font-size: var(--pada-font-size-sm);
+  color: var(--pada-color-fg-muted);
+}
+
+@keyframes timeline-item-in {
+  from {
+    opacity: 0;
+    translate: 0 var(--pada-motion-distance-sm);
+  }
+}
