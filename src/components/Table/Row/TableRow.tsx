@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import './TableRow.css';
-import { TableContext } from '../Table';
+import { TableContext } from '../TableContext';
 import type { TableCellProps } from '../Cells';
 
 export interface TableRowProps {

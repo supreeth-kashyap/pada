@@ -92,6 +92,95 @@ import { AccordionHeader } from 'pada-ds';
 <AccordionHeader title="..." />
 ```
 
+### Alert
+
+`import { Alert } from 'pada-ds';`
+
+An inline, persistent message: a callout in a form or page, not a transient toast.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| tone | `AlertTone` | no | `'info'` | Colour and default icon by meaning. |
+| title | `ReactNode` | no | - | Bold first line. |
+| icon | `string \| false` | no | - | Built-in icon name; `false` hides the icon. Defaults to one that matches the tone. |
+| actions | `ReactNode` | no | - | Buttons or links shown under the message. |
+| onDismiss | `() => void` | no | - | Shows a dismiss button that calls this. |
+| live | `'polite' \| 'assertive'` | no | - | Announce the alert when it appears: `polite` (role="status") or `assertive` (role="alert", for errors that need immediate attention). Leave unset for alerts present on page load. |
+
+Also accepts the props of `Omit<ComponentPropsWithRef<'div'>, 'title'>`.
+
+```tsx
+import { Alert } from 'pada-ds';
+
+<Alert />
+```
+
+### Avatar
+
+`import { Avatar } from 'pada-ds';`
+
+A user or entity picture. Shows the image once it has loaded; until then (or if it fails) shows initials on a colour derived from the name, or a person icon when there is no name.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| src | `string` | no | - | Image URL. Falls back to initials, then a person icon, while loading or on error. |
+| name | `string` | no | - | Person or entity name: the accessible name, and the source of the initials and colour. |
+| alt | `string` | no | - | Alternative text for the image when it differs from `name`. |
+| size | `AvatarSize` | no | `'md'` | xs 20px, sm 24px, md 32px, lg 40px, xl 56px. |
+| shape | `'circle' \| 'square'` | no | `'circle'` | Circle for people, square for organisations and projects. |
+| status | `AvatarStatus` | no | - | Presence dot in the corner. |
+
+Also accepts the props of `Omit<ComponentPropsWithRef<'span'>, 'children'>`.
+
+```tsx
+import { Avatar } from 'pada-ds';
+
+<Avatar />
+```
+
+### AvatarGroup
+
+`import { AvatarGroup } from 'pada-ds';`
+
+Overlapping avatars with a "+N" overflow counter.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| max | `number` | no | - | Show at most this many avatars, then a "+N" counter. |
+| size | `AvatarSize` | no | `'md'` | Size applied to every avatar in the group. |
+| label | `string` | no | - | Accessible name of the group, e.g. "Project members". |
+
+Also accepts the props of `ComponentPropsWithRef<'div'>`.
+
+```tsx
+import { AvatarGroup } from 'pada-ds';
+
+<AvatarGroup />
+```
+
+### Badge
+
+`import { Badge } from 'pada-ds';`
+
+A short status label or a count: "Beta", "Overdue", "12". For removable or clickable labels use `Tags`.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| tone | `BadgeTone` | no | `'neutral'` | Colour by meaning. |
+| variant | `'subtle' \| 'solid' \| 'outline'` | no | `'subtle'` | `subtle` (tinted), `solid` (filled) or `outline`. |
+| size | `'sm' \| 'md'` | no | `'md'` | sm for counts and dense tables, md otherwise. |
+| count | `number` | no | - | A numeric count. Replaces children; bumps briefly when it changes. |
+| max | `number` | no | `99` | Counts above this show as "max+". |
+| dot | `boolean` | no | - | Show a leading status dot. |
+
+Also accepts the props of `ComponentPropsWithRef<'span'>`.
+
+```tsx
+import { Badge } from 'pada-ds';
+
+<Badge />
+```
+
 ### Banner
 
 `import { Banner } from 'pada-ds';`
@@ -957,6 +1046,29 @@ import { DropdownMenu } from 'pada-ds';
 <DropdownMenu.Trigger />
 ```
 
+### EmptyState
+
+`import { EmptyState } from 'pada-ds';`
+
+First-use, no-results and error placeholders, with a clear next step.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| media | `string \| ReactNode` | no | - | Built-in icon name, or any element (an illustration). |
+| title | `ReactNode` | yes | - | What is empty, e.g. "No projects yet". |
+| description | `ReactNode` | no | - | Why it is empty and what to do next. |
+| actions | `ReactNode` | no | - | The next step: usually one primary button. |
+| size | `'sm' \| 'md'` | no | `'md'` | `sm` for inside cards and tables, `md` for whole pages. |
+| headingLevel | `2 \| 3 \| 4` | no | `3` | Heading level of the title. |
+
+Also accepts the props of `Omit<ComponentPropsWithRef<'div'>, 'title'>`.
+
+```tsx
+import { EmptyState } from 'pada-ds';
+
+<EmptyState title="..." />
+```
+
 ### Filter
 
 `import { Filter } from 'pada-ds';`
@@ -1058,6 +1170,31 @@ import { Icon } from 'pada-ds';
 <Icon />
 ```
 
+### IconButton
+
+`import { IconButton } from 'pada-ds';`
+
+A square button with only an icon. Defaults to the ghost variant.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| icon | `string` | yes | - | Built-in icon name. |
+| label | `string` | yes | - | Accessible name. Required: an icon alone has no text for screen readers. |
+| tooltip | `boolean` | no | `false` | Also show the label in a tooltip on hover and focus. |
+| variant | `ButtonVariant` | no | `'ghost'` | - |
+| size | `ButtonSize` | no | `'md'` | Height and padding: sm 28px, md 32px, lg 40px (scaled by density). |
+| disabled | `boolean` | no | - | - |
+| loading | `boolean` | no | - | Shows a spinner in place of the label and ignores clicks, keeping the button's width and focus. Announced through `aria-busy`. |
+| ref | `React.Ref<HTMLButtonElement>` | no | - | - |
+
+Also accepts the props of `Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'children' | 'leftIcon' | 'rightIcon' | 'split' | 'onSplitClick' | 'aria-label'>`.
+
+```tsx
+import { IconButton } from 'pada-ds';
+
+<IconButton icon="..." label="..." />
+```
+
 ### Indexer
 
 `import { Indexer } from 'pada-ds';`
@@ -1147,6 +1284,24 @@ import { InputTextArea } from 'pada-ds';
 <InputTextArea />
 ```
 
+### Kbd
+
+`import { Kbd } from 'pada-ds';`
+
+A keyboard key or shortcut, as in "Press ⌘ K".
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| keys | `string[]` | no | - | Several keys pressed together, e.g. `['⌘', 'K']`. Rendered as separate keys. |
+
+Also accepts the props of `ComponentPropsWithRef<'kbd'>`.
+
+```tsx
+import { Kbd } from 'pada-ds';
+
+<Kbd />
+```
+
 ### KeyValue
 
 `import { KeyValue } from 'pada-ds';`
@@ -1164,6 +1319,27 @@ Also accepts the props of `React.HTMLAttributes<HTMLDivElement>`.
 import { KeyValue } from 'pada-ds';
 
 <KeyValue label="...">...</KeyValue>
+```
+
+### Link
+
+`import { Link } from 'pada-ds';`
+
+A text link. Use `asChild` with a router link: `<Link asChild><RouterLink to="/" /></Link>`.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| tone | `'accent' \| 'neutral'` | no | `'accent'` | `accent` (default) or `neutral` (inherits the surrounding text colour). |
+| underline | `'hover' \| 'always'` | no | `'hover'` | `hover` underlines on hover only; `always` keeps the underline. |
+| external | `boolean` | no | - | Opens in a new tab with `rel="noopener noreferrer"`, an icon and a screen-reader hint. |
+| asChild | `boolean` | no | - | Style your router's link component instead of rendering an `<a>`. |
+
+Also accepts the props of `ComponentPropsWithRef<'a'>`.
+
+```tsx
+import { Link } from 'pada-ds';
+
+<Link />
 ```
 
 ### List
@@ -1628,6 +1804,25 @@ import { Select } from 'pada-ds';
 <Select label="..." options={[]} />
 ```
 
+### Separator
+
+`import { Separator } from 'pada-ds';`
+
+A thin line between content, horizontal or vertical.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| orientation | `'horizontal' \| 'vertical'` | no | `'horizontal'` | - |
+| decorative | `boolean` | no | `true` | Purely visual (the default): hidden from assistive technology. Set `false` when the line separates sections that a screen reader user should know are distinct. |
+
+Also accepts the props of `ComponentPropsWithRef<'div'>`.
+
+```tsx
+import { Separator } from 'pada-ds';
+
+<Separator />
+```
+
 ### SideDrawer
 
 `import { SideDrawer } from 'pada-ds';`
@@ -1784,6 +1979,27 @@ import { SidebarSectionMenu } from 'pada-ds';
 <SidebarSectionMenu>...</SidebarSectionMenu>
 ```
 
+### Skeleton
+
+`import { Skeleton } from 'pada-ds';`
+
+A placeholder that shimmers while content loads. Hidden from assistive technology: mark the loading region with `aria-busy` instead.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| shape | `'text' \| 'rect' \| 'circle'` | no | `'text'` | `text` (a line of text), `rect` (a block) or `circle` (an avatar). |
+| width | `number \| string` | no | - | CSS width. Text lines default to 100%; circles to their height. |
+| height | `number \| string` | no | - | CSS height. |
+| lines | `number` | no | `1` | For `text`: number of lines; the last one is shorter. |
+
+Also accepts the props of `ComponentPropsWithRef<'span'>`.
+
+```tsx
+import { Skeleton } from 'pada-ds';
+
+<Skeleton />
+```
+
 ### Slider
 
 `import { Slider } from 'pada-ds';`
@@ -1812,6 +2028,25 @@ import { Slider } from 'pada-ds';
 <Slider />
 ```
 
+### Spinner
+
+`import { Spinner } from 'pada-ds';`
+
+An indeterminate loading indicator. Rotates; under reduced motion it pulses slowly instead.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| size | `'sm' \| 'md' \| 'lg'` | no | `'md'` | sm 12px, md 16px, lg 24px. |
+| label | `string \| null` | no | `'Loading'` | Text announced to screen readers (`role="status"`). Pass `null` when the spinner sits inside something already marked busy, such as a loading button. |
+
+Also accepts the props of `ComponentPropsWithRef<'span'>`.
+
+```tsx
+import { Spinner } from 'pada-ds';
+
+<Spinner />
+```
+
 ### Splitter
 
 `import { Splitter } from 'pada-ds';`
@@ -1826,6 +2061,29 @@ Also accepts the props of `React.ButtonHTMLAttributes<HTMLButtonElement>`.
 import { Splitter } from 'pada-ds';
 
 <Splitter variant="primary" />
+```
+
+### Stack
+
+`import { Stack } from 'pada-ds';`
+
+Flex layout with token-based gaps, so spacing follows density.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| direction | `'row' \| 'column'` | no | `'column'` | Main axis. |
+| gap | `Space` | no | `2` | Gap in spacing steps (n × 0.25rem × density): `gap={3}` is 12px at default density. |
+| align | `'start' \| 'center' \| 'end' \| 'stretch' \| 'baseline'` | no | - | Cross-axis alignment. |
+| justify | `'start' \| 'center' \| 'end' \| 'between' \| 'around'` | no | - | Main-axis distribution. |
+| wrap | `boolean` | no | - | Wrap onto new lines when out of room. |
+| as | `ElementType` | no | `'div'` | Element to render, e.g. `ul`, `section`, `nav`. |
+
+Also accepts the props of `ComponentPropsWithRef<'div'>`.
+
+```tsx
+import { Stack } from 'pada-ds';
+
+<Stack />
 ```
 
 ### Step

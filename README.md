@@ -132,6 +132,9 @@ The package ships a machine-readable API description, generated from the TypeScr
 This design system includes the following components:
 
 - **Accordion**: Collapsible sections to show/hide content.
+- **Alert**: Inline callout by tone with actions.
+- **Avatar**: User picture with initials fallback; `AvatarGroup` for stacks.
+- **Badge**: Status label or count.
 - **Banner**: Notices and important messages display.
 - **Button**: Clickable control for primary actions.
 - **Card**: Container for grouped related content.
@@ -143,13 +146,17 @@ This design system includes the following components:
 - **Dialog**: Composable modal or non-modal dialog (`Dialog.Root`, `Dialog.Content`, `Dialog.Title`, …).
 - **Drawer**: Dialog panel that slides in from any edge.
 - **DropdownMenu**: Menu button with items, checkbox and radio items, and submenus.
+- **EmptyState**: First-use and no-results placeholder.
 - **FormLabel**: Accessible labels for form fields.
 - **Icon**: Reusable SVG icons for UI.
+- **IconButton**: Labelled icon-only button.
 - **Indexer**: Alphabetical index navigation component.
 - **InputDate**: Single-line date input field.
 - **InputText**: Single-line text input field.
 - **InputTextArea**: Multi-line text input area.
+- **Kbd**: Keyboard keys and shortcuts.
 - **KeyValue**: Render key/value metadata pairs.
+- **Link**: Text link, with `asChild` for router links.
 - **List**: Generic list rendering component.
 - **Loader**: Indicate loading state visually.
 - **Logo**: Project or brand logo component.
@@ -163,9 +170,13 @@ This design system includes the following components:
 - **SearchField**: Text search input with clear.
 - **SegmentControl**: Segmented button toggle control.
 - **Select**: Dropdown selection with ComboBox.
+- **Separator**: Horizontal or vertical divider.
 - **SideDrawer**: Slide-in side panel (1.x API; wraps `Drawer`).
 - **Sidebar**: Fixed side navigation area.
+- **Skeleton**: Loading placeholder with shimmer.
 - **Slider**: Range selection slider control.
+- **Spinner**: Indeterminate loading indicator.
+- **Stack**: Flex layout with token gaps.
 - **Steps**: Multi-step progress indicator component.
 - **Switch**: Toggle between on/off states.
 - **Table**: Responsive tabular data display component.

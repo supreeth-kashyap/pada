@@ -1,6 +1,6 @@
 import React, { useContext, useRef } from 'react';
 import './HeaderCell.css';
-import { TableContext } from '../Table';
+import { TableContext } from '../TableContext';
 
 export interface HeaderCellProps {
   columnId: string;

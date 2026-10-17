@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import './ListItem.css';
 import { Icon } from '../../Icon';
-import { ListContext } from '../List';
+import { ListContext } from '../ListContext';
 
 export interface ListItemProps {
   id?: string;

@@ -1,0 +1,5 @@
+/* Square: as wide as it is tall. Only overrides Button's component tokens. */
+.icon-button {
+  --pada-button-pad-x: 0;
+  width: var(--pada-button-height);
+}

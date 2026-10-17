@@ -1,4 +1,5 @@
-import React, { createContext, useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
+import { TableContext } from './TableContext';
 import './Table.css';
 
 export interface TableColumn {
@@ -8,14 +9,6 @@ export interface TableColumn {
   minWidth?: number;
 }
 
-interface TableContextValue {
-  columns: TableColumn[];
-  gridTemplate: string;
-  updateColumnWidth: (id: string, width: number) => void;
-  reorderColumns: (sourceId: string, targetId: string) => void;
-}
-
-export const TableContext = createContext<TableContextValue | null>(null);
 
 export interface TableProps {
   columns: TableColumn[];

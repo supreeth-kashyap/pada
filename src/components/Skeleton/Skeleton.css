@@ -1,0 +1,54 @@
+/* Root */
+.skeleton {
+  /* Component tokens */
+  --pada-skeleton-bg: var(--pada-color-neutral-subtle);
+  --pada-skeleton-highlight: var(--pada-color-neutral-subtle-hover);
+  --pada-skeleton-radius: var(--pada-radius-md);
+
+  display: block;
+  width: var(--pada-skeleton-width, 100%);
+  height: var(--pada-skeleton-height, 1em);
+  border-radius: var(--pada-skeleton-radius);
+  background: linear-gradient(90deg, var(--pada-skeleton-bg) 25%, var(--pada-skeleton-highlight) 50%, var(--pada-skeleton-bg) 75%)
+    0 0 / 300% 100%;
+  animation: skeleton-shimmer 1.5s var(--pada-ease-standard) infinite;
+}
+
+/* Variant variables */
+.skeleton[data-shape="text"] {
+  --pada-skeleton-radius: var(--pada-radius-sm);
+  height: var(--pada-skeleton-height, 0.75em);
+  margin-block: 0.25em;
+}
+
+.skeleton[data-shape="text"][data-last] {
+  width: 60%;
+}
+
+.skeleton[data-shape="circle"] {
+  --pada-skeleton-radius: var(--pada-radius-full);
+  width: var(--pada-skeleton-width, var(--pada-skeleton-height, 32px));
+  height: var(--pada-skeleton-height, var(--pada-skeleton-width, 32px));
+}
+
+.skeleton-lines {
+  display: block;
+  width: var(--pada-skeleton-width, 100%);
+}
+
+@keyframes skeleton-shimmer {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: 0 0;
+  }
+}
+
+/* Reduced motion: a static placeholder. */
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+    background: var(--pada-skeleton-bg);
+  }
+}

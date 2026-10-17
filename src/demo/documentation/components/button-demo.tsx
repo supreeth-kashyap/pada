@@ -1,5 +1,5 @@
 import DemoPage from '../DemoPage';
-import { Button } from '../../../components/Button';
+import { Button, type ButtonVariant } from '../../../components/Button';
 import { CodeSnippet } from '../../../components/CodeSnippet/CodeSnippet';
 
 const VARIANTS = [
@@ -60,9 +60,9 @@ export default function ButtonDemo() {
                 >
                   {label}
                 </span>
-                <Button variant={variant as any}>Button</Button>
-                <Button variant={variant as any} leftIcon="add">Button</Button>
-                <Button variant={variant as any} rightIcon="chevron_right">Button</Button>
+                <Button variant={variant as ButtonVariant}>Button</Button>
+                <Button variant={variant as ButtonVariant} leftIcon="add">Button</Button>
+                <Button variant={variant as ButtonVariant} rightIcon="chevron_right">Button</Button>
               </div>
             ))}
           </div>

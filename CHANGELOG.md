@@ -6,6 +6,14 @@
 - Moved the `body` and `p` rules out of `dist/tokens.css` into a new optional `pada-ds/base.css` export, so importing the tokens no longer overrides an app's own styles.
 - Added a component API manifest for AI coding agents. `npm run build` now reads every exported component's props from the TypeScript source and writes `dist/manifest.json` (exported as `pada-ds/manifest.json`), `llms.txt` and `llms-full.txt`. Both llms files ship in the package and are committed at the repo root. `npm test` fails if they are stale or if an exported component is missing from the manifest.
 
+- **New components (wave 1, display).**
+  - `Avatar` (image with initials or icon fallback, a stable colour per name, sizes, square shape, presence status) and `AvatarGroup` (overlap and a "+N" counter).
+  - `Badge` (tones, subtle/solid/outline, counts with a `max`, a status dot, and a bump when the count changes).
+  - `Skeleton` (text lines, rectangles and circles with a shimmer; static under reduced motion).
+  - `Alert` (inline callout by tone, with title, actions, dismiss, and opt-in `live` announcements).
+  - `EmptyState` (media, title, description, actions; sm/md).
+  - `Kbd` (keys and shortcuts), `Spinner` (labelled status; pulses under reduced motion), `Separator` (decorative or semantic), `Stack` (flex layout with density-aware token gaps and an `as` prop), `Link` (accent or neutral, external links with a new-tab hint, `asChild` for router links) and `IconButton` (labelled square button with an optional tooltip).
+- Moved `ListContext` and `TableContext` into their own modules (still exported from the package) and fixed the remaining lint errors; `npm run lint` is clean.
 - **Accessibility and API fixes (phase 3).**
   - `Button`: new `size` (`sm`, `md`, `lg`, density-aware) and `loading` (spinner over the hidden label so the width holds; stays focusable, sets `aria-busy`, ignores clicks). Buttons now default to `type="button"`, so they no longer submit forms by accident (pass `type="submit"` explicitly). Styles moved to `--pada-button-*` component tokens; icons follow the text colour; a press scales the button slightly and a trailing icon nudges forward on hover.
   - `Checkbox`: new `indeterminate` (shows a dash, announced as "mixed"); a consumer `id` now keeps the label wired; the tick springs in.

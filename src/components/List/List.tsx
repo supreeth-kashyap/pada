@@ -1,13 +1,8 @@
-import React, { createContext, useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
+import { ListContext } from './ListContext';
 import './List.css';
 import type { ListItemProps } from './ListItem';
 
-interface ListContextValue {
-  draggable: boolean;
-  onMove: (sourceId: string, targetId: string) => void;
-}
-
-export const ListContext = createContext<ListContextValue | null>(null);
 
 export interface ListProps {
   children: React.ReactNode;

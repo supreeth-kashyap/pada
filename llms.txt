@@ -42,6 +42,10 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - Accordion: header, headerIconName?, children, defaultOpen?, open?, onOpenChange?, className?, disabled?
 - AccordionContent: children; extends React.HTMLAttributes<HTMLDivElement>
 - AccordionHeader: title, iconName?, collapsed?; extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'title'>
+- Alert: tone?, title?, icon?, actions?, onDismiss?, live?; extends Omit<ComponentPropsWithRef<'div'>, 'title'>
+- Avatar: src?, name?, alt?, size?, shape?, status?; extends Omit<ComponentPropsWithRef<'span'>, 'children'>
+- AvatarGroup: max?, size?, label?; extends ComponentPropsWithRef<'div'>
+- Badge: tone?, variant?, size?, count?, max?, dot?; extends ComponentPropsWithRef<'span'>
 - Banner: title, subtitle?, visualIcon?, visualImage?, visualAlt?, button?, onButtonClick?, className?
 - BaseManageFilter: saveCopy?, onSaveFilter?, onClear?, onMenuClick?, className?
 - BaseToolbarMenu: title?, count?, showCount?, dropdown?, disabled?, state?, className?, onClick?
@@ -86,16 +90,20 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - DropdownMenu.SubContent: container?, forceMount?, loop?, onCloseAutoFocus?, onEscapeKeyDown?, onPointerDownOutside?, onInteractOutside?, sideOffset?, alignOffset?, avoidCollisions?, collisionPadding?, arrowPadding?, hideWhenDetached?; extends Omit<ComponentPropsWithRef<'div'>, 'side' | 'align'>
 - DropdownMenu.SubTrigger: disabled?, textValue?, icon?; extends Omit<Omit<Omit<ComponentPropsWithRef<'div'>, 'onSelect'>, 'onSelect'>, 'asChild'>
 - DropdownMenu.Trigger: asChild?; extends ComponentPropsWithRef<'button'>
+- EmptyState: media?, title, description?, actions?, size?, headingLevel?; extends Omit<ComponentPropsWithRef<'div'>, 'title'>
 - Filter: label, options, multiSelect?, value?, defaultValue?, onChange?, applyLabel?, clearLabel?, disabled?, className?
 - FilterChip: variant?, label?, value?, showClose?, disabled?, onRemove?, onClick?, className?
 - FormLabel: children, required?, optional?, htmlFor?; extends React.LabelHTMLAttributes<HTMLLabelElement>
 - HeaderCell: columnId, label, className?
 - Icon: name?, src?, size?, color?, variant?; extends React.HTMLAttributes<HTMLDivElement>
+- IconButton: icon, label, tooltip?, variant?, size?, disabled?, loading?, ref?; extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'children' | 'leftIcon' | 'rightIcon' | 'split' | 'onSplitClick' | 'aria-label'>
 - Indexer: items, activeIndex?, offset?, onActiveChange?; extends React.HTMLAttributes<HTMLElement>
 - InputDate: label?, error?, description?, required?, optional?, disabled?, placeholder?, filled?, mode?, selection?, value?, onChange?, minDate?, maxDate?, className?
 - InputText: label?, error?, description?, prefix?, suffix?, required?, optional?; extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'prefix' | 'suffix'>
 - InputTextArea: label?, error?, description?, required?, optional?; extends React.TextareaHTMLAttributes<HTMLTextAreaElement>
+- Kbd: keys?; extends ComponentPropsWithRef<'kbd'>
 - KeyValue: label, children, infoTooltip?, labelComponent?; extends React.HTMLAttributes<HTMLDivElement>
+- Link: tone?, underline?, external?, asChild?; extends ComponentPropsWithRef<'a'>
 - List: children, draggable?, className?, onReorder?
 - ListItem: id?, children, className?
 - Loader: size?, className?
@@ -119,6 +127,7 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - SearchField: value?, defaultValue?, onChange?, onClear?, className?; extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'onChange' | 'value' | 'defaultValue'>
 - SegmentControl: options, value?, defaultValue?, onChange?, className?, disabled?
 - Select: label, options, value?, defaultValue?, placeholder?, onChange?, description?, error?, disabled?, name?, id?, className?
+- Separator: orientation?, decorative?; extends ComponentPropsWithRef<'div'>
 - SideDrawer: open, onOpenChange, children, size?, className?, aria-label?, aria-labelledby?
 - Sidebar: data?, activeId?, onItemClick?, children?, className?; extends React.HTMLAttributes<HTMLElement>
 - SidebarCollapse: children, defaultOpen?, label?, className?
@@ -127,8 +136,11 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - SidebarSearch: placeholder?, value?, onChange?, className?
 - SidebarSection: label?, icon?, children?, className?; extends React.HTMLAttributes<HTMLDivElement>
 - SidebarSectionMenu: children, className?
+- Skeleton: shape?, width?, height?, lines?; extends ComponentPropsWithRef<'span'>
 - Slider: label?, description?, error?, value?, defaultValue?, min?, max?, step?, onChange?, onValueChange?, showValue?, disabled?, className?; extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'onChange'>
+- Spinner: size?, label?; extends ComponentPropsWithRef<'span'>
 - Splitter: variant; extends React.ButtonHTMLAttributes<HTMLButtonElement>
+- Stack: direction?, gap?, align?, justify?, wrap?, as?; extends ComponentPropsWithRef<'div'>
 - Step: title?, description?, stepValue?, status?, isLast?, onClick?, clickable?, onSelect?; extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onClick' | 'onSelect'>
 - Steps: steps, defaultStatus?, currentStep?, onStepChange?; extends React.HTMLAttributes<HTMLDivElement>
 - Switch: label?, loading?; extends React.InputHTMLAttributes<HTMLInputElement>
