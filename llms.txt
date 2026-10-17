@@ -52,6 +52,7 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - AlertDialog.Root: children?, open?, defaultOpen?, onOpenChange?, modal?
 - AlertDialog.Title: asChild?; extends ComponentPropsWithRef<'h2'>
 - AlertDialog.Trigger: asChild?; extends ComponentPropsWithRef<'button'>
+- Autocomplete: multiple?, value?, defaultValue?, onValueChange?, label, options, placeholder?, description?, error?, emptyMessage?, filter?, onInputValueChange?, disabled?, required?, name?, className?
 - Avatar: src?, name?, alt?, size?, shape?, status?; extends Omit<ComponentPropsWithRef<'span'>, 'children'>
 - AvatarGroup: max?, size?, label?; extends ComponentPropsWithRef<'div'>
 - Badge: tone?, variant?, size?, count?, max?, dot?; extends ComponentPropsWithRef<'span'>
@@ -66,6 +67,7 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - CodeSnippet: code, language, type?, label?, showCopy?, className?
 - ComboBox: items, multiSelect?, onItemClick?; extends React.HTMLAttributes<HTMLDivElement>
 - ComboBoxMenuItem: iconName?, label, selected?, disabled?, multiSelect?; extends React.ButtonHTMLAttributes<HTMLButtonElement>
+- CommandPalette: commands, open?, onOpenChange?, placeholder?, emptyMessage?, hotkey?, label?
 - DatePickerDropdown: mode?, selection?, isRange?, value?, onChange?, minDate?, maxDate?
 - Dialog.Body: no props; extends ComponentPropsWithRef<'div'>
 - Dialog.Close: asChild?; extends ComponentPropsWithRef<'button'>
@@ -174,9 +176,10 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - Text: children, size?, weight?, family?, lineHeight?, color?, as?; extends React.HTMLAttributes<HTMLSpanElement>
 - ThemeProvider: children?, defaultTheme?, onThemeChange?, target?, storageKey?, theme?, accent?, neutral?, density?, radius?, motion?, contrast?
 - ThemeToggle: className?, size?
+- Toaster: position?, visibleToasts?, label?, hotkey?, className?
 - Toggle: icon?, size?, pressed?, defaultPressed?, onPressedChange?, asChild?; extends ComponentPropsWithRef<'button'>
 - ToggleGroup.Item: icon?, value, asChild?; extends ComponentPropsWithRef<'button'>
-- ToggleGroup.Root: size?; extends ToggleGroupSingleProps | ToggleGroupMultipleProps
+- ToggleGroup.Root: type, value?, defaultValue?, onValueChange?, orientation?, loop?, disabled?, dir?, size?; extends Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'dir'>
 - Toolbar: left?, actions?, primaryAction?, children?, className?
 - Tooltip: content, children, position?, delayDuration?
 - Tooltip.Arrow: asChild?; extends ComponentPropsWithRef<'span'>

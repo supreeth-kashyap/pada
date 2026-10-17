@@ -9,10 +9,12 @@ export * from './Menu';
 export * from './Tabs';
 export * from './Field';
 export * from './Toggle';
+export * from './Combobox';
 
 export { Slot, type SlotProps } from './utils/Slot';
 export { Portal, type PortalProps } from './utils/Portal';
 export { useIsClient } from './utils/useIsClient';
+export { PortalContainerContext, usePortalContainer } from './utils/portalContainer';
 export { VisuallyHidden, type VisuallyHiddenProps } from './utils/VisuallyHidden';
 export { composeRefs, useComposedRefs } from './utils/refs';
 export { composeEventHandlers } from './utils/events';

@@ -3,6 +3,11 @@
   display: contents;
 }
 
+/* Overlays opened inside the scope portal here, so they inherit its theme. */
+.theme-portal {
+  display: contents;
+}
+
 /* Root */
 .theme-toggle {
   --pada-theme-toggle-size: var(--pada-control-height-md);

@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it } from 'vitest';
+import { Dialog } from '../Dialog';
 import { ThemeProvider, ThemeToggle, useTheme } from '.';
 
 function Current() {
@@ -49,5 +50,23 @@ describe('ThemeProvider and ThemeToggle', () => {
     );
     expect(document.documentElement).not.toHaveAttribute('data-theme');
     expect(screen.getByRole('status')).toHaveTextContent('system/light');
+  });
+
+  it('portals overlays opened in a subtree into that subtree, so they keep its theme', async () => {
+    const user = userEvent.setup();
+    render(
+      <ThemeProvider defaultTheme="dark">
+        <Dialog.Root>
+          <Dialog.Trigger>Open</Dialog.Trigger>
+          <Dialog.Content>
+            <Dialog.Title>Scoped</Dialog.Title>
+          </Dialog.Content>
+        </Dialog.Root>
+      </ThemeProvider>,
+    );
+    await user.click(screen.getByRole('button', { name: 'Open' }));
+    const dialog = screen.getByRole('dialog', { name: 'Scoped' });
+    expect(dialog.closest('.theme-portal')).not.toBeNull();
+    expect(dialog.closest('[data-theme]')).toHaveAttribute('data-theme', 'dark');
   });
 });

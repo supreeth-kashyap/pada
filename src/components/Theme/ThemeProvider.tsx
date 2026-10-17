@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useSyncExternalStore, type ReactNode } from 'react';
+import { useEffect, useMemo, useState, useSyncExternalStore, type ReactNode } from 'react';
+import { PortalContainerContext } from '../../headless/utils/portalContainer';
 import { useControllableState } from '../../headless/utils/useControllableState';
 import { ThemeContext, type ThemeMode, type ThemeSettings } from './themeContext';
 
@@ -69,6 +70,7 @@ export function ThemeProvider({
     },
   });
   const prefersDark = useSyncExternalStore(subscribeScheme, systemPrefersDark, () => false);
+  const [portalContainer, setPortalContainer] = useState<HTMLDivElement | null>(null);
   const resolvedTheme = theme === 'system' ? (prefersDark ? 'dark' : 'light') : theme;
 
   const attributes = useMemo(
@@ -111,7 +113,9 @@ export function ThemeProvider({
         children
       ) : (
         <div className="theme-scope" {...attributes}>
-          {children}
+          {/* Overlays opened inside this subtree portal here, so they keep its theme. */}
+          <PortalContainerContext value={portalContainer}>{children}</PortalContainerContext>
+          <div ref={setPortalContainer} className="theme-portal" />
         </div>
       )}
     </ThemeContext>

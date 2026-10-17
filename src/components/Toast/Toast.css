@@ -1,0 +1,219 @@
+/* Root: a fixed region in one corner. */
+.toaster {
+  --pada-toaster-gutter: var(--pada-space-4);
+  --pada-toaster-width: 22rem;
+  --pada-toaster-direction: -1;
+  /* Read by the toasts: where they anchor, and whether the stack is expanded (0 or 1). */
+  --pada-toast-inset-block: auto 0;
+  --pada-toast-origin: bottom center;
+  --pada-toast-expanded: 0;
+  --pada-toast-collapsed-height: var(--pada-toast-front-height);
+
+  position: fixed;
+  z-index: var(--pada-z-toast);
+  width: min(var(--pada-toaster-width), calc(100vw - 2 * var(--pada-toaster-gutter)));
+  outline: none;
+  pointer-events: none;
+}
+
+.toaster[data-vertical="top"] {
+  top: var(--pada-toaster-gutter);
+  --pada-toaster-direction: 1;
+  --pada-toast-inset-block: 0 auto;
+  --pada-toast-origin: top center;
+}
+
+.toaster[data-expanded] {
+  --pada-toast-expanded: 1;
+  --pada-toast-collapsed-height: auto;
+}
+.toaster[data-vertical="bottom"] { bottom: var(--pada-toaster-gutter); }
+.toaster[data-horizontal="left"] { left: var(--pada-toaster-gutter); }
+.toaster[data-horizontal="right"] { right: var(--pada-toaster-gutter); }
+.toaster[data-horizontal="center"] { left: 50%; translate: -50% 0; }
+
+.toaster-list {
+  position: relative;
+  height: var(--pada-toaster-height);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  pointer-events: auto;
+  transition: height var(--pada-duration-slow) var(--pada-ease-emphasized);
+}
+
+/* Child elements */
+.toast {
+  /* Component tokens */
+  --pada-toast-bg: var(--pada-color-surface-overlay);
+  --pada-toast-border: var(--pada-color-border);
+  --pada-toast-icon: var(--pada-color-fg-muted);
+  --pada-toast-timer: var(--pada-color-neutral-solid);
+  /* Collapsed: peek 10px behind the front toast and shrink a little per step.
+     Expanded: sit at the measured offset at full size. */
+  --pada-toast-y: calc(
+    var(--pada-toaster-direction) *
+      (var(--pada-toast-expanded) * var(--pada-toast-offset) + (1 - var(--pada-toast-expanded)) * var(--pada-toast-index) * 10px)
+  );
+  --pada-toast-scale: calc(1 - (1 - var(--pada-toast-expanded)) * var(--pada-toast-index) * 0.05);
+
+  position: absolute;
+  inset-inline: 0;
+  inset-block: var(--pada-toast-inset-block);
+  transform-origin: var(--pada-toast-origin);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--pada-space-3);
+  box-sizing: border-box;
+  padding: var(--pada-space-3) var(--pada-space-3) var(--pada-space-3) var(--pada-space-4);
+  overflow: hidden;
+  border: var(--pada-border-width-thin) solid var(--pada-toast-border);
+  border-radius: var(--pada-radius-xl);
+  background-color: var(--pada-toast-bg);
+  color: var(--pada-color-fg);
+  box-shadow: var(--pada-shadow-lg);
+  font-family: var(--pada-font-sans);
+  font-size: var(--pada-font-size-md);
+  line-height: var(--pada-line-height-sm);
+  z-index: calc(100 - var(--pada-toast-index));
+  translate: var(--pada-toast-swipe) var(--pada-toast-y);
+  scale: var(--pada-toast-scale);
+  opacity: 1;
+  touch-action: pan-y;
+  outline: none;
+  transition:
+    translate var(--pada-duration-slow) var(--pada-ease-emphasized),
+    scale var(--pada-duration-slow) var(--pada-ease-emphasized),
+    opacity var(--pada-duration-normal) var(--pada-ease-standard),
+    height var(--pada-duration-slow) var(--pada-ease-emphasized);
+}
+
+/* Collapsed toasts behind the front one take its height so only their edge shows. */
+.toast:not([data-front]) {
+  height: var(--pada-toast-collapsed-height);
+}
+
+/* Variant variables */
+.toast[data-tone="success"] { --pada-toast-icon: var(--pada-color-success-fg); --pada-toast-timer: var(--pada-color-success-solid); }
+.toast[data-tone="warning"] { --pada-toast-icon: var(--pada-color-warning-fg); --pada-toast-timer: var(--pada-color-warning-solid); }
+.toast[data-tone="danger"] { --pada-toast-icon: var(--pada-color-danger-fg); --pada-toast-timer: var(--pada-color-danger-solid); }
+.toast[data-tone="info"] { --pada-toast-icon: var(--pada-color-info-fg); --pada-toast-timer: var(--pada-color-info-solid); }
+
+/* States via attributes */
+.toast[data-hidden] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.toast[data-swiping] {
+  transition: none;
+}
+
+.toast[data-state="closed"] {
+  opacity: 0;
+  scale: 0.95;
+  transition-duration: var(--pada-duration-normal);
+}
+
+@starting-style {
+  .toast[data-state="open"] {
+    opacity: 0;
+    translate: 0 calc(var(--pada-toaster-direction) * -100%);
+  }
+}
+
+.toast:focus-visible {
+  box-shadow: var(--pada-shadow-focus), var(--pada-shadow-lg);
+}
+
+.toast-message {
+  display: flex;
+  flex: 1;
+  gap: var(--pada-space-3);
+  min-width: 0;
+}
+
+.toast-icon {
+  flex-shrink: 0;
+  margin-top: 1px;
+  color: var(--pada-toast-icon);
+}
+
+.toast-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.toast-title {
+  margin: 0;
+  font-weight: var(--pada-font-weight-semibold);
+}
+
+.toast-description {
+  margin: var(--pada-space-0-5) 0 0;
+  color: var(--pada-color-fg-muted);
+}
+
+.toast-action {
+  flex-shrink: 0;
+  height: var(--pada-control-height-sm);
+  padding: 0 var(--pada-space-2-5);
+  border: var(--pada-border-width-thin) solid var(--pada-color-border);
+  border-radius: var(--pada-radius-md);
+  background-color: var(--pada-color-surface);
+  color: var(--pada-color-fg);
+  font: inherit;
+  font-weight: var(--pada-font-weight-medium);
+  cursor: pointer;
+}
+
+.toast-action:hover {
+  background-color: var(--pada-color-neutral-subtle-hover);
+}
+
+.toast-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--pada-space-6);
+  height: var(--pada-space-6);
+  padding: 0;
+  border: none;
+  border-radius: var(--pada-radius-md);
+  background: transparent;
+  color: var(--pada-color-fg-muted);
+  cursor: pointer;
+}
+
+.toast-close:hover {
+  background-color: var(--pada-color-neutral-subtle-hover);
+  color: var(--pada-color-fg);
+}
+
+.toast-action:focus-visible,
+.toast-close:focus-visible {
+  outline: none;
+  box-shadow: var(--pada-shadow-focus);
+}
+
+/* The timer bar empties over the toast's duration and pauses with it. */
+.toast-timer {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 2px;
+  background-color: var(--pada-toast-timer);
+  opacity: 0.6;
+  transform-origin: left;
+  animation: toast-timer var(--pada-toast-duration) linear forwards;
+}
+
+.toast-timer[data-paused] {
+  animation-play-state: paused;
+}
+
+@keyframes toast-timer {
+  to {
+    scale: 0 1;
+  }
+}

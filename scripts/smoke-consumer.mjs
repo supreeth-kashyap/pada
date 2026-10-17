@@ -66,7 +66,8 @@ await writeFile(
 run('npm', ['run', 'build'], { cwd: appDir });
 
 const packageCss = await readFile(path.join(appDir, 'node_modules/pada-ds/dist/pada.css'), 'utf8');
-if (!packageCss.includes('.button--primary') || !packageCss.includes('var(--pada-color-accent-solid)')) {
+// Primary is the base .button style; variants only reassign its --pada-button-* tokens.
+if (!/\.button\{[^}]*--pada-button-bg:\s*var\(--pada-color-accent-solid\)/.test(packageCss)) {
   throw new Error('Expected primary button styles were not found in dist/pada.css');
 }
 

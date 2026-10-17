@@ -194,7 +194,8 @@ function collectProps(checker, typeNode, componentName) {
       visit(node.type);
     } else if (ts.isTypeLiteralNode(node)) {
       addMembers(node.members);
-    } else if (ts.isIntersectionTypeNode(node)) {
+    } else if (ts.isIntersectionTypeNode(node) || ts.isUnionTypeNode(node)) {
+      // A union of prop shapes (single vs multiple selection, say) lists every prop once.
       node.types.forEach(visit);
     } else {
       const local =
@@ -207,7 +208,7 @@ function collectProps(checker, typeNode, componentName) {
   };
 
   if (typeNode) visit(typeNode);
-  return { props: [...props.values()], inherited };
+  return { props: [...props.values()], inherited: [...new Set(inherited)] };
 }
 
 function propsTypeName(typeNode) {

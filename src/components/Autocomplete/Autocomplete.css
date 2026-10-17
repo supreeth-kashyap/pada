@@ -1,0 +1,239 @@
+/* Root */
+.autocomplete {
+  /* Component tokens */
+  --pada-autocomplete-border: var(--pada-color-border-strong);
+  --pada-autocomplete-border-focus: var(--pada-color-accent-solid);
+  --pada-autocomplete-ring: var(--pada-color-accent-subtle);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--pada-space-1);
+  font-family: var(--pada-font-sans);
+}
+
+.autocomplete[data-invalid] {
+  --pada-autocomplete-border: var(--pada-color-danger-solid);
+  --pada-autocomplete-border-focus: var(--pada-color-danger-solid);
+  --pada-autocomplete-ring: var(--pada-color-danger-subtle);
+}
+
+/* Child elements */
+.autocomplete-label {
+  font-size: var(--pada-font-size-sm);
+  font-weight: var(--pada-font-weight-medium);
+  color: var(--pada-color-fg);
+}
+
+.autocomplete-required {
+  margin-inline-start: var(--pada-space-0-5);
+  color: var(--pada-color-danger-fg);
+}
+
+.autocomplete-control {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--pada-space-1);
+  min-height: var(--pada-control-height-md);
+  box-sizing: border-box;
+  padding: var(--pada-space-0-5) var(--pada-space-1) var(--pada-space-0-5) var(--pada-space-2);
+  border: var(--pada-border-width-thin) solid var(--pada-autocomplete-border);
+  border-radius: var(--pada-radius-lg);
+  background-color: var(--pada-color-surface);
+  cursor: text;
+  transition:
+    border-color var(--pada-duration-fast) var(--pada-ease-standard),
+    box-shadow var(--pada-duration-fast) var(--pada-ease-standard);
+}
+
+.autocomplete-control:focus-within {
+  border-color: var(--pada-autocomplete-border-focus);
+  box-shadow: 0 0 0 3px var(--pada-autocomplete-ring);
+}
+
+.autocomplete-input {
+  flex: 1;
+  min-width: 6rem;
+  height: calc(var(--pada-control-height-md) - 6px);
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--pada-color-fg);
+  font: inherit;
+  font-size: var(--pada-font-size-md);
+  outline: none;
+}
+
+.autocomplete-input::placeholder {
+  color: var(--pada-color-fg-subtle);
+}
+
+.autocomplete-input:disabled {
+  cursor: not-allowed;
+}
+
+.autocomplete-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--pada-space-6);
+  height: var(--pada-space-6);
+  margin-inline-start: auto;
+  padding: 0;
+  border: none;
+  border-radius: var(--pada-radius-md);
+  background: transparent;
+  color: var(--pada-color-fg-muted);
+  cursor: pointer;
+  transition: rotate var(--pada-duration-normal) var(--pada-ease-emphasized);
+}
+
+.autocomplete-trigger[data-state="open"] {
+  rotate: 180deg;
+}
+
+.autocomplete-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--pada-space-1);
+  height: 22px;
+  padding: 0 var(--pada-space-1) 0 var(--pada-space-2);
+  border-radius: var(--pada-radius-md);
+  background-color: var(--pada-color-accent-subtle);
+  color: var(--pada-color-accent-fg);
+  font-size: var(--pada-font-size-sm);
+  font-weight: var(--pada-font-weight-medium);
+  animation: autocomplete-chip-in var(--pada-duration-normal) var(--pada-ease-spring);
+}
+
+.autocomplete-chip-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border: none;
+  border-radius: var(--pada-radius-sm);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.autocomplete-chip-remove:hover {
+  background-color: var(--pada-color-accent-subtle-hover);
+}
+
+.autocomplete-chip-remove:focus-visible {
+  outline: none;
+  box-shadow: var(--pada-shadow-focus);
+}
+
+.autocomplete-list {
+  z-index: var(--pada-z-dropdown);
+  box-sizing: border-box;
+  min-width: var(--pada-floating-anchor-width, 12rem);
+  max-height: min(18rem, var(--pada-floating-available-height, 18rem));
+  overflow: auto;
+  padding: var(--pada-space-1);
+  border: var(--pada-border-width-thin) solid var(--pada-color-border);
+  border-radius: var(--pada-radius-lg);
+  background-color: var(--pada-color-surface-overlay);
+  color: var(--pada-color-fg);
+  box-shadow: var(--pada-shadow-lg);
+  font-family: var(--pada-font-sans);
+  font-size: var(--pada-font-size-md);
+  transform-origin: var(--pada-floating-transform-origin);
+  transition:
+    opacity var(--pada-duration-normal) var(--pada-ease-enter),
+    scale var(--pada-duration-normal) var(--pada-ease-enter);
+}
+
+.autocomplete-list[data-state="closed"] {
+  opacity: 0;
+  scale: var(--pada-motion-scale-enter);
+  transition-duration: var(--pada-duration-fast);
+}
+
+@starting-style {
+  .autocomplete-list[data-state="open"] {
+    opacity: 0;
+    scale: var(--pada-motion-scale-enter);
+  }
+}
+
+.autocomplete-option {
+  display: flex;
+  align-items: center;
+  gap: var(--pada-space-2);
+  min-height: var(--pada-control-height-sm);
+  padding: var(--pada-space-1) var(--pada-space-2);
+  border-radius: var(--pada-radius-md);
+  cursor: default;
+  user-select: none;
+}
+
+.autocomplete-option[data-highlighted] {
+  background-color: var(--pada-color-neutral-subtle-hover);
+}
+
+.autocomplete-option[data-disabled] {
+  color: var(--pada-color-fg-disabled);
+}
+
+.autocomplete-option-icon {
+  flex-shrink: 0;
+  color: var(--pada-color-fg-muted);
+}
+
+.autocomplete-option-text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.autocomplete-option-description {
+  font-size: var(--pada-font-size-sm);
+  color: var(--pada-color-fg-muted);
+}
+
+.autocomplete-option-check {
+  flex-shrink: 0;
+  color: var(--pada-color-accent-fg);
+  opacity: 0;
+  scale: 0.6;
+  transition:
+    opacity var(--pada-duration-fast) var(--pada-ease-standard),
+    scale var(--pada-duration-normal) var(--pada-ease-spring);
+}
+
+.autocomplete-option[data-state="checked"] .autocomplete-option-check {
+  opacity: 1;
+  scale: 1;
+}
+
+.autocomplete-empty {
+  padding: var(--pada-space-3) var(--pada-space-2);
+  color: var(--pada-color-fg-muted);
+  text-align: center;
+}
+
+.autocomplete-description {
+  margin: 0;
+  font-size: var(--pada-font-size-sm);
+  color: var(--pada-color-fg-muted);
+}
+
+.autocomplete-error {
+  margin: 0;
+  font-size: var(--pada-font-size-sm);
+  color: var(--pada-color-danger-fg);
+}
+
+@keyframes autocomplete-chip-in {
+  from {
+    scale: 0.8;
+    opacity: 0;
+  }
+}

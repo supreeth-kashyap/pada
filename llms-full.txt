@@ -301,6 +301,37 @@ import { AlertDialog } from 'pada-ds';
 <AlertDialog.Trigger />
 ```
 
+### Autocomplete
+
+`import { Autocomplete } from 'pada-ds';`
+
+A text field with filtered suggestions (combobox): type to narrow the list, arrows to move, Enter to pick. With `multiple`, picks become chips; Backspace in the empty input removes the last.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| multiple | `false` | no | - | - |
+| value | `string \| null` | no | - | - |
+| defaultValue | `string \| null` | no | - | - |
+| onValueChange | `(value: string \| null) => void` | no | - | - |
+| label | `string` | yes | - | - |
+| options | `AutocompleteOption[]` | yes | - | - |
+| placeholder | `string` | no | - | - |
+| description | `string` | no | - | Help text under the field. |
+| error | `string` | no | - | Error message; marks the field invalid. |
+| emptyMessage | `ReactNode` | no | - | Shown when nothing matches. |
+| filter | `ComboboxFilter \| false` | no | - | How options match the typed text; `false` for server-side search (filter the options yourself). |
+| onInputValueChange | `(value: string) => void` | no | - | Called on every keystroke, e.g. to fetch options. |
+| disabled | `boolean` | no | - | - |
+| required | `boolean` | no | - | - |
+| name | `string` | no | - | Name for form submission (a hidden input per selected value). |
+| className | `string` | no | - | - |
+
+```tsx
+import { Autocomplete } from 'pada-ds';
+
+<Autocomplete label="..." options={[]} />
+```
+
 ### Avatar
 
 `import { Avatar } from 'pada-ds';`
@@ -583,6 +614,28 @@ Also accepts the props of `React.ButtonHTMLAttributes<HTMLButtonElement>`.
 import { ComboBoxMenuItem } from 'pada-ds';
 
 <ComboBoxMenuItem label="..." />
+```
+
+### CommandPalette
+
+`import { CommandPalette } from 'pada-ds';`
+
+A searchable list of actions in a dialog, opened with ⌘K / Ctrl+K. Type to filter (fuzzy, ranked), arrows to move, Enter to run.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| commands | `Command[]` | yes | - | - |
+| open | `boolean` | no | - | Controlled open state. |
+| onOpenChange | `(open: boolean) => void` | no | - | Called when the palette opens or closes. |
+| placeholder | `string` | no | `'Type a command or search…'` | - |
+| emptyMessage | `string` | no | `'No results'` | Shown when nothing matches. |
+| hotkey | `string \| false` | no | `'k'` | Key that toggles the palette together with ⌘ (macOS) or Ctrl (elsewhere). `false` disables the shortcut. |
+| label | `string` | no | `'Command palette'` | Accessible name of the dialog. |
+
+```tsx
+import { CommandPalette } from 'pada-ds';
+
+<CommandPalette commands={[]} />
 ```
 
 ### DatePickerDropdown
@@ -2742,6 +2795,26 @@ import { ThemeToggle } from 'pada-ds';
 <ThemeToggle />
 ```
 
+### Toaster
+
+`import { Toaster } from 'pada-ds';`
+
+Renders toasts created with `toast()`. Toasts stack in a corner and expand on hover or focus; timers pause while the stack is hovered or focused, or the window is in the background. Swipe a toast sideways or press Escape on it to dismiss it. F8 jumps to the toasts.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| position | `ToasterPosition` | no | `'bottom-right'` | Corner (or edge) where toasts appear. |
+| visibleToasts | `number` | no | `3` | How many toasts show at once; older ones wait in the stack. |
+| label | `string` | no | `'Notifications'` | Accessible name of the region. The hotkey is appended: "Notifications (F8)". |
+| hotkey | `string` | no | `'F8'` | Key that moves focus to the toasts. |
+| className | `string` | no | - | - |
+
+```tsx
+import { Toaster } from 'pada-ds';
+
+<Toaster />
+```
+
 ### Toggle
 
 `import { Toggle } from 'pada-ds';`
@@ -2793,14 +2866,22 @@ A segmented set of toggles. Name it with `aria-label`.
 
 | Prop | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
+| type | `'single'` | yes | - | One item pressed at a time (like radio buttons, but it can be cleared). |
+| value | `string` | no | - | - |
+| defaultValue | `string` | no | - | - |
+| onValueChange | `(value: string) => void` | no | - | - |
+| orientation | `'horizontal' \| 'vertical'` | no | - | Arrow keys follow the orientation. |
+| loop | `boolean` | no | - | Wrap focus from the last item to the first and back. |
+| disabled | `boolean` | no | - | Disables every item. |
+| dir | `'ltr' \| 'rtl'` | no | - | - |
 | size | `'sm' \| 'md' \| 'lg'` | no | `'md'` | sm 28px, md 32px, lg 40px. |
 
-Also accepts the props of `ToggleGroupSingleProps | ToggleGroupMultipleProps`.
+Also accepts the props of `Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'dir'>`.
 
 ```tsx
 import { ToggleGroup } from 'pada-ds';
 
-<ToggleGroup.Root />
+<ToggleGroup.Root type="single" />
 ```
 
 ### Toolbar

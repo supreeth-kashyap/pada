@@ -59,7 +59,9 @@ import { Dialog } from 'pada-ds/headless';
 .my-dialog[data-state="open"] { animation: fade-in var(--pada-duration-slow) var(--pada-ease-emphasized); }
 ```
 
-Available parts: `Dialog`, `Popover`, `Tooltip` (with `Tooltip.Provider` for shared delays) and `DropdownMenu` (items, checkbox and radio items, groups, labels, separators, submenus). Each follows the matching WAI-ARIA Authoring Practices pattern. Any part that renders an element accepts `asChild`, which merges its behaviour onto your own element (a router link, a custom button) instead of rendering a new one.
+Available parts: `Dialog`, `Popover`, `Tooltip` (with `Tooltip.Provider` for shared delays), `DropdownMenu` (items, checkbox and radio items, groups, labels, separators, submenus), `Tabs`, `Field`, `Toggle` / `ToggleGroup` and `Combobox` (single or multiple, with a pluggable filter). Each follows the matching WAI-ARIA Authoring Practices pattern. Any part that renders an element accepts `asChild`, which merges its behaviour onto your own element (a router link, a custom button) instead of rendering a new one.
+
+Portalled parts render into `document.body`, or into the element provided by `PortalContainerContext` (`ThemeProvider` provides one, so overlays keep a subtree's theme).
 
 The building blocks are exported too: `Slot`, `Portal`, `VisuallyHidden`, `useControllableState`, `usePresence` (keeps an element mounted until its exit transition ends), `useDismissable` (Escape and outside clicks, layered), `useFocusScope`, `useScrollLock`, `useHideOthers`, `useFloatingPosition`, `useTypeahead` and list navigation helpers.
 
@@ -133,6 +135,7 @@ This design system includes the following components:
 
 - **Accordion**: Collapsible sections to show/hide content.
 - **Alert**: Inline callout by tone with actions.
+- **Autocomplete**: Text field with filtered suggestions, single or multiple.
 - **AlertDialog**: Confirmation that needs an answer.
 - **Avatar**: User picture with initials fallback; `AvatarGroup` for stacks.
 - **Badge**: Status label or count.
@@ -143,6 +146,7 @@ This design system includes the following components:
 - **Carousel**: Scrollable content carousel with controls.
 - **Checkbox**: Binary selection with label support.
 - **CodeSnippet**: Display formatted, copyable code blocks.
+- **CommandPalette**: ⌘K search over app commands.
 - **ComboBox**: Filterable list dropdown with options.
 - **DatePicker**: Select dates via calendar UI.
 - **Dialog**: Composable modal or non-modal dialog (`Dialog.Root`, `Dialog.Content`, `Dialog.Title`, …).
@@ -188,6 +192,7 @@ This design system includes the following components:
 - **Tags**: Compact label tags for metadata.
 - **Text**: Typography primitives and helpers.
 - **ThemeProvider / ThemeToggle**: Theme axes for a page or subtree; `useTheme()`.
+- **Toaster / toast()**: Stacked, swipeable toast notifications.
 - **Toggle / ToggleGroup**: Pressed-state buttons and segmented groups.
 - **Toolbar**: Action toolbar with controls.
 - **Tooltip**: Hover and focus tooltip; also `Tooltip.Provider`, `Tooltip.Root`, … parts.

@@ -6,6 +6,16 @@
 - Moved the `body` and `p` rules out of `dist/tokens.css` into a new optional `pada-ds/base.css` export, so importing the tokens no longer overrides an app's own styles.
 - Added a component API manifest for AI coding agents. `npm run build` now reads every exported component's props from the TypeScript source and writes `dist/manifest.json` (exported as `pada-ds/manifest.json`), `llms.txt` and `llms-full.txt`. Both llms files ship in the package and are committed at the repo root. `npm test` fails if they are stale or if an exported component is missing from the manifest.
 
+- **New components (wave 1, feedback and search).**
+  - `Toaster` and `toast()`: call `toast('Saved')`, `toast.success(...)`, `toast.warning(...)`, `toast.danger(...)`, `toast.info(...)` or `toast.dismiss(id)` from anywhere, with one `<Toaster />` mounted. Toasts take a title, description, tone, one action (e.g. Undo) and a duration, and an `id` updates a toast in place. They stack in a corner and fan out on hover or focus. Timers pause while the stack is hovered or focused or the window is in the background. Swipe or press Escape to dismiss, and F8 jumps to the region. Each toast is a polite live region (danger is assertive).
+  - `Autocomplete`: a text field with a filtered list of options, single or `multiple` (removable chips), with a description, error, `name` for forms, a custom `filter`, or `filter={false}` plus `onInputValueChange` for server-side search.
+  - `CommandPalette`: a ⌘K / Ctrl+K dialog of commands with fuzzy, ranked matching on labels and `keywords`, groups, icons and shortcut hints.
+  - Headless `Combobox` (`pada-ds/headless`: `Root`, `Anchor`, `Input`, `Trigger`, `Portal`, `Content`, `Item`, `Group`, `Empty`) follows the APG combobox pattern with a listbox popup. The highlight is announced through `aria-activedescendant` and focus stays in the input. Exports `defaultComboboxFilter`.
+- Overlays opened inside a `ThemeProvider` subtree (`target="element"`) now portal into that subtree, so they keep its theme and accent instead of the page's. The headless `Portal` reads the container from the new `PortalContainerContext` (exported from `pada-ds/headless`) when no `container` is passed.
+- `Link`'s external-link icon is now an inline SVG, so a link inside a paragraph no longer puts a `<div>` inside the `<p>`.
+- The demo has a new Playground page (Foundation → Playground) with every new component and controls for theme, accent, density and radius.
+- `manifest.json` now expands union prop types (such as `AutocompleteProps`) and lists each inherited prop once.
+- Fixed the consumer smoke test, which looked for a `.button--primary` rule that no longer exists now that primary is the base button style.
 - **New components (wave 1, interaction).**
   - `Field` (`Field.Root`, `Label`, `Control`, `Description`, `Error`): wires any control's id, `aria-describedby`, `aria-invalid`, `required` and `disabled`; the error is announced and the control shakes once (not under reduced motion). Also headless in `pada-ds/headless`.
   - `Toggle` (`aria-pressed`) and `ToggleGroup` (single or multiple, one tab stop, arrow keys). Also headless.

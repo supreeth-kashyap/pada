@@ -1,7 +1,6 @@
 import type { ComponentPropsWithRef } from 'react';
 import { Slot } from '../../headless/utils/Slot';
 import { VisuallyHidden } from '../../headless/utils/VisuallyHidden';
-import { Icon } from '../Icon';
 import './Link.css';
 
 export interface LinkProps extends ComponentPropsWithRef<'a'> {
@@ -28,7 +27,10 @@ export function Link({ tone = 'accent', underline = 'hover', external, asChild, 
           {children}
           {external && (
             <>
-              <Icon name="tab_out" size={12} aria-hidden="true" className="link-external-icon" />
+              {/* Inline SVG (not Icon, which renders a <div>) so links stay valid inside paragraphs. */}
+              <svg className="link-external-icon" viewBox="0 0 16 16" width="12" height="12" aria-hidden="true">
+                <path d="M6 3H3v10h10v-3M9 3h4v4M13 3 7 9" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
               <VisuallyHidden> (opens in a new tab)</VisuallyHidden>
             </>
           )}

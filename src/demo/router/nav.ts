@@ -21,6 +21,7 @@ export interface NavEntry {
 }
 
 const FOUNDATION_ENTRIES: NavEntry[] = [
+  { kind: 'foundation', slug: 'playground', label: 'Playground (2.0)' },
   { kind: 'foundation', slug: 'typography', label: 'Typography' },
   { kind: 'foundation', slug: 'colors', label: 'Colors' },
   { kind: 'foundation', slug: 'shadows', label: 'Shadows' },
