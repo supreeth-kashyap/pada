@@ -1,6 +1,6 @@
 .accordion__body {
-  padding: var(--spacing-2) var(--spacing-4) var(--spacing-6);
-  background-color: var(--color-bg);
+  padding: var(--pada-space-2) var(--pada-space-4) var(--pada-space-6);
+  background-color: var(--pada-color-surface);
   box-sizing: border-box;
 }
 

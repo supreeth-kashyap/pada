@@ -198,7 +198,7 @@ export const Popover: React.FC<PopoverProps> = ({
           </div>
           {variant === 'active' && (
             <div className="popover-icon">
-              <Icon name="star" size={16} color="var(--color-purple-600)" />
+              <Icon name="star" size={16} color="var(--pada-color-purple-600)" />
             </div>
           )}
           {showClose && (

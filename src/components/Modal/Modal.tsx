@@ -127,7 +127,7 @@ export const Modal: React.FC<ModalProps> = ({ open, onOpenChange, children, titl
           {children}
         </div>
         <button className="modal-close" onClick={() => onOpenChange(false)} aria-label="Close modal" type="button">
-          <Icon name="cross_1" size={16} color="var(--color-neutral-600)" />
+          <Icon name="cross_1" size={16} color="var(--pada-color-neutral-600)" />
         </button>
       </div>
     </div>

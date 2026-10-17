@@ -43,9 +43,9 @@ export const Button = ({
   const iconSize = 16;
 
   const getIconColor = (): string => {
-    if (variant === 'primary') return 'var(--color-white)';
-    if (variant === 'destructive') return 'var(--color-white)';
-    return 'var(--color-neutral-600)';
+    if (variant === 'primary') return 'currentColor';
+    if (variant === 'destructive') return 'currentColor';
+    return 'var(--pada-color-neutral-600)';
   };
 
   const renderLeftVisual = () => {

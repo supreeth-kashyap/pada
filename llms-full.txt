@@ -20,7 +20,8 @@ import { Button } from 'pada-ds';
 <Button variant="primary">Save</Button>
 ```
 
-- `pada-ds/tokens.css`: design tokens (CSS custom properties) only.
+- `pada-ds/tokens.css`: design tokens (CSS custom properties, all prefixed `--pada-`) only.
+- `pada-ds/tokens`: token names as `var()` strings and breakpoints for JS (`import { tokens, breakpoints } from 'pada-ds/tokens'`); `pada-ds/tokens.scss` and `pada-ds/tokens.json` carry the same tokens for Sass and design tools.
 - `pada-ds/styles.css`: styles for every component.
 - `pada-ds/base.css` (optional): document base styles (`body` background, color and font; zero `p` margins).
 - `pada-ds/manifest.json`: machine-readable component API (props, types, defaults, descriptions).
@@ -28,6 +29,10 @@ import { Button } from 'pada-ds';
 ## Theming
 
 By default the theme follows the operating system (`prefers-color-scheme`). Set `data-theme="light"` or `data-theme="dark"` on `<html>` or on any container to force a theme for that subtree. Remove the attribute to follow the OS again.
+
+More theme axes work the same way and combine freely: `data-accent` (a palette hue such as `indigo`, `amber`, `emerald`, or `custom` with `--pada-accent-hue`), `data-neutral` (`stone`, `slate`, `gray`, `zinc`, `neutral`), `data-density` (`compact`, `comfortable`, `spacious`), `data-radius` (`none`, `sm`, `md`, `lg`, `xl`), `data-motion` (`reduced`, `full`) and `data-contrast` (`standard`, `more`).
+
+Style custom UI with semantic tokens rather than raw colours: `--pada-color-surface`, `--pada-color-fg`, `--pada-color-fg-muted`, `--pada-color-border`, and per intent (`accent`, `neutral`, `success`, `warning`, `danger`, `info`) `--pada-color-<intent>-solid`, `-solid-hover`, `-on-solid`, `-subtle`, `-fg`, `-border`. Spacing is `--pada-space-<n>` (n × 0.25rem × density), radius `--pada-radius-xs` to `-3xl`, motion `--pada-duration-fast|normal|slow` with `--pada-ease-standard|enter|exit|emphasized`, layers `--pada-z-dropdown|modal|popover|toast|tooltip`.
 
 ## Components
 
@@ -1191,7 +1196,7 @@ import { Tags } from 'pada-ds';
 | weight | `TextWeight` | no | `TextWeight.NORMAL` | - |
 | family | `TextFamily` | no | - | - |
 | lineHeight | `TextLineHeight` | no | `TextLineHeight.BASE` | - |
-| color | `string` | no | `'var(--color-neutral-900)'` | - |
+| color | `string` | no | `'var(--pada-color-fg)'` | - |
 | as | `'span' \| 'p' \| 'div' \| 'h1' \| 'h2' \| 'h3' \| 'h4' \| 'h5' \| 'h6'` | no | `'span'` | - |
 
 Also accepts the props of `React.HTMLAttributes<HTMLSpanElement>`.

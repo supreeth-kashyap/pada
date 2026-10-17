@@ -1,8 +1,8 @@
 .date_picker {
-    background-color: var(--color-bg);
-    border: 1px solid var(--color-border);
-    border-radius: 18px;
-    box-shadow: var(--shadow-lg);
+    background-color: var(--pada-color-surface);
+    border: 1px solid var(--pada-color-border);
+    border-radius: var(--pada-radius-2xl);
+    box-shadow: var(--pada-shadow-lg);
     padding: 24px;
     width: 275px;
 }
@@ -18,27 +18,27 @@
     align-items: center;
     background-color: transparent;
     border: none;
-    border-radius: 12px;
-    color: var(--color-neutral-700);
+    border-radius: var(--pada-radius-xl);
+    color: var(--pada-color-neutral-700);
     cursor: pointer;
     display: flex;
     height: 32px;
     justify-content: center;
-    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    transition: background-color var(--pada-duration-normal) var(--pada-ease-standard), color var(--pada-duration-normal) var(--pada-ease-standard);
     width: 32px;
 }
 
 
 .date_picker_view_select {
-    font-size: var(--font-size-base);
-    font-weight: 600;
-    color: var(--color-neutral-900);
+    font-size: var(--pada-font-size-md);
+    font-weight: var(--pada-font-weight-semibold);
+    color: var(--pada-color-neutral-900);
     background: none;
     border: none;
     cursor: pointer;
     padding: 6px 12px;
-    border-radius: 12px;
-    transition: background-color 0.2s ease-in-out;
+    border-radius: var(--pada-radius-xl);
+    transition: background-color var(--pada-duration-normal) var(--pada-ease-standard);
 }
 
 
@@ -48,9 +48,9 @@
     gap: 8px;
     margin-bottom: 12px;
     text-align: center;
-    font-size: var(--font-size-sm);
-    font-weight: 600;
-    color: var(--color-neutral-500);
+    font-size: var(--pada-font-size-sm);
+    font-weight: var(--pada-font-weight-semibold);
+    color: var(--pada-color-neutral-500);
 }
 
 .date_picker_weekday_header span {

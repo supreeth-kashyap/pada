@@ -34,7 +34,7 @@ export const KeyValue = ({
       return labelComponent;
     }
     return (
-      <Text size={TextSize.BASE} weight={TextWeight.MEDIUM} color="var(--color-neutral-900)">
+      <Text size={TextSize.BASE} weight={TextWeight.MEDIUM} color="var(--pada-color-neutral-900)">
         {label}
       </Text>
     );
@@ -51,7 +51,7 @@ export const KeyValue = ({
           <Icon 
             name="info" 
             size={12} 
-            color="var(--color-neutral-600)" 
+            color="var(--pada-color-neutral-600)" 
             className="key-value__info-icon"
           />
         </div>

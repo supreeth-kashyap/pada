@@ -290,7 +290,8 @@ const INTRO = [
   '<Button variant="primary">Save</Button>',
   '```',
   '',
-  `- \`${PACKAGE_NAME}/tokens.css\`: design tokens (CSS custom properties) only.`,
+  `- \`${PACKAGE_NAME}/tokens.css\`: design tokens (CSS custom properties, all prefixed \`--pada-\`) only.`,
+  `- \`${PACKAGE_NAME}/tokens\`: token names as \`var()\` strings and breakpoints for JS (\`import { tokens, breakpoints } from '${PACKAGE_NAME}/tokens'\`); \`${PACKAGE_NAME}/tokens.scss\` and \`${PACKAGE_NAME}/tokens.json\` carry the same tokens for Sass and design tools.`,
   `- \`${PACKAGE_NAME}/styles.css\`: styles for every component.`,
   `- \`${PACKAGE_NAME}/base.css\` (optional): document base styles (\`body\` background, color and font; zero \`p\` margins).`,
   `- \`${PACKAGE_NAME}/manifest.json\`: machine-readable component API (props, types, defaults, descriptions).`,
@@ -298,6 +299,10 @@ const INTRO = [
   '## Theming',
   '',
   'By default the theme follows the operating system (`prefers-color-scheme`). Set `data-theme="light"` or `data-theme="dark"` on `<html>` or on any container to force a theme for that subtree. Remove the attribute to follow the OS again.',
+  '',
+  'More theme axes work the same way and combine freely: `data-accent` (a palette hue such as `indigo`, `amber`, `emerald`, or `custom` with `--pada-accent-hue`), `data-neutral` (`stone`, `slate`, `gray`, `zinc`, `neutral`), `data-density` (`compact`, `comfortable`, `spacious`), `data-radius` (`none`, `sm`, `md`, `lg`, `xl`), `data-motion` (`reduced`, `full`) and `data-contrast` (`standard`, `more`).',
+  '',
+  'Style custom UI with semantic tokens rather than raw colours: `--pada-color-surface`, `--pada-color-fg`, `--pada-color-fg-muted`, `--pada-color-border`, and per intent (`accent`, `neutral`, `success`, `warning`, `danger`, `info`) `--pada-color-<intent>-solid`, `-solid-hover`, `-on-solid`, `-subtle`, `-fg`, `-border`. Spacing is `--pada-space-<n>` (n × 0.25rem × density), radius `--pada-radius-xs` to `-3xl`, motion `--pada-duration-fast|normal|slow` with `--pada-ease-standard|enter|exit|emphasized`, layers `--pada-z-dropdown|modal|popover|toast|tooltip`.',
 ];
 
 /** The short index: what Pada is, how to install and import it, and one line per component. */

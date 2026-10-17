@@ -2,20 +2,20 @@
 .pills {
   display: inline-flex;
   align-items: center;
-  gap: var(--spacing-2);
+  gap: var(--pada-space-2);
   font-family: inherit;
-  --pill-padding: var(--spacing-2) var(--spacing-4);
-  --pill-font-size: var(--font-size-sm);
-  --pill-min-height: var(--spacing-7);
-  --pill-bg-color: var(--color-white);
-  --pill-color: var(--color-neutral-900);
-  --pill-border-color: var(--color-neutral-200);
+  --pill-padding: var(--pada-space-2) var(--pada-space-4);
+  --pill-font-size: var(--pada-font-size-sm);
+  --pill-min-height: var(--pada-space-7);
+  --pill-bg-color: var(--pada-color-surface);
+  --pill-color: var(--pada-color-neutral-900);
+  --pill-border-color: var(--pada-color-neutral-200);
 
-  --pill-border-color-hover: var(--color-primary-200);
-  --pill-bg-color-hover: var(--color-white);
-  --pill-color-hover: var(--color-primary-800);
+  --pill-border-color-hover: var(--pada-color-accent-200);
+  --pill-bg-color-hover: var(--pada-color-surface);
+  --pill-color-hover: var(--pada-color-accent-800);
 
-  --pill-bg-color-active: var(--color-primary-200);
+  --pill-bg-color-active: var(--pada-color-accent-200);
 }
 
 .pills:focus-within {
@@ -24,15 +24,15 @@
 
 /* Variant: Size */
 .pills[data-size="sm"] {
-  --pill-padding: var(--spacing-1-5) var(--spacing-3);
-  --pill-font-size: var(--font-size-xs);
-  --pill-min-height: var(--spacing-6);
+  --pill-padding: var(--pada-space-1-5) var(--pada-space-3);
+  --pill-font-size: var(--pada-font-size-xs);
+  --pill-min-height: var(--pada-space-6);
 }
 
 .pills[data-size="lg"] {
-  --pill-padding: var(--spacing-2-5) var(--spacing-5);
-  --pill-font-size: var(--font-size-base);
-  --pill-min-height: var(--spacing-8);
+  --pill-padding: var(--pada-space-2-5) var(--pada-space-5);
+  --pill-font-size: var(--pada-font-size-md);
+  --pill-min-height: var(--pada-space-8);
 }
 
 /* Pill Button */
@@ -43,21 +43,21 @@
   background-color: var(--pill-bg-color);
   color: var(--pill-color);
   border: 1px solid var(--pill-border-color);
-  border-radius: var(--radius-full);
+  border-radius: var(--pada-radius-full);
   padding: var(--pill-padding);
   font-size: var(--pill-font-size);
   min-height: var(--pill-min-height);
-  font-weight: 500;
-  line-height: var(--line-height-base);
+  font-weight: var(--pada-font-weight-medium);
+  line-height: var(--pada-line-height-md);
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
+  transition: all var(--pada-duration-normal) var(--pada-ease-standard);
   white-space: nowrap;
   position: relative;
   outline: none;
 }
 
 .pill:focus-visible {
-  outline: 2px solid var(--color-focus-ring);
+  outline: 2px solid var(--pada-color-focus-ring);
   outline-offset: 2px;
 }
 
@@ -75,20 +75,20 @@
 
 /* Selected State */
 .pill[aria-selected="true"] {
-  background-color: var(--color-primary-50);
-  color: var(--color-primary-700);
-  border: 1px solid var(--color-primary-200);
-  font-weight: 600;
+  background-color: var(--pada-color-accent-50);
+  color: var(--pada-color-accent-700);
+  border: 1px solid var(--pada-color-accent-200);
+  font-weight: var(--pada-font-weight-semibold);
 }
 
 .pill[aria-selected="true"]:not(:disabled):hover {
-  background-color: var(--color-primary-100);
-  border-color: var(--color-primary-200);
+  background-color: var(--pada-color-accent-100);
+  border-color: var(--pada-color-accent-200);
 }
 
 .pill[aria-selected="true"]:not(:disabled):active {
-  background-color: var(--color-primary-100);
-  border-color: var(--color-primary-200);
+  background-color: var(--pada-color-accent-100);
+  border-color: var(--pada-color-accent-200);
 }
 
 /* Disabled State */
@@ -96,7 +96,7 @@
   opacity: 0.6;
   cursor: not-allowed;
   pointer-events: none;
-  background-color: var(--color-neutral-50);
-  border-color: var(--color-neutral-200);
-  color: var(--color-neutral-400);
+  background-color: var(--pada-color-neutral-50);
+  border-color: var(--pada-color-neutral-200);
+  color: var(--pada-color-neutral-400);
 }

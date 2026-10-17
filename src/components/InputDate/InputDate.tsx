@@ -155,7 +155,7 @@ export const InputDate = ({
             {getDisplayValue() || placeholder}
           </span>
           <span className="input-date__icon">
-            <Icon name="calendar_3" size={12} color="var(--color-neutral-600)" />
+            <Icon name="calendar_3" size={12} color="var(--pada-color-neutral-600)" />
           </span>
         </button>
         {isOpen && (

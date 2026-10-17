@@ -1,7 +1,7 @@
 .checkbox-wrapper {
   display: flex;
   align-items: center;
-  gap: var(--spacing-2);
+  gap: var(--pada-space-2);
 }
 
 .checkbox-container {
@@ -15,20 +15,20 @@
 .checkbox {
   -webkit-appearance: none;
   appearance: none;
-  width: var(--spacing-5);
-  height: var(--spacing-5);
-  border: 1px solid var(--color-neutral-600);
-  border-radius: var(--radius);
-  background-color: var(--color-bg);
+  width: var(--pada-space-5);
+  height: var(--pada-space-5);
+  border: 1px solid var(--pada-color-neutral-600);
+  border-radius: var(--pada-radius-sm);
+  background-color: var(--pada-color-surface);
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
+  transition: all var(--pada-duration-normal) var(--pada-ease-standard);
   margin: 0;
   padding: 0;
 }
 
 .checkbox:checked {
-  background-color: var(--color-primary-600);
-  border-color: var(--color-primary-600);
+  background-color: var(--pada-color-accent-solid);
+  border-color: var(--pada-color-accent-solid);
 }
 
 
@@ -39,12 +39,12 @@
   transform: translate(-50%, -50%);
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.2s ease-in-out;
+  transition: opacity var(--pada-duration-normal) var(--pada-ease-standard);
 }
 
 .checkbox-icon--tick {
   opacity: 0;
-  --checkbox-tick-color: var(--color-primary-50);
+  --checkbox-tick-color: var(--pada-color-accent-50);
 }
 
 .checkbox-icon--tick .icon {
@@ -52,25 +52,25 @@
 }
 
 .checkbox:hover:not(:disabled):not(:checked) {
-  border-color: var(--color-primary-600);
+  border-color: var(--pada-color-accent-600);
 }
 
 .checkbox:hover:not(:disabled):not(:checked) ~ .checkbox-icon--tick {
   opacity: 1;
-  --checkbox-tick-color: var(--color-primary-600);
+  --checkbox-tick-color: var(--pada-color-accent-600);
 }
 
 /* Focus ring per Figma: 2px white inner + 3px indigo-600 outer spread. The base
    border color is NOT overridden on focus — stone-600 for unselected, indigo-600
    for selected stay intact and only the outer ring changes. */
 .checkbox:focus-visible {
-  box-shadow: var(--shadow-focus-ring);
+  box-shadow: var(--pada-shadow-focus);
   outline: none;
 }
 
 .checkbox:focus-visible:not(:checked) ~ .checkbox-icon--tick {
   opacity: 1;
-  --checkbox-tick-color: var(--color-primary-600);
+  --checkbox-tick-color: var(--pada-color-accent-600);
 }
 
 .checkbox:checked ~ .checkbox-icon--tick {
@@ -81,8 +81,8 @@
    the border stays indigo-600 and the tick glyph re-colors to indigo-600 for AA
    contrast on the lighter fill. */
 .checkbox:checked:hover:not(:disabled) {
-  background-color: var(--color-primary-100);
-  border-color: var(--color-primary-600);
+  background-color: var(--pada-color-accent-100);
+  border-color: var(--pada-color-accent-600);
 }
 
 .checkbox:disabled:checked ~ .checkbox-icon--tick {
@@ -90,39 +90,39 @@
 }
 
 .checkbox:disabled {
-  background-color: var(--color-bg);
-  border-color: var(--color-neutral-300);
+  background-color: var(--pada-color-surface);
+  border-color: var(--pada-color-neutral-300);
   cursor: not-allowed;
   opacity: 1;
 }
 
 
 .checkbox:disabled:checked {
-  background-color: var(--color-primary-300);
-  border-color: var(--color-primary-300);
+  background-color: var(--pada-color-accent-300);
+  border-color: var(--pada-color-accent-300);
 }
 
 .checkbox:disabled ~ .checkbox-icon--tick {
   opacity: 1;
-  --checkbox-tick-color: var(--color-neutral-300);
+  --checkbox-tick-color: var(--pada-color-neutral-300);
 }
 
 .checkbox:disabled:checked ~ .checkbox-icon--tick {
-  --checkbox-tick-color: var(--color-primary-50);
+  --checkbox-tick-color: var(--pada-color-accent-50);
 }
 
 .checkbox:checked:hover:not(:disabled) ~ .checkbox-icon--tick {
-  --checkbox-tick-color: var(--color-primary-600);
+  --checkbox-tick-color: var(--pada-color-accent-600);
 }
 
 .checkbox-label {
-  font-size: var(--font-size-sm);
-  color: var(--color-neutral-900);
+  font-size: var(--pada-font-size-sm);
+  color: var(--pada-color-neutral-900);
   cursor: pointer;
-  line-height: var(--line-height-base);
+  line-height: var(--pada-line-height-md);
 }
 
 .checkbox:disabled + .checkbox-label {
-  color: var(--color-neutral-400);
+  color: var(--pada-color-neutral-400);
   cursor: not-allowed;
 }

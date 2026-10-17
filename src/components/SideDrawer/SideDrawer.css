@@ -3,15 +3,14 @@
   inset: 0;
   display: flex;
   justify-content: flex-end;
-  background-color: rgba(17, 24, 39, 0.4);
-  z-index: 1000;
+  background-color: var(--pada-color-backdrop);
+  z-index: var(--pada-z-modal);
 }
 
 .side-drawer {
   height: 100%;
-  background-color: var(--color-white);
-  box-shadow: 0 6px 12px -3px rgba(31, 41, 55, 0.04),
-    0 6px 18px 0 rgba(31, 41, 55, 0.12);
+  background-color: var(--pada-color-surface);
+  box-shadow: var(--pada-shadow-xl);
   display: flex;
   flex-direction: column;
 }

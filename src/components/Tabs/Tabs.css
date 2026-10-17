@@ -12,42 +12,42 @@
 .tabs__list {
     display: flex;
     align-items: stretch;
-    gap: var(--spacing-6);
-    border-bottom: 1px solid var(--color-stone-100);
+    gap: var(--pada-space-6);
+    border-bottom: 1px solid var(--pada-color-neutral-100);
 }
 
 .tabs__tab {
     font-family: inherit;
-    font-size: var(--font-size-base);
-    font-weight: 500;
+    font-size: var(--pada-font-size-md);
+    font-weight: var(--pada-font-weight-medium);
     line-height: 20px;
     /* No horizontal padding per Figma; the 24px tablist gap separates items. */
-    padding: var(--spacing-3) 0;
+    padding: var(--pada-space-3) 0;
     border: none;
     background-color: transparent;
     cursor: pointer;
-    color: var(--color-stone-900);
+    color: var(--pada-color-neutral-900);
     position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: var(--spacing-2);
+    gap: var(--pada-space-2);
     white-space: nowrap;
     /* Reserve the active-state 2px bar at all times so toggling doesn't shift
        layout. `margin-bottom: -1px` lets the bar overlap the 1px tablist
        separator below it. */
     border-bottom: 2px solid transparent;
     margin-bottom: -1px;
-    transition: color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+    transition: color var(--pada-duration-fast) var(--pada-ease-standard), border-color var(--pada-duration-fast) var(--pada-ease-standard);
 }
 
 .tabs__tab:hover:not([aria-disabled='true']) {
-    color: var(--color-primary-700);
+    color: var(--pada-color-accent-700);
 }
 
 .tabs__tab--active {
-    color: var(--color-primary-700);
-    border-bottom-color: var(--color-primary-600);
+    color: var(--pada-color-accent-700);
+    border-bottom-color: var(--pada-color-accent-600);
 }
 
 .tabs__tab:focus {
@@ -55,8 +55,8 @@
 }
 
 .tabs__tab:focus-visible {
-    box-shadow: var(--shadow-focus-ring);
-    border-radius: var(--radius);
+    box-shadow: var(--pada-shadow-focus);
+    border-radius: var(--pada-radius-sm);
 }
 
 .tabs__tab-label {
@@ -68,13 +68,13 @@
 .tabs__tab-indicator {
     width: 8px;
     height: 8px;
-    background-color: var(--color-red-600);
-    border: 2px solid var(--color-white);
-    border-radius: 9999px;
+    background-color: var(--pada-color-red-600);
+    border: 2px solid var(--pada-color-surface);
+    border-radius: var(--pada-radius-full);
     box-sizing: content-box;
     flex-shrink: 0;
 }
 
 .tabs__panel {
-    padding-top: var(--spacing-4);
+    padding-top: var(--pada-space-4);
 }

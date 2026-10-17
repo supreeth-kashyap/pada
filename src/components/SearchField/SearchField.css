@@ -2,24 +2,24 @@
 .search-field {
   display: flex;
   align-items: center;
-  height: var(--spacing-8);
+  height: var(--pada-space-8);
   width: 240px;
-  background-color: var(--color-white);
-  border: 1px solid var(--color-neutral-300);
-  border-radius: var(--radius-md);
+  background-color: var(--pada-color-surface);
+  border: 1px solid var(--pada-color-neutral-300);
+  border-radius: var(--pada-radius-md);
   box-sizing: border-box;
-  transition: all 0.2s ease-in-out;
+  transition: all var(--pada-duration-normal) var(--pada-ease-standard);
 }
 
 .search-field:focus-within {
-  border-color: var(--color-neutral-900);
-  box-shadow: 0 0 0 2px var(--color-focus-ring);
+  border-color: var(--pada-color-neutral-900);
+  box-shadow: 0 0 0 2px var(--pada-color-focus-ring);
 }
 
 .search-field:disabled {
   opacity: 0.6;
   pointer-events: none;
-  background-color: var(--color-neutral-50);
+  background-color: var(--pada-color-neutral-50);
 }
 
 /* Icon */
@@ -27,30 +27,30 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-left: var(--spacing-2);
-  color: var(--color-neutral-600);
+  padding-left: var(--pada-space-2);
+  color: var(--pada-color-neutral-600);
   flex-shrink: 0;
 }
 
 /* Input */
 .search-input {
   flex: 1;
-  padding: 0 var(--spacing-2);
+  padding: 0 var(--pada-space-2);
   height: 100%;
   border: none;
   background: transparent;
-  font-size: var(--font-size-sm);
-  line-height: var(--line-height-base);
-  color: var(--color-neutral-900);
+  font-size: var(--pada-font-size-sm);
+  line-height: var(--pada-line-height-md);
+  color: var(--pada-color-neutral-900);
   outline: none;
 }
 
 .search-input::placeholder {
-  color: var(--color-neutral-500);
+  color: var(--pada-color-neutral-500);
 }
 
 .search-input:disabled {
-  color: var(--color-neutral-400);
+  color: var(--pada-color-neutral-400);
   cursor: not-allowed;
 }
 
@@ -59,22 +59,22 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 var(--spacing-1);
+  padding: 0 var(--pada-space-1);
   height: 100%;
   border: none;
   background: transparent;
   cursor: pointer;
-  color: var(--color-neutral-600);
-  transition: color 0.2s ease-in-out;
+  color: var(--pada-color-neutral-600);
+  transition: color var(--pada-duration-normal) var(--pada-ease-standard);
   flex-shrink: 0;
   outline: none;
 }
 
 .search-clear:hover {
-  color: var(--color-neutral-900);
+  color: var(--pada-color-neutral-900);
 }
 
 .search-clear:focus-visible {
-  outline: 2px solid var(--color-focus-ring);
+  outline: 2px solid var(--pada-color-focus-ring);
   outline-offset: 2px;
 }

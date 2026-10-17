@@ -12,38 +12,38 @@
   gap: 8px;
   padding: 6px 16px;
   height: 32px;
-  background-color: var(--color-white);
-  border: 1px solid var(--color-stone-200);
-  border-radius: 8px;
+  background-color: var(--pada-color-surface);
+  border: 1px solid var(--pada-color-neutral-200);
+  border-radius: var(--pada-radius-lg);
   font-family: inherit;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: var(--pada-font-size-md);
+  font-weight: var(--pada-font-weight-medium);
   line-height: 20px;
-  color: var(--color-stone-900);
+  color: var(--pada-color-neutral-900);
   cursor: pointer;
   white-space: nowrap;
   box-sizing: border-box;
-  transition: border-color 0.15s ease-in-out, background-color 0.15s ease-in-out;
+  transition: border-color var(--pada-duration-fast) var(--pada-ease-standard), background-color var(--pada-duration-fast) var(--pada-ease-standard);
 }
 
 .toolbar-filter__chip:hover:not(:disabled) {
-  border-color: var(--color-stone-400);
+  border-color: var(--pada-color-neutral-400);
 }
 
 .toolbar-filter__chip:focus-visible {
   outline: none;
-  box-shadow: var(--shadow-focus-ring);
+  box-shadow: var(--pada-shadow-focus);
 }
 
 .toolbar-filter__chip[data-open] {
-  border-color: var(--color-stone-400);
+  border-color: var(--pada-color-neutral-400);
 }
 
 .toolbar-filter__chip[data-active] {
   /* Active = has at least one committed selection. Tint border + label so
      consumers can scan filter state quickly across the toolbar. */
-  border-color: var(--color-primary-600);
-  color: var(--color-primary-700);
+  border-color: var(--pada-color-accent-600);
+  color: var(--pada-color-accent-700);
 }
 
 .toolbar-filter__chip:disabled {
@@ -63,27 +63,27 @@
   min-width: 18px;
   height: 18px;
   padding: 0 6px;
-  font-size: 11px;
-  font-weight: 600;
+  font-size: var(--pada-font-size-sm);
+  font-weight: var(--pada-font-weight-semibold);
   line-height: 1;
-  color: var(--color-white);
-  background-color: var(--color-primary-600);
-  border-radius: 9999px;
+  color: var(--pada-color-accent-on-solid);
+  background-color: var(--pada-color-accent-solid);
+  border-radius: var(--pada-radius-full);
 }
 
 .toolbar-filter__dash {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-stone-500);
+  color: var(--pada-color-neutral-500);
 }
 
 .toolbar-filter__chevron {
-  color: var(--color-stone-600);
+  color: var(--pada-color-neutral-600);
 }
 
 .toolbar-filter__chip[data-active] .toolbar-filter__chevron {
-  color: var(--color-primary-700);
+  color: var(--pada-color-accent-700);
 }
 
 /* Popover. Absolutely positioned just below the trigger. */
@@ -91,12 +91,12 @@
   position: absolute;
   top: calc(100% + 4px);
   left: 0;
-  z-index: 20;
+  z-index: var(--pada-z-dropdown);
   display: flex;
   flex-direction: column;
-  background-color: var(--color-white);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-lg);
+  background-color: var(--pada-color-surface);
+  border-radius: var(--pada-radius-xl);
+  box-shadow: var(--pada-shadow-lg);
   min-width: 240px;
   overflow: hidden;
 }
@@ -116,6 +116,6 @@
   justify-content: flex-end;
   gap: 8px;
   padding: 8px 12px;
-  border-top: 1px solid var(--color-stone-100);
-  background-color: var(--color-white);
+  border-top: 1px solid var(--pada-color-neutral-100);
+  background-color: var(--pada-color-surface);
 }

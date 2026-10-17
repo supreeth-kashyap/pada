@@ -2,31 +2,31 @@
 .radiogroup {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-3);
+  gap: var(--pada-space-3);
   font-family: inherit;
 }
 
 /* Label */
 .radiogroup-label {
-  font-size: var(--font-size-sm);
-  font-weight: 500;
-  color: var(--color-neutral-900);
+  font-size: var(--pada-font-size-sm);
+  font-weight: var(--pada-font-weight-medium);
+  color: var(--pada-color-neutral-900);
   display: block;
-  margin-bottom: var(--spacing-1);
+  margin-bottom: var(--pada-space-1);
 }
 
 /* Options container */
 .radiogroup-options {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-2);
+  gap: var(--pada-space-2);
 }
 
 /* Radio option wrapper */
 .radio-option {
   display: flex;
   align-items: center;
-  gap: var(--spacing-2);
+  gap: var(--pada-space-2);
 }
 
 /* Radio input — sized & coloured per Figma node 1:21699. Mirrors the Checkbox
@@ -36,16 +36,16 @@
 .radio {
   -webkit-appearance: none;
   appearance: none;
-  width: var(--spacing-5);
-  height: var(--spacing-5);
-  min-width: var(--spacing-5);
-  min-height: var(--spacing-5);
+  width: var(--pada-space-5);
+  height: var(--pada-space-5);
+  min-width: var(--pada-space-5);
+  min-height: var(--pada-space-5);
   border-radius: 50%;
-  border: 1px solid var(--color-neutral-600);
-  background-color: var(--color-bg);
+  border: 1px solid var(--pada-color-neutral-600);
+  background-color: var(--pada-color-surface);
   cursor: pointer;
-  transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out,
-    box-shadow 0.2s ease-in-out;
+  transition: background-color var(--pada-duration-normal) var(--pada-ease-standard), border-color var(--pada-duration-normal) var(--pada-ease-standard),
+    box-shadow var(--pada-duration-normal) var(--pada-ease-standard);
   outline: none;
   /* Inner dot rendered via radial-gradient so we avoid a stacking-context fight
      with the focus ring. Default: fully transparent (unselected). */
@@ -57,23 +57,23 @@
 }
 
 .radio:hover:not(:disabled) {
-  border-color: var(--color-primary-600);
+  border-color: var(--pada-color-accent-600);
 }
 
 /* Focus ring per Figma. Border colour deliberately NOT overridden \u2014 unselected
    keeps stone-600, selected keeps indigo-600. */
 .radio:focus-visible {
-  box-shadow: var(--shadow-focus-ring);
+  box-shadow: var(--pada-shadow-focus);
   outline: none;
 }
 
 /* Selected: indigo-600 border + 12&nbsp;px indigo-600 inner disc, white field. */
 .radio:checked {
-  background-color: var(--color-bg);
-  border-color: var(--color-primary-600);
+  background-color: var(--pada-color-surface);
+  border-color: var(--pada-color-accent-600);
   background-image: radial-gradient(
     circle,
-    var(--color-primary-600) 0 6px,
+    var(--pada-color-accent-600) 0 6px,
     transparent 6px
   );
 }
@@ -81,32 +81,32 @@
 /* Disabled */
 .radio:disabled {
   cursor: not-allowed;
-  border-color: var(--color-neutral-300);
-  background-color: var(--color-bg);
+  border-color: var(--pada-color-neutral-300);
+  background-color: var(--pada-color-surface);
 }
 
 .radio:disabled:checked {
-  border-color: var(--color-primary-300);
+  border-color: var(--pada-color-accent-300);
   background-image: radial-gradient(
     circle,
-    var(--color-primary-300) 0 6px,
+    var(--pada-color-accent-300) 0 6px,
     transparent 6px
   );
 }
 
 /* Radio label */
 .radio-label {
-  font-size: var(--font-size-sm);
-  color: var(--color-neutral-900);
+  font-size: var(--pada-font-size-sm);
+  color: var(--pada-color-neutral-900);
   cursor: pointer;
-  transition: color 0.2s ease-in-out;
+  transition: color var(--pada-duration-normal) var(--pada-ease-standard);
 }
 
 .radio:disabled~.radio-label {
-  color: var(--color-neutral-400);
+  color: var(--pada-color-neutral-400);
   cursor: not-allowed;
 }
 
 .radio-label:hover {
-  color: var(--color-neutral-800);
+  color: var(--pada-color-neutral-800);
 }

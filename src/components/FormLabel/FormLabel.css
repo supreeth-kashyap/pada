@@ -1,20 +1,20 @@
 .form-label {
   display: inline-block;
-  font-size: var(--font-size-sm);
-  font-weight: 500;
-  line-height: var(--line-height-base);
-  color: var(--color-neutral-900);
-  margin-bottom: var(--spacing-0-5);
+  font-size: var(--pada-font-size-sm);
+  font-weight: var(--pada-font-weight-medium);
+  line-height: var(--pada-line-height-md);
+  color: var(--pada-color-neutral-900);
+  margin-bottom: var(--pada-space-0-5);
 }
 
 .form-label__required {
-  color: var(--color-accent-red-600);
-  margin-left: var(--spacing-0-5);
+  color: var(--pada-color-red-600);
+  margin-left: var(--pada-space-0-5);
 }
 
 .form-label__optional {
-  color: var(--color-neutral-500);
-  font-weight: 400;
-  margin-left: var(--spacing-1);
-  font-size: var(--font-size-xs);
+  color: var(--pada-color-neutral-500);
+  font-weight: var(--pada-font-weight-regular);
+  margin-left: var(--pada-space-1);
+  font-size: var(--pada-font-size-xs);
 }

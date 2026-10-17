@@ -24,7 +24,7 @@ export const Checkbox = ({
       <Icon
         name="tick_1"
         size={16}
-        color="var(--color-white)"
+        color="var(--pada-color-accent-on-solid)"
         className="checkbox-icon checkbox-icon--tick"
       />
     </div>

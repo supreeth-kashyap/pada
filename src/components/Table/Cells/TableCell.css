@@ -8,35 +8,35 @@
   height: 60px;
   min-height: 60px;
   max-height: 60px;
-  padding: var(--spacing-2) var(--spacing-4);
-  font-size: var(--font-size-sm);
-  line-height: var(--line-height-base);
-  color: var(--color-neutral-800);
+  padding: var(--pada-space-2) var(--pada-space-4);
+  font-size: var(--pada-font-size-sm);
+  line-height: var(--pada-line-height-md);
+  color: var(--pada-color-neutral-800);
   display: flex;
   flex-direction: column;
   align-items: stretch;
   justify-content: center;
-  background-color: var(--color-white);
-  border-bottom: 1px solid var(--color-stone-100);
+  background-color: var(--pada-color-surface);
+  border-bottom: 1px solid var(--pada-color-neutral-100);
   box-sizing: border-box;
   width: 100%;
-  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+  transition: background-color var(--pada-duration-fast) var(--pada-ease-standard), border-color var(--pada-duration-fast) var(--pada-ease-standard);
 }
 
 /* Hover (row-level) — all cells in the row tint together. */
 .table-row:hover:not([data-selected]) .table-cell {
-  background-color: var(--color-stone-50);
+  background-color: var(--pada-color-neutral-50);
 }
 
 /* Selected — bulk-row-select state. Lighter indigo by default, deeper indigo
    on hover. Border-bottom shifts to indigo-100 so the row-separator stays
    coherent with the selected fill. */
 .table-row[data-selected] .table-cell {
-  background-color: var(--color-primary-50);
-  border-bottom-color: var(--color-primary-100);
+  background-color: var(--pada-color-accent-50);
+  border-bottom-color: var(--pada-color-accent-100);
 }
 
 .table-row[data-selected]:hover .table-cell {
-  background-color: var(--color-primary-100);
-  border-bottom-color: var(--color-primary-100);
+  background-color: var(--pada-color-accent-100);
+  border-bottom-color: var(--pada-color-accent-100);
 }

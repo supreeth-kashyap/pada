@@ -18,7 +18,7 @@ export const Text: React.FC<TextProps> = ({
   weight = TextWeight.NORMAL,
   family,
   lineHeight = TextLineHeight.BASE,
-  color = 'var(--color-neutral-900)',
+  color = 'var(--pada-color-fg)',
   as = 'span',
   className = '',
   style,

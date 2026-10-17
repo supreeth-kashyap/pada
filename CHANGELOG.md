@@ -16,6 +16,12 @@
   - Every Pada 1.x token name still works as an alias (checked by `npm test`) and will be removed in 3.0.
   - Visual changes: surfaces, text and borders now come from the neutral palette (stone) instead of mixing slate and stone; `--font-size-lg` is now 15.6px (13px × 1.2); the focus ring is 2px wide; themed hue ramps (`--color-red-600` and so on, when read through the semantic layer) follow dark mode.
   - `npm run tokens:sync -- <path>` copies the built CSS and SCSS into the Angular library with a version and hash header.
+- **Components use the 2.0 tokens.** Every component stylesheet now reads `--pada-*` tokens only: no 1.x names, no reference (tier 0) tokens, and no hard-coded colours, z-index values, durations, easings, font weights, font sizes or radii.
+  - Solid fills use role tokens (`--pada-color-accent-solid`, `-solid-hover`, `-solid-pressed`, `-on-solid`), so Button, Checkbox and the Toolbar count badges keep readable text in dark mode and with any `data-accent`.
+  - Overlays use `--pada-color-backdrop`, `--pada-shadow-*` and the semantic layers (`--pada-z-dropdown`, `-modal`, `-popover`, `-toast`, `-tooltip`).
+  - Transitions use `--pada-duration-*` and `--pada-ease-*`, so they all stop under `prefers-reduced-motion` or `data-motion="reduced"`.
+  - Dark mode fixes that came with it: CodeSnippet forces the dark scheme and stays readable in both themes; Select, SegmentControl and Steps no longer render dark text on dark fills.
+- Added the `pada-tokens-migrate` CLI (`npx pada-tokens-migrate src/`), which rewrites 1.x token references in CSS, SCSS, JS and TS to their exact 2.0 names and lists the ones that need a manual choice (`--color-white`, `--color-black`, `--z-index-*`). `--themed` also moves raw palette colours to the themed ramps.
 - Fixed `CodeSnippet` failing to load in Node ESM (SSR): its Prism language imports now include the `.js` extension.
 - Fixed token bugs:
   - `--color-neutral-*` was defined twice (Tailwind's neutral grey in the primitives, Pada's stone scale in the semantic layer), so the value depended on stylesheet order. The stone scale is now the only definition.

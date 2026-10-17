@@ -103,7 +103,7 @@ export const SegmentControl: React.FC<SegmentControlProps> = ({
                   <Icon
                     name={option.icon}
                     size={16}
-                    color={isSelected ? 'var(--color-primary-700)' : 'var(--color-stone-900)'}
+                    color={isSelected ? 'var(--pada-color-accent-700)' : 'var(--pada-color-neutral-900)'}
                     className="segment-icon"
                   />
                 )}

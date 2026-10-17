@@ -38,7 +38,7 @@ export const FilterChip: React.FC<FilterChipProps> = ({
       {isFilled && showClose && (
         <span className="filter-chip__remove">
           <span className="filter-chip__remove-icon" onClick={disabled ? undefined : onRemove}>
-            <Icon name="cross_1" size={12} color="var(--color-neutral-600)" />
+            <Icon name="cross_1" size={12} color="var(--pada-color-neutral-600)" />
           </span>
           <span className="filter-chip__divider" />
         </span>
@@ -54,7 +54,7 @@ export const FilterChip: React.FC<FilterChipProps> = ({
             <span className="filter-chip__value">{value}</span>
           </>
         )}
-        <Icon name="chevron_down" size={12} color="var(--color-blue-600)" />
+        <Icon name="chevron_down" size={12} color="var(--pada-color-blue-600)" />
       </span>
     </button>
   );

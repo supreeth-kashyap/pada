@@ -1,7 +1,7 @@
 .input-date-wrapper {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-1);
+    gap: var(--pada-space-1);
     position: relative;
 }
 
@@ -13,40 +13,40 @@
     max-height: 32px;
     width: fit-content;
     min-width: 320px;
-    border: 1px solid var(--color-neutral-300);
-    border-radius: var(--radius-lg);
-    background-color: var(--color-white);
-    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    border: 1px solid var(--pada-color-neutral-300);
+    border-radius: var(--pada-radius-lg);
+    background-color: var(--pada-color-surface);
+    transition: border-color var(--pada-duration-normal) var(--pada-ease-standard), box-shadow var(--pada-duration-normal) var(--pada-ease-standard);
 }
 
 .input-date-container .date_picker {
     position: absolute;
-    top: calc(100% + var(--spacing-1));
+    top: calc(100% + var(--pada-space-1));
     left: 0;
-    z-index: 1000;
+    z-index: var(--pada-z-dropdown);
 }
 
 .input-date-container:hover:not(:has(.input-date--disabled)) {
-    border-color: var(--color-neutral-500);
+    border-color: var(--pada-color-neutral-500);
 }
 
 .input-date-container:focus-within {
-    border-color: var(--color-primary-600);
-    box-shadow: 0 0 0 3px var(--color-primary-50);
+    border-color: var(--pada-color-accent-600);
+    box-shadow: 0 0 0 3px var(--pada-color-accent-50);
     outline: none;
 }
 
 .input-date-container:has(.input-date--active) {
-    border-color: var(--color-neutral-500);
+    border-color: var(--pada-color-neutral-500);
 }
 
 .input-date-container:has(.input-date--error) {
-    border-color: var(--color-accent-red-500);
+    border-color: var(--pada-color-red-500);
 }
 
 .input-date-container:has(.input-date--error):focus-within {
-    border-color: var(--color-accent-red-500);
-    box-shadow: 0 0 0 3px var(--color-accent-red-50);
+    border-color: var(--pada-color-red-500);
+    box-shadow: 0 0 0 3px var(--pada-color-red-50);
 }
 
 .input-date {
@@ -54,16 +54,16 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: var(--spacing-2) var(--spacing-4);
-    font-size: var(--font-size-base);
-    font-weight: 400;
-    line-height: var(--line-height-base);
+    padding: var(--pada-space-2) var(--pada-space-4);
+    font-size: var(--pada-font-size-md);
+    font-weight: var(--pada-font-weight-regular);
+    line-height: var(--pada-line-height-md);
     border: none;
     background-color: transparent;
-    color: var(--color-neutral-400);
+    color: var(--pada-color-neutral-400);
     cursor: pointer;
     min-height: 32px;
-    gap: var(--spacing-2);
+    gap: var(--pada-space-2);
 }
 
 .input-date:focus {
@@ -71,26 +71,26 @@
 }
 
 .input-date__placeholder {
-    color: var(--color-neutral-400);
+    color: var(--pada-color-neutral-400);
 }
 
 .input-date--filled {
-    color: var(--color-neutral-900);
+    color: var(--pada-color-neutral-900);
 }
 
 .input-date--active {
-    color: var(--color-neutral-900);
+    color: var(--pada-color-neutral-900);
 }
 
 .input-date--disabled {
-    background-color: var(--color-neutral-50);
-    color: var(--color-neutral-400);
+    background-color: var(--pada-color-neutral-50);
+    color: var(--pada-color-neutral-400);
     cursor: not-allowed;
 }
 
 .input-date-container:has(.input-date--disabled) {
-    background-color: var(--color-neutral-50);
-    border-color: var(--color-neutral-200);
+    background-color: var(--pada-color-neutral-50);
+    border-color: var(--pada-color-neutral-200);
     cursor: not-allowed;
 }
 
@@ -99,21 +99,21 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    color: var(--color-neutral-600);
+    color: var(--pada-color-neutral-600);
 }
 
 .input-date-description,
 .input-date-error {
-    font-size: var(--font-size-xs);
-    line-height: var(--line-height-base);
+    font-size: var(--pada-font-size-xs);
+    line-height: var(--pada-line-height-md);
     margin: 0;
-    margin-top: var(--spacing-1);
+    margin-top: var(--pada-space-1);
 }
 
 .input-date-description {
-    color: var(--color-neutral-600);
+    color: var(--pada-color-neutral-600);
 }
 
 .input-date-error {
-    color: var(--color-accent-red-600);
+    color: var(--pada-color-red-600);
 }

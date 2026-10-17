@@ -38,7 +38,10 @@
     "llms-full.txt",
     "README.md",
     "LICENSE",
-    "CHANGELOG.md"
+    "CHANGELOG.md",
+    "scripts/migrate-tokens.mjs",
+    "tokens/index.mjs",
+    "tokens/palette.mjs"
   ],
   "keywords": [
     "react",
@@ -95,5 +98,8 @@
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.45.0",
     "vite": "^7.1.7"
+  },
+  "bin": {
+    "pada-tokens-migrate": "./scripts/migrate-tokens.mjs"
   }
 }

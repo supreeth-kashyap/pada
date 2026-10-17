@@ -1,11 +1,11 @@
 .banner {
   display: flex;
   align-items: center;
-  gap: var(--spacing-6);
-  padding: var(--spacing-4) var(--spacing-6);
-  border-radius: var(--radius-2xl);
-  border: 1px solid var(--color-neutral-100);
-  background-color: var(--color-end-white);
+  gap: var(--pada-space-6);
+  padding: var(--pada-space-4) var(--pada-space-6);
+  border-radius: var(--pada-radius-2xl);
+  border: 1px solid var(--pada-color-neutral-100);
+  background-color: var(--pada-color-static-white);
   width: 100%;
   min-width: 350px;
   box-sizing: border-box;
@@ -15,9 +15,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--spacing-3);
-  background-color: var(--color-stone-100);
-  border-radius: var(--radius-xl);
+  padding: var(--pada-space-3);
+  background-color: var(--pada-color-neutral-100);
+  border-radius: var(--pada-radius-xl);
   flex-shrink: 0;
 }
 
@@ -31,7 +31,7 @@
   width: 36px;
   height: 36px;
   object-fit: contain;
-  border-radius: var(--radius-md);
+  border-radius: var(--pada-radius-md);
 }
 
 .banner__body {
@@ -39,14 +39,14 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-0-5);
+  gap: var(--pada-space-0-5);
 }
 
 .banner__title {
-  font-size: var(--font-size-base);
-  font-weight: 500;
-  line-height: var(--line-height-base);
-  color: var(--color-stone-900);
+  font-size: var(--pada-font-size-md);
+  font-weight: var(--pada-font-weight-medium);
+  line-height: var(--pada-line-height-md);
+  color: var(--pada-color-neutral-900);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -54,10 +54,10 @@
 }
 
 .banner__subtitle {
-  font-size: var(--font-size-base);
-  font-weight: 400;
-  line-height: var(--line-height-base);
-  color: var(--color-stone-600);
+  font-size: var(--pada-font-size-md);
+  font-weight: var(--pada-font-weight-regular);
+  line-height: var(--pada-line-height-md);
+  color: var(--pada-color-neutral-600);
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;

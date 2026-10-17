@@ -2,16 +2,16 @@
   width: 100%;
   display: flex;
   align-items: center;
-  gap: var(--spacing-3);
-  padding: var(--spacing-2) var(--spacing-4);
-  background-color: var(--color-bg);
+  gap: var(--pada-space-3);
+  padding: var(--pada-space-2) var(--pada-space-4);
+  background-color: var(--pada-color-surface);
   box-sizing: border-box;
   border: none;
-  border-top: 1px solid var(--color-neutral-100);
+  border-top: 1px solid var(--pada-color-neutral-100);
   border-radius: 0;
   cursor: pointer;
   text-align: left;
-  color: var(--color-stone-900);
+  color: var(--pada-color-neutral-900);
 }
 
 .accordion-header__icon,
@@ -27,20 +27,20 @@
 .accordion-header__title {
   flex: 1;
   min-width: 0;
-  font-size: var(--font-size-base);
-  font-weight: 500;
+  font-size: var(--pada-font-size-md);
+  font-weight: var(--pada-font-weight-medium);
 }
 
 .accordion-header .icon {
-  --icon-color: var(--color-stone-900);
+  --icon-color: var(--pada-color-neutral-900);
 }
 
 .accordion-header:hover {
-  color: var(--color-primary-700);
+  color: var(--pada-color-accent-700);
 }
 
 .accordion-header:hover .icon {
-  --icon-color: var(--color-primary-700);
+  --icon-color: var(--pada-color-accent-700);
 }
 
 .accordion-header:focus {
@@ -48,7 +48,7 @@
 }
 
 .accordion-header:focus-visible {
-  box-shadow: var(--shadow-focus-ring);
+  box-shadow: var(--pada-shadow-focus);
 }
 
 /* Open / collapsed state is now communicated by swapping the chevron icon glyph

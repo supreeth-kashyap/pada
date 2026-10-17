@@ -1,25 +1,25 @@
 .progress-wrapper {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-1);
+    gap: var(--pada-space-1);
 }
 
 .progress-label {
-    font-size: var(--font-size-sm);
-    font-weight: 500;
-    color: var(--color-fg);
+    font-size: var(--pada-font-size-md);
+    font-weight: var(--pada-font-weight-medium);
+    color: var(--pada-color-fg);
 }
 
 .progress-bar {
     width: 100%;
-    height: var(--spacing-2);
-    background-color: var(--color-neutral-200);
-    border-radius: var(--radius-full);
+    height: var(--pada-space-2);
+    background-color: var(--pada-color-neutral-200);
+    border-radius: var(--pada-radius-full);
     overflow: hidden;
 }
 
 .progress-indicator {
     height: 100%;
-    background-color: var(--color-primary-500);
-    transition: width 0.3s ease-in-out;
+    background-color: var(--pada-color-accent-500);
+    transition: width var(--pada-duration-slow) var(--pada-ease-standard);
 }

@@ -1,8 +1,8 @@
 .indexer {
-  --indexer-rail-color: var(--color-neutral-200);
-  --indexer-active-color: var(--color-indigo-600);
-  --indexer-hover-color: var(--color-indigo-500);
-  --indexer-focus-ring: var(--color-indigo-200);
+  --indexer-rail-color: var(--pada-color-neutral-200);
+  --indexer-active-color: var(--pada-color-indigo-600);
+  --indexer-hover-color: var(--pada-color-indigo-500);
+  --indexer-focus-ring: var(--pada-color-indigo-200);
   display: flex;
   flex-direction: column;
   gap: 0px;
@@ -12,7 +12,7 @@
 
 .indexer::before {
   background: var(--indexer-rail-color);
-  border-radius: 999px;
+  border-radius: var(--pada-radius-full);
   content: '';
   left: 6px;
   position: absolute;
@@ -37,21 +37,21 @@
 .indexer-item {
   background: transparent;
   border: 1px solid transparent;
-  border-radius: 10px;
-  color: var(--color-neutral-600);
+  border-radius: var(--pada-radius-lg);
+  color: var(--pada-color-neutral-600);
   cursor: pointer;
-  font-size: var(--font-size-base);
-  font-weight: 500;
+  font-size: var(--pada-font-size-md);
+  font-weight: var(--pada-font-weight-medium);
   padding: 8px 12px;
   position: relative;
   text-align: left;
-  transition: color 150ms ease, background 150ms ease, border-color 150ms ease;
+  transition: color var(--pada-duration-fast) var(--pada-ease-standard), background var(--pada-duration-fast) var(--pada-ease-standard), border-color var(--pada-duration-fast) var(--pada-ease-standard);
   width: 100%;
 }
 
 .indexer-item::before {
   background: var(--indexer-active-color);
-  border-radius: 999px;
+  border-radius: var(--pada-radius-full);
   content: '';
   left: -8px;
   opacity: 0;
@@ -62,20 +62,20 @@
 }
 
 .indexer-item:hover {
-  background: var(--color-neutral-100);
+  background: var(--pada-color-neutral-100);
   color: var(--indexer-hover-color);
 }
 
 .indexer-item:focus-visible {
-  background: var(--color-indigo-50);
+  background: var(--pada-color-indigo-50);
   border-color: var(--indexer-focus-ring);
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25);
+  box-shadow: var(--pada-shadow-focus);
   outline: none;
 }
 
 .indexer-item--active {
   color: var(--indexer-active-color);
-  font-weight: 600;
+  font-weight: var(--pada-font-weight-semibold);
 }
 
 .indexer-item--active::before {

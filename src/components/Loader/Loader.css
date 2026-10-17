@@ -19,7 +19,7 @@
   width: var(--loader-bar-width);
   height: var(--loader-bar-height);
   border-radius: var(--loader-bar-radius);
-  background: var(--color-neutral-400);
+  background: var(--pada-color-neutral-400);
   opacity: var(--loader-opacity);
   transform: translate(-50%, -50%) rotate(var(--loader-rotation))
     translateY(calc(var(--loader-radius, 6px) * -1));

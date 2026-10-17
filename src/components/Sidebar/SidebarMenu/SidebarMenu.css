@@ -1,16 +1,16 @@
 .sidebar-menu {
   align-items: center;
   appearance: none;
-  background: var(--color-white, #ffffff);
+  background: var(--pada-color-surface);
   border: 0;
-  border-radius: var(--radius-lg, 8px);
+  border-radius: var(--pada-radius-lg, 8px);
   box-sizing: border-box;
-  color: var(--color-slate-900, #0f172a);
+  color: var(--pada-color-fg);
   cursor: pointer;
   display: flex;
   font-family: inherit;
-  font-size: 13px;
-  font-weight: 500;
+  font-size: var(--pada-font-size-md);
+  font-weight: var(--pada-font-weight-medium);
   gap: 8px;
   line-height: 20px;
   min-height: 32px;
@@ -20,14 +20,14 @@
   text-align: left;
   text-decoration: none;
   transition:
-    background-color 0.15s ease,
-    color 0.15s ease,
-    box-shadow 0.15s ease;
+    background-color var(--pada-duration-fast) var(--pada-ease-standard),
+    color var(--pada-duration-fast) var(--pada-ease-standard),
+    box-shadow var(--pada-duration-fast) var(--pada-ease-standard);
   width: 100%;
 }
 
 .sidebar-menu:hover {
-  color: var(--color-indigo-700, #4338ca);
+  color: var(--pada-color-accent-700);
 }
 
 .sidebar-menu:focus {
@@ -36,25 +36,25 @@
 
 .sidebar-menu:focus-visible {
   box-shadow:
-    0 0 0 2px var(--color-white, #ffffff),
-    0 0 0 3px var(--color-indigo-600, #4f46e5);
+    0 0 0 2px var(--pada-color-surface),
+    0 0 0 3px var(--pada-color-accent-600);
 }
 
 .sidebar-menu--selected {
-  background: var(--color-stone-50, #fafaf9);
-  color: var(--color-indigo-700, #4338ca);
-  font-weight: 600;
+  background: var(--pada-color-neutral-50);
+  color: var(--pada-color-accent-700);
+  font-weight: var(--pada-font-weight-semibold);
 }
 
 .sidebar-menu--selected:hover {
-  background: var(--color-stone-100, #f5f5f4);
-  color: var(--color-indigo-700, #4338ca);
+  background: var(--pada-color-neutral-100);
+  color: var(--pada-color-accent-700);
 }
 
 .sidebar-menu--disabled,
 .sidebar-menu--disabled:hover {
-  background: var(--color-white, #ffffff);
-  color: var(--color-stone-400, #a8a29e);
+  background: var(--pada-color-surface);
+  color: var(--pada-color-neutral-400);
   cursor: not-allowed;
   pointer-events: none;
 }
@@ -100,6 +100,6 @@
   color: inherit;
   display: inline-flex;
   flex-shrink: 0;
-  font-size: 11px;
-  font-weight: 600;
+  font-size: var(--pada-font-size-sm);
+  font-weight: var(--pada-font-weight-semibold);
 }

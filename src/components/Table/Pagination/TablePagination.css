@@ -26,10 +26,10 @@
 .table-pagination__range {
   /* Figma calls for 14px / 20 here. Pada's --font-size-sm token is 11px, so
      we set the literal value to stay faithful to the spec. */
-  font-size: 14px;
-  font-weight: 400;
+  font-size: var(--pada-font-size-md);
+  font-weight: var(--pada-font-weight-regular);
   line-height: 20px;
-  color: var(--color-stone-600);
+  color: var(--pada-color-neutral-600);
 }
 
 /* Prev / Next nav uses the design-system ghost <Button>, so styling is

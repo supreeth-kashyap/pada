@@ -5,12 +5,12 @@
 
 .tooltip {
     position: absolute;
-    background-color: var(--color-neutral-800);
-    color: var(--color-neutral-100);
-    padding: var(--spacing-2) var(--spacing-3);
-    border-radius: var(--radius-xl);
-    font-size: var(--font-size-sm);
-    z-index: 10;
+    background-color: var(--pada-color-neutral-800);
+    color: var(--pada-color-neutral-100);
+    padding: var(--pada-space-2) var(--pada-space-3);
+    border-radius: var(--pada-radius-xl);
+    font-size: var(--pada-font-size-md);
+    z-index: var(--pada-z-tooltip);
     white-space: nowrap;
 }
 
@@ -22,26 +22,26 @@
     bottom: 100%;
     left: 50%;
     transform: translateX(-50%);
-    margin-bottom: var(--spacing-2);
+    margin-bottom: var(--pada-space-2);
 }
 
 .tooltip--bottom {
     top: 100%;
     left: 50%;
     transform: translateX(-50%);
-    margin-top: var(--spacing-2);
+    margin-top: var(--pada-space-2);
 }
 
 .tooltip--left {
     right: 100%;
     top: 50%;
     transform: translateY(-50%);
-    margin-right: var(--spacing-2);
+    margin-right: var(--pada-space-2);
 }
 
 .tooltip--right {
     left: 100%;
     top: 50%;
     transform: translateY(-50%);
-    margin-left: var(--spacing-2);
+    margin-left: var(--pada-space-2);
 }

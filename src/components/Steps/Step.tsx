@@ -66,7 +66,7 @@ export const Step = ({
           <Icon 
             name="tick_1" 
             size={12} 
-            color="var(--color-white)" 
+            color="var(--pada-color-success-fg)" 
             className="step__icon--checkmark"
           />
         </div>

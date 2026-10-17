@@ -160,7 +160,7 @@ export const DatePickerDropdown = ({
             onClick={() => handleNavigateMonth('prev')}
             aria-label="Previous month"
           >
-            <Icon name="chevron_left" size={12} color="var(--color-neutral-600)" />
+            <Icon name="chevron_left" size={12} color="var(--pada-color-neutral-600)" />
           </button>
           <button
             type="button"
@@ -175,7 +175,7 @@ export const DatePickerDropdown = ({
             onClick={() => handleNavigateMonth('next')}
             aria-label="Next month"
           >
-            <Icon name="chevron_right" size={12} color="var(--color-neutral-600)" />
+            <Icon name="chevron_right" size={12} color="var(--pada-color-neutral-600)" />
           </button>
         </div>
         <div className="date_picker_weekday_header">
@@ -238,7 +238,7 @@ export const DatePickerDropdown = ({
             onClick={() => handleNavigateYear('prev')}
             aria-label="Previous year"
           >
-            <Icon name="chevron_left" size={12} color="var(--color-neutral-600)" />
+            <Icon name="chevron_left" size={12} color="var(--pada-color-neutral-600)" />
           </button>
           <button
             type="button"
@@ -253,7 +253,7 @@ export const DatePickerDropdown = ({
             onClick={() => handleNavigateYear('next')}
             aria-label="Next year"
           >
-            <Icon name="chevron_right" size={12} color="var(--color-neutral-600)" />
+            <Icon name="chevron_right" size={12} color="var(--pada-color-neutral-600)" />
           </button>
         </div>
         <div data-grid="months">
@@ -318,7 +318,7 @@ export const DatePickerDropdown = ({
             onClick={() => handleNavigateDecade('prev')}
             aria-label="Previous decade"
           >
-            <Icon name="chevron_left" size={12} color="var(--color-neutral-600)" />
+            <Icon name="chevron_left" size={12} color="var(--pada-color-neutral-600)" />
           </button>
           <div className="date_picker_view_select">
             {years[0]} - {years[years.length - 1]}
@@ -329,7 +329,7 @@ export const DatePickerDropdown = ({
             onClick={() => handleNavigateDecade('next')}
             aria-label="Next decade"
           >
-            <Icon name="chevron_right" size={12} color="var(--color-neutral-600)" />
+            <Icon name="chevron_right" size={12} color="var(--pada-color-neutral-600)" />
           </button>
         </div>
         <div data-grid="years">
