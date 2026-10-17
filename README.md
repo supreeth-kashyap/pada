@@ -51,6 +51,44 @@ document.documentElement.dataset.theme = 'dark'; // or 'light'
 delete document.documentElement.dataset.theme; // follow the OS again
 ```
 
+### Theme axes
+
+Every axis is an attribute that works on `<html>` or any container, and they combine freely:
+
+| Attribute | Values | Effect |
+|---|---|---|
+| `data-theme` | `light`, `dark` (none = follow the OS) | Light or dark colours |
+| `data-accent` | any palette hue (`indigo` default, `violet`, `amber`, `emerald`, `rose`, `sky`, …) or `custom` | Accent colour, hovers, focus rings |
+| `data-neutral` | `stone` (default), `slate`, `gray`, `zinc`, `neutral` | Surfaces, text and borders |
+| `data-density` | `compact`, `comfortable`, `spacious` | Spacing and control heights |
+| `data-radius` | `none`, `sm`, `md`, `lg`, `xl` | Corner radius scale |
+| `data-motion` | `reduced`, `full` | Overrides the OS reduced-motion setting |
+| `data-contrast` | `standard`, `more` | Stronger muted text and borders (also follows `prefers-contrast: more`) |
+
+```html
+<html data-theme="dark" data-accent="amber" data-density="compact">
+```
+
+### Knobs
+
+Derived tokens are computed from a handful of knobs, so one change re-themes every component. Set them on any element:
+
+```css
+.brand {
+  --pada-accent-hue: 160;   /* used by data-accent="custom" (OKLCH hue) */
+  --pada-radius-base: 0.5rem;
+  --pada-density: 0.9;
+  --pada-type-base: 14px;
+  --pada-type-ratio: 1.25;
+}
+```
+
+Tokens use the `--pada-` prefix: `--pada-color-fg-muted`, `--pada-color-accent-solid`, `--pada-space-4`, `--pada-radius-md`, `--pada-duration-normal`, `--pada-z-modal` and so on. The full list ships as `pada-ds/tokens.json`, `pada-ds/tokens.scss` (with breakpoint mixins) and `pada-ds/tokens` (JS: `import { tokens, breakpoints } from 'pada-ds/tokens'`).
+
+Pada 1.x token names (`--color-primary-600`, `--spacing-4`, …) still work as aliases and will be removed in 3.0.
+
+The tokens use `light-dark()`, `color-mix()`, relative colour syntax and `pow()`, so they need a 2024-era browser (Chrome 123, Safari 18, Firefox 128 or later).
+
 ## For AI coding agents
 
 The package ships a machine-readable API description, generated from the TypeScript source by `npm run build:manifest` (part of `npm run build`):

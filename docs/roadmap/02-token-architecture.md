@@ -217,3 +217,20 @@ Axes are independent attributes that can be set on `<html>` or any subtree, and 
 3. **Codemod** (`npx pada-codemod tokens`) rewrites `var(--color-…)` references in consumer CSS.
 4. **Bug fixes** from [01 §3](./01-current-state-audit.md#3-token-layer-bugs) land in phase 0, before the rename, so 1.x users get them too.
 5. **Lint:** `scripts/check-tokens.mjs` fails when component CSS uses an undefined `var(--…)`, a tier 0 token, a literal colour, z-index or duration.
+
+## 6. As built (phase 1)
+
+Phase 1 shipped with a few deliberate changes to the plan above:
+
+| Plan | As built | Why |
+|---|---|---|
+| DTCG JSON files as the source, built with Style Dictionary | A JavaScript model (`tokens/index.mjs`) built by `scripts/build-tokens.mjs`, which still emits DTCG-style `dist/tokens.json` | Ramps, intents and axes are generated with loops; derived formulas and per-axis re-declaration needed a custom format anyway. No extra dependency. |
+| `sys/light.json`, `sys/dark.json` theme files | One `light-dark()` value per token; `data-theme` only sets `color-scheme` | Nested themed containers work without re-declaring every token, and light and dark are reviewed side by side. |
+| `data-theme="high-contrast"` | `data-contrast="more"` axis plus `prefers-contrast: more`, driving the `--pada-contrast` knob | Contrast combines with light and dark instead of being a third theme. |
+| `data-accent` presets | Every palette hue plus `custom` (OKLCH ramp from `--pada-accent-hue` and `--pada-accent-chroma`) | Lets the site playground drive the accent with one slider. |
+| Not planned | `data-neutral` axis (stone, slate, gray, zinc, neutral) | Surfaces, text and borders now come from one neutral palette. |
+| Static fallbacks before each formula | Not emitted | `light-dark()`, `color-mix()`, relative colour and `pow()` are all Baseline 2024; the README states the browser floor. |
+| `dist/tokens-legacy.css` | Legacy aliases are part of `tokens.css` | One import for consumers; removed in 3.0. |
+| Component tokens in `tokens/component/*.json` | Declared at the top of each component's CSS | Keeps a component's tokens next to the styles that read them; listed in each component spec. |
+
+Re-declaration rule: `var()` inside a custom property is substituted on the element that declares it. Tokens that read a knob or palette (directly or through other tokens) are therefore declared on `:root` **and** on every element with an axis attribute. The generator works this set out from the references, so the model never lists it by hand.

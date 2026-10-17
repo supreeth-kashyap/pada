@@ -29,7 +29,7 @@ const REFERENCE = /var\(\s*(--[\w-]+)/g;
 
 export async function findUndefinedTokens({
   scanDirs = ['components', 'headless'],
-  tokenFiles = ['styles/primitives.css', 'styles/global.css', 'styles/tokens.generated.css'],
+  tokenFiles = ['styles/tokens.generated.css'],
 } = {}) {
   const defined = new Set();
   const addMatches = (text, pattern) => {

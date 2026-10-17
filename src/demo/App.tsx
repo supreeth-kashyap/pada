@@ -1,5 +1,3 @@
-import '../styles/global.css';
-import '../styles/primitives.css';
 import './App.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Sidebar } from '../components/Sidebar';

@@ -19,6 +19,13 @@
     },
     "./styles.css": "./dist/pada.css",
     "./tokens.css": "./dist/tokens.css",
+    "./tokens.scss": "./dist/tokens.scss",
+    "./tokens.json": "./dist/tokens.json",
+    "./tokens": {
+      "types": "./dist/tokens.d.ts",
+      "import": "./dist/tokens.js",
+      "default": "./dist/tokens.js"
+    },
     "./base.css": "./dist/base.css",
     "./manifest.json": "./dist/manifest.json",
     "./llms.txt": "./llms.txt",
@@ -53,16 +60,17 @@
     "clean": "rm -rf dist",
     "build:types": "tsc -p tsconfig.package.json",
     "build:styles": "vite build",
-    "build:tokens": "node ./scripts/build-tokens-css.mjs",
+    "build:tokens": "node ./scripts/build-tokens.mjs",
     "build:manifest": "node ./scripts/gen-manifest.mjs",
     "build": "npm run clean && npm run build:styles && npm run build:types && npm run build:tokens && npm run build:manifest",
     "check:manifest": "node ./scripts/gen-manifest.mjs --check",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "node --test scripts/component-manifest.test.mjs scripts/a11y.test.mjs scripts/check-tokens.test.mjs",
-    "check:tokens": "node ./scripts/check-tokens.mjs",
+    "test": "node --test scripts/*.test.mjs",
+    "check:tokens": "node ./scripts/build-tokens.mjs --check && node ./scripts/check-tokens.mjs",
     "smoke:consumer": "node ./scripts/smoke-consumer.mjs",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "tokens:sync": "node ./scripts/sync-tokens-angular.mjs"
   },
   "dependencies": {
     "prismjs": "^1.30.0"
@@ -73,6 +81,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
+    "@playwright/test": "^1.56.1",
     "@types/node": "^24.6.0",
     "@types/prismjs": "^1.26.6",
     "@types/react": "^19.1.16",
