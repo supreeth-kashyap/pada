@@ -191,4 +191,4 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - Tooltip.Provider: children?, delayDuration?, skipDelayDuration?
 - Tooltip.Root: children?, open?, defaultOpen?, onOpenChange?, delayDuration?, disableHoverableContent?
 - Tooltip.Trigger: asChild?; extends ComponentPropsWithRef<'button'>
-- UploadField: label?, description?, error?, accept?, multiple?, maxSize?, maxFiles?, files?, onFilesChange?, onUpload?, disabled?, required?, className?
+- UploadField: label?, description?, error?, accept?, multiple?, maxSize?, maxFiles?, files?, onFilesChange?, onUpload?, onView?, disabled?, required?, className?

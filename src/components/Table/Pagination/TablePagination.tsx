@@ -119,14 +119,14 @@ export const TablePagination: React.FC<TablePaginationProps> = ({
         <div className="table-pagination__nav">
           <Button
             variant="ghost"
-            leftIcon="keyboard_arrow_left"
+            leftIcon="chevron_left"
             disabled={!canPrev}
             onClick={handlePrev}
             aria-label="Previous page"
           />
           <Button
             variant="ghost"
-            leftIcon="keyboard_arrow_right"
+            leftIcon="chevron_right"
             disabled={!canNext}
             onClick={handleNext}
             aria-label="Next page"

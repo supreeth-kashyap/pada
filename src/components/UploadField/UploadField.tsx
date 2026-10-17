@@ -22,11 +22,40 @@ export interface UploadFieldProps {
   files?: UploadedFile[];
   onFilesChange?: (files: UploadedFile[]) => void;
   onUpload?: (files: File[]) => Promise<void> | void;
+  /** Called by a file's View button. By default the file opens in a new tab. */
+  onView?: (file: UploadedFile) => void;
   disabled?: boolean;
   required?: boolean;
   className?: string;
 }
 
+const formatFileSize = (bytes: number): string => {
+  if (bytes === 0) return '0 Bytes';
+  const k = 1024;
+  const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+  return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+};
+
+const validateFile = (file: File, maxSize: number | undefined): string | null => {
+  if (maxSize && file.size > maxSize) {
+    return `File size exceeds ${formatFileSize(maxSize)}`;
+  }
+  return null;
+};
+
+/** Opens a picked file in a new tab, for the default View action. */
+const openFile = (file: File) => {
+  const url = URL.createObjectURL(file);
+  window.open(url, '_blank', 'noopener');
+  window.setTimeout(() => URL.revokeObjectURL(url), 60_000);
+};
+
+/**
+ * A file picker with a drop zone. The zone is a real file input underneath, so keyboard users
+ * Tab to it and press Space or Enter to browse; dropped and picked files list below with their
+ * size, upload progress, status, and View and Remove actions.
+ */
 export const UploadField: React.FC<UploadFieldProps> = ({
   label,
   description,
@@ -38,6 +67,7 @@ export const UploadField: React.FC<UploadFieldProps> = ({
   files: controlledFiles,
   onFilesChange,
   onUpload,
+  onView,
   disabled = false,
   required = false,
   className = ''
@@ -53,20 +83,10 @@ export const UploadField: React.FC<UploadFieldProps> = ({
 
   const generateFileId = () => `file-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
-  const validateFile = (file: File): string | null => {
-    if (maxSize && file.size > maxSize) {
-      return `File size exceeds ${formatFileSize(maxSize)}`;
-    }
-    return null;
-  };
-
-  const formatFileSize = (bytes: number): string => {
-    if (bytes === 0) return '0 Bytes';
-    const k = 1024;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
-  };
+  const hintsId = `${id}-hints`;
+  const describedBy = [hasError ? `${id}-error` : null, description ? `${id}-description` : null, hintsId]
+    .filter(Boolean)
+    .join(' ');
 
   const handleFiles = useCallback(async (fileList: FileList | null) => {
     if (!fileList || fileList.length === 0) return;
@@ -80,7 +100,7 @@ export const UploadField: React.FC<UploadFieldProps> = ({
 
     const validatedFiles: UploadedFile[] = newFiles
       .map(file => {
-        const error = validateFile(file);
+        const error = validateFile(file, maxSize);
         return {
           id: generateFileId(),
           file,
@@ -202,8 +222,10 @@ export const UploadField: React.FC<UploadFieldProps> = ({
           onChange={handleFileInputChange}
           disabled={disabled}
           className="upload-field-input"
+          aria-label={label ? undefined : 'Upload files'}
           aria-invalid={hasError}
-          aria-describedby={hasError ? `${id}-error` : description ? `${id}-description` : undefined}
+          aria-required={required || undefined}
+          aria-describedby={describedBy}
         />
 
         <div className="upload-field-dropzone">
@@ -214,15 +236,7 @@ export const UploadField: React.FC<UploadFieldProps> = ({
                 <p className="upload-field-text">
                   Drag and drop or click to upload files
                 </p>
-                {accept && (
-                  <p className="upload-field-hint">Supported type(s): {accept}</p>
-                )}
-                {maxSize && (
-                  <p className="upload-field-hint">Max size: {formatFileSize(maxSize)}</p>
-                )}
-                {maxFiles && (
-                  <p className="upload-field-hint">Max count: {maxFiles}</p>
-                )}
+                <Hints id={hintsId} accept={accept} maxSize={maxSize} maxFiles={maxFiles} />
               </div>
             </>
           ) : (
@@ -231,22 +245,19 @@ export const UploadField: React.FC<UploadFieldProps> = ({
               <p className="upload-field-text">
                 Drag and drop or click to upload files
               </p>
-              {accept && (
-                <p className="upload-field-hint">Supported type(s): {accept}</p>
-              )}
-              {maxSize && (
-                <p className="upload-field-hint">Max size: {formatFileSize(maxSize)}</p>
-              )}
-              {maxFiles && (
-                <p className="upload-field-hint">Max count: {maxFiles}</p>
-              )}
+              <Hints id={hintsId} accept={accept} maxSize={maxSize} maxFiles={maxFiles} />
             </div>
           )}
 
           {files.length > 0 && (
-            <div className="upload-field-files" onClick={(e) => e.stopPropagation()}>
+            <div className="upload-field-files" role="list" aria-label="Files" onClick={(e) => e.stopPropagation()}>
               {files.map((file) => (
-                <div key={file.id} className={`upload-field-file ${file.status ? `upload-field-file--${file.status}` : ''}`}>
+                <div
+                  key={file.id}
+                  role="listitem"
+                  className={`upload-field-file ${file.status ? `upload-field-file--${file.status}` : ''}`}
+                  data-status={file.status}
+                >
                   {file.status === 'success' ? (
                     <Icon name="tick_1" size={16} color="var(--pada-color-green-600)" />
                   ) : file.status === 'error' ? (
@@ -263,7 +274,14 @@ export const UploadField: React.FC<UploadFieldProps> = ({
                       <span className="upload-field-file-error">{file.error}</span>
                     )}
                     {file.progress !== undefined && file.progress < 100 && (
-                      <div className="upload-field-progress">
+                      <div
+                        className="upload-field-progress"
+                        role="progressbar"
+                        aria-label={`Uploading ${file.file.name}`}
+                        aria-valuemin={0}
+                        aria-valuemax={100}
+                        aria-valuenow={Math.round(file.progress)}
+                      >
                         <div 
                           className="upload-field-progress-bar" 
                           style={{ width: `${file.progress}%` }}
@@ -277,7 +295,8 @@ export const UploadField: React.FC<UploadFieldProps> = ({
                       className="upload-field-view"
                       onClick={(e) => {
                         e.stopPropagation();
-                        // Handle view action
+                        if (onView) onView(file);
+                        else openFile(file.file);
                       }}
                       aria-label={`View ${file.file.name}`}
                     >
@@ -302,6 +321,12 @@ export const UploadField: React.FC<UploadFieldProps> = ({
             </div>
           )}
 
+          {description && !hasError && (
+            <p id={`${id}-description`} className="upload-field-hint upload-field-description">
+              {description}
+            </p>
+          )}
+
           {hasError && (
             <p id={`${id}-error`} className="upload-field-error" role="alert">
               {error}
@@ -312,3 +337,14 @@ export const UploadField: React.FC<UploadFieldProps> = ({
     </div>
   );
 };
+
+/** Accept, size and count limits, which also describe the file input. */
+function Hints({ id, accept, maxSize, maxFiles }: { id: string; accept?: string; maxSize?: number; maxFiles?: number }) {
+  return (
+    <span id={id} className="upload-field-hints">
+      {accept && <span className="upload-field-hint">Supported type(s): {accept}</span>}
+      {maxSize && <span className="upload-field-hint">Max size: {formatFileSize(maxSize)}</span>}
+      {maxFiles && <span className="upload-field-hint">Max count: {maxFiles}</span>}
+    </span>
+  );
+}

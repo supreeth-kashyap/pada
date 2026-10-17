@@ -667,6 +667,8 @@ import { CodeSnippet } from 'pada-ds';
 
 `import { ComboBox } from 'pada-ds';`
 
+A list of selectable options (`role="listbox"`). Without an `id` the listbox manages focus itself: it is one tab stop, and the arrow keys, Home and End move between options. With an `id`, an owning combobox keeps focus and points at options through `aria-activedescendant` (options are `${id}-option-${index}`).
+
 | Prop | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
 | items | `ComboBoxItem[]` | yes | - | - |
@@ -1509,7 +1511,7 @@ import { Field } from 'pada-ds';
 
 `import { Filter } from 'pada-ds';`
 
-Filter — a toolbar chip backed by a popover-driven ComboBox. Single-select: clicking an option commits immediately and closes the popover. Multi-select : the popover stages selections in a local draft, then commits on Apply (or discards on outside-click). The chip shows a count badge whenever there is at least one selection.
+Filter — a toolbar chip backed by a popover-driven ComboBox. Single-select: clicking an option commits immediately and closes the popover. Multi-select : the popover stages selections in a local draft, then commits on Apply (or discards on Escape or an outside click). The chip shows a count badge whenever there is at least one selection. In the popover the arrow keys move between options and Escape closes it, returning focus to the chip.
 
 | Prop | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
@@ -1533,6 +1535,8 @@ import { Filter } from 'pada-ds';
 ### FilterChip
 
 `import { FilterChip } from 'pada-ds';`
+
+A filter shown as a chip: its main button edits the filter, the cross removes it.
 
 | Prop | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
@@ -1879,7 +1883,7 @@ import { Modal } from 'pada-ds';
 
 `import { MoreFilter } from 'pada-ds';`
 
-MoreFilter — a single chip that opens a tandem ComboBox popover: left column = list of filter names right column = options for the focused filter footer = Apply / Clear Useful when the toolbar can't fit every filter as a standalone chip.
+MoreFilter — a single chip that opens a tandem ComboBox popover: left column = list of filter names right column = options for the focused filter footer = Apply / Clear Useful when the toolbar can't fit every filter as a standalone chip. The filter names are a vertical tab list (Up/Down move between them), each showing its options as a listbox.
 
 | Prop | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
@@ -2250,6 +2254,8 @@ import { SegmentControl } from 'pada-ds';
 ### Select
 
 `import { Select } from 'pada-ds';`
+
+A select-only combobox (WAI-ARIA APG): focus stays on the trigger while the arrow keys, Home/End and type-ahead move through the options. The list renders in a portal, flips above the trigger when there is no room below, and matches the trigger's width.
 
 | Prop | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
@@ -3128,6 +3134,8 @@ import { Tooltip } from 'pada-ds';
 
 `import { UploadField } from 'pada-ds';`
 
+A file picker with a drop zone. The zone is a real file input underneath, so keyboard users Tab to it and press Space or Enter to browse; dropped and picked files list below with their size, upload progress, status, and View and Remove actions.
+
 | Prop | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
 | label | `string` | no | - | - |
@@ -3140,6 +3148,7 @@ import { Tooltip } from 'pada-ds';
 | files | `UploadedFile[]` | no | - | - |
 | onFilesChange | `(files: UploadedFile[]) => void` | no | - | - |
 | onUpload | `(files: File[]) => Promise<void> \| void` | no | - | - |
+| onView | `(file: UploadedFile) => void` | no | - | Called by a file's View button. By default the file opens in a new tab. |
 | disabled | `boolean` | no | `false` | - |
 | required | `boolean` | no | `false` | - |
 | className | `string` | no | `''` | - |

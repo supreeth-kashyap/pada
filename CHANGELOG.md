@@ -6,6 +6,27 @@
 - Moved the `body` and `p` rules out of `dist/tokens.css` into a new optional `pada-ds/base.css` export, so importing the tokens no longer overrides an app's own styles.
 - Added a component API manifest for AI coding agents. `npm run build` now reads every exported component's props from the TypeScript source and writes `dist/manifest.json` (exported as `pada-ds/manifest.json`), `llms.txt` and `llms-full.txt`. Both llms files ship in the package and are committed at the repo root. `npm test` fails if they are stale or if an exported component is missing from the manifest.
 
+- **Toolbar, Select, ComboBox and UploadField (phase 3).**
+  - Toolbar `Filter` and `MoreFilter` open on the headless Popover. They render in a portal, flip when there is no room, and animate in and out. Escape and outside clicks close them, and focus moves into them on open and returns to the chip on close. `MoreFilter`'s filter names are now a vertical tab list (Up/Down move between them; previously `menuitem`s around a listbox). The selection count is announced as "N selected".
+  - `FilterChip` no longer nests a clickable `<span>` inside its button. The remove control is its own button ("Remove filter Owner: Ada") next to the chip's main button.
+  - `ComboBox` (the option list) is one tab stop when it manages focus. The arrow keys, Home and End move between options. Multi-select lists set `aria-multiselectable`.
+  - `Select` changes:
+    - The list renders in a portal positioned with Floating UI. It is no longer clipped by `overflow: hidden` containers, flips above the trigger near the bottom of the viewport, and is as wide as the trigger.
+    - The list is a dismissable layer, so choosing an option or pressing Escape in a Select inside a Dialog closes only the list.
+    - Type-ahead matches several typed letters ("bl" finds Blackberry).
+    - The active option scrolls into view.
+    - Moving focus off the trigger closes the list.
+    - The keyboard helpers now come from the headless navigation utilities.
+  - `UploadField` changes:
+    - `description` is rendered. Before, it was accepted but never shown.
+    - The description and the type, size and count hints describe the file input.
+    - An unlabelled field is named "Upload files".
+    - Files are listed as a list.
+    - Upload progress is a `progressbar`.
+    - The View button works: it calls the new `onView`, or opens the file in a new tab.
+    - Fixed a stale-closure warning in its upload handler.
+  - Overlays restore focus on close only when focus was lost with them. Closing one popover while another opens no longer pulls focus back and closes the new one.
+  - The Select, Filter, MoreFilter and TablePagination chevrons use bundled icons, so they render without network access.
 - **Accordion, Table, Steps and List rebuilt for keyboard and screen-reader use (phase 3).**
   - `Accordion` is rebuilt on new headless `Accordion` and `Collapsible` parts (`pada-ds/headless`). The 1.x props still work, plus a new `headingLevel`. Groups are composed from `Accordion.Root` (`type="single"` with optional `collapsible`, or `type="multiple"`), `Accordion.Item`, `Accordion.Trigger` (with `iconName`) and `Accordion.Content`. Arrow keys, Home and End move between headers. Each header button now sits in a heading (`h3` by default). The open header of a group that cannot collapse is `aria-disabled`. Content height animates open and closed, and the chevron turns instead of swapping glyphs. It now uses a bundled icon, so it shows without network access. The panel body sets its own text colour. `AccordionHeader` and `AccordionContent` are deprecated.
   - `Table` exposes table semantics:

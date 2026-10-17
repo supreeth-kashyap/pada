@@ -94,7 +94,20 @@
 }
 
 
+.upload-field-hints {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--pada-space-1);
+}
+
+.upload-field-description {
+  margin-top: var(--pada-space-2);
+  text-align: center;
+}
+
 .upload-field-hint {
+  display: block;
   font-size: var(--pada-font-size-xs);
   color: var(--pada-color-neutral-600);
   margin: 0;

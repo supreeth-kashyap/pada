@@ -1,8 +1,10 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import './Filter.css';
 import { Icon } from '../../Icon';
 import { Button } from '../../Button';
 import { ComboBox, type ComboBoxItem } from '../../ComboBox';
+import { PopoverContent, PopoverPortal, PopoverRoot, PopoverTrigger } from '../../../headless/Popover/Popover';
+import { VisuallyHidden } from '../../../headless/utils/VisuallyHidden';
 
 export interface FilterOption {
   value: string;
@@ -46,9 +48,10 @@ export interface FilterProps {
  *
  * Single-select: clicking an option commits immediately and closes the popover.
  * Multi-select : the popover stages selections in a local draft, then commits
- *                on Apply (or discards on outside-click).
+ *                on Apply (or discards on Escape or an outside click).
  *
- * The chip shows a count badge whenever there is at least one selection.
+ * The chip shows a count badge whenever there is at least one selection. In the popover the
+ * arrow keys move between options and Escape closes it, returning focus to the chip.
  */
 export const Filter: React.FC<FilterProps> = ({
   label,
@@ -69,27 +72,13 @@ export const Filter: React.FC<FilterProps> = ({
   // Draft selection used while the popover is open in multi-select mode.
   // Initialised from `committed` whenever the popover opens.
   const [draft, setDraft] = useState<string[]>(committed);
-  const [isOpen, setIsOpen] = useState(false);
-  const rootRef = useRef<HTMLDivElement>(null);
+  const [isOpen, setIsOpenState] = useState(false);
 
-  // Re-sync draft when the popover opens or the committed value changes externally.
-  useEffect(() => {
-    if (isOpen) setDraft(committed);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isOpen]);
-
-  // Click-outside closes the popover. Multi-select drafts are discarded.
-  useEffect(() => {
-    if (!isOpen) return;
-    const onDocClick = (event: MouseEvent) => {
-      if (!rootRef.current) return;
-      if (!rootRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', onDocClick);
-    return () => document.removeEventListener('mousedown', onDocClick);
-  }, [isOpen]);
+  // Opening starts the draft from the committed value; closing without Apply discards it.
+  const setIsOpen = (open: boolean) => {
+    if (open) setDraft(committed);
+    setIsOpenState(open);
+  };
 
   const selectionCount = committed.length;
   const isActive = selectionCount > 0;
@@ -141,53 +130,50 @@ export const Filter: React.FC<FilterProps> = ({
   );
 
   return (
-    <div
-      ref={rootRef}
-      className={`toolbar-filter ${className}`.trim()}
-    >
-      <button
-        type="button"
-        className="toolbar-filter__chip"
-        data-active={isActive ? '' : undefined}
-        data-open={isOpen ? '' : undefined}
-        disabled={disabled}
-        aria-haspopup="listbox"
-        aria-expanded={isOpen}
-        onClick={() => setIsOpen((o) => !o)}
-      >
-        <span className="toolbar-filter__label">{label}</span>
-        {isActive ? (
-          <span className="toolbar-filter__badge" aria-label={`${selectionCount} selected`}>
-            {selectionCount}
-          </span>
-        ) : (
-          <span className="toolbar-filter__dash" aria-hidden="true">
-            <Icon name="remove" size={12} />
-          </span>
-        )}
-        <Icon name="keyboard_arrow_down" size={12} className="toolbar-filter__chevron" />
-      </button>
-
-      {isOpen && (
-        <div className="toolbar-filter__popover" role="dialog" aria-label={label}>
-          <ComboBox
-            items={items}
-            multiSelect={multiSelect}
-            onItemClick={handleItemClick}
-            className="toolbar-filter__list"
-          />
-          {multiSelect && (
-            <div className="toolbar-filter__footer">
-              <Button variant="ghost" onClick={handleClear}>
-                {clearLabel}
-              </Button>
-              <Button variant="primary" onClick={handleApply}>
-                {applyLabel}
-              </Button>
-            </div>
+    <div className={`toolbar-filter ${className}`.trim()}>
+      <PopoverRoot open={isOpen} onOpenChange={setIsOpen}>
+        <PopoverTrigger
+          className="toolbar-filter__chip"
+          data-active={isActive ? '' : undefined}
+          data-open={isOpen ? '' : undefined}
+          disabled={disabled}
+        >
+          <span className="toolbar-filter__label">{label}</span>
+          {isActive ? (
+            <span className="toolbar-filter__badge">
+              {selectionCount}
+              <VisuallyHidden> selected</VisuallyHidden>
+            </span>
+          ) : (
+            <span className="toolbar-filter__dash" aria-hidden="true">
+              <Icon name="remove" size={12} />
+            </span>
           )}
-        </div>
-      )}
+          <Icon name="chevron_down" size={12} className="toolbar-filter__chevron" />
+        </PopoverTrigger>
+
+        <PopoverPortal>
+          <PopoverContent className="toolbar-filter__popover" aria-label={label} side="bottom" align="start" sideOffset={4}>
+            <ComboBox
+              items={items}
+              multiSelect={multiSelect}
+              onItemClick={handleItemClick}
+              aria-label={label}
+              className="toolbar-filter__list"
+            />
+            {multiSelect && (
+              <div className="toolbar-filter__footer">
+                <Button variant="ghost" onClick={handleClear}>
+                  {clearLabel}
+                </Button>
+                <Button variant="primary" onClick={handleApply}>
+                  {applyLabel}
+                </Button>
+              </div>
+            )}
+          </PopoverContent>
+        </PopoverPortal>
+      </PopoverRoot>
     </div>
   );
 };

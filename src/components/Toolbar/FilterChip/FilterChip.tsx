@@ -15,6 +15,7 @@ export interface FilterChipProps {
   className?: string;
 }
 
+/** A filter shown as a chip: its main button edits the filter, the cross removes it. */
 export const FilterChip: React.FC<FilterChipProps> = ({
   variant = 'filled',
   label = 'Field',
@@ -29,22 +30,26 @@ export const FilterChip: React.FC<FilterChipProps> = ({
   const isFilled = variant === 'filled';
 
   return (
-    <button
-      type="button"
+    <span
       className={`filter-chip filter-chip--${variant} ${disabled ? 'filter-chip--disabled' : ''} ${className}`.trim()}
-      onClick={disabled ? undefined : onClick}
-      disabled={disabled}
+      data-disabled={disabled ? '' : undefined}
     >
       {isFilled && showClose && (
         <span className="filter-chip__remove">
-          <span className="filter-chip__remove-icon" onClick={disabled ? undefined : onRemove}>
+          <button
+            type="button"
+            className="filter-chip__remove-icon"
+            aria-label={`Remove filter ${label}: ${value}`}
+            disabled={disabled}
+            onClick={onRemove}
+          >
             <Icon name="cross_1" size={12} color="var(--pada-color-neutral-600)" />
-          </span>
+          </button>
           <span className="filter-chip__divider" />
         </span>
       )}
 
-      <span className="filter-chip__content">
+      <button type="button" className="filter-chip__content" disabled={disabled} onClick={onClick}>
         {isButton ? (
           <span className="filter-chip__button-label">Filters</span>
         ) : (
@@ -55,7 +60,7 @@ export const FilterChip: React.FC<FilterChipProps> = ({
           </>
         )}
         <Icon name="chevron_down" size={12} color="var(--pada-color-blue-600)" />
-      </span>
-    </button>
+      </button>
+    </span>
   );
 };

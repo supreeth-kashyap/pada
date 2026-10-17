@@ -95,11 +95,20 @@ test('ComboBox with an id renders addressable options with aria-selected', async
   assert.deepEqual(options.map((option) => attr(option, 'data-active')), [undefined, undefined, '']);
   assert.ok(options[1].includes(' disabled'));
 
-  // Without an id, options keep their default tab order and get no ids.
-  const plain = render(h(ComboBox, { items: [{ id: 'a', label: 'Apple' }] }));
-  const option = tagWith(plain, 'role="option"');
-  assert.equal(attr(option, 'id'), undefined);
-  assert.equal(attr(option, 'tabindex'), undefined);
+  // Without an id, the listbox manages focus itself: no option ids, and one tab stop (the
+  // selected option, else the first enabled one).
+  const plain = render(
+    h(ComboBox, {
+      items: [
+        { id: 'a', label: 'Apple', disabled: true },
+        { id: 'b', label: 'Banana' },
+        { id: 'c', label: 'Cherry', selected: true },
+      ],
+    }),
+  );
+  const plainOptions = [...plain.matchAll(/<button[^>]*role="option"[^>]*>/g)].map((match) => match[0]);
+  assert.deepEqual(plainOptions.map((option) => attr(option, 'id')), [undefined, undefined, undefined]);
+  assert.deepEqual(plainOptions.map((option) => attr(option, 'tabindex')), ['-1', '-1', '0']);
 });
 
 test('Select keyboard navigation skips disabled options and stops at the ends', async () => {

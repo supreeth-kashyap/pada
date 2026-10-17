@@ -79,10 +79,14 @@ export function useFocusScope(ref: RefObject<HTMLElement | null>, { trapped, ...
       const event = createAutoFocusEvent();
       latest.current.onUnmountAutoFocus?.(event);
       if (event.defaultPrevented) return;
-      // Deferred so it runs after any aria-hidden cleanup in the same commit.
+      // Deferred so it runs after any aria-hidden cleanup in the same commit. Only focus that was
+      // lost with the container (now on <body>) returns; focus the user already moved elsewhere,
+      // such as into another popover, stays where it is.
       pendingRestore.current = window.setTimeout(() => {
         const target = restoreTarget.current;
-        if (target?.isConnected) focusElement(target);
+        const active = document.activeElement;
+        const focusLost = !active || active === document.body || !active.isConnected;
+        if (focusLost && target?.isConnected) focusElement(target);
       }, 0);
     };
   }, [ref]);

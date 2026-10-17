@@ -101,12 +101,32 @@
 }
 
 /* Dropdown menu */
+/* The list: portalled, positioned under (or above) the trigger and as wide as it. */
 .select-dropdown {
-    position: absolute;
-    top: calc(100% + var(--pada-space-1));
-    left: 0;
-    right: 0;
-    z-index: var(--pada-z-dropdown);
+    z-index: var(--pada-z-popover);
+    width: var(--pada-floating-anchor-width);
+    transform-origin: var(--pada-floating-transform-origin);
+    transition:
+        opacity var(--pada-duration-fast) var(--pada-ease-enter),
+        scale var(--pada-duration-fast) var(--pada-ease-enter);
+}
+
+@starting-style {
+    .select-dropdown[data-state="open"] {
+        opacity: 0;
+        scale: var(--pada-motion-scale-enter);
+    }
+}
+
+/* As wide as the trigger; six options tall, or less when the viewport has less room. */
+.select-dropdown .combo-box {
+    width: 100%;
+    max-width: none;
+    box-sizing: border-box;
+    max-height: min(
+        calc((var(--pada-space-2) + var(--pada-space-8)) * 6 + var(--pada-space-4)),
+        var(--pada-floating-available-height)
+    );
 }
 
 /* Helper text */

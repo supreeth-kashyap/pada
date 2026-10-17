@@ -14,9 +14,23 @@
   white-space: nowrap;
 }
 
-.filter-chip:focus-visible {
+/* The chip holds two buttons (remove, and the chip itself); each gets its own focus ring. */
+.filter-chip__remove-icon,
+.filter-chip__content {
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: var(--pada-radius-sm);
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.filter-chip__remove-icon:focus-visible,
+.filter-chip__content:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px var(--pada-color-surface), 0 0 0 4px var(--pada-color-amber-600);
+  box-shadow: var(--pada-shadow-focus);
 }
 
 .filter-chip--disabled {
@@ -70,11 +84,11 @@
   color: var(--pada-color-amber-700);
 }
 
-.filter-chip--filled:hover:not(:disabled) {
+.filter-chip--filled:hover:not([data-disabled]) {
   background-color: var(--pada-color-neutral-50);
 }
 
-.filter-chip--filled:active:not(:disabled) {
+.filter-chip--filled:active:not([data-disabled]) {
   background-color: var(--pada-color-neutral-100);
 }
 
@@ -83,12 +97,12 @@
   border-color: var(--pada-color-neutral-400);
 }
 
-.filter-chip--prompt:hover:not(:disabled) {
+.filter-chip--prompt:hover:not([data-disabled]) {
   background-color: var(--pada-color-neutral-50);
   border-color: var(--pada-color-neutral-500);
 }
 
-.filter-chip--prompt:active:not(:disabled) {
+.filter-chip--prompt:active:not([data-disabled]) {
   background-color: var(--pada-color-neutral-100);
 }
 
@@ -96,10 +110,10 @@
   border-color: var(--pada-color-amber-500);
 }
 
-.filter-chip--button:hover:not(:disabled) {
+.filter-chip--button:hover:not([data-disabled]) {
   background-color: var(--pada-color-amber-50);
 }
 
-.filter-chip--button:active:not(:disabled) {
+.filter-chip--button:active:not([data-disabled]) {
   background-color: var(--pada-color-amber-100);
 }

@@ -1,4 +1,4 @@
-import { act, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it } from 'vitest';
 import { axeViolations } from '../../test/axe';
@@ -132,5 +132,39 @@ describe('Popover under StrictMode', () => {
     await user.keyboard('{Escape}');
     await tick();
     expect(screen.getByRole('button', { name: 'Filters' })).toHaveFocus();
+  });
+
+  it('closing one popover does not pull focus out of another that just opened', async () => {
+    render(
+      <>
+        <Popover.Root>
+          <Popover.Trigger>First</Popover.Trigger>
+          <Popover.Portal>
+            <Popover.Content aria-label="First panel">
+              <button type="button">Inside first</button>
+            </Popover.Content>
+          </Popover.Portal>
+        </Popover.Root>
+        <Popover.Root>
+          <Popover.Trigger>Second</Popover.Trigger>
+          <Popover.Portal>
+            <Popover.Content aria-label="Second panel">
+              <button type="button">Inside second</button>
+            </Popover.Content>
+          </Popover.Portal>
+        </Popover.Root>
+      </>,
+    );
+    screen.getByRole('button', { name: 'First' }).focus();
+    fireEvent.click(screen.getByRole('button', { name: 'First' }));
+    await tick();
+    expect(screen.getByRole('button', { name: 'Inside first' })).toHaveFocus();
+    // Close the first and open the second before the first's focus restore runs.
+    fireEvent.keyDown(screen.getByRole('button', { name: 'Inside first' }), { key: 'Escape' });
+    screen.getByRole('button', { name: 'Second' }).focus();
+    fireEvent.click(screen.getByRole('button', { name: 'Second' }));
+    await tick();
+    expect(screen.getByRole('dialog', { name: 'Second panel' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Inside second' })).toHaveFocus();
   });
 });

@@ -86,19 +86,39 @@
   color: var(--pada-color-accent-700);
 }
 
-/* Popover. Absolutely positioned just below the trigger. */
+/* Popover. Portalled and positioned under the chip (it flips when there is no room). */
 .toolbar-filter__popover {
-  position: absolute;
-  top: calc(100% + 4px);
-  left: 0;
-  z-index: var(--pada-z-dropdown);
+  z-index: var(--pada-z-popover);
   display: flex;
   flex-direction: column;
   background-color: var(--pada-color-surface);
   border-radius: var(--pada-radius-xl);
   box-shadow: var(--pada-shadow-lg);
   min-width: 240px;
+  max-height: var(--pada-floating-available-height);
   overflow: hidden;
+  transform-origin: var(--pada-floating-transform-origin);
+  transition:
+    opacity var(--pada-duration-normal) var(--pada-ease-enter),
+    scale var(--pada-duration-normal) var(--pada-ease-enter);
+}
+
+.toolbar-filter__popover[data-state="closed"] {
+  opacity: 0;
+  scale: var(--pada-motion-scale-enter);
+  transition-duration: var(--pada-duration-fast);
+  transition-timing-function: var(--pada-ease-exit);
+}
+
+@starting-style {
+  .toolbar-filter__popover[data-state="open"] {
+    opacity: 0;
+    scale: var(--pada-motion-scale-enter);
+  }
+}
+
+.toolbar-filter__popover:focus-visible {
+  outline: none;
 }
 
 /* Re-skin the embedded ComboBox so it loses its own shadow / radius / max-width

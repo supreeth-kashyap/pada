@@ -82,11 +82,35 @@
 
 /* Cascading menu container \u2014 just an anchor point. The primary list flows
    in-document; the submenu (when an item is active) floats to its right. */
+/* Portalled and positioned under the chip; the two cards inside carry the surfaces. */
 .more-filter__menu {
-  position: absolute;
-  top: calc(100% + 4px);
-  left: -20;
-  z-index: var(--pada-z-dropdown);
+  z-index: var(--pada-z-popover);
+  transform-origin: var(--pada-floating-transform-origin);
+  transition:
+    opacity var(--pada-duration-normal) var(--pada-ease-enter),
+    scale var(--pada-duration-normal) var(--pada-ease-enter);
+}
+
+.more-filter__menu[data-state="closed"] {
+  opacity: 0;
+  scale: var(--pada-motion-scale-enter);
+  transition-duration: var(--pada-duration-fast);
+  transition-timing-function: var(--pada-ease-exit);
+}
+
+@starting-style {
+  .more-filter__menu[data-state="open"] {
+    opacity: 0;
+    scale: var(--pada-motion-scale-enter);
+  }
+}
+
+.more-filter__menu:focus-visible,
+.more-filter__panel:focus-visible {
+  outline: none;
+}
+
+.more-filter__tabs {
   display: flex;
   align-items: flex-start;
 }
@@ -195,4 +219,9 @@
   padding: 8px 12px;
   border-top: 1px solid var(--pada-color-neutral-100);
   background-color: var(--pada-color-surface);
+}
+
+.more-filter__row:focus-visible {
+  outline: none;
+  box-shadow: var(--pada-shadow-focus);
 }
