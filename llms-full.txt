@@ -1883,6 +1883,8 @@ import { Switch } from 'pada-ds';
 
 `import { TabPanel } from 'pada-ds';`
 
+One tab of a 1.x `<Tabs>`: its label and its panel content.
+
 | Prop | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
 | label | `string` | yes | - | - |
@@ -1973,6 +1975,8 @@ import { TableRow } from 'pada-ds';
 
 `import { Tabs } from 'pada-ds';`
 
+Tabbed sections (WAI-ARIA APG Tabs): arrow keys move between tabs, Home/End jump to the ends. Pass `<TabPanel label="…">` children for the simple API, or compose the parts: `Tabs.Root` (string values, `variant`, `orientation`, `activationMode`), `Tabs.List`, `Tabs.Trigger`, `Tabs.Content`.
+
 | Prop | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
 | children | `React.ReactNode` | yes | - | - |
@@ -1985,6 +1989,87 @@ import { TableRow } from 'pada-ds';
 import { Tabs } from 'pada-ds';
 
 <Tabs label="...">...</Tabs>
+```
+
+### Tabs.Content
+
+`import { Tabs } from 'pada-ds';`
+
+The panel for one tab.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| value | `string` | yes | - | Value of the tab this panel belongs to. |
+| forceMount | `boolean` | no | - | Keep the panel mounted (with `hidden`) while inactive, e.g. to preserve form state. |
+
+Also accepts the props of `ComponentPropsWithRef<'div'>`.
+
+```tsx
+import { Tabs } from 'pada-ds';
+
+<Tabs.Content value="..." />
+```
+
+### Tabs.List
+
+`import { Tabs } from 'pada-ds';`
+
+The tab list, with a sliding indicator under (or behind) the selected tab.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| loop | `boolean` | no | - | Wrap from the last tab to the first and back. |
+
+Also accepts the props of `ComponentPropsWithRef<'div'>`.
+
+```tsx
+import { Tabs } from 'pada-ds';
+
+<Tabs.List />
+```
+
+### Tabs.Root
+
+`import { Tabs } from 'pada-ds';`
+
+Holds the selected tab and sets the visual variant.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| variant | `TabsVariant` | no | `'underline'` | `underline` (a sliding bar under the selected tab) or `pills` (a sliding filled pill). |
+| value | `string` | no | - | Controlled selected tab value. |
+| defaultValue | `string` | no | - | Initially selected tab value when uncontrolled. |
+| onValueChange | `(value: string) => void` | no | - | Called with the newly selected value. |
+| orientation | `Orientation` | no | - | Arrow keys follow the orientation: Left/Right when horizontal, Up/Down when vertical. |
+| activationMode | `'automatic' \| 'manual'` | no | - | `automatic` selects a tab when it receives focus; `manual` waits for Enter or Space. |
+| dir | `'ltr' \| 'rtl'` | no | - | Reading direction, for horizontal arrow keys. |
+
+Also accepts the props of `Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'dir'>`.
+
+```tsx
+import { Tabs } from 'pada-ds';
+
+<Tabs.Root />
+```
+
+### Tabs.Trigger
+
+`import { Tabs } from 'pada-ds';`
+
+One tab.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| notification | `boolean` | no | - | Shows a dot (and tells screen readers) that this tab has unread updates. |
+| value | `string` | yes | - | Value this tab selects. |
+| asChild | `boolean` | no | - | Merge the tab's behaviour onto its only child instead of rendering a `<button>`. |
+
+Also accepts the props of `ComponentPropsWithRef<'button'>`.
+
+```tsx
+import { Tabs } from 'pada-ds';
+
+<Tabs.Trigger value="..." />
 ```
 
 ### Tags

@@ -6,6 +6,7 @@ export * from './Dialog';
 export * from './Popover';
 export * from './Tooltip';
 export * from './Menu';
+export * from './Tabs';
 
 export { Slot, type SlotProps } from './utils/Slot';
 export { Portal, type PortalProps } from './utils/Portal';

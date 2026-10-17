@@ -138,6 +138,10 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - TablePagination: total, page, rowsPerPage, rowsPerPageOptions?, onPageChange, onRowsPerPageChange, onNextPage?, onPrevPage?, className?
 - TableRow: children, className?, selected?, onClick?, role?
 - Tabs: children, label, defaultValue?, value?, onChange?
+- Tabs.Content: value, forceMount?; extends ComponentPropsWithRef<'div'>
+- Tabs.List: loop?; extends ComponentPropsWithRef<'div'>
+- Tabs.Root: variant?, value?, defaultValue?, onValueChange?, orientation?, activationMode?, dir?; extends Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'dir'>
+- Tabs.Trigger: notification?, value, asChild?; extends ComponentPropsWithRef<'button'>
 - Tags: children, variant?, icon?, className?
 - Text: children, size?, weight?, family?, lineHeight?, color?, as?; extends React.HTMLAttributes<HTMLSpanElement>
 - Toolbar: left?, actions?, primaryAction?, children?, className?

@@ -13,6 +13,7 @@
   - Every overlay animates in and out with the motion tokens (fade and scale from the trigger side, slide for drawers) and stays mounted until its exit transition finishes; reduced motion makes it instant.
   - Each styled part exposes component tokens (`--pada-dialog-*`, `--pada-drawer-*`, `--pada-popover-*`, `--pada-tooltip-*`, `--pada-menu-*`).
   - Behaviour changes: Tooltip now waits 300 ms on hover (keyboard focus still opens it at once) and only references the tooltip in `aria-describedby` while it is open; the Popover no longer follows the pointer position of the click that opened it (use `clickPosition`).
+  - `Tabs` is rebuilt on new headless `Tabs` parts (`pada-ds/headless`: `Tabs.Root`, `List`, `Trigger`, `Content`, `Indicator`). Fixes: ids are unique per instance (two Tabs on a page no longer collide), keyboard focus is scoped to the tab list, Home/End work, disabled tabs are skipped. New: `Tabs.Root` with string values, `variant="underline|pills"`, `orientation`, `activationMode="automatic|manual"`, and a sliding indicator. The notification dot is announced as "unread updates" inside the tab instead of a separate `role="status"`.
   - KeyValue's info icon is now a focusable button, so keyboard users can reach its tooltip.
   - `manifest.json`, `llms.txt` and `llms-full.txt` now list compound parts as `Name.Part` entries, and expand `Omit<>` / `Pick<>` props.
 - **Headless parts (`pada-ds/headless`).** Unstyled, accessible building blocks with compound parts, `asChild` composition and state exposed through `data-*` and `aria-*` attributes:
