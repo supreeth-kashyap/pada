@@ -27,6 +27,11 @@ import { useTypeahead } from '../utils/useTypeahead';
 
 type FocusTarget = 'first' | 'last' | 'content';
 
+/** A point or box to position a menu against, instead of its trigger (Floating UI virtual element). */
+export interface MenuAnchor {
+  getBoundingClientRect: () => DOMRect;
+}
+
 interface MenuContextValue {
   open: boolean;
   setOpen: (open: boolean) => void;
@@ -40,6 +45,8 @@ interface MenuContextValue {
   focusOnOpen: RefObject<FocusTarget>;
   isSub: boolean;
   dir: 'ltr' | 'rtl';
+  /** Set for context menus: the menu opens at this point, not at its trigger. */
+  anchor: MenuAnchor | null;
 }
 
 const [MenuProvider, useMenuContext] = createPartContext<MenuContextValue>('DropdownMenu.Root');
@@ -80,7 +87,7 @@ export function DropdownMenuRoot({ children, open, defaultOpen = false, onOpenCh
   const state = useMenuState(open, defaultOpen, onOpenChange);
   const { setOpen } = state;
   const closeAll = useCallback(() => setOpen(false), [setOpen]);
-  const value = useMemo(() => ({ ...state, closeAll, isSub: false, dir }), [state.open, state.trigger, closeAll, dir]); // eslint-disable-line react-hooks/exhaustive-deps
+  const value = useMemo(() => ({ ...state, closeAll, isSub: false, dir, anchor: null }), [state.open, state.trigger, closeAll, dir]); // eslint-disable-line react-hooks/exhaustive-deps
   return <MenuProvider value={value}>{children}</MenuProvider>;
 }
 
@@ -182,12 +189,12 @@ function MenuContentImpl({
   style,
   ...props
 }: Omit<DropdownMenuContentProps, 'forceMount'> & { context: MenuContextValue }) {
-  const { open, setOpen, trigger, isSub, dir, focusOnOpen } = context;
+  const { open, setOpen, trigger, isSub, dir, focusOnOpen, anchor } = context;
   const contentRef = useRef<HTMLDivElement>(null);
   const floating = useFloatingPosition(open, {
     side: side ?? (isSub ? (dir === 'rtl' ? 'left' : 'right') : 'bottom'),
     align: align ?? 'start',
-    sideOffset: sideOffset ?? (isSub ? 0 : 4),
+    sideOffset: sideOffset ?? (isSub ? 0 : anchor ? 2 : 4),
     alignOffset: alignOffset ?? (isSub ? -4 : 0),
     avoidCollisions,
     collisionPadding,
@@ -197,8 +204,8 @@ function MenuContentImpl({
   const composedRef = useComposedRefs(ref, contentRef, floating.refs.setFloating);
   const { setReference } = floating.refs;
   useLayoutEffect(() => {
-    setReference(trigger);
-  }, [trigger, setReference]);
+    setReference(anchor ?? trigger);
+  }, [anchor, trigger, setReference]);
 
   useDismissable(contentRef, {
     enabled: open,
@@ -258,7 +265,8 @@ function MenuContentImpl({
       id={context.contentId}
       role="menu"
       aria-orientation="vertical"
-      aria-labelledby={context.triggerId}
+      // A context menu's trigger is an area, not a button that names the menu.
+      aria-labelledby={anchor ? undefined : context.triggerId}
       tabIndex={-1}
       data-state={openState(open)}
       data-side={floating.side}
@@ -501,7 +509,7 @@ export function DropdownMenuSub({ children, open, defaultOpen = false, onOpenCha
     if (!parent.open) setOpen(false);
   }, [parent.open, setOpen]);
   const value = useMemo(
-    () => ({ ...state, closeAll: parent.closeAll, isSub: true, dir: parent.dir }),
+    () => ({ ...state, closeAll: parent.closeAll, isSub: true, dir: parent.dir, anchor: null }),
     [state.open, state.trigger, parent.closeAll, parent.dir], // eslint-disable-line react-hooks/exhaustive-deps
   );
   return <MenuProvider value={value}>{children}</MenuProvider>;
@@ -571,6 +579,117 @@ export function DropdownMenuSubContent({ forceMount, ref, onKeyDown, ...props }:
           context.setOpen(false);
         }
       })}
+    />
+  );
+}
+
+// ── Context menu ───────────────────────────────────────────────────────────────────────────
+export interface ContextMenuRootProps {
+  children?: ReactNode;
+  /** Called when the menu opens or closes. */
+  onOpenChange?: (open: boolean) => void;
+  /** Reading direction, for arrow keys and submenu placement. @default 'ltr' */
+  dir?: 'ltr' | 'rtl';
+}
+
+const pointAnchor = (x: number, y: number): MenuAnchor => ({
+  getBoundingClientRect: () => DOMRect.fromRect({ x, y, width: 0, height: 0 }),
+});
+
+/**
+ * Holds the state for a context menu: the same menu as DropdownMenu (use its Content, Item,
+ * CheckboxItem, Sub… parts), opened at the pointer from a `ContextMenu.Trigger` area.
+ */
+export function ContextMenuRoot({ children, onOpenChange, dir = 'ltr' }: ContextMenuRootProps) {
+  const state = useMenuState(undefined, false, onOpenChange);
+  const [anchor, setAnchor] = useState<MenuAnchor | null>(null);
+  const { setOpen } = state;
+  const closeAll = useCallback(() => setOpen(false), [setOpen]);
+  const openAt = useCallback(
+    (x: number, y: number) => {
+      setAnchor(pointAnchor(x, y));
+      state.focusOnOpen.current = 'first';
+      setOpen(true);
+    },
+    [setOpen, state.focusOnOpen],
+  );
+  const value = useMemo(
+    () => ({ ...state, closeAll, isSub: false, dir, anchor: anchor ?? pointAnchor(0, 0) }),
+    [state.open, state.trigger, closeAll, dir, anchor], // eslint-disable-line react-hooks/exhaustive-deps
+  );
+  return (
+    <ContextMenuOpenContext value={openAt}>
+      <MenuProvider value={value}>{children}</MenuProvider>
+    </ContextMenuOpenContext>
+  );
+}
+
+const [ContextMenuOpenContext, useContextMenuOpen] = createPartContext<(x: number, y: number) => void>('ContextMenu.Root');
+
+const LONG_PRESS_MS = 600;
+const LONG_PRESS_SLOP = 10;
+
+export interface ContextMenuTriggerProps extends ComponentPropsWithRef<'div'> {
+  /** Merge the behaviour onto your own element instead of rendering a `<div>`. */
+  asChild?: boolean;
+  /** Let the browser's own context menu show instead. */
+  disabled?: boolean;
+}
+
+/**
+ * The area that opens the menu: right-click opens it at the pointer, Shift+F10 or the
+ * ContextMenu key at the focused element, and a long press on touch screens.
+ */
+export function ContextMenuTrigger({
+  asChild,
+  disabled,
+  ref,
+  onContextMenu,
+  onPointerDown,
+  onPointerMove,
+  onPointerUp,
+  onPointerCancel,
+  ...props
+}: ContextMenuTriggerProps) {
+  const context = useMenuContext('ContextMenu.Trigger');
+  const openAt = useContextMenuOpen('ContextMenu.Trigger');
+  const composedRef = useComposedRefs(ref, context.setTrigger);
+  const press = useRef<{ x: number; y: number; timer: number } | null>(null);
+  const cancelPress = () => {
+    if (press.current) window.clearTimeout(press.current.timer);
+    press.current = null;
+  };
+  useEffect(() => cancelPress, []);
+  const Component = asChild ? Slot : 'div';
+  return (
+    <Component
+      data-state={openState(context.open)}
+      data-disabled={dataFlag(disabled)}
+      {...props}
+      ref={composedRef}
+      onContextMenu={composeEventHandlers(onContextMenu, (event) => {
+        if (disabled) return;
+        event.preventDefault();
+        cancelPress();
+        // From the keyboard there is no pointer position: open at the focused element.
+        if (event.clientX === 0 && event.clientY === 0) {
+          const box = (event.target as HTMLElement).getBoundingClientRect();
+          openAt(box.left, box.bottom);
+        } else {
+          openAt(event.clientX, event.clientY);
+        }
+      })}
+      onPointerDown={composeEventHandlers(onPointerDown, (event: ReactPointerEvent<HTMLElement>) => {
+        if (disabled || event.pointerType !== 'touch') return;
+        const { clientX: x, clientY: y } = event;
+        cancelPress();
+        press.current = { x, y, timer: window.setTimeout(() => openAt(x, y), LONG_PRESS_MS) };
+      })}
+      onPointerMove={composeEventHandlers(onPointerMove, (event: ReactPointerEvent<HTMLElement>) => {
+        if (press.current && Math.hypot(event.clientX - press.current.x, event.clientY - press.current.y) > LONG_PRESS_SLOP) cancelPress();
+      })}
+      onPointerUp={composeEventHandlers(onPointerUp, cancelPress)}
+      onPointerCancel={composeEventHandlers(onPointerCancel, cancelPress)}
     />
   );
 }

@@ -6,6 +6,14 @@
 - Moved the `body` and `p` rules out of `dist/tokens.css` into a new optional `pada-ds/base.css` export, so importing the tokens no longer overrides an app's own styles.
 - Added a component API manifest for AI coding agents. `npm run build` now reads every exported component's props from the TypeScript source and writes `dist/manifest.json` (exported as `pada-ds/manifest.json`), `llms.txt` and `llms-full.txt`. Both llms files ship in the package and are committed at the repo root. `npm test` fails if they are stale or if an exported component is missing from the manifest.
 
+- **New components (wave 2): Tree, HoverCard and ContextMenu.**
+  - `Tree` is a tree view for file browsers, sectioned navigation and nested settings. Pass nested `items`, or compose `Tree.Root`, `Item`, `ItemRow` (with an `icon`), `ItemLabel` and `Group`.
+    - Keys: Up/Down move, Right expands or enters, Left collapses or goes to the parent, Home/End jump, `*` expands the siblings, and typing jumps to an item.
+    - Selection is `single`, `multiple` or `none`. Expansion and selection are controllable, and `expandable` items can load their children lazily.
+    - Rows indent by level, with a guide line under open parents. Chevrons turn, and children slide in.
+    - It also comes as headless `Tree` parts.
+  - `HoverCard` is a rich preview of a link (a profile, a page), shown on hover and keyboard focus after `openDelay`. It stays open while the pointer is over the card and closes on leave, blur or Escape. It has an optional arrow, and it also comes as headless `HoverCard` parts.
+  - `ContextMenu` is a menu opened at the pointer by right-click, Shift+F10 or the context-menu key, or a long press on touch. Its content is the DropdownMenu parts (items, shortcuts, checkbox and radio items, submenus). It also comes as headless `ContextMenu.Root` and `ContextMenu.Trigger`. The headless menu content accepts a virtual anchor (`MenuAnchor`).
 - **New components (wave 2): NumberInput and Calendar.**
   - `NumberInput` is a number field built as a `spinbutton`:
     - Keys: Up/Down step, PageUp/PageDown take a `largeStep`, Home/End jump to `min`/`max`.

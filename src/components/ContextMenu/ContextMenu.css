@@ -1,0 +1,10 @@
+/* The trigger area: no visuals of its own, except while its menu is open. */
+.context-menu-trigger {
+  border-radius: var(--pada-radius-lg);
+  transition: box-shadow var(--pada-duration-fast) var(--pada-ease-standard);
+  -webkit-touch-callout: none;
+}
+
+.context-menu-trigger[data-state="open"] {
+  box-shadow: 0 0 0 2px var(--pada-color-accent-subtle);
+}

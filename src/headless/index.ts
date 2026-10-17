@@ -14,6 +14,8 @@ export * from './Collapsible';
 export * from './Accordion';
 export * from './NumberInput';
 export * from './Calendar';
+export * from './Tree';
+export * from './HoverCard';
 
 export { Slot, type SlotProps } from './utils/Slot';
 export { Portal, type PortalProps } from './utils/Portal';

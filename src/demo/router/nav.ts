@@ -39,8 +39,10 @@ const COMPONENT_ENTRIES: NavEntry[] = [
   { kind: 'components', slug: 'checkbox', label: 'Checkbox' },
   { kind: 'components', slug: 'code-snippet', label: 'Code Snippet' },
   { kind: 'components', slug: 'combo-box', label: 'Combo Box' },
+  { kind: 'components', slug: 'context-menu', label: 'Context Menu' },
   { kind: 'components', slug: 'date-picker', label: 'Date Picker' },
   { kind: 'components', slug: 'form-label', label: 'Form Label' },
+  { kind: 'components', slug: 'hover-card', label: 'Hover Card' },
   { kind: 'components', slug: 'icon', label: 'Icon' },
   { kind: 'components', slug: 'indexer', label: 'Indexer' },
   { kind: 'components', slug: 'input-date', label: 'Input Date' },
@@ -72,6 +74,7 @@ const COMPONENT_ENTRIES: NavEntry[] = [
   { kind: 'components', slug: 'text', label: 'Text' },
   { kind: 'components', slug: 'toolbar', label: 'Toolbar' },
   { kind: 'components', slug: 'tooltip', label: 'Tooltip' },
+  { kind: 'components', slug: 'tree', label: 'Tree' },
   { kind: 'components', slug: 'upload-field', label: 'Upload Field' },
 ];
 

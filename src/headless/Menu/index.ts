@@ -1,4 +1,6 @@
 import {
+  ContextMenuRoot,
+  ContextMenuTrigger,
   DropdownMenuRoot,
   DropdownMenuTrigger,
   DropdownMenuPortal,
@@ -58,4 +60,25 @@ export const DropdownMenu = {
   Sub: DropdownMenuSub,
   SubTrigger: DropdownMenuSubTrigger,
   SubContent: DropdownMenuSubContent,
+};
+
+/**
+ * Headless context menu: right-click (or Shift+F10, or a long press) on the trigger area opens
+ * a menu at the pointer. Its content and items are the DropdownMenu parts.
+ *
+ * ```tsx
+ * <ContextMenu.Root>
+ *   <ContextMenu.Trigger>Right-click this card</ContextMenu.Trigger>
+ *   <ContextMenu.Portal>
+ *     <ContextMenu.Content aria-label="Card actions">
+ *       <ContextMenu.Item onSelect={copy}>Copy</ContextMenu.Item>
+ *     </ContextMenu.Content>
+ *   </ContextMenu.Portal>
+ * </ContextMenu.Root>
+ * ```
+ */
+export const ContextMenu = {
+  ...DropdownMenu,
+  Root: ContextMenuRoot,
+  Trigger: ContextMenuTrigger,
 };

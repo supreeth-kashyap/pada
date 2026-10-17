@@ -59,7 +59,7 @@ import { Dialog } from 'pada-ds/headless';
 .my-dialog[data-state="open"] { animation: fade-in var(--pada-duration-slow) var(--pada-ease-emphasized); }
 ```
 
-Available parts: `Dialog`, `Popover`, `Tooltip` (with `Tooltip.Provider` for shared delays), `DropdownMenu` (items, checkbox and radio items, groups, labels, separators, submenus), `Tabs`, `Accordion`, `Collapsible`, `Field`, `Toggle` / `ToggleGroup`, `Combobox` (single or multiple, with a pluggable filter), `NumberInput` and `Calendar`. Each follows the matching WAI-ARIA Authoring Practices pattern. Any part that renders an element accepts `asChild`, which merges its behaviour onto your own element (a router link, a custom button) instead of rendering a new one.
+Available parts: `Dialog`, `Popover`, `Tooltip` (with `Tooltip.Provider` for shared delays), `DropdownMenu` (items, checkbox and radio items, groups, labels, separators, submenus), `Tabs`, `Accordion`, `Collapsible`, `Field`, `Toggle` / `ToggleGroup`, `Combobox` (single or multiple, with a pluggable filter), `NumberInput`, `Calendar`, `Tree`, `HoverCard` and `ContextMenu`. Each follows the matching WAI-ARIA Authoring Practices pattern. Any part that renders an element accepts `asChild`, which merges its behaviour onto your own element (a router link, a custom button) instead of rendering a new one.
 
 Portalled parts render into `document.body`, or into the element provided by `PortalContainerContext` (`ThemeProvider` provides one, so overlays keep a subtree's theme).
 
@@ -148,6 +148,7 @@ This design system includes the following components:
 - **Checkbox**: Binary selection with label support.
 - **CodeSnippet**: Display formatted, copyable code blocks.
 - **CommandPalette**: ⌘K search over app commands.
+- **ContextMenu**: Right-click menu at the pointer.
 - **ComboBox**: Filterable list dropdown with options.
 - **DatePicker**: Select dates via calendar UI.
 - **Dialog**: Composable modal or non-modal dialog (`Dialog.Root`, `Dialog.Content`, `Dialog.Title`, …).
@@ -156,6 +157,7 @@ This design system includes the following components:
 - **EmptyState**: First-use and no-results placeholder.
 - **Field**: Label, control, description and error wiring.
 - **FormLabel**: Accessible labels for form fields.
+- **HoverCard**: Rich preview of a link on hover and focus.
 - **Icon**: Reusable SVG icons for UI.
 - **IconButton**: Labelled icon-only button.
 - **Indexer**: Alphabetical index navigation component.
@@ -198,6 +200,7 @@ This design system includes the following components:
 - **Toggle / ToggleGroup**: Pressed-state buttons and segmented groups.
 - **Toolbar**: Action toolbar with controls.
 - **Tooltip**: Hover and focus tooltip; also `Tooltip.Provider`, `Tooltip.Root`, … parts.
+- **Tree**: Expandable, selectable tree view.
 - **UploadField**: File upload field with progress.
 
 ### Examples

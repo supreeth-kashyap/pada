@@ -78,6 +78,21 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - ComboBox: items, multiSelect?, onItemClick?; extends React.HTMLAttributes<HTMLDivElement>
 - ComboBoxMenuItem: iconName?, label, selected?, disabled?, multiSelect?; extends React.ButtonHTMLAttributes<HTMLButtonElement>
 - CommandPalette: commands, open?, onOpenChange?, placeholder?, emptyMessage?, hotkey?, label?
+- ContextMenu.CheckboxItem: checked?, onCheckedChange?, disabled?, onSelect?, textValue?, shortcut?; extends Omit<Omit<ComponentPropsWithRef<'div'>, 'onSelect'>, 'asChild'>
+- ContextMenu.Content: container?, forceMount?, loop?, onCloseAutoFocus?, onEscapeKeyDown?, onPointerDownOutside?, onInteractOutside?, side?, align?, sideOffset?, alignOffset?, avoidCollisions?, collisionPadding?, arrowPadding?, hideWhenDetached?; extends ComponentPropsWithRef<'div'>
+- ContextMenu.Group: no props; extends ComponentPropsWithRef<'div'>
+- ContextMenu.Item: icon?, shortcut?, tone?, asChild?, disabled?, onSelect?, textValue?; extends Omit<ComponentPropsWithRef<'div'>, 'onSelect'>
+- ContextMenu.Label: no props; extends ComponentPropsWithRef<'div'>
+- ContextMenu.RadioGroup: value?, onValueChange?; extends ComponentPropsWithRef<'div'>
+- ContextMenu.RadioItem: value, disabled?, onSelect?, textValue?, shortcut?; extends Omit<Omit<ComponentPropsWithRef<'div'>, 'onSelect'>, 'asChild'>
+- ContextMenu.Root: children?, onOpenChange?, dir?
+- ContextMenu.Separator: no props; extends ComponentPropsWithRef<'div'>
+- ContextMenu.Sub: children?, open?, defaultOpen?, onOpenChange?
+- ContextMenu.SubContent: container?, forceMount?, loop?, onCloseAutoFocus?, onEscapeKeyDown?, onPointerDownOutside?, onInteractOutside?, sideOffset?, alignOffset?, avoidCollisions?, collisionPadding?, arrowPadding?, hideWhenDetached?; extends Omit<ComponentPropsWithRef<'div'>, 'side' | 'align'>
+- ContextMenu.SubTrigger: disabled?, textValue?, icon?; extends Omit<Omit<Omit<ComponentPropsWithRef<'div'>, 'onSelect'>, 'onSelect'>, 'asChild'>
+- ContextMenu.Trigger: asChild?, disabled?; extends ComponentPropsWithRef<'div'>
+- ContextMenuRoot: children?, onOpenChange?, dir?
+- ContextMenuTrigger: asChild?, disabled?; extends ComponentPropsWithRef<'div'>
 - DatePickerDropdown: mode?, selection?, isRange?, value?, onChange?, minDate?, maxDate?, isDateUnavailable?, weekStartsOn?, locale?
 - Dialog.Body: no props; extends ComponentPropsWithRef<'div'>
 - Dialog.Close: asChild?; extends ComponentPropsWithRef<'button'>
@@ -122,6 +137,11 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - FilterChip: variant?, label?, value?, showClose?, disabled?, onRemove?, onClick?, className?
 - FormLabel: children, required?, optional?, htmlFor?; extends React.LabelHTMLAttributes<HTMLLabelElement>
 - HeaderCell: columnId, label, className?, sortDirection?, onSort?
+- HoverCard: children, content, side?, align?, arrow?, className?, open?, defaultOpen?, onOpenChange?, openDelay?, closeDelay?
+- HoverCard.Arrow: asChild?; extends ComponentPropsWithRef<'span'>
+- HoverCard.Content: container?, forceMount?, onEscapeKeyDown?, side?, align?, sideOffset?, alignOffset?, avoidCollisions?, collisionPadding?, arrowPadding?, hideWhenDetached?; extends ComponentPropsWithRef<'div'>
+- HoverCard.Root: children?, open?, defaultOpen?, onOpenChange?, openDelay?, closeDelay?
+- HoverCard.Trigger: asChild?; extends ComponentPropsWithRef<'a'>
 - Icon: name?, src?, size?, color?, variant?; extends React.HTMLAttributes<HTMLDivElement>
 - IconButton: icon, label, tooltip?, variant?, size?, disabled?, loading?, ref?; extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'children' | 'leftIcon' | 'rightIcon' | 'split' | 'onSplitClick' | 'aria-label'>
 - Indexer: items, activeIndex?, offset?, onActiveChange?; extends React.HTMLAttributes<HTMLElement>
@@ -198,4 +218,10 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - Tooltip.Provider: children?, delayDuration?, skipDelayDuration?
 - Tooltip.Root: children?, open?, defaultOpen?, onOpenChange?, delayDuration?, disableHoverableContent?
 - Tooltip.Trigger: asChild?; extends ComponentPropsWithRef<'button'>
+- Tree: items, expanded?, defaultExpanded?, onExpandedChange?, selectionMode?, value?, defaultValue?, onValueChange?; extends Omit<Omit<ComponentPropsWithRef<'ul'>, 'defaultValue' | 'onChange'>, 'children'>
+- Tree.Group: no props; extends ComponentPropsWithRef<'ul'>
+- Tree.Item: value, expandable?, disabled?; extends Omit<ComponentPropsWithRef<'li'>, 'value'>
+- Tree.ItemLabel: no props; extends ComponentPropsWithRef<'span'>
+- Tree.ItemRow: icon?; extends ComponentPropsWithRef<'div'>
+- Tree.Root: expanded?, defaultExpanded?, onExpandedChange?, selectionMode?, value?, defaultValue?, onValueChange?; extends Omit<ComponentPropsWithRef<'ul'>, 'defaultValue' | 'onChange'>
 - UploadField: label?, description?, error?, accept?, multiple?, maxSize?, maxFiles?, files?, onFilesChange?, onUpload?, onView?, disabled?, required?, className?
