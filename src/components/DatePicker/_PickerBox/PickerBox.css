@@ -39,7 +39,7 @@
 
 .picker-box--active {
   background: var(--color-primary-600);
-  box-shadow: var(--shadow-xs);
+  box-shadow: var(--shadow-sm);
   color: var(--color-primary-50);
 }
 

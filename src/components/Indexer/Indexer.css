@@ -40,7 +40,7 @@
   border-radius: 10px;
   color: var(--color-neutral-600);
   cursor: pointer;
-  font-size: var(--font-size-md);
+  font-size: var(--font-size-base);
   font-weight: 500;
   padding: 8px 12px;
   position: relative;

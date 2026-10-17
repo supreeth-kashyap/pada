@@ -88,7 +88,7 @@
 
 .pill[aria-selected="true"]:not(:disabled):active {
   background-color: var(--color-primary-100);
-  border-color: var(--color-primray-200);
+  border-color: var(--color-primary-200);
 }
 
 /* Disabled State */

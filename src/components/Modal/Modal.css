@@ -28,13 +28,13 @@
 }
 
 .modal-title {
-    font-size: var(--font-5);
+    font-size: var(--font-size-lg);
     font-weight: bold;
     margin-bottom: var(--spacing-3);
 }
 
 .modal-content {
-    font-size: var(--font-3);
+    font-size: var(--font-size-base);
 }
 
 .modal-close {

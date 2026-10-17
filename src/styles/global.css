@@ -96,16 +96,16 @@
     --color-accent-zinc-800: var(--color-zinc-200);
     --color-accent-zinc-900: var(--color-zinc-50);
 
-    --color-accent-neutral-50: var(--color-neutral-900);
-    --color-accent-neutral-100: var(--color-neutral-800);
-    --color-accent-neutral-200: var(--color-neutral-700);
-    --color-accent-neutral-300: var(--color-neutral-600);
-    --color-accent-neutral-400: var(--color-neutral-500);
-    --color-accent-neutral-500: var(--color-neutral-500);
-    --color-accent-neutral-600: var(--color-neutral-400);
-    --color-accent-neutral-700: var(--color-neutral-300);
-    --color-accent-neutral-800: var(--color-neutral-200);
-    --color-accent-neutral-900: var(--color-neutral-50);
+    --color-accent-neutral-50: var(--color-stone-900);
+    --color-accent-neutral-100: var(--color-stone-800);
+    --color-accent-neutral-200: var(--color-stone-700);
+    --color-accent-neutral-300: var(--color-stone-600);
+    --color-accent-neutral-400: var(--color-stone-500);
+    --color-accent-neutral-500: var(--color-stone-500);
+    --color-accent-neutral-600: var(--color-stone-400);
+    --color-accent-neutral-700: var(--color-stone-300);
+    --color-accent-neutral-800: var(--color-stone-200);
+    --color-accent-neutral-900: var(--color-stone-50);
 
     --color-accent-stone-50: var(--color-stone-900);
     --color-accent-stone-100: var(--color-stone-800);
@@ -399,16 +399,16 @@
     --color-accent-zinc-800: var(--color-zinc-800);
     --color-accent-zinc-900: var(--color-zinc-900);
 
-    --color-accent-neutral-50: var(--color-neutral-50);
-    --color-accent-neutral-100: var(--color-neutral-100);
-    --color-accent-neutral-200: var(--color-neutral-200);
-    --color-accent-neutral-300: var(--color-neutral-300);
-    --color-accent-neutral-400: var(--color-neutral-400);
-    --color-accent-neutral-500: var(--color-neutral-500);
-    --color-accent-neutral-600: var(--color-neutral-600);
-    --color-accent-neutral-700: var(--color-neutral-700);
-    --color-accent-neutral-800: var(--color-neutral-800);
-    --color-accent-neutral-900: var(--color-neutral-900);
+    --color-accent-neutral-50: var(--color-stone-50);
+    --color-accent-neutral-100: var(--color-stone-100);
+    --color-accent-neutral-200: var(--color-stone-200);
+    --color-accent-neutral-300: var(--color-stone-300);
+    --color-accent-neutral-400: var(--color-stone-400);
+    --color-accent-neutral-500: var(--color-stone-500);
+    --color-accent-neutral-600: var(--color-stone-600);
+    --color-accent-neutral-700: var(--color-stone-700);
+    --color-accent-neutral-800: var(--color-stone-800);
+    --color-accent-neutral-900: var(--color-stone-900);
 
     --color-accent-stone-50: var(--color-stone-50);
     --color-accent-stone-100: var(--color-stone-100);
@@ -657,8 +657,9 @@
   --size-96: var(--spacing-96);
 }
 
-/* Re-declared on themed containers so it resolves against that container's primary color */
+/* Re-declared on themed containers so they resolve against that container's palette */
 :root,
 [data-theme] {
+  --color-fg-muted: var(--color-neutral-600);
   --shadow-focus-ring: 0 0 0 2px var(--color-end-white), 0 0 0 3px var(--color-primary-600);
 }

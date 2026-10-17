@@ -6,6 +6,12 @@
 - Moved the `body` and `p` rules out of `dist/tokens.css` into a new optional `pada-ds/base.css` export, so importing the tokens no longer overrides an app's own styles.
 - Added a component API manifest for AI coding agents. `npm run build` now reads every exported component's props from the TypeScript source and writes `dist/manifest.json` (exported as `pada-ds/manifest.json`), `llms.txt` and `llms-full.txt`. Both llms files ship in the package and are committed at the repo root. `npm test` fails if they are stale or if an exported component is missing from the manifest.
 
+- Fixed token bugs:
+  - `--color-neutral-*` was defined twice (Tailwind's neutral grey in the primitives, Pada's stone scale in the semantic layer), so the value depended on stylesheet order. The stone scale is now the only definition.
+  - `--color-accent-neutral-*` was inverted twice in dark mode and resolved to near-white. It now maps to the stone scale and is inverted once.
+  - Components read tokens that did not exist and silently fell back to inherited values: `--font-2/3/5` (Modal, Tooltip, Progress), `--color-fg-default` (Progress), `--font-size-md` (Indexer), `--shadow-xs` (DatePicker), `--color-primray-200` (Pills, typo) and every `--tw-*` token in Logo. They now use real tokens. `--color-fg-muted` is now defined (neutral-600, per theme).
+- Added `npm run check:tokens`, part of `npm test`, which fails when component CSS reads a custom property that nothing defines.
+
 ## 1.1.0 - 2026-05-27
 
 - Externalized `prismjs` from the bundle. It is still listed under `dependencies`, so consumers get it auto-installed, but the published `dist/pada.js` no longer ships its own copy.

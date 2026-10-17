@@ -5,9 +5,9 @@
 }
 
 .progress-label {
-    font-size: var(--font-2);
+    font-size: var(--font-size-sm);
     font-weight: 500;
-    color: var(--color-fg-default);
+    color: var(--color-fg);
 }
 
 .progress-bar {
