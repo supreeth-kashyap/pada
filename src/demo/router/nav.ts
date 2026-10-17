@@ -27,6 +27,7 @@ const FOUNDATION_ENTRIES: NavEntry[] = [
   { kind: 'foundation', slug: 'shadows', label: 'Shadows' },
   { kind: 'foundation', slug: 'gradients', label: 'Gradients' },
   { kind: 'foundation', slug: 'animation', label: 'Animation' },
+  { kind: 'foundation', slug: 'layout', label: 'Layout' },
 ];
 
 const COMPONENT_ENTRIES: NavEntry[] = [

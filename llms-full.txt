@@ -386,6 +386,24 @@ import { AlertDialog } from 'pada-ds';
 <AlertDialog.Trigger />
 ```
 
+### AspectRatio
+
+`import { AspectRatio } from 'pada-ds';`
+
+Keeps its content at a fixed shape; images and videos inside fill it (cropped to fit).
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| ratio | `number` | no | `1` | Width divided by height: `16 / 9`, `1`, `4 / 3`. |
+
+Also accepts the props of `ComponentPropsWithRef<'div'>`.
+
+```tsx
+import { AspectRatio } from 'pada-ds';
+
+<AspectRatio />
+```
+
 ### Autocomplete
 
 `import { Autocomplete } from 'pada-ds';`
@@ -859,6 +877,25 @@ A searchable list of actions in a dialog, opened with ⌘K / Ctrl+K. Type to fil
 import { CommandPalette } from 'pada-ds';
 
 <CommandPalette commands={[]} />
+```
+
+### Container
+
+`import { Container } from 'pada-ds';`
+
+Centres page content at a readable maximum width, with side gutters that grow on wider screens.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| size | `'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl' \| 'full'` | no | `'xl'` | Maximum width, from the breakpoint tokens; `full` has none. |
+| as | `ElementType` | no | `'div'` | Element to render, e.g. `main` or `section`. |
+
+Also accepts the props of `ComponentPropsWithRef<'div'>`.
+
+```tsx
+import { Container } from 'pada-ds';
+
+<Container />
 ```
 
 ### ContextMenu.CheckboxItem
@@ -2024,6 +2061,29 @@ Also accepts the props of `React.LabelHTMLAttributes<HTMLLabelElement>`.
 import { FormLabel } from 'pada-ds';
 
 <FormLabel>...</FormLabel>
+```
+
+### Grid
+
+`import { Grid } from 'pada-ds';`
+
+CSS grid layout with token gaps: fixed columns, or as many as fit (`minItemWidth`).
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| columns | `number` | no | `1` | Fixed number of equal columns. Ignored when `minItemWidth` is set. |
+| minItemWidth | `string` | no | - | Fit as many columns as there is room for, each at least this wide (`240px`, `16rem`). Responsive without breakpoints. |
+| gap | `Space` | no | `4` | Gap in spacing steps, like Stack: `gap={4}` is 16px at default density. |
+| rowGap | `Space` | no | - | Row gap, when it differs from `gap`. |
+| align | `'start' \| 'center' \| 'end' \| 'stretch'` | no | - | Cross-axis alignment of items. |
+| as | `ElementType` | no | `'div'` | Element to render, e.g. `ul` or `section`. |
+
+Also accepts the props of `ComponentPropsWithRef<'div'>`.
+
+```tsx
+import { Grid } from 'pada-ds';
+
+<Grid />
 ```
 
 ### HeaderCell

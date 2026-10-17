@@ -135,6 +135,7 @@ This design system includes the following components:
 
 - **Accordion**: Collapsible sections; `Accordion.Root`, `Item`, `Trigger`, `Content` for groups.
 - **Alert**: Inline callout by tone with actions.
+- **AspectRatio**: Fixed-shape box for media.
 - **Autocomplete**: Text field with filtered suggestions, single or multiple.
 - **AlertDialog**: Confirmation that needs an answer.
 - **Avatar**: User picture with initials fallback; `AvatarGroup` for stacks.
@@ -150,6 +151,7 @@ This design system includes the following components:
 - **CommandPalette**: ⌘K search over app commands.
 - **ContextMenu**: Right-click menu at the pointer.
 - **ComboBox**: Filterable list dropdown with options.
+- **Container**: Centred page width with responsive gutters.
 - **DatePicker**: Select dates via calendar UI.
 - **Dialog**: Composable modal or non-modal dialog (`Dialog.Root`, `Dialog.Content`, `Dialog.Title`, …).
 - **Drawer**: Dialog panel that slides in from any edge.
@@ -157,6 +159,7 @@ This design system includes the following components:
 - **EmptyState**: First-use and no-results placeholder.
 - **Field**: Label, control, description and error wiring.
 - **FormLabel**: Accessible labels for form fields.
+- **Grid**: CSS grid with fixed or auto-fit columns.
 - **HoverCard**: Rich preview of a link on hover and focus.
 - **Icon**: Reusable SVG icons for UI.
 - **IconButton**: Labelled icon-only button.

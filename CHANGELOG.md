@@ -6,6 +6,7 @@
 - Moved the `body` and `p` rules out of `dist/tokens.css` into a new optional `pada-ds/base.css` export, so importing the tokens no longer overrides an app's own styles.
 - Added a component API manifest for AI coding agents. `npm run build` now reads every exported component's props from the TypeScript source and writes `dist/manifest.json` (exported as `pada-ds/manifest.json`), `llms.txt` and `llms-full.txt`. Both llms files ship in the package and are committed at the repo root. `npm test` fails if they are stale or if an exported component is missing from the manifest.
 
+- **Layout primitives.** `Grid` lays out a fixed number of `columns`, or as many as fit with `minItemWidth`, using token gaps. `Container` centres content at a breakpoint width (`sm` to `2xl`, or `full`), with gutters that grow on wider screens. `AspectRatio` keeps media at a fixed shape. The demo has a new Foundation → Layout page.
 - **New components (wave 2): form inputs.**
   - `RangeSlider` has two thumbs for a low and high value:
     - Each thumb is a named `slider` with a formatted `aria-valuetext`, bounded by the other thumb (`minStepsBetweenThumbs`).
