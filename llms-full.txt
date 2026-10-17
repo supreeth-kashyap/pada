@@ -301,6 +301,654 @@ import { DatePickerDropdown } from 'pada-ds';
 <DatePickerDropdown />
 ```
 
+### Dialog.Body
+
+`import { Dialog } from 'pada-ds';`
+
+Scrollable main content.
+
+No props.
+
+Also accepts the props of `ComponentPropsWithRef<'div'>`.
+
+```tsx
+import { Dialog } from 'pada-ds';
+
+<Dialog.Body />
+```
+
+### Dialog.Close
+
+`import { Dialog } from 'pada-ds';`
+
+Closes the dialog. Unstyled: wrap your own button with `asChild`.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| asChild | `boolean` | no | - | Merge the close behaviour onto its only child instead of rendering a `<button>`. |
+
+Also accepts the props of `ComponentPropsWithRef<'button'>`.
+
+```tsx
+import { Dialog } from 'pada-ds';
+
+<Dialog.Close />
+```
+
+### Dialog.CloseButton
+
+`import { Dialog } from 'pada-ds';`
+
+Icon button in the top corner that closes the dialog.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| label | `string` | no | `'Close'` | Accessible name of the icon button. |
+
+Also accepts the props of `Omit<ComponentPropsWithRef<'button'>, 'children' | 'asChild'>`.
+
+```tsx
+import { Dialog } from 'pada-ds';
+
+<Dialog.CloseButton />
+```
+
+### Dialog.Content
+
+`import { Dialog } from 'pada-ds';`
+
+The dialog panel, with its backdrop, rendered in a portal. Animates in and out; respects reduced motion. Restyle through `--pada-dialog-*` tokens on the element or a parent.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| size | `DialogSize` | no | `'md'` | Width preset: auto (fits the content), sm 24rem, md 32rem, lg 44rem, xl 56rem, full (fills the viewport less a margin). |
+| container | `Element \| null` | no | - | Element to portal into. Defaults to `document.body`. |
+| overlayProps | `ComponentPropsWithRef<'div'>` | no | - | Props for the backdrop behind the dialog. |
+| forceMount | `boolean` | no | - | Keep mounted while closed, for animation libraries that manage presence themselves. |
+| onOpenAutoFocus | `(event: AutoFocusEvent) => void` | no | - | Called when focus moves into the dialog on open. Prevent it to focus something else. |
+| onCloseAutoFocus | `(event: AutoFocusEvent) => void` | no | - | Called when focus returns to the trigger on close. Prevent it to focus something else. |
+| onEscapeKeyDown | `(event: DismissEvent<KeyboardEvent>) => void` | no | - | Called on Escape. Prevent it to keep the dialog open. |
+| onPointerDownOutside | `(event: DismissEvent<PointerEvent>) => void` | no | - | Called on a pointer-down outside the content. Prevent it to keep the dialog open. |
+| onInteractOutside | `(event: DismissEvent<PointerEvent \| FocusEvent>) => void` | no | - | Called on any interaction outside (pointer or focus). Prevent it to keep the dialog open. |
+
+Also accepts the props of `ComponentPropsWithRef<'div'>`.
+
+```tsx
+import { Dialog } from 'pada-ds';
+
+<Dialog.Content />
+```
+
+### Dialog.Description
+
+`import { Dialog } from 'pada-ds';`
+
+Supporting text under the title, announced after it.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| asChild | `boolean` | no | - | Render the description's behaviour on your own element. |
+
+Also accepts the props of `ComponentPropsWithRef<'p'>`.
+
+```tsx
+import { Dialog } from 'pada-ds';
+
+<Dialog.Description />
+```
+
+### Dialog.Footer
+
+`import { Dialog } from 'pada-ds';`
+
+Bottom section for actions. Defaults to right-aligned buttons.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| justify | `'start' \| 'end' \| 'between'` | no | `'end'` | Main axis alignment of the section's children. |
+
+Also accepts the props of `ComponentPropsWithRef<'div'>`.
+
+```tsx
+import { Dialog } from 'pada-ds';
+
+<Dialog.Footer />
+```
+
+### Dialog.Header
+
+`import { Dialog } from 'pada-ds';`
+
+Top section: the title, description and close button.
+
+No props.
+
+Also accepts the props of `ComponentPropsWithRef<'div'>`.
+
+```tsx
+import { Dialog } from 'pada-ds';
+
+<Dialog.Header />
+```
+
+### Dialog.Root
+
+`import { Dialog } from 'pada-ds';`
+
+Holds the open state for a dialog. Renders no element. WAI-ARIA APG: Dialog (Modal).
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| children | `ReactNode` | no | - | - |
+| open | `boolean` | no | - | Controlled open state. |
+| defaultOpen | `boolean` | no | `false` | Initial open state when uncontrolled. |
+| onOpenChange | `(open: boolean) => void` | no | - | Called when the dialog asks to open or close. |
+| modal | `boolean` | no | `true` | Modal dialogs trap focus, lock page scroll and hide the rest of the page from assistive technology. Non-modal dialogs do none of that and close when focus leaves them. |
+
+```tsx
+import { Dialog } from 'pada-ds';
+
+<Dialog.Root />
+```
+
+### Dialog.Title
+
+`import { Dialog } from 'pada-ds';`
+
+The dialog's accessible name, styled as its heading.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| asChild | `boolean` | no | - | Render the title's behaviour on your own heading element. |
+
+Also accepts the props of `ComponentPropsWithRef<'h2'>`.
+
+```tsx
+import { Dialog } from 'pada-ds';
+
+<Dialog.Title />
+```
+
+### Dialog.Trigger
+
+`import { Dialog } from 'pada-ds';`
+
+Opens the dialog. Gets `aria-expanded`, `aria-controls` and `data-state`.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| asChild | `boolean` | no | - | Merge the trigger's behaviour onto its only child instead of rendering a `<button>`. |
+
+Also accepts the props of `ComponentPropsWithRef<'button'>`.
+
+```tsx
+import { Dialog } from 'pada-ds';
+
+<Dialog.Trigger />
+```
+
+### Drawer.Body
+
+`import { Drawer } from 'pada-ds';`
+
+Scrollable main content.
+
+No props.
+
+Also accepts the props of `ComponentPropsWithRef<'div'>`.
+
+```tsx
+import { Drawer } from 'pada-ds';
+
+<Drawer.Body />
+```
+
+### Drawer.Close
+
+`import { Drawer } from 'pada-ds';`
+
+Closes the dialog. Unstyled: wrap your own button with `asChild`.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| asChild | `boolean` | no | - | Merge the close behaviour onto its only child instead of rendering a `<button>`. |
+
+Also accepts the props of `ComponentPropsWithRef<'button'>`.
+
+```tsx
+import { Drawer } from 'pada-ds';
+
+<Drawer.Close />
+```
+
+### Drawer.CloseButton
+
+`import { Drawer } from 'pada-ds';`
+
+Icon button in the top corner that closes the dialog.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| label | `string` | no | `'Close'` | Accessible name of the icon button. |
+
+Also accepts the props of `Omit<ComponentPropsWithRef<'button'>, 'children' | 'asChild'>`.
+
+```tsx
+import { Drawer } from 'pada-ds';
+
+<Drawer.CloseButton />
+```
+
+### Drawer.Content
+
+`import { Drawer } from 'pada-ds';`
+
+A dialog panel that slides in from an edge of the screen, with its backdrop, rendered in a portal. Use the Dialog parts inside it (`Drawer.Header`, `Drawer.Title`, `Drawer.Body`, …).
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| side | `DrawerSide` | no | `'right'` | Edge the drawer slides in from. |
+| size | `DrawerSize` | no | `'sm'` | Width (left/right) or height (top/bottom): sm 496px, md 640px, lg 800px, xl 960px. |
+| container | `Element \| null` | no | - | Element to portal into. Defaults to `document.body`. |
+| overlayProps | `ComponentPropsWithRef<'div'>` | no | - | Props for the backdrop behind the drawer. |
+| forceMount | `boolean` | no | - | Keep mounted while closed, for animation libraries that manage presence themselves. |
+| onOpenAutoFocus | `(event: AutoFocusEvent) => void` | no | - | Called when focus moves into the dialog on open. Prevent it to focus something else. |
+| onCloseAutoFocus | `(event: AutoFocusEvent) => void` | no | - | Called when focus returns to the trigger on close. Prevent it to focus something else. |
+| onEscapeKeyDown | `(event: DismissEvent<KeyboardEvent>) => void` | no | - | Called on Escape. Prevent it to keep the dialog open. |
+| onPointerDownOutside | `(event: DismissEvent<PointerEvent>) => void` | no | - | Called on a pointer-down outside the content. Prevent it to keep the dialog open. |
+| onInteractOutside | `(event: DismissEvent<PointerEvent \| FocusEvent>) => void` | no | - | Called on any interaction outside (pointer or focus). Prevent it to keep the dialog open. |
+
+Also accepts the props of `ComponentPropsWithRef<'div'>`.
+
+```tsx
+import { Drawer } from 'pada-ds';
+
+<Drawer.Content />
+```
+
+### Drawer.Description
+
+`import { Drawer } from 'pada-ds';`
+
+Supporting text under the title, announced after it.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| asChild | `boolean` | no | - | Render the description's behaviour on your own element. |
+
+Also accepts the props of `ComponentPropsWithRef<'p'>`.
+
+```tsx
+import { Drawer } from 'pada-ds';
+
+<Drawer.Description />
+```
+
+### Drawer.Footer
+
+`import { Drawer } from 'pada-ds';`
+
+Bottom section for actions. Defaults to right-aligned buttons.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| justify | `'start' \| 'end' \| 'between'` | no | `'end'` | Main axis alignment of the section's children. |
+
+Also accepts the props of `ComponentPropsWithRef<'div'>`.
+
+```tsx
+import { Drawer } from 'pada-ds';
+
+<Drawer.Footer />
+```
+
+### Drawer.Header
+
+`import { Drawer } from 'pada-ds';`
+
+Top section: the title, description and close button.
+
+No props.
+
+Also accepts the props of `ComponentPropsWithRef<'div'>`.
+
+```tsx
+import { Drawer } from 'pada-ds';
+
+<Drawer.Header />
+```
+
+### Drawer.Root
+
+`import { Drawer } from 'pada-ds';`
+
+Holds the open state for a dialog. Renders no element. WAI-ARIA APG: Dialog (Modal).
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| children | `ReactNode` | no | - | - |
+| open | `boolean` | no | - | Controlled open state. |
+| defaultOpen | `boolean` | no | `false` | Initial open state when uncontrolled. |
+| onOpenChange | `(open: boolean) => void` | no | - | Called when the dialog asks to open or close. |
+| modal | `boolean` | no | `true` | Modal dialogs trap focus, lock page scroll and hide the rest of the page from assistive technology. Non-modal dialogs do none of that and close when focus leaves them. |
+
+```tsx
+import { Drawer } from 'pada-ds';
+
+<Drawer.Root />
+```
+
+### Drawer.Title
+
+`import { Drawer } from 'pada-ds';`
+
+The dialog's accessible name, styled as its heading.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| asChild | `boolean` | no | - | Render the title's behaviour on your own heading element. |
+
+Also accepts the props of `ComponentPropsWithRef<'h2'>`.
+
+```tsx
+import { Drawer } from 'pada-ds';
+
+<Drawer.Title />
+```
+
+### Drawer.Trigger
+
+`import { Drawer } from 'pada-ds';`
+
+Opens the dialog. Gets `aria-expanded`, `aria-controls` and `data-state`.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| asChild | `boolean` | no | - | Merge the trigger's behaviour onto its only child instead of rendering a `<button>`. |
+
+Also accepts the props of `ComponentPropsWithRef<'button'>`.
+
+```tsx
+import { Drawer } from 'pada-ds';
+
+<Drawer.Trigger />
+```
+
+### DropdownMenu.CheckboxItem
+
+`import { DropdownMenu } from 'pada-ds';`
+
+A toggle with a check mark.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| checked | `boolean \| 'indeterminate'` | no | - | Checked state. `'indeterminate'` for mixed. |
+| onCheckedChange | `(checked: boolean) => void` | no | - | Called with the new checked state. |
+| disabled | `boolean` | no | - | - |
+| onSelect | `(event: MenuSelectEvent) => void` | no | - | - |
+| textValue | `string` | no | - | - |
+| shortcut | `string` | no | - | Keyboard shortcut hint shown after the label, e.g. "⌘D". Display only. |
+
+Also accepts the props of `Omit<Omit<ComponentPropsWithRef<'div'>, 'onSelect'>, 'asChild'>`.
+
+```tsx
+import { DropdownMenu } from 'pada-ds';
+
+<DropdownMenu.CheckboxItem />
+```
+
+### DropdownMenu.Content
+
+`import { DropdownMenu } from 'pada-ds';`
+
+The menu panel, rendered in a portal and animated from its trigger.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| container | `Element \| null` | no | - | Element to portal into. Defaults to `document.body`. |
+| forceMount | `boolean` | no | - | Keep mounted while closed, for animation libraries that manage presence themselves. |
+| loop | `boolean` | no | - | Wrap focus from the last item to the first and back. |
+| onCloseAutoFocus | `(event: AutoFocusEvent) => void` | no | - | Called when focus returns to the trigger on close. Prevent it to focus something else. |
+| onEscapeKeyDown | `(event: DismissEvent<KeyboardEvent>) => void` | no | - | Called on Escape. Prevent it to keep the menu open. |
+| onPointerDownOutside | `(event: DismissEvent<PointerEvent>) => void` | no | - | Called on a pointer-down outside. Prevent it to keep the menu open. |
+| onInteractOutside | `(event: DismissEvent<PointerEvent \| FocusEvent>) => void` | no | - | Called on any interaction outside. Prevent it to keep the menu open. |
+| side | `Side` | no | - | Preferred side of the anchor. Flips to the opposite side when there is no room. |
+| align | `Align` | no | - | Alignment along the side. |
+| sideOffset | `number` | no | - | Gap between anchor and content, in px. |
+| alignOffset | `number` | no | - | Shift along the alignment axis, in px. |
+| avoidCollisions | `boolean` | no | - | Flip and shift to stay in the viewport. |
+| collisionPadding | `number` | no | - | Distance to keep from the viewport edges, in px. |
+| arrowPadding | `number` | no | - | Size of the arrow element, if any, so it stays inside rounded corners. |
+| hideWhenDetached | `boolean` | no | - | Hide the content when its anchor scrolls out of view. |
+
+Also accepts the props of `ComponentPropsWithRef<'div'>`.
+
+```tsx
+import { DropdownMenu } from 'pada-ds';
+
+<DropdownMenu.Content />
+```
+
+### DropdownMenu.Group
+
+`import { DropdownMenu } from 'pada-ds';`
+
+Groups related items.
+
+No props.
+
+Also accepts the props of `ComponentPropsWithRef<'div'>`.
+
+```tsx
+import { DropdownMenu } from 'pada-ds';
+
+<DropdownMenu.Group />
+```
+
+### DropdownMenu.Item
+
+`import { DropdownMenu } from 'pada-ds';`
+
+An action. Chosen with click, Enter or Space; closes the menu unless `onSelect` prevents it.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| icon | `string` | no | - | Built-in icon name shown before the label. |
+| shortcut | `string` | no | - | Keyboard shortcut hint shown after the label, e.g. "⌘D". Display only. |
+| tone | `'default' \| 'danger'` | no | `'default'` | Destructive actions use the danger colours. |
+| asChild | `boolean` | no | - | Render the item behaviour on your own element (a link, for navigation items). |
+| disabled | `boolean` | no | - | - |
+| onSelect | `(event: MenuSelectEvent) => void` | no | - | - |
+| textValue | `string` | no | - | - |
+
+Also accepts the props of `Omit<ComponentPropsWithRef<'div'>, 'onSelect'>`.
+
+```tsx
+import { DropdownMenu } from 'pada-ds';
+
+<DropdownMenu.Item />
+```
+
+### DropdownMenu.Label
+
+`import { DropdownMenu } from 'pada-ds';`
+
+A non-focusable heading for a group of items.
+
+No props.
+
+Also accepts the props of `ComponentPropsWithRef<'div'>`.
+
+```tsx
+import { DropdownMenu } from 'pada-ds';
+
+<DropdownMenu.Label />
+```
+
+### DropdownMenu.RadioGroup
+
+`import { DropdownMenu } from 'pada-ds';`
+
+Groups radio items; exactly one is checked.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| value | `string` | no | - | The checked item's value. |
+| onValueChange | `(value: string) => void` | no | - | Called with the chosen item's value. |
+
+Also accepts the props of `ComponentPropsWithRef<'div'>`.
+
+```tsx
+import { DropdownMenu } from 'pada-ds';
+
+<DropdownMenu.RadioGroup />
+```
+
+### DropdownMenu.RadioItem
+
+`import { DropdownMenu } from 'pada-ds';`
+
+One option in a RadioGroup, with a dot when checked.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| value | `string` | yes | - | This item's value in its RadioGroup. |
+| disabled | `boolean` | no | - | - |
+| onSelect | `(event: MenuSelectEvent) => void` | no | - | - |
+| textValue | `string` | no | - | - |
+| shortcut | `string` | no | - | Keyboard shortcut hint shown after the label, e.g. "⌘D". Display only. |
+
+Also accepts the props of `Omit<Omit<ComponentPropsWithRef<'div'>, 'onSelect'>, 'asChild'>`.
+
+```tsx
+import { DropdownMenu } from 'pada-ds';
+
+<DropdownMenu.RadioItem value="..." />
+```
+
+### DropdownMenu.Root
+
+`import { DropdownMenu } from 'pada-ds';`
+
+Holds the state for a menu button. Renders no element. WAI-ARIA APG: Menu Button.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| children | `ReactNode` | no | - | - |
+| open | `boolean` | no | - | Controlled open state. |
+| defaultOpen | `boolean` | no | `false` | Initial open state when uncontrolled. |
+| onOpenChange | `(open: boolean) => void` | no | - | Called when the menu opens or closes. |
+| dir | `'ltr' \| 'rtl'` | no | `'ltr'` | Reading direction, for arrow keys and submenu placement. |
+
+```tsx
+import { DropdownMenu } from 'pada-ds';
+
+<DropdownMenu.Root />
+```
+
+### DropdownMenu.Separator
+
+`import { DropdownMenu } from 'pada-ds';`
+
+A divider between groups of items.
+
+No props.
+
+Also accepts the props of `ComponentPropsWithRef<'div'>`.
+
+```tsx
+import { DropdownMenu } from 'pada-ds';
+
+<DropdownMenu.Separator />
+```
+
+### DropdownMenu.Sub
+
+`import { DropdownMenu } from 'pada-ds';`
+
+A nested menu. Contains a SubTrigger and a SubContent.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| children | `ReactNode` | no | - | - |
+| open | `boolean` | no | - | Controlled open state. |
+| defaultOpen | `boolean` | no | `false` | Initial open state when uncontrolled. |
+| onOpenChange | `(open: boolean) => void` | no | - | Called when the submenu opens or closes. |
+
+```tsx
+import { DropdownMenu } from 'pada-ds';
+
+<DropdownMenu.Sub />
+```
+
+### DropdownMenu.SubContent
+
+`import { DropdownMenu } from 'pada-ds';`
+
+The submenu panel.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| container | `Element \| null` | no | - | Element to portal into. Defaults to `document.body`. |
+| forceMount | `boolean` | no | - | Keep mounted while closed, for animation libraries that manage presence themselves. |
+| loop | `boolean` | no | - | Wrap focus from the last item to the first and back. |
+| onCloseAutoFocus | `(event: AutoFocusEvent) => void` | no | - | Called when focus returns to the trigger on close. Prevent it to focus something else. |
+| onEscapeKeyDown | `(event: DismissEvent<KeyboardEvent>) => void` | no | - | Called on Escape. Prevent it to keep the menu open. |
+| onPointerDownOutside | `(event: DismissEvent<PointerEvent>) => void` | no | - | Called on a pointer-down outside. Prevent it to keep the menu open. |
+| onInteractOutside | `(event: DismissEvent<PointerEvent \| FocusEvent>) => void` | no | - | Called on any interaction outside. Prevent it to keep the menu open. |
+| sideOffset | `number` | no | - | Gap between anchor and content, in px. |
+| alignOffset | `number` | no | - | Shift along the alignment axis, in px. |
+| avoidCollisions | `boolean` | no | - | Flip and shift to stay in the viewport. |
+| collisionPadding | `number` | no | - | Distance to keep from the viewport edges, in px. |
+| arrowPadding | `number` | no | - | Size of the arrow element, if any, so it stays inside rounded corners. |
+| hideWhenDetached | `boolean` | no | - | Hide the content when its anchor scrolls out of view. |
+
+Also accepts the props of `Omit<ComponentPropsWithRef<'div'>, 'side' | 'align'>`.
+
+```tsx
+import { DropdownMenu } from 'pada-ds';
+
+<DropdownMenu.SubContent />
+```
+
+### DropdownMenu.SubTrigger
+
+`import { DropdownMenu } from 'pada-ds';`
+
+The item that opens a submenu, with a chevron.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| disabled | `boolean` | no | - | - |
+| textValue | `string` | no | - | - |
+| icon | `string` | no | - | Built-in icon name shown before the label. |
+
+Also accepts the props of `Omit<Omit<Omit<ComponentPropsWithRef<'div'>, 'onSelect'>, 'onSelect'>, 'asChild'>`.
+
+```tsx
+import { DropdownMenu } from 'pada-ds';
+
+<DropdownMenu.SubTrigger />
+```
+
+### DropdownMenu.Trigger
+
+`import { DropdownMenu } from 'pada-ds';`
+
+Opens the menu: on click, or with Enter, Space, ArrowDown (first item) and ArrowUp (last item).
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| asChild | `boolean` | no | - | Merge the trigger behaviour onto its only child instead of rendering a `<button>`. |
+
+Also accepts the props of `ComponentPropsWithRef<'button'>`.
+
+```tsx
+import { DropdownMenu } from 'pada-ds';
+
+<DropdownMenu.Trigger />
+```
+
 ### Filter
 
 `import { Filter } from 'pada-ds';`
@@ -581,6 +1229,8 @@ import { Logo } from 'pada-ds';
 
 `import { Modal } from 'pada-ds';`
 
+A modal dialog with an optional title and a close button.
+
 | Prop | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
 | open | `boolean` | yes | - | - |
@@ -687,23 +1337,187 @@ import { Pills } from 'pada-ds';
 
 `import { Popover } from 'pada-ds';`
 
+A panel anchored to a trigger. Closes on Escape, on a click outside and when focus leaves it. Also a namespace of compound parts for full control: `Popover.Root`, `Popover.Trigger`, `Popover.Anchor`, `Popover.Content`, `Popover.Title`, `Popover.Arrow`, `Popover.Close`, `Popover.CloseButton`. ```tsx <Popover.Root> <Popover.Trigger asChild><Button variant="secondary">Filters</Button></Popover.Trigger> <Popover.Content side="bottom" align="start"> <Popover.Title>Filters</Popover.Title> … <Popover.CloseButton /> </Popover.Content> </Popover.Root> ```
+
 | Prop | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
 | open | `boolean` | yes | - | - |
 | onOpenChange | `(open: boolean) => void` | yes | - | - |
 | children | `React.ReactNode` | yes | - | - |
-| trigger | `React.ReactElement` | no | - | - |
-| position | `PopoverPosition` | no | `'auto'` | - |
+| trigger | `React.ReactElement` | no | - | Element that toggles the popover. It receives the trigger's ARIA attributes. |
+| position | `PopoverPosition` | no | `'auto'` | Preferred side. `auto` prefers the bottom; every side flips when there is no room. |
 | title | `string` | no | - | - |
 | variant | `PopoverVariant` | no | `'default'` | - |
 | showClose | `boolean` | no | `true` | - |
-| className | `string` | no | `''` | - |
-| clickPosition | `{ x: number; y: number }` | no | - | - |
+| className | `string` | no | - | - |
+| clickPosition | `{ x: number; y: number }` | no | - | Viewport coordinates to anchor the popover at instead of the trigger (a context menu, say). |
 
 ```tsx
 import { Popover } from 'pada-ds';
 
 <Popover open={true} onOpenChange={() => {}}>...</Popover>
+```
+
+### Popover.Anchor
+
+`import { Popover } from 'pada-ds';`
+
+Positions the content against this element instead of the trigger.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| asChild | `boolean` | no | - | Use your own element as the anchor instead of rendering a `<div>`. |
+
+Also accepts the props of `ComponentPropsWithRef<'div'>`.
+
+```tsx
+import { Popover } from 'pada-ds';
+
+<Popover.Anchor />
+```
+
+### Popover.Arrow
+
+`import { Popover } from 'pada-ds';`
+
+Arrow pointing at the trigger.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| asChild | `boolean` | no | - | Render your own arrow element (an SVG, usually). |
+
+Also accepts the props of `ComponentPropsWithRef<'span'>`.
+
+```tsx
+import { Popover } from 'pada-ds';
+
+<Popover.Arrow />
+```
+
+### Popover.Close
+
+`import { Popover } from 'pada-ds';`
+
+Closes the popover. Give icon-only close buttons an `aria-label`.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| asChild | `boolean` | no | - | Merge the close behaviour onto its only child instead of rendering a `<button>`. |
+
+Also accepts the props of `ComponentPropsWithRef<'button'>`.
+
+```tsx
+import { Popover } from 'pada-ds';
+
+<Popover.Close />
+```
+
+### Popover.CloseButton
+
+`import { Popover } from 'pada-ds';`
+
+Icon button in the top corner that closes the popover.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| label | `string` | no | `'Close'` | Accessible name of the icon button. |
+
+Also accepts the props of `Omit<ComponentPropsWithRef<'button'>, 'children' | 'asChild'>`.
+
+```tsx
+import { Popover } from 'pada-ds';
+
+<Popover.CloseButton />
+```
+
+### Popover.Content
+
+`import { Popover } from 'pada-ds';`
+
+The floating panel, rendered in a portal and animated from the side that faces its trigger.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| variant | `PopoverContentVariant` | no | `'default'` | Surface style: default (solid border), dashed, or active (accent border with a glow). |
+| container | `Element \| null` | no | - | Element to portal into. Defaults to `document.body`. |
+| forceMount | `boolean` | no | - | Keep mounted while closed, for animation libraries that manage presence themselves. |
+| onOpenAutoFocus | `(event: AutoFocusEvent) => void` | no | - | Called when focus moves into the popover on open. Prevent it to keep focus where it is. |
+| onCloseAutoFocus | `(event: AutoFocusEvent) => void` | no | - | Called when focus returns to the trigger on close. Prevent it to focus something else. |
+| onEscapeKeyDown | `(event: DismissEvent<KeyboardEvent>) => void` | no | - | Called on Escape. Prevent it to keep the popover open. |
+| onPointerDownOutside | `(event: DismissEvent<PointerEvent>) => void` | no | - | Called on a pointer-down outside. Prevent it to keep the popover open. |
+| onFocusOutside | `(event: DismissEvent<FocusEvent>) => void` | no | - | Called when focus moves outside. Prevent it to keep the popover open. |
+| onInteractOutside | `(event: DismissEvent<PointerEvent \| FocusEvent>) => void` | no | - | Called on any interaction outside. Prevent it to keep the popover open. |
+| side | `Side` | no | - | Preferred side of the anchor. Flips to the opposite side when there is no room. |
+| align | `Align` | no | - | Alignment along the side. |
+| sideOffset | `number` | no | `8` | Gap between anchor and content, in px. |
+| alignOffset | `number` | no | - | Shift along the alignment axis, in px. |
+| avoidCollisions | `boolean` | no | - | Flip and shift to stay in the viewport. |
+| collisionPadding | `number` | no | - | Distance to keep from the viewport edges, in px. |
+| arrowPadding | `number` | no | - | Size of the arrow element, if any, so it stays inside rounded corners. |
+| hideWhenDetached | `boolean` | no | - | Hide the content when its anchor scrolls out of view. |
+
+Also accepts the props of `ComponentPropsWithRef<'div'>`.
+
+```tsx
+import { Popover } from 'pada-ds';
+
+<Popover.Content />
+```
+
+### Popover.Root
+
+`import { Popover } from 'pada-ds';`
+
+Holds the open state for a popover. Renders no element.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| children | `ReactNode` | no | - | - |
+| open | `boolean` | no | - | Controlled open state. |
+| defaultOpen | `boolean` | no | `false` | Initial open state when uncontrolled. |
+| onOpenChange | `(open: boolean) => void` | no | - | Called when the popover asks to open or close. |
+| modal | `boolean` | no | `false` | Modal popovers trap focus and hide the rest of the page from assistive technology. |
+
+```tsx
+import { Popover } from 'pada-ds';
+
+<Popover.Root />
+```
+
+### Popover.Title
+
+`import { Popover } from 'pada-ds';`
+
+The popover's heading; names the popover for assistive technology.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| asChild | `boolean` | no | - | Render the title's behaviour on your own heading element. |
+
+Also accepts the props of `ComponentPropsWithRef<'h2'>`.
+
+```tsx
+import { Popover } from 'pada-ds';
+
+<Popover.Title />
+```
+
+### Popover.Trigger
+
+`import { Popover } from 'pada-ds';`
+
+Toggles the popover. The content is positioned against it unless a Popover.Anchor exists.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| asChild | `boolean` | no | - | Merge the trigger's behaviour onto its only child instead of rendering a `<button>`. |
+
+Also accepts the props of `ComponentPropsWithRef<'button'>`.
+
+```tsx
+import { Popover } from 'pada-ds';
+
+<Popover.Trigger />
 ```
 
 ### Progress
@@ -810,13 +1624,17 @@ import { Select } from 'pada-ds';
 
 `import { SideDrawer } from 'pada-ds';`
 
+A panel that slides in from the right edge. Traps focus while open, closes on Escape or a click on the backdrop, and returns focus to whatever opened it.
+
 | Prop | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
 | open | `boolean` | yes | - | - |
 | onOpenChange | `(open: boolean) => void` | yes | - | - |
 | children | `React.ReactNode` | yes | - | - |
 | size | `SideDrawerSize` | no | `'sm'` | - |
-| className | `string` | no | `''` | - |
+| className | `string` | no | - | - |
+| aria-label | `string` | no | - | Accessible name of the drawer, when it has no visible heading to point at. |
+| aria-labelledby | `string` | no | - | Id of the element that names the drawer (usually its heading). |
 
 ```tsx
 import { SideDrawer } from 'pada-ds';
@@ -1232,16 +2050,122 @@ import { Toolbar } from 'pada-ds';
 
 `import { Tooltip } from 'pada-ds';`
 
+A short description of an element, shown on hover and keyboard focus. The trigger gets `aria-describedby` while the tooltip is open. Also a namespace of compound parts: `Tooltip.Provider` (shared delays), `Tooltip.Root`, `Tooltip.Trigger`, `Tooltip.Content`, `Tooltip.Arrow`.
+
 | Prop | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
-| content | `React.ReactNode` | yes | - | - |
-| children | `React.ReactElement` | yes | - | - |
-| position | `'top' \| 'bottom' \| 'left' \| 'right'` | no | `'top'` | - |
+| content | `React.ReactNode` | yes | - | Text (or short content) shown in the tooltip. Never put interactive content here. |
+| children | `React.ReactElement` | yes | - | The element the tooltip describes. It must be focusable (a button, link or input). |
+| position | `'top' \| 'bottom' \| 'left' \| 'right'` | no | `'top'` | Preferred side; flips when there is no room. |
+| delayDuration | `number` | no | `300` | Hover time before the tooltip opens, in ms. Keyboard focus opens it immediately. |
 
 ```tsx
 import { Tooltip } from 'pada-ds';
 
 <Tooltip content="..."><span>...</span></Tooltip>
+```
+
+### Tooltip.Arrow
+
+`import { Tooltip } from 'pada-ds';`
+
+Arrow pointing at the trigger.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| asChild | `boolean` | no | - | Render your own arrow element (an SVG, usually). |
+
+Also accepts the props of `ComponentPropsWithRef<'span'>`.
+
+```tsx
+import { Tooltip } from 'pada-ds';
+
+<Tooltip.Arrow />
+```
+
+### Tooltip.Content
+
+`import { Tooltip } from 'pada-ds';`
+
+The tooltip bubble, rendered in a portal and animated from the side that faces its trigger.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| container | `Element \| null` | no | - | Element to portal into. Defaults to `document.body`. |
+| forceMount | `boolean` | no | - | Keep mounted while closed, for animation libraries that manage presence themselves. |
+| onEscapeKeyDown | `(event: DismissEvent<KeyboardEvent>) => void` | no | - | Called on Escape. Prevent it to keep the tooltip open. |
+| side | `Side` | no | - | Preferred side of the anchor. Flips to the opposite side when there is no room. |
+| align | `Align` | no | - | Alignment along the side. |
+| sideOffset | `number` | no | `6` | Gap between anchor and content, in px. |
+| alignOffset | `number` | no | - | Shift along the alignment axis, in px. |
+| avoidCollisions | `boolean` | no | - | Flip and shift to stay in the viewport. |
+| collisionPadding | `number` | no | - | Distance to keep from the viewport edges, in px. |
+| arrowPadding | `number` | no | - | Size of the arrow element, if any, so it stays inside rounded corners. |
+| hideWhenDetached | `boolean` | no | - | Hide the content when its anchor scrolls out of view. |
+
+Also accepts the props of `ComponentPropsWithRef<'div'>`.
+
+```tsx
+import { Tooltip } from 'pada-ds';
+
+<Tooltip.Content />
+```
+
+### Tooltip.Provider
+
+`import { Tooltip } from 'pada-ds';`
+
+Shares open delays between tooltips: moving from one trigger to the next skips the delay.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| children | `ReactNode` | no | - | - |
+| delayDuration | `number` | no | `700` | Hover time before a tooltip opens, in ms. |
+| skipDelayDuration | `number` | no | `300` | After a tooltip closes, others open instantly for this long, in ms. |
+
+```tsx
+import { Tooltip } from 'pada-ds';
+
+<Tooltip.Provider />
+```
+
+### Tooltip.Root
+
+`import { Tooltip } from 'pada-ds';`
+
+Holds the state for one tooltip. Renders no element. WAI-ARIA APG: Tooltip.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| children | `ReactNode` | no | - | - |
+| open | `boolean` | no | - | Controlled open state. |
+| defaultOpen | `boolean` | no | `false` | Initial open state when uncontrolled. |
+| onOpenChange | `(open: boolean) => void` | no | - | Called when the tooltip opens or closes. |
+| delayDuration | `number` | no | - | Overrides the provider's hover delay, in ms. |
+| disableHoverableContent | `boolean` | no | `false` | Close as soon as the pointer leaves the trigger, even towards the content. |
+
+```tsx
+import { Tooltip } from 'pada-ds';
+
+<Tooltip.Root />
+```
+
+### Tooltip.Trigger
+
+`import { Tooltip } from 'pada-ds';`
+
+Element the tooltip describes. Opens on hover (after the delay) and immediately on keyboard focus; closes on leave, blur, Escape and pointer-down. Gets `aria-describedby` while open.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| asChild | `boolean` | no | - | Merge the trigger behaviour onto its only child (a button, link or icon button). |
+
+Also accepts the props of `ComponentPropsWithRef<'button'>`.
+
+```tsx
+import { Tooltip } from 'pada-ds';
+
+<Tooltip.Trigger />
 ```
 
 ### UploadField

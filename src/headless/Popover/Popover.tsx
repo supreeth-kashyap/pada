@@ -1,5 +1,6 @@
 import {
   useCallback,
+  useEffect,
   useId,
   useLayoutEffect,
   useMemo,
@@ -29,6 +30,9 @@ interface PopoverContextValue {
   customAnchor: HTMLElement | null;
   setCustomAnchor: (anchor: HTMLElement | null) => void;
   contentId: string;
+  titleId: string;
+  hasTitle: boolean;
+  setHasTitle: (value: boolean) => void;
 }
 
 const [PopoverProvider, usePopoverContext] = createPartContext<PopoverContextValue>('Popover.Root');
@@ -53,10 +57,22 @@ export function PopoverRoot({ children, open: openProp, defaultOpen = false, onO
   const [open, setOpen] = useControllableState({ prop: openProp, defaultProp: defaultOpen, onChange: onOpenChange });
   const triggerRef = useRef<HTMLButtonElement>(null);
   const [customAnchor, setCustomAnchor] = useState<HTMLElement | null>(null);
-  const contentId = `${useId()}popover`;
+  const baseId = useId();
+  const [hasTitle, setHasTitle] = useState(false);
   const value = useMemo(
-    () => ({ open, setOpen, modal, triggerRef, customAnchor, setCustomAnchor, contentId }),
-    [open, setOpen, modal, customAnchor, contentId],
+    () => ({
+      open,
+      setOpen,
+      modal,
+      triggerRef,
+      customAnchor,
+      setCustomAnchor,
+      contentId: `${baseId}popover`,
+      titleId: `${baseId}popover-title`,
+      hasTitle,
+      setHasTitle,
+    }),
+    [open, setOpen, modal, customAnchor, baseId, hasTitle],
   );
   return <PopoverProvider value={value}>{children}</PopoverProvider>;
 }
@@ -186,6 +202,7 @@ function PopoverContentImpl({
       id={context.contentId}
       role="dialog"
       aria-modal={modal || undefined}
+      aria-labelledby={context.hasTitle ? context.titleId : undefined}
       tabIndex={-1}
       data-state={openState(open)}
       data-side={floating.side}
@@ -213,6 +230,23 @@ export function PopoverArrow({ asChild, ref, style, ...props }: PopoverArrowProp
   const composedRef = useComposedRefs(ref, floating.setArrowElement);
   const Component = asChild ? Slot : 'span';
   return <Component aria-hidden="true" data-side={floating.side} {...props} ref={composedRef} style={{ ...floating.arrowStyles, ...style }} />;
+}
+
+export interface PopoverTitleProps extends ComponentPropsWithRef<'h2'> {
+  /** Render the title's behaviour on your own heading element. */
+  asChild?: boolean;
+}
+
+/** Names the popover: the content gets `aria-labelledby` pointing at it. */
+export function PopoverTitle({ asChild, ...props }: PopoverTitleProps) {
+  const context = usePopoverContext('Popover.Title');
+  const { setHasTitle } = context;
+  useEffect(() => {
+    setHasTitle(true);
+    return () => setHasTitle(false);
+  }, [setHasTitle]);
+  const Component = asChild ? Slot : 'h2';
+  return <Component id={context.titleId} {...props} />;
 }
 
 export interface PopoverCloseProps extends ComponentPropsWithRef<'button'> {

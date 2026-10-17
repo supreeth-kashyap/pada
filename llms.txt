@@ -53,6 +53,39 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - ComboBox: items, multiSelect?, onItemClick?; extends React.HTMLAttributes<HTMLDivElement>
 - ComboBoxMenuItem: iconName?, label, selected?, disabled?, multiSelect?; extends React.ButtonHTMLAttributes<HTMLButtonElement>
 - DatePickerDropdown: mode?, selection?, isRange?, value?, onChange?, minDate?, maxDate?
+- Dialog.Body: no props; extends ComponentPropsWithRef<'div'>
+- Dialog.Close: asChild?; extends ComponentPropsWithRef<'button'>
+- Dialog.CloseButton: label?; extends Omit<ComponentPropsWithRef<'button'>, 'children' | 'asChild'>
+- Dialog.Content: size?, container?, overlayProps?, forceMount?, onOpenAutoFocus?, onCloseAutoFocus?, onEscapeKeyDown?, onPointerDownOutside?, onInteractOutside?; extends ComponentPropsWithRef<'div'>
+- Dialog.Description: asChild?; extends ComponentPropsWithRef<'p'>
+- Dialog.Footer: justify?; extends ComponentPropsWithRef<'div'>
+- Dialog.Header: no props; extends ComponentPropsWithRef<'div'>
+- Dialog.Root: children?, open?, defaultOpen?, onOpenChange?, modal?
+- Dialog.Title: asChild?; extends ComponentPropsWithRef<'h2'>
+- Dialog.Trigger: asChild?; extends ComponentPropsWithRef<'button'>
+- Drawer.Body: no props; extends ComponentPropsWithRef<'div'>
+- Drawer.Close: asChild?; extends ComponentPropsWithRef<'button'>
+- Drawer.CloseButton: label?; extends Omit<ComponentPropsWithRef<'button'>, 'children' | 'asChild'>
+- Drawer.Content: side?, size?, container?, overlayProps?, forceMount?, onOpenAutoFocus?, onCloseAutoFocus?, onEscapeKeyDown?, onPointerDownOutside?, onInteractOutside?; extends ComponentPropsWithRef<'div'>
+- Drawer.Description: asChild?; extends ComponentPropsWithRef<'p'>
+- Drawer.Footer: justify?; extends ComponentPropsWithRef<'div'>
+- Drawer.Header: no props; extends ComponentPropsWithRef<'div'>
+- Drawer.Root: children?, open?, defaultOpen?, onOpenChange?, modal?
+- Drawer.Title: asChild?; extends ComponentPropsWithRef<'h2'>
+- Drawer.Trigger: asChild?; extends ComponentPropsWithRef<'button'>
+- DropdownMenu.CheckboxItem: checked?, onCheckedChange?, disabled?, onSelect?, textValue?, shortcut?; extends Omit<Omit<ComponentPropsWithRef<'div'>, 'onSelect'>, 'asChild'>
+- DropdownMenu.Content: container?, forceMount?, loop?, onCloseAutoFocus?, onEscapeKeyDown?, onPointerDownOutside?, onInteractOutside?, side?, align?, sideOffset?, alignOffset?, avoidCollisions?, collisionPadding?, arrowPadding?, hideWhenDetached?; extends ComponentPropsWithRef<'div'>
+- DropdownMenu.Group: no props; extends ComponentPropsWithRef<'div'>
+- DropdownMenu.Item: icon?, shortcut?, tone?, asChild?, disabled?, onSelect?, textValue?; extends Omit<ComponentPropsWithRef<'div'>, 'onSelect'>
+- DropdownMenu.Label: no props; extends ComponentPropsWithRef<'div'>
+- DropdownMenu.RadioGroup: value?, onValueChange?; extends ComponentPropsWithRef<'div'>
+- DropdownMenu.RadioItem: value, disabled?, onSelect?, textValue?, shortcut?; extends Omit<Omit<ComponentPropsWithRef<'div'>, 'onSelect'>, 'asChild'>
+- DropdownMenu.Root: children?, open?, defaultOpen?, onOpenChange?, dir?
+- DropdownMenu.Separator: no props; extends ComponentPropsWithRef<'div'>
+- DropdownMenu.Sub: children?, open?, defaultOpen?, onOpenChange?
+- DropdownMenu.SubContent: container?, forceMount?, loop?, onCloseAutoFocus?, onEscapeKeyDown?, onPointerDownOutside?, onInteractOutside?, sideOffset?, alignOffset?, avoidCollisions?, collisionPadding?, arrowPadding?, hideWhenDetached?; extends Omit<ComponentPropsWithRef<'div'>, 'side' | 'align'>
+- DropdownMenu.SubTrigger: disabled?, textValue?, icon?; extends Omit<Omit<Omit<ComponentPropsWithRef<'div'>, 'onSelect'>, 'onSelect'>, 'asChild'>
+- DropdownMenu.Trigger: asChild?; extends ComponentPropsWithRef<'button'>
 - Filter: label, options, multiSelect?, value?, defaultValue?, onChange?, applyLabel?, clearLabel?, disabled?, className?
 - FilterChip: variant?, label?, value?, showClose?, disabled?, onRemove?, onClick?, className?
 - FormLabel: children, required?, optional?, htmlFor?; extends React.LabelHTMLAttributes<HTMLLabelElement>
@@ -73,12 +106,20 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - PageHeader: breadcrumbs, onCommandClick?, commandLabel?, commandShortcut?, onAiClick?, aiLabel?, profileTrigger?, profileMenu?, className?
 - Pills: options, value?, defaultValue?, onChange?, className?, size?, disabled?
 - Popover: open, onOpenChange, children, trigger?, position?, title?, variant?, showClose?, className?, clickPosition?
+- Popover.Anchor: asChild?; extends ComponentPropsWithRef<'div'>
+- Popover.Arrow: asChild?; extends ComponentPropsWithRef<'span'>
+- Popover.Close: asChild?; extends ComponentPropsWithRef<'button'>
+- Popover.CloseButton: label?; extends Omit<ComponentPropsWithRef<'button'>, 'children' | 'asChild'>
+- Popover.Content: variant?, container?, forceMount?, onOpenAutoFocus?, onCloseAutoFocus?, onEscapeKeyDown?, onPointerDownOutside?, onFocusOutside?, onInteractOutside?, side?, align?, sideOffset?, alignOffset?, avoidCollisions?, collisionPadding?, arrowPadding?, hideWhenDetached?; extends ComponentPropsWithRef<'div'>
+- Popover.Root: children?, open?, defaultOpen?, onOpenChange?, modal?
+- Popover.Title: asChild?; extends ComponentPropsWithRef<'h2'>
+- Popover.Trigger: asChild?; extends ComponentPropsWithRef<'button'>
 - Progress: value, max?, label?
 - RadioGroup: name, label?, options, value, onChange, disabled?, className?
 - SearchField: value?, defaultValue?, onChange?, onClear?, className?; extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'onChange' | 'value' | 'defaultValue'>
 - SegmentControl: options, value?, defaultValue?, onChange?, className?, disabled?
 - Select: label, options, value?, defaultValue?, placeholder?, onChange?, description?, error?, disabled?, name?, id?, className?
-- SideDrawer: open, onOpenChange, children, size?, className?
+- SideDrawer: open, onOpenChange, children, size?, className?, aria-label?, aria-labelledby?
 - Sidebar: data?, activeId?, onItemClick?, children?, className?; extends React.HTMLAttributes<HTMLElement>
 - SidebarCollapse: children, defaultOpen?, label?, className?
 - SidebarLogo: src?, alt?, name?, size?, title?, href?, onClick?, className?; extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'>
@@ -100,5 +141,10 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - Tags: children, variant?, icon?, className?
 - Text: children, size?, weight?, family?, lineHeight?, color?, as?; extends React.HTMLAttributes<HTMLSpanElement>
 - Toolbar: left?, actions?, primaryAction?, children?, className?
-- Tooltip: content, children, position?
+- Tooltip: content, children, position?, delayDuration?
+- Tooltip.Arrow: asChild?; extends ComponentPropsWithRef<'span'>
+- Tooltip.Content: container?, forceMount?, onEscapeKeyDown?, side?, align?, sideOffset?, alignOffset?, avoidCollisions?, collisionPadding?, arrowPadding?, hideWhenDetached?; extends ComponentPropsWithRef<'div'>
+- Tooltip.Provider: children?, delayDuration?, skipDelayDuration?
+- Tooltip.Root: children?, open?, defaultOpen?, onOpenChange?, delayDuration?, disableHoverableContent?
+- Tooltip.Trigger: asChild?; extends ComponentPropsWithRef<'button'>
 - UploadField: label?, description?, error?, accept?, multiple?, maxSize?, maxFiles?, files?, onFilesChange?, onUpload?, disabled?, required?, className?

@@ -4,7 +4,7 @@
 //
 // A property counts as defined when it is declared in the token stylesheets, declared in
 // any component stylesheet (component-local variables such as --pill-padding), or set
-// from TSX as a style key ('--indexer-offset': …).
+// from TS/TSX as a style key ('--indexer-offset': …) or with style.setProperty('--x', …).
 import { readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -24,7 +24,8 @@ async function walk(dir) {
 }
 
 const DECLARATION = /(--[\w-]+)\s*:/g;
-const TSX_STYLE_KEY = /['"](--[\w-]+)['"]\s*:/g;
+// '--x': value, ['--x' as string]: value, and style.setProperty('--x', …) in TS/TSX.
+const TSX_STYLE_KEY = /(?:['"](--[\w-]+)['"]\s*(?:as\s+string\s*\]\s*)?:|setProperty\(\s*['"](--[\w-]+)['"])/g;
 const REFERENCE = /var\(\s*(--[\w-]+)/g;
 
 export async function findUndefinedTokens({
@@ -33,7 +34,7 @@ export async function findUndefinedTokens({
 } = {}) {
   const defined = new Set();
   const addMatches = (text, pattern) => {
-    for (const match of text.matchAll(pattern)) defined.add(match[1]);
+    for (const match of text.matchAll(pattern)) defined.add(match[1] ?? match[2]);
   };
 
   for (const file of tokenFiles) {

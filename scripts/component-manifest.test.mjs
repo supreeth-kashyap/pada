@@ -36,13 +36,15 @@ test('every component exported from the package entry is in the manifest', () =>
   assert.ok(exported.includes('Button'), 'expected the type checker to find Button');
   const missing = exported.filter((name) => !byName.has(name));
   assert.deepEqual(missing, [], `missing from the manifest: ${missing.join(', ')}`);
-  assert.equal(manifest.components.length, exported.length);
+  const topLevel = manifest.components.filter((component) => !component.name.includes('.'));
+  assert.equal(topLevel.length, exported.length);
 });
 
 test('every component has its props, with name, type and required flag', () => {
   for (const component of manifest.components) {
     assert.equal(component.importPath, 'pada-ds');
-    assert.ok(component.props.length > 0, `${component.name} has no props`);
+    // Compound parts such as Dialog.Header may only forward native element props.
+    assert.ok(component.props.length > 0 || component.extends.length > 0, `${component.name} has no props`);
     for (const prop of component.props) {
       assert.ok(prop.name, `${component.name} has a prop without a name`);
       assert.ok(prop.type, `${component.name}.${prop.name} has no type`);
@@ -83,6 +85,18 @@ test('props, types, defaults and descriptions come from the source', () => {
   for (const name of ['ListContext', 'TableContext', 'TextSize']) {
     assert.equal(byName.has(name), false, `${name} is not a component`);
   }
+});
+
+test('compound components list their parts, imported through the namespace', () => {
+  const content = byName.get('Dialog.Content');
+  assert.ok(content, 'Dialog.Content is in the manifest');
+  assert.equal(content.import, "import { Dialog } from 'pada-ds';");
+  assert.ok(content.props.some((prop) => prop.name === 'size'));
+  for (const part of ['Dialog.Root', 'Dialog.Title', 'Drawer.Content', 'DropdownMenu.Item', 'Popover.Trigger', 'Tooltip.Provider']) {
+    assert.ok(byName.has(part), `${part} is in the manifest`);
+  }
+  // The 1.x call signature stays documented next to the parts.
+  assert.ok(byName.has('Popover') && byName.has('Tooltip'));
 });
 
 test('usage examples pass only required props', () => {

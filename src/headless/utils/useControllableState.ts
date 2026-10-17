@@ -25,8 +25,12 @@ export function useControllableState<T>({ prop, defaultProp, onChange }: Control
     const { value: current, onChange: notify, isControlled: controlled } = latest.current;
     const resolved = typeof next === 'function' ? (next as (previous: T) => T)(current) : next;
     if (Object.is(resolved, current)) return;
-    if (!controlled) setInternal(resolved);
-    latest.current.value = resolved;
+    // Uncontrolled: record the value now so a second call in the same tick sees it. Controlled
+    // values only change when the parent passes a new prop, so every request is reported.
+    if (!controlled) {
+      setInternal(resolved);
+      latest.current.value = resolved;
+    }
     notify?.(resolved);
   }, []);
 

@@ -140,6 +140,9 @@ This design system includes the following components:
 - **CodeSnippet**: Display formatted, copyable code blocks.
 - **ComboBox**: Filterable list dropdown with options.
 - **DatePicker**: Select dates via calendar UI.
+- **Dialog**: Composable modal or non-modal dialog (`Dialog.Root`, `Dialog.Content`, `Dialog.Title`, …).
+- **Drawer**: Dialog panel that slides in from any edge.
+- **DropdownMenu**: Menu button with items, checkbox and radio items, and submenus.
 - **FormLabel**: Accessible labels for form fields.
 - **Icon**: Reusable SVG icons for UI.
 - **Indexer**: Alphabetical index navigation component.
@@ -150,17 +153,17 @@ This design system includes the following components:
 - **List**: Generic list rendering component.
 - **Loader**: Indicate loading state visually.
 - **Logo**: Project or brand logo component.
-- **Modal**: Overlay dialog for focused tasks.
+- **Modal**: Overlay dialog for focused tasks (1.x API; wraps `Dialog`).
 - **Notification**: Transient alert messages and toasts.
 - **PageHeader**: Page title and actions area.
 - **Pills**: Compact, selectable pill-style buttons.
-- **Popover**: Floating container for contextual content.
+- **Popover**: Floating container for contextual content; also `Popover.Root`, `Popover.Content`, … parts.
 - **Progress**: Visual progress indicators for tasks.
 - **RadioGroup**: Grouped single-choice radio buttons.
 - **SearchField**: Text search input with clear.
 - **SegmentControl**: Segmented button toggle control.
 - **Select**: Dropdown selection with ComboBox.
-- **SideDrawer**: Slide-in side panel for navigation.
+- **SideDrawer**: Slide-in side panel (1.x API; wraps `Drawer`).
 - **Sidebar**: Fixed side navigation area.
 - **Slider**: Range selection slider control.
 - **Steps**: Multi-step progress indicator component.
@@ -170,7 +173,7 @@ This design system includes the following components:
 - **Tags**: Compact label tags for metadata.
 - **Text**: Typography primitives and helpers.
 - **Toolbar**: Action toolbar with controls.
-- **Tooltip**: Hover tooltip for extra info.
+- **Tooltip**: Hover and focus tooltip; also `Tooltip.Provider`, `Tooltip.Root`, … parts.
 - **UploadField**: File upload field with progress.
 
 ### Examples

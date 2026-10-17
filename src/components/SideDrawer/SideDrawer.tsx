@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
-import './SideDrawer.css';
+import React from 'react';
+import { DialogRoot } from '../Dialog/Dialog';
+import { DrawerContent } from '../Drawer/Drawer';
 
 export type SideDrawerSize = 'sm' | 'md' | 'lg' | 'xl';
 
@@ -9,51 +10,23 @@ export interface SideDrawerProps {
   children: React.ReactNode;
   size?: SideDrawerSize;
   className?: string;
+  /** Accessible name of the drawer, when it has no visible heading to point at. */
+  'aria-label'?: string;
+  /** Id of the element that names the drawer (usually its heading). */
+  'aria-labelledby'?: string;
 }
 
-const sizeMap: Record<SideDrawerSize, number> = {
-  sm: 496,
-  md: 640,
-  lg: 800,
-  xl: 960
-};
-
-export const SideDrawer: React.FC<SideDrawerProps> = ({
-  open,
-  onOpenChange,
-  children,
-  size = 'sm',
-  className = ''
-}) => {
-  useEffect(() => {
-    const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        onOpenChange(false);
-      }
-    };
-
-    if (open) {
-      document.addEventListener('keydown', handleEscape);
-    } else {
-      document.removeEventListener('keydown', handleEscape);
-    }
-
-    return () => {
-      document.removeEventListener('keydown', handleEscape);
-    };
-  }, [open, onOpenChange]);
-
-  if (!open) return null;
-
-  return (
-    <div className="side-drawer-overlay" onClick={() => onOpenChange(false)}>
-      <div
-        className={`side-drawer side-drawer--${size} ${className}`.trim()}
-        style={{ width: `${sizeMap[size]}px` }}
-        onClick={(event) => event.stopPropagation()}
-      >
-        {children}
-      </div>
-    </div>
-  );
-};
+/**
+ * A panel that slides in from the right edge. Traps focus while open, closes on Escape or a
+ * click on the backdrop, and returns focus to whatever opened it.
+ *
+ * @deprecated Since 2.0. Use `Drawer` (`Drawer.Root`, `Drawer.Content side="right"`, …), which
+ * this wraps and which adds a trigger, title, other edges and padding. Removed in 3.0.
+ */
+export const SideDrawer: React.FC<SideDrawerProps> = ({ open, onOpenChange, children, size = 'sm', className, ...aria }) => (
+  <DialogRoot open={open} onOpenChange={onOpenChange}>
+    <DrawerContent side="right" size={size} className={className} style={{ ['--pada-drawer-pad' as string]: 0, ['--pada-drawer-gap' as string]: 0 }} {...aria}>
+      {children}
+    </DrawerContent>
+  </DialogRoot>
+);

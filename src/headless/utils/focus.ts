@@ -54,11 +54,17 @@ export interface FocusScopeOptions {
 export function useFocusScope(ref: RefObject<HTMLElement | null>, { trapped, ...callbacks }: FocusScopeOptions) {
   const latest = useRef(callbacks);
   latest.current = callbacks;
+  const restoreTarget = useRef<HTMLElement | null>(null);
+  const pendingRestore = useRef<number | undefined>(undefined);
 
   useEffect(() => {
     const container = ref.current;
     if (!container) return;
-    const previouslyFocused = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    // A remount (React StrictMode runs effects twice in development) cancels the restore the
+    // previous cleanup queued, and keeps the element focused before the first mount.
+    window.clearTimeout(pendingRestore.current);
+    const active = document.activeElement;
+    if (active instanceof HTMLElement && !container.contains(active)) restoreTarget.current = active;
 
     if (!container.contains(document.activeElement)) {
       const event = createAutoFocusEvent();
@@ -72,10 +78,12 @@ export function useFocusScope(ref: RefObject<HTMLElement | null>, { trapped, ...
     return () => {
       const event = createAutoFocusEvent();
       latest.current.onUnmountAutoFocus?.(event);
-      if (!event.defaultPrevented && previouslyFocused?.isConnected) {
-        // Deferred so it runs after any aria-hidden/inert cleanup in the same commit.
-        window.setTimeout(() => focusElement(previouslyFocused), 0);
-      }
+      if (event.defaultPrevented) return;
+      // Deferred so it runs after any aria-hidden cleanup in the same commit.
+      pendingRestore.current = window.setTimeout(() => {
+        const target = restoreTarget.current;
+        if (target?.isConnected) focusElement(target);
+      }, 0);
     };
   }, [ref]);
 

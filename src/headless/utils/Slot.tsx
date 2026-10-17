@@ -16,6 +16,8 @@ export interface SlotProps extends HTMLAttributes<HTMLElement> {
 
 type AnyProps = Record<string, unknown>;
 
+const ID_LIST_PROPS = new Set(['aria-describedby', 'aria-labelledby', 'aria-controls', 'aria-owns']);
+
 function mergeProps(slotProps: AnyProps, childProps: AnyProps): AnyProps {
   const merged: AnyProps = { ...slotProps, ...childProps };
   for (const key of Object.keys(slotProps)) {
@@ -31,6 +33,9 @@ function mergeProps(slotProps: AnyProps, childProps: AnyProps): AnyProps {
       merged.style = { ...(slotValue as object), ...(childValue as object) };
     } else if (key === 'className') {
       merged.className = [slotValue, childValue].filter(Boolean).join(' ');
+    } else if (ID_LIST_PROPS.has(key) && childValue && slotValue) {
+      // Both sides may reference elements (a tooltip, a hint): keep every id once.
+      merged[key] = [...new Set(`${childValue} ${slotValue}`.split(/\s+/).filter(Boolean))].join(' ');
     } else if (childValue === undefined) {
       merged[key] = slotValue;
     }

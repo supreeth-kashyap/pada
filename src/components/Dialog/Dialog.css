@@ -1,0 +1,171 @@
+/* Root */
+.dialog-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--pada-z-modal);
+  background-color: var(--pada-color-backdrop);
+  transition: opacity var(--pada-duration-slow) var(--pada-ease-standard);
+}
+
+.dialog-overlay[data-state="closed"] {
+  opacity: 0;
+  transition-duration: var(--pada-duration-normal);
+}
+
+@starting-style {
+  .dialog-overlay[data-state="open"] {
+    opacity: 0;
+  }
+}
+
+.dialog {
+  /* Component tokens */
+  --pada-dialog-bg: var(--pada-color-surface-overlay);
+  --pada-dialog-fg: var(--pada-color-fg);
+  --pada-dialog-border: var(--pada-color-border-subtle);
+  --pada-dialog-radius: var(--pada-radius-2xl);
+  --pada-dialog-shadow: var(--pada-shadow-xl);
+  --pada-dialog-pad: var(--pada-space-6);
+  --pada-dialog-gap: var(--pada-space-4);
+  --pada-dialog-width: 32rem;
+  --pada-dialog-height: auto;
+  --pada-dialog-margin: var(--pada-space-4);
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  z-index: var(--pada-z-modal);
+  display: flex;
+  flex-direction: column;
+  gap: var(--pada-dialog-gap);
+  box-sizing: border-box;
+  width: var(--pada-dialog-width);
+  max-width: calc(100vw - 2 * var(--pada-dialog-margin));
+  height: var(--pada-dialog-height);
+  max-height: calc(100dvh - 2 * var(--pada-dialog-margin));
+  padding: var(--pada-dialog-pad);
+  overflow: hidden;
+  background-color: var(--pada-dialog-bg);
+  color: var(--pada-dialog-fg);
+  border: var(--pada-border-width-thin) solid var(--pada-dialog-border);
+  border-radius: var(--pada-dialog-radius);
+  box-shadow: var(--pada-dialog-shadow);
+  font-family: var(--pada-font-sans);
+  font-size: var(--pada-font-size-md);
+  line-height: var(--pada-line-height-md);
+  outline: none;
+  transition:
+    opacity var(--pada-duration-slow) var(--pada-ease-emphasized),
+    scale var(--pada-duration-slow) var(--pada-ease-emphasized);
+}
+
+/* Variant variables */
+.dialog[data-size="auto"] {
+  --pada-dialog-width: fit-content;
+}
+
+.dialog[data-size="sm"] {
+  --pada-dialog-width: 24rem;
+}
+
+.dialog[data-size="lg"] {
+  --pada-dialog-width: 44rem;
+}
+
+.dialog[data-size="xl"] {
+  --pada-dialog-width: 56rem;
+}
+
+.dialog[data-size="full"] {
+  --pada-dialog-width: 100vw;
+  --pada-dialog-height: calc(100dvh - 2 * var(--pada-dialog-margin));
+}
+
+/* States via attributes */
+.dialog[data-state="closed"] {
+  opacity: 0;
+  scale: var(--pada-motion-scale-enter);
+  transition-duration: var(--pada-duration-normal);
+  transition-timing-function: var(--pada-ease-exit);
+}
+
+@starting-style {
+  .dialog[data-state="open"] {
+    opacity: 0;
+    scale: var(--pada-motion-scale-enter);
+  }
+}
+
+/* Child elements */
+.dialog-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pada-space-1);
+  padding-inline-end: var(--pada-space-8);
+}
+
+.dialog-title {
+  margin: 0;
+  font-size: var(--pada-font-size-lg);
+  font-weight: var(--pada-font-weight-semibold);
+  line-height: var(--pada-line-height-sm);
+  color: var(--pada-color-fg);
+}
+
+.dialog-description {
+  margin: 0;
+  color: var(--pada-color-fg-muted);
+}
+
+.dialog-body {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+
+.dialog-footer {
+  --pada-dialog-footer-justify: flex-end;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--pada-space-2);
+  justify-content: var(--pada-dialog-footer-justify);
+}
+
+.dialog-footer[data-justify="start"] {
+  --pada-dialog-footer-justify: flex-start;
+}
+
+.dialog-footer[data-justify="between"] {
+  --pada-dialog-footer-justify: space-between;
+}
+
+.dialog-close {
+  position: absolute;
+  top: var(--pada-space-4);
+  right: var(--pada-space-4);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--pada-control-height-md);
+  height: var(--pada-control-height-md);
+  padding: 0;
+  border: none;
+  border-radius: var(--pada-radius-lg);
+  background: transparent;
+  color: var(--pada-color-fg-muted);
+  cursor: pointer;
+  transition:
+    background-color var(--pada-duration-fast) var(--pada-ease-standard),
+    color var(--pada-duration-fast) var(--pada-ease-standard);
+}
+
+.dialog-close:hover {
+  background-color: var(--pada-color-neutral-subtle-hover);
+  color: var(--pada-color-fg);
+}
+
+.dialog-close:focus-visible {
+  outline: none;
+  box-shadow: var(--pada-shadow-focus);
+}

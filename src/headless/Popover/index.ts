@@ -6,6 +6,7 @@ import {
   PopoverContent,
   PopoverArrow,
   PopoverClose,
+  PopoverTitle,
 } from './Popover';
 
 export * from './Popover';
@@ -32,5 +33,6 @@ export const Popover = {
   Portal: PopoverPortal,
   Content: PopoverContent,
   Arrow: PopoverArrow,
+  Title: PopoverTitle,
   Close: PopoverClose,
 };

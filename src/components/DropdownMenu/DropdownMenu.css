@@ -1,0 +1,148 @@
+/* Root */
+.menu {
+  /* Component tokens */
+  --pada-menu-bg: var(--pada-color-surface-overlay);
+  --pada-menu-border: var(--pada-color-border);
+  --pada-menu-radius: var(--pada-radius-lg);
+  --pada-menu-shadow: var(--pada-shadow-lg);
+  --pada-menu-pad: var(--pada-space-1);
+  --pada-menu-min-width: 12rem;
+
+  z-index: var(--pada-z-popover);
+  box-sizing: border-box;
+  min-width: max(var(--pada-menu-min-width), var(--pada-floating-anchor-width, 0px));
+  max-height: var(--pada-floating-available-height, none);
+  overflow: auto;
+  padding: var(--pada-menu-pad);
+  background-color: var(--pada-menu-bg);
+  color: var(--pada-color-fg);
+  border: var(--pada-border-width-thin) solid var(--pada-menu-border);
+  border-radius: var(--pada-menu-radius);
+  box-shadow: var(--pada-menu-shadow);
+  font-family: var(--pada-font-sans);
+  font-size: var(--pada-font-size-md);
+  line-height: var(--pada-line-height-sm);
+  outline: none;
+  transform-origin: var(--pada-floating-transform-origin);
+  transition:
+    opacity var(--pada-duration-normal) var(--pada-ease-enter),
+    scale var(--pada-duration-normal) var(--pada-ease-enter);
+}
+
+/* States via attributes */
+.menu[data-state="closed"] {
+  opacity: 0;
+  scale: var(--pada-motion-scale-enter);
+  transition-duration: var(--pada-duration-fast);
+  transition-timing-function: var(--pada-ease-exit);
+}
+
+@starting-style {
+  .menu[data-state="open"] {
+    opacity: 0;
+    scale: var(--pada-motion-scale-enter);
+  }
+}
+
+/* Child elements */
+.menu-item {
+  /* Component tokens */
+  --pada-menu-item-fg: var(--pada-color-fg);
+  --pada-menu-item-bg-highlighted: var(--pada-color-neutral-subtle-hover);
+  --pada-menu-item-fg-highlighted: var(--pada-color-fg);
+
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--pada-space-2);
+  min-height: var(--pada-control-height-sm);
+  padding: var(--pada-space-1) var(--pada-space-2);
+  border-radius: var(--pada-radius-md);
+  color: var(--pada-menu-item-fg);
+  cursor: default;
+  user-select: none;
+  outline: none;
+  transition: background-color var(--pada-duration-instant) var(--pada-ease-standard);
+}
+
+.menu-item[data-tone="danger"] {
+  --pada-menu-item-fg: var(--pada-color-danger-fg);
+  --pada-menu-item-bg-highlighted: var(--pada-color-danger-subtle);
+  --pada-menu-item-fg-highlighted: var(--pada-color-danger-fg);
+}
+
+.menu-item[data-highlighted],
+.menu-item[data-state="open"] {
+  background-color: var(--pada-menu-item-bg-highlighted);
+  color: var(--pada-menu-item-fg-highlighted);
+}
+
+.menu-item[data-disabled] {
+  color: var(--pada-color-fg-disabled);
+  pointer-events: none;
+}
+
+.menu-item-icon {
+  flex-shrink: 0;
+  color: var(--pada-color-fg-muted);
+}
+
+.menu-item-label {
+  flex: 1;
+  min-width: 0;
+}
+
+.menu-item-indicator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--pada-icon-size-md);
+  height: var(--pada-icon-size-md);
+  color: var(--pada-color-accent-fg);
+}
+
+.menu-radio-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--pada-radius-full);
+  background-color: currentColor;
+}
+
+.menu-radio-dot[data-state="checked"] {
+  animation: menu-pop var(--pada-duration-normal) var(--pada-ease-spring);
+}
+
+.menu-item-chevron {
+  flex-shrink: 0;
+  margin-inline-start: auto;
+  color: var(--pada-color-fg-muted);
+}
+
+.menu-shortcut {
+  margin-inline-start: auto;
+  padding-inline-start: var(--pada-space-4);
+  font-family: var(--pada-font-sans);
+  font-size: var(--pada-font-size-xs);
+  letter-spacing: var(--pada-letter-spacing-xl);
+  color: var(--pada-color-fg-subtle);
+}
+
+.menu-label {
+  padding: var(--pada-space-1-5) var(--pada-space-2) var(--pada-space-1);
+  font-size: var(--pada-font-size-sm);
+  font-weight: var(--pada-font-weight-semibold);
+  color: var(--pada-color-fg-muted);
+}
+
+.menu-separator {
+  height: var(--pada-border-width-thin);
+  margin: var(--pada-space-1) calc(-1 * var(--pada-menu-pad));
+  background-color: var(--pada-color-border-subtle);
+}
+
+@keyframes menu-pop {
+  from {
+    scale: 0;
+  }
+}

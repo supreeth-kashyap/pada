@@ -161,6 +161,7 @@ function collectProps(checker, typeNode, componentName) {
     addMembers(declaration.members);
     for (const clause of declaration.heritageClauses ?? []) {
       for (const base of clause.types) {
+        if (expandUtility(base.expression.getText(), base.typeArguments)) continue;
         const local = base.typeArguments ? undefined : localTypeDeclaration(checker, base.expression);
         if (local) visitDeclaration(local);
         else inherited.push(collapse(base.getText()));
@@ -168,7 +169,27 @@ function collectProps(checker, typeNode, componentName) {
     }
   };
 
+  const literalKeys = (node) =>
+    (ts.isUnionTypeNode(node) ? node.types : [node])
+      .filter((type) => ts.isLiteralTypeNode(type) && ts.isStringLiteral(type.literal))
+      .map((type) => type.literal.text);
+
+  // Omit<LocalProps, 'a' | 'b'> and Pick<LocalProps, 'a'>: expand the local type, then filter.
+  // Returns false for anything else so the caller falls back to listing it as inherited.
+  const expandUtility = (utility, typeArguments) => {
+    if ((utility !== 'Omit' && utility !== 'Pick') || typeArguments?.length !== 2) return false;
+    const inner = collectProps(checker, typeArguments[0], componentName);
+    const keys = new Set(literalKeys(typeArguments[1]));
+    const keep = (name) => (utility === 'Omit' ? !keys.has(name) : keys.has(name));
+    for (const prop of inner.props) if (keep(prop.name) && !props.has(prop.name)) props.set(prop.name, prop);
+    if (utility === 'Omit') {
+      inherited.push(...inner.inherited.map((base) => `Omit<${base}, ${collapse(typeArguments[1].getText())}>`));
+    }
+    return true;
+  };
+
   const visit = (node) => {
+    if (ts.isTypeReferenceNode(node) && expandUtility(node.typeName.getText(), node.typeArguments)) return;
     if (ts.isParenthesizedTypeNode(node)) {
       visit(node.type);
     } else if (ts.isTypeLiteralNode(node)) {
@@ -195,7 +216,51 @@ function propsTypeName(typeNode) {
     : null;
 }
 
-/** Builds the manifest object for every component exported from `src/index.ts`. */
+function componentEntry(checker, name, exportName, declaration) {
+  const fn = renderFunction(declaration);
+  if (!fn) return undefined;
+  const typeNode = propsTypeNode(declaration, fn);
+  const { props, inherited } = collectProps(checker, typeNode, name);
+  const defaults = destructuredDefaults(fn);
+  const docHost = ts.isVariableDeclaration(declaration) ? declaration.parent.parent : declaration;
+  return {
+    name,
+    importPath: PACKAGE_NAME,
+    import: `import { ${exportName} } from '${PACKAGE_NAME}';`,
+    source: path.relative(rootDir, declaration.getSourceFile().fileName).split(path.sep).join('/'),
+    description: docText(docHost),
+    propsType: propsTypeName(typeNode),
+    extends: inherited,
+    props: props.map((prop) => ({
+      name: prop.name,
+      type: prop.type,
+      required: prop.required,
+      default: defaults.get(prop.name) ?? null,
+      description: prop.description,
+    })),
+  };
+}
+
+// The function a compound part points at: `Root: DialogRoot` in an object literal, or
+// `Popover.Root = PopoverRoot` assigned onto a component function.
+function partDeclaration(checker, propertySymbol) {
+  const declaration = propertySymbol.valueDeclaration;
+  if (!declaration) return undefined;
+  let valueSymbol;
+  if (ts.isPropertyAssignment(declaration)) {
+    valueSymbol = checker.getSymbolAtLocation(declaration.initializer);
+  } else if (ts.isShorthandPropertyAssignment(declaration)) {
+    valueSymbol = checker.getShorthandAssignmentValueSymbol(declaration);
+  } else if (ts.isPropertyAccessExpression(declaration) && ts.isBinaryExpression(declaration.parent)) {
+    valueSymbol = checker.getSymbolAtLocation(declaration.parent.right);
+  }
+  return valueSymbol ? resolveExport(checker, valueSymbol).valueDeclaration : undefined;
+}
+
+/**
+ * Builds the manifest object for every component exported from `src/index.ts`, including the
+ * parts of compound components (`Dialog.Content`, `Popover.Trigger`, …) as `Name.Part` entries.
+ */
 export function buildManifest() {
   const { checker, exports } = createEntryProgram();
   const components = [];
@@ -203,32 +268,20 @@ export function buildManifest() {
   for (const exported of exports) {
     const name = exported.getName();
     if (!/^[A-Z]/.test(name)) continue;
-    const declaration = resolveExport(checker, exported).valueDeclaration;
+    const target = resolveExport(checker, exported);
+    const declaration = target.valueDeclaration;
     if (!declaration) continue;
-    const fn = renderFunction(declaration);
-    if (!fn) continue;
 
-    const typeNode = propsTypeNode(declaration, fn);
-    const { props, inherited } = collectProps(checker, typeNode, name);
-    const defaults = destructuredDefaults(fn);
-    const docHost = ts.isVariableDeclaration(declaration) ? declaration.parent.parent : declaration;
+    const entry = componentEntry(checker, name, name, declaration);
+    if (entry) components.push(entry);
 
-    components.push({
-      name,
-      importPath: PACKAGE_NAME,
-      import: `import { ${name} } from '${PACKAGE_NAME}';`,
-      source: path.relative(rootDir, declaration.getSourceFile().fileName).split(path.sep).join('/'),
-      description: docText(docHost),
-      propsType: propsTypeName(typeNode),
-      extends: inherited,
-      props: props.map((prop) => ({
-        name: prop.name,
-        type: prop.type,
-        required: prop.required,
-        default: defaults.get(prop.name) ?? null,
-        description: prop.description,
-      })),
-    });
+    const type = checker.getTypeOfSymbolAtLocation(target, declaration);
+    for (const part of checker.getPropertiesOfType(type)) {
+      if (!/^[A-Z]/.test(part.getName())) continue;
+      const partDecl = partDeclaration(checker, part);
+      const partEntry = partDecl && componentEntry(checker, `${name}.${part.getName()}`, name, partDecl);
+      if (partEntry) components.push(partEntry);
+    }
   }
 
   components.sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));

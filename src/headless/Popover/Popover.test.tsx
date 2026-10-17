@@ -116,3 +116,21 @@ describe('Popover', () => {
     expect(screen.getByRole('dialog', { name: 'Outer' })).toBeInTheDocument();
   });
 });
+
+describe('Popover under StrictMode', () => {
+  it('keeps focus inside after effects run twice', async () => {
+    const { StrictMode } = await import('react');
+    const user = userEvent.setup();
+    render(
+      <StrictMode>
+        <Example />
+      </StrictMode>,
+    );
+    await user.click(screen.getByRole('button', { name: 'Filters' }));
+    await tick();
+    expect(screen.getByRole('textbox', { name: 'Status' })).toHaveFocus();
+    await user.keyboard('{Escape}');
+    await tick();
+    expect(screen.getByRole('button', { name: 'Filters' })).toHaveFocus();
+  });
+});
