@@ -27,6 +27,6 @@ describe('Breadcrumbs', () => {
     expect(screen.getAllByRole('listitem')).toHaveLength(4);
     expect(screen.queryByRole('link', { name: 'Projects' })).toBeNull();
     await user.click(screen.getByRole('button', { name: 'Show all breadcrumbs' }));
-    expect(screen.getByRole('link', { name: 'Projects' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Projects' })).toHaveFocus();
   });
 });

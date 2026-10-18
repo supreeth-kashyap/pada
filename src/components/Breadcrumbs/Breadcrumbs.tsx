@@ -1,4 +1,4 @@
-import { useState, type ComponentPropsWithRef, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type ComponentPropsWithRef, type ReactNode } from 'react';
 import { Icon } from '../Icon';
 import './Breadcrumbs.css';
 
@@ -27,6 +27,16 @@ export interface BreadcrumbsProps extends Omit<ComponentPropsWithRef<'nav'>, 'ch
 /** Where the current page sits in the hierarchy (WAI-ARIA APG Breadcrumb). */
 export function Breadcrumbs({ items, maxItems, renderLink, label = 'Breadcrumb', className, ...props }: BreadcrumbsProps) {
   const [expanded, setExpanded] = useState(false);
+  const listRef = useRef<HTMLOListElement>(null);
+  const focusRevealed = useRef(false);
+
+  // The expand button disappears when pressed; move focus to the first item it revealed so
+  // keyboard users don't lose their place.
+  useEffect(() => {
+    if (!expanded || !focusRevealed.current) return;
+    focusRevealed.current = false;
+    listRef.current?.querySelector<HTMLElement>(':scope > li:nth-child(n + 2) :is(a, button, [tabindex])')?.focus();
+  }, [expanded]);
   const collapse = !expanded && maxItems !== undefined && maxItems >= 2 && items.length > maxItems;
   const visible: (BreadcrumbItem | 'ellipsis')[] = collapse
     ? [items[0], 'ellipsis', ...items.slice(items.length - (maxItems - 1))]
@@ -34,13 +44,21 @@ export function Breadcrumbs({ items, maxItems, renderLink, label = 'Breadcrumb',
 
   return (
     <nav aria-label={label} {...props} className={['breadcrumbs', className].filter(Boolean).join(' ')}>
-      <ol className="breadcrumbs-list">
+      <ol ref={listRef} className="breadcrumbs-list">
         {visible.map((item, index) => {
           const isLast = index === visible.length - 1;
           return (
             <li key={index} className="breadcrumbs-item">
               {item === 'ellipsis' ? (
-                <button type="button" className="breadcrumbs-ellipsis" aria-label="Show all breadcrumbs" onClick={() => setExpanded(true)}>
+                <button
+                  type="button"
+                  className="breadcrumbs-ellipsis"
+                  aria-label="Show all breadcrumbs"
+                  onClick={() => {
+                    focusRevealed.current = true;
+                    setExpanded(true);
+                  }}
+                >
                   …
                 </button>
               ) : isLast ? (

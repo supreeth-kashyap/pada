@@ -6,6 +6,8 @@
 - Moved the `body` and `p` rules out of `dist/tokens.css` into a new optional `pada-ds/base.css` export, so importing the tokens no longer overrides an app's own styles.
 - Added a component API manifest for AI coding agents. `npm run build` now reads every exported component's props from the TypeScript source and writes `dist/manifest.json` (exported as `pada-ds/manifest.json`), `llms.txt` and `llms-full.txt`. Both llms files ship in the package and are committed at the repo root. `npm test` fails if they are stale or if an exported component is missing from the manifest.
 
+- **Demo pages for wave 1.** Every wave 1 component now has a page with Purpose, Design, Developer and Accessibility sections: Alert, Alert Dialog, Autocomplete, Avatar, Badge, Breadcrumbs, Command Palette, Dialog, Drawer, Dropdown Menu, Empty State, Field, Icon Button, Kbd, Link, Pagination, Separator, Skeleton, Spinner, Stack, Toast, and Toggle with Toggle Group. A new Foundation → Theme page shows nested `ThemeProvider`s and lists every theme axis.
+- **Fixed:** expanding a collapsed `Breadcrumbs` trail no longer drops keyboard focus. Focus moves to the first link it reveals.
 - **Brand (phase 7).**
   - New `PadaLogo` draws the "Twin Soles" mark (two soles standing on a shared ground line; *pāda* is Sanskrit for foot) as inline SVG:
     - Variants: `lockup` (mark and the geometric "pada" wordmark), `mark` and `wordmark`.
