@@ -52,6 +52,7 @@ const COMPONENT_ENTRIES: NavEntry[] = [
   { kind: 'components', slug: 'combo-box', label: 'Combo Box' },
   { kind: 'components', slug: 'command-palette', label: 'Command Palette' },
   { kind: 'components', slug: 'context-menu', label: 'Context Menu' },
+  { kind: 'components', slug: 'data-table', label: 'Data Table' },
   { kind: 'components', slug: 'date-picker', label: 'Date Picker' },
   { kind: 'components', slug: 'dialog', label: 'Dialog' },
   { kind: 'components', slug: 'drawer', label: 'Drawer' },

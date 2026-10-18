@@ -1,0 +1,51 @@
+/* Root: a Table with a toolbar for search, selection and column visibility. */
+.data-table {
+  /* Component tokens */
+  --pada-data-table-toolbar-gap: var(--pada-space-2);
+  --pada-data-table-search-width: 240px;
+  --pada-data-table-empty-pad: var(--pada-space-8);
+
+  width: 100%;
+  font-family: var(--pada-font-sans);
+}
+
+/* Child elements */
+.data-table-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--pada-data-table-toolbar-gap);
+  min-height: var(--pada-control-height-md);
+}
+
+.data-table-search {
+  width: min(100%, var(--pada-data-table-search-width));
+}
+
+.data-table-selection {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--pada-space-1);
+  color: var(--pada-color-fg-muted);
+  font-size: var(--pada-font-size-sm);
+  font-variant-numeric: tabular-nums;
+}
+
+.data-table-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--pada-data-table-toolbar-gap);
+  margin-inline-start: auto;
+}
+
+.data-table-select {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.data-table-empty {
+  padding: var(--pada-data-table-empty-pad);
+  color: var(--pada-color-fg-muted);
+  text-align: center;
+}

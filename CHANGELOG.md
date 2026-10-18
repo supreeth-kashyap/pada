@@ -6,6 +6,14 @@
 - Moved the `body` and `p` rules out of `dist/tokens.css` into a new optional `pada-ds/base.css` export, so importing the tokens no longer overrides an app's own styles.
 - Added a component API manifest for AI coding agents. `npm run build` now reads every exported component's props from the TypeScript source and writes `dist/manifest.json` (exported as `pada-ds/manifest.json`), `llms.txt` and `llms-full.txt`. Both llms files ship in the package and are committed at the repo root. `npm test` fails if they are stale or if an exported component is missing from the manifest.
 
+- **New: `DataTable`.** Turns `data` and `columns` into a `Table` people can use:
+  - **Sorting.** Header buttons with `aria-sort` cycle ascending, descending and off. Numbers, dates and text sort naturally, and blanks stay last.
+  - **Search.** A labelled search over searchable columns; the result count is announced.
+  - **Selection.** Row checkboxes are named by the row-header column. The select-all box goes "mixed" when only some rows on the page are selected.
+  - **Toolbar.** Shows the selected count with Clear, `actions` (static, or a function of the selected rows) and a Columns menu that stays open while toggling.
+  - **Paging.** The existing `TablePagination` footer.
+  - **State.** Every piece is controlled or uncontrolled, and `manual` with `rowCount` supports server-side data.
+  - **Headless.** The logic is `useDataTable` in `pada-ds/headless`.
 - **New: `ColorPicker`.** Picks colours in OKLCH:
   - **Controls.** An area for chroma (left to right) and lightness (bottom to top) at the chosen hue, drawn on a canvas with out-of-sRGB colours shown at their nearest displayable colour; a hue slider; a hex field that accepts typed values on Enter or blur; the OKLCH reading; and optional `swatches`.
   - **Accessibility.** The area is a keyboard-operable 2D slider: arrows, Shift for bigger steps, PageUp/PageDown for lightness, Home/End for grey or full chroma. Its value text reads lightness and chroma. Swatches are toggle buttons.

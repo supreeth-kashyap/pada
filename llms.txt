@@ -97,6 +97,7 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - ContextMenu.Trigger: asChild?, disabled?; extends ComponentPropsWithRef<'div'>
 - ContextMenuRoot: children?, onOpenChange?, dir?
 - ContextMenuTrigger: asChild?, disabled?; extends ComponentPropsWithRef<'div'>
+- DataTable: no props; extends DataTableProps<T>
 - DatePickerDropdown: mode?, selection?, isRange?, value?, onChange?, minDate?, maxDate?, isDateUnavailable?, weekStartsOn?, locale?
 - Dialog.Body: no props; extends ComponentPropsWithRef<'div'>
 - Dialog.Close: asChild?; extends ComponentPropsWithRef<'button'>

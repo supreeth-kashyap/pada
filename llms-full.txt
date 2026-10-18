@@ -1254,6 +1254,22 @@ import { ContextMenuTrigger } from 'pada-ds';
 <ContextMenuTrigger />
 ```
 
+### DataTable
+
+`import { DataTable } from 'pada-ds';`
+
+A data-driven table: sortable headers, search, row selection, column visibility and paging, on top of `Table`. Every piece of state can be controlled, or handled by a server with `manual`. For the logic without the markup, use `useDataTable` from `pada-ds/headless`.
+
+No props.
+
+Also accepts the props of `DataTableProps<T>`.
+
+```tsx
+import { DataTable } from 'pada-ds';
+
+<DataTable />
+```
+
 ### DatePickerDropdown
 
 `import { DatePickerDropdown } from 'pada-ds';`

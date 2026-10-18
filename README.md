@@ -61,7 +61,7 @@ import { Dialog } from 'pada-ds/headless';
 .my-dialog[data-state="open"] { animation: fade-in var(--pada-duration-slow) var(--pada-ease-emphasized); }
 ```
 
-Available parts: `Dialog` (plus `useDialog()` for custom parts), `Popover`, `Tooltip` (with `Tooltip.Provider` for shared delays), `DropdownMenu` (items, checkbox and radio items, groups, labels, separators, submenus), `Tabs`, `Accordion`, `Collapsible`, `Field`, `Toggle` / `ToggleGroup`, `Combobox` (single or multiple, with a pluggable filter), `NumberInput`, `Calendar`, `Tree`, `HoverCard`, `ContextMenu`, `Menubar`, `Slider` (any number of thumbs), `PinInput` and `Resizable` (window splitter). Each follows the matching WAI-ARIA Authoring Practices pattern. Any part that renders an element accepts `asChild`, which merges its behaviour onto your own element (a router link, a custom button) instead of rendering a new one.
+Available parts: `Dialog` (plus `useDialog()` for custom parts), `Popover`, `Tooltip` (with `Tooltip.Provider` for shared delays), `DropdownMenu` (items, checkbox and radio items, groups, labels, separators, submenus), `Tabs`, `Accordion`, `Collapsible`, `Field`, `Toggle` / `ToggleGroup`, `Combobox` (single or multiple, with a pluggable filter), `NumberInput`, `Calendar`, `Tree`, `HoverCard`, `ContextMenu`, `Menubar`, `Slider` (any number of thumbs), `PinInput` and `Resizable` (window splitter), plus the `useDataTable` hook (sorting, search, selection, column visibility and paging state). Each follows the matching WAI-ARIA Authoring Practices pattern. Any part that renders an element accepts `asChild`, which merges its behaviour onto your own element (a router link, a custom button) instead of rendering a new one.
 
 Portalled parts render into `document.body`, or into the element provided by `PortalContainerContext` (`ThemeProvider` provides one, so overlays keep a subtree's theme).
 
@@ -155,6 +155,7 @@ This design system includes the following components:
 - **ColorPicker**: OKLCH colour picker with a chroma and lightness area, hue slider, hex field and swatches.
 - **ComboBox**: Filterable list dropdown with options.
 - **Container**: Centred page width with responsive gutters.
+- **DataTable**: Records as a table with sorting, search, row selection, column visibility and paging; `useDataTable` in `pada-ds/headless` for your own markup.
 - **DatePicker**: Select dates via calendar UI.
 - **Dialog**: Composable modal or non-modal dialog (`Dialog.Root`, `Dialog.Content`, `Dialog.Title`, …).
 - **Drawer**: Dialog panel that slides in from any edge.
