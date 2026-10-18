@@ -693,3 +693,211 @@ export function ContextMenuTrigger({
     />
   );
 }
+
+// ── Menubar ────────────────────────────────────────────────────────────────────────────────
+interface MenubarContextValue {
+  /** The open menu's value, or '' when every menu is closed. */
+  value: string;
+  setValue: (value: string) => void;
+  /** The trigger that takes Tab (roving focus). */
+  tabStop: string;
+  setTabStop: (value: string) => void;
+  dir: 'ltr' | 'rtl';
+  loop: boolean;
+  rootRef: RefObject<HTMLDivElement | null>;
+  /** Each menu's "what to focus when the content mounts" signal, by value. */
+  focusTargets: RefObject<Map<string, RefObject<FocusTarget>>>;
+}
+
+const [MenubarProvider, useMenubarContext] = createPartContext<MenubarContextValue>('Menubar.Root');
+const [MenubarMenuValueProvider, useMenubarMenuValue] = createPartContext<string>('Menubar.Menu');
+
+const getMenubarTriggers = (root: HTMLElement | null) =>
+  root ? Array.from(root.querySelectorAll<HTMLElement>('[data-pada-menubar-trigger]')).filter((trigger) => trigger.closest('[role="menubar"]') === root) : [];
+
+/** Opens the menu after (`step` 1) or before (-1) `from`, focusing its first item. */
+function openAdjacentMenu(menubar: MenubarContextValue, from: string, step: 1 | -1) {
+  const triggers = getMenubarTriggers(menubar.rootRef.current).filter((trigger) => !trigger.hasAttribute('data-disabled'));
+  const index = triggers.findIndex((trigger) => trigger.dataset.value === from);
+  if (index === -1) return;
+  let next = index + step;
+  if (next < 0 || next >= triggers.length) {
+    if (!menubar.loop) return;
+    next = (next + triggers.length) % triggers.length;
+  }
+  const value = triggers[next].dataset.value ?? '';
+  const target = menubar.focusTargets.current.get(value);
+  if (target) target.current = 'first';
+  menubar.setTabStop(value);
+  menubar.setValue(value);
+}
+
+export interface MenubarRootProps extends Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'dir'> {
+  /** Controlled open menu (its `value`), or '' for none. */
+  value?: string;
+  /** Initially open menu when uncontrolled. @default '' */
+  defaultValue?: string;
+  /** Called when a menu opens (its value) or every menu closes (''). */
+  onValueChange?: (value: string) => void;
+  /** Wrap focus from the last menu to the first and back. @default true */
+  loop?: boolean;
+  /** Reading direction, for arrow keys and submenu placement. @default 'ltr' */
+  dir?: 'ltr' | 'rtl';
+}
+
+/**
+ * A horizontal bar of menus, as in a desktop application (WAI-ARIA APG Menubar). One Tab stop;
+ * arrow keys move between menus, and once a menu is open, between open menus.
+ */
+export function MenubarRoot({ value: valueProp, defaultValue = '', onValueChange, loop = true, dir = 'ltr', ref, ...props }: MenubarRootProps) {
+  const [value, setValue] = useControllableState({ prop: valueProp, defaultProp: defaultValue, onChange: onValueChange });
+  const [tabStop, setTabStop] = useState('');
+  const rootRef = useRef<HTMLDivElement>(null);
+  const composedRef = useComposedRefs(ref, rootRef);
+  const focusTargets = useRef(new Map<string, RefObject<FocusTarget>>());
+
+  // Until a trigger has been focused, the first enabled one takes Tab.
+  useLayoutEffect(() => {
+    if (tabStop) return;
+    const first = getMenubarTriggers(rootRef.current).find((trigger) => !trigger.hasAttribute('data-disabled'));
+    if (first?.dataset.value) setTabStop(first.dataset.value);
+  }, [tabStop]);
+
+  const context = useMemo(() => ({ value, setValue, tabStop, setTabStop, dir, loop, rootRef, focusTargets }), [value, setValue, tabStop, dir, loop]);
+  return (
+    <MenubarProvider value={context}>
+      <div role="menubar" aria-orientation="horizontal" dir={dir} {...props} ref={composedRef} />
+    </MenubarProvider>
+  );
+}
+
+export interface MenubarMenuProps {
+  children?: ReactNode;
+  /** Identifies the menu for `Menubar.Root`'s `value`. Generated when omitted. */
+  value?: string;
+}
+
+/** One menu in the bar: a Trigger and its Content. Inside it, use the DropdownMenu item parts. */
+export function MenubarMenu({ children, value: valueProp }: MenubarMenuProps) {
+  const menubar = useMenubarContext('Menubar.Menu');
+  const generated = useId();
+  const value = valueProp ?? generated;
+  const open = menubar.value === value;
+  const { setValue } = menubar;
+  const setOpen = useCallback((next: boolean) => setValue(next ? value : ''), [setValue, value]);
+  const state = useMenuState(open, false, undefined);
+  const { focusOnOpen } = state;
+
+  useLayoutEffect(() => {
+    const targets = menubar.focusTargets.current;
+    targets.set(value, focusOnOpen);
+    return () => {
+      targets.delete(value);
+    };
+  }, [menubar.focusTargets, value, focusOnOpen]);
+
+  const closeAll = useCallback(() => setOpen(false), [setOpen]);
+  const context = useMemo(
+    () => ({ ...state, open, setOpen, closeAll, isSub: false, dir: menubar.dir, anchor: null }),
+    [state.trigger, open, setOpen, closeAll, menubar.dir], // eslint-disable-line react-hooks/exhaustive-deps
+  );
+  return (
+    <MenubarMenuValueProvider value={value}>
+      <MenuProvider value={context}>{children}</MenuProvider>
+    </MenubarMenuValueProvider>
+  );
+}
+
+export type MenubarTriggerProps = ComponentPropsWithRef<'button'>;
+
+/**
+ * The menu's name in the bar: `role="menuitem"` with a popup. Click, Enter, Space or ArrowDown
+ * opens it; ArrowLeft and ArrowRight move along the bar; hovering another trigger while a menu
+ * is open switches to that menu.
+ */
+export function MenubarTrigger({ ref, onClick, onKeyDown, onFocus, onPointerEnter, disabled, ...props }: MenubarTriggerProps) {
+  const menubar = useMenubarContext('Menubar.Trigger');
+  const context = useMenuContext('Menubar.Trigger');
+  const value = useMenubarMenuValue('Menubar.Trigger');
+  const composedRef = useComposedRefs(ref, context.setTrigger);
+  const openWith = (target: FocusTarget) => {
+    context.focusOnOpen.current = target;
+    context.setOpen(true);
+  };
+  const moveFocus = (event: ReactKeyboardEvent<HTMLButtonElement>) => {
+    const triggers = getMenubarTriggers(menubar.rootRef.current);
+    const descriptors = triggers.map((trigger) => ({ label: trigger.textContent ?? '', disabled: trigger.hasAttribute('data-disabled') }));
+    const step = keyToNavigation(event.key, 'horizontal', menubar.dir);
+    if (!step) return false;
+    const next = findNextIndex(descriptors, triggers.indexOf(event.currentTarget), step, { loop: menubar.loop });
+    if (next !== -1) focusElement(triggers[next]);
+    return true;
+  };
+  return (
+    <button
+      type="button"
+      role="menuitem"
+      id={context.triggerId}
+      aria-haspopup="menu"
+      aria-expanded={context.open}
+      aria-controls={context.open ? context.contentId : undefined}
+      tabIndex={menubar.tabStop === value ? 0 : -1}
+      data-value={value}
+      data-state={openState(context.open)}
+      data-disabled={dataFlag(disabled)}
+      data-pada-menubar-trigger=""
+      disabled={disabled}
+      {...props}
+      ref={composedRef}
+      onFocus={composeEventHandlers(onFocus, () => menubar.setTabStop(value))}
+      onClick={composeEventHandlers(onClick, (event) => {
+        if (event.detail === 0) return;
+        if (context.open) context.setOpen(false);
+        else openWith('content');
+      })}
+      onPointerEnter={composeEventHandlers(onPointerEnter, (event: ReactPointerEvent<HTMLButtonElement>) => {
+        // Moving across the bar while a menu is open switches menus, as in desktop apps.
+        if (disabled || !menubar.value || context.open) return;
+        focusElement(event.currentTarget);
+        openWith('content');
+      })}
+      onKeyDown={composeEventHandlers(onKeyDown, (event) => {
+        if (['Enter', ' ', 'ArrowDown'].includes(event.key)) {
+          event.preventDefault();
+          openWith('first');
+        } else if (event.key === 'ArrowUp') {
+          event.preventDefault();
+          openWith('last');
+        } else if (moveFocus(event)) {
+          event.preventDefault();
+        }
+      })}
+    />
+  );
+}
+
+export type MenubarContentProps = DropdownMenuContentProps;
+
+/**
+ * The open menu. Besides the menu keys, ArrowRight and ArrowLeft open the next or previous
+ * menu in the bar (unless they open or close a submenu).
+ */
+export function MenubarContent({ onKeyDown, ...props }: MenubarContentProps) {
+  const menubar = useMenubarContext('Menubar.Content');
+  const value = useMenubarMenuValue('Menubar.Content');
+  const next = menubar.dir === 'rtl' ? 'ArrowLeft' : 'ArrowRight';
+  const previous = next === 'ArrowRight' ? 'ArrowLeft' : 'ArrowRight';
+  return (
+    <DropdownMenuContent
+      {...props}
+      onKeyDown={composeEventHandlers(onKeyDown, (event: ReactKeyboardEvent<HTMLDivElement>) => {
+        if (event.key !== next && event.key !== previous) return;
+        // Submenu triggers and submenu content handle these keys first and prevent them.
+        const inSubmenu = (event.target as HTMLElement).closest('[role="menu"]') !== event.currentTarget;
+        if (event.key === previous && inSubmenu) return;
+        event.preventDefault();
+        openAdjacentMenu(menubar, value, event.key === next ? 1 : -1);
+      })}
+    />
+  );
+}

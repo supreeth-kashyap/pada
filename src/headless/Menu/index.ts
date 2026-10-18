@@ -16,6 +16,10 @@ import {
   DropdownMenuSub,
   DropdownMenuSubTrigger,
   DropdownMenuSubContent,
+  MenubarRoot,
+  MenubarMenu,
+  MenubarTrigger,
+  MenubarContent,
 } from './Menu';
 
 export * from './Menu';
@@ -81,4 +85,28 @@ export const ContextMenu = {
   ...DropdownMenu,
   Root: ContextMenuRoot,
   Trigger: ContextMenuTrigger,
+};
+
+/**
+ * Headless menubar (WAI-ARIA APG Menubar): a row of menus with one Tab stop. Use the
+ * DropdownMenu item parts inside each menu's content.
+ *
+ * ```tsx
+ * <Menubar.Root aria-label="Editor">
+ *   <Menubar.Menu value="file">
+ *     <Menubar.Trigger>File</Menubar.Trigger>
+ *     <DropdownMenu.Portal>
+ *       <Menubar.Content>
+ *         <DropdownMenu.Item onSelect={newFile}>New file</DropdownMenu.Item>
+ *       </Menubar.Content>
+ *     </DropdownMenu.Portal>
+ *   </Menubar.Menu>
+ * </Menubar.Root>
+ * ```
+ */
+export const Menubar = {
+  Root: MenubarRoot,
+  Menu: MenubarMenu,
+  Trigger: MenubarTrigger,
+  Content: MenubarContent,
 };

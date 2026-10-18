@@ -6,6 +6,12 @@
 - Moved the `body` and `p` rules out of `dist/tokens.css` into a new optional `pada-ds/base.css` export, so importing the tokens no longer overrides an app's own styles.
 - Added a component API manifest for AI coding agents. `npm run build` now reads every exported component's props from the TypeScript source and writes `dist/manifest.json` (exported as `pada-ds/manifest.json`), `llms.txt` and `llms-full.txt`. Both llms files ship in the package and are committed at the repo root. `npm test` fails if they are stale or if an exported component is missing from the manifest.
 
+- **New: `Menubar`.** A desktop-style row of menus (`Menubar.Root`, `Menu`, `Trigger`, `Content`, plus every DropdownMenu item part: items with icons and shortcuts, checkbox and radio items, labels, separators and submenus). It follows the WAI-ARIA menubar pattern:
+  - **Bar.** One Tab stop. Arrow keys move along the bar (wrapping), and Home and End jump to the ends.
+  - **Opening.** Enter, Space or ArrowDown opens a menu on its first item; ArrowUp opens it on its last.
+  - **Between menus.** Inside an open menu, ArrowRight and ArrowLeft open the neighbouring menu, unless a submenu takes the key. Hovering another trigger while a menu is open switches to it.
+  - **Controlled value.** The open menu is controllable with `value` / `onValueChange`.
+  - **Headless.** The parts are in `pada-ds/headless`, and the styled bar is restyled through `--pada-menubar-*`.
 - **New: `Sheet`.** A bottom sheet for mobile-first flows (`Sheet.Root`, `Trigger`, `Content`, and the Dialog parts).
   - **Dialog behaviour.** It is a modal dialog underneath, with focus trap, Escape, backdrop and focus return.
   - **Size.** It fits its content, or rests at `snapPoints` (fractions of the viewport height) with `snap` / `defaultSnap` / `onSnapChange`. On wide screens it stays centred and capped at 640px.

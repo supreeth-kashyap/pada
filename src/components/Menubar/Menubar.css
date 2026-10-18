@@ -1,0 +1,57 @@
+/* Root */
+.menubar {
+  /* Component tokens */
+  --pada-menubar-bg: var(--pada-color-surface);
+  --pada-menubar-border: var(--pada-color-border);
+  --pada-menubar-radius: var(--pada-radius-md);
+  --pada-menubar-pad: var(--pada-space-1);
+  --pada-menubar-gap: var(--pada-space-1);
+
+  display: inline-flex;
+  align-items: center;
+  gap: var(--pada-menubar-gap);
+  padding: var(--pada-menubar-pad);
+  border: var(--pada-border-width-thin) solid var(--pada-menubar-border);
+  border-radius: var(--pada-menubar-radius);
+  background: var(--pada-menubar-bg);
+  font-family: var(--pada-font-sans);
+}
+
+/* Child elements */
+.menubar-trigger {
+  --pada-menubar-trigger-bg: transparent;
+  --pada-menubar-trigger-fg: var(--pada-color-fg);
+
+  display: inline-flex;
+  align-items: center;
+  height: var(--pada-control-height-sm);
+  padding-inline: var(--pada-space-3);
+  border: none;
+  border-radius: calc(var(--pada-menubar-radius) - var(--pada-menubar-pad));
+  background: var(--pada-menubar-trigger-bg);
+  color: var(--pada-menubar-trigger-fg);
+  font: inherit;
+  font-size: var(--pada-font-size-sm);
+  font-weight: var(--pada-font-weight-medium);
+  cursor: default;
+  outline: none;
+  transition: background-color var(--pada-duration-fast) var(--pada-ease-standard);
+}
+
+/* States via attributes */
+.menubar-trigger:hover {
+  --pada-menubar-trigger-bg: var(--pada-color-neutral-subtle);
+}
+
+.menubar-trigger[data-state="open"] {
+  --pada-menubar-trigger-bg: var(--pada-color-neutral-subtle-hover);
+}
+
+.menubar-trigger:focus-visible {
+  box-shadow: var(--pada-shadow-focus);
+}
+
+.menubar-trigger[data-disabled] {
+  --pada-menubar-trigger-bg: transparent;
+  --pada-menubar-trigger-fg: var(--pada-color-fg-disabled);
+}

@@ -2508,6 +2508,298 @@ import { Logo } from 'pada-ds';
 <Logo name="..." />
 ```
 
+### Menubar.CheckboxItem
+
+`import { Menubar } from 'pada-ds';`
+
+A toggle with a check mark.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| checked | `boolean \| 'indeterminate'` | no | - | Checked state. `'indeterminate'` for mixed. |
+| onCheckedChange | `(checked: boolean) => void` | no | - | Called with the new checked state. |
+| disabled | `boolean` | no | - | - |
+| onSelect | `(event: MenuSelectEvent) => void` | no | - | - |
+| textValue | `string` | no | - | - |
+| shortcut | `string` | no | - | Keyboard shortcut hint shown after the label, e.g. "⌘D". Display only. |
+
+Also accepts the props of `Omit<Omit<ComponentPropsWithRef<'div'>, 'onSelect'>, 'asChild'>`.
+
+```tsx
+import { Menubar } from 'pada-ds';
+
+<Menubar.CheckboxItem />
+```
+
+### Menubar.Content
+
+`import { Menubar } from 'pada-ds';`
+
+The open menu, rendered in a portal under its trigger. Use the DropdownMenu item parts inside.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| container | `Element \| null` | no | - | Element to portal into. Defaults to `document.body`. |
+| forceMount | `boolean` | no | - | Keep mounted while closed, for animation libraries that manage presence themselves. |
+| loop | `boolean` | no | - | Wrap focus from the last item to the first and back. |
+| onCloseAutoFocus | `(event: AutoFocusEvent) => void` | no | - | Called when focus returns to the trigger on close. Prevent it to focus something else. |
+| onEscapeKeyDown | `(event: DismissEvent<KeyboardEvent>) => void` | no | - | Called on Escape. Prevent it to keep the menu open. |
+| onPointerDownOutside | `(event: DismissEvent<PointerEvent>) => void` | no | - | Called on a pointer-down outside. Prevent it to keep the menu open. |
+| onInteractOutside | `(event: DismissEvent<PointerEvent \| FocusEvent>) => void` | no | - | Called on any interaction outside. Prevent it to keep the menu open. |
+| side | `Side` | no | - | Preferred side of the anchor. Flips to the opposite side when there is no room. |
+| align | `Align` | no | `'start'` | Alignment along the side. |
+| sideOffset | `number` | no | - | Gap between anchor and content, in px. |
+| alignOffset | `number` | no | - | Shift along the alignment axis, in px. |
+| avoidCollisions | `boolean` | no | - | Flip and shift to stay in the viewport. |
+| collisionPadding | `number` | no | - | Distance to keep from the viewport edges, in px. |
+| arrowPadding | `number` | no | - | Size of the arrow element, if any, so it stays inside rounded corners. |
+| hideWhenDetached | `boolean` | no | - | Hide the content when its anchor scrolls out of view. |
+
+Also accepts the props of `ComponentPropsWithRef<'div'>`.
+
+```tsx
+import { Menubar } from 'pada-ds';
+
+<Menubar.Content />
+```
+
+### Menubar.Group
+
+`import { Menubar } from 'pada-ds';`
+
+Groups related items.
+
+No props.
+
+Also accepts the props of `ComponentPropsWithRef<'div'>`.
+
+```tsx
+import { Menubar } from 'pada-ds';
+
+<Menubar.Group />
+```
+
+### Menubar.Item
+
+`import { Menubar } from 'pada-ds';`
+
+An action. Chosen with click, Enter or Space; closes the menu unless `onSelect` prevents it.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| icon | `string` | no | - | Built-in icon name shown before the label. |
+| shortcut | `string` | no | - | Keyboard shortcut hint shown after the label, e.g. "⌘D". Display only. |
+| tone | `'default' \| 'danger'` | no | `'default'` | Destructive actions use the danger colours. |
+| asChild | `boolean` | no | - | Render the item behaviour on your own element (a link, for navigation items). |
+| disabled | `boolean` | no | - | - |
+| onSelect | `(event: MenuSelectEvent) => void` | no | - | - |
+| textValue | `string` | no | - | - |
+
+Also accepts the props of `Omit<ComponentPropsWithRef<'div'>, 'onSelect'>`.
+
+```tsx
+import { Menubar } from 'pada-ds';
+
+<Menubar.Item />
+```
+
+### Menubar.Label
+
+`import { Menubar } from 'pada-ds';`
+
+A non-focusable heading for a group of items.
+
+No props.
+
+Also accepts the props of `ComponentPropsWithRef<'div'>`.
+
+```tsx
+import { Menubar } from 'pada-ds';
+
+<Menubar.Label />
+```
+
+### Menubar.Menu
+
+`import { Menubar } from 'pada-ds';`
+
+One menu in the bar: a Trigger and its Content. Inside it, use the DropdownMenu item parts.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| children | `ReactNode` | no | - | - |
+| value | `string` | no | - | Identifies the menu for `Menubar.Root`'s `value`. Generated when omitted. |
+
+```tsx
+import { Menubar } from 'pada-ds';
+
+<Menubar.Menu />
+```
+
+### Menubar.RadioGroup
+
+`import { Menubar } from 'pada-ds';`
+
+Groups radio items; exactly one is checked.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| value | `string` | no | - | The checked item's value. |
+| onValueChange | `(value: string) => void` | no | - | Called with the chosen item's value. |
+
+Also accepts the props of `ComponentPropsWithRef<'div'>`.
+
+```tsx
+import { Menubar } from 'pada-ds';
+
+<Menubar.RadioGroup />
+```
+
+### Menubar.RadioItem
+
+`import { Menubar } from 'pada-ds';`
+
+One option in a RadioGroup, with a dot when checked.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| value | `string` | yes | - | This item's value in its RadioGroup. |
+| disabled | `boolean` | no | - | - |
+| onSelect | `(event: MenuSelectEvent) => void` | no | - | - |
+| textValue | `string` | no | - | - |
+| shortcut | `string` | no | - | Keyboard shortcut hint shown after the label, e.g. "⌘D". Display only. |
+
+Also accepts the props of `Omit<Omit<ComponentPropsWithRef<'div'>, 'onSelect'>, 'asChild'>`.
+
+```tsx
+import { Menubar } from 'pada-ds';
+
+<Menubar.RadioItem value="..." />
+```
+
+### Menubar.Root
+
+`import { Menubar } from 'pada-ds';`
+
+The bar. Name it with `aria-label` ("Editor"). Restyle through `--pada-menubar-*` tokens.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| value | `string` | no | - | Controlled open menu (its `value`), or '' for none. |
+| defaultValue | `string` | no | - | Initially open menu when uncontrolled. |
+| onValueChange | `(value: string) => void` | no | - | Called when a menu opens (its value) or every menu closes (''). |
+| loop | `boolean` | no | - | Wrap focus from the last menu to the first and back. |
+| dir | `'ltr' \| 'rtl'` | no | - | Reading direction, for arrow keys and submenu placement. |
+
+Also accepts the props of `Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'dir'>`.
+
+```tsx
+import { Menubar } from 'pada-ds';
+
+<Menubar.Root />
+```
+
+### Menubar.Separator
+
+`import { Menubar } from 'pada-ds';`
+
+A divider between groups of items.
+
+No props.
+
+Also accepts the props of `ComponentPropsWithRef<'div'>`.
+
+```tsx
+import { Menubar } from 'pada-ds';
+
+<Menubar.Separator />
+```
+
+### Menubar.Sub
+
+`import { Menubar } from 'pada-ds';`
+
+A nested menu. Contains a SubTrigger and a SubContent.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| children | `ReactNode` | no | - | - |
+| open | `boolean` | no | - | Controlled open state. |
+| defaultOpen | `boolean` | no | `false` | Initial open state when uncontrolled. |
+| onOpenChange | `(open: boolean) => void` | no | - | Called when the submenu opens or closes. |
+
+```tsx
+import { Menubar } from 'pada-ds';
+
+<Menubar.Sub />
+```
+
+### Menubar.SubContent
+
+`import { Menubar } from 'pada-ds';`
+
+The submenu panel.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| container | `Element \| null` | no | - | Element to portal into. Defaults to `document.body`. |
+| forceMount | `boolean` | no | - | Keep mounted while closed, for animation libraries that manage presence themselves. |
+| loop | `boolean` | no | - | Wrap focus from the last item to the first and back. |
+| onCloseAutoFocus | `(event: AutoFocusEvent) => void` | no | - | Called when focus returns to the trigger on close. Prevent it to focus something else. |
+| onEscapeKeyDown | `(event: DismissEvent<KeyboardEvent>) => void` | no | - | Called on Escape. Prevent it to keep the menu open. |
+| onPointerDownOutside | `(event: DismissEvent<PointerEvent>) => void` | no | - | Called on a pointer-down outside. Prevent it to keep the menu open. |
+| onInteractOutside | `(event: DismissEvent<PointerEvent \| FocusEvent>) => void` | no | - | Called on any interaction outside. Prevent it to keep the menu open. |
+| sideOffset | `number` | no | - | Gap between anchor and content, in px. |
+| alignOffset | `number` | no | - | Shift along the alignment axis, in px. |
+| avoidCollisions | `boolean` | no | - | Flip and shift to stay in the viewport. |
+| collisionPadding | `number` | no | - | Distance to keep from the viewport edges, in px. |
+| arrowPadding | `number` | no | - | Size of the arrow element, if any, so it stays inside rounded corners. |
+| hideWhenDetached | `boolean` | no | - | Hide the content when its anchor scrolls out of view. |
+
+Also accepts the props of `Omit<ComponentPropsWithRef<'div'>, 'side' | 'align'>`.
+
+```tsx
+import { Menubar } from 'pada-ds';
+
+<Menubar.SubContent />
+```
+
+### Menubar.SubTrigger
+
+`import { Menubar } from 'pada-ds';`
+
+The item that opens a submenu, with a chevron.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| disabled | `boolean` | no | - | - |
+| textValue | `string` | no | - | - |
+| icon | `string` | no | - | Built-in icon name shown before the label. |
+
+Also accepts the props of `Omit<Omit<Omit<ComponentPropsWithRef<'div'>, 'onSelect'>, 'onSelect'>, 'asChild'>`.
+
+```tsx
+import { Menubar } from 'pada-ds';
+
+<Menubar.SubTrigger />
+```
+
+### Menubar.Trigger
+
+`import { Menubar } from 'pada-ds';`
+
+A menu's name in the bar.
+
+No props.
+
+Also accepts the props of `ComponentPropsWithRef<'button'>`.
+
+```tsx
+import { Menubar } from 'pada-ds';
+
+<Menubar.Trigger />
+```
+
 ### Modal
 
 `import { Modal } from 'pada-ds';`

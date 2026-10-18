@@ -159,6 +159,20 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - ListItem: id?, children, className?
 - Loader: size?, className?
 - Logo: name, size?, background?, tooltip?; extends React.HTMLAttributes<HTMLDivElement>
+- Menubar.CheckboxItem: checked?, onCheckedChange?, disabled?, onSelect?, textValue?, shortcut?; extends Omit<Omit<ComponentPropsWithRef<'div'>, 'onSelect'>, 'asChild'>
+- Menubar.Content: container?, forceMount?, loop?, onCloseAutoFocus?, onEscapeKeyDown?, onPointerDownOutside?, onInteractOutside?, side?, align?, sideOffset?, alignOffset?, avoidCollisions?, collisionPadding?, arrowPadding?, hideWhenDetached?; extends ComponentPropsWithRef<'div'>
+- Menubar.Group: no props; extends ComponentPropsWithRef<'div'>
+- Menubar.Item: icon?, shortcut?, tone?, asChild?, disabled?, onSelect?, textValue?; extends Omit<ComponentPropsWithRef<'div'>, 'onSelect'>
+- Menubar.Label: no props; extends ComponentPropsWithRef<'div'>
+- Menubar.Menu: children?, value?
+- Menubar.RadioGroup: value?, onValueChange?; extends ComponentPropsWithRef<'div'>
+- Menubar.RadioItem: value, disabled?, onSelect?, textValue?, shortcut?; extends Omit<Omit<ComponentPropsWithRef<'div'>, 'onSelect'>, 'asChild'>
+- Menubar.Root: value?, defaultValue?, onValueChange?, loop?, dir?; extends Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'dir'>
+- Menubar.Separator: no props; extends ComponentPropsWithRef<'div'>
+- Menubar.Sub: children?, open?, defaultOpen?, onOpenChange?
+- Menubar.SubContent: container?, forceMount?, loop?, onCloseAutoFocus?, onEscapeKeyDown?, onPointerDownOutside?, onInteractOutside?, sideOffset?, alignOffset?, avoidCollisions?, collisionPadding?, arrowPadding?, hideWhenDetached?; extends Omit<ComponentPropsWithRef<'div'>, 'side' | 'align'>
+- Menubar.SubTrigger: disabled?, textValue?, icon?; extends Omit<Omit<Omit<ComponentPropsWithRef<'div'>, 'onSelect'>, 'onSelect'>, 'asChild'>
+- Menubar.Trigger: no props; extends ComponentPropsWithRef<'button'>
 - Modal: open, onOpenChange, children, title?, width?, height?
 - MoreFilter: label?, filters, value?, defaultValue?, onChange?, applyLabel?, clearLabel?, disabled?, className?
 - Notification: open, onOpenChange, title, subtitle?, visual?, position?, direction?, className?

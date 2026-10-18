@@ -70,6 +70,7 @@ const COMPONENT_ENTRIES: NavEntry[] = [
   { kind: 'components', slug: 'link', label: 'Link' },
   { kind: 'components', slug: 'list', label: 'List' },
   { kind: 'components', slug: 'loader', label: 'Loader' },
+  { kind: 'components', slug: 'menubar', label: 'Menubar' },
   { kind: 'components', slug: 'modal', label: 'Modal' },
   { kind: 'components', slug: 'notification', label: 'Notification' },
   { kind: 'components', slug: 'number-input', label: 'Number Input' },
