@@ -10,6 +10,7 @@ import {
 } from './Dialog';
 
 export * from './Dialog';
+export { useDialog } from './dialogContext';
 
 /**
  * Headless dialog parts. Compose them; style with your own classes and `data-state`.

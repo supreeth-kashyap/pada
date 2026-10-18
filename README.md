@@ -61,7 +61,7 @@ import { Dialog } from 'pada-ds/headless';
 .my-dialog[data-state="open"] { animation: fade-in var(--pada-duration-slow) var(--pada-ease-emphasized); }
 ```
 
-Available parts: `Dialog`, `Popover`, `Tooltip` (with `Tooltip.Provider` for shared delays), `DropdownMenu` (items, checkbox and radio items, groups, labels, separators, submenus), `Tabs`, `Accordion`, `Collapsible`, `Field`, `Toggle` / `ToggleGroup`, `Combobox` (single or multiple, with a pluggable filter), `NumberInput`, `Calendar`, `Tree`, `HoverCard`, `ContextMenu`, `Slider` (any number of thumbs), `PinInput` and `Resizable` (window splitter). Each follows the matching WAI-ARIA Authoring Practices pattern. Any part that renders an element accepts `asChild`, which merges its behaviour onto your own element (a router link, a custom button) instead of rendering a new one.
+Available parts: `Dialog` (plus `useDialog()` for custom parts), `Popover`, `Tooltip` (with `Tooltip.Provider` for shared delays), `DropdownMenu` (items, checkbox and radio items, groups, labels, separators, submenus), `Tabs`, `Accordion`, `Collapsible`, `Field`, `Toggle` / `ToggleGroup`, `Combobox` (single or multiple, with a pluggable filter), `NumberInput`, `Calendar`, `Tree`, `HoverCard`, `ContextMenu`, `Slider` (any number of thumbs), `PinInput` and `Resizable` (window splitter). Each follows the matching WAI-ARIA Authoring Practices pattern. Any part that renders an element accepts `asChild`, which merges its behaviour onto your own element (a router link, a custom button) instead of rendering a new one.
 
 Portalled parts render into `document.body`, or into the element provided by `PortalContainerContext` (`ThemeProvider` provides one, so overlays keep a subtree's theme).
 
@@ -196,6 +196,7 @@ This design system includes the following components:
 - **SegmentControl**: Segmented button toggle control.
 - **Select**: Dropdown selection with ComboBox.
 - **Separator**: Horizontal or vertical divider.
+- **Sheet**: Bottom sheet with drag to dismiss and snap points.
 - **SideDrawer**: Slide-in side panel (1.x API; wraps `Drawer`).
 - **Sidebar**: Fixed side navigation area.
 - **Skeleton**: Loading placeholder with shimmer.

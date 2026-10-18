@@ -3237,6 +3237,196 @@ import { Separator } from 'pada-ds';
 <Separator />
 ```
 
+### Sheet.Body
+
+`import { Sheet } from 'pada-ds';`
+
+Scrollable main content.
+
+No props.
+
+Also accepts the props of `ComponentPropsWithRef<'div'>`.
+
+```tsx
+import { Sheet } from 'pada-ds';
+
+<Sheet.Body />
+```
+
+### Sheet.Close
+
+`import { Sheet } from 'pada-ds';`
+
+Closes the dialog. Unstyled: wrap your own button with `asChild`.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| asChild | `boolean` | no | - | Merge the close behaviour onto its only child instead of rendering a `<button>`. |
+
+Also accepts the props of `ComponentPropsWithRef<'button'>`.
+
+```tsx
+import { Sheet } from 'pada-ds';
+
+<Sheet.Close />
+```
+
+### Sheet.CloseButton
+
+`import { Sheet } from 'pada-ds';`
+
+Icon button in the top corner that closes the dialog.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| label | `string` | no | `'Close'` | Accessible name of the icon button. |
+
+Also accepts the props of `Omit<ComponentPropsWithRef<'button'>, 'children' | 'asChild'>`.
+
+```tsx
+import { Sheet } from 'pada-ds';
+
+<Sheet.CloseButton />
+```
+
+### Sheet.Content
+
+`import { Sheet } from 'pada-ds';`
+
+A bottom sheet: a dialog that rises from the bottom edge, for mobile-first flows (filters, a share menu, details). Drag it down to close, or between `snapPoints`; Escape and the backdrop close it too. Use the Dialog parts inside (`Sheet.Header`, `Sheet.Title`, `Sheet.Body`, …).
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| snapPoints | `number[]` | no | - | Heights the sheet rests at, as fractions of the viewport height in ascending order, e.g. `[0.4, 0.9]`. Without them the sheet fits its content (up to the maximum height). |
+| snap | `number` | no | - | Controlled snap point (one of `snapPoints`). |
+| defaultSnap | `number` | no | - | Initial snap point when uncontrolled. |
+| onSnapChange | `(snap: number) => void` | no | - | Called when the sheet settles at another snap point. |
+| dismissible | `boolean` | no | `true` | Close when dragged or flicked down past the lowest position. |
+| container | `Element \| null` | no | - | Element to portal into. Defaults to `document.body`. |
+| overlayProps | `ComponentPropsWithRef<'div'>` | no | - | Props for the backdrop behind the sheet. |
+| forceMount | `boolean` | no | - | Keep mounted while closed, for animation libraries that manage presence themselves. |
+| onOpenAutoFocus | `(event: AutoFocusEvent) => void` | no | - | Called when focus moves into the dialog on open. Prevent it to focus something else. |
+| onCloseAutoFocus | `(event: AutoFocusEvent) => void` | no | - | Called when focus returns to the trigger on close. Prevent it to focus something else. |
+| onEscapeKeyDown | `(event: DismissEvent<KeyboardEvent>) => void` | no | - | Called on Escape. Prevent it to keep the dialog open. |
+| onPointerDownOutside | `(event: DismissEvent<PointerEvent>) => void` | no | - | Called on a pointer-down outside the content. Prevent it to keep the dialog open. |
+| onInteractOutside | `(event: DismissEvent<PointerEvent \| FocusEvent>) => void` | no | - | Called on any interaction outside (pointer or focus). Prevent it to keep the dialog open. |
+
+Also accepts the props of `ComponentPropsWithRef<'div'>`.
+
+```tsx
+import { Sheet } from 'pada-ds';
+
+<Sheet.Content />
+```
+
+### Sheet.Description
+
+`import { Sheet } from 'pada-ds';`
+
+Supporting text under the title, announced after it.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| asChild | `boolean` | no | - | Render the description's behaviour on your own element. |
+
+Also accepts the props of `ComponentPropsWithRef<'p'>`.
+
+```tsx
+import { Sheet } from 'pada-ds';
+
+<Sheet.Description />
+```
+
+### Sheet.Footer
+
+`import { Sheet } from 'pada-ds';`
+
+Bottom section for actions. Defaults to right-aligned buttons.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| justify | `'start' \| 'end' \| 'between'` | no | `'end'` | Main axis alignment of the section's children. |
+
+Also accepts the props of `ComponentPropsWithRef<'div'>`.
+
+```tsx
+import { Sheet } from 'pada-ds';
+
+<Sheet.Footer />
+```
+
+### Sheet.Header
+
+`import { Sheet } from 'pada-ds';`
+
+Top section: the title, description and close button.
+
+No props.
+
+Also accepts the props of `ComponentPropsWithRef<'div'>`.
+
+```tsx
+import { Sheet } from 'pada-ds';
+
+<Sheet.Header />
+```
+
+### Sheet.Root
+
+`import { Sheet } from 'pada-ds';`
+
+Holds the open state for a dialog. Renders no element. WAI-ARIA APG: Dialog (Modal).
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| children | `ReactNode` | no | - | - |
+| open | `boolean` | no | - | Controlled open state. |
+| defaultOpen | `boolean` | no | `false` | Initial open state when uncontrolled. |
+| onOpenChange | `(open: boolean) => void` | no | - | Called when the dialog asks to open or close. |
+| modal | `boolean` | no | `true` | Modal dialogs trap focus, lock page scroll and hide the rest of the page from assistive technology. Non-modal dialogs do none of that and close when focus leaves them. |
+
+```tsx
+import { Sheet } from 'pada-ds';
+
+<Sheet.Root />
+```
+
+### Sheet.Title
+
+`import { Sheet } from 'pada-ds';`
+
+The dialog's accessible name, styled as its heading.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| asChild | `boolean` | no | - | Render the title's behaviour on your own heading element. |
+
+Also accepts the props of `ComponentPropsWithRef<'h2'>`.
+
+```tsx
+import { Sheet } from 'pada-ds';
+
+<Sheet.Title />
+```
+
+### Sheet.Trigger
+
+`import { Sheet } from 'pada-ds';`
+
+Opens the dialog. Gets `aria-expanded`, `aria-controls` and `data-state`.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| asChild | `boolean` | no | - | Merge the trigger's behaviour onto its only child instead of rendering a `<button>`. |
+
+Also accepts the props of `ComponentPropsWithRef<'button'>`.
+
+```tsx
+import { Sheet } from 'pada-ds';
+
+<Sheet.Trigger />
+```
+
 ### SideDrawer
 
 `import { SideDrawer } from 'pada-ds';`

@@ -1,0 +1,92 @@
+/* Root: a dialog panel anchored to the bottom edge. */
+.sheet {
+  /* Component tokens */
+  --pada-sheet-bg: var(--pada-color-surface-overlay);
+  --pada-sheet-fg: var(--pada-color-fg);
+  --pada-sheet-shadow: var(--pada-shadow-2xl);
+  --pada-sheet-radius: var(--pada-radius-xl);
+  --pada-sheet-pad: var(--pada-space-5);
+  --pada-sheet-gap: var(--pada-space-4);
+  --pada-sheet-max-width: 640px;
+  --pada-sheet-max-height: calc(100dvh - var(--pada-space-10));
+  --pada-sheet-height: auto;
+  --pada-sheet-grabber: var(--pada-color-border-strong);
+  --pada-sheet-grabber-active: var(--pada-color-fg-subtle);
+  --pada-sheet-translate: calc(var(--pada-sheet-offset, 0px) + var(--pada-sheet-drag, 0px));
+
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: var(--pada-z-modal);
+  display: flex;
+  flex-direction: column;
+  gap: var(--pada-sheet-gap);
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--pada-sheet-max-width);
+  height: var(--pada-sheet-height);
+  max-height: var(--pada-sheet-max-height);
+  margin-inline: auto;
+  padding: 0 var(--pada-sheet-pad) calc(var(--pada-sheet-pad) + env(safe-area-inset-bottom, 0px));
+  overflow: hidden;
+  border-radius: var(--pada-sheet-radius) var(--pada-sheet-radius) 0 0;
+  background-color: var(--pada-sheet-bg);
+  color: var(--pada-sheet-fg);
+  box-shadow: var(--pada-sheet-shadow);
+  font-family: var(--pada-font-sans);
+  font-size: var(--pada-font-size-md);
+  line-height: var(--pada-line-height-md);
+  outline: none;
+  touch-action: none;
+  translate: 0 var(--pada-sheet-translate);
+  transition: translate var(--pada-duration-slow) var(--pada-ease-emphasized);
+}
+
+/* States via attributes */
+.sheet[data-dragging] {
+  transition: none;
+  user-select: none;
+  --pada-sheet-grabber: var(--pada-sheet-grabber-active);
+}
+
+.sheet[data-state="closed"] {
+  --pada-sheet-translate: 100%;
+  transition-duration: var(--pada-duration-normal);
+  transition-timing-function: var(--pada-ease-exit);
+}
+
+@starting-style {
+  .sheet[data-state="open"] {
+    --pada-sheet-translate: 100%;
+  }
+}
+
+/* Child elements */
+.sheet-grabber {
+  flex: none;
+  align-self: center;
+  box-sizing: content-box;
+  width: 36px;
+  height: 4px;
+  margin: 0;
+  padding: var(--pada-space-2) var(--pada-space-4);
+  border: none;
+  border-radius: var(--pada-radius-full);
+  background: var(--pada-sheet-grabber) content-box;
+  cursor: grab;
+  transition: background-color var(--pada-duration-fast) var(--pada-ease-standard);
+}
+
+.sheet-grabber:hover {
+  --pada-sheet-grabber: var(--pada-sheet-grabber-active);
+}
+
+.sheet-grabber:focus-visible {
+  outline: none;
+  box-shadow: var(--pada-shadow-focus);
+}
+
+/* The body scrolls inside the sheet; touch scrolling stays native there. */
+.sheet .dialog-body {
+  touch-action: pan-y;
+  overscroll-behavior: contain;
+}

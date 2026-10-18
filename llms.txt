@@ -191,6 +191,16 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - SegmentControl: options, value?, defaultValue?, onChange?, className?, disabled?
 - Select: label, options, value?, defaultValue?, placeholder?, onChange?, description?, error?, disabled?, name?, id?, className?
 - Separator: orientation?, decorative?; extends ComponentPropsWithRef<'div'>
+- Sheet.Body: no props; extends ComponentPropsWithRef<'div'>
+- Sheet.Close: asChild?; extends ComponentPropsWithRef<'button'>
+- Sheet.CloseButton: label?; extends Omit<ComponentPropsWithRef<'button'>, 'children' | 'asChild'>
+- Sheet.Content: snapPoints?, snap?, defaultSnap?, onSnapChange?, dismissible?, container?, overlayProps?, forceMount?, onOpenAutoFocus?, onCloseAutoFocus?, onEscapeKeyDown?, onPointerDownOutside?, onInteractOutside?; extends ComponentPropsWithRef<'div'>
+- Sheet.Description: asChild?; extends ComponentPropsWithRef<'p'>
+- Sheet.Footer: justify?; extends ComponentPropsWithRef<'div'>
+- Sheet.Header: no props; extends ComponentPropsWithRef<'div'>
+- Sheet.Root: children?, open?, defaultOpen?, onOpenChange?, modal?
+- Sheet.Title: asChild?; extends ComponentPropsWithRef<'h2'>
+- Sheet.Trigger: asChild?; extends ComponentPropsWithRef<'button'>
 - SideDrawer: open, onOpenChange, children, size?, className?, aria-label?, aria-labelledby?
 - Sidebar: data?, activeId?, onItemClick?, children?, className?; extends React.HTMLAttributes<HTMLElement>
 - SidebarCollapse: children, defaultOpen?, label?, className?

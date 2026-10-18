@@ -7,9 +7,8 @@ import {
   useState,
   type ComponentPropsWithRef,
   type ReactNode,
-  type RefObject,
 } from 'react';
-import { createPartContext } from '../utils/context';
+import { DialogProvider, useDialogContext, type DialogContextValue } from './dialogContext';
 import { composeEventHandlers, openState } from '../utils/events';
 import { useFocusScope, type AutoFocusEvent } from '../utils/focus';
 import { useHideOthers, useScrollLock } from '../utils/modal';
@@ -20,21 +19,7 @@ import { Slot } from '../utils/Slot';
 import { useControllableState } from '../utils/useControllableState';
 import { useDismissable, type DismissEvent } from '../utils/useDismissable';
 
-interface DialogContextValue {
-  open: boolean;
-  setOpen: (open: boolean) => void;
-  modal: boolean;
-  triggerRef: RefObject<HTMLButtonElement | null>;
-  contentId: string;
-  titleId: string;
-  descriptionId: string;
-  hasTitle: boolean;
-  setHasTitle: (value: boolean) => void;
-  hasDescription: boolean;
-  setHasDescription: (value: boolean) => void;
-}
 
-const [DialogProvider, useDialogContext] = createPartContext<DialogContextValue>('Dialog.Root');
 
 export interface DialogRootProps {
   children?: ReactNode;

@@ -6,6 +6,14 @@
 - Moved the `body` and `p` rules out of `dist/tokens.css` into a new optional `pada-ds/base.css` export, so importing the tokens no longer overrides an app's own styles.
 - Added a component API manifest for AI coding agents. `npm run build` now reads every exported component's props from the TypeScript source and writes `dist/manifest.json` (exported as `pada-ds/manifest.json`), `llms.txt` and `llms-full.txt`. Both llms files ship in the package and are committed at the repo root. `npm test` fails if they are stale or if an exported component is missing from the manifest.
 
+- **New: `Sheet`.** A bottom sheet for mobile-first flows (`Sheet.Root`, `Trigger`, `Content`, and the Dialog parts).
+  - **Dialog behaviour.** It is a modal dialog underneath, with focus trap, Escape, backdrop and focus return.
+  - **Size.** It fits its content, or rests at `snapPoints` (fractions of the viewport height) with `snap` / `defaultSnap` / `onSnapChange`. On wide screens it stays centred and capped at 640px.
+  - **Dragging.** It follows the pointer and settles at the nearest resting place. A flick down closes it (`dismissible`, default true), and dragging past the highest snap point resists.
+  - **No conflicts.** Drags never start on form controls, links or scrolled content.
+  - **Keyboard.** With snap points, the grabber is a button ("Expand sheet" / "Collapse sheet") that moves between heights.
+  - **Tokens.** Restyle through `--pada-sheet-*`.
+- **New: `useDialog()`** in `pada-ds/headless` returns the nearest `Dialog.Root`'s `open` and `setOpen`, for building custom parts.
 - **New: `Resizable`.** Split a region into panels that people resize (`Resizable.Root`, `Panel`, `Handle`), horizontally or vertically, and nested:
   - **Panels.** Each takes `defaultSize`, `minSize` and `maxSize` in percent, and can be `collapsible`. Sizes are flex ratios, so handles never overflow the group.
   - **Handles.** Each is a focusable window-splitter `separator` that controls the panel before it. Arrow keys resize by `keyboardStep`, Home and End jump to the limits, and Enter or a double-click collapses and restores. A collapsible panel dragged well below its minimum snaps shut.

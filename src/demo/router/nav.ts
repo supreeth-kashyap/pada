@@ -90,6 +90,7 @@ const COMPONENT_ENTRIES: NavEntry[] = [
   { kind: 'components', slug: 'segment-control', label: 'Segment Control' },
   { kind: 'components', slug: 'select', label: 'Select' },
   { kind: 'components', slug: 'separator', label: 'Separator' },
+  { kind: 'components', slug: 'sheet', label: 'Sheet' },
   { kind: 'components', slug: 'side-drawer', label: 'Side Drawer' },
   { kind: 'components', slug: 'sidebar', label: 'Sidebar' },
   { kind: 'components', slug: 'skeleton', label: 'Skeleton' },
