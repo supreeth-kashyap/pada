@@ -203,18 +203,22 @@ Overlay: fade, duration-normal. Content: scale 0.96 → 1 + fade, ease-emphasize
 | `Tree` | `Root`, `Item`, `ItemRow`, `ItemIndicator`, `ItemLabel`, `Group`. Typeahead, `*` to expand all siblings, single or multiple selection, and `--pada-tree-level` for indentation. |
 | `HoverCard` | Opens on hover (not touch) or keyboard focus after a delay. |
 | `Slider` | Any number of thumbs. Pointer handling lives on `Root`, and each thumb is bounded by its neighbours. |
+| `Resizable` | `Root`, `Panel`, `Handle`: APG window splitter with percent sizes, min/max, collapsible panels, keyboard and pointer resizing, and a commit callback. |
+| `Menubar` | `Root`, `Menu`, `Trigger`, `Content` on the shared menu internals, so every DropdownMenu item part works inside. Roving focus along the bar, and ArrowLeft/Right between open menus. |
+| `useDataTable` | A hook, not parts: sorting, search, selection, column visibility and paging state, controlled or uncontrolled, with a `manual` mode for server data. |
 | `PinInput` | One input per character. A pasted or autofilled code fills the boxes from the start, and `onComplete` fires when the code is full. |
 
 New utilities:
 - `PortalContainerContext` / `usePortalContainer`
 - `useTypeahead`, for multi-letter type-ahead
 - `useAnimatedNumber`, the number ticker behind `Stat`, which jumps to the value under reduced motion
+- `useDialog()`, the nearest dialog's `open` and `setOpen`, for custom parts such as `Sheet`
 
 Changed behaviour:
 - **Focus restore.** `useFocusScope` returns focus on close only when focus was lost with the layer (it sits on `<body>` or a detached node), so opening one popover from another no longer steals focus back.
 - **`data-autofocus`.** An element marked `data-autofocus` (for example a calendar's focused day) wins the initial focus.
 
-Tests: 54 Vitest files with 183 tests, covering keyboard maps, focus, ARIA and axe for every headless and styled part.
+Tests: 61 Vitest files with 223 tests, covering keyboard maps, focus, ARIA and axe for every headless and styled part.
 
 **Not done yet:**
 - `DirectionProvider`

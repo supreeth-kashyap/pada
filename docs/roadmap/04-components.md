@@ -170,7 +170,7 @@ Every component below has JSDoc for the manifest, Vitest and axe tests, and a de
 - ThemeProvider and ThemeToggle.
 
 **Wave 2:**
-- **Shipped:** NumberInput, PasswordInput, PinInput, TagInput, RangeSlider, RadioCard (`RadioCardGroup`), Rating, ContextMenu, HoverCard, Collapsible, Tree, Calendar (range selection, also used by InputDate), Timeline, Stat, ScrollArea, AspectRatio, Grid and Container.
-- **Not started:** CheckboxGroup, TimePicker, ColorPicker, Menubar, DataTable, the two-month DateRangePicker with presets, Sheet and Resizable.
+- **Shipped:** NumberInput, PasswordInput, PinInput, TagInput, RangeSlider, RadioCard (`RadioCardGroup`), Rating, ColorPicker (OKLCH), ContextMenu, HoverCard, Collapsible, Menubar, Tree, DataTable (with headless `useDataTable`; no virtualisation or TanStack adapter), Calendar (range selection, also used by InputDate), Timeline, Stat, ScrollArea, AspectRatio, Grid, Container, Sheet (bottom sheet with snap points) and Resizable.
+- **Not started:** CheckboxGroup, TimePicker, and the two-month DateRangePicker with presets.
 
 **Definition of done, React side:** specs in `specs/` and Figma updates are still outstanding for every component.

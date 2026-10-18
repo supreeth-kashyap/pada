@@ -152,6 +152,8 @@ All motion uses the duration and easing tokens, so `--pada-motion-scale: 0` (red
 - **Link:** underline.
 - **ThemeToggle:** view-transition reveal, and the sun and moon morph.
 - **PadaLogo:** "steps in", plus a walking loop.
+- **Sheet:** follows the pointer while dragged, then settles at a snap point or flies out.
+- **Resizable:** the handle line thickens in the accent colour on hover, focus and drag.
 
 **Not yet:**
 - Checkbox path draw, the Radio dot and Switch spring and stretch.

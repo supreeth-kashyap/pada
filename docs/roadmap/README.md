@@ -67,7 +67,7 @@ As of 2026-10-18, on the React branch `claude/pada-2` (unreleased). Each documen
 | 2. Headless core | ✅ | not started |
 | 3. Refactor | 🟡 overlays, Tabs, Accordion, Table, Steps, List, Select, Toolbar filters, UploadField, DatePicker and InputDate done; Card, Banner, PageHeader, Sidebar, Progress, Text, Tags, SegmentControl, Pills, RadioGroup and Switch still to move to parts | not started |
 | 4. Wave 1 | ✅ | not started |
-| 5. Wave 2 | 🟡 17 of 25 shipped and DateRangePicker partly (range selection, no two-month view or presets); DataTable, ColorPicker, Menubar, TimePicker, CheckboxGroup, Sheet and Resizable to do | not started |
+| 5. Wave 2 | 🟡 22 of 25 shipped and DateRangePicker partly (range selection, no two-month view or presets); TimePicker and CheckboxGroup to do | not started |
 | 7. Brand | 🟡 `PadaLogo`, favicon and Sidebar default done; exports, social card and Figma to do | not started |
 | 8. Site | not started | n/a |
 | 9. Release 2.0 | 🟡 [migration guide](../migration-2.0.md) and token codemod written; not published | not started |
