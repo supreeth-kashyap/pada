@@ -125,3 +125,39 @@ Components with travel also check `@media (prefers-reduced-motion: reduce)` (or 
 - Motion styles live in the styled skin, never in the headless core. The core only provides `data-state`, `data-side` and the indicator position variables.
 - Each component's spec lists the motion it uses, and the docs page shows it with a "replay" control.
 - A Playwright test runs every component with `prefers-reduced-motion: reduce` and checks that computed `transition-duration` is `0s` and no `transform` animation runs.
+
+## 6. As built (React)
+
+All motion uses the duration and easing tokens, so `--pada-motion-scale: 0` (reduced motion or `data-motion="reduced"`) stops it. Enter and exit use `@starting-style` and `data-state="closed"`, with `usePresence` keeping parts mounted until their exit finishes.
+
+**Shipped:**
+- **Button:** press scale, loading crossfade, and the trailing icon nudge.
+- **Checkbox:** the tick springs in.
+- **Field:** error shake.
+- **Tabs:** sliding indicator.
+- **Accordion:** height animates through `grid-template-rows`, and the chevron rotates.
+- **Overlays:** Dialog, AlertDialog, Drawer, Popover, DropdownMenu, ContextMenu, HoverCard, Tooltip and Select open and close with fade and scale from the trigger side, or slide for drawers.
+- **Toast:** stack, expand, swipe and timer.
+- **Progress:** value transitions.
+- **Skeleton:** shimmer.
+- **Spinner:** a pulse under reduced motion.
+- **Steps:** the connector fills.
+- **Badge:** count bump.
+- **List:** FLIP reorder.
+- **Carousel:** fade and dot width.
+- **UploadField:** drag-over state.
+- **Stat:** number ticker.
+- **Timeline:** stagger.
+- **Avatar:** image fade.
+- **Link:** underline.
+- **ThemeToggle:** view-transition reveal, and the sun and moon morph.
+- **PadaLogo:** "steps in", plus a walking loop.
+
+**Not yet:**
+- Checkbox path draw, the Radio dot and Switch spring and stretch.
+- The SegmentControl, Pills and ToggleGroup sliding thumb.
+- The Select item stagger and sliding highlight.
+- The Tag remove collapse and the IconButton hover circle.
+- The CodeSnippet copy morph.
+- The Sidebar collapse.
+- The docs "replay" control and the Playwright reduced-motion audit from §5.

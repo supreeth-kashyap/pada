@@ -21,6 +21,8 @@ To install the design system, run:
 npm install pada-ds
 ```
 
+Upgrading from 1.x? See the [2.0 migration guide](./docs/migration-2.0.md). The plan and progress for 2.0 are in [`docs/roadmap`](./docs/roadmap/README.md).
+
 ## Usage
 
 ```tsx

@@ -6,6 +6,7 @@
 - Moved the `body` and `p` rules out of `dist/tokens.css` into a new optional `pada-ds/base.css` export, so importing the tokens no longer overrides an app's own styles.
 - Added a component API manifest for AI coding agents. `npm run build` now reads every exported component's props from the TypeScript source and writes `dist/manifest.json` (exported as `pada-ds/manifest.json`), `llms.txt` and `llms-full.txt`. Both llms files ship in the package and are committed at the repo root. `npm test` fails if they are stale or if an exported component is missing from the manifest.
 
+- **Docs.** New [migration guide](./docs/migration-2.0.md) covering tokens, theming, deprecated APIs, the headless entry point and every behaviour or markup change. `docs/roadmap` has "As built" notes per area, a progress table and a React 2.0 column in the parity matrix.
 - **Demo dark mode.** The demo shell and documentation pages now use semantic tokens instead of hard-coded colours. A theme toggle in the top-right corner follows the OS by default and remembers your choice. The Playground starts from the shell's theme.
 - **Fixed:** `ThemeToggle`:
   - Each toggle now has its own icon mask id. With two toggles on a page, they shared the first one's mask and could draw the wrong icon.

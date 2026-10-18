@@ -184,3 +184,40 @@ Overlay: fade, duration-normal. Content: scale 0.96 → 1 + fade, ease-emphasize
 - `usePresence` keeps a closing part mounted for its longest transition or animation, read from computed styles, so exit motion needs CSS only. With reduced motion every duration is 0 and parts unmount at once.
 - Not done yet: `DirectionProvider` (a `dir` prop exists on `DropdownMenu.Root`), pointer "safe triangle" for submenus, and manifest/llms entries for the headless parts (they are described in the llms introduction for now).
 - Tests: Vitest + Testing Library + axe-core in jsdom, 28 tests across the four components covering the APG keyboard maps, focus movement and return, layering and ARIA.
+
+## 7. As built (phases 3 to 5, React)
+
+`pada-ds/headless` now exports these parts. The styled `pada-ds` components are built on them.
+
+| Module | Parts and notes |
+|---|---|
+| `Dialog`, `Popover`, `Tooltip` | From phase 2. `Popover.Title` labels its content. |
+| `Menu` | `DropdownMenu.*`, plus `ContextMenu.Root` and `ContextMenu.Trigger`, which open the same menu at the pointer: on right-click, Shift+F10 or the context-menu key, and long-press on touch. A virtual `MenuAnchor` positions it. |
+| `Tabs` | `Root`, `List`, `Trigger`, `Content`, `Indicator`. Automatic or manual activation, either orientation. |
+| `Collapsible`, `Accordion` | `type="single"` (optionally `collapsible`) or `"multiple"`, with arrow keys, Home and End between headers. The content height is exposed for CSS animation. |
+| `Field` | `Root`, `Label`, `Control` (`asChild`), `Description`, `Error`. Wires `for`, `aria-describedby`, `aria-invalid` and `required`. |
+| `Toggle`, `ToggleGroup` | `aria-pressed`. Groups are `single` or `multiple` with roving focus. |
+| `Combobox` | `Root`, `Anchor`, `Input`, `Trigger`, `Portal`, `Content`, `Item`, `Group`, `Empty`. Single or multiple selection with `aria-activedescendant`, a pluggable filter, or `filter={false}` for server search. |
+| `NumberInput` | A spinbutton with `Intl.NumberFormat` formatting and parsing, press-and-hold steppers, and a hidden input for `name`. |
+| `Calendar` | An APG date grid: single or range selection, min, max and unavailable days, a configurable week start (`weekStartsOn`), and a heading that labels the grid. |
+| `Tree` | `Root`, `Item`, `ItemRow`, `ItemIndicator`, `ItemLabel`, `Group`. Typeahead, `*` to expand all siblings, single or multiple selection, and `--pada-tree-level` for indentation. |
+| `HoverCard` | Opens on hover (not touch) or keyboard focus after a delay. |
+| `Slider` | Any number of thumbs. Pointer handling lives on `Root`, and each thumb is bounded by its neighbours. |
+| `PinInput` | One input per character. A pasted or autofilled code fills the boxes from the start, and `onComplete` fires when the code is full. |
+
+New utilities:
+- `PortalContainerContext` / `usePortalContainer`
+- `useTypeahead`, for multi-letter type-ahead
+- `useAnimatedNumber`, the number ticker behind `Stat`, which jumps to the value under reduced motion
+
+Changed behaviour:
+- **Focus restore.** `useFocusScope` returns focus on close only when focus was lost with the layer (it sits on `<body>` or a detached node), so opening one popover from another no longer steals focus back.
+- **`data-autofocus`.** An element marked `data-autofocus` (for example a calendar's focused day) wins the initial focus.
+
+Tests: 54 Vitest files with 183 tests, covering keyboard maps, focus, ARIA and axe for every headless and styled part.
+
+**Not done yet:**
+- `DirectionProvider`
+- the submenu "safe triangle"
+- separate manifest entries for the headless parts
+- `Select` and `Listbox` as headless parts (the styled Select uses the shared navigation helpers instead)

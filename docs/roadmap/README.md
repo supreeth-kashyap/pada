@@ -56,6 +56,22 @@ Phases are ordered by dependency. Angular parity (phase 6) runs alongside phases
 | **8. Site** | `pada-site` repo: landing page, docs entry, blog scaffold. | Deployed, with the live token playground. |
 | **9. Release 2.0** | Migration guide, codemods (prop renames, token renames), changelog, Figma kit update. | `pada-ds@2.0.0` and `pada-ds-angular@2.0.0` published. |
 
+## Progress
+
+As of 2026-10-18, on the React branch `claude/pada-2` (unreleased). Each document has an "As built" section with the details and what is still open.
+
+| Phase | React | Angular |
+|---|---|---|
+| 0. Hygiene | ✅ | not started |
+| 1. Tokens v2 | ✅ | not started (sync script ready) |
+| 2. Headless core | ✅ | not started |
+| 3. Refactor | 🟡 overlays, Tabs, Accordion, Table, Steps, List, Select, Toolbar filters, UploadField, DatePicker and InputDate done; Card, Banner, PageHeader, Sidebar, Progress, Text, Tags, SegmentControl, Pills, RadioGroup and Switch still to move to parts | not started |
+| 4. Wave 1 | ✅ | not started |
+| 5. Wave 2 | 🟡 17 of 25 shipped and DateRangePicker partly (range selection, no two-month view or presets); DataTable, ColorPicker, Menubar, TimePicker, CheckboxGroup, Sheet and Resizable to do | not started |
+| 7. Brand | 🟡 `PadaLogo`, favicon and Sidebar default done; exports, social card and Figma to do | not started |
+| 8. Site | not started | n/a |
+| 9. Release 2.0 | 🟡 [migration guide](../migration-2.0.md) and token codemod written; not published | not started |
+
 ## How parity is kept
 
 Every component gets a **spec** (`specs/<component>.md`, shared by both repos) before it is built. A spec lists:

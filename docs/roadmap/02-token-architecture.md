@@ -234,3 +234,13 @@ Phase 1 shipped with a few deliberate changes to the plan above:
 | Component tokens in `tokens/component/*.json` | Declared at the top of each component's CSS | Keeps a component's tokens next to the styles that read them; listed in each component spec. |
 
 Re-declaration rule: `var()` inside a custom property is substituted on the element that declares it. Tokens that read a knob or palette (directly or through other tokens) are therefore declared on `:root` **and** on every element with an axis attribute. The generator works this set out from the references, so the model never lists it by hand.
+
+## 7. As built (phases 3 to 5, React)
+
+- Every 1.x component and every new component reads `--pada-*` tokens only. `npm run check:tokens` (part of `npm test`) fails on any `var()` that nothing defines.
+- Each component declares its tier 3 tokens at the top of its stylesheet. In the 2.0 components, variants only reassign those tokens through a data attribute; for example, `.alert[data-tone="success"]` sets `--pada-alert-bg` and its siblings. Some 1.x components (Button, for one) still select variants with modifier classes, but those also only reassign tokens.
+- `ThemeProvider` sets the axes from React (`target="root"` for `<html>`, or a `display: contents` wrapper for a subtree), and `useTheme()` reads them. Overlays opened inside a themed subtree portal into it (`PortalContainerContext`), so they keep its theme.
+- The demo app runs on the semantic tokens end to end, including its shell, and follows the OS theme with a toggle.
+- **Not done yet:**
+  - running `tokens:sync` into the Angular repo (the script exists)
+  - Figma variables generated from `dist/tokens.json`

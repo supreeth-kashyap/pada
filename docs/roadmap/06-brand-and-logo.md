@@ -82,3 +82,29 @@ These are briefs for a designer (or a first SVG pass), not finished art.
 - The existing `Logo` component (third-party brand logos) is renamed to **`BrandLogo`**, with `Logo` kept as a deprecated alias in 2.x.
 - `SidebarLogo` defaults to the new `PadaLogo`.
 - Figma: brand page with the mark, lockups and rules.
+
+## 8. As built (React)
+
+**`PadaLogo`** (`src/components/PadaLogo`) implements concept A in code: two mirrored soles on a shared ground bar.
+- Variants: `mark`, `wordmark` and `lockup`.
+- `tone`:
+  - `color`: amber left sole, accent right sole, so it follows `data-accent`.
+  - `accent`.
+  - `mono` (`currentColor`).
+- `size`: `sm` to `xl`, or a pixel height. Toes appear from 48px up.
+- `animated`: steps in once; `animated="loop"` is the branded loader, with `role="status"`.
+- It is an image named "Pada" unless `decorative`.
+- The wordmark is drawn with strokes, so it needs no font.
+
+Product changes:
+- `Logo` is now `BrandLogo`, with the old name kept as a deprecated alias.
+- `SidebarLogo` defaults to the lockup.
+- The demo has `public/favicon.svg`, whose ground bar adapts to dark mode, the title "Pada Design System" and a Foundation → Brand page.
+
+**Not done yet:**
+- PNG and ICO exports and maskable icons.
+- The social card.
+- The stacked lockup.
+- The पाद heritage mark.
+- The rules page and Figma.
+- The Angular `PadaLogo`.

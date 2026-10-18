@@ -131,3 +131,46 @@ Each refactor: move behaviour into a headless part, expose compound parts, keep 
 - [ ] Docs page (Purpose, Design, Developer, Accessibility, as `DemoPage` does today) with React and Angular code tabs
 - [ ] Figma component updated
 - [ ] Parity matrix row set to ✅ in both repos
+
+## 5. As built (React, phases 3 to 5)
+
+Every component below has JSDoc for the manifest, Vitest and axe tests, and a demo page.
+
+**Refactors done:**
+- **Overlays.** Dialog, AlertDialog, Drawer and DropdownMenu (Modal and SideDrawer are now wrappers). Popover and Tooltip gained compound parts.
+- **Tabs.** Headless, with a sliding indicator and a pills variant.
+- **Accordion.** Built on Collapsible.
+- **Table.** Table roles, `aria-sort` and keyboard column resizing.
+- **Steps.** Real buttons and `aria-current="step"`.
+- **List.** Keyboard reorder with announcements, and FLIP motion.
+- **Toolbar filters.** On Popover and vertical Tabs, and FilterChip has no nested controls.
+- **Select.** Portalled, floating and flips; dismissable inside dialogs; type-ahead; a hidden input for `name`.
+- **UploadField.** Description wired up, progressbar, and a working View action.
+- **DatePicker and InputDate.** On Calendar.
+- **Logo.** Renamed `BrandLogo`.
+- **Accessibility fixes** in Button (`size`, `loading`, `type="button"`), Checkbox (`indeterminate`), InputText and InputTextArea, Carousel (APG carousel), Notification, ComboBox (roving focus) and Breadcrumbs (focus on expand).
+
+**Refactors not done:**
+- **Not yet compound parts:** Select, Card, Banner, PageHeader, Sidebar, Progress (no `ProgressCircle`), Text (no `Heading`), Tags (no `Tag` / `TagGroup`), SegmentControl, Pills, RadioGroup and Switch. They use the 2.0 tokens and keep their 1.x APIs.
+- **ComboBox not renamed.** It keeps its name; `Autocomplete` is the real combobox.
+- **KeyValue not merged.** It is not yet merged into `DescriptionList`.
+- **InputText and InputTextArea not moved onto Field.** Use `Field` directly for new forms.
+
+**Ported from Angular:** Avatar and AvatarGroup, and Badge. DescriptionList is not done.
+
+**Wave 1:** all shipped.
+- Field, Stack, Separator, VisuallyHidden (headless).
+- Toggle and ToggleGroup.
+- DropdownMenu, AlertDialog.
+- Toaster and `toast()`.
+- CommandPalette, and Combobox (styled as `Autocomplete`).
+- Breadcrumbs, Pagination.
+- Avatar, Badge, Skeleton, Alert, EmptyState, Kbd (a `keys` prop instead of `KbdGroup`), Spinner.
+- IconButton, Link.
+- ThemeProvider and ThemeToggle.
+
+**Wave 2:**
+- **Shipped:** NumberInput, PasswordInput, PinInput, TagInput, RangeSlider, RadioCard (`RadioCardGroup`), Rating, ContextMenu, HoverCard, Collapsible, Tree, Calendar (range selection, also used by InputDate), Timeline, Stat, ScrollArea, AspectRatio, Grid and Container.
+- **Not started:** CheckboxGroup, TimePicker, ColorPicker, Menubar, DataTable, the two-month DateRangePicker with presets, Sheet and Resizable.
+
+**Definition of done, React side:** specs in `specs/` and Figma updates are still outstanding for every component.
