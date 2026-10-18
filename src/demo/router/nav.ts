@@ -48,6 +48,7 @@ const COMPONENT_ENTRIES: NavEntry[] = [
   { kind: 'components', slug: 'carousel', label: 'Carousel' },
   { kind: 'components', slug: 'checkbox', label: 'Checkbox' },
   { kind: 'components', slug: 'code-snippet', label: 'Code Snippet' },
+  { kind: 'components', slug: 'color-picker', label: 'Color Picker' },
   { kind: 'components', slug: 'combo-box', label: 'Combo Box' },
   { kind: 'components', slug: 'command-palette', label: 'Command Palette' },
   { kind: 'components', slug: 'context-menu', label: 'Context Menu' },

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, useSyncExternalStore, type ReactNode } from 'react';
+import { useEffect, useMemo, useState, useSyncExternalStore, type CSSProperties, type ReactNode } from 'react';
 import { PortalContainerContext } from '../../headless/utils/portalContainer';
 import { useControllableState } from '../../headless/utils/useControllableState';
 import { ThemeContext, type ThemeMode, type ThemeSettings } from './themeContext';
@@ -16,6 +16,8 @@ export interface ThemeProviderProps extends ThemeSettings {
   target?: 'root' | 'element';
   /** Remember the chosen theme in localStorage under this key. */
   storageKey?: string;
+  /** Hue (0–360) of the accent when `accent="custom"`; sets `--pada-accent-hue`. */
+  accentHue?: number;
 }
 
 const DARK_QUERY = '(prefers-color-scheme: dark)';
@@ -54,6 +56,7 @@ export function ThemeProvider({
   radius,
   motion,
   contrast,
+  accentHue,
 }: ThemeProviderProps) {
   const [theme, setTheme] = useControllableState<ThemeMode>({
     prop: themeProp,
@@ -86,6 +89,19 @@ export function ThemeProvider({
     [theme, accent, neutral, density, radius, motion, contrast],
   );
 
+  // The custom accent's hue must be set on the element that carries data-accent: tokens read it
+  // where they are declared, so a value set on a child would not reach them.
+  useEffect(() => {
+    if (target !== 'root' || accentHue === undefined) return;
+    const root = document.documentElement;
+    const previous = root.style.getPropertyValue('--pada-accent-hue');
+    root.style.setProperty('--pada-accent-hue', String(accentHue));
+    return () => {
+      if (previous) root.style.setProperty('--pada-accent-hue', previous);
+      else root.style.removeProperty('--pada-accent-hue');
+    };
+  }, [target, accentHue]);
+
   useEffect(() => {
     if (target !== 'root') return;
     const root = document.documentElement;
@@ -112,7 +128,11 @@ export function ThemeProvider({
       {target === 'root' ? (
         children
       ) : (
-        <div className="theme-scope" {...attributes}>
+        <div
+          className="theme-scope"
+          {...attributes}
+          style={accentHue === undefined ? undefined : ({ '--pada-accent-hue': accentHue } as CSSProperties)}
+        >
           {/* Overlays opened inside this subtree portal here, so they keep its theme. */}
           <PortalContainerContext value={portalContainer}>{children}</PortalContainerContext>
           <div ref={setPortalContainer} className="theme-portal" />

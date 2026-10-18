@@ -1,4 +1,4 @@
-import { useState, type CSSProperties, type ReactNode } from 'react';
+import { useState, type ReactNode } from 'react';
 import {
   Alert,
   AlertDialog,
@@ -116,8 +116,8 @@ export default function PlaygroundDemo() {
         </div>
       </div>
 
-      <ThemeProvider theme={theme} onThemeChange={setTheme} accent={accent} density={density} radius={radius}>
-        <div className="playground-surface" style={{ '--pada-accent-hue': hue } as CSSProperties}>
+      <ThemeProvider theme={theme} onThemeChange={setTheme} accent={accent} accentHue={hue} density={density} radius={radius}>
+        <div className="playground-surface">
           <div className="playground-grid">
             <Panel title="Actions">
               <Stack direction="row" gap={2} wrap align="center">

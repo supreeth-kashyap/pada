@@ -6,6 +6,13 @@
 - Moved the `body` and `p` rules out of `dist/tokens.css` into a new optional `pada-ds/base.css` export, so importing the tokens no longer overrides an app's own styles.
 - Added a component API manifest for AI coding agents. `npm run build` now reads every exported component's props from the TypeScript source and writes `dist/manifest.json` (exported as `pada-ds/manifest.json`), `llms.txt` and `llms-full.txt`. Both llms files ship in the package and are committed at the repo root. `npm test` fails if they are stale or if an exported component is missing from the manifest.
 
+- **New: `ColorPicker`.** Picks colours in OKLCH:
+  - **Controls.** An area for chroma (left to right) and lightness (bottom to top) at the chosen hue, drawn on a canvas with out-of-sRGB colours shown at their nearest displayable colour; a hue slider; a hex field that accepts typed values on Enter or blur; the OKLCH reading; and optional `swatches`.
+  - **Accessibility.** The area is a keyboard-operable 2D slider: arrows, Shift for bigger steps, PageUp/PageDown for lightness, Home/End for grey or full chroma. Its value text reads lightness and chroma. Swatches are toggle buttons.
+  - **Output.** `format="hex"` (mapped into sRGB) or `"oklch"` (exactly as chosen). Exported helpers: `parseColor`, `formatHex` and `formatOklch`.
+- **New: `ThemeProvider accentHue`** sets the hue for `accent="custom"` on the themed element itself.
+- **Fixed:** the Playground's custom accent hue, which was set on a child of the themed element and never reached the accent tokens.
+- **Fixed docs:** the README said the token knobs could be set on any element. They take effect on `:root` or on an element with a theme attribute.
 - **New: `Menubar`.** A desktop-style row of menus (`Menubar.Root`, `Menu`, `Trigger`, `Content`, plus every DropdownMenu item part: items with icons and shortcuts, checkbox and radio items, labels, separators and submenus). It follows the WAI-ARIA menubar pattern:
   - **Bar.** One Tab stop. Arrow keys move along the bar (wrapping), and Home and End jump to the ends.
   - **Opening.** Enter, Space or ArrowDown opens a menu on its first item; ArrowUp opens it on its last.

@@ -17,6 +17,8 @@ if (!('ResizeObserver' in globalThis)) {
   };
 }
 if (!Element.prototype.scrollIntoView) Element.prototype.scrollIntoView = () => {};
+// jsdom has no canvas; stub it so parts that paint one (ColorPicker) skip painting quietly.
+HTMLCanvasElement.prototype.getContext = (() => null) as typeof HTMLCanvasElement.prototype.getContext;
 if (!('PointerEvent' in window)) {
   // @ts-expect-error minimal polyfill: jsdom only has MouseEvent
   window.PointerEvent = class PointerEvent extends MouseEvent {};

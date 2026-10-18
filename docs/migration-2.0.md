@@ -69,7 +69,7 @@ There are new theme axes. Each is a `data-*` attribute on `<html>` or any contai
 | Attribute | Values |
 |---|---|
 | `data-theme` | `light`, `dark` (unset follows the OS) |
-| `data-accent` | any palette hue, or `custom` with `--pada-accent-hue` |
+| `data-accent` | any palette hue, or `custom` with `--pada-accent-hue` (set on the same element, or `ThemeProvider accentHue`) |
 | `data-neutral` | `stone`, `slate`, `gray`, `zinc`, `neutral` |
 | `data-density` | `compact`, `comfortable`, `spacious` |
 | `data-radius` | `none`, `sm`, `md`, `lg`, `xl` |

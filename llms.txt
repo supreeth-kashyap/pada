@@ -77,6 +77,7 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - Carousel: children, autoPlay?, interval?, className?, showDots?, showNav?, label?
 - Checkbox: label?, indeterminate?, ref?; extends React.InputHTMLAttributes<HTMLInputElement>
 - CodeSnippet: code, language, type?, label?, showCopy?, className?
+- ColorPicker: label, value?, defaultValue?, onValueChange?, format?, swatches?, disabled?; extends Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'onChange'>
 - ComboBox: items, multiSelect?, onItemClick?; extends React.HTMLAttributes<HTMLDivElement>
 - ComboBoxMenuItem: iconName?, label, selected?, disabled?, multiSelect?; extends React.ButtonHTMLAttributes<HTMLButtonElement>
 - CommandPalette: commands, open?, onOpenChange?, placeholder?, emptyMessage?, hotkey?, label?
@@ -245,7 +246,7 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - TagInput: label, value?, defaultValue?, onValueChange?, placeholder?, description?, error?, separators?, maxTags?, allowDuplicates?, validate?, addOnBlur?, disabled?, required?, name?, className?
 - Tags: children, variant?, icon?, className?
 - Text: children, size?, weight?, family?, lineHeight?, color?, as?; extends React.HTMLAttributes<HTMLSpanElement>
-- ThemeProvider: children?, defaultTheme?, onThemeChange?, target?, storageKey?, theme?, accent?, neutral?, density?, radius?, motion?, contrast?
+- ThemeProvider: children?, defaultTheme?, onThemeChange?, target?, storageKey?, accentHue?, theme?, accent?, neutral?, density?, radius?, motion?, contrast?
 - ThemeToggle: className?, size?
 - Timeline: items?, children?, density?; extends Omit<ComponentPropsWithRef<'ol'>, 'children'>
 - Timeline.Item: title, time?, icon?, tone?, pending?, children?; extends Omit<ComponentPropsWithRef<'li'>, 'title'>

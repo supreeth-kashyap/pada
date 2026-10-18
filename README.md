@@ -103,10 +103,10 @@ Every axis is an attribute that works on `<html>` or any container, and they com
 
 ### Knobs
 
-Derived tokens are computed from a handful of knobs, so one change re-themes every component. Set them on any element:
+Derived tokens are computed from a handful of knobs, so one change re-themes every component. Set them on `:root`, or on an element that also carries a theme attribute (`data-accent`, `data-theme`, …): derived tokens are computed on those elements, so a knob set anywhere else does not reach them. With `ThemeProvider`, pass `accentHue` instead of setting `--pada-accent-hue` yourself.
 
 ```css
-.brand {
+.brand[data-accent] {
   --pada-accent-hue: 160;   /* used by data-accent="custom" (OKLCH hue) */
   --pada-radius-base: 0.5rem;
   --pada-density: 0.9;
@@ -152,6 +152,7 @@ This design system includes the following components:
 - **CodeSnippet**: Display formatted, copyable code blocks.
 - **CommandPalette**: ⌘K search over app commands.
 - **ContextMenu**: Right-click menu at the pointer.
+- **ColorPicker**: OKLCH colour picker with a chroma and lightness area, hue slider, hex field and swatches.
 - **ComboBox**: Filterable list dropdown with options.
 - **Container**: Centred page width with responsive gutters.
 - **DatePicker**: Select dates via calendar UI.

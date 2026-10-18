@@ -12,7 +12,7 @@ const cell = { padding: '8px 12px', borderBottom: '1px solid var(--pada-color-bo
 
 const AXES: [string, string, string][] = [
   ['theme', 'data-theme', 'light · dark · system'],
-  ['accent', 'data-accent', 'any palette hue (indigo, violet, emerald, amber, rose, …) or custom with --pada-accent-hue'],
+  ['accent', 'data-accent', 'any palette hue (indigo, violet, emerald, amber, rose, …) or custom with accentHue (--pada-accent-hue)'],
   ['neutral', 'data-neutral', 'stone · slate · gray · zinc · neutral'],
   ['density', 'data-density', 'compact · comfortable · spacious'],
   ['radius', 'data-radius', 'none · sm · md · lg · xl'],
@@ -140,7 +140,7 @@ const { theme, resolvedTheme, setTheme } = useTheme();`}
             code={`<!-- No React needed: the attributes alone drive the tokens -->
 <html data-theme="dark" data-accent="amber" data-density="compact">
 
-/* A custom accent from any hue */
+/* A custom accent from any hue, set where data-accent is */
 :root { --pada-accent-hue: 200; }
 <html data-accent="custom">`}
             language="html"

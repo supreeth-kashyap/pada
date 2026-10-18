@@ -42,6 +42,23 @@ describe('ThemeProvider and ThemeToggle', () => {
     expect(window.localStorage.getItem('pada-theme')).toBe('dark');
   });
 
+  it('sets the custom accent hue on the themed element, where the accent tokens read it', () => {
+    const { container, rerender } = render(
+      <ThemeProvider accent="custom" accentHue={140}>
+        <span>Inside</span>
+      </ThemeProvider>,
+    );
+    const scope = container.querySelector('.theme-scope') as HTMLElement;
+    expect(scope).toHaveAttribute('data-accent', 'custom');
+    expect(scope.style.getPropertyValue('--pada-accent-hue')).toBe('140');
+    rerender(
+      <ThemeProvider target="root" accent="custom" accentHue={20}>
+        <span>Inside</span>
+      </ThemeProvider>,
+    );
+    expect(document.documentElement.style.getPropertyValue('--pada-accent-hue')).toBe('20');
+  });
+
   it('gives each toggle its own icon mask', () => {
     const { container } = render(
       <ThemeProvider defaultTheme="light">

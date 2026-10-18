@@ -1,0 +1,213 @@
+/* Root */
+.color-picker {
+  /* Component tokens */
+  --pada-color-picker-width: 240px;
+  --pada-color-picker-gap: var(--pada-space-3);
+  --pada-color-picker-area-height: 160px;
+  --pada-color-picker-radius: var(--pada-radius-md);
+  --pada-color-picker-thumb-size: 16px;
+  --pada-color-picker-thumb-border: var(--pada-color-static-white);
+  --pada-color-picker-thumb-ring: color-mix(in oklch, var(--pada-color-static-black) 25%, transparent);
+  --pada-color-picker-hue-height: var(--pada-space-3);
+  --pada-color-picker-swatch-size: 24px;
+  --pada-color-picker-cursor: crosshair;
+  /* Lightness and chroma of the hue spectrum. */
+  --pada-color-picker-spectrum: 0.72 0.15;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--pada-color-picker-gap);
+  box-sizing: border-box;
+  width: var(--pada-color-picker-width);
+  font-family: var(--pada-font-sans);
+  font-size: var(--pada-font-size-sm);
+  color: var(--pada-color-fg);
+}
+
+/* Variant variables */
+.color-picker[data-disabled] {
+  --pada-color-picker-cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Child elements */
+.color-picker-area {
+  position: relative;
+  height: var(--pada-color-picker-area-height);
+  border-radius: var(--pada-color-picker-radius);
+  box-shadow: inset 0 0 0 var(--pada-border-width-thin) var(--pada-color-border);
+  cursor: var(--pada-color-picker-cursor);
+  touch-action: none;
+  user-select: none;
+}
+
+.color-picker-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+}
+
+.color-picker-thumb {
+  position: absolute;
+  box-sizing: border-box;
+  width: var(--pada-color-picker-thumb-size);
+  height: var(--pada-color-picker-thumb-size);
+  translate: -50% -50%;
+  border: 2px solid var(--pada-color-picker-thumb-border);
+  border-radius: var(--pada-radius-full);
+  background: var(--pada-color-picker-value);
+  box-shadow: 0 0 0 1px var(--pada-color-picker-thumb-ring), var(--pada-shadow-sm);
+  outline: none;
+  transition: scale var(--pada-duration-fast) var(--pada-ease-standard);
+}
+
+.color-picker-thumb:focus-visible {
+  box-shadow: 0 0 0 1px var(--pada-color-picker-thumb-ring), var(--pada-shadow-focus);
+  scale: 1.15;
+}
+
+.color-picker-row {
+  display: flex;
+  align-items: center;
+  gap: var(--pada-space-2);
+}
+
+.color-picker-preview {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--pada-radius-full);
+  background: var(--pada-color-picker-value);
+  box-shadow: inset 0 0 0 var(--pada-border-width-thin) color-mix(in oklch, var(--pada-color-fg) 15%, transparent);
+}
+
+.color-picker-hue {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  height: var(--pada-color-picker-thumb-size);
+  margin-inline: calc(var(--pada-color-picker-thumb-size) / 2);
+  touch-action: none;
+  user-select: none;
+  cursor: pointer;
+}
+
+.color-picker-hue-track {
+  position: relative;
+  flex: 1;
+  height: var(--pada-color-picker-hue-height);
+  margin-inline: calc(var(--pada-color-picker-thumb-size) / -2);
+  border-radius: var(--pada-radius-full);
+  background: linear-gradient(
+    to right,
+    oklch(var(--pada-color-picker-spectrum) 0),
+    oklch(var(--pada-color-picker-spectrum) 60),
+    oklch(var(--pada-color-picker-spectrum) 120),
+    oklch(var(--pada-color-picker-spectrum) 180),
+    oklch(var(--pada-color-picker-spectrum) 240),
+    oklch(var(--pada-color-picker-spectrum) 300),
+    oklch(var(--pada-color-picker-spectrum) 360)
+  );
+}
+
+/* The hue track shows every hue; the filled range is not drawn. */
+.color-picker-hue-range {
+  display: none;
+}
+
+.color-picker-hue-thumb {
+  position: absolute;
+  inset-inline-start: calc(var(--pada-slider-thumb-position) - var(--pada-color-picker-thumb-size) / 2);
+  box-sizing: border-box;
+  width: var(--pada-color-picker-thumb-size);
+  height: var(--pada-color-picker-thumb-size);
+  border: 2px solid var(--pada-color-picker-thumb-border);
+  border-radius: var(--pada-radius-full);
+  background: oklch(var(--pada-color-picker-spectrum) var(--pada-color-picker-hue));
+  box-shadow: 0 0 0 1px var(--pada-color-picker-thumb-ring), var(--pada-shadow-sm);
+  outline: none;
+}
+
+.color-picker-hue-thumb:focus-visible {
+  box-shadow: 0 0 0 1px var(--pada-color-picker-thumb-ring), var(--pada-shadow-focus);
+}
+
+.color-picker-field {
+  display: flex;
+  align-items: center;
+  gap: var(--pada-space-2);
+  flex: none;
+}
+
+.color-picker-field-label {
+  color: var(--pada-color-fg-muted);
+  font-weight: var(--pada-font-weight-medium);
+}
+
+.color-picker-input {
+  box-sizing: border-box;
+  width: 84px;
+  height: var(--pada-control-height-sm);
+  padding-inline: var(--pada-space-2);
+  border: var(--pada-border-width-thin) solid var(--pada-color-border);
+  border-radius: var(--pada-radius-sm);
+  background: var(--pada-color-surface);
+  color: var(--pada-color-fg);
+  font-family: var(--pada-font-mono);
+  font-size: var(--pada-font-size-sm);
+  outline: none;
+}
+
+.color-picker-input:focus-visible {
+  border-color: var(--pada-color-accent-solid);
+  box-shadow: var(--pada-shadow-focus);
+}
+
+.color-picker-input[aria-invalid="true"] {
+  border-color: var(--pada-color-danger-solid);
+}
+
+.color-picker-oklch {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--pada-color-fg-muted);
+  font-family: var(--pada-font-mono);
+  font-size: var(--pada-font-size-xs);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.color-picker-swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--pada-space-2);
+}
+
+.color-picker-swatch {
+  width: var(--pada-color-picker-swatch-size);
+  height: var(--pada-color-picker-swatch-size);
+  padding: 0;
+  border: none;
+  border-radius: var(--pada-radius-sm);
+  background: var(--pada-color-picker-swatch);
+  box-shadow: inset 0 0 0 var(--pada-border-width-thin) color-mix(in oklch, var(--pada-color-fg) 15%, transparent);
+  cursor: pointer;
+  outline: none;
+  transition: scale var(--pada-duration-fast) var(--pada-ease-standard);
+}
+
+.color-picker-swatch:hover {
+  scale: 1.1;
+}
+
+.color-picker-swatch:focus-visible {
+  box-shadow: var(--pada-shadow-focus);
+}
+
+.color-picker-swatch[aria-pressed="true"] {
+  box-shadow:
+    0 0 0 2px var(--pada-color-surface),
+    0 0 0 4px var(--pada-color-picker-swatch);
+}

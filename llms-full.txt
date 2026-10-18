@@ -838,6 +838,30 @@ import { CodeSnippet } from 'pada-ds';
 <CodeSnippet code="..." language="..." />
 ```
 
+### ColorPicker
+
+`import { ColorPicker } from 'pada-ds';`
+
+Pick a colour in OKLCH, the perceptual colour space Pada's tokens use: an area for chroma (left to right) and lightness (bottom to top), a hue slider, a hex field and optional swatches. Colours outside sRGB are shown at their nearest displayable colour.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| label | `string` | yes | - | Accessible name of the picker, e.g. "Accent colour". |
+| value | `string` | no | - | Controlled colour: `#rrggbb` or `oklch(L C H)`. |
+| defaultValue | `string` | no | `'#4f46e5'` | Initial colour when uncontrolled. |
+| onValueChange | `(value: string) => void` | no | - | Called with the new colour, in `format`, on every change. |
+| format | `ColorFormat` | no | `'hex'` | Output format. `hex` maps the colour into sRGB; `oklch` keeps exactly what was chosen, which may be outside sRGB on wide-gamut screens. |
+| swatches | `(string \| ColorSwatch)[]` | no | - | Preset colours shown under the controls. |
+| disabled | `boolean` | no | `false` | - |
+
+Also accepts the props of `Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'onChange'>`.
+
+```tsx
+import { ColorPicker } from 'pada-ds';
+
+<ColorPicker label="..." />
+```
+
 ### ComboBox
 
 `import { ComboBox } from 'pada-ds';`
@@ -4350,6 +4374,7 @@ Sets Pada's theme axes (`data-theme`, `data-accent`, `data-density`, …) for th
 | onThemeChange | `(theme: ThemeMode) => void` | no | - | Called when `setTheme` changes the theme. |
 | target | `'root' \| 'element'` | no | `'element'` | `root` applies the attributes to `<html>` (the whole page); `element` wraps the children in a `display: contents` element, so a section can have its own theme. |
 | storageKey | `string` | no | - | Remember the chosen theme in localStorage under this key. |
+| accentHue | `number` | no | - | Hue (0–360) of the accent when `accent="custom"`; sets `--pada-accent-hue`. |
 | theme | `ThemeMode` | no | - | Light, dark, or follow the operating system. |
 | accent | `string` | no | - | Accent palette: any palette hue (`indigo`, `amber`, `emerald`, …) or `custom` (uses `--pada-accent-hue`). |
 | neutral | `'stone' \| 'slate' \| 'gray' \| 'zinc' \| 'neutral'` | no | - | Neutral palette for surfaces, text and borders. |
