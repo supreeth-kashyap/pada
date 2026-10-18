@@ -183,6 +183,9 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - RadioGroup: name, label?, options, value, onChange, disabled?, className?
 - RangeSlider: label, value?, defaultValue?, onValueChange?, onValueCommit?, min?, max?, step?, minStepsBetweenThumbs?, formatOptions?, locale?, showValue?, thumbLabels?, description?, error?, disabled?, name?, className?
 - Rating: label, value?, defaultValue?, onValueChange?, max?, readOnly?, disabled?, allowClear?, showLabel?, size?, name?, className?
+- Resizable.Handle: withGrip?, aria-label?; extends ComponentPropsWithRef<'div'>
+- Resizable.Panel: defaultSize?, minSize?, maxSize?, collapsible?, collapsedSize?; extends ComponentPropsWithRef<'div'>
+- Resizable.Root: orientation?, sizes?, onSizesChange?, onSizesCommit?, keyboardStep?, disabled?; extends Omit<ComponentPropsWithRef<'div'>, 'dir'>
 - ScrollArea: orientation?, maxHeight?, maxWidth?, fade?, scrollbar?; extends ComponentPropsWithRef<'div'>
 - SearchField: value?, defaultValue?, onChange?, onClear?, className?; extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'onChange' | 'value' | 'defaultValue'>
 - SegmentControl: options, value?, defaultValue?, onChange?, className?, disabled?

@@ -84,6 +84,7 @@ const COMPONENT_ENTRIES: NavEntry[] = [
   { kind: 'components', slug: 'radio-group', label: 'Radio Group' },
   { kind: 'components', slug: 'range-slider', label: 'Range Slider' },
   { kind: 'components', slug: 'rating', label: 'Rating' },
+  { kind: 'components', slug: 'resizable', label: 'Resizable' },
   { kind: 'components', slug: 'scroll-area', label: 'Scroll Area' },
   { kind: 'components', slug: 'search-field', label: 'Search Field' },
   { kind: 'components', slug: 'segment-control', label: 'Segment Control' },

@@ -3066,6 +3066,70 @@ import { Rating } from 'pada-ds';
 <Rating label="..." />
 ```
 
+### Resizable.Handle
+
+`import { Resizable } from 'pada-ds';`
+
+The line between two panels. Drag it, or focus it and use the arrow keys; Home and End jump to the limits and Enter collapses a collapsible panel. Named "Resize" unless you pass a label.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| withGrip | `boolean` | no | `false` | Show a grip in the middle of the line, so the handle is easier to find. |
+| aria-label | `string` | no | - | Accessible name: say what the handle resizes ("Resize file list"). |
+
+Also accepts the props of `ComponentPropsWithRef<'div'>`.
+
+```tsx
+import { Resizable } from 'pada-ds';
+
+<Resizable.Handle />
+```
+
+### Resizable.Panel
+
+`import { Resizable } from 'pada-ds';`
+
+One panel. Its size is a flex ratio, so handles of any width never overflow the group. `data-state` is `collapsed` or `expanded` for collapsible panels.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| defaultSize | `number` | no | - | Initial size in percent. Panels without one share the remaining space. |
+| minSize | `number` | no | - | - |
+| maxSize | `number` | no | - | - |
+| collapsible | `boolean` | no | - | Lets the panel collapse: Enter on the handle after it, or dragging well below `minSize`. |
+| collapsedSize | `number` | no | - | Size when collapsed, in percent. |
+
+Also accepts the props of `ComponentPropsWithRef<'div'>`.
+
+```tsx
+import { Resizable } from 'pada-ds';
+
+<Resizable.Panel />
+```
+
+### Resizable.Root
+
+`import { Resizable } from 'pada-ds';`
+
+A group of resizable panels. Panels and handles must be direct children, in order. Restyle through `--pada-resizable-*` tokens.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| orientation | `Orientation` | no | - | `horizontal` lays panels side by side; `vertical` stacks them. |
+| sizes | `number[]` | no | - | Controlled panel sizes, in percent, one per panel. |
+| onSizesChange | `(sizes: number[]) => void` | no | - | Called with the new sizes on every change. |
+| onSizesCommit | `(sizes: number[]) => void` | no | - | Called once a drag ends or a key press resizes, e.g. to save the layout. |
+| keyboardStep | `number` | no | - | Percent moved by each arrow-key press. |
+| disabled | `boolean` | no | - | - |
+
+Also accepts the props of `Omit<ComponentPropsWithRef<'div'>, 'dir'>`.
+
+```tsx
+import { Resizable } from 'pada-ds';
+
+<Resizable.Root />
+```
+
 ### ScrollArea
 
 `import { ScrollArea } from 'pada-ds';`

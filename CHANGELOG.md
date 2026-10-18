@@ -6,6 +6,12 @@
 - Moved the `body` and `p` rules out of `dist/tokens.css` into a new optional `pada-ds/base.css` export, so importing the tokens no longer overrides an app's own styles.
 - Added a component API manifest for AI coding agents. `npm run build` now reads every exported component's props from the TypeScript source and writes `dist/manifest.json` (exported as `pada-ds/manifest.json`), `llms.txt` and `llms-full.txt`. Both llms files ship in the package and are committed at the repo root. `npm test` fails if they are stale or if an exported component is missing from the manifest.
 
+- **New: `Resizable`.** Split a region into panels that people resize (`Resizable.Root`, `Panel`, `Handle`), horizontally or vertically, and nested:
+  - **Panels.** Each takes `defaultSize`, `minSize` and `maxSize` in percent, and can be `collapsible`. Sizes are flex ratios, so handles never overflow the group.
+  - **Handles.** Each is a focusable window-splitter `separator` that controls the panel before it. Arrow keys resize by `keyboardStep`, Home and End jump to the limits, and Enter or a double-click collapses and restores. A collapsible panel dragged well below its minimum snaps shut.
+  - **Sizes.** Controlled with `sizes` / `onSizesChange`; `onSizesCommit` fires when a drag or key press ends, for saving the layout.
+  - **Styled handle.** A 1px line with a wider invisible hit area. It thickens in the accent colour on hover, focus and drag, and `withGrip` adds a grip. Restyle through `--pada-resizable-*` tokens.
+  - **Headless.** `pada-ds/headless` exports the same parts.
 - **Docs.** New [migration guide](./docs/migration-2.0.md) covering tokens, theming, deprecated APIs, the headless entry point and every behaviour or markup change. `docs/roadmap` has "As built" notes per area, a progress table and a React 2.0 column in the parity matrix.
 - **Demo dark mode.** The demo shell and documentation pages now use semantic tokens instead of hard-coded colours. A theme toggle in the top-right corner follows the OS by default and remembers your choice. The Playground starts from the shell's theme.
 - **Fixed:** `ThemeToggle`:

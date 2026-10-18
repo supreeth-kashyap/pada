@@ -18,6 +18,7 @@ export * from './Tree';
 export * from './HoverCard';
 export * from './Slider';
 export * from './PinInput';
+export * from './Resizable';
 
 export { Slot, type SlotProps } from './utils/Slot';
 export { Portal, type PortalProps } from './utils/Portal';

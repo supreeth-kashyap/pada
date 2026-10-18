@@ -61,7 +61,7 @@ import { Dialog } from 'pada-ds/headless';
 .my-dialog[data-state="open"] { animation: fade-in var(--pada-duration-slow) var(--pada-ease-emphasized); }
 ```
 
-Available parts: `Dialog`, `Popover`, `Tooltip` (with `Tooltip.Provider` for shared delays), `DropdownMenu` (items, checkbox and radio items, groups, labels, separators, submenus), `Tabs`, `Accordion`, `Collapsible`, `Field`, `Toggle` / `ToggleGroup`, `Combobox` (single or multiple, with a pluggable filter), `NumberInput`, `Calendar`, `Tree`, `HoverCard`, `ContextMenu`, `Slider` (any number of thumbs) and `PinInput`. Each follows the matching WAI-ARIA Authoring Practices pattern. Any part that renders an element accepts `asChild`, which merges its behaviour onto your own element (a router link, a custom button) instead of rendering a new one.
+Available parts: `Dialog`, `Popover`, `Tooltip` (with `Tooltip.Provider` for shared delays), `DropdownMenu` (items, checkbox and radio items, groups, labels, separators, submenus), `Tabs`, `Accordion`, `Collapsible`, `Field`, `Toggle` / `ToggleGroup`, `Combobox` (single or multiple, with a pluggable filter), `NumberInput`, `Calendar`, `Tree`, `HoverCard`, `ContextMenu`, `Slider` (any number of thumbs), `PinInput` and `Resizable` (window splitter). Each follows the matching WAI-ARIA Authoring Practices pattern. Any part that renders an element accepts `asChild`, which merges its behaviour onto your own element (a router link, a custom button) instead of rendering a new one.
 
 Portalled parts render into `document.body`, or into the element provided by `PortalContainerContext` (`ThemeProvider` provides one, so overlays keep a subtree's theme).
 
@@ -190,6 +190,7 @@ This design system includes the following components:
 - **RadioGroup**: Grouped single-choice radio buttons.
 - **RangeSlider**: Two-thumb slider for a range.
 - **Rating**: Star rating, interactive or read-only.
+- **Resizable**: Panels separated by draggable, keyboard-operable handles, with collapsible panels and nested groups.
 - **ScrollArea**: Native scrolling with themed scrollbars and edge fades.
 - **SearchField**: Text search input with clear.
 - **SegmentControl**: Segmented button toggle control.
