@@ -1,24 +1,102 @@
-import React, { useEffect, useRef, useState } from 'react';
-import './Popover.css';
+import React, { useId } from 'react';
+import {
+  PopoverAnchor,
+  PopoverArrow as HeadlessArrow,
+  PopoverClose,
+  PopoverContent as HeadlessContent,
+  PopoverPortal as HeadlessPortal,
+  PopoverRoot,
+  PopoverTitle as HeadlessTitle,
+  PopoverTrigger,
+  type PopoverArrowProps,
+  type PopoverCloseProps,
+  type PopoverContentProps as HeadlessContentProps,
+  type PopoverTitleProps,
+} from '../../headless/Popover/Popover';
 import { Icon } from '../Icon';
+import './Popover.css';
+
+const cx = (...names: (string | undefined | false)[]) => names.filter(Boolean).join(' ');
 
 export type PopoverPosition = 'top' | 'bottom' | 'left' | 'right' | 'auto';
 export type PopoverVariant = 'default' | 'active';
+export type PopoverContentVariant = 'default' | 'dashed' | 'active';
+
+export interface PopoverContentProps extends HeadlessContentProps {
+  /** Surface style: default (solid border), dashed, or active (accent border with a glow). */
+  variant?: PopoverContentVariant;
+  /** Element to portal into. Defaults to `document.body`. */
+  container?: Element | null;
+}
+
+/** The floating panel, rendered in a portal and animated from the side that faces its trigger. */
+function PopoverContent({ variant = 'default', container, sideOffset = 8, className, ...props }: PopoverContentProps) {
+  return (
+    <HeadlessPortal container={container}>
+      <HeadlessContent data-variant={variant} sideOffset={sideOffset} {...props} className={cx('popover', className)} />
+    </HeadlessPortal>
+  );
+}
+
+/** The popover's heading; names the popover for assistive technology. */
+function PopoverTitle({ className, ...props }: PopoverTitleProps) {
+  return <HeadlessTitle {...props} className={cx('popover-title', className)} />;
+}
+
+/** Arrow pointing at the trigger. */
+function PopoverArrow({ className, ...props }: PopoverArrowProps) {
+  return <HeadlessArrow {...props} className={cx('popover-arrow', className)} />;
+}
+
+export interface PopoverCloseButtonProps extends Omit<PopoverCloseProps, 'children' | 'asChild'> {
+  /** Accessible name of the icon button. */
+  label?: string;
+}
+
+/** Icon button in the top corner that closes the popover. */
+function PopoverCloseButton({ label = 'Close', className, ...props }: PopoverCloseButtonProps) {
+  return (
+    <PopoverClose aria-label={label} {...props} className={cx('popover-close', className)}>
+      <Icon name="cross_1" size={14} aria-hidden="true" />
+    </PopoverClose>
+  );
+}
 
 export interface PopoverProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   children: React.ReactNode;
+  /** Element that toggles the popover. It receives the trigger's ARIA attributes. */
   trigger?: React.ReactElement;
+  /** Preferred side. `auto` prefers the bottom; every side flips when there is no room. */
   position?: PopoverPosition;
   title?: string;
   variant?: PopoverVariant;
   showClose?: boolean;
   className?: string;
+  /** Viewport coordinates to anchor the popover at instead of the trigger (a context menu, say). */
   clickPosition?: { x: number; y: number };
 }
 
-export const Popover: React.FC<PopoverProps> = ({
+/**
+ * A panel anchored to a trigger. Closes on Escape, on a click outside and when focus leaves it.
+ *
+ * Also a namespace of compound parts for full control:
+ * `Popover.Root`, `Popover.Trigger`, `Popover.Anchor`, `Popover.Content`, `Popover.Title`,
+ * `Popover.Arrow`, `Popover.Close`, `Popover.CloseButton`.
+ *
+ * ```tsx
+ * <Popover.Root>
+ *   <Popover.Trigger asChild><Button variant="secondary">Filters</Button></Popover.Trigger>
+ *   <Popover.Content side="bottom" align="start">
+ *     <Popover.Title>Filters</Popover.Title>
+ *     …
+ *     <Popover.CloseButton />
+ *   </Popover.Content>
+ * </Popover.Root>
+ * ```
+ */
+export function Popover({
   open,
   onOpenChange,
   children,
@@ -27,191 +105,48 @@ export const Popover: React.FC<PopoverProps> = ({
   title,
   variant = 'default',
   showClose = true,
-  className = '',
-  clickPosition
-}) => {
-  const popoverRef = useRef<HTMLDivElement>(null);
-  const triggerRef = useRef<HTMLElement>(null);
-  const [calculatedPosition, setCalculatedPosition] = useState<PopoverPosition>(position);
-  const [popoverStyles, setPopoverStyles] = useState<React.CSSProperties>({});
-  const [triggerClickPosition, setTriggerClickPosition] = useState<{ x: number; y: number } | null>(null);
-  const lastPointerPositionRef = useRef<{ x: number; y: number } | null>(null);
-
-  // Callback ref to handle trigger element ref
-  const setTriggerRef = React.useCallback((node: HTMLElement | null) => {
-    triggerRef.current = node;
-    // If trigger has its own ref, call it too
-    if (trigger) {
-      const existingRef = (trigger as any).ref;
-      if (typeof existingRef === 'function') {
-        existingRef(node);
-      } else if (existingRef && typeof existingRef === 'object' && 'current' in existingRef) {
-        existingRef.current = node;
-      }
-    }
-  }, [trigger]);
-
-  useEffect(() => {
-    const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        onOpenChange(false);
-      }
-    };
-    const handlePointerDown = (event: PointerEvent) => {
-      lastPointerPositionRef.current = { x: event.clientX, y: event.clientY };
-    };
-
-    if (open) {
-      document.addEventListener('keydown', handleEscape);
-    } else {
-      document.removeEventListener('keydown', handleEscape);
-    }
-
-    document.addEventListener('pointerdown', handlePointerDown, true);
-
-    return () => {
-      document.removeEventListener('keydown', handleEscape);
-      document.removeEventListener('pointerdown', handlePointerDown, true);
-    };
-  }, [open, onOpenChange]);
-
-  useEffect(() => {
-    if (open && popoverRef.current) {
-      const popoverRect = popoverRef.current.getBoundingClientRect();
-      const viewportWidth = window.innerWidth;
-      const viewportHeight = window.innerHeight;
-
-      let finalPosition = position;
-      let top = 0;
-      let left = 0;
-
-      // If clickPosition is provided, use it
-      if (clickPosition) {
-        top = clickPosition.y;
-        left = clickPosition.x;
-        finalPosition = 'bottom';
-      } else if (triggerClickPosition) {
-        top = triggerClickPosition.y;
-        left = triggerClickPosition.x;
-        finalPosition = 'bottom';
-      } else if (lastPointerPositionRef.current) {
-        top = lastPointerPositionRef.current.y;
-        left = lastPointerPositionRef.current.x;
-        finalPosition = 'bottom';
-      } else if (triggerRef.current) {
-        // Otherwise, position relative to trigger
-        const triggerRect = triggerRef.current.getBoundingClientRect();
-
-        if (position === 'auto') {
-          // Auto-detect best position
-          const spaceBelow = viewportHeight - triggerRect.bottom;
-          const spaceAbove = triggerRect.top;
-          const spaceRight = viewportWidth - triggerRect.right;
-
-          if (spaceBelow >= popoverRect.height) {
-            finalPosition = 'bottom';
-          } else if (spaceAbove >= popoverRect.height) {
-            finalPosition = 'top';
-          } else if (spaceRight >= popoverRect.width) {
-            finalPosition = 'right';
-          } else {
-            finalPosition = 'left';
-          }
-        }
-
-        // Calculate position based on final position
-        switch (finalPosition) {
-          case 'bottom':
-            top = triggerRect.bottom + 8;
-            left = triggerRect.left + (triggerRect.width / 2) - (popoverRect.width / 2);
-            break;
-          case 'top':
-            top = triggerRect.top - popoverRect.height - 8;
-            left = triggerRect.left + (triggerRect.width / 2) - (popoverRect.width / 2);
-            break;
-          case 'right':
-            top = triggerRect.top + (triggerRect.height / 2) - (popoverRect.height / 2);
-            left = triggerRect.right + 8;
-            break;
-          case 'left':
-            top = triggerRect.top + (triggerRect.height / 2) - (popoverRect.height / 2);
-            left = triggerRect.left - popoverRect.width - 8;
-            break;
-        }
-      }
-
-      // Keep popover within viewport
-      if (left < 8) left = 8;
-      if (left + popoverRect.width > viewportWidth - 8) {
-        left = viewportWidth - popoverRect.width - 8;
-      }
-      if (top < 8) top = 8;
-      if (top + popoverRect.height > viewportHeight - 8) {
-        top = viewportHeight - popoverRect.height - 8;
-      }
-
-      setCalculatedPosition(finalPosition);
-      setPopoverStyles({ top: `${top}px`, left: `${left}px` });
-    }
-  }, [open, position, clickPosition, triggerClickPosition]);
-
-  const handleTriggerClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setTriggerClickPosition({ x: e.clientX, y: e.clientY });
-    onOpenChange(!open);
-  };
-
-  const handleOutsideClick = () => {
-    onOpenChange(false);
-  };
-
-  const clonedTrigger = trigger ? React.cloneElement(trigger, {
-    ...(trigger.props || {}),
-    ref: setTriggerRef,
-    onClick: (e: React.MouseEvent) => {
-      handleTriggerClick(e);
-      if (trigger.props && typeof trigger.props === 'object' && 'onClick' in trigger.props) {
-        (trigger.props as any).onClick?.(e);
-      }
-    }
-  } as any) : null;
-
-  if (!open) {
-    return clonedTrigger;
-  }
-
+  className,
+  clickPosition,
+}: PopoverProps) {
+  const labelId = useId();
   return (
-    <>
-      {clonedTrigger}
-      <div className="popover-overlay" onClick={handleOutsideClick}>
-        <div
-          ref={popoverRef}
-          className={`popover popover--${calculatedPosition} popover--${variant} ${className}`.trim()}
-          role="dialog"
-          aria-labelledby={title ? "popover-title" : undefined}
-          onClick={(e) => e.stopPropagation()}
-          style={popoverStyles}
-        >
-          {title && <h3 id="popover-title" className="popover-title">{title}</h3>}
-          <div className="popover-content">
-            {children}
-          </div>
-          {variant === 'active' && (
-            <div className="popover-icon">
-              <Icon name="star" size={16} color="var(--color-purple-600)" />
-            </div>
-          )}
-          {showClose && (
-            <button 
-              className="popover-close" 
-              onClick={() => onOpenChange(false)} 
-              aria-label="Close popover"
-            >
-              &times;
-            </button>
-          )}
-        </div>
-      </div>
-    </>
+    <PopoverRoot open={open} onOpenChange={onOpenChange}>
+      {trigger && <PopoverTrigger asChild>{trigger}</PopoverTrigger>}
+      {clickPosition && (
+        <PopoverAnchor asChild>
+          <span aria-hidden="true" style={{ position: 'fixed', left: clickPosition.x, top: clickPosition.y, width: 0, height: 0 }} />
+        </PopoverAnchor>
+      )}
+      <PopoverContent
+        side={position === 'auto' ? 'bottom' : position}
+        // 1.x look: the default variant had a dashed accent border.
+        variant={variant === 'active' ? 'active' : 'dashed'}
+        className={className}
+        aria-label={title ? undefined : 'Popover'}
+        aria-labelledby={title ? labelId : undefined}
+      >
+        {title && (
+          <h3 id={labelId} className="popover-title">
+            {title}
+          </h3>
+        )}
+        <div className="popover-body">{children}</div>
+        {variant === 'active' && (
+          <span className="popover-badge" aria-hidden="true">
+            <Icon name="star" size={16} />
+          </span>
+        )}
+        {showClose && <PopoverCloseButton label="Close popover" />}
+      </PopoverContent>
+    </PopoverRoot>
   );
-};
+}
+
+Popover.Root = PopoverRoot;
+Popover.Trigger = PopoverTrigger;
+Popover.Anchor = PopoverAnchor;
+Popover.Content = PopoverContent;
+Popover.Title = PopoverTitle;
+Popover.Arrow = PopoverArrow;
+Popover.Close = PopoverClose;
+Popover.CloseButton = PopoverCloseButton;

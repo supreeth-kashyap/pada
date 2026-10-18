@@ -1,14 +1,14 @@
 .combo-box {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-0-5);
-  padding: var(--spacing-2) var(--spacing-1);
+  gap: var(--pada-space-0-5);
+  padding: var(--pada-space-2) var(--pada-space-1);
   min-width: 225px;
   max-width: 400px;
   width: fit-content;
-  background-color: var(--color-bg);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-lg);
-  max-height: calc((var(--spacing-2) + var(--spacing-8)) * 6 + var(--spacing-4));
+  background-color: var(--pada-color-surface);
+  border-radius: var(--pada-radius-xl);
+  box-shadow: var(--pada-shadow-lg);
+  max-height: calc((var(--pada-space-2) + var(--pada-space-8)) * 6 + var(--pada-space-4));
   overflow-y: auto;
 }

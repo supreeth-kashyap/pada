@@ -13,12 +13,12 @@
   align-items: center;
   gap: 2px;
   font-family: inherit;
-  font-weight: 500;
-  font-size: 11px;
+  font-weight: var(--pada-font-weight-medium);
+  font-size: var(--pada-font-size-sm);
   line-height: 16px;
   padding: 4px 8px;
   white-space: nowrap;
-  border-radius: 6px;
+  border-radius: var(--pada-radius-md);
   border: 1px solid transparent;
   position: relative;
   box-sizing: border-box;
@@ -31,39 +31,39 @@
 
 /* Variants — all share the hue-50 / hue-100 / hue-700 tint formula. */
 .tags--neutral {
-  background-color: var(--color-stone-50);
-  border-color: var(--color-stone-100);
-  color: var(--color-stone-700);
+  background-color: var(--pada-color-neutral-50);
+  border-color: var(--pada-color-neutral-100);
+  color: var(--pada-color-neutral-700);
 }
 
 .tags--primary {
-  background-color: var(--color-primary-50);
-  border-color: var(--color-primary-100);
-  color: var(--color-primary-700);
+  background-color: var(--pada-color-accent-50);
+  border-color: var(--pada-color-accent-100);
+  color: var(--pada-color-accent-700);
 }
 
 .tags--secondary {
-  background-color: var(--color-secondary-50);
-  border-color: var(--color-secondary-100);
-  color: var(--color-secondary-700);
+  background-color: var(--pada-color-amber-50);
+  border-color: var(--pada-color-amber-100);
+  color: var(--pada-color-amber-700);
 }
 
 .tags--success {
-  background-color: var(--color-accent-lime-50);
-  border-color: var(--color-accent-lime-100);
-  color: var(--color-accent-lime-700);
+  background-color: var(--pada-color-lime-50);
+  border-color: var(--pada-color-lime-100);
+  color: var(--pada-color-lime-700);
 }
 
 .tags--danger {
-  background-color: var(--color-red-50);
-  border-color: var(--color-red-100);
-  color: var(--color-red-700);
+  background-color: var(--pada-color-red-50);
+  border-color: var(--pada-color-red-100);
+  color: var(--pada-color-red-700);
 }
 
 .tags--royal {
-  background-color: var(--color-purple-50);
-  border-color: var(--color-purple-100);
-  color: var(--color-purple-700);
+  background-color: var(--pada-color-purple-50);
+  border-color: var(--pada-color-purple-100);
+  color: var(--pada-color-purple-700);
 }
 
 /* Content */

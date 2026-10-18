@@ -1,35 +1,48 @@
 .code-snippet {
+  /* Code is always shown on a dark surface. Forcing the dark scheme here makes every
+     light-dark() token inside resolve to its dark value, in both page themes. */
+  color-scheme: dark;
+
+  /* Syntax colours (component tokens). Read under the dark scheme, so the themed ramps
+     resolve to their dark steps: pink-600 shows pink-400, purple-700 shows purple-300. */
+  --pada-code-snippet-comment: var(--pada-color-fg-subtle);
+  --pada-code-snippet-keyword: var(--pada-color-success-fg);
+  --pada-code-snippet-string: var(--pada-color-fg);
+  --pada-code-snippet-variable: var(--pada-color-pink-600);
+  --pada-code-snippet-number: var(--pada-color-purple-700);
+  --pada-code-snippet-punctuation: var(--pada-color-fg-muted);
+
   width: 100%;
-  border-radius: 8px;
+  border-radius: var(--pada-radius-lg);
   overflow: hidden;
-  font-family: var(--font-family-mono, "Fira Code", monospace);
+  font-family: var(--pada-font-mono);
 }
 
 .code-snippet__header {
   display: flex;
   align-items: center;
-  gap: var(--spacing-4);
-  padding: var(--spacing-2) var(--spacing-3);
-  background-color: var(--color-end-black);
-  border-bottom: 1px solid var(--color-neutral-900);
+  gap: var(--pada-space-4);
+  padding: var(--pada-space-2) var(--pada-space-3);
+  background-color: var(--pada-color-surface-sunken);
+  border-bottom: 1px solid var(--pada-color-border-subtle);
 }
 
 .code-snippet__label {
   flex: 1;
-  font-size: var(--font-size-sm);
-  line-height: var(--line-height-sm);
-  color: var(--color-neutral-400);
+  font-size: var(--pada-font-size-sm);
+  line-height: var(--pada-line-height-sm);
+  color: var(--pada-color-fg-muted);
   font-weight: 450;
   letter-spacing: -0.24px;
 }
 
 .code-snippet__body {
   margin: 0;
-  padding: var(--spacing-3);
-  background-color: var(--color-neutral-900);
-  color: var(--color-neutral-100);
-  font-size: var(--font-size-sm);
-  line-height: var(--line-height-sm);
+  padding: var(--pada-space-3);
+  background-color: var(--pada-color-surface);
+  color: var(--pada-color-fg);
+  font-size: var(--pada-font-size-sm);
+  line-height: var(--pada-line-height-sm);
   height: auto;
   overflow: auto;
 }
@@ -41,7 +54,7 @@
 
 .code-snippet--micro .code-snippet__body {
   height: auto;
-  padding: var(--spacing-2);
+  padding: var(--pada-space-2);
 }
 
 .code-snippet__code {
@@ -51,29 +64,29 @@
 }
 
 .code-snippet__code .token.comment {
-  color: #9ca3af;
+  color: var(--pada-code-snippet-comment);
 }
 
 .code-snippet__code .token.keyword,
 .code-snippet__code .token.boolean {
-  color: #15803d;
+  color: var(--pada-code-snippet-keyword);
 }
 
 .code-snippet__code .token.string {
-  color: #f3f4f6;
+  color: var(--pada-code-snippet-string);
 }
 
 .code-snippet__code .token.variable,
 .code-snippet__code .token.property,
 .code-snippet__code .token.attr-name {
-  color: #ec4899;
+  color: var(--pada-code-snippet-variable);
 }
 
 .code-snippet__code .token.number {
-  color: #d8b4fe;
+  color: var(--pada-code-snippet-number);
 }
 
 .code-snippet__code .token.operator,
 .code-snippet__code .token.punctuation {
-  color: #e5e7eb;
+  color: var(--pada-code-snippet-punctuation);
 }

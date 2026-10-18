@@ -1,7 +1,12 @@
-import React, { useState, useRef, useEffect, useId } from 'react';
+import React, { useState, useRef, useEffect, useId, useLayoutEffect } from 'react';
 import type { ComboBoxItem } from '../ComboBox/ComboBox';
 import { ComboBox } from '../ComboBox/ComboBox';
 import { Icon } from '../Icon';
+import { useFloatingPosition } from '../../headless/utils/floating';
+import { Portal } from '../../headless/utils/Portal';
+import { useComposedRefs } from '../../headless/utils/refs';
+import { useDismissable } from '../../headless/utils/useDismissable';
+import { useTypeahead } from '../../headless/utils/useTypeahead';
 import { findEnabledIndex, findTypeaheadIndex } from './selectNavigation';
 import './Select.css';
 
@@ -34,6 +39,11 @@ export interface SelectProps {
   className?: string;
 }
 
+/**
+ * A select-only combobox (WAI-ARIA APG): focus stays on the trigger while the arrow keys,
+ * Home/End and type-ahead move through the options. The list renders in a portal, flips above
+ * the trigger when there is no room below, and matches the trigger's width.
+ */
 export const Select: React.FC<SelectProps> = ({
   label,
   options,
@@ -48,8 +58,8 @@ export const Select: React.FC<SelectProps> = ({
   name,
   id,
 }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   // Index of the option the trigger points at through aria-activedescendant
   // (WAI-ARIA APG select-only combobox: focus never leaves the trigger).
@@ -74,28 +84,30 @@ export const Select: React.FC<SelectProps> = ({
   const selectedOption = selectedIndex >= 0 ? options[selectedIndex] : undefined;
   const displayText = selectedOption?.label || placeholder;
 
+  const floating = useFloatingPosition(isOpen, { side: 'bottom', align: 'start', sideOffset: 4 });
+  const { setReference, setFloating } = floating.refs;
+  const composedListRef = useComposedRefs(listRef, setFloating);
+  useLayoutEffect(() => {
+    setReference(triggerRef.current);
+  }, [setReference]);
+
+  // The list is a layer: Escape and outside clicks close it first, and a Dialog underneath
+  // treats clicks inside it as inside, not outside.
+  useDismissable(listRef, {
+    enabled: isOpen,
+    onDismiss: () => setIsOpen(false),
+    onInteractOutside: (event) => {
+      if (event.target instanceof Node && triggerRef.current?.contains(event.target)) event.preventDefault();
+    },
+  });
+
+  // Keep the active option visible while arrowing through a long list.
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen || activeIndex < 0) return;
+    document.getElementById(`${listboxId}-option-${activeIndex}`)?.scrollIntoView?.({ block: 'nearest' });
+  }, [isOpen, activeIndex, listboxId]);
 
-    const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        setIsOpen(false);
-      }
-    };
-    const handlePointerDown = (event: PointerEvent) => {
-      if (!containerRef.current?.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
-    };
-
-    document.addEventListener('keydown', handleEscape);
-    document.addEventListener('pointerdown', handlePointerDown, true);
-
-    return () => {
-      document.removeEventListener('keydown', handleEscape);
-      document.removeEventListener('pointerdown', handlePointerDown, true);
-    };
-  }, [isOpen]);
+  const typeahead = useTypeahead();
 
   const openList = (index: number) => {
     setActiveIndex(index);
@@ -130,7 +142,8 @@ export const Select: React.FC<SelectProps> = ({
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
     const { key } = event;
-    const isTypeahead = key.length === 1 && key !== ' ' && !event.altKey && !event.ctrlKey && !event.metaKey;
+    // Printable keys build a search ("ba" finds Banana); Space only searches mid-word.
+    const search = typeahead(event);
 
     if (!isOpen) {
       if (key === 'ArrowDown' || key === 'ArrowUp' || key === 'Enter' || key === ' ') {
@@ -139,9 +152,15 @@ export const Select: React.FC<SelectProps> = ({
       } else if (key === 'Home' || key === 'End') {
         event.preventDefault();
         openList(findEnabledIndex(options, -1, key));
-      } else if (isTypeahead) {
-        openList(findTypeaheadIndex(options, selectedIndex, key));
+      } else if (search !== null) {
+        openList(findTypeaheadIndex(options, selectedIndex, search));
       }
+      return;
+    }
+
+    if (search !== null) {
+      event.preventDefault();
+      setActiveIndex(findTypeaheadIndex(options, activeIndex, search));
       return;
     }
 
@@ -169,10 +188,6 @@ export const Select: React.FC<SelectProps> = ({
       case 'Tab':
         setIsOpen(false);
         break;
-      default:
-        if (isTypeahead) {
-          setActiveIndex(findTypeaheadIndex(options, activeIndex, key));
-        }
     }
   };
 
@@ -191,7 +206,6 @@ export const Select: React.FC<SelectProps> = ({
       </label>
       <div
         className="select-container"
-        ref={containerRef}
         data-error={error ? '' : undefined}
       >
         <button
@@ -202,11 +216,17 @@ export const Select: React.FC<SelectProps> = ({
           className="select-trigger"
           onClick={() => (isOpen ? setIsOpen(false) : openOnSelection())}
           onKeyDown={handleKeyDown}
+          onBlur={(event) => {
+            // Leaving the trigger for anything but the list (Tab, a click elsewhere) closes it.
+            if (!listRef.current?.contains(event.relatedTarget as Node | null)) setIsOpen(false);
+          }}
           disabled={disabled}
           aria-haspopup="listbox"
           aria-expanded={isOpen}
           aria-controls={isOpen ? listboxId : undefined}
           aria-activedescendant={isOpen && activeIndex >= 0 ? `${listboxId}-option-${activeIndex}` : undefined}
+          aria-invalid={error ? true : undefined}
+          aria-describedby={[description ? `${triggerId}-description` : '', error ? `${triggerId}-error` : ''].filter(Boolean).join(' ') || undefined}
           data-filled={selectedOption ? '' : undefined}
         >
           <span
@@ -216,26 +236,37 @@ export const Select: React.FC<SelectProps> = ({
             {displayText}
           </span>
           <Icon
-            name="keyboard_arrow_down"
+            name="chevron_down"
             size={12}
             className="select-icon"
             aria-hidden="true"
           />
         </button>
+        {/* A button cannot carry a form value; this hidden input submits the selection. */}
+        {name && <input type="hidden" name={name} value={currentValue ?? ''} disabled={disabled} />}
         {isOpen && (
-          <div className="select-dropdown">
-            <ComboBox
-              id={listboxId}
-              items={comboBoxItems}
-              onItemClick={handleItemClick}
-              role="listbox"
-              aria-labelledby={labelId}
-            />
-          </div>
+          <Portal>
+            <div
+              ref={composedListRef}
+              className="select-dropdown"
+              data-state="open"
+              data-side={floating.side}
+              data-pada-layer=""
+              style={floating.floatingStyles}
+            >
+              <ComboBox
+                id={listboxId}
+                items={comboBoxItems}
+                onItemClick={handleItemClick}
+                role="listbox"
+                aria-labelledby={labelId}
+              />
+            </div>
+          </Portal>
         )}
       </div>
-      {description && <p className="select-description">{description}</p>}
-      {error && <p className="select-error">{error}</p>}
+      {description && <p id={`${triggerId}-description`} className="select-description">{description}</p>}
+      {error && <p id={`${triggerId}-error`} className="select-error">{error}</p>}
     </div>
   );
 };

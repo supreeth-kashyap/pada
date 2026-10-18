@@ -1,22 +1,36 @@
 .filter-chip {
   display: inline-flex;
   align-items: center;
-  gap: var(--spacing-2);
-  padding: var(--spacing-0-5) var(--spacing-2);
+  gap: var(--pada-space-2);
+  padding: var(--pada-space-0-5) var(--pada-space-2);
   height: 24px;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--color-neutral-200);
-  background-color: var(--color-white);
-  color: var(--color-neutral-800);
-  font-size: var(--font-size-sm);
-  line-height: var(--line-height-base);
+  border-radius: var(--pada-radius-md);
+  border: 1px solid var(--pada-color-neutral-200);
+  background-color: var(--pada-color-surface);
+  color: var(--pada-color-neutral-800);
+  font-size: var(--pada-font-size-sm);
+  line-height: var(--pada-line-height-md);
   cursor: pointer;
   white-space: nowrap;
 }
 
-.filter-chip:focus-visible {
+/* The chip holds two buttons (remove, and the chip itself); each gets its own focus ring. */
+.filter-chip__remove-icon,
+.filter-chip__content {
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: var(--pada-radius-sm);
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.filter-chip__remove-icon:focus-visible,
+.filter-chip__content:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px var(--color-white), 0 0 0 4px var(--color-secondary-600);
+  box-shadow: var(--pada-shadow-focus);
 }
 
 .filter-chip--disabled {
@@ -41,65 +55,65 @@
 .filter-chip__divider {
   width: 0;
   height: 14px;
-  border-right: 1px solid var(--color-neutral-300);
+  border-right: 1px solid var(--pada-color-neutral-300);
 }
 
 .filter-chip__content {
   display: inline-flex;
   align-items: center;
-  gap: var(--spacing-1);
+  gap: var(--pada-space-1);
 }
 
 .filter-chip__label {
-  color: var(--color-neutral-800);
-  font-weight: 400;
+  color: var(--pada-color-neutral-800);
+  font-weight: var(--pada-font-weight-regular);
 }
 
 .filter-chip__colon {
-  color: var(--color-neutral-800);
+  color: var(--pada-color-neutral-800);
   font-weight: 300;
 }
 
 .filter-chip__value {
-  font-weight: 600;
-  color: var(--color-secondary-700);
+  font-weight: var(--pada-font-weight-semibold);
+  color: var(--pada-color-amber-700);
 }
 
 .filter-chip__button-label {
-  font-weight: 600;
-  color: var(--color-secondary-700);
+  font-weight: var(--pada-font-weight-semibold);
+  color: var(--pada-color-amber-700);
 }
 
-.filter-chip--filled:hover:not(:disabled) {
-  background-color: var(--color-neutral-50);
+.filter-chip--filled:hover:not([data-disabled]) {
+  background-color: var(--pada-color-neutral-50);
 }
 
-.filter-chip--filled:active:not(:disabled) {
-  background-color: var(--color-neutral-100);
+.filter-chip--filled:active:not([data-disabled]) {
+  background-color: var(--pada-color-neutral-100);
 }
 
 .filter-chip--prompt {
   border-style: dashed;
-  border-color: var(--color-neutral-400);
+  border-color: var(--pada-color-neutral-400);
 }
 
-.filter-chip--prompt:hover:not(:disabled) {
-  background-color: var(--color-neutral-50);
-  border-color: var(--color-neutral-500);
+.filter-chip--prompt:hover:not([data-disabled]) {
+  background-color: var(--pada-color-neutral-50);
+  border-color: var(--pada-color-neutral-500);
 }
 
-.filter-chip--prompt:active:not(:disabled) {
-  background-color: var(--color-neutral-100);
+.filter-chip--prompt:active:not([data-disabled]) {
+  background-color: var(--pada-color-neutral-100);
 }
 
 .filter-chip--button {
-  border-color: var(--color-secondary-500);
+  border-color: var(--pada-color-amber-500);
 }
 
-.filter-chip--button:hover:not(:disabled) {
-  background-color: var(--color-secondary-50);
+.filter-chip--button:hover:not([data-disabled]) {
+  background-color: var(--pada-color-amber-50);
 }
 
-.filter-chip--button:active:not(:disabled) {
-  background-color: var(--color-secondary-100);
+.filter-chip--button:active:not([data-disabled]) {
+  background-color: var(--pada-color-amber-100);
 }

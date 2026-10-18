@@ -2,9 +2,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: var(--spacing-8);
-  height: var(--spacing-8);
-  border-radius: var(--radius-md);
+  width: var(--pada-space-8);
+  height: var(--pada-space-8);
+  border-radius: var(--pada-radius-md);
   border: 1px solid transparent;
   box-sizing: border-box;
   cursor: pointer;
@@ -16,38 +16,38 @@
 }
 
 .button-splitter--primary {
-  background-color: var(--color-primary-600);
-  color: var(--color-primary-50);
-  border-color: var(--color-primary-600);
-  border-left-color: var(--color-primary-700);
+  background-color: var(--pada-color-accent-600);
+  color: var(--pada-color-accent-50);
+  border-color: var(--pada-color-accent-600);
+  border-left-color: var(--pada-color-accent-700);
 }
 
 .button-splitter--primary:hover:not(:disabled) {
-  background-color: var(--color-primary-700);
-  border-color: var(--color-primary-700);
+  background-color: var(--pada-color-accent-700);
+  border-color: var(--pada-color-accent-700);
 }
 
 .button-splitter--primary:disabled {
-  background-color: var(--color-primary-200);
-  color: var(--color-primary-400);
-  border-color: var(--color-primary-200);
+  background-color: var(--pada-color-accent-200);
+  color: var(--pada-color-accent-400);
+  border-color: var(--pada-color-accent-200);
 }
 
 .button-splitter--secondary {
-  background-color: var(--color-bg);
-  color: var(--color-neutral-900);
-  border-color: var(--color-neutral-200);
-  border-left-color: var(--color-neutral-200);
+  background-color: var(--pada-color-surface);
+  color: var(--pada-color-neutral-900);
+  border-color: var(--pada-color-neutral-200);
+  border-left-color: var(--pada-color-neutral-200);
 }
 
 .button-splitter--secondary:hover:not(:disabled) {
-  border-color: var(--color-primary-600);
-  color: var(--color-primary-700);
+  border-color: var(--pada-color-accent-600);
+  color: var(--pada-color-accent-700);
 }
 
 .button-splitter--secondary:disabled {
-  color: var(--color-neutral-400);
-  border-color: var(--color-neutral-200);
+  color: var(--pada-color-neutral-400);
+  border-color: var(--pada-color-neutral-200);
 }
 
 .button-splitter:focus {
@@ -55,7 +55,7 @@
 }
 
 .button-splitter:focus-visible {
-  box-shadow: var(--shadow-focus-ring);
+  box-shadow: var(--pada-shadow-focus);
 }
 
 .button-splitter:disabled {

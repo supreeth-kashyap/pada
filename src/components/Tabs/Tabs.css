@@ -1,80 +1,154 @@
-/* Tabs — Figma node 2:2612.
-   Tablist:    bottom 1px stone-100 separator, 24px gap between tabs.
-   Tab item:   12px vertical padding only, no horizontal padding; 8px gap
-               between label and notification dot.
-   Active tab: 2px indigo-600 bottom border + indigo-700 label colour.
-   Hover:      indigo-700 label colour (border unchanged for inactive). */
+/* Tabs: Figma node 2:2612. Underline variant: 1px separator under the list, 24px gap between
+   tabs, 12px vertical padding, a 2px accent bar that slides to the selected tab. */
 
+/* Root */
 .tabs {
-    width: 100%;
+  /* Component tokens */
+  --pada-tabs-gap: var(--pada-space-6);
+  --pada-tabs-trigger-pad: var(--pada-space-3) 0;
+  --pada-tabs-trigger-fg: var(--pada-color-fg);
+  --pada-tabs-trigger-fg-active: var(--pada-color-accent-fg);
+  --pada-tabs-trigger-radius: var(--pada-radius-sm);
+  --pada-tabs-list-border: var(--pada-color-border-subtle);
+  --pada-tabs-list-pad: 0;
+  --pada-tabs-list-bg: transparent;
+  --pada-tabs-list-radius: 0;
+  --pada-tabs-indicator-color: var(--pada-color-accent-solid);
+  --pada-tabs-indicator-thickness: 2px;
+  --pada-tabs-indicator-radius: 0;
+  --pada-tabs-indicator-inset: auto 0 -1px auto;
+  --pada-tabs-indicator-shadow: none;
+  --pada-tabs-list-min-width: 100%;
+
+  width: 100%;
 }
 
-.tabs__list {
-    display: flex;
-    align-items: stretch;
-    gap: var(--spacing-6);
-    border-bottom: 1px solid var(--color-stone-100);
+/* Variant variables */
+.tabs[data-variant="pills"] {
+  --pada-tabs-gap: var(--pada-space-1);
+  --pada-tabs-trigger-pad: var(--pada-space-1-5) var(--pada-space-3);
+  --pada-tabs-trigger-fg-active: var(--pada-color-fg);
+  --pada-tabs-trigger-radius: var(--pada-radius-md);
+  --pada-tabs-list-border: transparent;
+  --pada-tabs-list-pad: var(--pada-space-1);
+  --pada-tabs-list-bg: var(--pada-color-neutral-subtle);
+  --pada-tabs-list-radius: var(--pada-radius-lg);
+  --pada-tabs-indicator-color: var(--pada-color-surface-raised);
+  --pada-tabs-indicator-thickness: calc(100% - 2 * var(--pada-tabs-list-pad));
+  --pada-tabs-indicator-radius: var(--pada-radius-md);
+  --pada-tabs-indicator-inset: var(--pada-tabs-list-pad) auto auto auto;
+  --pada-tabs-indicator-shadow: var(--pada-shadow-xs);
+  --pada-tabs-list-min-width: 0;
 }
 
-.tabs__tab {
-    font-family: inherit;
-    font-size: var(--font-size-base);
-    font-weight: 500;
-    line-height: 20px;
-    /* No horizontal padding per Figma; the 24px tablist gap separates items. */
-    padding: var(--spacing-3) 0;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-    color: var(--color-stone-900);
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--spacing-2);
-    white-space: nowrap;
-    /* Reserve the active-state 2px bar at all times so toggling doesn't shift
-       layout. `margin-bottom: -1px` lets the bar overlap the 1px tablist
-       separator below it. */
-    border-bottom: 2px solid transparent;
-    margin-bottom: -1px;
-    transition: color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+/* Child elements */
+.tabs-list {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  gap: var(--pada-tabs-gap);
+  width: fit-content;
+  min-width: var(--pada-tabs-list-min-width);
+  box-sizing: border-box;
+  padding: var(--pada-tabs-list-pad);
+  background-color: var(--pada-tabs-list-bg);
+  border-bottom: var(--pada-border-width-thin) solid var(--pada-tabs-list-border);
+  border-radius: var(--pada-tabs-list-radius);
 }
 
-.tabs__tab:hover:not([aria-disabled='true']) {
-    color: var(--color-primary-700);
+.tabs-list[data-orientation="vertical"] {
+  flex-direction: column;
+  width: auto;
+  min-width: 0;
+  border-bottom: none;
 }
 
-.tabs__tab--active {
-    color: var(--color-primary-700);
-    border-bottom-color: var(--color-primary-600);
+.tabs-trigger {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--pada-space-2);
+  padding: var(--pada-tabs-trigger-pad);
+  border: none;
+  border-radius: var(--pada-tabs-trigger-radius);
+  background: transparent;
+  color: var(--pada-tabs-trigger-fg);
+  font-family: inherit;
+  font-size: var(--pada-font-size-md);
+  font-weight: var(--pada-font-weight-medium);
+  line-height: 20px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color var(--pada-duration-fast) var(--pada-ease-standard);
 }
 
-.tabs__tab:focus {
-    outline: none;
+.tabs-trigger:hover:not([data-disabled]) {
+  color: var(--pada-tabs-trigger-fg-active);
 }
 
-.tabs__tab:focus-visible {
-    box-shadow: var(--shadow-focus-ring);
-    border-radius: var(--radius);
+.tabs-trigger[data-state="active"] {
+  color: var(--pada-tabs-trigger-fg-active);
 }
 
-.tabs__tab-label {
-    display: inline-block;
+.tabs-trigger[data-disabled] {
+  color: var(--pada-color-fg-disabled);
+  cursor: not-allowed;
 }
 
-/* Notification dot per Figma: 8×8 red-600 disc with a 2px white ring so the
-   dot still reads when sitting against a stone or indigo underline. */
-.tabs__tab-indicator {
-    width: 8px;
-    height: 8px;
-    background-color: var(--color-red-600);
-    border: 2px solid var(--color-white);
-    border-radius: 9999px;
-    box-sizing: content-box;
-    flex-shrink: 0;
+.tabs-trigger:focus-visible {
+  outline: none;
+  box-shadow: var(--pada-shadow-focus);
 }
 
-.tabs__panel {
-    padding-top: var(--spacing-4);
+/* The indicator slides between tabs: the headless part sets its offset and size. */
+.tabs-indicator {
+  position: absolute;
+  inset: var(--pada-tabs-indicator-inset);
+  left: var(--pada-tabs-indicator-offset);
+  width: var(--pada-tabs-indicator-size);
+  height: var(--pada-tabs-indicator-thickness);
+  background-color: var(--pada-tabs-indicator-color);
+  border-radius: var(--pada-tabs-indicator-radius);
+  box-shadow: var(--pada-tabs-indicator-shadow);
+  transition:
+    left var(--pada-duration-normal) var(--pada-ease-emphasized),
+    width var(--pada-duration-normal) var(--pada-ease-emphasized);
+}
+
+.tabs-indicator[data-orientation="vertical"] {
+  inset: auto auto auto -1px;
+  top: var(--pada-tabs-indicator-offset);
+  left: auto;
+  width: var(--pada-tabs-indicator-thickness);
+  height: var(--pada-tabs-indicator-size);
+  transition:
+    top var(--pada-duration-normal) var(--pada-ease-emphasized),
+    height var(--pada-duration-normal) var(--pada-ease-emphasized);
+}
+
+.tabs-indicator[data-state="hidden"] {
+  display: none;
+}
+
+/* Notification dot: 8×8 red disc with a 2px surface ring so it reads on any underline. */
+.tabs-notification {
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  box-sizing: content-box;
+  background-color: var(--pada-color-danger-solid);
+  border: 2px solid var(--pada-color-surface);
+  border-radius: var(--pada-radius-full);
+}
+
+.tabs-content {
+  padding-top: var(--pada-space-4);
+}
+
+.tabs-content:focus-visible {
+  outline: none;
+  box-shadow: var(--pada-shadow-focus);
+  border-radius: var(--pada-radius-sm);
 }

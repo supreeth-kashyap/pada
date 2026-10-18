@@ -2,19 +2,19 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--spacing-3);
-  padding: var(--spacing-2) var(--spacing-3);
+  gap: var(--pada-space-3);
+  padding: var(--pada-space-2) var(--pada-space-3);
   min-width: 220px;
   border: 1px solid transparent;
-  border-radius: var(--radius-lg);
-  background-color: var(--color-bg);
-  color: var(--color-neutral-900);
+  border-radius: var(--pada-radius-lg);
+  background-color: var(--pada-color-surface);
+  color: var(--pada-color-neutral-900);
   cursor: pointer;
-  font-size: var(--font-size-base);
-  font-weight: 500;
-  line-height: var(--line-height-base);
+  font-size: var(--pada-font-size-md);
+  font-weight: var(--pada-font-weight-medium);
+  line-height: var(--pada-line-height-md);
   text-align: left;
-  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  transition: background-color var(--pada-duration-normal) var(--pada-ease-standard), border-color var(--pada-duration-normal) var(--pada-ease-standard), color var(--pada-duration-normal) var(--pada-ease-standard);
 }
 
 .combo-box-menu-item__label {
@@ -26,8 +26,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: var(--spacing-4);
-  height: var(--spacing-4);
+  width: var(--pada-space-4);
+  height: var(--pada-space-4);
   color: currentColor;
   flex-shrink: 0;
 }
@@ -40,8 +40,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: var(--spacing-3);
-  height: var(--spacing-3);
+  width: var(--pada-space-3);
+  height: var(--pada-space-3);
   color: currentColor;
   flex-shrink: 0;
 }
@@ -51,32 +51,32 @@
 }
 
 .combo-box-menu-item[data-selected='true'] {
-  background-color: var(--color-neutral-50);
-  color: var(--color-primary-700);
+  background-color: var(--pada-color-neutral-50);
+  color: var(--pada-color-accent-700);
 }
 
 .combo-box-menu-item:hover:not(:disabled) {
-  background-color: var(--color-neutral-50);
-  color: var(--color-primary-700);
+  background-color: var(--pada-color-neutral-50);
+  color: var(--pada-color-accent-700);
 }
 
 /* Active descendant of a combobox: keyboard focus stays on the trigger. */
 .combo-box-menu-item[data-active] {
-  border-color: var(--color-primary-600);
-  background-color: var(--color-neutral-50);
-  color: var(--color-primary-700);
+  border-color: var(--pada-color-accent-600);
+  background-color: var(--pada-color-neutral-50);
+  color: var(--pada-color-accent-700);
 }
 
 .combo-box-menu-item:focus-visible {
   outline: none;
-  box-shadow: var(--shadow-focus-ring);
-  border-color: var(--color-primary-600);
+  box-shadow: var(--pada-shadow-focus);
+  border-color: var(--pada-color-accent-600);
 }
 
 .combo-box-menu-item:disabled {
   cursor: not-allowed;
-  color: var(--color-neutral-400);
-  background-color: var(--color-neutral-50);
+  color: var(--pada-color-neutral-400);
+  background-color: var(--pada-color-neutral-50);
 }
 
 .combo-box-menu-item:disabled .combo-box-menu-item__tick {

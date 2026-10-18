@@ -1,0 +1,92 @@
+/* Root: the scrolling element itself (native scrolling, themed scrollbar). */
+.scroll-area {
+  /* Component tokens */
+  --pada-scroll-area-max-height: none;
+  --pada-scroll-area-max-width: none;
+  --pada-scroll-area-thumb: transparent;
+  --pada-scroll-area-thumb-visible: color-mix(in oklch, var(--pada-color-fg) 28%, transparent);
+  --pada-scroll-area-thumb-hover: color-mix(in oklch, var(--pada-color-fg) 45%, transparent);
+  --pada-scroll-area-fade-size: var(--pada-space-6);
+  --pada-scroll-area-fade-start: 0px;
+  --pada-scroll-area-fade-end: 0px;
+
+  max-height: var(--pada-scroll-area-max-height);
+  max-width: var(--pada-scroll-area-max-width);
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--pada-scroll-area-thumb) transparent;
+  border-radius: inherit;
+  transition: scrollbar-color var(--pada-duration-normal) var(--pada-ease-standard);
+}
+
+/* Variant variables */
+.scroll-area[data-orientation="vertical"] {
+  overflow-x: hidden;
+}
+
+.scroll-area[data-orientation="horizontal"] {
+  overflow-y: hidden;
+}
+
+.scroll-area[data-scrollbar="always"],
+.scroll-area:hover,
+.scroll-area:focus-visible {
+  --pada-scroll-area-thumb: var(--pada-scroll-area-thumb-visible);
+}
+
+/* Edge fades where more content is hidden. */
+.scroll-area[data-fade][data-overflowing]:not([data-at-start]) {
+  --pada-scroll-area-fade-start: var(--pada-scroll-area-fade-size);
+}
+
+.scroll-area[data-fade][data-overflowing]:not([data-at-end]) {
+  --pada-scroll-area-fade-end: var(--pada-scroll-area-fade-size);
+}
+
+.scroll-area[data-fade][data-orientation="vertical"] {
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    #000 var(--pada-scroll-area-fade-start),
+    #000 calc(100% - var(--pada-scroll-area-fade-end)),
+    transparent
+  );
+}
+
+.scroll-area[data-fade][data-orientation="horizontal"] {
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 var(--pada-scroll-area-fade-start),
+    #000 calc(100% - var(--pada-scroll-area-fade-end)),
+    transparent
+  );
+}
+
+.scroll-area:focus-visible {
+  outline: none;
+  box-shadow: inset var(--pada-shadow-focus);
+}
+
+/* WebKit scrollbars (Safari, older Chromium) */
+.scroll-area::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.scroll-area::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: var(--pada-radius-full);
+  background-color: var(--pada-scroll-area-thumb);
+  background-clip: padding-box;
+}
+
+.scroll-area::-webkit-scrollbar-thumb:hover {
+  background-color: var(--pada-scroll-area-thumb-hover);
+}
+
+.scroll-area::-webkit-scrollbar-track,
+.scroll-area::-webkit-scrollbar-corner {
+  background: transparent;
+}

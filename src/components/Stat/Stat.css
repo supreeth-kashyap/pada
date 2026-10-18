@@ -1,0 +1,101 @@
+/* Root */
+.stat {
+  /* Component tokens. Sizes only reassign these. */
+  --pada-stat-value-size: var(--pada-font-size-3xl);
+  --pada-stat-gap: var(--pada-space-1);
+  --pada-stat-positive: var(--pada-color-success-fg);
+  --pada-stat-positive-bg: var(--pada-color-success-subtle);
+  --pada-stat-negative: var(--pada-color-danger-fg);
+  --pada-stat-negative-bg: var(--pada-color-danger-subtle);
+  --pada-stat-neutral: var(--pada-color-fg-muted);
+  --pada-stat-neutral-bg: var(--pada-color-neutral-subtle);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--pada-stat-gap);
+  min-width: 0;
+  font-family: var(--pada-font-sans);
+  color: var(--pada-color-fg);
+}
+
+/* Variant variables */
+.stat[data-size="sm"] {
+  --pada-stat-value-size: var(--pada-font-size-xl);
+}
+
+.stat[data-size="lg"] {
+  --pada-stat-value-size: var(--pada-font-size-4xl);
+}
+
+/* Child elements */
+.stat-label {
+  font-size: var(--pada-font-size-sm);
+  font-weight: var(--pada-font-weight-medium);
+  color: var(--pada-color-fg-muted);
+}
+
+.stat-value {
+  font-size: var(--pada-stat-value-size);
+  font-weight: var(--pada-font-weight-semibold);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-delta {
+  /* Sentiment variables */
+  --pada-stat-delta-fg: var(--pada-stat-neutral);
+  --pada-stat-delta-bg: var(--pada-stat-neutral-bg);
+  --pada-stat-delta-rotate: 90deg;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--pada-space-2);
+  font-size: var(--pada-font-size-sm);
+}
+
+.stat-delta[data-sentiment="positive"] {
+  --pada-stat-delta-fg: var(--pada-stat-positive);
+  --pada-stat-delta-bg: var(--pada-stat-positive-bg);
+}
+
+.stat-delta[data-sentiment="negative"] {
+  --pada-stat-delta-fg: var(--pada-stat-negative);
+  --pada-stat-delta-bg: var(--pada-stat-negative-bg);
+}
+
+.stat-delta[data-trend="up"] {
+  --pada-stat-delta-rotate: 0deg;
+}
+
+.stat-delta[data-trend="down"] {
+  --pada-stat-delta-rotate: 180deg;
+}
+
+.stat-delta-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--pada-space-0-5);
+  padding: var(--pada-space-0-5) var(--pada-space-1-5);
+  border-radius: var(--pada-radius-full);
+  background-color: var(--pada-stat-delta-bg);
+  color: var(--pada-stat-delta-fg);
+  font-weight: var(--pada-font-weight-medium);
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-delta-arrow {
+  rotate: var(--pada-stat-delta-rotate);
+}
+
+.stat-delta-label,
+.stat-description {
+  color: var(--pada-color-fg-muted);
+  font-size: var(--pada-font-size-sm);
+}
+
+.stat-chart {
+  margin-top: var(--pada-space-2);
+  color: var(--pada-color-accent-solid);
+}

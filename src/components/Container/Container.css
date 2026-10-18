@@ -1,0 +1,28 @@
+/* Root */
+.container {
+  /* Component tokens. Sizes only reassign these. */
+  --pada-container-max-width: var(--pada-breakpoint-xl);
+  --pada-container-gutter: var(--pada-space-4);
+
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--pada-container-max-width);
+  margin-inline: auto;
+  padding-inline: var(--pada-container-gutter);
+}
+
+/* Variant variables */
+.container[data-size="sm"] { --pada-container-max-width: var(--pada-breakpoint-sm); }
+.container[data-size="md"] { --pada-container-max-width: var(--pada-breakpoint-md); }
+.container[data-size="lg"] { --pada-container-max-width: var(--pada-breakpoint-lg); }
+.container[data-size="2xl"] { --pada-container-max-width: var(--pada-breakpoint-2xl); }
+.container[data-size="full"] { --pada-container-max-width: none; }
+
+/* Wider gutters on wider screens (640px and 1024px, the sm and lg breakpoints). */
+@media (min-width: 640px) {
+  .container { --pada-container-gutter: var(--pada-space-6); }
+}
+
+@media (min-width: 1024px) {
+  .container { --pada-container-gutter: var(--pada-space-8); }
+}

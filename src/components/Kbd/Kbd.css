@@ -1,0 +1,25 @@
+.kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.5em;
+  height: 1.5em;
+  box-sizing: border-box;
+  padding: 0 0.35em;
+  border: var(--pada-border-width-thin) solid var(--pada-color-border);
+  border-bottom-width: 2px;
+  border-radius: var(--pada-radius-sm);
+  background-color: var(--pada-color-surface-raised);
+  color: var(--pada-color-fg-muted);
+  font-family: var(--pada-font-sans);
+  font-size: 0.85em;
+  font-weight: var(--pada-font-weight-medium);
+  line-height: 1;
+  vertical-align: baseline;
+}
+
+.kbd-group {
+  display: inline-flex;
+  gap: 0.25em;
+  font: inherit;
+}

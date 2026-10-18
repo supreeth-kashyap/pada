@@ -1,0 +1,122 @@
+/* Root */
+.field {
+  /* Component tokens */
+  --pada-field-gap: var(--pada-space-1);
+  --pada-field-input-height: var(--pada-control-height-md);
+  --pada-field-input-bg: var(--pada-color-surface);
+  --pada-field-input-border: var(--pada-color-border-strong);
+  --pada-field-input-border-hover: var(--pada-color-neutral-500);
+  --pada-field-input-border-focus: var(--pada-color-accent-solid);
+  --pada-field-input-ring: var(--pada-color-accent-subtle);
+  --pada-field-input-radius: var(--pada-radius-lg);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--pada-field-gap);
+  font-family: var(--pada-font-sans);
+}
+
+/* Variant variables */
+.field[data-invalid] {
+  --pada-field-input-border: var(--pada-color-danger-solid);
+  --pada-field-input-border-hover: var(--pada-color-danger-solid);
+  --pada-field-input-border-focus: var(--pada-color-danger-solid);
+  --pada-field-input-ring: var(--pada-color-danger-subtle);
+}
+
+/* Child elements */
+.field-label {
+  font-size: var(--pada-font-size-sm);
+  font-weight: var(--pada-font-weight-medium);
+  line-height: var(--pada-line-height-md);
+  color: var(--pada-color-fg);
+}
+
+.field-label[data-disabled] {
+  color: var(--pada-color-fg-disabled);
+}
+
+.field-required {
+  display: none;
+  margin-inline-start: var(--pada-space-0-5);
+  color: var(--pada-color-danger-fg);
+}
+
+.field:has([required]) .field-required {
+  display: inline;
+}
+
+.field-optional {
+  margin-inline-start: var(--pada-space-1);
+  font-size: var(--pada-font-size-xs);
+  font-weight: var(--pada-font-weight-regular);
+  color: var(--pada-color-fg-subtle);
+}
+
+.field-input {
+  box-sizing: border-box;
+  width: 100%;
+  height: var(--pada-field-input-height);
+  padding: 0 var(--pada-space-3);
+  border: var(--pada-border-width-thin) solid var(--pada-field-input-border);
+  border-radius: var(--pada-field-input-radius);
+  background-color: var(--pada-field-input-bg);
+  color: var(--pada-color-fg);
+  font: inherit;
+  font-size: var(--pada-font-size-md);
+  outline: none;
+  transition:
+    border-color var(--pada-duration-fast) var(--pada-ease-standard),
+    box-shadow var(--pada-duration-fast) var(--pada-ease-standard);
+}
+
+.field-input::placeholder {
+  color: var(--pada-color-fg-subtle);
+}
+
+.field-input:hover:not(:disabled) {
+  border-color: var(--pada-field-input-border-hover);
+}
+
+/* The ring grows in on focus. */
+.field-input:focus-visible {
+  border-color: var(--pada-field-input-border-focus);
+  box-shadow: 0 0 0 3px var(--pada-field-input-ring);
+}
+
+.field-input:disabled {
+  background-color: var(--pada-color-surface-sunken);
+  color: var(--pada-color-fg-disabled);
+  cursor: not-allowed;
+}
+
+.field-description {
+  margin: 0;
+  font-size: var(--pada-font-size-sm);
+  color: var(--pada-color-fg-muted);
+}
+
+.field-error {
+  margin: 0;
+  font-size: var(--pada-font-size-sm);
+  color: var(--pada-color-danger-fg);
+  animation: field-error-in var(--pada-duration-normal) var(--pada-ease-enter);
+}
+
+/* An invalid control shakes once when its error appears (not under reduced motion). */
+.field[data-invalid] .field-input {
+  animation: field-shake calc(320ms * var(--pada-motion-scale)) var(--pada-ease-standard);
+}
+
+@keyframes field-error-in {
+  from {
+    opacity: 0;
+    translate: 0 calc(-1 * var(--pada-motion-distance-sm));
+  }
+}
+
+@keyframes field-shake {
+  25% { translate: -2px 0; }
+  50% { translate: 2px 0; }
+  75% { translate: -1px 0; }
+}

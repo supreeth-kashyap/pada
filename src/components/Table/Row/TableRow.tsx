@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import './TableRow.css';
-import { TableContext } from '../Table';
+import { TableContext } from '../TableContext';
 import type { TableCellProps } from '../Cells';
 
 export interface TableRowProps {
@@ -10,11 +10,11 @@ export interface TableRowProps {
   selected?: boolean;
   /** Click handler on the entire row \u2014 useful for bulk-select toggling. */
   onClick?: React.MouseEventHandler<HTMLDivElement>;
-  /** Sets `role="row"` semantics if you need to override the default `<div>`. */
+  /** ARIA role of the row. @default 'row' */
   role?: string;
 }
 
-export const TableRow: React.FC<TableRowProps> = ({ children, className = '', selected, onClick, role }) => {
+export const TableRow: React.FC<TableRowProps> = ({ children, className = '', selected, onClick, role = 'row' }) => {
   const context = useContext(TableContext);
   const gridTemplate = context?.gridTemplate ?? '';
   const columns = context?.columns ?? [];

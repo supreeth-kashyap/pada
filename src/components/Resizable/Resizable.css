@@ -1,0 +1,107 @@
+/* Root */
+.resizable {
+  /* Component tokens */
+  --pada-resizable-direction: row;
+  --pada-resizable-hit-area: var(--pada-space-1);
+  --pada-resizable-line: var(--pada-color-border);
+  --pada-resizable-line-active: var(--pada-color-accent-solid);
+  --pada-resizable-line-thickness: 1px;
+  --pada-resizable-line-thickness-active: 3px;
+
+  display: flex;
+  flex-direction: var(--pada-resizable-direction);
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+}
+
+/* Variant variables */
+.resizable[data-orientation="vertical"] {
+  --pada-resizable-direction: column;
+}
+
+/* Child elements */
+.resizable-handle {
+  --pada-resizable-thickness: var(--pada-resizable-line-thickness);
+  --pada-resizable-color: var(--pada-resizable-line);
+  --pada-resizable-cursor: col-resize;
+  --pada-resizable-line-width: var(--pada-resizable-thickness);
+  --pada-resizable-line-height: 100%;
+  --pada-resizable-hit-inline: calc(-1 * var(--pada-resizable-hit-area));
+  --pada-resizable-hit-block: 0px;
+  --pada-resizable-grip-rotate: 0deg;
+
+  /* The handle is as thin as the line; ::after widens the area that takes the pointer. */
+  position: relative;
+  z-index: 1;
+  flex: 0 0 var(--pada-resizable-line-thickness);
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: var(--pada-resizable-cursor);
+  touch-action: none;
+  user-select: none;
+  outline: none;
+}
+
+.resizable-handle[data-orientation="vertical"] {
+  --pada-resizable-cursor: row-resize;
+  --pada-resizable-line-width: 100%;
+  --pada-resizable-line-height: var(--pada-resizable-thickness);
+  --pada-resizable-hit-inline: 0px;
+  --pada-resizable-hit-block: calc(-1 * var(--pada-resizable-hit-area));
+  --pada-resizable-grip-rotate: 90deg;
+}
+
+.resizable-handle:hover,
+.resizable-handle:focus-visible,
+.resizable-handle[data-dragging] {
+  --pada-resizable-thickness: var(--pada-resizable-line-thickness-active);
+  --pada-resizable-color: var(--pada-resizable-line-active);
+}
+
+.resizable-handle[data-disabled] {
+  --pada-resizable-cursor: default;
+  --pada-resizable-thickness: var(--pada-resizable-line-thickness);
+  --pada-resizable-color: var(--pada-resizable-line);
+}
+
+/* The visible line, centred in the wider hit area. */
+.resizable-handle::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: var(--pada-resizable-line-width);
+  height: var(--pada-resizable-line-height);
+  border-radius: var(--pada-radius-full);
+  background: var(--pada-resizable-color);
+  transition:
+    width var(--pada-duration-fast) var(--pada-ease-standard),
+    height var(--pada-duration-fast) var(--pada-ease-standard),
+    background-color var(--pada-duration-fast) var(--pada-ease-standard);
+}
+
+.resizable-handle::after {
+  content: '';
+  position: absolute;
+  inset-inline: var(--pada-resizable-hit-inline);
+  inset-block: var(--pada-resizable-hit-block);
+}
+
+.resizable-grip {
+  /* Out of flow, so the grip never widens the handle; centred by the handle's alignment. */
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 0;
+  border: var(--pada-border-width-thin) solid var(--pada-color-border);
+  border-radius: var(--pada-radius-sm);
+  background: var(--pada-color-surface);
+  color: var(--pada-color-fg-muted);
+  rotate: var(--pada-resizable-grip-rotate);
+}

@@ -8,7 +8,21 @@
     "noEmit": false,
     "composite": false,
     "sourceMap": false,
-    "types": ["prismjs", "react", "react-dom"]
+    "types": [
+      "prismjs",
+      "react",
+      "react-dom"
+    ]
   },
-  "include": ["src/index.ts", "src/components", "src/types/styles.d.ts"]
+  "include": [
+    "src/index.ts",
+    "src/components",
+    "src/headless",
+    "src/types/styles.d.ts"
+  ],
+  "exclude": [
+    "src/**/*.test.ts",
+    "src/**/*.test.tsx",
+    "src/test"
+  ]
 }

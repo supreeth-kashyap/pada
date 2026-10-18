@@ -70,29 +70,29 @@
 
 /* Concentric - Rest State (Grey) */
 .step-indicator--concentric.step-indicator--rest .step-indicator__outer {
-  border-color: var(--color-neutral-300);
+  border-color: var(--pada-color-neutral-300);
 }
 
 .step-indicator--concentric.step-indicator--rest .step-indicator__inner {
-  background-color: var(--color-neutral-400);
+  background-color: var(--pada-color-neutral-400);
 }
 
 /* Concentric - Hover State (Blue) */
 .step-indicator--concentric.step-indicator--hover .step-indicator__outer {
-  border-color: var(--color-blue-300);
+  border-color: var(--pada-color-blue-300);
 }
 
 .step-indicator--concentric.step-indicator--hover .step-indicator__inner {
-  background-color: var(--color-blue-600);
+  background-color: var(--pada-color-blue-600);
 }
 
 /* Concentric - Active State (Dark Grey/Black) */
 .step-indicator--concentric.step-indicator--active .step-indicator__outer {
-  border-color: var(--color-neutral-600);
+  border-color: var(--pada-color-neutral-600);
 }
 
 .step-indicator--concentric.step-indicator--active .step-indicator__inner {
-  background-color: var(--color-neutral-900);
+  background-color: var(--pada-color-neutral-900);
 }
 
 /* ============================================
@@ -107,17 +107,17 @@
 
 /* Solid - Rest State (Medium-Dark Grey) */
 .step-indicator--solid.step-indicator--rest .step-indicator__fill {
-  background-color: var(--color-neutral-500);
+  background-color: var(--pada-color-neutral-500);
 }
 
 /* Solid - Hover/Active State (Vibrant Blue) */
 .step-indicator--solid.step-indicator--hover .step-indicator__fill {
-  background-color: var(--color-blue-600);
+  background-color: var(--pada-color-blue-600);
 }
 
 /* Solid - Active State (Very Dark Grey/Black) */
 .step-indicator--solid.step-indicator--active .step-indicator__fill {
-  background-color: var(--color-neutral-900);
+  background-color: var(--pada-color-neutral-900);
 }
 
 /* ============================================
@@ -127,5 +127,5 @@
 .step-indicator__outer,
 .step-indicator__inner,
 .step-indicator__fill {
-  transition: all 0.2s ease;
+  transition: all var(--pada-duration-normal) var(--pada-ease-standard);
 }

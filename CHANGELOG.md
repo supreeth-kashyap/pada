@@ -6,6 +6,229 @@
 - Moved the `body` and `p` rules out of `dist/tokens.css` into a new optional `pada-ds/base.css` export, so importing the tokens no longer overrides an app's own styles.
 - Added a component API manifest for AI coding agents. `npm run build` now reads every exported component's props from the TypeScript source and writes `dist/manifest.json` (exported as `pada-ds/manifest.json`), `llms.txt` and `llms-full.txt`. Both llms files ship in the package and are committed at the repo root. `npm test` fails if they are stale or if an exported component is missing from the manifest.
 
+- **New: `DataTable`.** Turns `data` and `columns` into a `Table` people can use:
+  - **Sorting.** Header buttons with `aria-sort` cycle ascending, descending and off. Numbers, dates and text sort naturally, and blanks stay last.
+  - **Search.** A labelled search over searchable columns; the result count is announced.
+  - **Selection.** Row checkboxes are named by the row-header column. The select-all box goes "mixed" when only some rows on the page are selected.
+  - **Toolbar.** Shows the selected count with Clear, `actions` (static, or a function of the selected rows) and a Columns menu that stays open while toggling.
+  - **Paging.** The existing `TablePagination` footer.
+  - **State.** Every piece is controlled or uncontrolled, and `manual` with `rowCount` supports server-side data.
+  - **Headless.** The logic is `useDataTable` in `pada-ds/headless`.
+- **New: `ColorPicker`.** Picks colours in OKLCH:
+  - **Controls.** An area for chroma (left to right) and lightness (bottom to top) at the chosen hue, drawn on a canvas with out-of-sRGB colours shown at their nearest displayable colour; a hue slider; a hex field that accepts typed values on Enter or blur; the OKLCH reading; and optional `swatches`.
+  - **Accessibility.** The area is a keyboard-operable 2D slider: arrows, Shift for bigger steps, PageUp/PageDown for lightness, Home/End for grey or full chroma. Its value text reads lightness and chroma. Swatches are toggle buttons.
+  - **Output.** `format="hex"` (mapped into sRGB) or `"oklch"` (exactly as chosen). Exported helpers: `parseColor`, `formatHex` and `formatOklch`.
+- **New: `ThemeProvider accentHue`** sets the hue for `accent="custom"` on the themed element itself.
+- **Fixed:** the Playground's custom accent hue, which was set on a child of the themed element and never reached the accent tokens.
+- **Fixed docs:** the README said the token knobs could be set on any element. They take effect on `:root` or on an element with a theme attribute.
+- **New: `Menubar`.** A desktop-style row of menus (`Menubar.Root`, `Menu`, `Trigger`, `Content`, plus every DropdownMenu item part: items with icons and shortcuts, checkbox and radio items, labels, separators and submenus). It follows the WAI-ARIA menubar pattern:
+  - **Bar.** One Tab stop. Arrow keys move along the bar (wrapping), and Home and End jump to the ends.
+  - **Opening.** Enter, Space or ArrowDown opens a menu on its first item; ArrowUp opens it on its last.
+  - **Between menus.** Inside an open menu, ArrowRight and ArrowLeft open the neighbouring menu, unless a submenu takes the key. Hovering another trigger while a menu is open switches to it.
+  - **Controlled value.** The open menu is controllable with `value` / `onValueChange`.
+  - **Headless.** The parts are in `pada-ds/headless`, and the styled bar is restyled through `--pada-menubar-*`.
+- **New: `Sheet`.** A bottom sheet for mobile-first flows (`Sheet.Root`, `Trigger`, `Content`, and the Dialog parts).
+  - **Dialog behaviour.** It is a modal dialog underneath, with focus trap, Escape, backdrop and focus return.
+  - **Size.** It fits its content, or rests at `snapPoints` (fractions of the viewport height) with `snap` / `defaultSnap` / `onSnapChange`. On wide screens it stays centred and capped at 640px.
+  - **Dragging.** It follows the pointer and settles at the nearest resting place. A flick down closes it (`dismissible`, default true), and dragging past the highest snap point resists.
+  - **No conflicts.** Drags never start on form controls, links or scrolled content.
+  - **Keyboard.** With snap points, the grabber is a button ("Expand sheet" / "Collapse sheet") that moves between heights.
+  - **Tokens.** Restyle through `--pada-sheet-*`.
+- **New: `useDialog()`** in `pada-ds/headless` returns the nearest `Dialog.Root`'s `open` and `setOpen`, for building custom parts.
+- **New: `Resizable`.** Split a region into panels that people resize (`Resizable.Root`, `Panel`, `Handle`), horizontally or vertically, and nested:
+  - **Panels.** Each takes `defaultSize`, `minSize` and `maxSize` in percent, and can be `collapsible`. Sizes are flex ratios, so handles never overflow the group.
+  - **Handles.** Each is a focusable window-splitter `separator` that controls the panel before it. Arrow keys resize by `keyboardStep`, Home and End jump to the limits, and Enter or a double-click collapses and restores. A collapsible panel dragged well below its minimum snaps shut.
+  - **Sizes.** Controlled with `sizes` / `onSizesChange`; `onSizesCommit` fires when a drag or key press ends, for saving the layout.
+  - **Styled handle.** A 1px line with a wider invisible hit area. It thickens in the accent colour on hover, focus and drag, and `withGrip` adds a grip. Restyle through `--pada-resizable-*` tokens.
+  - **Headless.** `pada-ds/headless` exports the same parts.
+- **Docs.** New [migration guide](./docs/migration-2.0.md) covering tokens, theming, deprecated APIs, the headless entry point and every behaviour or markup change. `docs/roadmap` has "As built" notes per area, a progress table and a React 2.0 column in the parity matrix.
+- **Demo dark mode.** The demo shell and documentation pages now use semantic tokens instead of hard-coded colours. A theme toggle in the top-right corner follows the OS by default and remembers your choice. The Playground starts from the shell's theme.
+- **Fixed:** `ThemeToggle`:
+  - Each toggle now has its own icon mask id. With two toggles on a page, they shared the first one's mask and could draw the wrong icon.
+  - The moon icon now faces the usual way.
+- **Demo pages for wave 1.** Every wave 1 component now has a page with Purpose, Design, Developer and Accessibility sections: Alert, Alert Dialog, Autocomplete, Avatar, Badge, Breadcrumbs, Command Palette, Dialog, Drawer, Dropdown Menu, Empty State, Field, Icon Button, Kbd, Link, Pagination, Separator, Skeleton, Spinner, Stack, Toast, and Toggle with Toggle Group. A new Foundation → Theme page shows nested `ThemeProvider`s and lists every theme axis.
+- **Fixed:** expanding a collapsed `Breadcrumbs` trail no longer drops keyboard focus. Focus moves to the first link it reveals.
+- **Brand (phase 7).**
+  - New `PadaLogo` draws the "Twin Soles" mark (two soles standing on a shared ground line; *pāda* is Sanskrit for foot) as inline SVG:
+    - Variants: `lockup` (mark and the geometric "pada" wordmark), `mark` and `wordmark`.
+    - Tones: `color` (amber, plus the accent colour, so it follows `data-accent`), `accent` and `mono` (`currentColor`).
+    - Sizes run from `sm` to `xl` or take a pixel height. Toes are drawn from 48px up.
+    - `animated` steps in once (left sole, right sole, then the ground draws out); `animated="loop"` walks as a branded loader (`role="status"`). Both use the motion tokens.
+    - It is an image named "Pada" unless `decorative`.
+  - `Logo` (third-party brand logos) is renamed `BrandLogo`; `Logo` and `LogoProps` remain as deprecated aliases until 3.0. The manifest lists aliases with their deprecation note.
+  - `SidebarLogo` with no `src`, `name` or `title` now shows the `PadaLogo` lockup instead of the old mark and grey "Pada . design" images (removed).
+  - The demo uses the new mark as its favicon (`public/favicon.svg`, adapting to dark mode) and the page title "Pada Design System" (was `vite.svg` and "myapp"). It has a new Foundation → Brand page.
+- **Layout primitives.** `Grid` lays out a fixed number of `columns`, or as many as fit with `minItemWidth`, using token gaps. `Container` centres content at a breakpoint width (`sm` to `2xl`, or `full`), with gutters that grow on wider screens. `AspectRatio` keeps media at a fixed shape. The demo has a new Foundation → Layout page.
+- **New components (wave 2): form inputs.**
+  - `RangeSlider` has two thumbs for a low and high value:
+    - Each thumb is a named `slider` with a formatted `aria-valuetext`, bounded by the other thumb (`minStepsBetweenThumbs`).
+    - Keys: arrows, PageUp/PageDown and Home/End. Pressing the track moves the nearest thumb.
+    - `onValueChange` fires while dragging and `onValueCommit` when the drag ends. It also accepts `formatOptions`, a description, an error and `name`.
+    - It is built on new headless `Slider` parts (`Root`, `Track`, `Range`, `Thumb`) that support any number of thumbs.
+  - `PasswordInput` is a password field:
+    - A show/hide toggle (`aria-pressed`).
+    - An optional strength `meter` (`strength`, or pass your own 0–4 score), plus `estimatePasswordStrength`.
+    - `autoComplete` defaults to `current-password`.
+  - `PinInput` has one box per character for codes and PINs:
+    - Typing advances, Backspace goes back, the arrows and Home/End move, and pasting or SMS autofill (`one-time-code`) fills every box.
+    - `onComplete`, `mask`, `numeric` or `alphanumeric`, `groupSize` separators and `name`.
+    - It also comes as headless `PinInput` parts.
+  - `TagInput` takes free-form tags in one field:
+    - Enter or a comma adds a tag, and pasting a list adds them all.
+    - `validate`, `maxTags` and duplicate prevention, with the reason shown as an error.
+    - Backspace moves to the tags, the arrows move between them, and Delete removes one. Changes are announced, and `name` submits each tag.
+  - `RadioCardGroup` is a single choice shown as cards (title, description, icon, meta such as a price) on native radios in a named fieldset. It has columns that wrap, and the indicator animates.
+  - `Rating` is a star rating built as a radio group (click the current value to clear it, with a hover preview). Read-only ratings are one image named "4.3 out of 5 stars", with partial stars.
+- `RadioGroup`'s label now names the radio group (it was a `<label>` pointing at nothing).
+- **New components (wave 2): Stat, Timeline and ScrollArea.**
+  - `Stat` is a key figure:
+    - A label and a value formatted with `formatOptions`. The value counts up to its new number when it changes; screen readers hear only the final value, and the count is skipped under reduced motion.
+    - A `delta` with a spoken direction, coloured by whether the change is good (`invertTrend` for costs and errors).
+    - `deltaLabel`, `description`, a `chart` slot and three sizes.
+    - The counter is also exported as the headless hook `useAnimatedNumber`.
+  - `Timeline` is an ordered list of events with tone- and icon-able markers, `<time>` dates, details, pending (hollow, dashed) events, a compact density and a staggered entrance. Pass `items` or `Timeline.Item` children.
+  - `ScrollArea` is a natively scrolling region:
+    - Slim themed scrollbars that show on hover or scroll (or `always`) and fade at the edges where more content is hidden.
+    - Vertical, horizontal or both, with `maxHeight` and `maxWidth`.
+    - It becomes focusable (and a named region) when its content overflows.
+- **New components (wave 2): Tree, HoverCard and ContextMenu.**
+  - `Tree` is a tree view for file browsers, sectioned navigation and nested settings. Pass nested `items`, or compose `Tree.Root`, `Item`, `ItemRow` (with an `icon`), `ItemLabel` and `Group`.
+    - Keys: Up/Down move, Right expands or enters, Left collapses or goes to the parent, Home/End jump, `*` expands the siblings, and typing jumps to an item.
+    - Selection is `single`, `multiple` or `none`. Expansion and selection are controllable, and `expandable` items can load their children lazily.
+    - Rows indent by level, with a guide line under open parents. Chevrons turn, and children slide in.
+    - It also comes as headless `Tree` parts.
+  - `HoverCard` is a rich preview of a link (a profile, a page), shown on hover and keyboard focus after `openDelay`. It stays open while the pointer is over the card and closes on leave, blur or Escape. It has an optional arrow, and it also comes as headless `HoverCard` parts.
+  - `ContextMenu` is a menu opened at the pointer by right-click, Shift+F10 or the context-menu key, or a long press on touch. Its content is the DropdownMenu parts (items, shortcuts, checkbox and radio items, submenus). It also comes as headless `ContextMenu.Root` and `ContextMenu.Trigger`. The headless menu content accepts a virtual anchor (`MenuAnchor`).
+- **New components (wave 2): NumberInput and Calendar.**
+  - `NumberInput` is a number field built as a `spinbutton`:
+    - Keys: Up/Down step, PageUp/PageDown take a `largeStep`, Home/End jump to `min`/`max`.
+    - Steppers can be `stacked` (default), `split` or `none`. They repeat while held and are out of the tab order.
+    - Values are formatted with `formatOptions` (currency, percent, units) through `Intl.NumberFormat`. Typed text is parsed in the same `locale` and committed on Enter or blur.
+    - Stepping is free of floating-point noise. The `aria-valuetext` is formatted, and `name` submits the raw number.
+    - It also comes as headless `NumberInput` parts (`Root`, `Input`, `Increment`, `Decrement`) with `createNumberFormatter`.
+  - `Calendar` is a month grid, single day or range (`mode="range"`):
+    - Keys: arrows move by day and week, Home/End to the week's ends, PageUp/PageDown by month (Shift: by year), Enter or Space selects.
+    - Options: `min`, `max`, `isDateUnavailable`, `weekStartsOn`, `locale` and a controllable visible month.
+    - A range previews while you choose its end.
+    - It also comes as headless `Calendar` parts (`Root`, `Heading`, `PrevButton`, `NextButton`, `Grid` with `renderDay`).
+  - `DatePickerDropdown`'s day view is now this Calendar, so it gets the keyboard grid, full date names for screen readers and unavailable days. New props: `isDateUnavailable`, `weekStartsOn` and `locale`. The month and year views are unchanged.
+  - `InputDate` opens its picker in a popover dialog:
+    - Focus starts on the selected day (or today), and Escape or an outside click closes it and returns focus to the field.
+    - The picker flips above the field when there is no room.
+    - The field reports `aria-haspopup="dialog"` and is described by its description or error.
+    - A range picker now closes once both ends are chosen.
+    - New props: `isDateUnavailable` and `weekStartsOn`.
+- **Toolbar, Select, ComboBox and UploadField (phase 3).**
+  - Toolbar `Filter` and `MoreFilter` open on the headless Popover. They render in a portal, flip when there is no room, and animate in and out. Escape and outside clicks close them, and focus moves into them on open and returns to the chip on close. `MoreFilter`'s filter names are now a vertical tab list (Up/Down move between them; previously `menuitem`s around a listbox). The selection count is announced as "N selected".
+  - `FilterChip` no longer nests a clickable `<span>` inside its button. The remove control is its own button ("Remove filter Owner: Ada") next to the chip's main button.
+  - `ComboBox` (the option list) is one tab stop when it manages focus. The arrow keys, Home and End move between options. Multi-select lists set `aria-multiselectable`.
+  - `Select` changes:
+    - The list renders in a portal positioned with Floating UI. It is no longer clipped by `overflow: hidden` containers, flips above the trigger near the bottom of the viewport, and is as wide as the trigger.
+    - The list is a dismissable layer, so choosing an option or pressing Escape in a Select inside a Dialog closes only the list.
+    - Type-ahead matches several typed letters ("bl" finds Blackberry).
+    - The active option scrolls into view.
+    - Moving focus off the trigger closes the list.
+    - The keyboard helpers now come from the headless navigation utilities.
+  - `UploadField` changes:
+    - `description` is rendered. Before, it was accepted but never shown.
+    - The description and the type, size and count hints describe the file input.
+    - An unlabelled field is named "Upload files".
+    - Files are listed as a list.
+    - Upload progress is a `progressbar`.
+    - The View button works: it calls the new `onView`, or opens the file in a new tab.
+    - Fixed a stale-closure warning in its upload handler.
+  - Overlays restore focus on close only when focus was lost with them. Closing one popover while another opens no longer pulls focus back and closes the new one.
+  - The Select, Filter, MoreFilter and TablePagination chevrons use bundled icons, so they render without network access.
+- **Accordion, Table, Steps and List rebuilt for keyboard and screen-reader use (phase 3).**
+  - `Accordion` is rebuilt on new headless `Accordion` and `Collapsible` parts (`pada-ds/headless`). The 1.x props still work, plus a new `headingLevel`. Groups are composed from `Accordion.Root` (`type="single"` with optional `collapsible`, or `type="multiple"`), `Accordion.Item`, `Accordion.Trigger` (with `iconName`) and `Accordion.Content`. Arrow keys, Home and End move between headers. Each header button now sits in a heading (`h3` by default). The open header of a group that cannot collapse is `aria-disabled`. Content height animates open and closed, and the chevron turns instead of swapping glyphs. It now uses a bundled icon, so it shows without network access. The panel body sets its own text colour. `AccordionHeader` and `AccordionContent` are deprecated.
+  - `Table` exposes table semantics:
+    - `role="table"` (named by the new `label` or `labelledBy`), `row`, `columnheader` and `cell`.
+    - New `TableCell` props: `rowHeader` and `span` (`'all'` for full-width messages).
+    - `TablePagination` renders outside the table role.
+    - `HeaderCell` takes `sortDirection` and `onSort`, which make the label a sort button and set `aria-sort`.
+    - Each column's resize handle is a focusable separator: Left and Right resize the column by 16px, and the width is announced. Resizing a column without a set width now starts from its rendered width instead of jumping to 120px.
+  - `Steps` is a list:
+    - Clickable steps are real buttons whose hit area covers the whole step.
+    - The current step has `aria-current="step"`, and each step's status ("completed", "current step", "not started") is announced.
+    - The connector below a completed step fills in.
+    - Fixed `status: 'current'` being ignored unless `currentStep` was set.
+  - `List`:
+    - Exposes list semantics, with a new `label` prop.
+    - In a `draggable` list each item has a handle button. Space or Enter lifts the item, the arrow keys and Home/End move it, Space or Enter drops it and Escape cancels. Each step is announced.
+    - Items slide to their new positions (FLIP).
+    - A parent re-render no longer resets the user's order, and `onReorder` is no longer called from inside a state updater.
+- **New components (wave 1, feedback and search).**
+  - `Toaster` and `toast()`: call `toast('Saved')`, `toast.success(...)`, `toast.warning(...)`, `toast.danger(...)`, `toast.info(...)` or `toast.dismiss(id)` from anywhere, with one `<Toaster />` mounted. Toasts take a title, description, tone, one action (e.g. Undo) and a duration, and an `id` updates a toast in place. They stack in a corner and fan out on hover or focus. Timers pause while the stack is hovered or focused or the window is in the background. Swipe or press Escape to dismiss, and F8 jumps to the region. Each toast is a polite live region (danger is assertive).
+  - `Autocomplete`: a text field with a filtered list of options, single or `multiple` (removable chips), with a description, error, `name` for forms, a custom `filter`, or `filter={false}` plus `onInputValueChange` for server-side search.
+  - `CommandPalette`: a ⌘K / Ctrl+K dialog of commands with fuzzy, ranked matching on labels and `keywords`, groups, icons and shortcut hints.
+  - Headless `Combobox` (`pada-ds/headless`: `Root`, `Anchor`, `Input`, `Trigger`, `Portal`, `Content`, `Item`, `Group`, `Empty`) follows the APG combobox pattern with a listbox popup. The highlight is announced through `aria-activedescendant` and focus stays in the input. Exports `defaultComboboxFilter`.
+- Overlays opened inside a `ThemeProvider` subtree (`target="element"`) now portal into that subtree, so they keep its theme and accent instead of the page's. The headless `Portal` reads the container from the new `PortalContainerContext` (exported from `pada-ds/headless`) when no `container` is passed.
+- `Link`'s external-link icon is now an inline SVG, so a link inside a paragraph no longer puts a `<div>` inside the `<p>`.
+- The demo has a new Playground page (Foundation → Playground) with every new component and controls for theme, accent, density and radius.
+- `manifest.json` now expands union prop types (such as `AutocompleteProps`) and lists each inherited prop once.
+- Fixed the consumer smoke test, which looked for a `.button--primary` rule that no longer exists now that primary is the base button style.
+- **New components (wave 1, interaction).**
+  - `Field` (`Field.Root`, `Label`, `Control`, `Description`, `Error`): wires any control's id, `aria-describedby`, `aria-invalid`, `required` and `disabled`; the error is announced and the control shakes once (not under reduced motion). Also headless in `pada-ds/headless`.
+  - `Toggle` (`aria-pressed`) and `ToggleGroup` (single or multiple, one tab stop, arrow keys). Also headless.
+  - `Breadcrumbs` (navigation landmark, `aria-current="page"`, collapsing long trails behind an expand button, `renderLink` for router links). PageHeader now reuses its `BreadcrumbItem` type.
+  - `Pagination` (previous/next, numbered pages with ellipses, `aria-current="page"`) and the `paginationRange` helper.
+  - `AlertDialog` (`role="alertdialog"`, focus starts on Cancel, no dismissal by clicking outside).
+  - `ThemeProvider` (sets every theme axis on `<html>` or a subtree, remembers the choice in localStorage), `useTheme()`, and `ThemeToggle` (sun/moon morph; the new theme spreads from the button with a view transition where supported).
+- **New components (wave 1, display).**
+  - `Avatar` (image with initials or icon fallback, a stable colour per name, sizes, square shape, presence status) and `AvatarGroup` (overlap and a "+N" counter).
+  - `Badge` (tones, subtle/solid/outline, counts with a `max`, a status dot, and a bump when the count changes).
+  - `Skeleton` (text lines, rectangles and circles with a shimmer; static under reduced motion).
+  - `Alert` (inline callout by tone, with title, actions, dismiss, and opt-in `live` announcements).
+  - `EmptyState` (media, title, description, actions; sm/md).
+  - `Kbd` (keys and shortcuts), `Spinner` (labelled status; pulses under reduced motion), `Separator` (decorative or semantic), `Stack` (flex layout with density-aware token gaps and an `as` prop), `Link` (accent or neutral, external links with a new-tab hint, `asChild` for router links) and `IconButton` (labelled square button with an optional tooltip).
+- Moved `ListContext` and `TableContext` into their own modules (still exported from the package) and fixed the remaining lint errors; `npm run lint` is clean.
+- **Accessibility and API fixes (phase 3).**
+  - `Button`: new `size` (`sm`, `md`, `lg`, density-aware) and `loading` (spinner over the hidden label so the width holds; stays focusable, sets `aria-busy`, ignores clicks). Buttons now default to `type="button"`, so they no longer submit forms by accident (pass `type="submit"` explicitly). Styles moved to `--pada-button-*` component tokens; icons follow the text colour; a press scales the button slightly and a trailing icon nudges forward on hover.
+  - `Checkbox`: new `indeterminate` (shows a dash, announced as "mixed"); a consumer `id` now keeps the label wired; the tick springs in.
+  - `InputText` / `InputTextArea`: a consumer `id` no longer breaks the label, and a consumer `aria-describedby` is kept alongside the description or error.
+  - `Select`: `name` now submits the value with forms (hidden input); the description and error describe the trigger, and errors set `aria-invalid`.
+  - `Carousel` follows the APG carousel pattern: a labelled region (`label` prop) of slide groups, auto-rotation pauses on hover and focus, never runs under reduced motion, and has a pause/play button; dots are buttons with `aria-current` (not a tablist without tabs); slides fade in and the current dot widens. Fixed the controls being pushed out of view by tall slides.
+  - `Notification` is a polite live region and its dismiss control is a real button.
+  - `Loader` pulses more slowly under reduced motion.
+- **Overlays rebuilt on the headless parts (phase 3).**
+  - New `Dialog` (`Dialog.Root`, `Trigger`, `Content` with `size` auto/sm/md/lg/xl/full, `Header`, `Title`, `Description`, `Body`, `Footer`, `Close`, `CloseButton`), `Drawer` (the same parts, with `Drawer.Content side="left|right|top|bottom"` and sizes) and `DropdownMenu` (items with `icon`, `shortcut` and `tone="danger"`, checkbox and radio items, labels, separators, submenus).
+  - `Popover` and `Tooltip` keep their 1.x props and are now also namespaces of parts (`Popover.Root`, `Popover.Content`, `Popover.Title`, `Popover.Arrow`, `Popover.CloseButton`; `Tooltip.Provider`, `Tooltip.Root`, `Tooltip.Content`, `Tooltip.Arrow`). They render in a portal, position with collision handling, and close on Escape and outside clicks; Popover closes when focus leaves it and labels itself from its title.
+  - `Modal` and `SideDrawer` keep their 1.x props and are deprecated wrappers over `Dialog` and `Drawer`. SideDrawer is now a real modal dialog (focus trap, focus return, `aria-modal`) and accepts `aria-label` / `aria-labelledby`.
+  - Every overlay animates in and out with the motion tokens (fade and scale from the trigger side, slide for drawers) and stays mounted until its exit transition finishes; reduced motion makes it instant.
+  - Each styled part exposes component tokens (`--pada-dialog-*`, `--pada-drawer-*`, `--pada-popover-*`, `--pada-tooltip-*`, `--pada-menu-*`).
+  - Behaviour changes: Tooltip now waits 300 ms on hover (keyboard focus still opens it at once) and only references the tooltip in `aria-describedby` while it is open; the Popover no longer follows the pointer position of the click that opened it (use `clickPosition`).
+  - `Tabs` is rebuilt on new headless `Tabs` parts (`pada-ds/headless`: `Tabs.Root`, `List`, `Trigger`, `Content`, `Indicator`). Fixes: ids are unique per instance (two Tabs on a page no longer collide), keyboard focus is scoped to the tab list, Home/End work, disabled tabs are skipped. New: `Tabs.Root` with string values, `variant="underline|pills"`, `orientation`, `activationMode="automatic|manual"`, and a sliding indicator. The notification dot is announced as "unread updates" inside the tab instead of a separate `role="status"`.
+  - KeyValue's info icon is now a focusable button, so keyboard users can reach its tooltip.
+  - `manifest.json`, `llms.txt` and `llms-full.txt` now list compound parts as `Name.Part` entries, and expand `Omit<>` / `Pick<>` props.
+- **Headless parts (`pada-ds/headless`).** Unstyled, accessible building blocks with compound parts, `asChild` composition and state exposed through `data-*` and `aria-*` attributes:
+  - `Dialog` (modal and non-modal: focus trap, focus return, scroll lock, the rest of the page hidden from assistive technology, Escape and outside-click dismissal), `Popover` (anchored, flips and shifts to stay on screen, optional modal mode), `Tooltip` (hover delay, instant on keyboard focus, shared delays through `Tooltip.Provider`, hoverable content) and `DropdownMenu` (APG menu button: arrow keys, Home/End, type-ahead, checkbox and radio items, submenus).
+  - Overlays stack: Escape and outside clicks only close the topmost layer. Every overlay renders through a portal and stays mounted until its exit transition finishes.
+  - Utilities: `Slot`, `Portal`, `VisuallyHidden`, `useControllableState`, `usePresence`, `useDismissable`, `useFocusScope`, `useScrollLock`, `useHideOthers`, `useFloatingPosition` (Floating UI), `useTypeahead`, `findNextIndex`, `findTypeaheadIndex`, `keyToNavigation`.
+  - New runtime dependency: `@floating-ui/react-dom`.
+- Added component tests (Vitest, Testing Library and axe-core in jsdom); `npm test` runs them after the script tests.
+- **Tokens v2.** Tokens are now generated from one model (`tokens/index.mjs`) by `npm run build:tokens`, in four tiers: reference (`--pada-ref-*`), semantic, derived and component. Every token has the `--pada-` prefix.
+  - Light and dark values live in one `light-dark()` value, so themes switch with `color-scheme` and nested `data-theme` containers need no re-declared token sets.
+  - New semantic tokens: surfaces (`--pada-color-surface`, `-sunken`, `-raised`, `-overlay`, `-inverse`, `backdrop`), text (`fg`, `fg-muted`, `fg-subtle`, `fg-disabled`), borders, and intents (`accent`, `neutral`, `success`, `warning`, `danger`, `info`) each with `solid`, `solid-hover`, `solid-pressed`, `on-solid`, `subtle`, `subtle-hover`, `fg` and `border`.
+  - Derived tokens are computed from knobs: `--pada-accent-hue`, `--pada-radius-base`, `--pada-density`, `--pada-type-base`, `--pada-type-ratio`, `--pada-motion-scale` and `--pada-contrast`. `on-solid` text picks white or near-black from the fill's lightness.
+  - New theme axes: `data-accent`, `data-neutral`, `data-density`, `data-radius`, `data-motion` and `data-contrast`, on `<html>` or any container.
+  - New categories: motion (durations scaled by `--pada-motion-scale`, which is 0 under `prefers-reduced-motion`; easings), semantic z-index (`--pada-z-dropdown` … `--pada-z-tooltip`), control heights, opacity, border widths, breakpoints and a configurable focus ring (`--pada-shadow-focus`, which now uses the surface colour for its gap so it works in dark mode).
+  - New exports: `pada-ds/tokens.scss` (breakpoint mixins and a `pada()` function), `pada-ds/tokens` (JS token names and breakpoints, with types) and `pada-ds/tokens.json` (DTCG-style, for design tools).
+  - Every Pada 1.x token name still works as an alias (checked by `npm test`) and will be removed in 3.0.
+  - Visual changes: surfaces, text and borders now come from the neutral palette (stone) instead of mixing slate and stone; `--font-size-lg` is now 15.6px (13px × 1.2); the focus ring is 2px wide; themed hue ramps (`--color-red-600` and so on, when read through the semantic layer) follow dark mode.
+  - `npm run tokens:sync -- <path>` copies the built CSS and SCSS into the Angular library with a version and hash header.
+- **Components use the 2.0 tokens.** Every component stylesheet now reads `--pada-*` tokens only: no 1.x names, no reference (tier 0) tokens, and no hard-coded colours, z-index values, durations, easings, font weights, font sizes or radii.
+  - Solid fills use role tokens (`--pada-color-accent-solid`, `-solid-hover`, `-solid-pressed`, `-on-solid`), so Button, Checkbox and the Toolbar count badges keep readable text in dark mode and with any `data-accent`.
+  - Overlays use `--pada-color-backdrop`, `--pada-shadow-*` and the semantic layers (`--pada-z-dropdown`, `-modal`, `-popover`, `-toast`, `-tooltip`).
+  - Transitions use `--pada-duration-*` and `--pada-ease-*`, so they all stop under `prefers-reduced-motion` or `data-motion="reduced"`.
+  - Dark mode fixes that came with it: CodeSnippet forces the dark scheme and stays readable in both themes; Select, SegmentControl and Steps no longer render dark text on dark fills.
+- Added the `pada-tokens-migrate` CLI (`npx pada-tokens-migrate src/`), which rewrites 1.x token references in CSS, SCSS, JS and TS to their exact 2.0 names and lists the ones that need a manual choice (`--color-white`, `--color-black`, `--z-index-*`). `--themed` also moves raw palette colours to the themed ramps.
+- Fixed `CodeSnippet` failing to load in Node ESM (SSR): its Prism language imports now include the `.js` extension.
+- Fixed token bugs:
+  - `--color-neutral-*` was defined twice (Tailwind's neutral grey in the primitives, Pada's stone scale in the semantic layer), so the value depended on stylesheet order. The stone scale is now the only definition.
+  - `--color-accent-neutral-*` was inverted twice in dark mode and resolved to near-white. It now maps to the stone scale and is inverted once.
+  - Components read tokens that did not exist and silently fell back to inherited values: `--font-2/3/5` (Modal, Tooltip, Progress), `--color-fg-default` (Progress), `--font-size-md` (Indexer), `--shadow-xs` (DatePicker), `--color-primray-200` (Pills, typo) and every `--tw-*` token in Logo. They now use real tokens. `--color-fg-muted` is now defined (neutral-600, per theme).
+- Added `npm run check:tokens`, part of `npm test`, which fails when component CSS reads a custom property that nothing defines.
+
 ## 1.1.0 - 2026-05-27
 
 - Externalized `prismjs` from the bundle. It is still listed under `dependencies`, so consumers get it auto-installed, but the published `dist/pada.js` no longer ships its own copy.

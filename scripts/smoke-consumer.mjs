@@ -66,12 +66,20 @@ await writeFile(
 run('npm', ['run', 'build'], { cwd: appDir });
 
 const packageCss = await readFile(path.join(appDir, 'node_modules/pada-ds/dist/pada.css'), 'utf8');
-if (!packageCss.includes('.button--primary') || !packageCss.includes('var(--color-primary-600)')) {
+// Primary is the base .button style; variants only reassign its --pada-button-* tokens.
+if (!/\.button\{[^}]*--pada-button-bg:\s*var\(--pada-color-accent-solid\)/.test(packageCss)) {
   throw new Error('Expected primary button styles were not found in dist/pada.css');
 }
 
 const tokensCss = await readFile(path.join(appDir, 'node_modules/pada-ds/dist/tokens.css'), 'utf8');
 const requiredTokens = [
+  '--pada-color-accent-solid',
+  '--pada-space-4',
+  '--pada-radius-lg',
+  '--pada-font-sans',
+  '--pada-shadow-lg',
+  '--pada-duration-normal',
+  // Pada 1.x names stay defined as aliases through 2.x.
   '--color-primary-600',
   '--spacing-4',
   '--radius-lg',
@@ -88,7 +96,9 @@ for (const token of requiredTokens) {
 const requiredThemeSelectors = [
   '[data-theme="light"]',
   '[data-theme="dark"]',
-  ':root:not([data-theme])',
+  'color-scheme: light dark',
+  '[data-accent="custom"]',
+  '[data-density="compact"]',
 ];
 
 for (const selector of requiredThemeSelectors) {
@@ -115,6 +125,20 @@ run('node', [
   '--input-type=module',
   '--eval',
   `import React from 'react'; import { renderToString } from 'react-dom/server'; import { Button } from 'pada-ds'; const html = renderToString(React.createElement(Button, { variant: 'primary' }, 'Smoke test button')); if (!html.includes('button--primary')) { throw new Error('Button primary class not rendered.'); }`,
+], { cwd: appDir });
+
+// The headless entry resolves, renders without any stylesheet, and exposes ARIA wiring.
+run('node', [
+  '--input-type=module',
+  '--eval',
+  `import React from 'react'; import { renderToString } from 'react-dom/server'; import { Dialog } from 'pada-ds/headless'; const html = renderToString(React.createElement(Dialog.Root, null, React.createElement(Dialog.Trigger, null, 'Open'))); if (!html.includes('aria-haspopup="dialog"') || !html.includes('aria-expanded="false"')) { throw new Error('pada-ds/headless Dialog.Trigger did not render its ARIA attributes: ' + html); }`,
+], { cwd: appDir });
+
+// The JS token entry resolves and maps names to var() references.
+run('node', [
+  '--input-type=module',
+  '--eval',
+  `import { tokens, breakpoints } from 'pada-ds/tokens'; if (tokens['color-accent-solid'] !== 'var(--pada-color-accent-solid)' || breakpoints.md !== 768) { throw new Error('pada-ds/tokens did not export the expected values.'); }`,
 ], { cwd: appDir });
 
 // Built-in icons are bundled and must render synchronously (no fetch), so SSR emits the SVG.

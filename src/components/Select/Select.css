@@ -2,14 +2,14 @@
 .select-group {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-2);
+    gap: var(--pada-space-2);
 }
 
 /* Label */
 .select-label {
-    font-size: var(--font-size-sm);
-    font-weight: 500;
-    color: var(--color-neutral-900);
+    font-size: var(--pada-font-size-sm);
+    font-weight: var(--pada-font-weight-medium);
+    color: var(--pada-color-neutral-900);
     display: block;
 }
 
@@ -28,18 +28,18 @@
     height: 32px;
     min-height: 32px;
     max-height: 32px;
-    padding: var(--spacing-2) var(--spacing-4);
-    gap: var(--spacing-2);
-    font-size: var(--font-size-base);
+    padding: var(--pada-space-2) var(--pada-space-4);
+    gap: var(--pada-space-2);
+    font-size: var(--pada-font-size-md);
     line-height: 20px;
-    font-weight: 400;
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--color-stone-200);
-    background-color: var(--color-white);
-    color: var(--color-stone-900);
+    font-weight: var(--pada-font-weight-regular);
+    border-radius: var(--pada-radius-lg);
+    border: 1px solid var(--pada-color-neutral-200);
+    background-color: var(--pada-color-surface);
+    color: var(--pada-color-neutral-900);
     cursor: pointer;
-    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out,
-        box-shadow 0.2s ease-in-out;
+    transition: background-color var(--pada-duration-normal) var(--pada-ease-standard), border-color var(--pada-duration-normal) var(--pada-ease-standard),
+        box-shadow var(--pada-duration-normal) var(--pada-ease-standard);
     outline: none;
     display: flex;
     align-items: center;
@@ -50,19 +50,19 @@
 
 .select-trigger:hover:not(:disabled),
 .select-trigger[aria-expanded="true"]:not(:disabled) {
-    border-color: var(--color-stone-400);
+    border-color: var(--pada-color-neutral-400);
 }
 
 /* Focus ring per Figma: 2px white inner + 3px indigo-600 outer. Base border
    colour intentionally NOT overridden so it reflects rest/hover/error state. */
 .select-trigger:focus-visible {
-    box-shadow: var(--shadow-focus-ring);
+    box-shadow: var(--pada-shadow-focus);
 }
 
 .select-trigger:disabled {
     cursor: not-allowed;
-    background-color: var(--color-stone-50);
-    border-color: var(--color-stone-200);
+    background-color: var(--pada-color-neutral-50);
+    border-color: var(--pada-color-neutral-200);
 }
 
 .select-trigger:disabled .select-trigger-text,
@@ -81,44 +81,64 @@
 
 /* Placeholder colour when no value is selected. */
 .select-trigger-text[data-placeholder] {
-    color: var(--color-stone-400);
+    color: var(--pada-color-neutral-400);
 }
 
 /* Error state on container — red/400 border per Figma. */
 .select-container[data-error] .select-trigger {
-    border-color: var(--color-red-400);
+    border-color: var(--pada-color-red-400);
 }
 
 .select-container[data-error] .select-trigger:hover:not(:disabled),
 .select-container[data-error] .select-trigger[aria-expanded="true"]:not(:disabled) {
-    border-color: var(--color-red-400);
+    border-color: var(--pada-color-red-400);
 }
 
 /* Chevron */
 .select-icon {
     flex-shrink: 0;
-    --icon-color: var(--color-stone-900);
+    --icon-color: var(--pada-color-neutral-900);
 }
 
 /* Dropdown menu */
+/* The list: portalled, positioned under (or above) the trigger and as wide as it. */
 .select-dropdown {
-    position: absolute;
-    top: calc(100% + var(--spacing-1));
-    left: 0;
-    right: 0;
-    z-index: 1000;
+    z-index: var(--pada-z-popover);
+    width: var(--pada-floating-anchor-width);
+    transform-origin: var(--pada-floating-transform-origin);
+    transition:
+        opacity var(--pada-duration-fast) var(--pada-ease-enter),
+        scale var(--pada-duration-fast) var(--pada-ease-enter);
+}
+
+@starting-style {
+    .select-dropdown[data-state="open"] {
+        opacity: 0;
+        scale: var(--pada-motion-scale-enter);
+    }
+}
+
+/* As wide as the trigger; six options tall, or less when the viewport has less room. */
+.select-dropdown .combo-box {
+    width: 100%;
+    max-width: none;
+    box-sizing: border-box;
+    max-height: min(
+        calc((var(--pada-space-2) + var(--pada-space-8)) * 6 + var(--pada-space-4)),
+        var(--pada-floating-available-height)
+    );
 }
 
 /* Helper text */
 .select-description {
-    font-size: var(--font-size-xs);
-    color: var(--color-neutral-600);
+    font-size: var(--pada-font-size-xs);
+    color: var(--pada-color-neutral-600);
     margin: 0;
 }
 
 /* Error message */
 .select-error {
-    font-size: var(--font-size-xs);
-    color: var(--color-red-500);
+    font-size: var(--pada-font-size-xs);
+    color: var(--pada-color-red-500);
     margin: 0;
 }

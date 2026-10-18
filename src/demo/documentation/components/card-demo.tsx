@@ -8,7 +8,7 @@ export default function CardDemo() {
       title="Card"
       kind="Component"
       purpose={<p>Card groups related content and actions into a contained surface. Use cards to chunk lists of entities (records, projects, dashboards) that the user can scan and act on. Avoid nesting cards or using them for ambient page chrome.</p>}
-      design={<><p>Cards have a white surface with subtle shadow elevation, optional padding, and consistent corner radius. Compose them with headings, body text, and action buttons.</p><div className="demo-page__showcase" style={{ flexDirection: 'row', gap: 16 }}><div style={{ width: 280 }}><Card><div style={{ padding: 16 }}><h3 style={{ margin: 0, marginBottom: 8 }}>Card title</h3><p style={{ margin: 0, color: 'var(--color-stone-600)', fontSize: 13 }}>Cards group related information into a scannable surface.</p></div></Card></div></div></>}
+      design={<><p>Cards have a white surface with subtle shadow elevation, optional padding, and consistent corner radius. Compose them with headings, body text, and action buttons.</p><div className="demo-page__showcase" style={{ flexDirection: 'row', gap: 16 }}><div style={{ width: 280 }}><Card><div style={{ padding: 16 }}><h3 style={{ margin: 0, marginBottom: 8 }}>Card title</h3><p style={{ margin: 0, color: 'var(--pada-color-fg-muted)', fontSize: 13 }}>Cards group related information into a scannable surface.</p></div></Card></div></div></>}
       developer={<><p>Import the <code>Card</code> from <code>pada-ds</code> and configure with the props shown below.</p><CodeSnippet code={`import { Card } from 'pada-ds';
 
 export function ProjectCard() {

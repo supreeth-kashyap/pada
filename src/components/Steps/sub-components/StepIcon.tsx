@@ -41,7 +41,7 @@ export const StepIcon = ({
         <Icon 
           name="tick_1" 
           size={16} 
-          color="var(--color-green-600)" 
+          color="var(--pada-color-green-600)" 
           className="step-icon__checkmark"
         />
       );
@@ -52,7 +52,7 @@ export const StepIcon = ({
         <Icon 
           name="alert_1" 
           size={16} 
-          color="var(--color-red-600)" 
+          color="var(--pada-color-red-600)" 
           className="step-icon__exclamation"
         />
       );

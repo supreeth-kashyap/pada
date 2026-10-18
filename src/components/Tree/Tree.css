@@ -1,0 +1,120 @@
+/* Root */
+.tree {
+  /* Component tokens */
+  --pada-tree-indent: var(--pada-space-5);
+  --pada-tree-row-height: var(--pada-control-height-sm);
+  --pada-tree-row-radius: var(--pada-radius-md);
+  --pada-tree-guide: var(--pada-color-border);
+
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--pada-font-sans);
+  font-size: var(--pada-font-size-md);
+  color: var(--pada-color-fg);
+}
+
+.tree-group {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  animation: tree-group-in var(--pada-duration-normal) var(--pada-ease-enter);
+}
+
+/* A guide line under each open parent's chevron. */
+.tree-group::before {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: calc(var(--pada-space-2) + 6px + var(--pada-tree-level) * var(--pada-tree-indent));
+  width: var(--pada-border-width-thin);
+  background-color: var(--pada-tree-guide);
+}
+
+/* Item: the row carries the visuals; the item only takes focus. */
+.tree-item {
+  outline: none;
+}
+
+.tree-row {
+  /* State variables */
+  --pada-tree-row-bg: transparent;
+  --pada-tree-row-fg: var(--pada-color-fg);
+  --pada-tree-row-shadow: none;
+  --pada-tree-indicator-rotate: 0deg;
+
+  display: flex;
+  align-items: center;
+  gap: var(--pada-space-1-5);
+  min-height: var(--pada-tree-row-height);
+  padding-inline: calc(var(--pada-space-2) + var(--pada-tree-level) * var(--pada-tree-indent)) var(--pada-space-2);
+  border-radius: var(--pada-tree-row-radius);
+  background-color: var(--pada-tree-row-bg);
+  color: var(--pada-tree-row-fg);
+  box-shadow: var(--pada-tree-row-shadow);
+  cursor: pointer;
+  user-select: none;
+  transition:
+    background-color var(--pada-duration-fast) var(--pada-ease-standard),
+    color var(--pada-duration-fast) var(--pada-ease-standard);
+}
+
+.tree-row[data-state="open"] {
+  --pada-tree-indicator-rotate: 90deg;
+}
+
+.tree-row:hover {
+  --pada-tree-row-bg: var(--pada-color-neutral-subtle-hover);
+}
+
+.tree-row[data-selected] {
+  --pada-tree-row-bg: var(--pada-color-accent-subtle);
+  --pada-tree-row-fg: var(--pada-color-accent-fg);
+}
+
+.tree-row[data-disabled] {
+  --pada-tree-row-fg: var(--pada-color-fg-disabled);
+
+  cursor: not-allowed;
+}
+
+/* Keyboard focus lands on the item; show it on its row. */
+.tree-item:focus-visible > .tree-row {
+  --pada-tree-row-shadow: var(--pada-shadow-focus);
+}
+
+/* Child elements */
+.tree-indicator {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 12px;
+  height: 12px;
+  color: var(--pada-color-fg-muted);
+  rotate: var(--pada-tree-indicator-rotate);
+  transition: rotate var(--pada-duration-normal) var(--pada-ease-emphasized);
+}
+
+.tree-indicator:not([data-expandable]) {
+  visibility: hidden;
+}
+
+.tree-icon {
+  flex-shrink: 0;
+}
+
+.tree-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@keyframes tree-group-in {
+  from {
+    opacity: 0;
+    translate: 0 calc(-1 * var(--pada-motion-distance-sm));
+  }
+}

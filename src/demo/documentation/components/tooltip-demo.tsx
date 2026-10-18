@@ -8,7 +8,7 @@ export default function TooltipDemo() {
       title="Tooltip"
       kind="Component"
       purpose={<p>Tooltip reveals supplementary text on hover or focus — typically clarifying an icon-only button or a truncated value. Use them sparingly and never for content that the user must read to complete a task.</p>}
-      design={<><p>Tooltip supports four placements (top/right/bottom/left) and is keyboard-accessible. It renders only when the trigger is hovered or focused.</p><div className="demo-page__showcase" style={{ flexDirection: 'row', gap: 16 }}><Tooltip content="Quick tip"><button style={{ padding: '6px 12px', borderRadius: 6, border: '1px solid var(--color-stone-300)', background: 'white' }}>Hover me</button></Tooltip></div></>}
+      design={<><p>Tooltip supports four placements (top/right/bottom/left) and is keyboard-accessible. It renders only when the trigger is hovered or focused.</p><div className="demo-page__showcase" style={{ flexDirection: 'row', gap: 16 }}><Tooltip content="Quick tip"><button style={{ padding: '6px 12px', borderRadius: 6, border: '1px solid var(--pada-color-border-strong)', background: 'var(--pada-color-surface)', color: 'var(--pada-color-fg)' }}>Hover me</button></Tooltip></div></>}
       developer={<><p>Import the <code>Tooltip</code> from <code>pada-ds</code> and configure with the props shown below.</p><CodeSnippet code={`import { Tooltip } from 'pada-ds';
 
 export function ArchiveButton() {

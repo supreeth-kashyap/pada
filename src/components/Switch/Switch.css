@@ -8,7 +8,7 @@
 .switch-wrapper {
     display: inline-flex;
     align-items: center;
-    gap: var(--spacing-2);
+    gap: var(--pada-space-2);
     cursor: pointer;
     user-select: none;
 }
@@ -19,13 +19,13 @@
 }
 
 .switch-label {
-    font-size: var(--font-size-sm);
-    color: var(--color-stone-900);
-    line-height: var(--line-height-base);
+    font-size: var(--pada-font-size-sm);
+    color: var(--pada-color-neutral-900);
+    line-height: var(--pada-line-height-md);
 }
 
 .switch-wrapper[data-disabled] .switch-label {
-    color: var(--color-stone-400);
+    color: var(--pada-color-neutral-400);
 }
 
 /* Visually hidden but kept in the accessibility tree. */
@@ -49,9 +49,9 @@
     height: 24px;
     padding: 2px;
     box-sizing: border-box;
-    background-color: var(--color-stone-300);
-    border-radius: 24px;
-    transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    background-color: var(--pada-color-neutral-300);
+    border-radius: var(--pada-radius-3xl);
+    transition: background-color var(--pada-duration-normal) var(--pada-ease-standard), box-shadow var(--pada-duration-normal) var(--pada-ease-standard);
     flex-shrink: 0;
 }
 
@@ -61,9 +61,9 @@
     justify-content: center;
     width: 28px;
     height: 20px;
-    background-color: var(--color-white);
-    border-radius: 24px;
-    transition: transform 0.2s ease-in-out;
+    background-color: var(--pada-color-surface);
+    border-radius: var(--pada-radius-3xl);
+    transition: transform var(--pada-duration-normal) var(--pada-ease-standard);
     /* Track inner width is 60px (64 - 2*2 padding); knob is 28px, so the
        checked translation is 60 - 28 = 32px. */
     transform: translateX(0);
@@ -71,7 +71,7 @@
 
 /* On — checked / selected */
 .switch-input:checked + .switch-track {
-    background-color: var(--color-primary-600);
+    background-color: var(--pada-color-accent-600);
 }
 
 .switch-input:checked + .switch-track .switch-knob {
@@ -80,30 +80,30 @@
 
 /* Focus — ring renders around the track, base colour stays intact. */
 .switch-input:focus-visible + .switch-track {
-    box-shadow: var(--shadow-focus-ring);
+    box-shadow: var(--pada-shadow-focus);
 }
 
 /* Disabled — track desaturates; both off and on get a lighter wash. */
 .switch-wrapper[data-disabled] .switch-track,
 .switch-wrapper[data-loading] .switch-track {
-    background-color: var(--color-stone-200);
+    background-color: var(--pada-color-neutral-200);
 }
 
 .switch-wrapper[data-disabled] .switch-input:checked + .switch-track,
 .switch-wrapper[data-loading] .switch-input:checked + .switch-track {
-    background-color: var(--color-primary-300);
+    background-color: var(--pada-color-accent-300);
 }
 
 /* Loading — knob hosts a spinner. Spinner uses Material Symbols
    `progress_activity` glyph and gets a CSS rotation. */
 .switch-spinner {
     display: inline-flex;
-    color: var(--color-primary-600);
+    color: var(--pada-color-accent-600);
     animation: switch-spin 0.8s linear infinite;
 }
 
 .switch-wrapper[data-loading] .switch-input:checked ~ .switch-track .switch-spinner {
-    color: var(--color-primary-600);
+    color: var(--pada-color-accent-600);
 }
 
 @keyframes switch-spin {

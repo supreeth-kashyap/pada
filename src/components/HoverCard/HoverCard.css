@@ -1,0 +1,73 @@
+/* Root: the card */
+.hover-card {
+  /* Component tokens */
+  --pada-hover-card-bg: var(--pada-color-surface-overlay);
+  --pada-hover-card-border: var(--pada-color-border);
+  --pada-hover-card-radius: var(--pada-radius-xl);
+  --pada-hover-card-padding: var(--pada-space-4);
+  --pada-hover-card-width: 320px;
+  --pada-hover-card-shadow: var(--pada-shadow-lg);
+
+  z-index: var(--pada-z-popover);
+  box-sizing: border-box;
+  width: var(--pada-hover-card-width);
+  max-width: var(--pada-floating-available-width);
+  padding: var(--pada-hover-card-padding);
+  border: var(--pada-border-width-thin) solid var(--pada-hover-card-border);
+  border-radius: var(--pada-hover-card-radius);
+  background-color: var(--pada-hover-card-bg);
+  color: var(--pada-color-fg);
+  box-shadow: var(--pada-hover-card-shadow);
+  font-family: var(--pada-font-sans);
+  font-size: var(--pada-font-size-md);
+  transform-origin: var(--pada-floating-transform-origin);
+  transition:
+    opacity var(--pada-duration-normal) var(--pada-ease-enter),
+    scale var(--pada-duration-normal) var(--pada-ease-enter);
+}
+
+/* Enter and exit */
+.hover-card[data-state="closed"] {
+  opacity: 0;
+  scale: var(--pada-motion-scale-enter);
+  transition-duration: var(--pada-duration-fast);
+  transition-timing-function: var(--pada-ease-exit);
+}
+
+@starting-style {
+  .hover-card[data-state="open"] {
+    opacity: 0;
+    scale: var(--pada-motion-scale-enter);
+  }
+}
+
+/* Child elements */
+.hover-card-arrow {
+  width: 12px;
+  height: 6px;
+  background-color: var(--pada-hover-card-bg);
+}
+
+.hover-card-arrow[data-side="bottom"] {
+  translate: 0 -100%;
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+
+.hover-card-arrow[data-side="top"] {
+  translate: 0 100%;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
+.hover-card-arrow[data-side="left"] {
+  width: 6px;
+  height: 12px;
+  translate: 100% 0;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+.hover-card-arrow[data-side="right"] {
+  width: 6px;
+  height: 12px;
+  translate: -100% 0;
+  clip-path: polygon(100% 0, 100% 100%, 0 50%);
+}

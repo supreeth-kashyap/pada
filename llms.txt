@@ -20,8 +20,10 @@ import { Button } from 'pada-ds';
 <Button variant="primary">Save</Button>
 ```
 
-- `pada-ds/tokens.css`: design tokens (CSS custom properties) only.
+- `pada-ds/tokens.css`: design tokens (CSS custom properties, all prefixed `--pada-`) only.
+- `pada-ds/tokens`: token names as `var()` strings and breakpoints for JS (`import { tokens, breakpoints } from 'pada-ds/tokens'`); `pada-ds/tokens.scss` and `pada-ds/tokens.json` carry the same tokens for Sass and design tools.
 - `pada-ds/styles.css`: styles for every component.
+- `pada-ds/headless`: unstyled, accessible parts with no CSS (`Dialog`, `Popover`, `Tooltip`, `DropdownMenu`, plus `Slot`, `Portal`, `VisuallyHidden` and hooks). Compose them as `<Dialog.Root><Dialog.Trigger/><Dialog.Portal><Dialog.Overlay/><Dialog.Content><Dialog.Title/></Dialog.Content></Dialog.Portal></Dialog.Root>`; style them through `data-state`, `data-side` and `aria-*` attributes; `asChild` merges a part onto your own element.
 - `pada-ds/base.css` (optional): document base styles (`body` background, color and font; zero `p` margins).
 - `pada-ds/manifest.json`: machine-readable component API (props, types, defaults, descriptions).
 
@@ -29,50 +31,193 @@ import { Button } from 'pada-ds';
 
 By default the theme follows the operating system (`prefers-color-scheme`). Set `data-theme="light"` or `data-theme="dark"` on `<html>` or on any container to force a theme for that subtree. Remove the attribute to follow the OS again.
 
+More theme axes work the same way and combine freely: `data-accent` (a palette hue such as `indigo`, `amber`, `emerald`, or `custom` with `--pada-accent-hue`), `data-neutral` (`stone`, `slate`, `gray`, `zinc`, `neutral`), `data-density` (`compact`, `comfortable`, `spacious`), `data-radius` (`none`, `sm`, `md`, `lg`, `xl`), `data-motion` (`reduced`, `full`) and `data-contrast` (`standard`, `more`).
+
+Style custom UI with semantic tokens rather than raw colours: `--pada-color-surface`, `--pada-color-fg`, `--pada-color-fg-muted`, `--pada-color-border`, and per intent (`accent`, `neutral`, `success`, `warning`, `danger`, `info`) `--pada-color-<intent>-solid`, `-solid-hover`, `-on-solid`, `-subtle`, `-fg`, `-border`. Spacing is `--pada-space-<n>` (n × 0.25rem × density), radius `--pada-radius-xs` to `-3xl`, motion `--pada-duration-fast|normal|slow` with `--pada-ease-standard|enter|exit|emphasized`, layers `--pada-z-dropdown|modal|popover|toast|tooltip`.
+
 ## Components
 
 Every component is a named export: `import { Name } from 'pada-ds'`. Props marked `?` are optional. Full prop tables with types, defaults and examples are in llms-full.txt.
 
-- Accordion: header, headerIconName?, children, defaultOpen?, open?, onOpenChange?, className?, disabled?
+- Accordion: header, headerIconName?, children, defaultOpen?, open?, onOpenChange?, className?, disabled?, headingLevel?
+- Accordion.Content: forceMount?; extends ComponentPropsWithRef<'div'>
+- Accordion.Item: value, disabled?; extends ComponentPropsWithRef<'div'>
+- Accordion.Root: type, value?, defaultValue?, onValueChange?, collapsible?, disabled?, orientation?, dir?; extends Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'dir'>
+- Accordion.Trigger: iconName?, headingLevel?, asChild?; extends ComponentPropsWithRef<'button'>
 - AccordionContent: children; extends React.HTMLAttributes<HTMLDivElement>
 - AccordionHeader: title, iconName?, collapsed?; extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'title'>
+- Alert: tone?, title?, icon?, actions?, onDismiss?, live?; extends Omit<ComponentPropsWithRef<'div'>, 'title'>
+- AlertDialog.Action: children?, variant?, size?, leftIcon?, rightIcon?, split?, onSplitClick?, disabled?, loading?, ref?; extends React.ButtonHTMLAttributes<HTMLButtonElement>
+- AlertDialog.Cancel: children?, variant?, size?, leftIcon?, rightIcon?, split?, onSplitClick?, disabled?, loading?, ref?; extends React.ButtonHTMLAttributes<HTMLButtonElement>
+- AlertDialog.Content: onOpenAutoFocus?, size?, container?, overlayProps?, forceMount?, onCloseAutoFocus?, onEscapeKeyDown?; extends Omit<ComponentPropsWithRef<'div'>, 'onPointerDownOutside' | 'onInteractOutside'>
+- AlertDialog.Description: asChild?; extends ComponentPropsWithRef<'p'>
+- AlertDialog.Footer: justify?; extends ComponentPropsWithRef<'div'>
+- AlertDialog.Header: no props; extends ComponentPropsWithRef<'div'>
+- AlertDialog.Root: children?, open?, defaultOpen?, onOpenChange?, modal?
+- AlertDialog.Title: asChild?; extends ComponentPropsWithRef<'h2'>
+- AlertDialog.Trigger: asChild?; extends ComponentPropsWithRef<'button'>
+- AspectRatio: ratio?; extends ComponentPropsWithRef<'div'>
+- Autocomplete: multiple?, value?, defaultValue?, onValueChange?, label, options, placeholder?, description?, error?, emptyMessage?, filter?, onInputValueChange?, disabled?, required?, name?, className?
+- Avatar: src?, name?, alt?, size?, shape?, status?; extends Omit<ComponentPropsWithRef<'span'>, 'children'>
+- AvatarGroup: max?, size?, label?; extends ComponentPropsWithRef<'div'>
+- Badge: tone?, variant?, size?, count?, max?, dot?; extends ComponentPropsWithRef<'span'>
 - Banner: title, subtitle?, visualIcon?, visualImage?, visualAlt?, button?, onButtonClick?, className?
 - BaseManageFilter: saveCopy?, onSaveFilter?, onClear?, onMenuClick?, className?
 - BaseToolbarMenu: title?, count?, showCount?, dropdown?, disabled?, state?, className?, onClick?
-- Button: children?, variant?, leftIcon?, rightIcon?, split?, onSplitClick?, disabled?; extends React.ButtonHTMLAttributes<HTMLButtonElement>
+- BrandLogo: name, size?, background?, tooltip?; extends React.HTMLAttributes<HTMLDivElement>
+- Breadcrumbs: items, maxItems?, renderLink?, label?; extends Omit<ComponentPropsWithRef<'nav'>, 'children'>
+- Button: children?, variant?, size?, leftIcon?, rightIcon?, split?, onSplitClick?, disabled?, loading?, ref?; extends React.ButtonHTMLAttributes<HTMLButtonElement>
+- Calendar: mode?, value?, defaultValue?, onValueChange?, month?, defaultMonth?, onMonthChange?, min?, max?, isDateUnavailable?, weekStartsOn?, locale?, disabled?, readOnly?; extends Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'onChange'>
+- Calendar.Grid: renderDay?, hideOutsideDays?, dayClassName?; extends Omit<ComponentPropsWithRef<'table'>, 'children'>
+- Calendar.Heading: asChild?; extends ComponentPropsWithRef<'h2'>
+- Calendar.NextButton: asChild?; extends ComponentPropsWithRef<'button'>
+- Calendar.PrevButton: asChild?; extends ComponentPropsWithRef<'button'>
+- Calendar.Root: mode?, value?, defaultValue?, onValueChange?, month?, defaultMonth?, onMonthChange?, min?, max?, isDateUnavailable?, weekStartsOn?, locale?, disabled?, readOnly?; extends Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'onChange'>
 - Card: children?, className?
-- Carousel: children, autoPlay?, interval?, className?, showDots?, showNav?
-- Checkbox: label?; extends React.InputHTMLAttributes<HTMLInputElement>
+- Carousel: children, autoPlay?, interval?, className?, showDots?, showNav?, label?
+- Checkbox: label?, indeterminate?, ref?; extends React.InputHTMLAttributes<HTMLInputElement>
 - CodeSnippet: code, language, type?, label?, showCopy?, className?
+- ColorPicker: label, value?, defaultValue?, onValueChange?, format?, swatches?, disabled?; extends Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'onChange'>
 - ComboBox: items, multiSelect?, onItemClick?; extends React.HTMLAttributes<HTMLDivElement>
 - ComboBoxMenuItem: iconName?, label, selected?, disabled?, multiSelect?; extends React.ButtonHTMLAttributes<HTMLButtonElement>
-- DatePickerDropdown: mode?, selection?, isRange?, value?, onChange?, minDate?, maxDate?
+- CommandPalette: commands, open?, onOpenChange?, placeholder?, emptyMessage?, hotkey?, label?
+- Container: size?, as?; extends ComponentPropsWithRef<'div'>
+- ContextMenu.CheckboxItem: checked?, onCheckedChange?, disabled?, onSelect?, textValue?, shortcut?; extends Omit<Omit<ComponentPropsWithRef<'div'>, 'onSelect'>, 'asChild'>
+- ContextMenu.Content: container?, forceMount?, loop?, onCloseAutoFocus?, onEscapeKeyDown?, onPointerDownOutside?, onInteractOutside?, side?, align?, sideOffset?, alignOffset?, avoidCollisions?, collisionPadding?, arrowPadding?, hideWhenDetached?; extends ComponentPropsWithRef<'div'>
+- ContextMenu.Group: no props; extends ComponentPropsWithRef<'div'>
+- ContextMenu.Item: icon?, shortcut?, tone?, asChild?, disabled?, onSelect?, textValue?; extends Omit<ComponentPropsWithRef<'div'>, 'onSelect'>
+- ContextMenu.Label: no props; extends ComponentPropsWithRef<'div'>
+- ContextMenu.RadioGroup: value?, onValueChange?; extends ComponentPropsWithRef<'div'>
+- ContextMenu.RadioItem: value, disabled?, onSelect?, textValue?, shortcut?; extends Omit<Omit<ComponentPropsWithRef<'div'>, 'onSelect'>, 'asChild'>
+- ContextMenu.Root: children?, onOpenChange?, dir?
+- ContextMenu.Separator: no props; extends ComponentPropsWithRef<'div'>
+- ContextMenu.Sub: children?, open?, defaultOpen?, onOpenChange?
+- ContextMenu.SubContent: container?, forceMount?, loop?, onCloseAutoFocus?, onEscapeKeyDown?, onPointerDownOutside?, onInteractOutside?, sideOffset?, alignOffset?, avoidCollisions?, collisionPadding?, arrowPadding?, hideWhenDetached?; extends Omit<ComponentPropsWithRef<'div'>, 'side' | 'align'>
+- ContextMenu.SubTrigger: disabled?, textValue?, icon?; extends Omit<Omit<Omit<ComponentPropsWithRef<'div'>, 'onSelect'>, 'onSelect'>, 'asChild'>
+- ContextMenu.Trigger: asChild?, disabled?; extends ComponentPropsWithRef<'div'>
+- ContextMenuRoot: children?, onOpenChange?, dir?
+- ContextMenuTrigger: asChild?, disabled?; extends ComponentPropsWithRef<'div'>
+- DataTable: no props; extends DataTableProps<T>
+- DatePickerDropdown: mode?, selection?, isRange?, value?, onChange?, minDate?, maxDate?, isDateUnavailable?, weekStartsOn?, locale?
+- Dialog.Body: no props; extends ComponentPropsWithRef<'div'>
+- Dialog.Close: asChild?; extends ComponentPropsWithRef<'button'>
+- Dialog.CloseButton: label?; extends Omit<ComponentPropsWithRef<'button'>, 'children' | 'asChild'>
+- Dialog.Content: size?, container?, overlayProps?, forceMount?, onOpenAutoFocus?, onCloseAutoFocus?, onEscapeKeyDown?, onPointerDownOutside?, onInteractOutside?; extends ComponentPropsWithRef<'div'>
+- Dialog.Description: asChild?; extends ComponentPropsWithRef<'p'>
+- Dialog.Footer: justify?; extends ComponentPropsWithRef<'div'>
+- Dialog.Header: no props; extends ComponentPropsWithRef<'div'>
+- Dialog.Root: children?, open?, defaultOpen?, onOpenChange?, modal?
+- Dialog.Title: asChild?; extends ComponentPropsWithRef<'h2'>
+- Dialog.Trigger: asChild?; extends ComponentPropsWithRef<'button'>
+- Drawer.Body: no props; extends ComponentPropsWithRef<'div'>
+- Drawer.Close: asChild?; extends ComponentPropsWithRef<'button'>
+- Drawer.CloseButton: label?; extends Omit<ComponentPropsWithRef<'button'>, 'children' | 'asChild'>
+- Drawer.Content: side?, size?, container?, overlayProps?, forceMount?, onOpenAutoFocus?, onCloseAutoFocus?, onEscapeKeyDown?, onPointerDownOutside?, onInteractOutside?; extends ComponentPropsWithRef<'div'>
+- Drawer.Description: asChild?; extends ComponentPropsWithRef<'p'>
+- Drawer.Footer: justify?; extends ComponentPropsWithRef<'div'>
+- Drawer.Header: no props; extends ComponentPropsWithRef<'div'>
+- Drawer.Root: children?, open?, defaultOpen?, onOpenChange?, modal?
+- Drawer.Title: asChild?; extends ComponentPropsWithRef<'h2'>
+- Drawer.Trigger: asChild?; extends ComponentPropsWithRef<'button'>
+- DropdownMenu.CheckboxItem: checked?, onCheckedChange?, disabled?, onSelect?, textValue?, shortcut?; extends Omit<Omit<ComponentPropsWithRef<'div'>, 'onSelect'>, 'asChild'>
+- DropdownMenu.Content: container?, forceMount?, loop?, onCloseAutoFocus?, onEscapeKeyDown?, onPointerDownOutside?, onInteractOutside?, side?, align?, sideOffset?, alignOffset?, avoidCollisions?, collisionPadding?, arrowPadding?, hideWhenDetached?; extends ComponentPropsWithRef<'div'>
+- DropdownMenu.Group: no props; extends ComponentPropsWithRef<'div'>
+- DropdownMenu.Item: icon?, shortcut?, tone?, asChild?, disabled?, onSelect?, textValue?; extends Omit<ComponentPropsWithRef<'div'>, 'onSelect'>
+- DropdownMenu.Label: no props; extends ComponentPropsWithRef<'div'>
+- DropdownMenu.RadioGroup: value?, onValueChange?; extends ComponentPropsWithRef<'div'>
+- DropdownMenu.RadioItem: value, disabled?, onSelect?, textValue?, shortcut?; extends Omit<Omit<ComponentPropsWithRef<'div'>, 'onSelect'>, 'asChild'>
+- DropdownMenu.Root: children?, open?, defaultOpen?, onOpenChange?, dir?
+- DropdownMenu.Separator: no props; extends ComponentPropsWithRef<'div'>
+- DropdownMenu.Sub: children?, open?, defaultOpen?, onOpenChange?
+- DropdownMenu.SubContent: container?, forceMount?, loop?, onCloseAutoFocus?, onEscapeKeyDown?, onPointerDownOutside?, onInteractOutside?, sideOffset?, alignOffset?, avoidCollisions?, collisionPadding?, arrowPadding?, hideWhenDetached?; extends Omit<ComponentPropsWithRef<'div'>, 'side' | 'align'>
+- DropdownMenu.SubTrigger: disabled?, textValue?, icon?; extends Omit<Omit<Omit<ComponentPropsWithRef<'div'>, 'onSelect'>, 'onSelect'>, 'asChild'>
+- DropdownMenu.Trigger: asChild?; extends ComponentPropsWithRef<'button'>
+- EmptyState: media?, title, description?, actions?, size?, headingLevel?; extends Omit<ComponentPropsWithRef<'div'>, 'title'>
+- Field.Control: asChild?; extends ComponentPropsWithRef<'input'>
+- Field.Description: no props; extends ComponentPropsWithRef<'p'>
+- Field.Error: forceMount?; extends ComponentPropsWithRef<'p'>
+- Field.Label: optional?; extends ComponentPropsWithRef<'label'>
+- Field.Root: invalid?, required?, disabled?, controlId?; extends ComponentPropsWithRef<'div'>
 - Filter: label, options, multiSelect?, value?, defaultValue?, onChange?, applyLabel?, clearLabel?, disabled?, className?
 - FilterChip: variant?, label?, value?, showClose?, disabled?, onRemove?, onClick?, className?
 - FormLabel: children, required?, optional?, htmlFor?; extends React.LabelHTMLAttributes<HTMLLabelElement>
-- HeaderCell: columnId, label, className?
+- Grid: columns?, minItemWidth?, gap?, rowGap?, align?, as?; extends ComponentPropsWithRef<'div'>
+- HeaderCell: columnId, label, className?, sortDirection?, onSort?
+- HoverCard: children, content, side?, align?, arrow?, className?, open?, defaultOpen?, onOpenChange?, openDelay?, closeDelay?
+- HoverCard.Arrow: asChild?; extends ComponentPropsWithRef<'span'>
+- HoverCard.Content: container?, forceMount?, onEscapeKeyDown?, side?, align?, sideOffset?, alignOffset?, avoidCollisions?, collisionPadding?, arrowPadding?, hideWhenDetached?; extends ComponentPropsWithRef<'div'>
+- HoverCard.Root: children?, open?, defaultOpen?, onOpenChange?, openDelay?, closeDelay?
+- HoverCard.Trigger: asChild?; extends ComponentPropsWithRef<'a'>
 - Icon: name?, src?, size?, color?, variant?; extends React.HTMLAttributes<HTMLDivElement>
+- IconButton: icon, label, tooltip?, variant?, size?, disabled?, loading?, ref?; extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'children' | 'leftIcon' | 'rightIcon' | 'split' | 'onSplitClick' | 'aria-label'>
 - Indexer: items, activeIndex?, offset?, onActiveChange?; extends React.HTMLAttributes<HTMLElement>
-- InputDate: label?, error?, description?, required?, optional?, disabled?, placeholder?, filled?, mode?, selection?, value?, onChange?, minDate?, maxDate?, className?
+- InputDate: label?, error?, description?, required?, optional?, disabled?, placeholder?, filled?, mode?, selection?, value?, onChange?, minDate?, maxDate?, isDateUnavailable?, weekStartsOn?, className?
 - InputText: label?, error?, description?, prefix?, suffix?, required?, optional?; extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'prefix' | 'suffix'>
 - InputTextArea: label?, error?, description?, required?, optional?; extends React.TextareaHTMLAttributes<HTMLTextAreaElement>
+- Kbd: keys?; extends ComponentPropsWithRef<'kbd'>
 - KeyValue: label, children, infoTooltip?, labelComponent?; extends React.HTMLAttributes<HTMLDivElement>
-- List: children, draggable?, className?, onReorder?
+- Link: tone?, underline?, external?, asChild?; extends ComponentPropsWithRef<'a'>
+- List: children, draggable?, className?, onReorder?, label?
 - ListItem: id?, children, className?
 - Loader: size?, className?
 - Logo: name, size?, background?, tooltip?; extends React.HTMLAttributes<HTMLDivElement>
+- Menubar.CheckboxItem: checked?, onCheckedChange?, disabled?, onSelect?, textValue?, shortcut?; extends Omit<Omit<ComponentPropsWithRef<'div'>, 'onSelect'>, 'asChild'>
+- Menubar.Content: container?, forceMount?, loop?, onCloseAutoFocus?, onEscapeKeyDown?, onPointerDownOutside?, onInteractOutside?, side?, align?, sideOffset?, alignOffset?, avoidCollisions?, collisionPadding?, arrowPadding?, hideWhenDetached?; extends ComponentPropsWithRef<'div'>
+- Menubar.Group: no props; extends ComponentPropsWithRef<'div'>
+- Menubar.Item: icon?, shortcut?, tone?, asChild?, disabled?, onSelect?, textValue?; extends Omit<ComponentPropsWithRef<'div'>, 'onSelect'>
+- Menubar.Label: no props; extends ComponentPropsWithRef<'div'>
+- Menubar.Menu: children?, value?
+- Menubar.RadioGroup: value?, onValueChange?; extends ComponentPropsWithRef<'div'>
+- Menubar.RadioItem: value, disabled?, onSelect?, textValue?, shortcut?; extends Omit<Omit<ComponentPropsWithRef<'div'>, 'onSelect'>, 'asChild'>
+- Menubar.Root: value?, defaultValue?, onValueChange?, loop?, dir?; extends Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'dir'>
+- Menubar.Separator: no props; extends ComponentPropsWithRef<'div'>
+- Menubar.Sub: children?, open?, defaultOpen?, onOpenChange?
+- Menubar.SubContent: container?, forceMount?, loop?, onCloseAutoFocus?, onEscapeKeyDown?, onPointerDownOutside?, onInteractOutside?, sideOffset?, alignOffset?, avoidCollisions?, collisionPadding?, arrowPadding?, hideWhenDetached?; extends Omit<ComponentPropsWithRef<'div'>, 'side' | 'align'>
+- Menubar.SubTrigger: disabled?, textValue?, icon?; extends Omit<Omit<Omit<ComponentPropsWithRef<'div'>, 'onSelect'>, 'onSelect'>, 'asChild'>
+- Menubar.Trigger: no props; extends ComponentPropsWithRef<'button'>
 - Modal: open, onOpenChange, children, title?, width?, height?
 - MoreFilter: label?, filters, value?, defaultValue?, onChange?, applyLabel?, clearLabel?, disabled?, className?
 - Notification: open, onOpenChange, title, subtitle?, visual?, position?, direction?, className?
+- NumberInput: label, description?, error?, required?, optional?, placeholder?, stepper?, size?, value?, defaultValue?, onValueChange?, min?, max?, step?, largeStep?, formatOptions?, locale?, disabled?, readOnly?, name?; extends Omit<Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'onChange'>, 'children' | 'inputId'>
+- PadaLogo: variant?, tone?, size?, toes?, animated?, title?, decorative?; extends Omit<ComponentPropsWithRef<'svg'>, 'children'>
 - PageHeader: breadcrumbs, onCommandClick?, commandLabel?, commandShortcut?, onAiClick?, aiLabel?, profileTrigger?, profileMenu?, className?
+- Pagination: page, totalPages, onPageChange, siblingCount?, boundaryCount?, label?; extends Omit<ComponentPropsWithRef<'nav'>, 'onChange'>
+- PasswordInput: label, description?, error?, optional?, strength?, defaultVisible?, size?; extends Omit<ComponentPropsWithRef<'input'>, 'type' | 'size'>
 - Pills: options, value?, defaultValue?, onChange?, className?, size?, disabled?
+- PinInput: label, description?, error?, groupSize?, size?, length, value?, defaultValue?, onValueChange?, onComplete?, type?, mask?, otp?, disabled?, placeholder?, name?; extends Omit<Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'onChange'>, 'children'>
 - Popover: open, onOpenChange, children, trigger?, position?, title?, variant?, showClose?, className?, clickPosition?
+- Popover.Anchor: asChild?; extends ComponentPropsWithRef<'div'>
+- Popover.Arrow: asChild?; extends ComponentPropsWithRef<'span'>
+- Popover.Close: asChild?; extends ComponentPropsWithRef<'button'>
+- Popover.CloseButton: label?; extends Omit<ComponentPropsWithRef<'button'>, 'children' | 'asChild'>
+- Popover.Content: variant?, container?, forceMount?, onOpenAutoFocus?, onCloseAutoFocus?, onEscapeKeyDown?, onPointerDownOutside?, onFocusOutside?, onInteractOutside?, side?, align?, sideOffset?, alignOffset?, avoidCollisions?, collisionPadding?, arrowPadding?, hideWhenDetached?; extends ComponentPropsWithRef<'div'>
+- Popover.Root: children?, open?, defaultOpen?, onOpenChange?, modal?
+- Popover.Title: asChild?; extends ComponentPropsWithRef<'h2'>
+- Popover.Trigger: asChild?; extends ComponentPropsWithRef<'button'>
 - Progress: value, max?, label?
+- RadioCardGroup: label, options, value?, defaultValue?, onValueChange?, description?, name?, columns?, disabled?, required?, className?
 - RadioGroup: name, label?, options, value, onChange, disabled?, className?
+- RangeSlider: label, value?, defaultValue?, onValueChange?, onValueCommit?, min?, max?, step?, minStepsBetweenThumbs?, formatOptions?, locale?, showValue?, thumbLabels?, description?, error?, disabled?, name?, className?
+- Rating: label, value?, defaultValue?, onValueChange?, max?, readOnly?, disabled?, allowClear?, showLabel?, size?, name?, className?
+- Resizable.Handle: withGrip?, aria-label?; extends ComponentPropsWithRef<'div'>
+- Resizable.Panel: defaultSize?, minSize?, maxSize?, collapsible?, collapsedSize?; extends ComponentPropsWithRef<'div'>
+- Resizable.Root: orientation?, sizes?, onSizesChange?, onSizesCommit?, keyboardStep?, disabled?; extends Omit<ComponentPropsWithRef<'div'>, 'dir'>
+- ScrollArea: orientation?, maxHeight?, maxWidth?, fade?, scrollbar?; extends ComponentPropsWithRef<'div'>
 - SearchField: value?, defaultValue?, onChange?, onClear?, className?; extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'onChange' | 'value' | 'defaultValue'>
 - SegmentControl: options, value?, defaultValue?, onChange?, className?, disabled?
 - Select: label, options, value?, defaultValue?, placeholder?, onChange?, description?, error?, disabled?, name?, id?, className?
-- SideDrawer: open, onOpenChange, children, size?, className?
+- Separator: orientation?, decorative?; extends ComponentPropsWithRef<'div'>
+- Sheet.Body: no props; extends ComponentPropsWithRef<'div'>
+- Sheet.Close: asChild?; extends ComponentPropsWithRef<'button'>
+- Sheet.CloseButton: label?; extends Omit<ComponentPropsWithRef<'button'>, 'children' | 'asChild'>
+- Sheet.Content: snapPoints?, snap?, defaultSnap?, onSnapChange?, dismissible?, container?, overlayProps?, forceMount?, onOpenAutoFocus?, onCloseAutoFocus?, onEscapeKeyDown?, onPointerDownOutside?, onInteractOutside?; extends ComponentPropsWithRef<'div'>
+- Sheet.Description: asChild?; extends ComponentPropsWithRef<'p'>
+- Sheet.Footer: justify?; extends ComponentPropsWithRef<'div'>
+- Sheet.Header: no props; extends ComponentPropsWithRef<'div'>
+- Sheet.Root: children?, open?, defaultOpen?, onOpenChange?, modal?
+- Sheet.Title: asChild?; extends ComponentPropsWithRef<'h2'>
+- Sheet.Trigger: asChild?; extends ComponentPropsWithRef<'button'>
+- SideDrawer: open, onOpenChange, children, size?, className?, aria-label?, aria-labelledby?
 - Sidebar: data?, activeId?, onItemClick?, children?, className?; extends React.HTMLAttributes<HTMLElement>
 - SidebarCollapse: children, defaultOpen?, label?, className?
 - SidebarLogo: src?, alt?, name?, size?, title?, href?, onClick?, className?; extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'>
@@ -80,19 +225,48 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - SidebarSearch: placeholder?, value?, onChange?, className?
 - SidebarSection: label?, icon?, children?, className?; extends React.HTMLAttributes<HTMLDivElement>
 - SidebarSectionMenu: children, className?
+- Skeleton: shape?, width?, height?, lines?; extends ComponentPropsWithRef<'span'>
 - Slider: label?, description?, error?, value?, defaultValue?, min?, max?, step?, onChange?, onValueChange?, showValue?, disabled?, className?; extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'onChange'>
+- Spinner: size?, label?; extends ComponentPropsWithRef<'span'>
 - Splitter: variant; extends React.ButtonHTMLAttributes<HTMLButtonElement>
+- Stack: direction?, gap?, align?, justify?, wrap?, as?; extends ComponentPropsWithRef<'div'>
+- Stat: label, value, formatOptions?, locale?, delta?, deltaFormatOptions?, deltaLabel?, trend?, invertTrend?, description?, chart?, animate?, size?, className?
 - Step: title?, description?, stepValue?, status?, isLast?, onClick?, clickable?, onSelect?; extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onClick' | 'onSelect'>
 - Steps: steps, defaultStatus?, currentStep?, onStepChange?; extends React.HTMLAttributes<HTMLDivElement>
 - Switch: label?, loading?; extends React.InputHTMLAttributes<HTMLInputElement>
 - TabPanel: label, children, notification?
-- Table: columns, children, toolbar?, className?, onColumnsChange?
-- TableCell: children, columnId?, className?
+- Table: columns, children, toolbar?, className?, onColumnsChange?, label?, labelledBy?
+- TableCell: children, columnId?, className?, rowHeader?, span?
 - TablePagination: total, page, rowsPerPage, rowsPerPageOptions?, onPageChange, onRowsPerPageChange, onNextPage?, onPrevPage?, className?
 - TableRow: children, className?, selected?, onClick?, role?
 - Tabs: children, label, defaultValue?, value?, onChange?
+- Tabs.Content: value, forceMount?; extends ComponentPropsWithRef<'div'>
+- Tabs.List: loop?; extends ComponentPropsWithRef<'div'>
+- Tabs.Root: variant?, value?, defaultValue?, onValueChange?, orientation?, activationMode?, dir?; extends Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'dir'>
+- Tabs.Trigger: notification?, value, asChild?; extends ComponentPropsWithRef<'button'>
+- TagInput: label, value?, defaultValue?, onValueChange?, placeholder?, description?, error?, separators?, maxTags?, allowDuplicates?, validate?, addOnBlur?, disabled?, required?, name?, className?
 - Tags: children, variant?, icon?, className?
 - Text: children, size?, weight?, family?, lineHeight?, color?, as?; extends React.HTMLAttributes<HTMLSpanElement>
+- ThemeProvider: children?, defaultTheme?, onThemeChange?, target?, storageKey?, accentHue?, theme?, accent?, neutral?, density?, radius?, motion?, contrast?
+- ThemeToggle: className?, size?
+- Timeline: items?, children?, density?; extends Omit<ComponentPropsWithRef<'ol'>, 'children'>
+- Timeline.Item: title, time?, icon?, tone?, pending?, children?; extends Omit<ComponentPropsWithRef<'li'>, 'title'>
+- TimelineItem: title, time?, icon?, tone?, pending?, children?; extends Omit<ComponentPropsWithRef<'li'>, 'title'>
+- Toaster: position?, visibleToasts?, label?, hotkey?, className?
+- Toggle: icon?, size?, pressed?, defaultPressed?, onPressedChange?, asChild?; extends ComponentPropsWithRef<'button'>
+- ToggleGroup.Item: icon?, value, asChild?; extends ComponentPropsWithRef<'button'>
+- ToggleGroup.Root: type, value?, defaultValue?, onValueChange?, orientation?, loop?, disabled?, dir?, size?; extends Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'dir'>
 - Toolbar: left?, actions?, primaryAction?, children?, className?
-- Tooltip: content, children, position?
-- UploadField: label?, description?, error?, accept?, multiple?, maxSize?, maxFiles?, files?, onFilesChange?, onUpload?, disabled?, required?, className?
+- Tooltip: content, children, position?, delayDuration?
+- Tooltip.Arrow: asChild?; extends ComponentPropsWithRef<'span'>
+- Tooltip.Content: container?, forceMount?, onEscapeKeyDown?, side?, align?, sideOffset?, alignOffset?, avoidCollisions?, collisionPadding?, arrowPadding?, hideWhenDetached?; extends ComponentPropsWithRef<'div'>
+- Tooltip.Provider: children?, delayDuration?, skipDelayDuration?
+- Tooltip.Root: children?, open?, defaultOpen?, onOpenChange?, delayDuration?, disableHoverableContent?
+- Tooltip.Trigger: asChild?; extends ComponentPropsWithRef<'button'>
+- Tree: items, expanded?, defaultExpanded?, onExpandedChange?, selectionMode?, value?, defaultValue?, onValueChange?; extends Omit<Omit<ComponentPropsWithRef<'ul'>, 'defaultValue' | 'onChange'>, 'children'>
+- Tree.Group: no props; extends ComponentPropsWithRef<'ul'>
+- Tree.Item: value, expandable?, disabled?; extends Omit<ComponentPropsWithRef<'li'>, 'value'>
+- Tree.ItemLabel: no props; extends ComponentPropsWithRef<'span'>
+- Tree.ItemRow: icon?; extends ComponentPropsWithRef<'div'>
+- Tree.Root: expanded?, defaultExpanded?, onExpandedChange?, selectionMode?, value?, defaultValue?, onValueChange?; extends Omit<ComponentPropsWithRef<'ul'>, 'defaultValue' | 'onChange'>
+- UploadField: label?, description?, error?, accept?, multiple?, maxSize?, maxFiles?, files?, onFilesChange?, onUpload?, onView?, disabled?, required?, className?

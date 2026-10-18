@@ -34,7 +34,7 @@ export const KeyValue = ({
       return labelComponent;
     }
     return (
-      <Text size={TextSize.BASE} weight={TextWeight.MEDIUM} color="var(--color-neutral-900)">
+      <Text size={TextSize.BASE} weight={TextWeight.MEDIUM} color="var(--pada-color-neutral-900)">
         {label}
       </Text>
     );
@@ -47,14 +47,16 @@ export const KeyValue = ({
 
     return (
       <Tooltip content={infoTooltip} position="top">
-        <div className="key-value__info-icon-wrapper">
-          <Icon 
-            name="info" 
-            size={12} 
-            color="var(--color-neutral-600)" 
+        {/* A real button, so keyboard users can reach the tooltip too. */}
+        <button type="button" className="key-value__info-icon-wrapper" aria-label="More information">
+          <Icon
+            name="info"
+            size={12}
+            color="var(--pada-color-neutral-600)"
             className="key-value__info-icon"
+            aria-hidden="true"
           />
-        </div>
+        </button>
       </Tooltip>
     );
   };

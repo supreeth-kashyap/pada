@@ -12,7 +12,7 @@
 
 .sidebar-collapse__icon {
   /* Sidebar collapse icon styles */
-  transition: transform 0.2s;
+  transition: transform var(--pada-duration-normal);
 }
 
 .sidebar-collapse__icon--open {
@@ -22,7 +22,7 @@
 .sidebar-collapse__content {
   /* Sidebar collapse content styles */
   overflow: hidden;
-  transition: max-height 0.3s ease-out;
+  transition: max-height var(--pada-duration-slow) var(--pada-ease-enter);
 }
 
 .sidebar-collapse__content--open {

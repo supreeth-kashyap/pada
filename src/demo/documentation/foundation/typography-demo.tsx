@@ -76,9 +76,9 @@ export default function TypographyDemo() {
                   padding: '4px 0',
                 }}
               >
-                <code style={{ color: 'var(--color-stone-500)', fontSize: 11 }}>{token}</code>
-                <span style={{ color: 'var(--color-stone-500)', fontSize: 11 }}>{size}</span>
-                <span style={{ fontSize: size, lineHeight: 1.1, color: 'var(--color-slate-900)' }}>
+                <code style={{ color: 'var(--pada-color-fg-muted)', fontSize: 11 }}>{token}</code>
+                <span style={{ color: 'var(--pada-color-fg-muted)', fontSize: 11 }}>{size}</span>
+                <span style={{ fontSize: size, lineHeight: 1.1, color: 'var(--pada-color-fg)' }}>
                   {sample}
                 </span>
               </div>
@@ -100,10 +100,10 @@ export default function TypographyDemo() {
                   gridTemplateColumns: '140px 1fr',
                 }}
               >
-                <code style={{ color: 'var(--color-stone-500)', fontSize: 11 }}>
+                <code style={{ color: 'var(--pada-color-fg-muted)', fontSize: 11 }}>
                   {label} / {weight}
                 </code>
-                <span style={{ fontSize: 15, fontWeight: weight, color: 'var(--color-slate-900)' }}>
+                <span style={{ fontSize: 15, fontWeight: weight, color: 'var(--pada-color-fg)' }}>
                   The quick brown fox jumps over the lazy dog.
                 </span>
               </div>

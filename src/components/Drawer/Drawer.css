@@ -1,0 +1,84 @@
+/* Root */
+.drawer {
+  /* Component tokens */
+  --pada-drawer-bg: var(--pada-color-surface-overlay);
+  --pada-drawer-fg: var(--pada-color-fg);
+  --pada-drawer-shadow: var(--pada-shadow-xl);
+  --pada-drawer-pad: var(--pada-space-6);
+  --pada-drawer-gap: var(--pada-space-4);
+  --pada-drawer-size: 496px;
+  --pada-drawer-offscreen: 100% 0;
+
+  position: fixed;
+  z-index: var(--pada-z-modal);
+  display: flex;
+  flex-direction: column;
+  gap: var(--pada-drawer-gap);
+  box-sizing: border-box;
+  padding: var(--pada-drawer-pad);
+  overflow: auto;
+  background-color: var(--pada-drawer-bg);
+  color: var(--pada-drawer-fg);
+  box-shadow: var(--pada-drawer-shadow);
+  font-family: var(--pada-font-sans);
+  font-size: var(--pada-font-size-md);
+  line-height: var(--pada-line-height-md);
+  outline: none;
+  transition: translate var(--pada-duration-slow) var(--pada-ease-emphasized);
+}
+
+/* Variant variables */
+.drawer[data-size="md"] {
+  --pada-drawer-size: 640px;
+}
+
+.drawer[data-size="lg"] {
+  --pada-drawer-size: 800px;
+}
+
+.drawer[data-size="xl"] {
+  --pada-drawer-size: 960px;
+}
+
+.drawer[data-side="right"] {
+  inset: 0 0 0 auto;
+  width: min(var(--pada-drawer-size), 100vw);
+}
+
+.drawer[data-side="left"] {
+  --pada-drawer-offscreen: -100% 0;
+  inset: 0 auto 0 0;
+  width: min(var(--pada-drawer-size), 100vw);
+}
+
+.drawer[data-side="top"] {
+  --pada-drawer-offscreen: 0 -100%;
+  inset: 0 0 auto 0;
+  height: min(var(--pada-drawer-size), 100dvh);
+}
+
+.drawer[data-side="bottom"] {
+  --pada-drawer-offscreen: 0 100%;
+  inset: auto 0 0 0;
+  height: min(var(--pada-drawer-size), 100dvh);
+}
+
+/* States via attributes */
+.drawer[data-state="closed"] {
+  translate: var(--pada-drawer-offscreen);
+  transition-duration: var(--pada-duration-normal);
+  transition-timing-function: var(--pada-ease-exit);
+}
+
+@starting-style {
+  .drawer[data-state="open"] {
+    translate: var(--pada-drawer-offscreen);
+  }
+}
+
+/* Under reduced motion the slide becomes a fade (durations are 0, so it is instant anyway). */
+@media (prefers-reduced-motion: reduce) {
+  .drawer {
+    --pada-drawer-offscreen: 0 0;
+  }
+}

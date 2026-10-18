@@ -1,8 +1,11 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import './MoreFilter.css';
 import { Icon } from '../../Icon';
 import { Button } from '../../Button';
 import { ComboBox, type ComboBoxItem } from '../../ComboBox';
+import { PopoverContent, PopoverPortal, PopoverRoot, PopoverTrigger } from '../../../headless/Popover/Popover';
+import { TabsContent, TabsList, TabsRoot, TabsTrigger } from '../../../headless/Tabs/Tabs';
+import { VisuallyHidden } from '../../../headless/utils/VisuallyHidden';
 import type { FilterOption } from '../Filter';
 
 export interface MoreFilterDescriptor {
@@ -47,7 +50,8 @@ const countSelections = (values: MoreFilterValues): number =>
  *   right column = options for the focused filter
  *   footer       = Apply / Clear
  *
- * Useful when the toolbar can't fit every filter as a standalone chip.
+ * Useful when the toolbar can't fit every filter as a standalone chip. The filter names are a
+ * vertical tab list (Up/Down move between them), each showing its options as a listbox.
  */
 export const MoreFilter: React.FC<MoreFilterProps> = ({
   label = 'More',
@@ -67,46 +71,30 @@ export const MoreFilter: React.FC<MoreFilterProps> = ({
   // Local draft so users can stage selections across multiple sub-filters
   // before applying them in one go.
   const [draft, setDraft] = useState<MoreFilterValues>(committed);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpenState] = useState(false);
   const [activeFilterId, setActiveFilterId] = useState<string>(filters[0]?.id ?? '');
-  const rootRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (isOpen) {
+  // Opening starts the draft from the committed values (closing without Apply discards it) and
+  // re-anchors to the first filter if the previously active one is gone.
+  const setIsOpen = (open: boolean) => {
+    if (open) {
       setDraft(committed);
-      // Re-anchor to the first filter (or keep the previous active if still present).
-      if (!filters.some((f) => f.id === activeFilterId)) {
-        setActiveFilterId(filters[0]?.id ?? '');
-      }
+      if (!filters.some((f) => f.id === activeFilterId)) setActiveFilterId(filters[0]?.id ?? '');
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isOpen]);
-
-  useEffect(() => {
-    if (!isOpen) return;
-    const onDocClick = (event: MouseEvent) => {
-      if (!rootRef.current) return;
-      if (!rootRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', onDocClick);
-    return () => document.removeEventListener('mousedown', onDocClick);
-  }, [isOpen]);
+    setIsOpenState(open);
+  };
 
   const totalCount = countSelections(committed);
   const isActive = totalCount > 0;
 
-  const activeFilter = filters.find((f) => f.id === activeFilterId);
-  const activeMulti = activeFilter?.multiSelect ?? true;
 
   const commit = (next: MoreFilterValues) => {
     if (!isControlled) setInternalValue(next);
     onChange?.(next, countSelections(next));
   };
 
-  const handleOptionClick = (item: ComboBoxItem) => {
-    if (!activeFilter) return;
+  const handleOptionClick = (activeFilter: MoreFilterDescriptor, item: ComboBoxItem) => {
+    const activeMulti = activeFilter.multiSelect ?? true;
     setDraft((prev) => {
       const current = prev[activeFilter.id] ?? [];
       if (activeMulti) {
@@ -128,103 +116,115 @@ export const MoreFilter: React.FC<MoreFilterProps> = ({
     setDraft({});
   };
 
-  // Submenu items \u2014 options of the currently-focused filter, rendered as a
-  // standard ComboBox to the right of the primary list.
-  const optionItems: ComboBoxItem[] = useMemo(() => {
-    if (!activeFilter) return [];
-    const active = draft[activeFilter.id] ?? [];
-    return activeFilter.options.map((option) => ({
-      id: option.value,
-      label: option.label,
-      iconName: option.iconName,
-      disabled: option.disabled,
-      selected: active.includes(option.value),
-    }));
-  }, [activeFilter, draft]);
+  // Submenu items \u2014 options of each filter, rendered as a standard ComboBox to the right of
+  // the primary list.
+  const optionItems = useMemo(
+    () =>
+      new Map(
+        filters.map((filter): [string, ComboBoxItem[]] => {
+          const selected = draft[filter.id] ?? [];
+          return [
+            filter.id,
+            filter.options.map((option) => ({
+              id: option.value,
+              label: option.label,
+              iconName: option.iconName,
+              disabled: option.disabled,
+              selected: selected.includes(option.value),
+            })),
+          ];
+        }),
+      ),
+    [filters, draft],
+  );
 
   return (
-    <div ref={rootRef} className={`more-filter ${className}`.trim()}>
-      <button
-        type="button"
-        className="more-filter__chip"
-        data-active={isActive ? '' : undefined}
-        data-open={isOpen ? '' : undefined}
-        disabled={disabled}
-        aria-haspopup="dialog"
-        aria-expanded={isOpen}
-        onClick={() => setIsOpen((o) => !o)}
-      >
-        <span className="more-filter__label">{label}</span>
-        {isActive ? (
-          <span className="more-filter__badge" aria-label={`${totalCount} selected`}>
-            {totalCount}
-          </span>
-        ) : (
-          <span className="more-filter__dash" aria-hidden="true">
-            <Icon name="remove" size={12} />
-          </span>
-        )}
-        <Icon name="keyboard_arrow_down" size={12} className="more-filter__chevron" />
-      </button>
-
-      {isOpen && (
-        <div className="more-filter__menu" role="dialog" aria-label={`${label} filters`}>
-          {/* Primary list \u2014 each row is a filter that opens a cascading
-              submenu of options to the right. Rendered with custom markup
-              (rather than ComboBox) so we can place a chevron-right indicator
-              on the right edge of every row. */}
-          <div className="more-filter__primary" role="menu">
-            {filters.map((f) => {
-              const count = (draft[f.id] ?? []).length;
-              const active = f.id === activeFilterId;
-              return (
-                <button
-                  key={f.id}
-                  type="button"
-                  role="menuitem"
-                  className="more-filter__row"
-                  data-active={active ? '' : undefined}
-                  aria-haspopup="menu"
-                  aria-expanded={active}
-                  onClick={() => setActiveFilterId(f.id)}
-                  onMouseEnter={() => setActiveFilterId(f.id)}
-                >
-                  <span className="more-filter__row-label">{f.label}</span>
-                  {count > 0 && (
-                    <span className="more-filter__row-count" aria-label={`${count} selected`}>
-                      {count}
-                    </span>
-                  )}
-                  <Icon
-                    name="keyboard_arrow_right"
-                    size={12}
-                    className="more-filter__row-chevron"
-                  />
-                </button>
-              );
-            })}
-          </div>
-
-          {activeFilter && (
-            <div className="more-filter__submenu" role="menu" aria-label={activeFilter.label}>
-              <ComboBox
-                items={optionItems}
-                multiSelect={activeMulti}
-                onItemClick={handleOptionClick}
-                className="more-filter__submenu-list"
-              />
-              <div className="more-filter__footer">
-                <Button variant="ghost" onClick={handleClearAll}>
-                  {clearLabel}
-                </Button>
-                <Button variant="primary" onClick={handleApply}>
-                  {applyLabel}
-                </Button>
-              </div>
-            </div>
+    <div className={`more-filter ${className}`.trim()}>
+      <PopoverRoot open={isOpen} onOpenChange={setIsOpen}>
+        <PopoverTrigger
+          className="more-filter__chip"
+          data-active={isActive ? '' : undefined}
+          data-open={isOpen ? '' : undefined}
+          disabled={disabled}
+        >
+          <span className="more-filter__label">{label}</span>
+          {isActive ? (
+            <span className="more-filter__badge">
+              {totalCount}
+              <VisuallyHidden> selected</VisuallyHidden>
+            </span>
+          ) : (
+            <span className="more-filter__dash" aria-hidden="true">
+              <Icon name="remove" size={12} />
+            </span>
           )}
-        </div>
-      )}
+          <Icon name="chevron_down" size={12} className="more-filter__chevron" />
+        </PopoverTrigger>
+
+        <PopoverPortal>
+          <PopoverContent
+            className="more-filter__menu"
+            aria-label={`${label} filters`}
+            side="bottom"
+            align="start"
+            sideOffset={4}
+          >
+            <TabsRoot
+              value={activeFilterId}
+              onValueChange={setActiveFilterId}
+              orientation="vertical"
+              className="more-filter__tabs"
+            >
+              {/* Primary list \u2014 each row is a filter whose options show to the right. */}
+              <TabsList className="more-filter__primary" aria-label={`${label} filters`}>
+                {filters.map((f) => {
+                  const count = (draft[f.id] ?? []).length;
+                  return (
+                    <TabsTrigger
+                      key={f.id}
+                      value={f.id}
+                      className="more-filter__row"
+                      data-active={f.id === activeFilterId ? '' : undefined}
+                      onMouseEnter={() => setActiveFilterId(f.id)}
+                    >
+                      <span className="more-filter__row-label">{f.label}</span>
+                      {count > 0 && (
+                        <span className="more-filter__row-count">
+                          {count}
+                          <VisuallyHidden> selected</VisuallyHidden>
+                        </span>
+                      )}
+                      <Icon name="chevron_right" size={12} className="more-filter__row-chevron" />
+                    </TabsTrigger>
+                  );
+                })}
+              </TabsList>
+
+              <div className="more-filter__submenu">
+                {filters.map((f) => (
+                  <TabsContent key={f.id} value={f.id} className="more-filter__panel" tabIndex={-1}>
+                    <ComboBox
+                      items={optionItems.get(f.id) ?? []}
+                      multiSelect={f.multiSelect ?? true}
+                      onItemClick={(item) => handleOptionClick(f, item)}
+                      aria-label={f.label}
+                      className="more-filter__submenu-list"
+                    />
+                  </TabsContent>
+                ))}
+                <div className="more-filter__footer">
+                  <Button variant="ghost" onClick={handleClearAll}>
+                    {clearLabel}
+                  </Button>
+                  <Button variant="primary" onClick={handleApply}>
+                    {applyLabel}
+                  </Button>
+                </div>
+              </div>
+            </TabsRoot>
+          </PopoverContent>
+        </PopoverPortal>
+      </PopoverRoot>
     </div>
   );
 };

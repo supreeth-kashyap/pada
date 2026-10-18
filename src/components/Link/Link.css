@@ -1,0 +1,42 @@
+.link {
+  --pada-link-color: var(--pada-color-fg-link);
+  --pada-link-color-hover: var(--pada-color-accent-solid-hover);
+  --pada-link-underline: transparent;
+
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.2em;
+  color: var(--pada-link-color);
+  text-decoration-line: underline;
+  text-decoration-color: var(--pada-link-underline);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  border-radius: var(--pada-radius-xs);
+  cursor: pointer;
+  transition:
+    color var(--pada-duration-fast) var(--pada-ease-standard),
+    text-decoration-color var(--pada-duration-fast) var(--pada-ease-standard);
+}
+
+.link[data-tone="neutral"] {
+  --pada-link-color: inherit;
+  --pada-link-color-hover: var(--pada-color-fg-link);
+}
+
+.link[data-underline="always"] {
+  --pada-link-underline: currentColor;
+}
+
+.link:hover {
+  color: var(--pada-link-color-hover);
+  text-decoration-color: currentColor;
+}
+
+.link:focus-visible {
+  outline: none;
+  box-shadow: var(--pada-shadow-focus);
+}
+
+.link-external-icon {
+  align-self: center;
+}

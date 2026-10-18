@@ -1,0 +1,24 @@
+/* Root */
+.grid {
+  /* Component tokens (set from props). */
+  --pada-grid-columns: 1;
+  --pada-grid-gap: var(--pada-space-4);
+  --pada-grid-row-gap: var(--pada-grid-gap);
+  --pada-grid-min-item-width: 240px;
+  --pada-grid-template: repeat(var(--pada-grid-columns), minmax(0, 1fr));
+
+  display: grid;
+  grid-template-columns: var(--pada-grid-template);
+  column-gap: var(--pada-grid-gap);
+  row-gap: var(--pada-grid-row-gap);
+}
+
+/* Variant variables */
+.grid[data-fit] {
+  --pada-grid-template: repeat(auto-fit, minmax(min(var(--pada-grid-min-item-width), 100%), 1fr));
+}
+
+.grid[data-align="start"] { align-items: start; }
+.grid[data-align="center"] { align-items: center; }
+.grid[data-align="end"] { align-items: end; }
+.grid[data-align="stretch"] { align-items: stretch; }

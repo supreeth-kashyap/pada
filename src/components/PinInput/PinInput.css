@@ -1,0 +1,114 @@
+/* Root */
+.pin-input-field {
+  /* Component tokens */
+  --pada-pin-input-box-size: var(--pada-control-height-lg);
+  --pada-pin-input-font-size: var(--pada-font-size-xl);
+  --pada-pin-input-border: var(--pada-color-border-strong);
+  --pada-pin-input-border-focus: var(--pada-color-accent-solid);
+  --pada-pin-input-ring: var(--pada-color-accent-subtle);
+  --pada-pin-input-filled-bg: var(--pada-color-surface);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--pada-space-2);
+  font-family: var(--pada-font-sans);
+}
+
+/* Variant variables */
+.pin-input-field[data-invalid] {
+  --pada-pin-input-border: var(--pada-color-danger-solid);
+  --pada-pin-input-border-focus: var(--pada-color-danger-solid);
+  --pada-pin-input-ring: var(--pada-color-danger-subtle);
+}
+
+.pin-input[data-size="sm"] {
+  --pada-pin-input-box-size: var(--pada-control-height-md);
+  --pada-pin-input-font-size: var(--pada-font-size-lg);
+}
+
+.pin-input[data-size="lg"] {
+  --pada-pin-input-box-size: calc(var(--pada-control-height-lg) * 1.25);
+  --pada-pin-input-font-size: var(--pada-font-size-2xl);
+}
+
+/* Child elements */
+.pin-input-label {
+  font-size: var(--pada-font-size-sm);
+  font-weight: var(--pada-font-weight-medium);
+  color: var(--pada-color-fg);
+}
+
+.pin-input {
+  display: flex;
+  align-items: center;
+  gap: var(--pada-space-2);
+}
+
+.pin-input-box {
+  box-sizing: border-box;
+  width: var(--pada-pin-input-box-size);
+  height: var(--pada-pin-input-box-size);
+  padding: 0;
+  border: var(--pada-border-width-thin) solid var(--pada-pin-input-border);
+  border-radius: var(--pada-radius-lg);
+  background-color: var(--pada-color-surface);
+  color: var(--pada-color-fg);
+  font: inherit;
+  font-size: var(--pada-pin-input-font-size);
+  font-weight: var(--pada-font-weight-semibold);
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  caret-color: var(--pada-pin-input-border-focus);
+  outline: none;
+  transition:
+    border-color var(--pada-duration-fast) var(--pada-ease-standard),
+    box-shadow var(--pada-duration-fast) var(--pada-ease-standard);
+}
+
+.pin-input-box::placeholder {
+  color: var(--pada-color-fg-subtle);
+}
+
+.pin-input-box:focus {
+  border-color: var(--pada-pin-input-border-focus);
+  box-shadow: 0 0 0 3px var(--pada-pin-input-ring);
+}
+
+/* A character pops in as it is typed. */
+.pin-input-box[data-filled] {
+  background-color: var(--pada-pin-input-filled-bg);
+  animation: pin-input-pop var(--pada-duration-fast) var(--pada-ease-emphasized);
+}
+
+.pin-input-box:disabled {
+  background-color: var(--pada-color-surface-sunken);
+  color: var(--pada-color-fg-disabled);
+  cursor: not-allowed;
+}
+
+.pin-input-separator {
+  width: var(--pada-space-2);
+  height: var(--pada-border-width-thick);
+  border-radius: var(--pada-radius-full);
+  background-color: var(--pada-color-border-strong);
+}
+
+.pin-input-description,
+.pin-input-error {
+  margin: 0;
+  font-size: var(--pada-font-size-sm);
+}
+
+.pin-input-description {
+  color: var(--pada-color-fg-muted);
+}
+
+.pin-input-error {
+  color: var(--pada-color-danger-fg);
+}
+
+@keyframes pin-input-pop {
+  from {
+    scale: 0.92;
+  }
+}

@@ -1,0 +1,114 @@
+/* Root */
+.pada-logo {
+  /* Component tokens. Tones only reassign these. */
+  --pada-logo-left: var(--pada-color-amber-500);
+  --pada-logo-right: var(--pada-color-accent-solid);
+  --pada-logo-ink: var(--pada-color-fg);
+
+  display: inline-block;
+  flex-shrink: 0;
+  overflow: visible;
+  vertical-align: middle;
+}
+
+/* Variant variables */
+.pada-logo[data-tone="accent"] {
+  --pada-logo-left: var(--pada-color-accent-solid);
+}
+
+.pada-logo[data-tone="mono"] {
+  --pada-logo-left: currentColor;
+  --pada-logo-right: currentColor;
+  --pada-logo-ink: currentColor;
+}
+
+/* Child elements */
+.pada-logo-sole[data-side="left"] {
+  fill: var(--pada-logo-left);
+}
+
+.pada-logo-sole[data-side="right"] {
+  fill: var(--pada-logo-right);
+}
+
+.pada-logo-ground {
+  fill: var(--pada-logo-ink);
+}
+
+.pada-logo-wordmark {
+  fill: none;
+  stroke: var(--pada-logo-ink);
+  stroke-width: 2.6;
+  stroke-linecap: round;
+}
+
+.pada-logo-sole,
+.pada-logo-ground {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+}
+
+/* "Steps in": the left sole drops onto the ground, then the right, then the ground draws out. */
+.pada-logo[data-animated="enter"] .pada-logo-sole {
+  animation: pada-logo-step calc(420ms * var(--pada-motion-scale)) var(--pada-ease-emphasized) both;
+}
+
+.pada-logo[data-animated="enter"] .pada-logo-sole[data-side="right"] {
+  animation-delay: calc(160ms * var(--pada-motion-scale));
+}
+
+.pada-logo[data-animated="enter"] .pada-logo-ground {
+  transform-origin: 50% 50%;
+  animation: pada-logo-ground calc(360ms * var(--pada-motion-scale)) var(--pada-ease-emphasized) calc(420ms * var(--pada-motion-scale)) both;
+}
+
+.pada-logo[data-animated="enter"] .pada-logo-wordmark {
+  animation: pada-logo-fade calc(320ms * var(--pada-motion-scale)) var(--pada-ease-enter) calc(560ms * var(--pada-motion-scale)) both;
+}
+
+/* Loader: the soles take turns lifting. */
+.pada-logo[data-animated="loop"] .pada-logo-sole {
+  animation: pada-logo-walk calc(1100ms * var(--pada-motion-scale)) var(--pada-ease-standard) infinite;
+}
+
+.pada-logo[data-animated="loop"] .pada-logo-sole[data-side="right"] {
+  animation-delay: calc(550ms * var(--pada-motion-scale));
+}
+
+@keyframes pada-logo-step {
+  from {
+    opacity: 0;
+    translate: 0 -35%;
+  }
+  70% {
+    opacity: 1;
+    translate: 0 4%;
+  }
+  to {
+    translate: 0 0;
+  }
+}
+
+@keyframes pada-logo-ground {
+  from {
+    scale: 0 1;
+  }
+}
+
+@keyframes pada-logo-fade {
+  from {
+    opacity: 0;
+    translate: -4px 0;
+  }
+}
+
+@keyframes pada-logo-walk {
+  0%,
+  60%,
+  100% {
+    translate: 0 0;
+  }
+  25% {
+    translate: 0 -14%;
+  }
+}

@@ -1,4 +1,6 @@
-import React, { createContext, useEffect, useMemo, useState } from 'react';
+import React, { Children, isValidElement, useEffect, useMemo, useState } from 'react';
+import { TablePagination } from './Pagination';
+import { TableContext } from './TableContext';
 import './Table.css';
 
 export interface TableColumn {
@@ -8,21 +10,18 @@ export interface TableColumn {
   minWidth?: number;
 }
 
-interface TableContextValue {
-  columns: TableColumn[];
-  gridTemplate: string;
-  updateColumnWidth: (id: string, width: number) => void;
-  reorderColumns: (sourceId: string, targetId: string) => void;
-}
-
-export const TableContext = createContext<TableContextValue | null>(null);
 
 export interface TableProps {
   columns: TableColumn[];
+  /** `TableRow`s (the first one of `HeaderCell`s), then optionally a `TablePagination`. */
   children: React.ReactNode;
   toolbar?: React.ReactNode;
   className?: string;
   onColumnsChange?: (columns: TableColumn[]) => void;
+  /** Accessible name of the table. */
+  label?: string;
+  /** Id of the element that names the table (instead of `label`). */
+  labelledBy?: string;
 }
 
 export const Table: React.FC<TableProps> = ({
@@ -30,7 +29,9 @@ export const Table: React.FC<TableProps> = ({
   children,
   toolbar,
   className = '',
-  onColumnsChange
+  onColumnsChange,
+  label,
+  labelledBy,
 }) => {
   const [columnState, setColumnState] = useState<TableColumn[]>(columns);
 
@@ -70,11 +71,20 @@ export const Table: React.FC<TableProps> = ({
     });
   };
 
+  // Pagination sits under the rows but is not part of the table's row structure.
+  const items = Children.toArray(children);
+  const isPagination = (child: React.ReactNode) => isValidElement(child) && child.type === TablePagination;
+
   return (
     <div className={`table ${className}`.trim()}>
       {toolbar && <div className="table__toolbar">{toolbar}</div>}
       <TableContext.Provider value={{ columns: columnState, gridTemplate, updateColumnWidth, reorderColumns }}>
-        <div className="table__content">{children}</div>
+        <div className="table__content">
+          <div className="table__grid" role="table" aria-label={label} aria-labelledby={labelledBy}>
+            {items.filter((child) => !isPagination(child))}
+          </div>
+          {items.filter(isPagination)}
+        </div>
       </TableContext.Provider>
     </div>
   );

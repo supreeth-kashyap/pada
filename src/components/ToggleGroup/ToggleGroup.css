@@ -1,0 +1,21 @@
+.toggle-group {
+  --pada-toggle-group-height: var(--pada-control-height-md);
+  --pada-toggle-group-pad-x: var(--pada-space-2-5);
+
+  display: inline-flex;
+  align-items: center;
+  gap: var(--pada-space-0-5);
+  padding: var(--pada-space-0-5);
+  border: var(--pada-border-width-thin) solid var(--pada-color-border);
+  border-radius: var(--pada-radius-lg);
+  background-color: var(--pada-color-surface);
+}
+
+.toggle-group[data-orientation="vertical"] {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* Items take their size from the group. */
+.toggle-group[data-size="sm"] { --pada-toggle-group-height: var(--pada-control-height-sm); --pada-toggle-group-pad-x: var(--pada-space-2); }
+.toggle-group[data-size="lg"] { --pada-toggle-group-height: var(--pada-control-height-lg); --pada-toggle-group-pad-x: var(--pada-space-3); }

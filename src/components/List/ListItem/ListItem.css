@@ -1,19 +1,58 @@
 .list-item {
+  /* Component tokens. The lifted state only reassigns these. */
+  --pada-list-item-bg: var(--pada-color-surface);
+  --pada-list-item-shadow: none;
+  --pada-list-item-scale: 1;
+
+  position: relative;
   display: flex;
   align-items: center;
-  gap: var(--spacing-4);
-  padding: var(--spacing-4);
-  background-color: var(--color-white);
-  border-bottom: 1px solid var(--color-neutral-200);
+  gap: var(--pada-space-4);
+  padding: var(--pada-space-4);
+  background-color: var(--pada-list-item-bg);
+  border-bottom: var(--pada-border-width-thin) solid var(--pada-color-neutral-200);
   overflow: hidden;
   min-height: 50px;
   box-sizing: border-box;
+  box-shadow: var(--pada-list-item-shadow);
+  scale: var(--pada-list-item-scale);
+  transition:
+    translate var(--pada-duration-normal) var(--pada-ease-emphasized),
+    scale var(--pada-duration-fast) var(--pada-ease-standard),
+    box-shadow var(--pada-duration-fast) var(--pada-ease-standard);
+}
+
+/* Lifted with the keyboard (or being moved): raised above its neighbours. */
+.list-item[data-lifted] {
+  --pada-list-item-bg: var(--pada-color-surface-raised);
+  --pada-list-item-shadow: var(--pada-shadow-md);
+  --pada-list-item-scale: 1.01;
+
+  z-index: var(--pada-z-raised);
 }
 
 .list-item__drag {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  width: 24px;
+  height: 24px;
+  margin: calc(var(--pada-space-1) * -1);
+  padding: 0;
+  border: none;
+  border-radius: var(--pada-radius-sm);
+  background: none;
+  cursor: grab;
+}
+
+.list-item__drag:hover,
+.list-item__drag[aria-pressed="true"] {
+  background-color: var(--pada-color-neutral-subtle-hover);
+}
+
+.list-item__drag:focus-visible {
+  outline: none;
+  box-shadow: var(--pada-shadow-focus);
 }
 
 .list-item__content {

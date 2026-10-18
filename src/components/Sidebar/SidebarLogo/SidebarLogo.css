@@ -1,6 +1,6 @@
 .sidebar-logo {
   align-items: center;
-  background: var(--color-white, #ffffff);
+  background: var(--pada-color-surface);
   box-sizing: border-box;
   display: flex;
   gap: 8px;
@@ -32,11 +32,11 @@
 }
 
 .sidebar-logo__title {
-  color: var(--color-slate-900, #0f172a);
+  color: var(--pada-color-fg);
   flex: 1 1 auto;
   font-family: inherit;
-  font-size: 16px;
-  font-weight: 700;
+  font-size: var(--pada-font-size-lg);
+  font-weight: var(--pada-font-weight-bold);
   line-height: 20px;
   min-width: 0;
   overflow: hidden;
@@ -44,11 +44,6 @@
   white-space: nowrap;
 }
 
-.sidebar-logo__wordmark {
+.sidebar-logo__lockup {
   display: block;
-  flex-shrink: 0;
-  /* matches Figma: 109.484 x 15.875 */
-  height: 16px;
-  width: auto;
-  object-fit: contain;
 }

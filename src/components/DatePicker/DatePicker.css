@@ -1,8 +1,8 @@
 .date_picker {
-    background-color: var(--color-bg);
-    border: 1px solid var(--color-border);
-    border-radius: 18px;
-    box-shadow: var(--shadow-lg);
+    background-color: var(--pada-color-surface);
+    border: 1px solid var(--pada-color-border);
+    border-radius: var(--pada-radius-2xl);
+    box-shadow: var(--pada-shadow-lg);
     padding: 24px;
     width: 275px;
 }
@@ -14,63 +14,61 @@
     margin-bottom: 18px;
 }
 
+/* The day view is a Calendar inside the card; the card supplies the spacing. */
+.date_picker.calendar {
+    display: flex;
+    gap: 0;
+}
+
+.date_picker_chevron:hover:not(:disabled),
+.date_picker_view_select:hover {
+    background-color: var(--pada-color-neutral-subtle-hover);
+}
+
+.date_picker_chevron:focus-visible,
+.date_picker_view_select:focus-visible {
+    outline: none;
+    box-shadow: var(--pada-shadow-focus);
+}
+
+.date_picker_chevron:disabled {
+    color: var(--pada-color-fg-disabled);
+    cursor: not-allowed;
+}
+
 .date_picker_chevron {
     align-items: center;
     background-color: transparent;
     border: none;
-    border-radius: 12px;
-    color: var(--color-neutral-700);
+    border-radius: var(--pada-radius-xl);
+    color: var(--pada-color-neutral-700);
     cursor: pointer;
     display: flex;
     height: 32px;
     justify-content: center;
-    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    transition: background-color var(--pada-duration-normal) var(--pada-ease-standard), color var(--pada-duration-normal) var(--pada-ease-standard);
     width: 32px;
 }
 
 
 .date_picker_view_select {
-    font-size: var(--font-size-base);
-    font-weight: 600;
-    color: var(--color-neutral-900);
+    font-size: var(--pada-font-size-md);
+    font-weight: var(--pada-font-weight-semibold);
+    color: var(--pada-color-neutral-900);
     background: none;
     border: none;
     cursor: pointer;
     padding: 6px 12px;
-    border-radius: 12px;
-    transition: background-color 0.2s ease-in-out;
+    border-radius: var(--pada-radius-xl);
+    transition: background-color var(--pada-duration-normal) var(--pada-ease-standard);
 }
 
-
-.date_picker_weekday_header {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 8px;
-    margin-bottom: 12px;
-    text-align: center;
-    font-size: var(--font-size-sm);
-    font-weight: 600;
-    color: var(--color-neutral-500);
-}
-
-.date_picker_weekday_header span {
-    padding: 4px 0;
-}
 
 .date_picker [data-grid] {
     display: grid;
     column-gap: 2px;
     row-gap: 2px;
     justify-items: center;
-}
-
-.date_picker [data-grid="days"] {
-    grid-template-columns: repeat(7, 1fr);
-    grid-auto-rows: 32px;
-}
-
-.date_picker [data-grid="days"] .picker-box {
-    height: 100%;
 }
 
 .date_picker [data-grid="months"],

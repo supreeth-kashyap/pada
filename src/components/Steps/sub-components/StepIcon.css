@@ -14,19 +14,19 @@
 .step-icon--sm {
   width: 20px;
   height: 20px;
-  font-size: var(--font-size-xs);
+  font-size: var(--pada-font-size-xs);
 }
 
 .step-icon--md {
   width: 24px;
   height: 24px;
-  font-size: var(--font-size-sm);
+  font-size: var(--pada-font-size-sm);
 }
 
 .step-icon--lg {
   width: 32px;
   height: 32px;
-  font-size: var(--font-size-base);
+  font-size: var(--pada-font-size-md);
 }
 
 /* ============================================
@@ -35,25 +35,25 @@
 
 /* Active - Number (Dark grey background, white number) */
 .step-icon--active.step-icon--number {
-  background-color: var(--color-neutral-900);
-  color: var(--color-white);
+  background-color: var(--pada-color-surface-inverse);
+  color: var(--pada-color-fg-on-inverse);
 }
 
 .step-icon--active.step-icon--number .step-icon__number {
-  font-weight: 600;
+  font-weight: var(--pada-font-weight-semibold);
   line-height: 1;
 }
 
 /* Active - Dot (Light grey background, dark grey dot) */
 .step-icon--active.step-icon--dot {
-  background-color: var(--color-neutral-200);
+  background-color: var(--pada-color-neutral-200);
 }
 
 .step-icon--active.step-icon--dot .step-icon__dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background-color: var(--color-neutral-700);
+  background-color: var(--pada-color-neutral-700);
 }
 
 .step-icon--active.step-icon--dot.step-icon--sm .step-icon__dot {
@@ -68,12 +68,12 @@
 
 /* Active - Symbol (Dark grey background, white symbol) */
 .step-icon--active.step-icon--symbol {
-  background-color: var(--color-neutral-900);
-  color: var(--color-white);
+  background-color: var(--pada-color-surface-inverse);
+  color: var(--pada-color-fg-on-inverse);
 }
 
 .step-icon--active.step-icon--symbol .step-icon__symbol {
-  font-weight: 600;
+  font-weight: var(--pada-font-weight-semibold);
   line-height: 1;
   font-size: 1.2em;
 }
@@ -83,12 +83,12 @@
    ============================================ */
 
 .step-icon--completed {
-  background-color: var(--color-green-100);
-  color: var(--color-green-700);
+  background-color: var(--pada-color-green-100);
+  color: var(--pada-color-green-700);
 }
 
 .step-icon--completed .step-icon__checkmark {
-  color: var(--color-green-700);
+  color: var(--pada-color-green-700);
 }
 
 /* ============================================
@@ -96,12 +96,12 @@
    ============================================ */
 
 .step-icon--error {
-  background-color: var(--color-red-100);
-  color: var(--color-red-700);
+  background-color: var(--pada-color-red-100);
+  color: var(--pada-color-red-700);
 }
 
 .step-icon--error .step-icon__exclamation {
-  color: var(--color-red-700);
+  color: var(--pada-color-red-700);
 }
 
 /* ============================================
@@ -134,5 +134,5 @@
    ============================================ */
 
 .step-icon {
-  transition: all 0.2s ease;
+  transition: all var(--pada-duration-normal) var(--pada-ease-standard);
 }

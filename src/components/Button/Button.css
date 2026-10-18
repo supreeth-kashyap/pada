@@ -1,23 +1,102 @@
+/* Root */
 .button {
+  /* Component tokens. Variants and sizes only reassign these. */
+  --pada-button-bg: var(--pada-color-accent-solid);
+  --pada-button-bg-hover: var(--pada-color-accent-solid-hover);
+  --pada-button-bg-pressed: var(--pada-color-accent-solid-pressed);
+  --pada-button-fg: var(--pada-color-accent-on-solid);
+  --pada-button-fg-hover: var(--pada-button-fg);
+  --pada-button-border: transparent;
+  --pada-button-border-hover: var(--pada-button-border);
+  --pada-button-bg-disabled: var(--pada-color-accent-200);
+  --pada-button-fg-disabled: var(--pada-color-accent-400);
+  --pada-button-border-disabled: transparent;
+  --pada-button-icon-color: currentColor;
+  --pada-button-height: var(--pada-control-height-md);
+  --pada-button-pad-x: var(--pada-space-3);
+  --pada-button-gap: var(--pada-space-2);
+  --pada-button-radius: var(--pada-radius-lg);
+  --pada-button-font-size: var(--pada-font-size-md);
+  --pada-button-icon-size: var(--pada-icon-size-md);
+
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--spacing-2);
-  height: var(--spacing-8);
-  padding: var(--spacing-3);
-  border-radius: var(--radius-lg);
-  border: 1px solid transparent;
-  font-size: var(--font-size-base);
-  font-weight: 600;
-  line-height: var(--line-height-base);
+  gap: var(--pada-button-gap);
+  height: var(--pada-button-height);
+  padding: 0 var(--pada-button-pad-x);
+  border-radius: var(--pada-button-radius);
+  border: var(--pada-border-width-thin) solid var(--pada-button-border);
+  background-color: var(--pada-button-bg);
+  color: var(--pada-button-fg);
+  font-family: inherit;
+  font-size: var(--pada-button-font-size);
+  font-weight: var(--pada-font-weight-semibold);
+  line-height: var(--pada-line-height-md);
   cursor: pointer;
   white-space: nowrap;
   width: fit-content;
   box-sizing: border-box;
-  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
-  --button-icon-size: var(--spacing-4);
+  transition:
+    background-color var(--pada-duration-normal) var(--pada-ease-standard),
+    border-color var(--pada-duration-normal) var(--pada-ease-standard),
+    color var(--pada-duration-normal) var(--pada-ease-standard),
+    scale var(--pada-duration-instant) var(--pada-ease-standard);
 }
 
+/* Variant variables */
+.button--secondary {
+  --pada-button-bg: var(--pada-color-surface);
+  --pada-button-bg-hover: var(--pada-color-surface);
+  --pada-button-bg-pressed: var(--pada-color-neutral-subtle);
+  --pada-button-fg: var(--pada-color-fg);
+  --pada-button-fg-hover: var(--pada-color-accent-fg);
+  --pada-button-border: var(--pada-color-border);
+  --pada-button-border-hover: var(--pada-color-accent-solid);
+  --pada-button-bg-disabled: var(--pada-color-surface);
+  --pada-button-fg-disabled: var(--pada-color-fg-disabled);
+  --pada-button-border-disabled: var(--pada-color-border);
+  --pada-button-icon-color: var(--pada-color-fg-muted);
+}
+
+.button--ghost {
+  --pada-button-bg: transparent;
+  --pada-button-bg-hover: var(--pada-color-neutral-subtle-hover);
+  --pada-button-bg-pressed: var(--pada-color-neutral-subtle-hover);
+  --pada-button-fg: var(--pada-color-fg);
+  --pada-button-fg-hover: var(--pada-color-accent-fg);
+  --pada-button-bg-disabled: transparent;
+  --pada-button-fg-disabled: var(--pada-color-fg-disabled);
+  --pada-button-icon-color: var(--pada-color-fg-muted);
+}
+
+.button--destructive {
+  --pada-button-bg: var(--pada-color-danger-solid);
+  --pada-button-bg-hover: var(--pada-color-danger-solid-hover);
+  --pada-button-bg-pressed: var(--pada-color-danger-solid-pressed);
+  --pada-button-fg: var(--pada-color-danger-on-solid);
+  --pada-button-bg-disabled: var(--pada-color-red-200);
+  --pada-button-fg-disabled: var(--pada-color-red-400);
+}
+
+.button[data-size="sm"] {
+  --pada-button-height: var(--pada-control-height-sm);
+  --pada-button-pad-x: var(--pada-space-2);
+  --pada-button-gap: var(--pada-space-1-5);
+  --pada-button-font-size: var(--pada-font-size-sm);
+  --pada-button-radius: var(--pada-radius-md);
+  --pada-button-icon-size: var(--pada-icon-size-sm);
+}
+
+.button[data-size="lg"] {
+  --pada-button-height: var(--pada-control-height-lg);
+  --pada-button-pad-x: var(--pada-space-4);
+  --pada-button-gap: var(--pada-space-2);
+  --pada-button-icon-size: var(--pada-icon-size-lg);
+}
+
+/* Split button */
 .button-split {
   display: inline-flex;
   align-items: center;
@@ -38,79 +117,80 @@
   border-bottom-left-radius: 0;
 }
 
+/* States via attributes */
+.button:hover:not(:disabled, [data-loading]) {
+  background-color: var(--pada-button-bg-hover);
+  border-color: var(--pada-button-border-hover);
+  color: var(--pada-button-fg-hover);
+}
+
+.button:active:not(:disabled, [data-loading]) {
+  background-color: var(--pada-button-bg-pressed);
+  scale: var(--pada-motion-scale-press);
+}
+
 .button:focus-visible {
-  box-shadow: var(--shadow-focus-ring);
+  outline: none;
+  box-shadow: var(--pada-shadow-focus);
 }
 
 .button:disabled {
+  background-color: var(--pada-button-bg-disabled);
+  border-color: var(--pada-button-border-disabled);
+  color: var(--pada-button-fg-disabled);
   cursor: not-allowed;
 }
 
-.button--primary {
-  background-color: var(--color-primary-600);
-  color: var(--color-primary-50);
+/* Loading: the label stays in place (keeping the width) but is hidden behind a spinner. */
+.button[data-loading] {
+  cursor: progress;
 }
 
-.button--primary:hover:not(:disabled) {
-  background-color: var(--color-primary-700);
+.button[data-loading] > :not(.button-spinner) {
+  opacity: 0;
 }
 
-.button--primary:disabled {
-  background-color: var(--color-primary-200);
-  color: var(--color-primary-400);
-}
-
-.button--secondary {
-  background-color: var(--color-bg);
-  color: var(--color-fg);
-  border-color: var(--color-neutral-200);
-}
-
-.button--secondary:hover:not(:disabled) {
-  background-color: var(--color-bg);
-  border-color: var(--color-primary-600);
-  color: var(--color-primary-700);
-}
-
-.button--secondary:disabled {
-  background-color: var(--color-bg);
-  color: var(--color-neutral-400);
-  border-color: var(--color-neutral-200);
-}
-
-.button--ghost {
-  background-color: var(--color-bg);
-  color: var(--color-fg);
-}
-
-.button--ghost:hover:not(:disabled) {
-  background-color: var(--color-neutral-100);
-  color: var(--color-primary-700);
-}
-
-.button--ghost:disabled {
-  color: var(--color-neutral-400);
-}
-
-.button--destructive {
-  background-color: var(--color-accent-red-600);
-  color: var(--color-accent-red-50);
-}
-
-.button--destructive:hover:not(:disabled) {
-  background-color: var(--color-accent-red-700);
-}
-
-.button--destructive:disabled {
-  background-color: var(--color-accent-red-200);
-  color: var(--color-accent-red-400);
-}
-
+/* Child elements */
 .button .button__icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  --icon-color: inherit;
-  width: var(--button-icon-size);
-  height: var(--button-icon-size);
+  --icon-color: var(--pada-button-icon-color);
+  width: var(--pada-button-icon-size);
+  height: var(--pada-button-icon-size);
+  transition: translate var(--pada-duration-fast) var(--pada-ease-standard);
+}
+
+/* A trailing icon (an arrow, usually) nudges forward on hover. */
+.button:hover:not(:disabled) > .button__icon[data-position="end"] {
+  translate: 2px 0;
+}
+
+.button-label {
+  transition: opacity var(--pada-duration-fast) var(--pada-ease-standard);
+}
+
+.button-spinner {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: var(--pada-button-icon-size);
+  height: var(--pada-button-icon-size);
+  box-sizing: border-box;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: var(--pada-radius-full);
+  animation: button-spin 0.7s linear infinite;
+}
+
+@keyframes button-spin {
+  to {
+    rotate: 1turn;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button-spinner {
+    animation-duration: 2.8s;
+  }
 }

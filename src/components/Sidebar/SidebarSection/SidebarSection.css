@@ -9,11 +9,11 @@
 .sidebar-section__header {
   align-items: center;
   box-sizing: border-box;
-  color: var(--color-stone-500, #78716c);
+  color: var(--pada-color-neutral-500);
   display: flex;
   font-family: inherit;
-  font-size: 11px;
-  font-weight: 600;
+  font-size: var(--pada-font-size-sm);
+  font-weight: var(--pada-font-weight-semibold);
   gap: 6px;
   line-height: 16px;
   min-height: 24px;

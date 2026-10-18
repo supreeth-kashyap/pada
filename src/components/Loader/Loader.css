@@ -19,12 +19,19 @@
   width: var(--loader-bar-width);
   height: var(--loader-bar-height);
   border-radius: var(--loader-bar-radius);
-  background: var(--color-neutral-400);
+  background: var(--pada-color-neutral-400);
   opacity: var(--loader-opacity);
   transform: translate(-50%, -50%) rotate(var(--loader-rotation))
     translateY(calc(var(--loader-radius, 6px) * -1));
   transform-origin: center;
   animation: loader-pulse 1.6s linear infinite;
+}
+
+/* Reduced motion: a slower, calmer pulse (the loader still has to show progress). */
+@media (prefers-reduced-motion: reduce) {
+  .loader__bar {
+    animation-duration: 4s;
+  }
 }
 
 @keyframes loader-pulse {

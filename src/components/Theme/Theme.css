@@ -1,0 +1,103 @@
+/* ThemeProvider target="element": a wrapper that carries the theme attributes without a box. */
+.theme-scope {
+  display: contents;
+}
+
+/* Overlays opened inside the scope portal here, so they inherit its theme. */
+.theme-portal {
+  display: contents;
+}
+
+/* Root */
+.theme-toggle {
+  --pada-theme-toggle-size: var(--pada-control-height-md);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--pada-theme-toggle-size);
+  height: var(--pada-theme-toggle-size);
+  padding: 0;
+  border: none;
+  border-radius: var(--pada-radius-full);
+  background: transparent;
+  color: var(--pada-color-fg-muted);
+  cursor: pointer;
+  transition: background-color var(--pada-duration-fast) var(--pada-ease-standard);
+}
+
+.theme-toggle[data-size="sm"] { --pada-theme-toggle-size: var(--pada-control-height-sm); }
+.theme-toggle[data-size="lg"] { --pada-theme-toggle-size: var(--pada-control-height-lg); }
+
+.theme-toggle:hover {
+  background-color: var(--pada-color-neutral-subtle-hover);
+  color: var(--pada-color-fg);
+}
+
+.theme-toggle:focus-visible {
+  outline: none;
+  box-shadow: var(--pada-shadow-focus);
+}
+
+/* Child elements: the icon morphs between sun and moon. */
+.theme-toggle-icon {
+  /* The sun looks the same a quarter-turn round, so the morph to the moon can spin back to 0. */
+  rotate: 90deg;
+  transition: rotate var(--pada-duration-slow) var(--pada-ease-emphasized);
+}
+
+.theme-toggle-disc {
+  transform-origin: center;
+  transition: r var(--pada-duration-slow) var(--pada-ease-emphasized);
+}
+
+.theme-toggle-bite {
+  transition: cx var(--pada-duration-slow) var(--pada-ease-emphasized), cy var(--pada-duration-slow) var(--pada-ease-emphasized);
+  cx: 30px;
+  cy: -6px;
+}
+
+.theme-toggle-rays {
+  transform-origin: center;
+  transition:
+    opacity var(--pada-duration-normal) var(--pada-ease-standard),
+    scale var(--pada-duration-slow) var(--pada-ease-emphasized);
+}
+
+.theme-toggle[data-theme-current="dark"] .theme-toggle-icon {
+  rotate: 0deg;
+}
+
+.theme-toggle[data-theme-current="dark"] .theme-toggle-disc {
+  r: 9px;
+}
+
+.theme-toggle[data-theme-current="dark"] .theme-toggle-bite {
+  cx: 17px;
+  cy: 7px;
+}
+
+.theme-toggle[data-theme-current="dark"] .theme-toggle-rays {
+  opacity: 0;
+  scale: 0.5;
+}
+
+/* The page-wide reveal when the theme changes through a view transition. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-new(root) {
+  animation: pada-theme-reveal calc(600ms * var(--pada-motion-scale)) var(--pada-ease-emphasized);
+}
+
+@keyframes pada-theme-reveal {
+  from {
+    clip-path: circle(0 at var(--pada-theme-reveal-x, 50%) var(--pada-theme-reveal-y, 50%));
+  }
+  to {
+    clip-path: circle(150vmax at var(--pada-theme-reveal-x, 50%) var(--pada-theme-reveal-y, 50%));
+  }
+}

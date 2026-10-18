@@ -1,6 +1,6 @@
 .notification {
   position: fixed;
-  z-index: 1100;
+  z-index: var(--pada-z-toast);
   max-width: 360px;
   margin: 72px;
   pointer-events: none;
@@ -41,15 +41,15 @@
 .notification__card {
   display: flex;
   align-items: flex-start;
-  gap: var(--spacing-3);
-  background-color: var(--color-white);
-  border: 1px solid var(--color-neutral-200);
-  border-radius: 16px;
-  padding: var(--spacing-3) var(--spacing-4);
-  box-shadow: var(--shadow-lg);
+  gap: var(--pada-space-3);
+  background-color: var(--pada-color-surface);
+  border: 1px solid var(--pada-color-neutral-200);
+  border-radius: var(--pada-radius-2xl);
+  padding: var(--pada-space-3) var(--pada-space-4);
+  box-shadow: var(--pada-shadow-lg);
   pointer-events: auto;
   transform: translateX(0);
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  transition: transform var(--pada-duration-normal) var(--pada-ease-standard), opacity var(--pada-duration-normal) var(--pada-ease-standard);
   opacity: 0;
 }
 
@@ -90,8 +90,8 @@
   justify-content: center;
   width: 24px;
   height: 24px;
-  border-radius: var(--radius-lg);
-  background-color: var(--color-neutral-100);
+  border-radius: var(--pada-radius-lg);
+  background-color: var(--pada-color-neutral-100);
   flex-shrink: 0;
   padding: 12px;
 }
@@ -99,7 +99,7 @@
 .notification__content {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-3);
+  gap: var(--pada-space-3);
   flex: 1;
   min-width: 0;
 }
@@ -112,18 +112,18 @@
 
 .notification__title {
   margin: 0;
-  font-size: var(--font-size-sm);
-  font-weight: 600;
-  color: var(--color-neutral-900);
-  line-height: var(--line-height-base);
+  font-size: var(--pada-font-size-sm);
+  font-weight: var(--pada-font-weight-semibold);
+  color: var(--pada-color-neutral-900);
+  line-height: var(--pada-line-height-md);
 }
 
 .notification__description {
   margin: 0;
-  font-size: var(--font-size-xs);
-  font-weight: 400;
-  color: var(--color-neutral-900);
-  line-height: var(--line-height-sm);
+  font-size: var(--pada-font-size-xs);
+  font-weight: var(--pada-font-weight-regular);
+  color: var(--pada-color-neutral-900);
+  line-height: var(--pada-line-height-sm);
 }
 
 .notification__dismiss {
@@ -132,8 +132,15 @@
   justify-content: center;
   width: 20px;
   height: 20px;
-  border-radius: 999px;
+  padding: 0;
+  border-radius: var(--pada-radius-full);
   border: none;
+  background: transparent;
   cursor: pointer;
   flex-shrink: 0;
+}
+
+.notification__dismiss:focus-visible {
+  outline: none;
+  box-shadow: var(--pada-shadow-focus);
 }

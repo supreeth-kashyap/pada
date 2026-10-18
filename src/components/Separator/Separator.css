@@ -1,0 +1,15 @@
+.separator {
+  --pada-separator-color: var(--pada-color-border-subtle);
+  --pada-separator-thickness: var(--pada-border-width-thin);
+
+  flex-shrink: 0;
+  background-color: var(--pada-separator-color);
+  width: 100%;
+  height: var(--pada-separator-thickness);
+}
+
+.separator[data-orientation="vertical"] {
+  width: var(--pada-separator-thickness);
+  height: auto;
+  align-self: stretch;
+}

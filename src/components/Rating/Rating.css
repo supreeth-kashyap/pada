@@ -1,0 +1,92 @@
+/* Root */
+.rating {
+  /* Component tokens. Sizes only reassign these. */
+  --pada-rating-size: 20px;
+  --pada-rating-gap: var(--pada-space-0-5);
+  --pada-rating-filled: var(--pada-color-amber-500);
+  --pada-rating-empty: var(--pada-color-neutral-subtle);
+  --pada-rating-empty-stroke: var(--pada-color-border-strong);
+
+  display: inline-flex;
+  align-items: center;
+  gap: var(--pada-space-2);
+  font-family: var(--pada-font-sans);
+}
+
+/* Variant variables */
+.rating[data-size="sm"] {
+  --pada-rating-size: 16px;
+}
+
+.rating[data-size="lg"] {
+  --pada-rating-size: 28px;
+}
+
+.rating[data-disabled] {
+  opacity: 0.55;
+}
+
+/* Child elements */
+.rating-label {
+  font-size: var(--pada-font-size-sm);
+  font-weight: var(--pada-font-weight-medium);
+  color: var(--pada-color-fg);
+}
+
+.rating-stars {
+  display: inline-flex;
+  gap: var(--pada-rating-gap);
+}
+
+.rating-option {
+  position: relative;
+  display: inline-flex;
+  padding: 2px;
+  border-radius: var(--pada-radius-sm);
+  cursor: pointer;
+}
+
+.rating[data-disabled] .rating-option {
+  cursor: not-allowed;
+}
+
+.rating-option:has(.rating-input:focus-visible) {
+  box-shadow: var(--pada-shadow-focus);
+}
+
+.rating-input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.rating-star {
+  display: block;
+  width: var(--pada-rating-size);
+  height: var(--pada-rating-size);
+  overflow: visible;
+  transition: scale var(--pada-duration-fast) var(--pada-ease-emphasized);
+}
+
+.rating-star-empty {
+  fill: var(--pada-rating-empty);
+  stroke: var(--pada-rating-empty-stroke);
+  stroke-width: 1;
+  stroke-linejoin: round;
+}
+
+/* The filled star is clipped to the fill fraction (whole stars when interactive). */
+.rating-star-full {
+  fill: var(--pada-rating-filled);
+  clip-path: inset(0 calc(100% - var(--pada-rating-fill)) 0 0);
+  transition: clip-path var(--pada-duration-fast) var(--pada-ease-standard);
+}
+
+/* The hovered or picked stars grow slightly. */
+.rating-option[data-filled] .rating-star {
+  scale: 1.06;
+}
+
+.rating-option:active .rating-star {
+  scale: 0.9;
+}

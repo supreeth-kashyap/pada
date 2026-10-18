@@ -4,20 +4,33 @@ import { Icon } from '../Icon';
 import { Splitter } from './Splitter/Splitter';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'destructive';
+export type ButtonSize = 'sm' | 'md' | 'lg';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children?: React.ReactNode;
   variant?: ButtonVariant;
+  /** Height and padding: sm 28px, md 32px, lg 40px (scaled by density). */
+  size?: ButtonSize;
   leftIcon?: string;
   rightIcon?: string;
   split?: boolean;
   onSplitClick?: () => void;
   disabled?: boolean;
+  /**
+   * Shows a spinner in place of the label and ignores clicks, keeping the button's width and
+   * focus. Announced through `aria-busy`.
+   */
+  loading?: boolean;
+  ref?: React.Ref<HTMLButtonElement>;
 }
 
 export const Button = ({
-  children, 
-  variant = 'primary', 
+  children,
+  variant = 'primary',
+  size = 'md',
+  loading = false,
+  type = 'button',
+  onClick,
   leftIcon,
   rightIcon,
   split = false,
@@ -42,15 +55,28 @@ export const Button = ({
 
   const iconSize = 16;
 
-  const getIconColor = (): string => {
-    if (variant === 'primary') return 'var(--color-white)';
-    if (variant === 'destructive') return 'var(--color-white)';
-    return 'var(--color-neutral-600)';
+  // Loading keeps the button focusable (unlike `disabled`), so focus is not lost mid-action.
+  const stateProps = {
+    type,
+    'data-size': size,
+    'data-variant': variant,
+    'data-loading': loading ? '' : undefined,
+    'aria-busy': loading || undefined,
+    'aria-disabled': loading || undefined,
+    onClick: (event: React.MouseEvent<HTMLButtonElement>) => {
+      if (loading) {
+        event.preventDefault();
+        return;
+      }
+      onClick?.(event);
+    },
   };
+  const label = children ? <span className="button-label">{children}</span> : null;
+  const spinner = loading ? <span className="button-spinner" aria-hidden="true" /> : null;
 
   const renderLeftVisual = () => {
     if (resolvedLeftIcon) {
-      return <Icon name={resolvedLeftIcon} size={iconSize} color={getIconColor()} className="button__icon" />;
+      return <Icon name={resolvedLeftIcon} size={iconSize} className="button__icon" data-position="start" aria-hidden="true" />;
     }
     return null;
   };
@@ -58,7 +84,7 @@ export const Button = ({
   const renderRightVisual = () => {
     const canSplit = split && (variant === 'primary' || variant === 'secondary');
     if (resolvedRightIcon && !canSplit) {
-      return <Icon name={resolvedRightIcon} size={iconSize} color={getIconColor()} className="button__icon" />;
+      return <Icon name={resolvedRightIcon} size={iconSize} className="button__icon" data-position="end" aria-hidden="true" />;
     }
     return null;
   };
@@ -71,10 +97,12 @@ export const Button = ({
         <button
           className={['button', `button--${variant}`, 'button--split-main'].join(' ')}
           disabled={disabled}
+          {...stateProps}
           {...props}
         >
           {renderLeftVisual()}
-          {children ? children : null}
+          {label}
+          {spinner}
         </button>
         <Splitter
           variant={variant}
@@ -93,11 +121,13 @@ export const Button = ({
     <button
       className={buttonClasses}
       disabled={disabled}
+      {...stateProps}
       {...props}
     >
       {renderLeftVisual()}
-      {children ? children : null}
+      {label}
       {renderRightVisual()}
+      {spinner}
     </button>
   );
 };

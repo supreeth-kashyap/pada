@@ -1,0 +1,43 @@
+/* Root */
+.spinner {
+  --pada-spinner-size: var(--pada-icon-size-md);
+  --pada-spinner-color: currentColor;
+  --pada-spinner-track: color-mix(in oklch, currentColor 20%, transparent);
+  --pada-spinner-thickness: 2px;
+
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+/* Variant variables */
+.spinner[data-size="sm"] { --pada-spinner-size: var(--pada-icon-size-sm); --pada-spinner-thickness: 1.5px; }
+.spinner[data-size="lg"] { --pada-spinner-size: 24px; --pada-spinner-thickness: 3px; }
+
+/* Child elements */
+.spinner-ring {
+  width: var(--pada-spinner-size);
+  height: var(--pada-spinner-size);
+  box-sizing: border-box;
+  border: var(--pada-spinner-thickness) solid var(--pada-spinner-track);
+  border-top-color: var(--pada-spinner-color);
+  border-radius: var(--pada-radius-full);
+  animation: spinner-rotate 0.7s linear infinite;
+}
+
+@keyframes spinner-rotate {
+  to {
+    rotate: 1turn;
+  }
+}
+
+@keyframes spinner-pulse {
+  50% {
+    opacity: 0.4;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner-ring {
+    animation: spinner-pulse 2s var(--pada-ease-standard) infinite;
+  }
+}

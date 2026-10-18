@@ -2,6 +2,9 @@ import React from 'react';
 import './InputTextArea.css';
 import { FormLabel } from '../FormLabel';
 
+const messageId = (id: string, error?: string, description?: string) =>
+  error ? `${id}-error` : description ? `${id}-description` : undefined;
+
 export interface InputTextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
   error?: string;
@@ -18,9 +21,14 @@ export const InputTextArea = ({
   required = false,
   optional = false,
   className = '',
+  id: idProp,
+  'aria-describedby': describedByProp,
   ...props
 }: InputTextAreaProps) => {
-  const id = React.useId();
+  const generatedId = React.useId();
+  // A consumer id must reach both the control and the label, or the label stops naming it.
+  const id = idProp ?? generatedId;
+  const describedBy = [describedByProp, messageId(id, error, description)].filter(Boolean).join(' ') || undefined;
   const hasError = !!error;
 
   return (
@@ -35,7 +43,7 @@ export const InputTextArea = ({
         className={`input-textarea ${hasError ? 'input-textarea--error' : ''} ${className}`.trim()}
         disabled={disabled}
         aria-invalid={hasError}
-        aria-describedby={hasError ? `${id}-error` : description ? `${id}-description` : undefined}
+        aria-describedby={describedBy}
         {...props}
       />
       {description && !hasError && (

@@ -58,10 +58,10 @@ export default function AnimationDemo() {
                   gridTemplateColumns: '120px 80px 1fr',
                 }}
               >
-                <code style={{ color: 'var(--color-stone-500)', fontSize: 11 }}>{ms}ms</code>
+                <code style={{ color: 'var(--pada-color-fg-muted)', fontSize: 11 }}>{ms}ms</code>
                 <span
                   style={{
-                    color: 'var(--color-stone-500)',
+                    color: 'var(--pada-color-fg-muted)',
                     fontSize: 11,
                     letterSpacing: '0.06em',
                     textTransform: 'uppercase',
@@ -92,7 +92,7 @@ export default function AnimationDemo() {
                 }}
               >
                 <code style={{ fontSize: 11 }}>{name}</code>
-                <code style={{ color: 'var(--color-stone-500)', fontSize: 11 }}>{value}</code>
+                <code style={{ color: 'var(--pada-color-fg-muted)', fontSize: 11 }}>{value}</code>
                 <span style={{ fontSize: 12 }}>{use}</span>
               </div>
             ))}

@@ -5,9 +5,10 @@ import ReactDOMServer from 'react-dom/server';
 import { createServer } from 'vite';
 import { rootDir } from './component-manifest.mjs';
 
-// There is no DOM in the test setup, so components are loaded through Vite (TSX + CSS
-// imports) and rendered to static markup: these tests check the ARIA wiring each
-// component renders, and the pure keyboard-navigation logic behind Select.
+// Components are loaded through Vite (TSX + CSS imports) and rendered to static markup:
+// these tests check the ARIA wiring each component renders on the server, and the pure
+// keyboard-navigation logic behind Select. Overlays render through a portal, which only
+// exists in the browser, so their tests are Vitest component tests (src/**/*.test.tsx).
 const server = await createServer({
   root: rootDir,
   configFile: false,
@@ -33,29 +34,6 @@ function tagWith(markup, marker) {
 function attr(tag, name) {
   return tag.match(new RegExp(`\\s${name}="([^"]*)"`))?.[1];
 }
-
-test('Modal labels the dialog with the id of its title heading', async () => {
-  const { Modal } = await load('Modal/Modal.tsx');
-  const markup = render(h(Modal, { open: true, onOpenChange: () => {}, title: 'Delete project' }, 'Body'));
-
-  const dialog = tagWith(markup, 'role="dialog"');
-  assert.equal(attr(dialog, 'aria-modal'), 'true');
-  assert.equal(attr(dialog, 'tabindex'), '-1');
-  const labelledBy = attr(dialog, 'aria-labelledby');
-  assert.ok(labelledBy, 'dialog has aria-labelledby');
-  assert.notEqual(labelledBy, 'modal-title');
-
-  const heading = tagWith(markup, '<h2');
-  assert.equal(attr(heading, 'id'), labelledBy);
-  assert.ok(markup.includes(`${heading}Delete project</h2>`));
-});
-
-test('Modal without a title has no dangling aria-labelledby', async () => {
-  const { Modal } = await load('Modal/Modal.tsx');
-  const markup = render(h(Modal, { open: true, onOpenChange: () => {} }, 'Body'));
-  assert.equal(attr(tagWith(markup, 'role="dialog"'), 'aria-labelledby'), undefined);
-  assert.equal(render(h(Modal, { open: false, onOpenChange: () => {} }, 'Body')), '');
-});
 
 const fruit = [
   { label: 'Apple', value: 'apple' },
@@ -117,11 +95,20 @@ test('ComboBox with an id renders addressable options with aria-selected', async
   assert.deepEqual(options.map((option) => attr(option, 'data-active')), [undefined, undefined, '']);
   assert.ok(options[1].includes(' disabled'));
 
-  // Without an id, options keep their default tab order and get no ids.
-  const plain = render(h(ComboBox, { items: [{ id: 'a', label: 'Apple' }] }));
-  const option = tagWith(plain, 'role="option"');
-  assert.equal(attr(option, 'id'), undefined);
-  assert.equal(attr(option, 'tabindex'), undefined);
+  // Without an id, the listbox manages focus itself: no option ids, and one tab stop (the
+  // selected option, else the first enabled one).
+  const plain = render(
+    h(ComboBox, {
+      items: [
+        { id: 'a', label: 'Apple', disabled: true },
+        { id: 'b', label: 'Banana' },
+        { id: 'c', label: 'Cherry', selected: true },
+      ],
+    }),
+  );
+  const plainOptions = [...plain.matchAll(/<button[^>]*role="option"[^>]*>/g)].map((match) => match[0]);
+  assert.deepEqual(plainOptions.map((option) => attr(option, 'id')), [undefined, undefined, undefined]);
+  assert.deepEqual(plainOptions.map((option) => attr(option, 'tabindex')), ['-1', '-1', '0']);
 });
 
 test('Select keyboard navigation skips disabled options and stops at the ends', async () => {
@@ -162,19 +149,3 @@ test('Select type-ahead jumps to the next enabled option by first letter', async
   assert.equal(findTypeaheadIndex(options, 3, 'z'), 3);
 });
 
-test('Tooltip is a role=tooltip that describes its trigger', async () => {
-  const { Tooltip } = await load('Tooltip/Tooltip.tsx');
-  const markup = render(h(Tooltip, { content: 'Archive this record' }, h('button', { type: 'button' }, 'Archive')));
-
-  const tooltip = tagWith(markup, 'role="tooltip"');
-  const tooltipId = attr(tooltip, 'id');
-  assert.ok(tooltipId, 'tooltip has an id');
-  assert.ok(tooltip.includes(' hidden'), 'tooltip is hidden until hover or focus');
-  assert.equal(attr(tagWith(markup, '<button'), 'aria-describedby'), tooltipId);
-
-  const described = render(
-    h(Tooltip, { content: 'Tip' }, h('button', { type: 'button', 'aria-describedby': 'hint' }, 'Go')),
-  );
-  const describedId = attr(tagWith(described, 'role="tooltip"'), 'id');
-  assert.equal(attr(tagWith(described, '<button'), 'aria-describedby'), `hint ${describedId}`);
-});
