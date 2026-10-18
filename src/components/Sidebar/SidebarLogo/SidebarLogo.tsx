@@ -1,8 +1,7 @@
 import React from 'react';
 import './SidebarLogo.css';
-import { Logo, type LogoSize } from '../../Logo';
-import padaLogoMark from '../assets/pada-logo-mark.svg';
-import padaWordmark from '../assets/pada-wordmark.svg';
+import { BrandLogo, type LogoSize } from '../../Logo';
+import { PadaLogo } from '../../PadaLogo';
 
 export interface SidebarLogoProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {
   /** Image source (png / svg / data URL) shown as the logo mark. Takes precedence over `name`. */
@@ -49,17 +48,14 @@ export const SidebarLogo = React.forwardRef<HTMLDivElement, SidebarLogoProps>(
     const mark = src ? (
       <img src={src} alt={alt} className="sidebar-logo__mark" />
     ) : name ? (
-      <Logo name={name} size={size} className="sidebar-logo__mark sidebar-logo__mark--ds" />
+      <BrandLogo name={name} size={size} className="sidebar-logo__mark sidebar-logo__mark--ds" />
+    ) : title !== undefined ? (
+      <PadaLogo variant="mark" size={32} decorative={!!title} className="sidebar-logo__mark" />
     ) : (
-      <img src={padaLogoMark} alt={alt || 'Pada'} className="sidebar-logo__mark" />
+      <PadaLogo variant="lockup" size={28} title={alt || 'Pada'} className="sidebar-logo__lockup" />
     );
 
-    const titleNode =
-      title !== undefined ? (
-        <span className="sidebar-logo__title">{title}</span>
-      ) : usingDefaults ? (
-        <img src={padaWordmark} alt="Pada . design" className="sidebar-logo__wordmark" />
-      ) : null;
+    const titleNode = title !== undefined ? <span className="sidebar-logo__title">{title}</span> : null;
 
     const content = (
       <>

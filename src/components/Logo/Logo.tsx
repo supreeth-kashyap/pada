@@ -3,7 +3,7 @@ import './Logo.css';
 
 export type LogoSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
-export interface LogoProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface BrandLogoProps extends React.HTMLAttributes<HTMLDivElement> {
   name: string;
   size?: LogoSize;
   background?: boolean;
@@ -18,7 +18,8 @@ const getLogoPath = (name: string): string => {
   return new URL(`../../assets/logos/name=${name}.svg`, import.meta.url).href;
 };
 
-export const Logo = React.forwardRef<HTMLDivElement, LogoProps>((
+/** A third-party brand logo (Slack, GitHub, …) from the bundled logo library, by name. */
+export const BrandLogo = React.forwardRef<HTMLDivElement, BrandLogoProps>((
   { 
     name, 
     size = 'md', 
@@ -65,5 +66,10 @@ export const Logo = React.forwardRef<HTMLDivElement, LogoProps>((
   return logoElement;
 });
 
-Logo.displayName = 'Logo';
+BrandLogo.displayName = 'BrandLogo';
+
+/** @deprecated Renamed to `BrandLogo` (Pada's own logo is `PadaLogo`). Removed in 3.0. */
+export const Logo = BrandLogo;
+/** @deprecated Renamed to `BrandLogoProps`. */
+export type LogoProps = BrandLogoProps;
 

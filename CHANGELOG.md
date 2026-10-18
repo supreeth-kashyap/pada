@@ -6,6 +6,16 @@
 - Moved the `body` and `p` rules out of `dist/tokens.css` into a new optional `pada-ds/base.css` export, so importing the tokens no longer overrides an app's own styles.
 - Added a component API manifest for AI coding agents. `npm run build` now reads every exported component's props from the TypeScript source and writes `dist/manifest.json` (exported as `pada-ds/manifest.json`), `llms.txt` and `llms-full.txt`. Both llms files ship in the package and are committed at the repo root. `npm test` fails if they are stale or if an exported component is missing from the manifest.
 
+- **Brand (phase 7).**
+  - New `PadaLogo` draws the "Twin Soles" mark (two soles standing on a shared ground line; *pāda* is Sanskrit for foot) as inline SVG:
+    - Variants: `lockup` (mark and the geometric "pada" wordmark), `mark` and `wordmark`.
+    - Tones: `color` (amber, plus the accent colour, so it follows `data-accent`), `accent` and `mono` (`currentColor`).
+    - Sizes run from `sm` to `xl` or take a pixel height. Toes are drawn from 48px up.
+    - `animated` steps in once (left sole, right sole, then the ground draws out); `animated="loop"` walks as a branded loader (`role="status"`). Both use the motion tokens.
+    - It is an image named "Pada" unless `decorative`.
+  - `Logo` (third-party brand logos) is renamed `BrandLogo`; `Logo` and `LogoProps` remain as deprecated aliases until 3.0. The manifest lists aliases with their deprecation note.
+  - `SidebarLogo` with no `src`, `name` or `title` now shows the `PadaLogo` lockup instead of the old mark and grey "Pada . design" images (removed).
+  - The demo uses the new mark as its favicon (`public/favicon.svg`, adapting to dark mode) and the page title "Pada Design System" (was `vite.svg` and "myapp"). It has a new Foundation → Brand page.
 - **Layout primitives.** `Grid` lays out a fixed number of `columns`, or as many as fit with `minItemWidth`, using token gaps. `Container` centres content at a breakpoint width (`sm` to `2xl`, or `full`), with gutters that grow on wider screens. `AspectRatio` keeps media at a fixed shape. The demo has a new Foundation → Layout page.
 - **New components (wave 2): form inputs.**
   - `RangeSlider` has two thumbs for a low and high value:

@@ -172,10 +172,11 @@ This design system includes the following components:
 - **Link**: Text link, with `asChild` for router links.
 - **List**: Generic list rendering component.
 - **Loader**: Indicate loading state visually.
-- **Logo**: Project or brand logo component.
+- **BrandLogo**: Third-party brand logos by name (`Logo` is a deprecated alias).
 - **Modal**: Overlay dialog for focused tasks (1.x API; wraps `Dialog`).
 - **Notification**: Transient alert messages and toasts.
 - **NumberInput**: Number field with steppers and locale formatting.
+- **PadaLogo**: The Pada mark, wordmark and lockup, with motion.
 - **PageHeader**: Page title and actions area.
 - **Pagination**: Page navigation with ellipses.
 - **PasswordInput**: Password field with show/hide and a strength meter.

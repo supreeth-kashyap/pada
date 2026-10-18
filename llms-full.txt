@@ -561,6 +561,27 @@ import { BaseToolbarMenu } from 'pada-ds';
 <BaseToolbarMenu />
 ```
 
+### BrandLogo
+
+`import { BrandLogo } from 'pada-ds';`
+
+A third-party brand logo (Slack, GitHub, …) from the bundled logo library, by name.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| name | `string` | yes | - | - |
+| size | `LogoSize` | no | `'md'` | - |
+| background | `boolean` | no | `false` | - |
+| tooltip | `string` | no | - | - |
+
+Also accepts the props of `React.HTMLAttributes<HTMLDivElement>`.
+
+```tsx
+import { BrandLogo } from 'pada-ds';
+
+<BrandLogo name="..." />
+```
+
 ### Breadcrumbs
 
 `import { Breadcrumbs } from 'pada-ds';`
@@ -2470,6 +2491,8 @@ import { Loader } from 'pada-ds';
 
 `import { Logo } from 'pada-ds';`
 
+Deprecated: Renamed to `BrandLogo` (Pada's own logo is `PadaLogo`). Removed in 3.0.
+
 | Prop | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
 | name | `string` | yes | - | - |
@@ -2586,6 +2609,30 @@ Also accepts the props of `Omit<Omit<ComponentPropsWithRef<'div'>, 'defaultValue
 import { NumberInput } from 'pada-ds';
 
 <NumberInput label="..." />
+```
+
+### PadaLogo
+
+`import { PadaLogo } from 'pada-ds';`
+
+The Pada logo: the "Twin Soles" mark, the wordmark, or both, as inline SVG.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| variant | `'lockup' \| 'mark' \| 'wordmark'` | no | `'lockup'` | `lockup` (mark and wordmark), `mark` alone, or `wordmark` alone. |
+| tone | `'color' \| 'accent' \| 'mono'` | no | `'color'` | `color`: amber left sole, accent right sole (it follows `data-accent`). `accent`: both soles in the accent. `mono`: everything in `currentColor`. |
+| size | `keyof typeof SIZES \| number` | no | `'md'` | Height in px, or a preset. |
+| toes | `boolean` | no | - | Draw a toe above each sole. Defaults to on from 48px up, where it stays legible. |
+| animated | `boolean \| 'loop'` | no | `false` | `true` steps in once on mount (left sole, right sole, then the ground); `'loop'` walks, for a branded loading indicator. Both are still under reduced motion. |
+| title | `string` | no | - | Accessible name. |
+| decorative | `boolean` | no | `false` | Hide from assistive technology when a text label sits next to it. |
+
+Also accepts the props of `Omit<ComponentPropsWithRef<'svg'>, 'children'>`.
+
+```tsx
+import { PadaLogo } from 'pada-ds';
+
+<PadaLogo />
 ```
 
 ### PageHeader

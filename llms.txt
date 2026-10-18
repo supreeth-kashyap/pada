@@ -64,6 +64,7 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - Banner: title, subtitle?, visualIcon?, visualImage?, visualAlt?, button?, onButtonClick?, className?
 - BaseManageFilter: saveCopy?, onSaveFilter?, onClear?, onMenuClick?, className?
 - BaseToolbarMenu: title?, count?, showCount?, dropdown?, disabled?, state?, className?, onClick?
+- BrandLogo: name, size?, background?, tooltip?; extends React.HTMLAttributes<HTMLDivElement>
 - Breadcrumbs: items, maxItems?, renderLink?, label?; extends Omit<ComponentPropsWithRef<'nav'>, 'children'>
 - Button: children?, variant?, size?, leftIcon?, rightIcon?, split?, onSplitClick?, disabled?, loading?, ref?; extends React.ButtonHTMLAttributes<HTMLButtonElement>
 - Calendar: mode?, value?, defaultValue?, onValueChange?, month?, defaultMonth?, onMonthChange?, min?, max?, isDateUnavailable?, weekStartsOn?, locale?, disabled?, readOnly?; extends Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'onChange'>
@@ -162,6 +163,7 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - MoreFilter: label?, filters, value?, defaultValue?, onChange?, applyLabel?, clearLabel?, disabled?, className?
 - Notification: open, onOpenChange, title, subtitle?, visual?, position?, direction?, className?
 - NumberInput: label, description?, error?, required?, optional?, placeholder?, stepper?, size?, value?, defaultValue?, onValueChange?, min?, max?, step?, largeStep?, formatOptions?, locale?, disabled?, readOnly?, name?; extends Omit<Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'onChange'>, 'children' | 'inputId'>
+- PadaLogo: variant?, tone?, size?, toes?, animated?, title?, decorative?; extends Omit<ComponentPropsWithRef<'svg'>, 'children'>
 - PageHeader: breadcrumbs, onCommandClick?, commandLabel?, commandShortcut?, onAiClick?, aiLabel?, profileTrigger?, profileMenu?, className?
 - Pagination: page, totalPages, onPageChange, siblingCount?, boundaryCount?, label?; extends Omit<ComponentPropsWithRef<'nav'>, 'onChange'>
 - PasswordInput: label, description?, error?, optional?, strength?, defaultVisible?, size?; extends Omit<ComponentPropsWithRef<'input'>, 'type' | 'size'>

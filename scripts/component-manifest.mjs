@@ -258,6 +258,15 @@ function partDeclaration(checker, propertySymbol) {
   return valueSymbol ? resolveExport(checker, valueSymbol).valueDeclaration : undefined;
 }
 
+// `export const Logo = BrandLogo;`: the declaration of the component an alias points at.
+function aliasedDeclaration(checker, declaration) {
+  if (!ts.isVariableDeclaration(declaration)) return undefined;
+  const init = unwrap(declaration.initializer);
+  if (!init || !ts.isIdentifier(init)) return undefined;
+  const symbol = checker.getSymbolAtLocation(init);
+  return symbol ? resolveExport(checker, symbol).valueDeclaration : undefined;
+}
+
 /**
  * Builds the manifest object for every component exported from `src/index.ts`, including the
  * parts of compound components (`Dialog.Content`, `Popover.Trigger`, …) as `Name.Part` entries.
@@ -273,7 +282,14 @@ export function buildManifest() {
     const declaration = target.valueDeclaration;
     if (!declaration) continue;
 
-    const entry = componentEntry(checker, name, name, declaration);
+    let entry = componentEntry(checker, name, name, declaration);
+    if (!entry) {
+      // A renamed component kept under its old name: same props, its own (deprecation) note.
+      const aliased = aliasedDeclaration(checker, declaration);
+      entry = aliased && componentEntry(checker, name, name, aliased);
+      const deprecated = ts.getJSDocTags(declaration).find((tag) => tag.tagName.text === 'deprecated');
+      if (entry && deprecated) entry.description = `Deprecated: ${decodeEscapes(ts.getTextOfJSDocComment(deprecated.comment) ?? '')}`.trim();
+    }
     if (entry) components.push(entry);
 
     const type = checker.getTypeOfSymbolAtLocation(target, declaration);

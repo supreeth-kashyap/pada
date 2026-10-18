@@ -28,11 +28,13 @@ const FOUNDATION_ENTRIES: NavEntry[] = [
   { kind: 'foundation', slug: 'gradients', label: 'Gradients' },
   { kind: 'foundation', slug: 'animation', label: 'Animation' },
   { kind: 'foundation', slug: 'layout', label: 'Layout' },
+  { kind: 'foundation', slug: 'brand', label: 'Brand' },
 ];
 
 const COMPONENT_ENTRIES: NavEntry[] = [
   { kind: 'components', slug: 'accordion', label: 'Accordion' },
   { kind: 'components', slug: 'banner', label: 'Banner' },
+  { kind: 'components', slug: 'logo', label: 'Brand Logo' },
   { kind: 'components', slug: 'button', label: 'Button' },
   { kind: 'components', slug: 'calendar', label: 'Calendar' },
   { kind: 'components', slug: 'card', label: 'Card' },
@@ -52,7 +54,6 @@ const COMPONENT_ENTRIES: NavEntry[] = [
   { kind: 'components', slug: 'key-value', label: 'Key Value' },
   { kind: 'components', slug: 'list', label: 'List' },
   { kind: 'components', slug: 'loader', label: 'Loader' },
-  { kind: 'components', slug: 'logo', label: 'Logo' },
   { kind: 'components', slug: 'modal', label: 'Modal' },
   { kind: 'components', slug: 'notification', label: 'Notification' },
   { kind: 'components', slug: 'number-input', label: 'Number Input' },
