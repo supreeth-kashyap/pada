@@ -31,6 +31,7 @@ import {
   ToggleGroup,
   Tooltip,
   toast,
+  useTheme,
   type ThemeMode,
 } from '../../../index';
 import DemoPage from '../DemoPage';
@@ -53,7 +54,9 @@ function Panel({ title, children }: { title: string; children: ReactNode }) {
 }
 
 export default function PlaygroundDemo() {
-  const [theme, setTheme] = useState<ThemeMode>('light');
+  // Starts from the demo shell's theme; the controls below then override it for this page.
+  const shell = useTheme();
+  const [theme, setTheme] = useState<ThemeMode>(shell.resolvedTheme);
   const [accent, setAccent] = useState('indigo');
   const [hue, setHue] = useState(277);
   const [density, setDensity] = useState<'compact' | 'comfortable' | 'spacious'>('comfortable');

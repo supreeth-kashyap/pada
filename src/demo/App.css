@@ -1,5 +1,7 @@
+/* Demo shell. Colours come from the semantic tokens so the shell follows the theme. */
 .demo-shell {
-  background: #fff;
+  background: var(--pada-color-surface);
+  color: var(--pada-color-fg);
   min-height: 100vh;
   width: 100vw;
   padding: 40px 32px;
@@ -15,28 +17,35 @@
   padding: 0;
 }
 
+.demo-theme-toggle {
+  position: fixed;
+  inset-block-start: 16px;
+  inset-inline-end: 24px;
+  z-index: 10;
+}
+
 .demo-section-tag {
-  background: #ffffff;
-  border: 1px solid #e3e3e8;
+  background: var(--pada-color-surface);
+  border: 1px solid var(--pada-color-border);
   border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(24, 24, 32, 0.08);
-  color: #14151a;
+  box-shadow: var(--pada-shadow-sm);
+  color: var(--pada-color-fg);
   font-size: 18px;
   font-weight: 600;
   padding: 10px 16px;
 }
 
 .demo-panel {
-  background: #ffffff;
+  background: var(--pada-color-surface);
   border-radius: 18px;
-  box-shadow: 0 18px 40px rgba(20, 21, 26, 0.12);
+  box-shadow: var(--pada-shadow-xl);
   margin-top: 20px;
   padding: 48px 40px;
 }
 
 .demo-grid {
   align-items: center;
-  border: 2px dashed #9d7bff;
+  border: 2px dashed var(--pada-color-accent-border);
   border-radius: 20px;
   display: grid;
   gap: 28px 32px;
@@ -46,14 +55,14 @@
 }
 
 .demo-col-label {
-  color: #8f62ff;
+  color: var(--pada-color-accent-fg);
   font-size: 18px;
   font-weight: 600;
   text-align: center;
 }
 
 .demo-row-label {
-  color: #8f62ff;
+  color: var(--pada-color-accent-fg);
   font-size: 18px;
   font-weight: 600;
   text-align: right;

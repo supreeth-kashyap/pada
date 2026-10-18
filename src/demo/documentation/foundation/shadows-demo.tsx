@@ -56,18 +56,18 @@ export default function ShadowsDemo() {
               >
                 <div
                   style={{
-                    backgroundColor: 'var(--color-end-white)',
+                    backgroundColor: 'var(--pada-color-surface)',
                     borderRadius: 12,
                     boxShadow: `var(${token})`,
                     height: 96,
                     width: '100%',
                   }}
                 />
-                <code style={{ color: 'var(--color-stone-500)', fontSize: 11 }}>{token}</code>
+                <code style={{ color: 'var(--pada-color-fg-muted)', fontSize: 11 }}>{token}</code>
                 <span style={{ fontSize: 12 }}>{use}</span>
                 <span
                   style={{
-                    color: 'var(--color-stone-500)',
+                    color: 'var(--pada-color-fg-muted)',
                     fontSize: 11,
                     textTransform: 'uppercase',
                     letterSpacing: '0.06em',

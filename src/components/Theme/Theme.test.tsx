@@ -42,6 +42,20 @@ describe('ThemeProvider and ThemeToggle', () => {
     expect(window.localStorage.getItem('pada-theme')).toBe('dark');
   });
 
+  it('gives each toggle its own icon mask', () => {
+    const { container } = render(
+      <ThemeProvider defaultTheme="light">
+        <ThemeToggle />
+        <ThemeToggle />
+      </ThemeProvider>,
+    );
+    const ids = [...container.querySelectorAll('mask')].map((mask) => mask.id);
+    expect(new Set(ids).size).toBe(2);
+    container.querySelectorAll('.theme-toggle').forEach((toggle) => {
+      expect(toggle.querySelector('.theme-toggle-disc')).toHaveAttribute('mask', `url(#${toggle.querySelector('mask')!.id})`);
+    });
+  });
+
   it('system follows the OS and leaves data-theme unset', () => {
     render(
       <ThemeProvider target="root">

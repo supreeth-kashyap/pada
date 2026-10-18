@@ -41,6 +41,8 @@
 
 /* Child elements: the icon morphs between sun and moon. */
 .theme-toggle-icon {
+  /* The sun looks the same a quarter-turn round, so the morph to the moon can spin back to 0. */
+  rotate: 90deg;
   transition: rotate var(--pada-duration-slow) var(--pada-ease-emphasized);
 }
 
@@ -63,7 +65,7 @@
 }
 
 .theme-toggle[data-theme-current="dark"] .theme-toggle-icon {
-  rotate: -40deg;
+  rotate: 0deg;
 }
 
 .theme-toggle[data-theme-current="dark"] .theme-toggle-disc {

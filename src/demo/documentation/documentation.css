@@ -27,7 +27,7 @@
 }
 
 .demo-page__header {
-  border-bottom: 1px solid var(--color-stone-200, #e7e5e4);
+  border-bottom: 1px solid var(--pada-color-border);
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -35,7 +35,7 @@
 }
 
 .demo-page__kind {
-  color: var(--color-stone-500, #78716c);
+  color: var(--pada-color-fg-subtle);
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.08em;
@@ -44,7 +44,7 @@
 }
 
 .demo-page__title {
-  color: var(--color-slate-900, #0f172a);
+  color: var(--pada-color-fg);
   font-size: 32px;
   font-weight: 600;
   letter-spacing: -0.02em;
@@ -53,7 +53,7 @@
 }
 
 .demo-page__body {
-  color: var(--color-slate-700, #334155);
+  color: var(--pada-color-fg-muted);
   display: flex;
   flex-direction: column;
   font-size: 14px;
@@ -66,7 +66,7 @@
 }
 
 .demo-page__section {
-  border-top: 1px solid var(--color-stone-200, #e7e5e4);
+  border-top: 1px solid var(--pada-color-border);
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -79,7 +79,7 @@
 }
 
 .demo-page__section-title {
-  color: var(--color-slate-900, #0f172a);
+  color: var(--pada-color-fg);
   font-size: 20px;
   font-weight: 600;
   letter-spacing: -0.01em;
@@ -87,7 +87,7 @@
 }
 
 .demo-page__section-body {
-  color: var(--color-slate-700, #334155);
+  color: var(--pada-color-fg-muted);
   display: flex;
   flex-direction: column;
   font-size: 14px;
@@ -101,8 +101,8 @@
 
 /* Showcase wrapper for the "Design" section — gives variants a clear, padded canvas. */
 .demo-page__showcase {
-  background: var(--color-stone-50, #fafaf9);
-  border: 1px solid var(--color-stone-200, #e7e5e4);
+  background: var(--pada-color-surface-sunken);
+  border: 1px solid var(--pada-color-border);
   border-radius: 12px;
   display: flex;
   flex-wrap: wrap;
@@ -111,10 +111,10 @@
 }
 
 .demo-page__placeholder {
-  background: var(--color-stone-50, #fafaf9);
-  border: 1px dashed var(--color-stone-300, #d6d3d1);
+  background: var(--pada-color-surface-sunken);
+  border: 1px dashed var(--pada-color-border-strong);
   border-radius: 12px;
-  color: var(--color-stone-500, #78716c);
+  color: var(--pada-color-fg-subtle);
   font-size: 13px;
   padding: 32px;
   text-align: center;

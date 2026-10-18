@@ -34,7 +34,7 @@ const resolvePage = (kind: 'foundation' | 'components', slug: string): Component
 const NotFound = () => (
   <section style={{ padding: '40px', flex: 1 }}>
     <h1 style={{ margin: 0 }}>Not found</h1>
-    <p style={{ color: '#6b7280', marginTop: 16 }}>
+    <p style={{ color: 'var(--pada-color-fg-muted)', marginTop: 16 }}>
       No demo page is registered for this route.
     </p>
   </section>

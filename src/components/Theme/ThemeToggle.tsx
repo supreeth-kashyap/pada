@@ -1,3 +1,4 @@
+import { useId } from 'react';
 import { flushSync } from 'react-dom';
 import { useTheme } from './themeContext';
 import './Theme.css';
@@ -19,6 +20,8 @@ interface ViewTransitionDocument {
 export function ThemeToggle({ className, size = 'md' }: ThemeToggleProps) {
   const { resolvedTheme, setTheme } = useTheme();
   const next = resolvedTheme === 'dark' ? 'light' : 'dark';
+  // Unique per toggle: a shared id would make every toggle on the page use the first one's mask.
+  const maskId = `pada-theme-toggle-mask-${useId().replace(/:/g, '')}`;
 
   const toggle = (event: React.MouseEvent<HTMLButtonElement>) => {
     const doc = document as Document & ViewTransitionDocument;
@@ -47,11 +50,11 @@ export function ThemeToggle({ className, size = 'md' }: ThemeToggleProps) {
     >
       <svg className="theme-toggle-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
         {/* Sun: a disc and rays. In dark mode the rays shrink away and a bite turns the disc into a moon. */}
-        <mask id="pada-theme-toggle-mask">
+        <mask id={maskId}>
           <rect width="24" height="24" fill="white" />
           <circle className="theme-toggle-bite" cx="18" cy="6" r="6" fill="black" />
         </mask>
-        <circle className="theme-toggle-disc" cx="12" cy="12" r="5" fill="currentColor" mask="url(#pada-theme-toggle-mask)" />
+        <circle className="theme-toggle-disc" cx="12" cy="12" r="5" fill="currentColor" mask={`url(#${maskId})`} />
         <g className="theme-toggle-rays" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
           <path d="M12 1.5v2M12 20.5v2M1.5 12h2M20.5 12h2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M4.6 19.4 6 18M18 6l1.4-1.4" />
         </g>

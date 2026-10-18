@@ -50,7 +50,7 @@ export default function ButtonDemo() {
               <div key={variant} style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
                 <span
                   style={{
-                    color: 'var(--color-stone-500)',
+                    color: 'var(--pada-color-fg-muted)',
                     fontSize: 11,
                     fontWeight: 600,
                     letterSpacing: '0.06em',
