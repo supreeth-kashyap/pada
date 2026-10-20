@@ -1,0 +1,32 @@
+name: Publish Storybook
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: chromatic-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  chromatic:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Chromatic walks git history to find the baseline build.
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # Builds Storybook via the build-storybook script and publishes it.
+      # Changes landing on main become the new accepted baseline.
+      - run: npx chromatic --auto-accept-changes --exit-zero-on-changes
+        env:
+          CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}

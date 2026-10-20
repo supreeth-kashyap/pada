@@ -250,4 +250,6 @@ npm run build-storybook    # static build in storybook-static/
 npm run chromatic          # publish to Chromatic (needs CHROMATIC_PROJECT_TOKEN)
 ```
 
+Every push to `main` (including merged PRs) publishes Storybook to Chromatic through `.github/workflows/chromatic.yml`, and the changes become the new accepted baseline. The workflow reads the `CHROMATIC_PROJECT_TOKEN` repository secret.
+
 The toolbar switches every `ThemeProvider` axis (theme, accent, neutral, density, radius, contrast), and the Accessibility panel runs axe-core against the current story.
