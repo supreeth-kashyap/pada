@@ -10,9 +10,9 @@ describe('PadaLogo', () => {
     render(<PadaLogo size="lg" />);
     const logo = screen.getByRole('img', { name: 'Pada' });
     expect(logo).toHaveAttribute('height', '48');
-    expect(logo).toHaveAttribute('width', String((48 * 110) / 32));
-    // Toes are drawn from 48px up.
-    expect(logo.querySelectorAll('circle[r="1.5"]')).toHaveLength(2);
+    expect(logo).toHaveAttribute('width', String((48 * 146.2) / 32.875));
+    expect(logo.querySelectorAll('.pada-logo-half')).toHaveLength(2);
+    expect(logo.querySelector('.pada-logo-wordmark')).toHaveAttribute('transform', 'translate(36.7 8.5)');
     expect(await axeViolations()).toEqual([]);
   });
 
@@ -25,7 +25,7 @@ describe('PadaLogo', () => {
     );
     const [decorative, loader] = container.querySelectorAll('svg');
     expect(decorative).toHaveAttribute('aria-hidden', 'true');
-    expect(decorative.querySelectorAll('circle')).toHaveLength(0);
+    expect(decorative.querySelector('.pada-logo-wordmark')).toBeNull();
     expect(screen.getByRole('status', { name: 'Loading' })).toBe(loader);
     expect(loader).toHaveAttribute('data-animated', 'loop');
   });

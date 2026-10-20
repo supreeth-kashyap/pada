@@ -185,7 +185,7 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - MoreFilter: label?, filters, value?, defaultValue?, onChange?, applyLabel?, clearLabel?, disabled?, className?
 - Notification (deprecated): open, onOpenChange, title, subtitle?, visual?, position?, direction?, className?
 - NumberInput: label, description?, error?, required?, optional?, placeholder?, stepper?, size?, value?, defaultValue?, onValueChange?, min?, max?, step?, largeStep?, formatOptions?, locale?, disabled?, readOnly?, name?; extends Omit<Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'onChange'>, 'children' | 'inputId'>
-- PadaLogo: variant?, tone?, size?, toes?, animated?, title?, decorative?; extends Omit<ComponentPropsWithRef<'svg'>, 'children'>
+- PadaLogo: variant?, tone?, size?, animated?, title?, decorative?; extends Omit<ComponentPropsWithRef<'svg'>, 'children'>
 - PageHeader: breadcrumbs, onCommandClick?, commandLabel?, commandShortcut?, onAiClick?, aiLabel?, profileTrigger?, profileMenu?, className?
 - Pagination: page, totalPages, onPageChange, siblingCount?, boundaryCount?, label?; extends Omit<ComponentPropsWithRef<'nav'>, 'onChange'>
 - PasswordInput: label, description?, error?, optional?, strength?, defaultVisible?, size?; extends Omit<ComponentPropsWithRef<'input'>, 'type' | 'size'>

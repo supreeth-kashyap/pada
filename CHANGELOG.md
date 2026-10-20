@@ -62,15 +62,15 @@
 - **Demo pages for wave 1.** Every wave 1 component now has a page with Purpose, Design, Developer and Accessibility sections: Alert, Alert Dialog, Autocomplete, Avatar, Badge, Breadcrumbs, Command Palette, Dialog, Drawer, Dropdown Menu, Empty State, Field, Icon Button, Kbd, Link, Pagination, Separator, Skeleton, Spinner, Stack, Toast, and Toggle with Toggle Group. A new Foundation → Theme page shows nested `ThemeProvider`s and lists every theme axis.
 - **Fixed:** expanding a collapsed `Breadcrumbs` trail no longer drops keyboard focus. Focus moves to the first link it reveals.
 - **Brand (phase 7).**
-  - New `PadaLogo` draws the "Twin Soles" mark (two soles standing on a shared ground line; *pāda* is Sanskrit for foot) as inline SVG:
-    - Variants: `lockup` (mark and the geometric "pada" wordmark), `mark` and `wordmark`.
-    - Tones: `color` (amber, plus the accent colour, so it follows `data-accent`), `accent` and `mono` (`currentColor`).
-    - Sizes run from `sm` to `xl` or take a pixel height. Toes are drawn from 48px up.
-    - `animated` steps in once (left sole, right sole, then the ground draws out); `animated="loop"` walks as a branded loader (`role="status"`). Both use the motion tokens.
+  - New `PadaLogo` draws the Pada mark (two mirrored geometric halves) and the "Pada . design" wordmark as inline SVG:
+    - Variants: `lockup` (mark and wordmark), `mark` and `wordmark`.
+    - Tones: `color` (amber, plus the accent colour, so it follows `data-accent`; stone wordmark), `accent` and `mono` (`currentColor`).
+    - Sizes run from `sm` to `xl` or take a pixel height.
+    - `animated` steps in once (left half, right half, then the wordmark); `animated="loop"` lifts the halves in turn as a branded loader (`role="status"`). Both use the motion tokens.
     - It is an image named "Pada" unless `decorative`.
   - `Logo` (third-party brand logos) is renamed `BrandLogo`; `Logo` and `LogoProps` remain as deprecated aliases until 3.0. The manifest lists aliases with their deprecation note.
-  - `SidebarLogo` with no `src`, `name` or `title` now shows the `PadaLogo` lockup instead of the old mark and grey "Pada . design" images (removed).
-  - The demo uses the new mark as its favicon (`public/favicon.svg`, adapting to dark mode) and the page title "Pada Design System" (was `vite.svg` and "myapp"). It has a new Foundation → Brand page.
+  - `SidebarLogo` with no `src`, `name` or `title` now shows the `PadaLogo` lockup instead of the old mark and wordmark images (removed).
+  - The demo uses the mark as its favicon (`public/favicon.svg`) and the page title "Pada Design System" (was `vite.svg` and "myapp"). It has a new Foundation → Brand page.
 - **Layout primitives.** `Grid` lays out a fixed number of `columns`, or as many as fit with `minItemWidth`, using token gaps. `Container` centres content at a breakpoint width (`sm` to `2xl`, or `full`), with gutters that grow on wider screens. `AspectRatio` keeps media at a fixed shape. The demo has a new Foundation → Layout page.
 - **New components (wave 2): form inputs.**
   - `RangeSlider` has two thumbs for a low and high value:

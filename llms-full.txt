@@ -3118,15 +3118,14 @@ import { NumberInput } from 'pada-ds';
 
 `import { PadaLogo } from 'pada-ds';`
 
-The Pada logo: the "Twin Soles" mark, the wordmark, or both, as inline SVG.
+The Pada logo: the geometric mark, the "Pada . design" wordmark, or both, as inline SVG.
 
 | Prop | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
 | variant | `'lockup' \| 'mark' \| 'wordmark'` | no | `'lockup'` | `lockup` (mark and wordmark), `mark` alone, or `wordmark` alone. |
-| tone | `'color' \| 'accent' \| 'mono'` | no | `'color'` | `color`: amber left sole, accent right sole (it follows `data-accent`). `accent`: both soles in the accent. `mono`: everything in `currentColor`. |
+| tone | `'color' \| 'accent' \| 'mono'` | no | `'color'` | `color`: amber left half, accent right half (it follows `data-accent`), stone wordmark. `accent`: both halves in the accent. `mono`: everything in `currentColor`. |
 | size | `keyof typeof SIZES \| number` | no | `'md'` | Height in px, or a preset. |
-| toes | `boolean` | no | - | Draw a toe above each sole. Defaults to on from 48px up, where it stays legible. |
-| animated | `boolean \| 'loop'` | no | `false` | `true` steps in once on mount (left sole, right sole, then the ground); `'loop'` walks, for a branded loading indicator. Both are still under reduced motion. |
+| animated | `boolean \| 'loop'` | no | `false` | `true` steps in once on mount (left half, right half, then the wordmark); `'loop'` lifts the halves in turn, for a branded loading indicator. Both are still under reduced motion. |
 | title | `string` | no | `'Pada' ('Loading' when looping)` | Accessible name. |
 | decorative | `boolean` | no | `false` | Hide from assistive technology when a text label sits next to it. |
 
