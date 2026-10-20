@@ -16,12 +16,12 @@ export default function BrandDemo() {
       purpose={
         <p>
           <em>Pāda</em> (पाद) is Sanskrit for <em>foot</em>: the part that carries the weight and meets the ground. In verse, a pāda is also one measured
-          quarter of a whole. The mark, "Twin Soles", is a pair of feet standing on a shared ground line; the space between them rises like a pillar.
+          quarter of a whole. The mark is two mirrored geometric halves, amber and the accent colour, set side by side; the wordmark reads "Pada . design".
         </p>
       }
       design={
         <>
-          <p>Lockup, mark and wordmark, in colour, accent and mono. The right sole follows the accent, so it changes with <code>data-accent</code>.</p>
+          <p>Lockup, mark and wordmark, in colour, accent and mono. The right half follows the accent, so it changes with <code>data-accent</code>.</p>
           <div className="demo-page__showcase" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: 28 }}>
             <div style={{ display: 'flex', gap: 40, alignItems: 'center', flexWrap: 'wrap' }}>
               <PadaLogo size="xl" />
@@ -44,7 +44,7 @@ export default function BrandDemo() {
               ))}
             </div>
           </div>
-          <p>Motion: the mark steps in once (left sole, right sole, then the ground), and walks as a loader. Both are still under reduced motion.</p>
+          <p>Motion: the mark steps in once (left half, right half, then the wordmark), and its halves lift in turn as a loader. Both are still under reduced motion.</p>
           <div className="demo-page__showcase" style={{ alignItems: 'center', gap: 40 }}>
             <PadaLogo key={replay} size="xl" animated />
             <Button variant="secondary" size="sm" onClick={() => setReplay((count) => count + 1)}>
@@ -72,7 +72,7 @@ export default function BrandDemo() {
       accessibility={
         <ul style={list}>
           <li>The logo is an image named "Pada" (or your <code>title</code>); pass <code>decorative</code> when a visible label sits next to it. The looping loader is a <code>status</code> named "Loading".</li>
-          <li>Rules: keep clear space of one sole's width around the mark; the mark goes down to 16px and the lockup to 64px wide. Don't rotate it, recolour it outside the palette, or add effects.</li>
+          <li>Rules: keep clear space of one half's width around the mark; the mark goes down to 16px and the lockup to 64px wide. Don't rotate it, recolour it outside the palette, or add effects.</li>
         </ul>
       }
     />

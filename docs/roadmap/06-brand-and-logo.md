@@ -85,26 +85,27 @@ These are briefs for a designer (or a first SVG pass), not finished art.
 
 ## 8. As built (React)
 
-**`PadaLogo`** (`src/components/PadaLogo`) implements concept A in code: two mirrored soles on a shared ground bar.
-- Variants: `mark`, `wordmark` and `lockup`.
+**Decision (October 2026): the original geometric mark stays.** Concept A ("Twin Soles") was built and then reverted. `PadaLogo` (`src/components/PadaLogo`) draws the original mark from the Figma file: two mirrored geometric halves, amber on the left and the accent on the right, with the "Pada . design" wordmark in stone.
+- Variants: `mark`, `wordmark` and `lockup` (wordmark centred to the right of the mark).
 - `tone`:
-  - `color`: amber left sole, accent right sole, so it follows `data-accent`.
-  - `accent`.
+  - `color`: amber left half, accent right half (so it follows `data-accent`), stone wordmark.
+  - `accent`: both halves in the accent.
   - `mono` (`currentColor`).
-- `size`: `sm` to `xl`, or a pixel height. Toes appear from 48px up.
-- `animated`: steps in once; `animated="loop"` is the branded loader, with `role="status"`.
+- `size`: `sm` to `xl`, or a pixel height.
+- `animated`: steps in once (left half, right half, then the wordmark); `animated="loop"` lifts the halves in turn as the branded loader, with `role="status"`.
 - It is an image named "Pada" unless `decorative`.
-- The wordmark is drawn with strokes, so it needs no font.
+- The wordmark is outlined paths, so it needs no font.
+- `public/pada-logo.svg` is a static lockup for READMEs and Storybook's sidebar.
 
 Product changes:
 - `Logo` is now `BrandLogo`, with the old name kept as a deprecated alias.
 - `SidebarLogo` defaults to the lockup.
-- The demo has `public/favicon.svg`, whose ground bar adapts to dark mode, the title "Pada Design System" and a Foundation → Brand page.
+- The demo has `public/favicon.svg` (the mark), the title "Pada Design System" and a Foundation → Brand page.
 
 **Not done yet:**
 - PNG and ICO exports and maskable icons.
 - The social card.
 - The stacked lockup.
-- The पाद heritage mark.
 - The rules page and Figma.
-- The Angular `PadaLogo`.
+
+The Angular `PadaLogo` (`ds-pada-logo`) draws the same mark, with the same inputs, and is the default in `ds-sidebar-logo`.

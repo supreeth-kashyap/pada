@@ -3,7 +3,7 @@
   /* Component tokens. Tones only reassign these. */
   --pada-logo-left: var(--pada-color-amber-500);
   --pada-logo-right: var(--pada-color-accent-solid);
-  --pada-logo-ink: var(--pada-color-fg);
+  --pada-logo-ink: var(--pada-color-stone-400);
 
   display: inline-block;
   flex-shrink: 0;
@@ -23,55 +23,42 @@
 }
 
 /* Child elements */
-.pada-logo-sole[data-side="left"] {
+.pada-logo-half[data-side="left"] {
   fill: var(--pada-logo-left);
 }
 
-.pada-logo-sole[data-side="right"] {
+.pada-logo-half[data-side="right"] {
   fill: var(--pada-logo-right);
 }
 
-.pada-logo-ground {
+.pada-logo-wordmark {
   fill: var(--pada-logo-ink);
 }
 
-.pada-logo-wordmark {
-  fill: none;
-  stroke: var(--pada-logo-ink);
-  stroke-width: 2.6;
-  stroke-linecap: round;
-}
-
-.pada-logo-sole,
-.pada-logo-ground {
+.pada-logo-half {
   transform-box: fill-box;
   transform-origin: 50% 100%;
 }
 
-/* "Steps in": the left sole drops onto the ground, then the right, then the ground draws out. */
-.pada-logo[data-animated="enter"] .pada-logo-sole {
+/* "Steps in": the left half drops into place, then the right, then the wordmark slides in. */
+.pada-logo[data-animated="enter"] .pada-logo-half {
   animation: pada-logo-step calc(420ms * var(--pada-motion-scale)) var(--pada-ease-emphasized) both;
 }
 
-.pada-logo[data-animated="enter"] .pada-logo-sole[data-side="right"] {
+.pada-logo[data-animated="enter"] .pada-logo-half[data-side="right"] {
   animation-delay: calc(160ms * var(--pada-motion-scale));
 }
 
-.pada-logo[data-animated="enter"] .pada-logo-ground {
-  transform-origin: 50% 50%;
-  animation: pada-logo-ground calc(360ms * var(--pada-motion-scale)) var(--pada-ease-emphasized) calc(420ms * var(--pada-motion-scale)) both;
-}
-
 .pada-logo[data-animated="enter"] .pada-logo-wordmark {
-  animation: pada-logo-fade calc(320ms * var(--pada-motion-scale)) var(--pada-ease-enter) calc(560ms * var(--pada-motion-scale)) both;
+  animation: pada-logo-fade calc(320ms * var(--pada-motion-scale)) var(--pada-ease-enter) calc(480ms * var(--pada-motion-scale)) both;
 }
 
-/* Loader: the soles take turns lifting. */
-.pada-logo[data-animated="loop"] .pada-logo-sole {
+/* Loader: the halves take turns lifting. */
+.pada-logo[data-animated="loop"] .pada-logo-half {
   animation: pada-logo-walk calc(1100ms * var(--pada-motion-scale)) var(--pada-ease-standard) infinite;
 }
 
-.pada-logo[data-animated="loop"] .pada-logo-sole[data-side="right"] {
+.pada-logo[data-animated="loop"] .pada-logo-half[data-side="right"] {
   animation-delay: calc(550ms * var(--pada-motion-scale));
 }
 
@@ -86,12 +73,6 @@
   }
   to {
     translate: 0 0;
-  }
-}
-
-@keyframes pada-logo-ground {
-  from {
-    scale: 0 1;
   }
 }
 
