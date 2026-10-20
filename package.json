@@ -80,7 +80,10 @@
     "check:tokens": "node ./scripts/build-tokens.mjs --check && node ./scripts/check-tokens.mjs",
     "smoke:consumer": "node ./scripts/smoke-consumer.mjs",
     "prepublishOnly": "npm run build",
-    "tokens:sync": "node ./scripts/sync-tokens-angular.mjs"
+    "tokens:sync": "node ./scripts/sync-tokens-angular.mjs",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "chromatic": "chromatic --exit-zero-on-changes"
   },
   "dependencies": {
     "@floating-ui/react-dom": "^2.1.9",
@@ -93,6 +96,9 @@
   "devDependencies": {
     "@eslint/js": "^9.36.0",
     "@playwright/test": "^1.56.1",
+    "@storybook/addon-a11y": "^10.6.2",
+    "@storybook/addon-docs": "^10.6.2",
+    "@storybook/react-vite": "^10.6.2",
     "@testing-library/dom": "^10.4.2",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.3",
@@ -103,12 +109,15 @@
     "@types/react-dom": "^19.1.9",
     "@vitejs/plugin-react": "^5.0.4",
     "axe-core": "^4.14.0",
+    "chromatic": "^18.13.0",
     "eslint": "^9.36.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.22",
+    "eslint-plugin-storybook": "^10.6.2",
     "globals": "^16.4.0",
     "jsdom": "^26.1.0",
     "react-router-dom": "^7.15.1",
+    "storybook": "^10.6.2",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.45.0",
     "vite": "^7.1.7",

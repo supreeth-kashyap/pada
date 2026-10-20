@@ -239,3 +239,15 @@ const App = () => (
   </div>
 );
 ```
+
+## Storybook
+
+Stories live next to each component (`src/components/<Name>/<Name>.stories.tsx`) and are left out of the published package.
+
+```bash
+npm run storybook          # dev server on http://localhost:6006
+npm run build-storybook    # static build in storybook-static/
+npm run chromatic          # publish to Chromatic (needs CHROMATIC_PROJECT_TOKEN)
+```
+
+The toolbar switches every `ThemeProvider` axis (theme, accent, neutral, density, radius, contrast), and the Accessibility panel runs axe-core against the current story.
