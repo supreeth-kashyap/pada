@@ -1,6 +1,8 @@
 import React from 'react';
 import './Button.css';
 import { Icon } from '../Icon';
+import { SplitButtonRoot } from '../SplitButton/SplitButton';
+import { useButtonGroup } from './ButtonGroupContext';
 import { Splitter } from './Splitter/Splitter';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'destructive';
@@ -8,12 +10,15 @@ export type ButtonSize = 'sm' | 'md' | 'lg';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children?: React.ReactNode;
+  /** Visual emphasis. Inside a `ButtonGroup` or `SplitButton.Root`, defaults to the group's. @default 'primary' */
   variant?: ButtonVariant;
-  /** Height and padding: sm 28px, md 32px, lg 40px (scaled by density). */
+  /** Height and padding: sm 28px, md 32px, lg 40px (scaled by density). Inside a group, defaults to the group's. @default 'md' */
   size?: ButtonSize;
   leftIcon?: string;
   rightIcon?: string;
+  /** @deprecated Compose `SplitButton.Root` with a `Button` and a `SplitButton.Splitter` instead. Removed in 3.0. */
   split?: boolean;
+  /** @deprecated Use `SplitButton.Splitter`'s `onClick`. Removed in 3.0. */
   onSplitClick?: () => void;
   disabled?: boolean;
   /**
@@ -26,8 +31,8 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 
 export const Button = ({
   children,
-  variant = 'primary',
-  size = 'md',
+  variant: variantProp,
+  size: sizeProp,
   loading = false,
   type = 'button',
   onClick,
@@ -37,8 +42,12 @@ export const Button = ({
   onSplitClick,
   disabled = false,
   className = '',
-  ...props 
+  ...props
 }: ButtonProps) => {
+  const group = useButtonGroup();
+  const variant = variantProp ?? group?.variant ?? 'primary';
+  const size = sizeProp ?? group?.size ?? 'md';
+
   if (leftIcon && rightIcon) {
     console.warn('Button: use either leftIcon or rightIcon, not both.');
   }
@@ -46,11 +55,13 @@ export const Button = ({
   const resolvedLeftIcon = leftIcon;
   const resolvedRightIcon = leftIcon ? undefined : rightIcon;
 
+  const canSplit = split && (variant === 'primary' || variant === 'secondary');
+
   const buttonClasses = [
     'button',
     `button--${variant}`,
-    split && (variant === 'primary' || variant === 'secondary') && 'button--split-main',
-    className
+    canSplit && 'button--split-main',
+    !canSplit && className
   ].filter(Boolean).join(' ');
 
   const iconSize = 16;
@@ -82,38 +93,29 @@ export const Button = ({
   };
 
   const renderRightVisual = () => {
-    const canSplit = split && (variant === 'primary' || variant === 'secondary');
     if (resolvedRightIcon && !canSplit) {
       return <Icon name={resolvedRightIcon} size={iconSize} className="button__icon" data-position="end" aria-hidden="true" />;
     }
     return null;
   };
 
-  const canSplit = split && (variant === 'primary' || variant === 'secondary');
-
+  // 1.x API: kept as a thin wrapper over SplitButton.
   if (canSplit) {
     return (
-      <div className={`button-split ${className}`}>
-        <button
-          className={['button', `button--${variant}`, 'button--split-main'].join(' ')}
-          disabled={disabled}
-          {...stateProps}
-          {...props}
-        >
+      <SplitButtonRoot variant={variant} size={size} className={['button-split', className].filter(Boolean).join(' ')}>
+        <button className={buttonClasses} disabled={disabled} {...stateProps} {...props}>
           {renderLeftVisual()}
           {label}
           {spinner}
         </button>
         <Splitter
-          variant={variant}
           onClick={(event) => {
             event.stopPropagation();
             onSplitClick?.();
           }}
           disabled={disabled}
-          aria-label="More options"
         />
-      </div>
+      </SplitButtonRoot>
     );
   }
 

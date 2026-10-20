@@ -110,7 +110,7 @@ Holds which items are open: `type="single"` (optionally `collapsible`) or `type=
 | value | `string` | no | - | Controlled open item (`''` for none). |
 | defaultValue | `string` | no | - | Initially open item when uncontrolled. |
 | onValueChange | `(value: string) => void` | no | - | Called with the newly open item (`''` when it closed). |
-| collapsible | `boolean` | no | - | Let the open item close again, leaving none open. |
+| collapsible | `boolean` | no | `false` | Let the open item close again, leaving none open. |
 | disabled | `boolean` | no | - | Disables every item. |
 | orientation | `Orientation` | no | - | Arrow keys follow the orientation: Up/Down when vertical, Left/Right when horizontal. |
 | dir | `'ltr' \| 'rtl'` | no | - | Reading direction, for horizontal arrow keys. |
@@ -209,8 +209,8 @@ The confirming action. Closes the dialog after `onClick`, unless the handler pre
 | Prop | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
 | children | `React.ReactNode` | no | - | - |
-| variant | `ButtonVariant` | no | `'primary'` | - |
-| size | `ButtonSize` | no | - | Height and padding: sm 28px, md 32px, lg 40px (scaled by density). |
+| variant | `ButtonVariant` | no | `'primary'` | Visual emphasis. Inside a `ButtonGroup` or `SplitButton.Root`, defaults to the group's. |
+| size | `ButtonSize` | no | `'md'` | Height and padding: sm 28px, md 32px, lg 40px (scaled by density). Inside a group, defaults to the group's. |
 | leftIcon | `string` | no | - | - |
 | rightIcon | `string` | no | - | - |
 | split | `boolean` | no | - | - |
@@ -236,8 +236,8 @@ The safe choice. Closes the dialog.
 | Prop | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
 | children | `React.ReactNode` | no | - | - |
-| variant | `ButtonVariant` | no | `'secondary'` | - |
-| size | `ButtonSize` | no | - | Height and padding: sm 28px, md 32px, lg 40px (scaled by density). |
+| variant | `ButtonVariant` | no | `'secondary'` | Visual emphasis. Inside a `ButtonGroup` or `SplitButton.Root`, defaults to the group's. |
+| size | `ButtonSize` | no | `'md'` | Height and padding: sm 28px, md 32px, lg 40px (scaled by density). Inside a group, defaults to the group's. |
 | leftIcon | `string` | no | - | - |
 | rightIcon | `string` | no | - | - |
 | split | `boolean` | no | - | - |
@@ -610,8 +610,8 @@ import { Breadcrumbs } from 'pada-ds';
 | Prop | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
 | children | `React.ReactNode` | no | - | - |
-| variant | `ButtonVariant` | no | `'primary'` | - |
-| size | `ButtonSize` | no | `'md'` | Height and padding: sm 28px, md 32px, lg 40px (scaled by density). |
+| variant | `ButtonVariant` | no | `'primary'` | Visual emphasis. Inside a `ButtonGroup` or `SplitButton.Root`, defaults to the group's. |
+| size | `ButtonSize` | no | `'md'` | Height and padding: sm 28px, md 32px, lg 40px (scaled by density). Inside a group, defaults to the group's. |
 | leftIcon | `string` | no | - | - |
 | rightIcon | `string` | no | - | - |
 | split | `boolean` | no | `false` | - |
@@ -626,6 +626,28 @@ Also accepts the props of `React.ButtonHTMLAttributes<HTMLButtonElement>`.
 import { Button } from 'pada-ds';
 
 <Button />
+```
+
+### ButtonGroup
+
+`import { ButtonGroup } from 'pada-ds';`
+
+A row (or column) of related buttons, `role="group"` and named by `label`. Buttons without their own `size` / `variant` take the group's. ```tsx <ButtonGroup label="Text alignment" variant="secondary" size="sm" attached> <Button leftIcon="align_left">Left</Button> <Button leftIcon="align_center">Center</Button> <Button leftIcon="align_right">Right</Button> </ButtonGroup> ``` Every button keeps its own tab stop: a group of actions is not a toolbar. For one tab stop and arrow keys, or pressed states, use `ToggleGroup`.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| label | `string` | no | - | Accessible name of the group, e.g. "Text alignment". |
+| size | `ButtonSize` | no | - | Size for the buttons that set none. |
+| variant | `ButtonVariant` | no | - | Variant for the buttons that set none. |
+| orientation | `'horizontal' \| 'vertical'` | no | `'horizontal'` | Lays the buttons out in a row or a column. |
+| attached | `boolean` | no | `false` | Joins the buttons into one segmented control: shared borders, outer corners only. |
+
+Also accepts the props of `ComponentPropsWithRef<'div'>`.
+
+```tsx
+import { ButtonGroup } from 'pada-ds';
+
+<ButtonGroup />
 ```
 
 ### Calendar
@@ -646,8 +668,10 @@ A month calendar for picking a day or a range (WAI-ARIA APG date grid). Arrow ke
 | min | `Date` | no | - | Earliest selectable day. |
 | max | `Date` | no | - | Latest selectable day. |
 | isDateUnavailable | `(date: Date) => boolean` | no | - | Marks other days unavailable (weekends, holidays, booked dates). |
-| weekStartsOn | `number` | no | - | First day of the week: 0 = Sunday … 6 = Saturday. |
+| weekStartsOn | `number` | no | `0` | First day of the week: 0 = Sunday … 6 = Saturday. |
 | locale | `string` | no | - | Locale for month and day names. Defaults to the browser's. |
+| numberOfMonths | `number` | no | `1` | Months shown side by side. Render a `Calendar.Heading` and a `Calendar.Grid` per month with `monthOffset` 0 … n-1; keyboard focus moves across them. |
+| today | `Date` | no | - | The day marked as today. Defaults to the current date. |
 | disabled | `boolean` | no | - | - |
 | readOnly | `boolean` | no | - | - |
 
@@ -670,6 +694,7 @@ The day grid.
 | renderDay | `(state: CalendarDayState) => ReactNode` | no | - | Content of each day button. Defaults to the day of the month. |
 | hideOutsideDays | `boolean` | no | - | Hide days of the previous and next months instead of showing them muted. |
 | dayClassName | `string` | no | - | Class name for each day button. |
+| monthOffset | `number` | no | `0` | Which shown month this grid renders, with `numberOfMonths` > 1: 0 is the first. |
 
 Also accepts the props of `Omit<ComponentPropsWithRef<'table'>, 'children'>`.
 
@@ -687,6 +712,7 @@ The month and year.
 
 | Prop | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
+| monthOffset | `number` | no | `0` | Which shown month this heads, with `numberOfMonths` > 1: 0 is the first. |
 | asChild | `boolean` | no | - | Merge onto your own element (a button that opens a month picker) instead of an `<h2>`. The element gets the month label as its content unless it has content of its own. |
 
 Also accepts the props of `ComponentPropsWithRef<'h2'>`.
@@ -751,8 +777,10 @@ Holds the selection, the visible month and the limits.
 | min | `Date` | no | - | Earliest selectable day. |
 | max | `Date` | no | - | Latest selectable day. |
 | isDateUnavailable | `(date: Date) => boolean` | no | - | Marks other days unavailable (weekends, holidays, booked dates). |
-| weekStartsOn | `number` | no | - | First day of the week: 0 = Sunday … 6 = Saturday. |
+| weekStartsOn | `number` | no | `0` | First day of the week: 0 = Sunday … 6 = Saturday. |
 | locale | `string` | no | - | Locale for month and day names. Defaults to the browser's. |
+| numberOfMonths | `number` | no | `1` | Months shown side by side. Render a `Calendar.Heading` and a `Calendar.Grid` per month with `monthOffset` 0 … n-1; keyboard focus moves across them. |
+| today | `Date` | no | - | The day marked as today. Defaults to the current date. |
 | disabled | `boolean` | no | - | - |
 | readOnly | `boolean` | no | - | - |
 
@@ -817,6 +845,37 @@ Also accepts the props of `React.InputHTMLAttributes<HTMLInputElement>`.
 import { Checkbox } from 'pada-ds';
 
 <Checkbox />
+```
+
+### CheckboxGroup
+
+`import { CheckboxGroup } from 'pada-ds';`
+
+A labelled set of checkboxes whose value is the array of checked option values, with an optional "Select all" box that turns mixed while only some are checked. ```tsx <CheckboxGroup label="Notify me about" description="We send at most one email a day." options={topics} selectAll value={value} onValueChange={setValue} /> ``` `role="group"` named by the label and described by `description` and `error`; each choice is a `Checkbox`, so Tab moves between them and Space toggles. Select all only changes the enabled choices. Values are reported in option order, whatever order they were checked in.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| options | `readonly CheckboxGroupOption[]` | yes | - | The choices, in order. |
+| value | `string[]` | no | - | The checked values (controlled). |
+| defaultValue | `string[]` | no | `[]` | The initially checked values (uncontrolled). |
+| onValueChange | `(value: string[]) => void` | no | - | Called with the checked values, in option order. |
+| label | `string` | no | - | Visible label; also the group's accessible name. Use `aria-label` without one. |
+| description | `string` | no | - | Help text under the label. |
+| error | `string` | no | - | Message shown (and announced) while the group is `invalid`. |
+| invalid | `boolean` | no | `false` | Marks the group invalid: shows `error` and sets `data-invalid`. |
+| selectAll | `boolean` | no | `false` | Adds a "Select all" box before the choices. |
+| selectAllLabel | `string` | no | `'Select all'` | Label of the select-all box. |
+| orientation | `'vertical' \| 'horizontal'` | no | `'vertical'` | Stacks the choices (`vertical`) or lays them in a wrapping row. |
+| disabled | `boolean` | no | `false` | Disables every choice. |
+| required | `boolean` | no | `false` | Marks the group required (at least one choice); shown next to the label. |
+| name | `string` | no | - | Name for native form submission: each checked choice submits as `name=value`. |
+
+Also accepts the props of `Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'onChange'>`.
+
+```tsx
+import { CheckboxGroup } from 'pada-ds';
+
+<CheckboxGroup options={[]} />
 ```
 
 ### CodeSnippet
@@ -976,7 +1035,7 @@ The menu panel, rendered in a portal and animated from its trigger.
 | --- | --- | --- | --- | --- |
 | container | `Element \| null` | no | - | Element to portal into. Defaults to `document.body`. |
 | forceMount | `boolean` | no | - | Keep mounted while closed, for animation libraries that manage presence themselves. |
-| loop | `boolean` | no | - | Wrap focus from the last item to the first and back. |
+| loop | `boolean` | no | `true` | Wrap focus from the last item to the first and back. |
 | onCloseAutoFocus | `(event: AutoFocusEvent) => void` | no | - | Called when focus returns to the trigger on close. Prevent it to focus something else. |
 | onEscapeKeyDown | `(event: DismissEvent<KeyboardEvent>) => void` | no | - | Called on Escape. Prevent it to keep the menu open. |
 | onPointerDownOutside | `(event: DismissEvent<PointerEvent>) => void` | no | - | Called on a pointer-down outside. Prevent it to keep the menu open. |
@@ -988,7 +1047,7 @@ The menu panel, rendered in a portal and animated from its trigger.
 | avoidCollisions | `boolean` | no | - | Flip and shift to stay in the viewport. |
 | collisionPadding | `number` | no | - | Distance to keep from the viewport edges, in px. |
 | arrowPadding | `number` | no | - | Size of the arrow element, if any, so it stays inside rounded corners. |
-| hideWhenDetached | `boolean` | no | - | Hide the content when its anchor scrolls out of view. |
+| hideWhenDetached | `boolean` | no | `false` | Hide the content when its anchor scrolls out of view. |
 
 Also accepts the props of `ComponentPropsWithRef<'div'>`.
 
@@ -1158,7 +1217,7 @@ The submenu panel.
 | --- | --- | --- | --- | --- |
 | container | `Element \| null` | no | - | Element to portal into. Defaults to `document.body`. |
 | forceMount | `boolean` | no | - | Keep mounted while closed, for animation libraries that manage presence themselves. |
-| loop | `boolean` | no | - | Wrap focus from the last item to the first and back. |
+| loop | `boolean` | no | `true` | Wrap focus from the last item to the first and back. |
 | onCloseAutoFocus | `(event: AutoFocusEvent) => void` | no | - | Called when focus returns to the trigger on close. Prevent it to focus something else. |
 | onEscapeKeyDown | `(event: DismissEvent<KeyboardEvent>) => void` | no | - | Called on Escape. Prevent it to keep the menu open. |
 | onPointerDownOutside | `(event: DismissEvent<PointerEvent>) => void` | no | - | Called on a pointer-down outside. Prevent it to keep the menu open. |
@@ -1168,7 +1227,7 @@ The submenu panel.
 | avoidCollisions | `boolean` | no | - | Flip and shift to stay in the viewport. |
 | collisionPadding | `number` | no | - | Distance to keep from the viewport edges, in px. |
 | arrowPadding | `number` | no | - | Size of the arrow element, if any, so it stays inside rounded corners. |
-| hideWhenDetached | `boolean` | no | - | Hide the content when its anchor scrolls out of view. |
+| hideWhenDetached | `boolean` | no | `false` | Hide the content when its anchor scrolls out of view. |
 
 Also accepts the props of `Omit<ComponentPropsWithRef<'div'>, 'side' | 'align'>`.
 
@@ -1286,13 +1345,67 @@ The date picker panel. Days are a keyboard-navigable `Calendar` grid (arrow keys
 | minDate | `Date` | no | - | - |
 | maxDate | `Date` | no | - | - |
 | isDateUnavailable | `(date: Date) => boolean` | no | - | Marks other days unavailable (weekends, holidays, booked dates). |
-| weekStartsOn | `number` | no | - | First day of the week: 0 = Sunday … 6 = Saturday. |
+| weekStartsOn | `number` | no | `0` | First day of the week: 0 = Sunday … 6 = Saturday. |
 | locale | `string` | no | - | Locale for month and day names. |
 
 ```tsx
 import { DatePickerDropdown } from 'pada-ds';
 
 <DatePickerDropdown />
+```
+
+### DateRangePicker
+
+`import { DateRangePicker } from 'pada-ds';`
+
+A date range field: a button showing the chosen range that opens a two-month range calendar (and optional presets) in a popover dialog. The first click picks the start, the second the end; the hovered or focused day previews the range in between. Picking the end (or a preset) closes the dialog and returns focus to the field; Escape closes it and keeps the previous range. ```tsx <DateRangePicker label="Stay" value={stay} onValueChange={setStay} minDate={today} /> <DateRangePicker label="Report period" presets={presets} weekStartsOn={1} /> ``` The calendar keyboard is `Calendar`'s: arrow keys by day and week (crossing from one month's grid into the other), Home/End to the week's ends, PageUp/PageDown by month (Shift: by year), Enter or Space picks. Unlike `InputDate` with `selection="range"`, the value only changes once both ends are picked: a half-picked range is a draft inside the dialog, dropped if it closes.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| label | `string` | no | - | Visible label; the dialog is named "Choose {label}". |
+| description | `string` | no | - | Help text under the field, hidden while the error shows. |
+| error | `string` | no | - | Validation message. Setting it marks the field invalid. |
+| required | `boolean` | no | `false` | - |
+| optional | `boolean` | no | `false` | Show "(optional)" after the label. |
+| disabled | `boolean` | no | `false` | - |
+| placeholder | `string` | no | `'Select dates'` | Text shown while there is no value. |
+| value | `DateRange \| null` | no | - | The range, `[start, end]`, or null (controlled). |
+| defaultValue | `DateRange \| null` | no | `null` | The initial range (uncontrolled). |
+| onValueChange | `(value: DateRange) => void` | no | - | Called once both ends are picked (or a preset is), with the new range. |
+| minDate | `Date` | no | - | Earliest selectable day. |
+| maxDate | `Date` | no | - | Latest selectable day. |
+| isDateUnavailable | `(date: Date) => boolean` | no | - | Marks other days unavailable (weekends, holidays, booked dates). |
+| weekStartsOn | `number` | no | `0` | First day of the week: 0 = Sunday … 6 = Saturday. |
+| locale | `string` | no | - | Locale for the shown range and the calendar. Defaults to the browser's. |
+| today | `Date` | no | - | The day marked as today. Defaults to the current date. |
+| numberOfMonths | `number` | no | `2` | Months shown side by side. |
+| presets | `readonly DateRangePreset[]` | no | `[]` | Shortcuts listed beside the calendar. |
+| id | `string` | no | - | Id of the field's button. Generated when omitted. |
+| className | `string` | no | - | - |
+
+```tsx
+import { DateRangePicker } from 'pada-ds';
+
+<DateRangePicker />
+```
+
+### DescriptionList
+
+`import { DescriptionList } from 'pada-ds';`
+
+Sections of terms and values (a record's attributes), from data: a header per section, then a description list (`dl`, `dt`, `dd`) of rows. Values can be text, an avatar with a name, a badge, a button, or your own content. ```tsx <DescriptionList data={{ sections: [{ header: { label: 'Ownership', slot: [{ type: 'button', label: 'Edit' }] }, rows: [ { key: 'Owner', value: [{ type: 'avatar', name: 'Anna Banks', subtitle: 'HR' }] }, { key: 'Status', tooltip: 'Current state', value: [{ type: 'badge', label: 'Active', tone: 'success' }] }, ], }], }} onAction={handleAction} /> ``` Each section is a `role="group"` named by its header. Differences from Angular: a `custom` value takes any React node (Angular takes a component or a template), and avatars take no `initials` (React's Avatar derives them from the name).
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| data | `DescriptionListData` | yes | - | The sections to show. |
+| onAction | `(event: DescriptionListEvent) => void` | no | - | A header slot button or a row button was pressed. Row buttons report the row key, their label and their position in the row's `value`. |
+
+Also accepts the props of `Omit<ComponentPropsWithRef<'div'>, 'children'>`.
+
+```tsx
+import { DescriptionList } from 'pada-ds';
+
+<DescriptionList data={undefined} />
 ```
 
 ### Dialog.Body
@@ -1701,7 +1814,7 @@ The menu panel, rendered in a portal and animated from its trigger.
 | --- | --- | --- | --- | --- |
 | container | `Element \| null` | no | - | Element to portal into. Defaults to `document.body`. |
 | forceMount | `boolean` | no | - | Keep mounted while closed, for animation libraries that manage presence themselves. |
-| loop | `boolean` | no | - | Wrap focus from the last item to the first and back. |
+| loop | `boolean` | no | `true` | Wrap focus from the last item to the first and back. |
 | onCloseAutoFocus | `(event: AutoFocusEvent) => void` | no | - | Called when focus returns to the trigger on close. Prevent it to focus something else. |
 | onEscapeKeyDown | `(event: DismissEvent<KeyboardEvent>) => void` | no | - | Called on Escape. Prevent it to keep the menu open. |
 | onPointerDownOutside | `(event: DismissEvent<PointerEvent>) => void` | no | - | Called on a pointer-down outside. Prevent it to keep the menu open. |
@@ -1713,7 +1826,7 @@ The menu panel, rendered in a portal and animated from its trigger.
 | avoidCollisions | `boolean` | no | - | Flip and shift to stay in the viewport. |
 | collisionPadding | `number` | no | - | Distance to keep from the viewport edges, in px. |
 | arrowPadding | `number` | no | - | Size of the arrow element, if any, so it stays inside rounded corners. |
-| hideWhenDetached | `boolean` | no | - | Hide the content when its anchor scrolls out of view. |
+| hideWhenDetached | `boolean` | no | `false` | Hide the content when its anchor scrolls out of view. |
 
 Also accepts the props of `ComponentPropsWithRef<'div'>`.
 
@@ -1885,7 +1998,7 @@ The submenu panel.
 | --- | --- | --- | --- | --- |
 | container | `Element \| null` | no | - | Element to portal into. Defaults to `document.body`. |
 | forceMount | `boolean` | no | - | Keep mounted while closed, for animation libraries that manage presence themselves. |
-| loop | `boolean` | no | - | Wrap focus from the last item to the first and back. |
+| loop | `boolean` | no | `true` | Wrap focus from the last item to the first and back. |
 | onCloseAutoFocus | `(event: AutoFocusEvent) => void` | no | - | Called when focus returns to the trigger on close. Prevent it to focus something else. |
 | onEscapeKeyDown | `(event: DismissEvent<KeyboardEvent>) => void` | no | - | Called on Escape. Prevent it to keep the menu open. |
 | onPointerDownOutside | `(event: DismissEvent<PointerEvent>) => void` | no | - | Called on a pointer-down outside. Prevent it to keep the menu open. |
@@ -1895,7 +2008,7 @@ The submenu panel.
 | avoidCollisions | `boolean` | no | - | Flip and shift to stay in the viewport. |
 | collisionPadding | `number` | no | - | Distance to keep from the viewport edges, in px. |
 | arrowPadding | `number` | no | - | Size of the arrow element, if any, so it stays inside rounded corners. |
-| hideWhenDetached | `boolean` | no | - | Hide the content when its anchor scrolls out of view. |
+| hideWhenDetached | `boolean` | no | `false` | Hide the content when its anchor scrolls out of view. |
 
 Also accepts the props of `Omit<ComponentPropsWithRef<'div'>, 'side' | 'align'>`.
 
@@ -2167,6 +2280,26 @@ import { HeaderCell } from 'pada-ds';
 <HeaderCell columnId="..." label="..." />
 ```
 
+### Heading
+
+`import { Heading } from 'pada-ds';`
+
+A section heading on the type scale. Renders a native `h1`–`h6`, so the document outline and the heading role come from the element; the level picks a default size (h1 3xl, h2 2xl, h3 xl, h4 lg, h5 base, h6 sm) that `size` can override when the visual and the outline differ. ```tsx <Heading level={1}>Billing</Heading> <Heading level={3} size="lg">Payment method</Heading> ``` Sizes, weights, line height and letter spacing come from tokens (`--pada-heading-*`), never inline styles.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| level | `HeadingLevel` | no | `2` | The heading level, rendered as a native `h1`–`h6`. |
+| size | `TextSize` | no | - | Font size on the type scale. Defaults by level (h1 `3xl` … h6 `sm`). |
+| weight | `TextWeight` | no | `'600'` | Font weight, 100–900. |
+
+Also accepts the props of `ComponentPropsWithRef<'h2'>`.
+
+```tsx
+import { Heading } from 'pada-ds';
+
+<Heading />
+```
+
 ### HoverCard
 
 `import { HoverCard } from 'pada-ds';`
@@ -2184,8 +2317,8 @@ A rich preview shown when people hover or focus a link: a profile, a page, a rep
 | open | `boolean` | no | - | - |
 | defaultOpen | `boolean` | no | - | - |
 | onOpenChange | `(open: boolean) => void` | no | - | - |
-| openDelay | `number` | no | - | Hover (or focus) time before the card opens, in ms. |
-| closeDelay | `number` | no | - | Time after the pointer leaves before the card closes, in ms. |
+| openDelay | `number` | no | `700` | Hover (or focus) time before the card opens, in ms. |
+| closeDelay | `number` | no | `300` | Time after the pointer leaves before the card closes, in ms. |
 
 ```tsx
 import { HoverCard } from 'pada-ds';
@@ -2229,7 +2362,7 @@ The card, in a portal, animated from the side that faces the trigger.
 | avoidCollisions | `boolean` | no | - | Flip and shift to stay in the viewport. |
 | collisionPadding | `number` | no | - | Distance to keep from the viewport edges, in px. |
 | arrowPadding | `number` | no | - | Size of the arrow element, if any, so it stays inside rounded corners. |
-| hideWhenDetached | `boolean` | no | - | Hide the content when its anchor scrolls out of view. |
+| hideWhenDetached | `boolean` | no | `false` | Hide the content when its anchor scrolls out of view. |
 
 Also accepts the props of `ComponentPropsWithRef<'div'>`.
 
@@ -2309,8 +2442,8 @@ A square button with only an icon. Defaults to the ghost variant.
 | icon | `string` | yes | - | Built-in icon name. |
 | label | `string` | yes | - | Accessible name. Required: an icon alone has no text for screen readers. |
 | tooltip | `boolean` | no | `false` | Also show the label in a tooltip on hover and focus. |
-| variant | `ButtonVariant` | no | `'ghost'` | - |
-| size | `ButtonSize` | no | `'md'` | Height and padding: sm 28px, md 32px, lg 40px (scaled by density). |
+| variant | `ButtonVariant` | no | `'ghost'` | Visual emphasis. Inside a `ButtonGroup` or `SplitButton.Root`, defaults to the group's. |
+| size | `ButtonSize` | no | `'md'` | Height and padding: sm 28px, md 32px, lg 40px (scaled by density). Inside a group, defaults to the group's. |
 | disabled | `boolean` | no | - | - |
 | loading | `boolean` | no | - | Shows a spinner in place of the label and ignores clicks, keeping the button's width and focus. Announced through `aria-busy`. |
 | ref | `React.Ref<HTMLButtonElement>` | no | - | - |
@@ -2342,6 +2475,26 @@ import { Indexer } from 'pada-ds';
 <Indexer items={[]} />
 ```
 
+### InfoTooltip
+
+`import { InfoTooltip } from 'pada-ds';`
+
+A small info icon that explains the thing next to it: a native button that opens a Tooltip on hover and keyboard focus, and closes on Escape. ```tsx <span>Seats <InfoTooltip label="Seats" text="Seats are billed monthly, per active member." /></span> ``` Differences from Angular's `ds-info-tooltip`: built on Tooltip, so it renders in a portal, flips to stay on screen, and only references the tooltip from `aria-describedby` while open.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| label | `string` | yes | - | What the tooltip describes; the trigger is named "More info about {label}". |
+| text | `ReactNode` | yes | - | The explanation shown in the tooltip. Never put interactive content here. |
+| position | `'top' \| 'bottom' \| 'left' \| 'right'` | no | `'top'` | Preferred side; flips when there is no room. |
+
+Also accepts the props of `Omit<ComponentPropsWithRef<'button'>, 'children'>`.
+
+```tsx
+import { InfoTooltip } from 'pada-ds';
+
+<InfoTooltip label="..." text="..." />
+```
+
 ### InputDate
 
 `import { InputDate } from 'pada-ds';`
@@ -2365,7 +2518,7 @@ A date field: a button showing the chosen date (or range) that opens the date pi
 | minDate | `Date` | no | - | - |
 | maxDate | `Date` | no | - | - |
 | isDateUnavailable | `(date: Date) => boolean` | no | - | Marks other days unavailable (weekends, holidays, booked dates). |
-| weekStartsOn | `number` | no | - | First day of the week: 0 = Sunday … 6 = Saturday. |
+| weekStartsOn | `number` | no | `0` | First day of the week: 0 = Sunday … 6 = Saturday. |
 | className | `string` | no | `''` | - |
 
 ```tsx
@@ -2581,7 +2734,7 @@ The open menu, rendered in a portal under its trigger. Use the DropdownMenu item
 | --- | --- | --- | --- | --- |
 | container | `Element \| null` | no | - | Element to portal into. Defaults to `document.body`. |
 | forceMount | `boolean` | no | - | Keep mounted while closed, for animation libraries that manage presence themselves. |
-| loop | `boolean` | no | - | Wrap focus from the last item to the first and back. |
+| loop | `boolean` | no | `true` | Wrap focus from the last item to the first and back. |
 | onCloseAutoFocus | `(event: AutoFocusEvent) => void` | no | - | Called when focus returns to the trigger on close. Prevent it to focus something else. |
 | onEscapeKeyDown | `(event: DismissEvent<KeyboardEvent>) => void` | no | - | Called on Escape. Prevent it to keep the menu open. |
 | onPointerDownOutside | `(event: DismissEvent<PointerEvent>) => void` | no | - | Called on a pointer-down outside. Prevent it to keep the menu open. |
@@ -2593,7 +2746,7 @@ The open menu, rendered in a portal under its trigger. Use the DropdownMenu item
 | avoidCollisions | `boolean` | no | - | Flip and shift to stay in the viewport. |
 | collisionPadding | `number` | no | - | Distance to keep from the viewport edges, in px. |
 | arrowPadding | `number` | no | - | Size of the arrow element, if any, so it stays inside rounded corners. |
-| hideWhenDetached | `boolean` | no | - | Hide the content when its anchor scrolls out of view. |
+| hideWhenDetached | `boolean` | no | `false` | Hide the content when its anchor scrolls out of view. |
 
 Also accepts the props of `ComponentPropsWithRef<'div'>`.
 
@@ -2726,10 +2879,10 @@ The bar. Name it with `aria-label` ("Editor"). Restyle through `--pada-menubar-*
 | Prop | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
 | value | `string` | no | - | Controlled open menu (its `value`), or '' for none. |
-| defaultValue | `string` | no | - | Initially open menu when uncontrolled. |
+| defaultValue | `string` | no | `''` | Initially open menu when uncontrolled. |
 | onValueChange | `(value: string) => void` | no | - | Called when a menu opens (its value) or every menu closes (''). |
-| loop | `boolean` | no | - | Wrap focus from the last menu to the first and back. |
-| dir | `'ltr' \| 'rtl'` | no | - | Reading direction, for arrow keys and submenu placement. |
+| loop | `boolean` | no | `true` | Wrap focus from the last menu to the first and back. |
+| dir | `'ltr' \| 'rtl'` | no | `'ltr'` | Reading direction, for arrow keys and submenu placement. |
 
 Also accepts the props of `Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'dir'>`.
 
@@ -2784,7 +2937,7 @@ The submenu panel.
 | --- | --- | --- | --- | --- |
 | container | `Element \| null` | no | - | Element to portal into. Defaults to `document.body`. |
 | forceMount | `boolean` | no | - | Keep mounted while closed, for animation libraries that manage presence themselves. |
-| loop | `boolean` | no | - | Wrap focus from the last item to the first and back. |
+| loop | `boolean` | no | `true` | Wrap focus from the last item to the first and back. |
 | onCloseAutoFocus | `(event: AutoFocusEvent) => void` | no | - | Called when focus returns to the trigger on close. Prevent it to focus something else. |
 | onEscapeKeyDown | `(event: DismissEvent<KeyboardEvent>) => void` | no | - | Called on Escape. Prevent it to keep the menu open. |
 | onPointerDownOutside | `(event: DismissEvent<PointerEvent>) => void` | no | - | Called on a pointer-down outside. Prevent it to keep the menu open. |
@@ -2794,7 +2947,7 @@ The submenu panel.
 | avoidCollisions | `boolean` | no | - | Flip and shift to stay in the viewport. |
 | collisionPadding | `number` | no | - | Distance to keep from the viewport edges, in px. |
 | arrowPadding | `number` | no | - | Size of the arrow element, if any, so it stays inside rounded corners. |
-| hideWhenDetached | `boolean` | no | - | Hide the content when its anchor scrolls out of view. |
+| hideWhenDetached | `boolean` | no | `false` | Hide the content when its anchor scrolls out of view. |
 
 Also accepts the props of `Omit<ComponentPropsWithRef<'div'>, 'side' | 'align'>`.
 
@@ -2925,10 +3078,10 @@ A number field (WAI-ARIA APG Spinbutton): type a value, or use Up/Down, PageUp/P
 | value | `number \| null` | no | - | Controlled value; `null` when empty. |
 | defaultValue | `number \| null` | no | - | Initial value when uncontrolled. |
 | onValueChange | `(value: number \| null) => void` | no | - | Called with the committed value (on step, Enter or blur), `null` when cleared. |
-| min | `number` | no | - | - |
-| max | `number` | no | - | - |
-| step | `number` | no | - | Arrow keys and the steppers change the value by this much. |
-| largeStep | `number` | no | - | PageUp and PageDown change the value by this much. |
+| min | `number` | no | `-Infinity` | - |
+| max | `number` | no | `Infinity` | - |
+| step | `number` | no | `1` | Arrow keys and the steppers change the value by this much. |
+| largeStep | `number` | no | `step × 10` | PageUp and PageDown change the value by this much. |
 | formatOptions | `Intl.NumberFormatOptions` | no | - | Display format: currency, percent, units, fraction digits. |
 | locale | `string` | no | - | Locale for formatting and parsing. Defaults to the browser's. |
 | disabled | `boolean` | no | - | - |
@@ -2956,7 +3109,7 @@ The Pada logo: the "Twin Soles" mark, the wordmark, or both, as inline SVG.
 | size | `keyof typeof SIZES \| number` | no | `'md'` | Height in px, or a preset. |
 | toes | `boolean` | no | - | Draw a toe above each sole. Defaults to on from 48px up, where it stays legible. |
 | animated | `boolean \| 'loop'` | no | `false` | `true` steps in once on mount (left sole, right sole, then the ground); `'loop'` walks, for a branded loading indicator. Both are still under reduced motion. |
-| title | `string` | no | - | Accessible name. |
+| title | `string` | no | `'Pada' ('Loading' when looping)` | Accessible name. |
 | decorative | `boolean` | no | `false` | Hide from assistive technology when a text label sits next to it. |
 
 Also accepts the props of `Omit<ComponentPropsWithRef<'svg'>, 'children'>`.
@@ -3074,9 +3227,9 @@ A code or PIN field with one box per character. Typing moves to the next box, Ba
 | defaultValue | `string` | no | - | - |
 | onValueChange | `(value: string) => void` | no | - | Called with the characters so far; a blank box between filled ones is a space. |
 | onComplete | `(value: string) => void` | no | - | Called once every box is filled. |
-| type | `'numeric' \| 'alphanumeric'` | no | - | Accepted characters. |
+| type | `'numeric' \| 'alphanumeric'` | no | `'numeric'` | Accepted characters. |
 | mask | `boolean` | no | - | Hide the characters, like a password. |
-| otp | `boolean` | no | - | One-time code: lets browsers and phones autofill it from a text message. |
+| otp | `boolean` | no | `true` | One-time code: lets browsers and phones autofill it from a text message. |
 | disabled | `boolean` | no | - | - |
 | placeholder | `string` | no | - | Placeholder in each empty box. |
 | name | `string` | no | - | Submits the joined value with forms under this name. |
@@ -3210,7 +3363,7 @@ The floating panel, rendered in a portal and animated from the side that faces i
 | avoidCollisions | `boolean` | no | - | Flip and shift to stay in the viewport. |
 | collisionPadding | `number` | no | - | Distance to keep from the viewport edges, in px. |
 | arrowPadding | `number` | no | - | Size of the arrow element, if any, so it stays inside rounded corners. |
-| hideWhenDetached | `boolean` | no | - | Hide the content when its anchor scrolls out of view. |
+| hideWhenDetached | `boolean` | no | `false` | Hide the content when its anchor scrolls out of view. |
 
 Also accepts the props of `ComponentPropsWithRef<'div'>`.
 
@@ -3292,6 +3445,28 @@ import { Progress } from 'pada-ds';
 <Progress value={0} />
 ```
 
+### ProgressCircle
+
+`import { ProgressCircle } from 'pada-ds';`
+
+Circular progress: a ring that fills clockwise from the top, or spins while `value` is `null`. For compact places (a table cell, a file row, a button); use `Progress` where there is room for a bar and a label. ```tsx <ProgressCircle label="Uploading report.pdf" value={64} /> <ProgressCircle label="Syncing" size="sm" /> <ProgressCircle label="Storage used" value={72} size="lg" showValue /> ``` `role="progressbar"` named by `label`, with `aria-valuenow` (left out while indeterminate) and `data-state` (`indeterminate`, `loading`, `complete`). The stroke dash transitions on value change.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| value | `number \| null` | no | `null` | Current value, from 0 to `max`. `null` (the default) spins indeterminately. |
+| max | `number` | no | `100` | The value that means done. |
+| label | `string` | yes | - | Accessible name. Required: the ring has no visible text of its own. |
+| size | `ProgressCircleSize` | no | `'md'` | sm 16px, md 24px, lg 48px. |
+| showValue | `boolean` | no | `false` | Shows the percentage inside the ring. Only legible at `lg`. |
+
+Also accepts the props of `Omit<ComponentPropsWithRef<'div'>, 'children'>`.
+
+```tsx
+import { ProgressCircle } from 'pada-ds';
+
+<ProgressCircle label="..." />
+```
+
 ### RadioCardGroup
 
 `import { RadioCardGroup } from 'pada-ds';`
@@ -3348,7 +3523,7 @@ A slider with two thumbs for picking a range (price, dates, size). Each thumb is
 | --- | --- | --- | --- | --- |
 | label | `string` | yes | - | - |
 | value | `[number, number]` | no | - | Controlled `[low, high]`. |
-| defaultValue | `[number, number]` | no | - | Initial `[low, high]` when uncontrolled. |
+| defaultValue | `[number, number]` | no | `[min, max]` | Initial `[low, high]` when uncontrolled. |
 | onValueChange | `(value: [number, number]) => void` | no | - | Called on every change while dragging or pressing keys. |
 | onValueCommit | `(value: [number, number]) => void` | no | - | Called when a drag ends or a key press changes the value. |
 | min | `number` | no | `0` | - |
@@ -3358,7 +3533,7 @@ A slider with two thumbs for picking a range (price, dates, size). Each thumb is
 | formatOptions | `Intl.NumberFormatOptions` | no | - | Number format for the values shown and announced. |
 | locale | `string` | no | - | - |
 | showValue | `boolean` | no | `true` | Show the selected range next to the label. |
-| thumbLabels | `[string, string]` | no | - | Accessible names of the thumbs. |
+| thumbLabels | `[string, string]` | no | `['Minimum <label>', 'Maximum <label>']` | Accessible names of the thumbs. |
 | description | `string` | no | - | - |
 | error | `string` | no | - | - |
 | disabled | `boolean` | no | `false` | - |
@@ -3426,10 +3601,10 @@ One panel. Its size is a flex ratio, so handles of any width never overflow the 
 | Prop | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
 | defaultSize | `number` | no | - | Initial size in percent. Panels without one share the remaining space. |
-| minSize | `number` | no | - | - |
-| maxSize | `number` | no | - | - |
+| minSize | `number` | no | `0` | - |
+| maxSize | `number` | no | `100` | - |
 | collapsible | `boolean` | no | - | Lets the panel collapse: Enter on the handle after it, or dragging well below `minSize`. |
-| collapsedSize | `number` | no | - | Size when collapsed, in percent. |
+| collapsedSize | `number` | no | `0` | Size when collapsed, in percent. |
 
 Also accepts the props of `ComponentPropsWithRef<'div'>`.
 
@@ -3447,11 +3622,11 @@ A group of resizable panels. Panels and handles must be direct children, in orde
 
 | Prop | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
-| orientation | `Orientation` | no | - | `horizontal` lays panels side by side; `vertical` stacks them. |
+| orientation | `Orientation` | no | `'horizontal'` | `horizontal` lays panels side by side; `vertical` stacks them. |
 | sizes | `number[]` | no | - | Controlled panel sizes, in percent, one per panel. |
 | onSizesChange | `(sizes: number[]) => void` | no | - | Called with the new sizes on every change. |
 | onSizesCommit | `(sizes: number[]) => void` | no | - | Called once a drag ends or a key press resizes, e.g. to save the layout. |
-| keyboardStep | `number` | no | - | Percent moved by each arrow-key press. |
+| keyboardStep | `number` | no | `10` | Percent moved by each arrow-key press. |
 | disabled | `boolean` | no | - | - |
 
 Also accepts the props of `Omit<ComponentPropsWithRef<'div'>, 'dir'>`.
@@ -3631,7 +3806,7 @@ A bottom sheet: a dialog that rises from the bottom edge, for mobile-first flows
 | --- | --- | --- | --- | --- |
 | snapPoints | `number[]` | no | - | Heights the sheet rests at, as fractions of the viewport height in ascending order, e.g. `[0.4, 0.9]`. Without them the sheet fits its content (up to the maximum height). |
 | snap | `number` | no | - | Controlled snap point (one of `snapPoints`). |
-| defaultSnap | `number` | no | - | Initial snap point when uncontrolled. |
+| defaultSnap | `number` | no | `the first snap point` | Initial snap point when uncontrolled. |
 | onSnapChange | `(snap: number) => void` | no | - | Called when the sheet settles at another snap point. |
 | dismissible | `boolean` | no | `true` | Close when dragged or flicked down past the lowest position. |
 | container | `Element \| null` | no | - | Element to portal into. Defaults to `document.body`. |
@@ -3983,20 +4158,64 @@ import { Spinner } from 'pada-ds';
 <Spinner />
 ```
 
+### SplitButton.Root
+
+`import { SplitButton } from 'pada-ds';`
+
+A main action joined to a chevron button that offers related ones.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| variant | `'primary' \| 'secondary'` | no | `'primary'` | Visual emphasis of both halves. |
+| size | `ButtonSize` | no | `'md'` | Size of both halves. |
+| label | `string` | no | - | Accessible name of the pair, e.g. "Save options". |
+
+Also accepts the props of `ComponentPropsWithRef<'div'>`.
+
+```tsx
+import { SplitButton } from 'pada-ds';
+
+<SplitButton.Root />
+```
+
+### SplitButton.Splitter
+
+`import { SplitButton } from 'pada-ds';`
+
+The chevron half of a split button: a square button with a down chevron, named by `label`. Takes its variant and size from the surrounding `SplitButton.Root`. Also exported as `SplitButton.Splitter`.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| variant | `'primary' \| 'secondary'` | no | `'primary'` | Visual emphasis when used outside a `SplitButton.Root`. |
+| size | `ButtonSize` | no | `'md'` | Size when used outside a `SplitButton.Root`. |
+| label | `string` | no | `'More options'` | Accessible name. |
+
+Also accepts the props of `ComponentPropsWithRef<'button'>`.
+
+```tsx
+import { SplitButton } from 'pada-ds';
+
+<SplitButton.Splitter />
+```
+
 ### Splitter
 
 `import { Splitter } from 'pada-ds';`
 
+The chevron half of a split button: a square button with a down chevron, named by `label`. Takes its variant and size from the surrounding `SplitButton.Root`. Also exported as `SplitButton.Splitter`.
+
 | Prop | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
-| variant | `'primary' \| 'secondary'` | yes | - | - |
+| variant | `'primary' \| 'secondary'` | no | `'primary'` | Visual emphasis when used outside a `SplitButton.Root`. |
+| size | `ButtonSize` | no | `'md'` | Size when used outside a `SplitButton.Root`. |
+| label | `string` | no | `'More options'` | Accessible name. |
 
-Also accepts the props of `React.ButtonHTMLAttributes<HTMLButtonElement>`.
+Also accepts the props of `ComponentPropsWithRef<'button'>`.
 
 ```tsx
 import { Splitter } from 'pada-ds';
 
-<Splitter variant="primary" />
+<Splitter />
 ```
 
 ### Stack
@@ -4253,7 +4472,7 @@ The tab list, with a sliding indicator under (or behind) the selected tab.
 
 | Prop | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
-| loop | `boolean` | no | - | Wrap from the last tab to the first and back. |
+| loop | `boolean` | no | `true` | Wrap from the last tab to the first and back. |
 
 Also accepts the props of `ComponentPropsWithRef<'div'>`.
 
@@ -4422,6 +4641,40 @@ import { ThemeToggle } from 'pada-ds';
 <ThemeToggle />
 ```
 
+### TimePicker
+
+`import { TimePicker } from 'pada-ds';`
+
+A labelled time-of-day field in segments: hours, minutes (and seconds), and AM/PM on a 12-hour clock, in the locale's order. Each segment is a spinbutton: ArrowUp/ArrowDown step it, PageUp/PageDown by a larger step, Home/End to its ends, digits type into it, A/P set AM/PM, Backspace empties it, ArrowLeft/ArrowRight (or Tab) move between segments. The value is a 24-hour `"HH:mm"` (or `"HH:mm:ss"`) string, null until every segment is filled. ```tsx <TimePicker label="Start time" value={start} onValueChange={setStart} minuteStep={15} /> <TimePicker label="Alarm" granularity="second" hourCycle={24} name="alarm" /> ``` Setting `error` marks the field invalid; so does a value outside `min`/`max`. There is no dropdown of times: the segments are the whole control. Built on the headless `TimeField`.
+
+| Prop | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| label | `string` | no | - | Visible label naming the group of segments. |
+| description | `string` | no | - | Help text under the field, hidden while the error shows. |
+| error | `string` | no | - | Validation message. Setting it marks the field invalid. |
+| value | `string \| null` | no | - | The time, `"HH:mm"` or `"HH:mm:ss"` (24-hour), or null (controlled). |
+| defaultValue | `string \| null` | no | `null` | The initial time (uncontrolled). |
+| onValueChange | `(value: string \| null) => void` | no | - | Called with the new time, or null while a segment is empty. |
+| granularity | `TimeGranularity` | no | `'minute'` | Smallest unit entered. |
+| hourCycle | `HourCycle` | no | - | 12- or 24-hour clock. Follows the locale when unset. |
+| locale | `string` | no | - | Locale for the segment order, clock and AM/PM names. Defaults to the browser's. |
+| minuteStep | `number` | no | `1` | Minutes the arrow keys step by. |
+| min | `string` | no | - | Earliest valid time (`"HH:mm"`). |
+| max | `string` | no | - | Latest valid time (`"HH:mm"`). |
+| required | `boolean` | no | `false` | - |
+| optional | `boolean` | no | `false` | Show "(optional)" after the label. |
+| disabled | `boolean` | no | `false` | - |
+| readOnly | `boolean` | no | `false` | - |
+| name | `string` | no | - | Submits the value with a native form under this name. |
+
+Also accepts the props of `Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'onChange' | 'children'>`.
+
+```tsx
+import { TimePicker } from 'pada-ds';
+
+<TimePicker />
+```
+
 ### Timeline
 
 `import { Timeline } from 'pada-ds';`
@@ -4564,7 +4817,7 @@ A segmented set of toggles. Name it with `aria-label`.
 | defaultValue | `string` | no | - | - |
 | onValueChange | `(value: string) => void` | no | - | - |
 | orientation | `'horizontal' \| 'vertical'` | no | - | Arrow keys follow the orientation. |
-| loop | `boolean` | no | - | Wrap focus from the last item to the first and back. |
+| loop | `boolean` | no | `true` | Wrap focus from the last item to the first and back. |
 | disabled | `boolean` | no | - | Disables every item. |
 | dir | `'ltr' \| 'rtl'` | no | - | - |
 | size | `'sm' \| 'md' \| 'lg'` | no | `'md'` | sm 28px, md 32px, lg 40px. |
@@ -4652,7 +4905,7 @@ The tooltip bubble, rendered in a portal and animated from the side that faces i
 | avoidCollisions | `boolean` | no | - | Flip and shift to stay in the viewport. |
 | collisionPadding | `number` | no | - | Distance to keep from the viewport edges, in px. |
 | arrowPadding | `number` | no | - | Size of the arrow element, if any, so it stays inside rounded corners. |
-| hideWhenDetached | `boolean` | no | - | Hide the content when its anchor scrolls out of view. |
+| hideWhenDetached | `boolean` | no | `false` | Hide the content when its anchor scrolls out of view. |
 
 Also accepts the props of `ComponentPropsWithRef<'div'>`.
 

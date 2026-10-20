@@ -96,27 +96,6 @@
   --pada-button-icon-size: var(--pada-icon-size-lg);
 }
 
-/* Split button */
-.button-split {
-  display: inline-flex;
-  align-items: center;
-  width: fit-content;
-}
-
-.button--split-main {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
-.button--secondary.button--split-main {
-  border-right: none;
-}
-
-.button-split .button-splitter {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-}
-
 /* States via attributes */
 .button:hover:not(:disabled, [data-loading]) {
   background-color: var(--pada-button-bg-hover);

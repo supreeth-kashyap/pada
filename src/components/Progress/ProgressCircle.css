@@ -1,0 +1,94 @@
+.progress-circle {
+  /* Component tokens. Sizes only reassign these. */
+  --pada-progress-circle-size: 24px;
+  --pada-progress-circle-thickness: 2.5;
+  --pada-progress-circle-track: var(--pada-color-neutral-200);
+  --pada-progress-circle-fill: var(--pada-color-accent-500);
+  --pada-progress-circle-font-size: var(--pada-font-size-xs);
+
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: var(--pada-progress-circle-size);
+  height: var(--pada-progress-circle-size);
+  vertical-align: middle;
+  font-family: var(--pada-font-sans);
+}
+
+.progress-circle[data-size="sm"] {
+  --pada-progress-circle-size: var(--pada-icon-size-md);
+  --pada-progress-circle-thickness: 3;
+}
+
+.progress-circle[data-size="lg"] {
+  --pada-progress-circle-size: 48px;
+  --pada-progress-circle-thickness: 2;
+  --pada-progress-circle-font-size: var(--pada-font-size-sm);
+}
+
+.progress-circle-svg {
+  grid-area: 1 / 1;
+  width: 100%;
+  height: 100%;
+  /* Start at 12 o'clock. */
+  rotate: -90deg;
+}
+
+.progress-circle-track,
+.progress-circle-indicator {
+  fill: none;
+  stroke-width: var(--pada-progress-circle-thickness);
+}
+
+.progress-circle-track {
+  stroke: var(--pada-progress-circle-track);
+}
+
+.progress-circle-indicator {
+  stroke: var(--pada-progress-circle-fill);
+  stroke-linecap: round;
+  stroke-dasharray: 100;
+  stroke-dashoffset: calc(100 - var(--pada-progress-circle-percentage));
+  transition: stroke-dashoffset var(--pada-duration-normal) var(--pada-ease-standard);
+}
+
+/* An empty ring stays empty: a round cap would otherwise draw a dot at 0%. */
+.progress-circle-indicator[data-empty] {
+  stroke-linecap: butt;
+}
+
+/* Indeterminate: a quarter arc spins around the track. */
+.progress-circle-indicator[data-state="indeterminate"] {
+  stroke-dasharray: 25 75;
+  stroke-dashoffset: 0;
+  transform-origin: center;
+  animation: progress-circle-spin 0.9s linear infinite;
+}
+
+.progress-circle-value {
+  grid-area: 1 / 1;
+  color: var(--pada-color-fg);
+  font-size: var(--pada-progress-circle-font-size);
+  font-weight: var(--pada-font-weight-semibold);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+@keyframes progress-circle-spin {
+  to {
+    rotate: 1turn;
+  }
+}
+
+@keyframes progress-circle-pulse {
+  50% {
+    opacity: 0.4;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .progress-circle-indicator[data-state="indeterminate"] {
+    animation: progress-circle-pulse 2s var(--pada-ease-standard) infinite;
+  }
+}

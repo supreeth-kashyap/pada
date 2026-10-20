@@ -1,0 +1,107 @@
+.description-list {
+  /* Component tokens */
+  --pada-description-list-section-gap: var(--pada-space-6);
+  --pada-description-list-row-gap: var(--pada-space-4);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--pada-description-list-section-gap);
+  width: 100%;
+  font-family: var(--pada-font-sans);
+}
+
+.description-list-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pada-space-2);
+}
+
+.description-list-rows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pada-description-list-row-gap);
+  margin: 0;
+}
+
+.description-list-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--pada-space-1) 0;
+}
+
+.description-list-header-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--pada-space-1);
+}
+
+.description-list-header-label {
+  color: var(--pada-color-fg-muted);
+  font-size: var(--pada-font-size-md);
+  font-weight: var(--pada-font-weight-semibold);
+  line-height: var(--pada-line-height-md);
+}
+
+.description-list-header-slot {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--pada-space-2);
+}
+
+.description-list-row {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.description-list-key {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--pada-space-1);
+  padding: var(--pada-space-0-5) 0;
+  color: var(--pada-color-fg-muted);
+  font-size: var(--pada-font-size-md);
+  font-weight: var(--pada-font-weight-regular);
+  line-height: var(--pada-line-height-md);
+}
+
+.description-list-value {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--pada-space-3);
+  width: 100%;
+  margin: 0;
+  padding: var(--pada-space-2) 0;
+  color: var(--pada-color-fg);
+  font-size: var(--pada-font-size-md);
+  line-height: var(--pada-line-height-md);
+}
+
+.description-list-avatar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--pada-space-2);
+}
+
+.description-list-avatar-picture {
+  display: inline-flex;
+}
+
+.description-list-avatar-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.description-list-avatar-name {
+  font-weight: var(--pada-font-weight-semibold);
+}
+

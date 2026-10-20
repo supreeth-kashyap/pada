@@ -67,15 +67,17 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - BrandLogo: name, size?, background?, tooltip?; extends React.HTMLAttributes<HTMLDivElement>
 - Breadcrumbs: items, maxItems?, renderLink?, label?; extends Omit<ComponentPropsWithRef<'nav'>, 'children'>
 - Button: children?, variant?, size?, leftIcon?, rightIcon?, split?, onSplitClick?, disabled?, loading?, ref?; extends React.ButtonHTMLAttributes<HTMLButtonElement>
-- Calendar: mode?, value?, defaultValue?, onValueChange?, month?, defaultMonth?, onMonthChange?, min?, max?, isDateUnavailable?, weekStartsOn?, locale?, disabled?, readOnly?; extends Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'onChange'>
-- Calendar.Grid: renderDay?, hideOutsideDays?, dayClassName?; extends Omit<ComponentPropsWithRef<'table'>, 'children'>
-- Calendar.Heading: asChild?; extends ComponentPropsWithRef<'h2'>
+- ButtonGroup: label?, size?, variant?, orientation?, attached?; extends ComponentPropsWithRef<'div'>
+- Calendar: mode?, value?, defaultValue?, onValueChange?, month?, defaultMonth?, onMonthChange?, min?, max?, isDateUnavailable?, weekStartsOn?, locale?, numberOfMonths?, today?, disabled?, readOnly?; extends Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'onChange'>
+- Calendar.Grid: renderDay?, hideOutsideDays?, dayClassName?, monthOffset?; extends Omit<ComponentPropsWithRef<'table'>, 'children'>
+- Calendar.Heading: monthOffset?, asChild?; extends ComponentPropsWithRef<'h2'>
 - Calendar.NextButton: asChild?; extends ComponentPropsWithRef<'button'>
 - Calendar.PrevButton: asChild?; extends ComponentPropsWithRef<'button'>
-- Calendar.Root: mode?, value?, defaultValue?, onValueChange?, month?, defaultMonth?, onMonthChange?, min?, max?, isDateUnavailable?, weekStartsOn?, locale?, disabled?, readOnly?; extends Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'onChange'>
+- Calendar.Root: mode?, value?, defaultValue?, onValueChange?, month?, defaultMonth?, onMonthChange?, min?, max?, isDateUnavailable?, weekStartsOn?, locale?, numberOfMonths?, today?, disabled?, readOnly?; extends Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'onChange'>
 - Card: children?, className?
 - Carousel: children, autoPlay?, interval?, className?, showDots?, showNav?, label?
 - Checkbox: label?, indeterminate?, ref?; extends React.InputHTMLAttributes<HTMLInputElement>
+- CheckboxGroup: options, value?, defaultValue?, onValueChange?, label?, description?, error?, invalid?, selectAll?, selectAllLabel?, orientation?, disabled?, required?, name?; extends Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'onChange'>
 - CodeSnippet: code, language, type?, label?, showCopy?, className?
 - ColorPicker: label, value?, defaultValue?, onValueChange?, format?, swatches?, disabled?; extends Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'onChange'>
 - ComboBox: items, multiSelect?, onItemClick?; extends React.HTMLAttributes<HTMLDivElement>
@@ -99,6 +101,8 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - ContextMenuTrigger: asChild?, disabled?; extends ComponentPropsWithRef<'div'>
 - DataTable: no props; extends DataTableProps<T>
 - DatePickerDropdown: mode?, selection?, isRange?, value?, onChange?, minDate?, maxDate?, isDateUnavailable?, weekStartsOn?, locale?
+- DateRangePicker: label?, description?, error?, required?, optional?, disabled?, placeholder?, value?, defaultValue?, onValueChange?, minDate?, maxDate?, isDateUnavailable?, weekStartsOn?, locale?, today?, numberOfMonths?, presets?, id?, className?
+- DescriptionList: data, onAction?; extends Omit<ComponentPropsWithRef<'div'>, 'children'>
 - Dialog.Body: no props; extends ComponentPropsWithRef<'div'>
 - Dialog.Close: asChild?; extends ComponentPropsWithRef<'button'>
 - Dialog.CloseButton: label?; extends Omit<ComponentPropsWithRef<'button'>, 'children' | 'asChild'>
@@ -143,6 +147,7 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - FormLabel: children, required?, optional?, htmlFor?; extends React.LabelHTMLAttributes<HTMLLabelElement>
 - Grid: columns?, minItemWidth?, gap?, rowGap?, align?, as?; extends ComponentPropsWithRef<'div'>
 - HeaderCell: columnId, label, className?, sortDirection?, onSort?
+- Heading: level?, size?, weight?; extends ComponentPropsWithRef<'h2'>
 - HoverCard: children, content, side?, align?, arrow?, className?, open?, defaultOpen?, onOpenChange?, openDelay?, closeDelay?
 - HoverCard.Arrow: asChild?; extends ComponentPropsWithRef<'span'>
 - HoverCard.Content: container?, forceMount?, onEscapeKeyDown?, side?, align?, sideOffset?, alignOffset?, avoidCollisions?, collisionPadding?, arrowPadding?, hideWhenDetached?; extends ComponentPropsWithRef<'div'>
@@ -151,6 +156,7 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - Icon: name?, src?, size?, color?, variant?; extends React.HTMLAttributes<HTMLDivElement>
 - IconButton: icon, label, tooltip?, variant?, size?, disabled?, loading?, ref?; extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'children' | 'leftIcon' | 'rightIcon' | 'split' | 'onSplitClick' | 'aria-label'>
 - Indexer: items, activeIndex?, offset?, onActiveChange?; extends React.HTMLAttributes<HTMLElement>
+- InfoTooltip: label, text, position?; extends Omit<ComponentPropsWithRef<'button'>, 'children'>
 - InputDate: label?, error?, description?, required?, optional?, disabled?, placeholder?, filled?, mode?, selection?, value?, onChange?, minDate?, maxDate?, isDateUnavailable?, weekStartsOn?, className?
 - InputText: label?, error?, description?, prefix?, suffix?, required?, optional?; extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'prefix' | 'suffix'>
 - InputTextArea: label?, error?, description?, required?, optional?; extends React.TextareaHTMLAttributes<HTMLTextAreaElement>
@@ -195,6 +201,7 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - Popover.Title: asChild?; extends ComponentPropsWithRef<'h2'>
 - Popover.Trigger: asChild?; extends ComponentPropsWithRef<'button'>
 - Progress: value, max?, label?
+- ProgressCircle: value?, max?, label, size?, showValue?; extends Omit<ComponentPropsWithRef<'div'>, 'children'>
 - RadioCardGroup: label, options, value?, defaultValue?, onValueChange?, description?, name?, columns?, disabled?, required?, className?
 - RadioGroup: name, label?, options, value, onChange, disabled?, className?
 - RangeSlider: label, value?, defaultValue?, onValueChange?, onValueCommit?, min?, max?, step?, minStepsBetweenThumbs?, formatOptions?, locale?, showValue?, thumbLabels?, description?, error?, disabled?, name?, className?
@@ -228,7 +235,9 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - Skeleton: shape?, width?, height?, lines?; extends ComponentPropsWithRef<'span'>
 - Slider: label?, description?, error?, value?, defaultValue?, min?, max?, step?, onChange?, onValueChange?, showValue?, disabled?, className?; extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'onChange'>
 - Spinner: size?, label?; extends ComponentPropsWithRef<'span'>
-- Splitter: variant; extends React.ButtonHTMLAttributes<HTMLButtonElement>
+- SplitButton.Root: variant?, size?, label?; extends ComponentPropsWithRef<'div'>
+- SplitButton.Splitter: variant?, size?, label?; extends ComponentPropsWithRef<'button'>
+- Splitter: variant?, size?, label?; extends ComponentPropsWithRef<'button'>
 - Stack: direction?, gap?, align?, justify?, wrap?, as?; extends ComponentPropsWithRef<'div'>
 - Stat: label, value, formatOptions?, locale?, delta?, deltaFormatOptions?, deltaLabel?, trend?, invertTrend?, description?, chart?, animate?, size?, className?
 - Step: title?, description?, stepValue?, status?, isLast?, onClick?, clickable?, onSelect?; extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onClick' | 'onSelect'>
@@ -249,6 +258,7 @@ Every component is a named export: `import { Name } from 'pada-ds'`. Props marke
 - Text: children, size?, weight?, family?, lineHeight?, color?, as?; extends React.HTMLAttributes<HTMLSpanElement>
 - ThemeProvider: children?, defaultTheme?, onThemeChange?, target?, storageKey?, accentHue?, theme?, accent?, neutral?, density?, radius?, motion?, contrast?
 - ThemeToggle: className?, size?
+- TimePicker: label?, description?, error?, value?, defaultValue?, onValueChange?, granularity?, hourCycle?, locale?, minuteStep?, min?, max?, required?, optional?, disabled?, readOnly?, name?; extends Omit<ComponentPropsWithRef<'div'>, 'defaultValue' | 'onChange' | 'children'>
 - Timeline: items?, children?, density?; extends Omit<ComponentPropsWithRef<'ol'>, 'children'>
 - Timeline.Item: title, time?, icon?, tone?, pending?, children?; extends Omit<ComponentPropsWithRef<'li'>, 'title'>
 - TimelineItem: title, time?, icon?, tone?, pending?, children?; extends Omit<ComponentPropsWithRef<'li'>, 'title'>

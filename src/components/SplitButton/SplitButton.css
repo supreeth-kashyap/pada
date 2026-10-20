@@ -1,0 +1,20 @@
+.split-button {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+}
+
+/* The main half: square inner corners. */
+.split-button .button:not(.button-splitter) {
+  border-start-end-radius: 0;
+  border-end-end-radius: 0;
+}
+
+/* Secondary halves share one border instead of drawing two. */
+.split-button[data-variant="secondary"] .button:not(.button-splitter) {
+  border-inline-end-width: 0;
+}
+
+.split-button .button:is(:hover, :focus-visible) {
+  z-index: var(--pada-z-raised);
+}

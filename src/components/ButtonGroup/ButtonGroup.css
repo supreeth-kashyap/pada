@@ -1,0 +1,46 @@
+.button-group {
+  /* Component tokens */
+  --pada-button-group-gap: var(--pada-space-2);
+
+  display: inline-flex;
+  align-items: center;
+  gap: var(--pada-button-group-gap);
+}
+
+.button-group[data-orientation="vertical"] {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* Attached: one control. Neighbours share a border and only the outer corners are rounded. */
+.button-group[data-attached] {
+  --pada-button-group-gap: 0;
+}
+
+.button-group[data-attached][data-orientation="horizontal"] > .button:not(:first-child) {
+  margin-inline-start: calc(-1 * var(--pada-border-width-thin));
+  border-start-start-radius: 0;
+  border-end-start-radius: 0;
+}
+.button-group[data-attached][data-orientation="horizontal"] > .button:not(:last-child) {
+  border-start-end-radius: 0;
+  border-end-end-radius: 0;
+}
+
+.button-group[data-attached][data-orientation="vertical"] > .button {
+  width: auto;
+}
+.button-group[data-attached][data-orientation="vertical"] > .button:not(:first-child) {
+  margin-block-start: calc(-1 * var(--pada-border-width-thin));
+  border-start-start-radius: 0;
+  border-start-end-radius: 0;
+}
+.button-group[data-attached][data-orientation="vertical"] > .button:not(:last-child) {
+  border-end-start-radius: 0;
+  border-end-end-radius: 0;
+}
+
+/* The hovered or focused button draws its border (and focus ring) above its neighbours. */
+.button-group[data-attached] > .button:is(:hover, :focus-visible) {
+  z-index: var(--pada-z-raised);
+}

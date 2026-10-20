@@ -60,7 +60,7 @@ test('props, types, defaults and descriptions come from the source', () => {
     type: 'ButtonVariant',
     required: false,
     default: "'primary'",
-    description: '',
+    description: "Visual emphasis. Inside a `ButtonGroup` or `SplitButton.Root`, defaults to the group's.",
   });
   assert.deepEqual(button.extends, ['React.ButtonHTMLAttributes<HTMLButtonElement>']);
 

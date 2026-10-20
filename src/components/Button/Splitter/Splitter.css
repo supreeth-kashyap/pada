@@ -1,63 +1,36 @@
-.button-splitter {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: var(--pada-space-8);
-  height: var(--pada-space-8);
-  border-radius: var(--pada-radius-md);
-  border: 1px solid transparent;
-  box-sizing: border-box;
-  cursor: pointer;
-  padding: 0;
+/* The chevron half of a split button: square, as wide as it is tall. Only overrides Button's
+   component tokens. */
+.button.button-splitter {
+  --pada-button-pad-x: 0;
+  --pada-button-splitter-divider: var(--pada-color-accent-solid-pressed);
+
+  width: var(--pada-button-height);
+  border-start-start-radius: 0;
+  border-end-start-radius: 0;
+  border-inline-start-color: var(--pada-button-splitter-divider);
 }
 
-.button-splitter .icon {
+.button.button-splitter[data-variant="secondary"] {
+  --pada-button-splitter-divider: var(--pada-color-border);
+}
+
+.button.button-splitter:hover:not(:disabled) {
+  border-inline-start-color: var(--pada-button-border-hover);
+}
+
+.button.button-splitter[data-variant="primary"]:hover:not(:disabled) {
+  border-inline-start-color: var(--pada-button-splitter-divider);
+}
+
+.button.button-splitter:disabled {
+  border-inline-start-color: var(--pada-button-border-disabled);
+}
+
+.button.button-splitter .button__icon {
   --icon-color: currentColor;
 }
 
-.button-splitter--primary {
-  background-color: var(--pada-color-accent-600);
-  color: var(--pada-color-accent-50);
-  border-color: var(--pada-color-accent-600);
-  border-left-color: var(--pada-color-accent-700);
-}
-
-.button-splitter--primary:hover:not(:disabled) {
-  background-color: var(--pada-color-accent-700);
-  border-color: var(--pada-color-accent-700);
-}
-
-.button-splitter--primary:disabled {
-  background-color: var(--pada-color-accent-200);
-  color: var(--pada-color-accent-400);
-  border-color: var(--pada-color-accent-200);
-}
-
-.button-splitter--secondary {
-  background-color: var(--pada-color-surface);
-  color: var(--pada-color-neutral-900);
-  border-color: var(--pada-color-neutral-200);
-  border-left-color: var(--pada-color-neutral-200);
-}
-
-.button-splitter--secondary:hover:not(:disabled) {
-  border-color: var(--pada-color-accent-600);
-  color: var(--pada-color-accent-700);
-}
-
-.button-splitter--secondary:disabled {
-  color: var(--pada-color-neutral-400);
-  border-color: var(--pada-color-neutral-200);
-}
-
-.button-splitter:focus {
-  outline: none;
-}
-
-.button-splitter:focus-visible {
-  box-shadow: var(--pada-shadow-focus);
-}
-
-.button-splitter:disabled {
-  cursor: not-allowed;
+/* Only a trailing label icon nudges on hover; the chevron stays put. */
+.button.button-splitter:hover:not(:disabled) > .button__icon {
+  translate: none;
 }

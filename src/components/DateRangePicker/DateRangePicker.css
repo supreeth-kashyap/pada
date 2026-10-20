@@ -1,0 +1,240 @@
+.date-range-picker {
+  /* Component tokens */
+  --pada-date-range-picker-height: var(--pada-control-height-md);
+  --pada-date-range-picker-min-width: 320px;
+  --pada-date-range-picker-bg: var(--pada-color-surface);
+  --pada-date-range-picker-fg: var(--pada-color-fg);
+  --pada-date-range-picker-border: var(--pada-color-border-strong);
+  --pada-date-range-picker-border-hover: var(--pada-color-neutral-500);
+  --pada-date-range-picker-border-focus: var(--pada-color-accent-solid);
+  --pada-date-range-picker-ring: var(--pada-color-accent-subtle);
+  --pada-date-range-picker-radius: var(--pada-radius-lg);
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--pada-space-1);
+  font-family: var(--pada-font-sans);
+}
+
+/* Variant variables */
+.date-range-picker[data-invalid] {
+  --pada-date-range-picker-border: var(--pada-color-danger-solid);
+  --pada-date-range-picker-border-hover: var(--pada-color-danger-solid);
+  --pada-date-range-picker-border-focus: var(--pada-color-danger-solid);
+  --pada-date-range-picker-ring: var(--pada-color-danger-subtle);
+}
+
+.date-range-picker[data-disabled] {
+  --pada-date-range-picker-bg: var(--pada-color-surface-sunken);
+  --pada-date-range-picker-border: var(--pada-color-border-subtle);
+  --pada-date-range-picker-border-hover: var(--pada-color-border-subtle);
+  --pada-date-range-picker-fg: var(--pada-color-fg-disabled);
+}
+
+/* Child elements */
+.date-range-picker-label {
+  font-size: var(--pada-font-size-sm);
+  font-weight: var(--pada-font-weight-medium);
+  line-height: var(--pada-line-height-md);
+  color: var(--pada-color-fg);
+}
+
+.date-range-picker-label[data-disabled] {
+  color: var(--pada-color-fg-disabled);
+}
+
+.date-range-picker-required {
+  margin-inline-start: var(--pada-space-0-5);
+  color: var(--pada-color-danger-fg);
+}
+
+.date-range-picker-optional {
+  margin-inline-start: var(--pada-space-1);
+  font-size: var(--pada-font-size-xs);
+  font-weight: var(--pada-font-weight-regular);
+  color: var(--pada-color-fg-subtle);
+}
+
+.date-range-picker-field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--pada-space-2);
+  box-sizing: border-box;
+  width: fit-content;
+  min-width: var(--pada-date-range-picker-min-width);
+  height: var(--pada-date-range-picker-height);
+  padding: 0 var(--pada-space-4);
+  border: var(--pada-border-width-thin) solid var(--pada-date-range-picker-border);
+  border-radius: var(--pada-date-range-picker-radius);
+  background-color: var(--pada-date-range-picker-bg);
+  color: var(--pada-date-range-picker-fg);
+  font: inherit;
+  font-size: var(--pada-font-size-md);
+  line-height: var(--pada-line-height-md);
+  text-align: start;
+  cursor: pointer;
+  transition:
+    border-color var(--pada-duration-normal) var(--pada-ease-standard),
+    box-shadow var(--pada-duration-normal) var(--pada-ease-standard);
+}
+
+.date-range-picker-field:hover:not(:disabled),
+.date-range-picker-field[data-state="open"] {
+  border-color: var(--pada-date-range-picker-border-hover);
+}
+
+.date-range-picker-field:focus-visible {
+  outline: none;
+  border-color: var(--pada-date-range-picker-border-focus);
+  box-shadow: 0 0 0 3px var(--pada-date-range-picker-ring);
+}
+
+.date-range-picker-field:disabled {
+  cursor: not-allowed;
+}
+
+.date-range-picker-value[data-placeholder] {
+  color: var(--pada-color-fg-subtle);
+}
+
+.date-range-picker-icon {
+  flex-shrink: 0;
+  color: var(--pada-color-fg-muted);
+}
+
+/* The picker: in the top layer, positioned under the field (it flips when there is no room). */
+.date-range-picker-popover {
+  z-index: var(--pada-z-popover);
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  overflow: visible;
+  outline: none;
+  transform-origin: var(--pada-floating-transform-origin);
+  transition:
+    opacity var(--pada-duration-normal) var(--pada-ease-enter),
+    scale var(--pada-duration-normal) var(--pada-ease-enter);
+}
+
+.date-range-picker-popover[data-state="closed"] {
+  opacity: 0;
+  scale: var(--pada-motion-scale-enter);
+  transition-duration: var(--pada-duration-fast);
+  transition-timing-function: var(--pada-ease-exit);
+}
+
+@starting-style {
+  .date-range-picker-popover[data-state="open"] {
+    opacity: 0;
+    scale: var(--pada-motion-scale-enter);
+  }
+}
+
+.date-range-picker-description,
+.date-range-picker-error {
+  margin: 0;
+  font-size: var(--pada-font-size-xs);
+  line-height: var(--pada-line-height-md);
+}
+
+.date-range-picker-description {
+  color: var(--pada-color-fg-muted);
+}
+
+.date-range-picker-error {
+  color: var(--pada-color-danger-fg);
+}
+
+/* The dialog's card: presets beside the months. */
+.date-range-picker-panel {
+  /* Component tokens */
+  --pada-date-range-picker-panel-bg: var(--pada-color-surface);
+  --pada-date-range-picker-panel-border: var(--pada-color-border);
+  --pada-date-range-picker-panel-radius: var(--pada-radius-2xl);
+  --pada-date-range-picker-panel-shadow: var(--pada-shadow-lg);
+  --pada-date-range-picker-panel-pad: var(--pada-space-6);
+
+  display: flex;
+  gap: var(--pada-space-6);
+  box-sizing: border-box;
+  padding: var(--pada-date-range-picker-panel-pad);
+  border: var(--pada-border-width-thin) solid var(--pada-date-range-picker-panel-border);
+  border-radius: var(--pada-date-range-picker-panel-radius);
+  background-color: var(--pada-date-range-picker-panel-bg);
+  box-shadow: var(--pada-date-range-picker-panel-shadow);
+  color: var(--pada-color-fg);
+  font-family: var(--pada-font-sans);
+}
+
+.date-range-picker-presets {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pada-space-1);
+  min-width: 140px;
+  margin: 0;
+  padding: 0 var(--pada-space-4) 0 0;
+  border-inline-end: var(--pada-border-width-thin) solid var(--pada-color-border-subtle);
+  list-style: none;
+}
+
+.date-range-picker-preset {
+  width: 100%;
+  padding: var(--pada-space-1-5) var(--pada-space-3);
+  border: none;
+  border-radius: var(--pada-radius-lg);
+  background: none;
+  color: var(--pada-color-fg);
+  font: inherit;
+  font-size: var(--pada-font-size-sm);
+  text-align: start;
+  cursor: pointer;
+  transition:
+    background-color var(--pada-duration-fast) var(--pada-ease-standard),
+    color var(--pada-duration-fast) var(--pada-ease-standard);
+}
+
+.date-range-picker-preset:hover {
+  background-color: var(--pada-color-neutral-subtle-hover);
+}
+
+.date-range-picker-preset[data-selected] {
+  background-color: var(--pada-color-accent-subtle);
+  color: var(--pada-color-accent-fg);
+  font-weight: var(--pada-font-weight-medium);
+}
+
+.date-range-picker-preset:focus-visible {
+  outline: none;
+  box-shadow: var(--pada-shadow-focus);
+}
+
+.date-range-picker-months {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--pada-space-8);
+}
+
+.date-range-picker-month {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pada-space-3);
+}
+
+.date-range-picker-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--pada-space-2);
+}
+
+/* Keeps the heading centred over its grid where a month has no nav button. */
+.date-range-picker-nav-space {
+  width: var(--pada-calendar-cell-size);
+}
+
+.date-range-picker-icon {
+  --icon-color: currentColor;
+}

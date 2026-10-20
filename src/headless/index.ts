@@ -18,6 +18,7 @@ export * from './Tree';
 export * from './HoverCard';
 export * from './Slider';
 export * from './PinInput';
+export * from './TimeField';
 export * from './Resizable';
 export * from './DataTable';
 

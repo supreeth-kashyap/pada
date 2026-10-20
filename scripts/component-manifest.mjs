@@ -95,6 +95,14 @@ function propsTypeNode(declaration, fn) {
 const decodeEscapes = (text) =>
   text.replace(/\\u([0-9a-fA-F]{4})/g, (_, hex) => String.fromCharCode(parseInt(hex, 16)));
 
+// A prop's `@default` tag, for defaults resolved in the body (from a context, say) rather than
+// in the destructuring.
+function docDefault(node) {
+  const tag = ts.getJSDocTags(node).find((entry) => entry.tagName.text === 'default');
+  const text = typeof tag?.comment === 'string' ? tag.comment : ts.getTextOfJSDocComment(tag?.comment);
+  return text ? collapse(text) : null;
+}
+
 function docText(node) {
   const docs = ts.getJSDocCommentsAndTags(node).filter(ts.isJSDoc);
   const last = docs[docs.length - 1];
@@ -149,6 +157,7 @@ function collectProps(checker, typeNode, componentName) {
         type: collapse(member.type.getText()),
         required: !member.questionToken,
         description: docText(member),
+        docDefault: docDefault(member),
       });
     }
   };
@@ -236,7 +245,7 @@ function componentEntry(checker, name, exportName, declaration) {
       name: prop.name,
       type: prop.type,
       required: prop.required,
-      default: defaults.get(prop.name) ?? null,
+      default: defaults.get(prop.name) ?? prop.docDefault ?? null,
       description: prop.description,
     })),
   };

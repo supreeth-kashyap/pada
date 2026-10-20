@@ -51,6 +51,10 @@ interface CalendarContextValue {
   disabled: boolean;
   readOnly: boolean;
   headingId: string;
+  /** Months shown side by side (`numberOfMonths`). */
+  monthCount: number;
+  /** The day marked as today. */
+  today: Date;
   /** Set by keyboard navigation so the newly focused day takes DOM focus after rendering. */
   shouldMoveFocus: React.RefObject<boolean>;
 }
@@ -74,6 +78,13 @@ interface CalendarRootBaseProps extends Omit<ComponentPropsWithRef<'div'>, 'defa
   weekStartsOn?: number;
   /** Locale for month and day names. Defaults to the browser's. */
   locale?: string;
+  /**
+   * Months shown side by side. Render a `Calendar.Heading` and a `Calendar.Grid` per month with
+   * `monthOffset` 0 … n-1; keyboard focus moves across them. @default 1
+   */
+  numberOfMonths?: number;
+  /** The day marked as today. Defaults to the current date. */
+  today?: Date;
   disabled?: boolean;
   readOnly?: boolean;
 }
@@ -133,6 +144,8 @@ function CalendarImpl({
     isDateUnavailable,
     weekStartsOn = 0,
     locale,
+    numberOfMonths = 1,
+    today: todayProp,
     disabled = false,
     readOnly = false,
     ...props
@@ -145,7 +158,8 @@ function CalendarImpl({
   anchor: Date | null;
   rest: CalendarRootBaseProps;
 }) {
-  const initial = clampDay(anchor ?? defaultMonth ?? new Date(), min, max);
+  // The tab stop starts on the selection, else today (moved into the shown months below).
+  const initial = clampDay(anchor ?? todayProp ?? new Date(), min, max);
   const [month, setMonthState] = useControllableState<Date>({
     prop: monthProp && startOfMonth(monthProp),
     defaultProp: startOfMonth(defaultMonth ?? initial),
@@ -155,6 +169,10 @@ function CalendarImpl({
   const [preview, setPreview] = useState<Date | null>(null);
   const headingId = useId();
   const shouldMoveFocus = useRef(false);
+  const monthCount = Math.max(1, Math.floor(numberOfMonths));
+  const lastMonth = addMonths(month, monthCount - 1);
+  const todayTime = startOfDay(todayProp ?? new Date()).getTime();
+  const today = useMemo(() => new Date(todayTime), [todayTime]);
 
   const isUnavailable = useCallback(
     (date: Date) =>
@@ -175,15 +193,20 @@ function CalendarImpl({
       const next = clampDay(date, min, max);
       shouldMoveFocus.current = moveFocus;
       setFocusedState(next);
-      setMonth(next);
+      // With several months shown, the view only scrolls when the day is outside all of them.
+      const first = startOfMonth(next);
+      if (first < month) setMonth(first);
+      else if (first > addMonths(month, monthCount - 1)) setMonth(addMonths(first, 1 - monthCount));
     },
-    [min, max, setMonth],
+    [min, max, month, monthCount, setMonth],
   );
 
-  // Keep the focusable day inside the visible month (after Prev/Next, or a controlled month).
-  const focusedInMonth = isSameMonth(focused, month)
-    ? focused
-    : clampDay(addMonths(focused, (month.getFullYear() - focused.getFullYear()) * 12 + month.getMonth() - focused.getMonth()), min, max);
+  // Keep the focusable day inside the visible months (after Prev/Next, or a controlled month):
+  // outside them it moves to the same day of the nearest shown month.
+  const focusedMonth = startOfMonth(focused);
+  const target = focusedMonth < month ? month : focusedMonth > lastMonth ? lastMonth : null;
+  const monthsBetween = (from: Date, to: Date) => (to.getFullYear() - from.getFullYear()) * 12 + to.getMonth() - from.getMonth();
+  const focusedInMonth = target ? clampDay(addMonths(focused, monthsBetween(focusedMonth, target)), min, max) : focused;
 
   const select = useCallback(
     (date: Date) => {
@@ -215,9 +238,11 @@ function CalendarImpl({
       disabled,
       readOnly,
       headingId,
+      monthCount,
+      today,
       shouldMoveFocus,
     }),
-    [mode, selected, range, select, month, setMonth, focusedInMonth, setFocused, preview, isUnavailable, min, max, weekStartsOn, locale, disabled, readOnly, headingId],
+    [mode, selected, range, select, month, setMonth, focusedInMonth, setFocused, preview, isUnavailable, min, max, weekStartsOn, locale, disabled, readOnly, headingId, monthCount, today],
   );
 
   return (
@@ -228,6 +253,8 @@ function CalendarImpl({
 }
 
 export interface CalendarHeadingProps extends ComponentPropsWithRef<'h2'> {
+  /** Which shown month this heads, with `numberOfMonths` > 1: 0 is the first. @default 0 */
+  monthOffset?: number;
   /**
    * Merge onto your own element (a button that opens a month picker) instead of an `<h2>`. The
    * element gets the month label as its content unless it has content of its own.
@@ -236,22 +263,26 @@ export interface CalendarHeadingProps extends ComponentPropsWithRef<'h2'> {
 }
 
 /** The visible month and year ("March 2026"). Labels the grid and is announced when it changes. */
-export function CalendarHeading({ asChild, children, ...props }: CalendarHeadingProps) {
+export function CalendarHeading({ monthOffset = 0, asChild, children, ...props }: CalendarHeadingProps) {
   const context = useCalendarContext('Calendar.Heading');
-  const label = new Intl.DateTimeFormat(context.locale, { month: 'long', year: 'numeric' }).format(context.month);
+  const label = new Intl.DateTimeFormat(context.locale, { month: 'long', year: 'numeric' }).format(addMonths(context.month, monthOffset));
+  const id = headingIdAt(context.headingId, monthOffset);
   if (asChild && isValidElement<{ children?: ReactNode }>(children)) {
     return (
-      <Slot id={context.headingId} aria-live="polite" {...props}>
+      <Slot id={id} aria-live="polite" {...props}>
         {cloneElement(children, undefined, children.props.children ?? label)}
       </Slot>
     );
   }
   return (
-    <h2 id={context.headingId} aria-live="polite" {...props}>
+    <h2 id={id} aria-live="polite" {...props}>
       {children ?? label}
     </h2>
   );
 }
+
+/** Id of the heading of the month at `offset`, which labels that month's grid. */
+const headingIdAt = (headingId: string, offset: number) => (offset ? `${headingId}-${offset}` : headingId);
 
 export interface CalendarNavButtonProps extends ComponentPropsWithRef<'button'> {
   asChild?: boolean;
@@ -260,11 +291,12 @@ export interface CalendarNavButtonProps extends ComponentPropsWithRef<'button'> 
 function CalendarNavButton({ direction, asChild, onClick, ...props }: CalendarNavButtonProps & { direction: 1 | -1 }) {
   const context = useCalendarContext(direction === 1 ? 'Calendar.NextButton' : 'Calendar.PrevButton');
   const target = addMonths(context.month, direction);
-  // No month beyond the limits to show.
+  // No month beyond the limits to show (with several months, the one coming into view at the end).
+  const entering = direction === 1 ? addMonths(target, context.monthCount - 1) : target;
   const blocked =
     context.disabled ||
-    (direction === -1 && !!context.min && compareDays(new Date(target.getFullYear(), target.getMonth() + 1, 0), context.min) < 0) ||
-    (direction === 1 && !!context.max && compareDays(target, context.max) > 0);
+    (direction === -1 && !!context.min && compareDays(new Date(entering.getFullYear(), entering.getMonth() + 1, 0), context.min) < 0) ||
+    (direction === 1 && !!context.max && compareDays(entering, context.max) > 0);
   const Component = asChild ? Slot : 'button';
   return (
     <Component
@@ -310,18 +342,21 @@ export interface CalendarGridProps extends Omit<ComponentPropsWithRef<'table'>, 
   hideOutsideDays?: boolean;
   /** Class name for each day button. */
   dayClassName?: string;
+  /** Which shown month this grid renders, with `numberOfMonths` > 1: 0 is the first. @default 0 */
+  monthOffset?: number;
 }
 
 /**
  * The month grid (`role="grid"`): arrow keys move by day and week, Home/End to the week's ends,
  * PageUp/PageDown by month (with Shift, by year), Enter or Space selects.
  */
-export function CalendarGrid({ renderDay, hideOutsideDays, dayClassName, onKeyDown, ...props }: CalendarGridProps) {
+export function CalendarGrid({ renderDay, hideOutsideDays, dayClassName, monthOffset = 0, onKeyDown, ...props }: CalendarGridProps) {
   const context = useCalendarContext('Calendar.Grid');
-  const { month, focused, weekStartsOn, locale, mode, range, preview } = context;
+  const { focused, weekStartsOn, locale, mode, range, preview, today, monthCount } = context;
+  const monthTime = addMonths(context.month, monthOffset).getTime();
+  const month = useMemo(() => new Date(monthTime), [monthTime]);
   const weeks = useMemo(() => getMonthGrid(month, weekStartsOn), [month, weekStartsOn]);
   const gridRef = useRef<HTMLTableElement>(null);
-  const today = new Date();
 
   const weekdays = useMemo(() => {
     const short = new Intl.DateTimeFormat(locale, { weekday: 'short' });
@@ -330,11 +365,14 @@ export function CalendarGrid({ renderDay, hideOutsideDays, dayClassName, onKeyDo
   }, [weeks, locale]);
   const dayLabel = useMemo(() => new Intl.DateTimeFormat(locale, { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' }), [locale]);
 
-  // Keyboard navigation moves DOM focus to the newly focused day once it is rendered.
+  // Keyboard navigation moves DOM focus to the newly focused day once it is rendered. With
+  // several months shown, the grid that holds it takes focus.
   useLayoutEffect(() => {
     if (!context.shouldMoveFocus.current) return;
+    const day = gridRef.current?.querySelector<HTMLElement>('[data-focused]');
+    if (!day) return;
     context.shouldMoveFocus.current = false;
-    gridRef.current?.querySelector<HTMLElement>('[data-focused]')?.focus({ preventScroll: true });
+    day.focus({ preventScroll: true });
   });
 
   const [rangeStart, rangeEnd] = range ?? [];
@@ -369,7 +407,7 @@ export function CalendarGrid({ renderDay, hideOutsideDays, dayClassName, onKeyDo
   return (
     <table
       role="grid"
-      aria-labelledby={context.headingId}
+      aria-labelledby={headingIdAt(context.headingId, monthOffset)}
       aria-readonly={context.readOnly || undefined}
       aria-disabled={context.disabled || undefined}
       aria-multiselectable={mode === 'range' || undefined}
@@ -402,7 +440,8 @@ export function CalendarGrid({ renderDay, hideOutsideDays, dayClassName, onKeyDo
                 today: isSameDay(date, today),
                 outsideMonth,
                 unavailable,
-                focused: isSameDay(date, focused),
+                // With several months, a day shown muted in a neighbour's grid never takes the tab stop.
+                focused: isSameDay(date, focused) && !(outsideMonth && monthCount > 1),
                 rangeStart: false,
                 rangeEnd: false,
                 inRange: false,

@@ -1,0 +1,23 @@
+.info-tooltip {
+  /* Component tokens */
+  --pada-info-tooltip-icon: var(--pada-color-fg-muted);
+
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  padding: 0;
+  border: 0;
+  border-radius: var(--pada-radius-full);
+  background: none;
+  color: var(--pada-info-tooltip-icon);
+  cursor: help;
+}
+
+.info-tooltip .icon {
+  --icon-color: currentColor;
+}
+
+.info-tooltip:focus-visible {
+  outline: none;
+  box-shadow: var(--pada-shadow-focus);
+}
