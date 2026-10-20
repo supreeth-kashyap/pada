@@ -1,7 +1,10 @@
 # Changelog
 
-## Unreleased
+## 1.2.0 - 2026-10-20
 
+Pada 1.2 brings React to parity with Pada for Angular (`pada-ds-angular` 1.2.0, released alongside it): the same components, parts, keyboard behaviour, tokens and motion. Component APIs from 1.1 keep working; deprecated names stay until 3.0. Read the [upgrade guide](./docs/migration-2.0.md) for everything you might notice.
+
+- **Releases.** Pushing a `v*` tag runs `.github/workflows/release.yml`: it checks the tag against `package.json`, publishes `pada-ds` to npm with provenance and `@supreeth-kashyap/pada-ds` to GitHub Packages, and creates the GitHub Release from this changelog.
 - **New components, matching Pada for Angular** (same parts, attributes, keyboard behaviour and tokens):
   - **`ButtonGroup`.** A `role="group"` of buttons named by `label`, in a row or a column. Buttons without their own `size` / `variant` take the group's; `attached` joins them into one segmented control.
   - **`SplitButton`.** `SplitButton.Root` joins a main `Button` to `SplitButton.Splitter`, a chevron button that is usually a `DropdownMenu.Trigger`. Both halves take the root's variant and size.

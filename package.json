@@ -1,9 +1,18 @@
 {
   "name": "pada-ds",
   "private": false,
-  "version": "1.1.0",
-  "description": "Singular design system for React applications, built with TypeScript and Vite.",
+  "version": "1.2.0",
+  "description": "Pada design system for React: accessible styled components, headless parts and design tokens.",
   "license": "MIT",
+  "author": "Supreeth Kashyap",
+  "homepage": "https://github.com/supreeth-kashyap/pada#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/supreeth-kashyap/pada.git"
+  },
+  "bugs": {
+    "url": "https://github.com/supreeth-kashyap/pada/issues"
+  },
   "type": "module",
   "main": "./dist/pada.js",
   "module": "./dist/pada.js",

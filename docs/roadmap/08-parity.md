@@ -96,7 +96,7 @@ React 2.0 deprecates its 1.x names, removed in 3.0: `Modal` (Dialog), `SideDrawe
 
 | Foundation | React | Angular |
 |---|---|---|
-| Tokens (CSS custom properties) | ✅ | ✅ synced `tokens.css` v1.1.0, enforced by `tokens:check` |
+| Tokens (CSS custom properties) | ✅ | ✅ synced `tokens.css` v1.2.0, enforced by `tokens:check` |
 | Light/dark theming | ✅ | ✅ `ThemeService`, `[dsTheme]` scopes |
 | Headless core | ✅ | ✅ `pada-ds-angular/headless` |
 | Motion tokens | ✅ | ✅ (read from the synced tokens) |

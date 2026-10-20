@@ -1,0 +1,89 @@
+name: Release
+
+# Push a tag that matches package.json (git tag v1.2.0 && git push origin v1.2.0) to publish
+# pada-ds to npm and GitHub Packages and create the GitHub Release from CHANGELOG.md.
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write # create the GitHub Release
+  packages: write # publish to GitHub Packages
+  id-token: write # npm provenance and trusted publishing
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          registry-url: https://registry.npmjs.org
+
+      # Trusted publishing (OIDC) needs npm 11.5 or later.
+      - run: npm install -g npm@11
+
+      - run: npm ci
+
+      - name: Check the tag matches package.json
+        run: |
+          version="$(node -p "require('./package.json').version")"
+          if [ "$GITHUB_REF_NAME" != "v$version" ]; then
+            echo "::error::Tag $GITHUB_REF_NAME does not match package.json version $version"
+            exit 1
+          fi
+          echo "VERSION=$version" >> "$GITHUB_ENV"
+
+      - run: npm run lint
+      - run: npm test
+      - run: npm run check:tokens
+      - run: npm run build
+
+      # Skips a version that is already on npm, so a failed run can be re-run.
+      - name: Publish to npm
+        run: |
+          if npm view "pada-ds@$VERSION" version > /dev/null 2>&1; then
+            echo "pada-ds@$VERSION is already on npm"
+          else
+            npm publish --provenance --access public --ignore-scripts
+          fi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      # GitHub Packages only takes scoped names; this is what the repo's Packages panel lists.
+      - name: Publish to GitHub Packages
+        run: |
+          echo "//npm.pkg.github.com/:_authToken=\${NODE_AUTH_TOKEN}" >> "$NPM_CONFIG_USERCONFIG"
+          npm pkg set name=@supreeth-kashyap/pada-ds
+          if npm view "@supreeth-kashyap/pada-ds@$VERSION" version --registry=https://npm.pkg.github.com > /dev/null 2>&1; then
+            echo "@supreeth-kashyap/pada-ds@$VERSION is already on GitHub Packages"
+          else
+            npm publish --registry=https://npm.pkg.github.com --ignore-scripts
+          fi
+          git checkout package.json
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create the GitHub Release
+        run: |
+          # This version's section of CHANGELOG.md, without its heading.
+          awk -v v="$VERSION" '
+            $0 ~ "^## " v "( |$)" { found = 1; next }
+            found && /^## / { exit }
+            found { print }
+          ' CHANGELOG.md > release-notes.md
+          printf '\n**npm:** [`pada-ds@%s`](https://www.npmjs.com/package/pada-ds/v/%s)\n' "$VERSION" "$VERSION" >> release-notes.md
+          if gh release view "$GITHUB_REF_NAME" > /dev/null 2>&1; then
+            gh release edit "$GITHUB_REF_NAME" --notes-file release-notes.md
+          else
+            gh release create "$GITHUB_REF_NAME" --title "Pada $GITHUB_REF_NAME" --notes-file release-notes.md --verify-tag
+          fi
+        env:
+          GH_TOKEN: ${{ github.token }}
