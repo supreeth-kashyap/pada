@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { FormLabel } from './FormLabel';
 
 const meta = {
-  title: 'Components/FormLabel',
+  title: 'Legacy/FormLabel',
   component: FormLabel,
   tags: ['autodocs'],
   args: { children: 'Email', htmlFor: 'email' },

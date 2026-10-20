@@ -7,7 +7,7 @@ export default function NotificationDemo() {
     <DemoPage
       title="Notification"
       kind="Component"
-      purpose={<p>Notification surfaces transient feedback — success, error, info, or warning — typically after the user takes an action (saved, deleted, copied). Use it for short, time-bound messages that auto-dismiss; for persistent system messages, use Banner instead.</p>}
+      purpose={<p><strong>Deprecated since 2.0, removed in 3.0.</strong> Use <strong>Toast</strong> (<code>Toaster</code> and <code>toast()</code>) instead: queued, stacked, swipe to dismiss. Notification surfaces transient feedback — success, error, info, or warning — typically after the user takes an action (saved, deleted, copied). Use it for short, time-bound messages that auto-dismiss; for persistent system messages, use Banner instead.</p>}
       design={<><p>Notification renders a toast with a title, optional subtitle, and optional visual. Toasts are positioned in one of six corners and slide in from the matching edge.</p><div className="demo-page__showcase" style={{ flexDirection: 'column', gap: 16 }}><div style={{ display: 'flex', flexDirection: 'column', gap: 12, position: 'relative', minHeight: 160 }}><Notification open onOpenChange={() => {}} title="Saved" subtitle="Your changes are live." position="top-right" /></div></div></>}
       developer={<><p>Import the <code>Notification</code> from <code>pada-ds</code> and configure with the props shown below.</p><CodeSnippet code={`import { useState } from 'react';
 import { Notification } from 'pada-ds';

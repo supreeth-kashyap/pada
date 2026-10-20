@@ -4,7 +4,7 @@ import { Button } from '../Button';
 import { Modal } from './Modal';
 
 const meta = {
-  title: 'Components/Modal',
+  title: 'Legacy/Modal',
   component: Modal,
   tags: ['autodocs'],
   args: { open: false, onOpenChange: () => {}, title: 'Delete record?', children: 'This cannot be undone.' },

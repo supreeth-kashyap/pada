@@ -2,6 +2,19 @@
 
 ## Unreleased
 
+- **New components, matching Pada for Angular** (same parts, attributes, keyboard behaviour and tokens):
+  - **`ButtonGroup`.** A `role="group"` of buttons named by `label`, in a row or a column. Buttons without their own `size` / `variant` take the group's; `attached` joins them into one segmented control.
+  - **`SplitButton`.** `SplitButton.Root` joins a main `Button` to `SplitButton.Splitter`, a chevron button that is usually a `DropdownMenu.Trigger`. Both halves take the root's variant and size.
+  - **`CheckboxGroup`.** A labelled, described group of checkboxes whose value is the checked option values, in option order. An optional Select all box turns mixed for a partial selection and only changes enabled choices.
+  - **`DateRangePicker`.** A field that opens a two-month range calendar (and optional `presets`) in a popover. The value changes only once both ends are picked; Escape drops a half-picked range.
+  - **`TimePicker`.** A time of day in spinbutton segments, ordered and labelled by the locale through `Intl`, with a 24-hour `"HH:mm"` (or `"HH:mm:ss"`) value. Built on the new headless `TimeField` (`TimeField.Root`, `TimeField.Segment`).
+  - **`DescriptionList`.** A record's attributes from `data`: sections with a header (tooltip, buttons, badges) and a `dl` of rows whose values are text, avatars, badges, buttons or your own content. Button presses come out of `onAction`.
+  - **`Heading`.** A native `h1`–`h6` on the type scale, sized by level unless `size` says otherwise.
+  - **`ProgressCircle`.** A compact `progressbar` ring that fills by value or spins while indeterminate.
+  - **`InfoTooltip`.** An info icon button named "More info about {label}" that opens a Tooltip.
+- **Calendar:** `numberOfMonths` with `monthOffset` on `Calendar.Heading` and `Calendar.Grid` shows several months side by side, with keyboard focus moving across them; `today` sets the day marked as today. With nothing selected, the tab stop now starts on today (moved into the shown months) instead of the first day of the month.
+- **Deprecated** (still work in 2.x, removed in 3.0): `FormLabel` (use `Field`), `Loader` (use `Spinner`, `ProgressCircle` or `Skeleton`), `Notification` (use `Toaster` and `toast()`), and `Button`'s `split` / `onSplitClick` (use `SplitButton`, which they now render). `Splitter` is rebuilt on Button's tokens and takes its variant and size from `SplitButton.Root`.
+- **Storybook:** deprecated components are grouped under **Legacy**; Logo, Toast, Theme and RadioCard stories are titled BrandLogo, Toaster, ThemeProvider and RadioCardGroup, as in Angular.
 - Added explicit `data-theme="light"` and `data-theme="dark"` token sets. They work on `<html>` or any container. With no attribute the theme still follows the OS. Previously, setting `data-theme` removed every semantic token.
 - Moved the `body` and `p` rules out of `dist/tokens.css` into a new optional `pada-ds/base.css` export, so importing the tokens no longer overrides an app's own styles.
 - Added a component API manifest for AI coding agents. `npm run build` now reads every exported component's props from the TypeScript source and writes `dist/manifest.json` (exported as `pada-ds/manifest.json`), `llms.txt` and `llms-full.txt`. Both llms files ship in the package and are committed at the repo root. `npm test` fails if they are stale or if an exported component is missing from the manifest.

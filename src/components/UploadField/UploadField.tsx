@@ -1,6 +1,6 @@
 import React, { useRef, useState, useCallback } from 'react';
 import './UploadField.css';
-import { FormLabel } from '../FormLabel';
+import { ControlLabel } from '../FormLabel/ControlLabel';
 import { Icon } from '../Icon';
 
 export interface UploadedFile {
@@ -201,9 +201,9 @@ export const UploadField: React.FC<UploadFieldProps> = ({
   return (
     <div className={`upload-field-wrapper ${className}`.trim()}>
       {label && (
-        <FormLabel htmlFor={id} required={required}>
+        <ControlLabel htmlFor={id} required={required}>
           {label}
-        </FormLabel>
+        </ControlLabel>
       )}
 
       <div

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './InputDate.css';
-import { FormLabel } from '../FormLabel';
+import { ControlLabel } from '../FormLabel/ControlLabel';
 import { Icon } from '../Icon';
 import { DatePickerDropdown } from '../DatePicker';
 import type { DatePickerMode, DatePickerSelection } from '../DatePicker';
@@ -106,9 +106,9 @@ export const InputDate = ({
   return (
     <div className={`input-date-wrapper ${className}`}>
       {label && (
-        <FormLabel htmlFor={id} required={required} optional={optional}>
+        <ControlLabel htmlFor={id} required={required} optional={optional}>
           {label}
-        </FormLabel>
+        </ControlLabel>
       )}
       <div className="input-date-container">
         <PopoverRoot open={isOpen} onOpenChange={(open) => setIsOpen(open && !disabled)}>

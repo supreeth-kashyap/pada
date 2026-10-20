@@ -147,6 +147,8 @@ import { Accordion } from 'pada-ds';
 
 `import { AccordionContent } from 'pada-ds';`
 
+**Deprecated.** Use `Accordion.Content` inside `Accordion.Item`. The 1.x body on its own.
+
 | Prop | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
 | children | `React.ReactNode` | yes | - | - |
@@ -162,6 +164,8 @@ import { AccordionContent } from 'pada-ds';
 ### AccordionHeader
 
 `import { AccordionHeader } from 'pada-ds';`
+
+**Deprecated.** Use `Accordion.Trigger` inside `Accordion.Item`. The 1.x header button on its own.
 
 | Prop | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
@@ -2222,11 +2226,15 @@ import { FilterChip } from 'pada-ds';
 
 `import { FormLabel } from 'pada-ds';`
 
+**Deprecated.** Since 2.0. Use `Field` (`Field.Root`, `Field.Label`, `Field.Control`, `Field.Description`, `Field.Error`), which also wires the control's id, description and error. Removed in 3.0.
+
+A label with optional required and "(optional)" markers.
+
 | Prop | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
 | children | `React.ReactNode` | yes | - | - |
-| required | `boolean` | no | `false` | - |
-| optional | `boolean` | no | `false` | - |
+| required | `boolean` | no | - | - |
+| optional | `boolean` | no | - | - |
 | htmlFor | `string` | no | - | - |
 
 Also accepts the props of `React.LabelHTMLAttributes<HTMLLabelElement>`.
@@ -2669,6 +2677,10 @@ import { ListItem } from 'pada-ds';
 
 `import { Loader } from 'pada-ds';`
 
+**Deprecated.** Since 2.0. Use `Spinner` for inline loading, `ProgressCircle` when progress is known, or `Skeleton` for content placeholders. Removed in 3.0.
+
+A 1.x loading indicator for a whole area.
+
 | Prop | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
 | size | `LoaderSize` | no | `'xs'` | - |
@@ -2997,6 +3009,8 @@ import { Menubar } from 'pada-ds';
 
 `import { Modal } from 'pada-ds';`
 
+**Deprecated.** Since 2.0. Use `Dialog` (`Dialog.Root`, `Dialog.Content`, `Dialog.Title`, …), which this wraps and which adds a trigger, description, footer and sizes. Removed in 3.0.
+
 A modal dialog with an optional title and a close button.
 
 | Prop | Type | Required | Default | Description |
@@ -3041,6 +3055,10 @@ import { MoreFilter } from 'pada-ds';
 ### Notification
 
 `import { Notification } from 'pada-ds';`
+
+**Deprecated.** Since 2.0. Render one `Toaster` and call `toast()` / `toast.success()` …: toasts are queued, stacked, dismissed by swipe and paused on hover. Removed in 3.0.
+
+A 1.x single toast you open and close yourself.
 
 | Prop | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
@@ -3937,6 +3955,8 @@ import { Sheet } from 'pada-ds';
 ### SideDrawer
 
 `import { SideDrawer } from 'pada-ds';`
+
+**Deprecated.** Since 2.0. Use `Drawer` (`Drawer.Root`, `Drawer.Content side="right"`, …), which this wraps and which adds a trigger, title, other edges and padding. Removed in 3.0.
 
 A panel that slides in from the right edge. Traps focus while open, closes on Escape or a click on the backdrop, and returns focus to whatever opened it.
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import './InputText.css';
-import { FormLabel } from '../FormLabel';
+import { ControlLabel } from '../FormLabel/ControlLabel';
 
 const messageId = (id: string, error?: string, description?: string) =>
   error ? `${id}-error` : description ? `${id}-description` : undefined;
@@ -38,9 +38,9 @@ export const InputText = ({
   return (
     <div className="input-text-wrapper">
       {label && (
-        <FormLabel htmlFor={id} required={required} optional={optional}>
+        <ControlLabel htmlFor={id} required={required} optional={optional}>
           {label}
-        </FormLabel>
+        </ControlLabel>
       )}
       <div className="input-text-container">
         {prefix && <div className="input-text-prefix">{prefix}</div>}

@@ -145,10 +145,12 @@ This design system includes the following components:
 - **Banner**: Notices and important messages display.
 - **Breadcrumbs**: Location trail with collapsing.
 - **Button**: Clickable control for primary actions.
+- **ButtonGroup**: Named row or column of related buttons that share a size and variant, optionally attached.
 - **Calendar**: Month grid for a day or a range.
 - **Card**: Container for grouped related content.
 - **Carousel**: Scrollable content carousel with controls.
 - **Checkbox**: Binary selection with label support.
+- **CheckboxGroup**: Labelled set of checkboxes with an optional mixed Select all.
 - **CodeSnippet**: Display formatted, copyable code blocks.
 - **CommandPalette**: ⌘K search over app commands.
 - **ContextMenu**: Right-click menu at the pointer.
@@ -157,17 +159,21 @@ This design system includes the following components:
 - **Container**: Centred page width with responsive gutters.
 - **DataTable**: Records as a table with sorting, search, row selection, column visibility and paging; `useDataTable` in `pada-ds/headless` for your own markup.
 - **DatePicker**: Select dates via calendar UI.
+- **DateRangePicker**: Start and end dates on a two-month calendar in a popover, with presets.
+- **DescriptionList**: A record's attributes as sections of terms and values, from data.
 - **Dialog**: Composable modal or non-modal dialog (`Dialog.Root`, `Dialog.Content`, `Dialog.Title`, …).
 - **Drawer**: Dialog panel that slides in from any edge.
 - **DropdownMenu**: Menu button with items, checkbox and radio items, and submenus.
 - **EmptyState**: First-use and no-results placeholder.
 - **Field**: Label, control, description and error wiring.
-- **FormLabel**: Accessible labels for form fields.
+- **FormLabel**: Label for form fields (deprecated; use `Field`).
 - **Grid**: CSS grid with fixed or auto-fit columns.
+- **Heading**: `h1`–`h6` on the type scale, sized by level.
 - **HoverCard**: Rich preview of a link on hover and focus.
 - **Icon**: Reusable SVG icons for UI.
 - **IconButton**: Labelled icon-only button.
 - **Indexer**: Alphabetical index navigation component.
+- **InfoTooltip**: Info icon button that explains the label next to it.
 - **InputDate**: Single-line date input field.
 - **InputText**: Single-line text input field.
 - **InputTextArea**: Multi-line text input area.
@@ -175,11 +181,11 @@ This design system includes the following components:
 - **KeyValue**: Render key/value metadata pairs.
 - **Link**: Text link, with `asChild` for router links.
 - **List**: Generic list rendering component.
-- **Loader**: Indicate loading state visually.
+- **Loader**: Full-area loading indicator (deprecated; use `Spinner`, `ProgressCircle` or `Skeleton`).
 - **BrandLogo**: Third-party brand logos by name (`Logo` is a deprecated alias).
 - **Menubar**: Desktop-style row of menus with one Tab stop and arrow-key movement between menus.
-- **Modal**: Overlay dialog for focused tasks (1.x API; wraps `Dialog`).
-- **Notification**: Transient alert messages and toasts.
+- **Modal**: Overlay dialog for focused tasks (deprecated 1.x API; wraps `Dialog`).
+- **Notification**: A single 1.x toast (deprecated; use `Toaster` and `toast()`).
 - **NumberInput**: Number field with steppers and locale formatting.
 - **PadaLogo**: The Pada mark, wordmark and lockup, with motion.
 - **PageHeader**: Page title and actions area.
@@ -189,6 +195,7 @@ This design system includes the following components:
 - **PinInput**: One box per character for codes and PINs.
 - **Popover**: Floating container for contextual content; also `Popover.Root`, `Popover.Content`, … parts.
 - **Progress**: Visual progress indicators for tasks.
+- **ProgressCircle**: Compact circular progress, determinate or spinning.
 - **RadioCardGroup**: Single choice shown as cards.
 - **RadioGroup**: Grouped single-choice radio buttons.
 - **RangeSlider**: Two-thumb slider for a range.
@@ -200,11 +207,12 @@ This design system includes the following components:
 - **Select**: Dropdown selection with ComboBox.
 - **Separator**: Horizontal or vertical divider.
 - **Sheet**: Bottom sheet with drag to dismiss and snap points.
-- **SideDrawer**: Slide-in side panel (1.x API; wraps `Drawer`).
+- **SideDrawer**: Slide-in side panel (deprecated 1.x API; wraps `Drawer`).
 - **Sidebar**: Fixed side navigation area.
 - **Skeleton**: Loading placeholder with shimmer.
 - **Slider**: Range selection slider control.
 - **Spinner**: Indeterminate loading indicator.
+- **SplitButton**: A main action joined to a chevron that opens related ones.
 - **Stack**: Flex layout with token gaps.
 - **Stat**: Key figure with a counting value and a delta.
 - **Steps**: Multi-step progress indicator component.
@@ -216,6 +224,7 @@ This design system includes the following components:
 - **Text**: Typography primitives and helpers.
 - **Timeline**: Ordered list of events.
 - **ThemeProvider / ThemeToggle**: Theme axes for a page or subtree; `useTheme()`.
+- **TimePicker**: Time of day in locale-ordered spinbutton segments.
 - **Toaster / toast()**: Stacked, swipeable toast notifications.
 - **Toggle / ToggleGroup**: Pressed-state buttons and segmented groups.
 - **Toolbar**: Action toolbar with controls.

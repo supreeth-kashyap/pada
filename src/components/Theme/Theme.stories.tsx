@@ -6,7 +6,7 @@ import { Switch } from '../Switch';
 import { ThemeProvider, ThemeToggle } from '.';
 
 const meta = {
-  title: 'Foundation/Theme',
+  title: 'Foundation/ThemeProvider',
   component: ThemeToggle,
   tags: ['autodocs'],
   argTypes: { size: { control: 'inline-radio', options: ['sm', 'md', 'lg'] } },

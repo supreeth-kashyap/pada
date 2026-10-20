@@ -126,7 +126,12 @@ test('llms files mention the install, imports, stylesheets and every component',
     assert.ok(llms.includes(text), `llms.txt is missing ${text}`);
   }
   for (const component of manifest.components) {
-    assert.ok(llms.includes(`\n- ${component.name}: `), `llms.txt is missing ${component.name}`);
+    const marker = component.deprecated ? ' (deprecated)' : '';
+    assert.ok(llms.includes(`\n- ${component.name}${marker}: `), `llms.txt is missing ${component.name}`);
     assert.ok(llmsFull.includes(`\n### ${component.name}\n`), `llms-full.txt is missing ${component.name}`);
   }
+  // Deprecated components say so, with what to use instead.
+  assert.match(byName.get('Modal').deprecated, /Dialog/);
+  assert.match(byName.get('FormLabel').deprecated, /Field/);
+  assert.equal(byName.get('Dialog.Root').deprecated, null);
 });

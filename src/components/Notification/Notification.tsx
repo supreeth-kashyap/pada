@@ -29,6 +29,12 @@ export interface NotificationProps {
   className?: string;
 }
 
+/**
+ * A 1.x single toast you open and close yourself.
+ *
+ * @deprecated Since 2.0. Render one `Toaster` and call `toast()` / `toast.success()` …: toasts
+ * are queued, stacked, dismissed by swipe and paused on hover. Removed in 3.0.
+ */
 export const Notification: React.FC<NotificationProps> = ({
   open,
   onOpenChange,

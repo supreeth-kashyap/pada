@@ -7,7 +7,7 @@ export default function ModalDemo() {
     <DemoPage
       title="Modal"
       kind="Component"
-      purpose={<p>Modal interrupts the user with a focused task — a confirmation, a short form, or critical information. Use modals only when context cannot be preserved any other way; over-use breaks flow. Prefer SideDrawer for longer tasks and inline confirmation for low-stakes actions.</p>}
+      purpose={<p><strong>Deprecated since 2.0, removed in 3.0.</strong> Use <strong>Dialog</strong> instead; Modal is now a thin wrapper over it. Modal interrupts the user with a focused task — a confirmation, a short form, or critical information. Use modals only when context cannot be preserved any other way; over-use breaks flow. Prefer SideDrawer for longer tasks and inline confirmation for low-stakes actions.</p>}
       design={<><p>Modal traps focus while open, dims the page behind, and dismisses on overlay click or <kbd>Esc</kbd>. The body slot accepts arbitrary content; standard footer patterns include primary + secondary buttons.</p><ModalDemoPreview /></>}
       developer={<><p>Import the <code>Modal</code> from <code>pada-ds</code> and configure with the props shown below.</p><CodeSnippet code={`import { useState } from 'react';
 import { Modal, Button } from 'pada-ds';

@@ -8,7 +8,7 @@ export default function CheckboxDemo() {
       title="Checkbox"
       kind="Component"
       purpose={<p>Checkbox lets users select zero or more options from a set, or toggle a single boolean. Use checkboxes when each option is independent — switch to a Switch for instant-effect settings, or RadioGroup when only one value can be selected at a time.</p>}
-      design={<><p>Checkbox supports unchecked, checked, indeterminate, and disabled states. Provide a label via the input pattern or a wrapping <code>FormLabel</code>.</p><div className="demo-page__showcase" style={{ flexDirection: 'column', gap: 16 }}><label style={{ display: 'flex', alignItems: 'center', gap: 8 }}><Checkbox /> Unchecked</label><label style={{ display: 'flex', alignItems: 'center', gap: 8 }}><Checkbox defaultChecked /> Checked</label><label style={{ display: 'flex', alignItems: 'center', gap: 8 }}><Checkbox disabled /> Disabled</label></div></>}
+      design={<><p>Checkbox supports unchecked, checked, indeterminate, and disabled states. Provide a label with <code>label</code> or a wrapping <code>&lt;label&gt;</code>; for a labelled set, use Checkbox Group.</p><div className="demo-page__showcase" style={{ flexDirection: 'column', gap: 16 }}><label style={{ display: 'flex', alignItems: 'center', gap: 8 }}><Checkbox /> Unchecked</label><label style={{ display: 'flex', alignItems: 'center', gap: 8 }}><Checkbox defaultChecked /> Checked</label><label style={{ display: 'flex', alignItems: 'center', gap: 8 }}><Checkbox disabled /> Disabled</label></div></>}
       developer={<><p>Import the <code>Checkbox</code> from <code>pada-ds</code> and configure with the props shown below.</p><CodeSnippet code={`import { Checkbox } from 'pada-ds';
 
 export function TermsAccept() {

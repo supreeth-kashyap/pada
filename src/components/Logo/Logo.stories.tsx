@@ -4,7 +4,7 @@ import { BrandLogo } from './Logo';
 const SIZES = ['xs', 'sm', 'md', 'lg', 'xl', '2xl'] as const;
 
 const meta = {
-  title: 'Components/Logo',
+  title: 'Components/BrandLogo',
   component: BrandLogo,
   tags: ['autodocs'],
   args: { name: 'airtable', size: 'lg', tooltip: 'Airtable' },

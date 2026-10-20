@@ -10,7 +10,7 @@ export default function SpinnerDemo() {
     <DemoPage
       title="Spinner"
       kind="Component"
-      purpose={<p>Spinner shows that something is loading when you can’t say how long it will take. Keep it small and close to what is loading. When the layout of the result is known, a Skeleton feels faster; for a full-area wait, use Loader.</p>}
+      purpose={<p>Spinner shows that something is loading when you can’t say how long it will take. Keep it small and close to what is loading. When the layout of the result is known, a Skeleton feels faster; where progress is known, use Progress Circle.</p>}
       design={
         <>
           <p>Three sizes that inherit the current text colour. Buttons have a built-in loading state that uses the same spinner.</p>

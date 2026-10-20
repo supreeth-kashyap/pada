@@ -1,6 +1,6 @@
 import React from 'react';
 import './InputTextArea.css';
-import { FormLabel } from '../FormLabel';
+import { ControlLabel } from '../FormLabel/ControlLabel';
 
 const messageId = (id: string, error?: string, description?: string) =>
   error ? `${id}-error` : description ? `${id}-description` : undefined;
@@ -34,9 +34,9 @@ export const InputTextArea = ({
   return (
     <div className="input-textarea-wrapper">
       {label && (
-        <FormLabel htmlFor={id} required={required} optional={optional}>
+        <ControlLabel htmlFor={id} required={required} optional={optional}>
           {label}
-        </FormLabel>
+        </ControlLabel>
       )}
       <textarea
         id={id}

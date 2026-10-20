@@ -95,6 +95,13 @@ function propsTypeNode(declaration, fn) {
 const decodeEscapes = (text) =>
   text.replace(/\\u([0-9a-fA-F]{4})/g, (_, hex) => String.fromCharCode(parseInt(hex, 16)));
 
+// The `@deprecated` note of a component (or a part), or null.
+function deprecationText(declaration) {
+  const tag = ts.getJSDocTags(declaration).find((entry) => entry.tagName.text === 'deprecated');
+  if (!tag) return null;
+  return collapse(decodeEscapes(ts.getTextOfJSDocComment(tag.comment) ?? '')) || 'Deprecated.';
+}
+
 // A prop's `@default` tag, for defaults resolved in the body (from a context, say) rather than
 // in the destructuring.
 function docDefault(node) {
@@ -235,6 +242,7 @@ function componentEntry(checker, name, exportName, declaration) {
   const docHost = ts.isVariableDeclaration(declaration) ? declaration.parent.parent : declaration;
   return {
     name,
+    deprecated: deprecationText(declaration),
     importPath: PACKAGE_NAME,
     import: `import { ${exportName} } from '${PACKAGE_NAME}';`,
     source: path.relative(rootDir, declaration.getSourceFile().fileName).split(path.sep).join('/'),
@@ -297,7 +305,10 @@ export function buildManifest() {
       const aliased = aliasedDeclaration(checker, declaration);
       entry = aliased && componentEntry(checker, name, name, aliased);
       const deprecated = ts.getJSDocTags(declaration).find((tag) => tag.tagName.text === 'deprecated');
-      if (entry && deprecated) entry.description = `Deprecated: ${decodeEscapes(ts.getTextOfJSDocComment(deprecated.comment) ?? '')}`.trim();
+      if (entry && deprecated) {
+        entry.description = `Deprecated: ${decodeEscapes(ts.getTextOfJSDocComment(deprecated.comment) ?? '')}`.trim();
+        entry.deprecated = deprecationText(declaration);
+      }
     }
     if (entry) components.push(entry);
 
@@ -400,7 +411,8 @@ export function renderLlmsTxt(manifest) {
   for (const component of manifest.components) {
     const props = component.props.map((prop) => `${prop.name}${prop.required ? '' : '?'}`).join(', ');
     const inherited = component.extends.length ? `; extends ${component.extends.join(', ')}` : '';
-    lines.push(`- ${component.name}: ${props || 'no props'}${inherited}`);
+    const deprecated = component.deprecated ? ' (deprecated)' : '';
+    lines.push(`- ${component.name}${deprecated}: ${props || 'no props'}${inherited}`);
   }
   return `${lines.join('\n')}\n`;
 }
@@ -412,6 +424,9 @@ export function renderLlmsFullTxt(manifest) {
   const lines = ['# Pada Design System: full component reference', '', ...INTRO, '', '## Components', ''];
   for (const component of manifest.components) {
     lines.push(`### ${component.name}`, '', `\`${component.import}\``, '');
+    if (component.deprecated && !component.description.startsWith('Deprecated')) {
+      lines.push(`**Deprecated.** ${component.deprecated}`, '');
+    }
     if (component.description) {
       lines.push(component.description, '');
     }

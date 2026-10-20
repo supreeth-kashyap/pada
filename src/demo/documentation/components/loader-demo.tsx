@@ -7,7 +7,7 @@ export default function LoaderDemo() {
     <DemoPage
       title="Loader"
       kind="Component"
-      purpose={<p>Loader signals that an asynchronous operation is in progress. Use it for short waits where displaying skeletons or progress would be overkill (e.g. button-level "saving..." state). For longer operations, prefer Progress for determinate work or skeletons for content placeholders.</p>}
+      purpose={<p><strong>Deprecated since 2.0, removed in 3.0.</strong> Use <strong>Spinner</strong> for inline loading, <strong>Progress Circle</strong> when progress is known, or <strong>Skeleton</strong> for placeholders. Loader signals that an asynchronous operation is in progress. Use it for short waits where displaying skeletons or progress would be overkill (e.g. button-level "saving..." state). For longer operations, prefer Progress for determinate work or skeletons for content placeholders.</p>}
       design={<><p>Loader renders a circular spinner in three sizes — <code>sm</code>, <code>md</code> (default), <code>lg</code> — and inherits its color from <code>currentColor</code> so it adapts to any surface.</p><div className="demo-page__showcase" style={{ flexDirection: 'row', gap: 16 }}><Loader size="sm" /><Loader size="md" /><Loader size="lg" /></div></>}
       developer={<><p>Import the <code>Loader</code> from <code>pada-ds</code> and configure with the props shown below.</p><CodeSnippet code={`import { Loader } from 'pada-ds';
 

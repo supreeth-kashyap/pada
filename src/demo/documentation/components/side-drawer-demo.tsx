@@ -7,7 +7,7 @@ export default function SideDrawerDemo() {
     <DemoPage
       title="Side Drawer"
       kind="Component"
-      purpose={<p>SideDrawer slides a panel in from the edge of the screen for secondary tasks — record details, settings, multi-step flows. Use it when the task is too long for a Modal but should not navigate away from the current page.</p>}
+      purpose={<p><strong>Deprecated since 2.0, removed in 3.0.</strong> Use <strong>Drawer</strong> instead; SideDrawer is now a thin wrapper over it. SideDrawer slides a panel in from the edge of the screen for secondary tasks — record details, settings, multi-step flows. Use it when the task is too long for a Modal but should not navigate away from the current page.</p>}
       design={<><p>SideDrawer supports four sizes (<code>sm</code>–<code>xl</code>) and slides in from the right. It traps focus while open and dismisses on overlay click or <kbd>Esc</kbd>.</p><SideDrawerDemoPreview /></>}
       developer={<><p>Import the <code>SideDrawer</code> from <code>pada-ds</code> and configure with the props shown below.</p><CodeSnippet code={`import { useState } from 'react';
 import { SideDrawer, Button } from 'pada-ds';

@@ -14,7 +14,7 @@ export default function InputTextDemo() {
 export function EmailField() {
   return <InputText label="Email" type="email" required />;
 }`} language="tsx" label="InputText usage" /></>}
-      accessibility={<ul style={{ margin: 0, paddingLeft: 20, display: 'flex', flexDirection: 'column', gap: 6 }}><li>Always provide a label via the <code>label</code> prop or an external <code>FormLabel</code>.</li><li>Error states use <code>aria-invalid</code> + <code>aria-describedby</code> so screen readers announce the message.</li><li>Placeholder text is supplemental, never used as the sole label.</li></ul>}
+      accessibility={<ul style={{ margin: 0, paddingLeft: 20, display: 'flex', flexDirection: 'column', gap: 6 }}><li>Always provide a label via the <code>label</code> prop or wire your own control with <code>Field</code>.</li><li>Error states use <code>aria-invalid</code> + <code>aria-describedby</code> so screen readers announce the message.</li><li>Placeholder text is supplemental, never used as the sole label.</li></ul>}
     />
   );
 }

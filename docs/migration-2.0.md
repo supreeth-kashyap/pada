@@ -97,15 +97,17 @@ These still work in 2.x and are removed in 3.0. Your editor marks them as deprec
 | `SideDrawer` | `Drawer` (the same parts as Dialog, with `Drawer.Content side="left \| right \| top \| bottom"`) |
 | `AccordionHeader`, `AccordionContent` | `Accordion.Root`, `Accordion.Item`, `Accordion.Trigger`, `Accordion.Content` (or keep the 1.x `Accordion` props) |
 | `Logo`, `LogoProps` | `BrandLogo`, `BrandLogoProps` (third-party brand logos). The Pada mark is the new `PadaLogo`. |
+| `Notification` | `Toaster` and `toast()`: queued, stacked, swipe to dismiss, and pause on hover |
+| `Loader` | `Spinner` for inline loading, `ProgressCircle` when progress is known, `Skeleton` for content placeholders |
+| `FormLabel` | `Field` (`Field.Root`, `Label`, `Control`, `Description`, `Error`), which wires any control |
+| `Button` `split`, `onSplitClick` | `SplitButton.Root` with a `Button` and a `SplitButton.Splitter` (usually a `DropdownMenu.Trigger`) |
 | 1.x token names (`--color-*`, `--spacing-*`, `--font-*`, …) | `--pada-*` (run `pada-tokens-migrate`) |
 
 The following stay supported. They have 2.0 alternatives that are worth adopting:
 
 | 1.x | 2.0 alternative |
 |---|---|
-| `Notification` | `Toaster` and `toast()`: queued, stacked, swipe to dismiss, and pause on hover |
-| `Loader` | `Spinner` for inline loading, `Skeleton` for content placeholders |
-| `FormLabel` + `InputText` | `Field` (`Field.Root`, `Label`, `Control`, `Description`, `Error`), which wires any control |
+| `InputText` | `Field` with `Field.Control`, for your own layout around the input |
 | `ComboBox` | Still the inline listbox. For a text field with suggestions, use the new `Autocomplete`. |
 
 ## 5. Headless parts
@@ -114,7 +116,7 @@ The following stay supported. They have 2.0 alternatives that are worth adopting
 - overlays: `Dialog`, `Popover`, `Tooltip`, `HoverCard`
 - menus: `DropdownMenu`, `ContextMenu`
 - disclosure: `Tabs`, `Accordion`, `Collapsible`
-- forms: `Field`, `Toggle`, `ToggleGroup`, `Combobox`, `NumberInput`, `PinInput`, `Slider`
+- forms: `Field`, `Toggle`, `ToggleGroup`, `Combobox`, `NumberInput`, `PinInput`, `Slider`, `TimeField`
 - data: `Calendar`, `Tree`
 
 Parts expose their state through `data-state`, `data-disabled`, `data-side` and `aria-*`, so you style them with plain CSS. `asChild` merges a part's behaviour onto your own element.

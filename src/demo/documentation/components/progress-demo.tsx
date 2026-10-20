@@ -7,7 +7,7 @@ export default function ProgressDemo() {
     <DemoPage
       title="Progress"
       kind="Component"
-      purpose={<p>Progress communicates the proportion completed of a known-length operation. Use determinate progress for uploads, batch jobs, or installation steps; for unknown durations, use Loader instead.</p>}
+      purpose={<p>Progress communicates the proportion completed of a known-length operation. Use determinate progress for uploads, batch jobs, or installation steps; for unknown durations, use Spinner instead, and Progress Circle where space is tight.</p>}
       design={<><p>Progress renders a horizontal bar from 0–100, with optional label and value. The track and bar use consistent stone-tone surfaces.</p><div className="demo-page__showcase" style={{ flexDirection: 'column', gap: 16 }}><div style={{ width: 320, display: 'flex', flexDirection: 'column', gap: 12 }}><Progress value={25} label="Uploading" /><Progress value={60} label="Processing" /><Progress value={100} label="Complete" /></div></div></>}
       developer={<><p>Import the <code>Progress</code> from <code>pada-ds</code> and configure with the props shown below.</p><CodeSnippet code={`import { Progress } from 'pada-ds';
 

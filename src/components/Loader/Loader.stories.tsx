@@ -4,7 +4,7 @@ import { Loader } from './Loader';
 const SIZES = ['xs', 'sm', 'md', 'lg', 'xl', '2xl'] as const;
 
 const meta = {
-  title: 'Components/Loader',
+  title: 'Legacy/Loader',
   component: Loader,
   tags: ['autodocs'],
   args: { size: 'md' },

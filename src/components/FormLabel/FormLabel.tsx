@@ -1,31 +1,12 @@
-import React from 'react';
-import './FormLabel.css';
+import { ControlLabel, type ControlLabelProps } from './ControlLabel';
 
-export interface FormLabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
-  children: React.ReactNode;
-  required?: boolean;
-  optional?: boolean;
-  htmlFor?: string;
-}
+export type FormLabelProps = ControlLabelProps;
 
-export const FormLabel = ({
-  children,
-  required = false,
-  optional = false,
-  htmlFor,
-  className = '',
-  ...props
-}: FormLabelProps) => {
-  const classes = [
-    'form-label',
-    className
-  ].filter(Boolean).join(' ');
-
-  return (
-    <label htmlFor={htmlFor} className={classes} {...props}>
-      {children}
-      {required && <span className="form-label__required">*</span>}
-      {optional && <span className="form-label__optional">(optional)</span>}
-    </label>
-  );
-};
+/**
+ * A label with optional required and "(optional)" markers.
+ *
+ * @deprecated Since 2.0. Use `Field` (`Field.Root`, `Field.Label`, `Field.Control`,
+ * `Field.Description`, `Field.Error`), which also wires the control's id, description and
+ * error. Removed in 3.0.
+ */
+export const FormLabel = (props: FormLabelProps) => <ControlLabel {...props} />;

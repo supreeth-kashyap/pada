@@ -5,7 +5,7 @@ import { Switch } from '../Switch';
 import { SideDrawer } from './SideDrawer';
 
 const meta = {
-  title: 'Components/SideDrawer',
+  title: 'Legacy/SideDrawer',
   component: SideDrawer,
   tags: ['autodocs'],
   args: {

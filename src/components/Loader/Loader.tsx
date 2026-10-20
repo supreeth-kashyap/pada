@@ -17,6 +17,12 @@ export interface LoaderProps {
   className?: string;
 }
 
+/**
+ * A 1.x loading indicator for a whole area.
+ *
+ * @deprecated Since 2.0. Use `Spinner` for inline loading, `ProgressCircle` when progress is
+ * known, or `Skeleton` for content placeholders. Removed in 3.0.
+ */
 export const Loader: React.FC<LoaderProps> = ({ size = 'xs', className = '' }) => {
   const resolvedSize = loaderSizes[size];
 

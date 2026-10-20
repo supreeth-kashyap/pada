@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import './Slider.css';
-import { FormLabel } from '../FormLabel';
+import { ControlLabel } from '../FormLabel/ControlLabel';
 
 export interface SliderProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'onChange'> {
   label?: string;
@@ -78,9 +78,9 @@ export const Slider: React.FC<SliderProps> = ({
       {(label || showValue) && (
         <div className="slider-header">
           {label && (
-            <FormLabel htmlFor={id} required={props.required}>
+            <ControlLabel htmlFor={id} required={props.required}>
               {label}
-            </FormLabel>
+            </ControlLabel>
           )}
           {showValue && (
             <span className="slider-value" aria-live="polite">

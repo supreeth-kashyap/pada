@@ -5,7 +5,7 @@ import { Icon } from '../Icon';
 import { Notification } from './Notification';
 
 const meta = {
-  title: 'Components/Notification',
+  title: 'Legacy/Notification',
   component: Notification,
   tags: ['autodocs'],
   args: { open: true, onOpenChange: () => {}, title: 'Saved', subtitle: 'Your changes are live.' },
