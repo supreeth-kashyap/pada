@@ -4,6 +4,7 @@ import { Drawer, PadaLogo } from 'pada-ds';
 import { docs, links } from '../lib/docs';
 import { ROUTES } from '../lib/paths';
 import { ThemeSwitch } from './ThemeSwitch';
+import { SearchPalette } from './SearchPalette';
 import { ArrowRight, Github, Menu, Storybook } from './icons';
 
 const NAV = [
@@ -30,8 +31,8 @@ export function SiteHeader() {
   return (
     <header className="site-header" data-scrolled={scrolled ? '' : undefined}>
       <div className="wrap">
-        <RouterLink to="/" className="site-brand" aria-label="Pada home">
-          <PadaLogo size={26} decorative />
+        <RouterLink to="/" className="site-brand">
+          <PadaLogo size={26} title="Pada" />
           <span className="version">v{docs.version}</span>
         </RouterLink>
         <nav className="site-nav" aria-label="Main">
@@ -45,6 +46,7 @@ export function SiteHeader() {
           </a>
         </nav>
         <div className="site-header-actions">
+          <SearchPalette />
           <a className="icon-link hide-sm" href={links.reactStorybook} target="_blank" rel="noopener noreferrer" aria-label="Storybook (opens in a new tab)" title="Storybook">
             <Storybook size={17} />
           </a>

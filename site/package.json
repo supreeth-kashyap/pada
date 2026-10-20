@@ -7,7 +7,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build && vite build --ssr src/entry-server.tsx --outDir dist-server && node scripts/prerender.mjs",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "check": "node scripts/check-site.mjs",
+    "media": "node scripts/capture-media.mjs"
   },
   "dependencies": {
     "pada-ds": "*",

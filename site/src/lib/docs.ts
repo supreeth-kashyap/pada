@@ -8,7 +8,7 @@ export interface DocComponent {
   replacedBy: string | null;
   summary: string;
   related: string[];
-  react: { import: string; dir: string; storybook: string | null; storyTitle: string | null; source: string } | null;
+  react: { import: string; dir: string; storybook: string | null; storyTitle: string | null; storyFile?: string; source: string } | null;
   angular: { selector: string; dir: string; storybook: string | null; storyTitle: string | null; source: string } | null;
   tokens: { component: { name: string; value: string }[]; reads: string[] };
   overview?: string;

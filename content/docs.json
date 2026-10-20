@@ -50,7 +50,8 @@
         "dir": "Button",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/actions-button--docs",
         "storyTitle": "Actions/Button",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Button"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Button",
+        "storyFile": "components/Button/Button.stories.tsx"
       },
       "angular": {
         "selector": "button[dsButton]",
@@ -224,7 +225,8 @@
         "dir": "ButtonGroup",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/actions-buttongroup--docs",
         "storyTitle": "Actions/ButtonGroup",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/ButtonGroup"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/ButtonGroup",
+        "storyFile": "components/ButtonGroup/ButtonGroup.stories.tsx"
       },
       "angular": {
         "selector": "ds-button-group",
@@ -288,7 +290,8 @@
         "dir": "IconButton",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/actions-iconbutton--docs",
         "storyTitle": "Actions/IconButton",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/IconButton"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/IconButton",
+        "storyFile": "components/IconButton/IconButton.stories.tsx"
       },
       "angular": {
         "selector": "button[dsIconButton]",
@@ -348,7 +351,8 @@
         "dir": "Link",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/actions-link--docs",
         "storyTitle": "Actions/Link",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Link"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Link",
+        "storyFile": "components/Link/Link.stories.tsx"
       },
       "angular": {
         "selector": "a[dsLink]",
@@ -422,7 +426,8 @@
         "dir": "SplitButton",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/actions-splitbutton--docs",
         "storyTitle": "Actions/SplitButton",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/SplitButton"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/SplitButton",
+        "storyFile": "components/SplitButton/SplitButton.stories.tsx"
       },
       "angular": {
         "selector": "ds-split-button",
@@ -478,7 +483,8 @@
         "dir": "Toggle",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/actions-toggle--docs",
         "storyTitle": "Actions/Toggle",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Toggle"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Toggle",
+        "storyFile": "components/Toggle/Toggle.stories.tsx"
       },
       "angular": {
         "selector": "button[dsToggle]",
@@ -590,7 +596,8 @@
         "dir": "ToggleGroup",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/actions-togglegroup--docs",
         "storyTitle": "Actions/ToggleGroup",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/ToggleGroup"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/ToggleGroup",
+        "storyFile": "components/ToggleGroup/ToggleGroup.stories.tsx"
       },
       "angular": {
         "selector": "ds-toggle-group",
@@ -666,7 +673,8 @@
         "dir": "Autocomplete",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/forms-autocomplete--docs",
         "storyTitle": "Forms/Autocomplete",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Autocomplete"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Autocomplete",
+        "storyFile": "components/Autocomplete/Autocomplete.stories.tsx"
       },
       "angular": {
         "selector": "ds-autocomplete",
@@ -779,7 +787,8 @@
         "dir": "Checkbox",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/forms-checkbox--docs",
         "storyTitle": "Forms/Checkbox",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Checkbox"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Checkbox",
+        "storyFile": "components/Checkbox/Checkbox.stories.tsx"
       },
       "angular": {
         "selector": "ds-checkbox",
@@ -860,7 +869,8 @@
         "dir": "CheckboxGroup",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/forms-checkboxgroup--docs",
         "storyTitle": "Forms/CheckboxGroup",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/CheckboxGroup"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/CheckboxGroup",
+        "storyFile": "components/CheckboxGroup/CheckboxGroup.stories.tsx"
       },
       "angular": {
         "selector": "ds-checkbox-group",
@@ -935,7 +945,8 @@
         "dir": "ColorPicker",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/forms-colorpicker--docs",
         "storyTitle": "Forms/ColorPicker",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/ColorPicker"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/ColorPicker",
+        "storyFile": "components/ColorPicker/ColorPicker.stories.tsx"
       },
       "angular": {
         "selector": "ds-color-picker",
@@ -1061,7 +1072,8 @@
         "dir": "ComboBox",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/forms-combobox--docs",
         "storyTitle": "Forms/ComboBox",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/ComboBox"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/ComboBox",
+        "storyFile": "components/ComboBox/ComboBox.stories.tsx"
       },
       "angular": {
         "selector": "ds-combo-box",
@@ -1122,7 +1134,8 @@
         "dir": "Field",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/forms-field--docs",
         "storyTitle": "Forms/Field",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Field"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Field",
+        "storyFile": "components/Field/Field.stories.tsx"
       },
       "angular": {
         "selector": "ds-field",
@@ -1243,7 +1256,8 @@
         "dir": "InputText",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/forms-inputtext--docs",
         "storyTitle": "Forms/InputText",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/InputText"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/InputText",
+        "storyFile": "components/InputText/InputText.stories.tsx"
       },
       "angular": {
         "selector": "ds-input-text",
@@ -1320,7 +1334,8 @@
         "dir": "InputTextArea",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/forms-inputtextarea--docs",
         "storyTitle": "Forms/InputTextArea",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/InputTextArea"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/InputTextArea",
+        "storyFile": "components/InputTextArea/InputTextArea.stories.tsx"
       },
       "angular": {
         "selector": "ds-input-text-area",
@@ -1393,7 +1408,8 @@
         "dir": "NumberInput",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/forms-numberinput--docs",
         "storyTitle": "Forms/NumberInput",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/NumberInput"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/NumberInput",
+        "storyFile": "components/NumberInput/NumberInput.stories.tsx"
       },
       "angular": {
         "selector": "ds-number-input",
@@ -1483,7 +1499,8 @@
         "dir": "PasswordInput",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/forms-passwordinput--docs",
         "storyTitle": "Forms/PasswordInput",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/PasswordInput"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/PasswordInput",
+        "storyFile": "components/PasswordInput/PasswordInput.stories.tsx"
       },
       "angular": {
         "selector": "ds-password-input",
@@ -1574,7 +1591,8 @@
         "dir": "PinInput",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/forms-pininput--docs",
         "storyTitle": "Forms/PinInput",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/PinInput"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/PinInput",
+        "storyFile": "components/PinInput/PinInput.stories.tsx"
       },
       "angular": {
         "selector": "ds-pin-input",
@@ -1680,7 +1698,8 @@
         "dir": "RadioCard",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/forms-radiocardgroup--docs",
         "storyTitle": "Forms/RadioCardGroup",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/RadioCard"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/RadioCard",
+        "storyFile": "components/RadioCard/RadioCard.stories.tsx"
       },
       "angular": {
         "selector": "ds-radio-card-group",
@@ -1790,7 +1809,8 @@
         "dir": "RadioGroup",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/forms-radiogroup--docs",
         "storyTitle": "Forms/RadioGroup",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/RadioGroup"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/RadioGroup",
+        "storyFile": "components/RadioGroup/RadioGroup.stories.tsx"
       },
       "angular": {
         "selector": "ds-radio-group",
@@ -1860,7 +1880,8 @@
         "dir": "RangeSlider",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/forms-rangeslider--docs",
         "storyTitle": "Forms/RangeSlider",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/RangeSlider"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/RangeSlider",
+        "storyFile": "components/RangeSlider/RangeSlider.stories.tsx"
       },
       "angular": {
         "selector": "ds-range-slider",
@@ -1967,7 +1988,8 @@
         "dir": "Rating",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/forms-rating--docs",
         "storyTitle": "Forms/Rating",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Rating"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Rating",
+        "storyFile": "components/Rating/Rating.stories.tsx"
       },
       "angular": {
         "selector": "ds-rating",
@@ -2055,7 +2077,8 @@
         "dir": "SearchField",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/forms-searchfield--docs",
         "storyTitle": "Forms/SearchField",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/SearchField"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/SearchField",
+        "storyFile": "components/SearchField/SearchField.stories.tsx"
       },
       "angular": {
         "selector": "ds-search-field",
@@ -2126,7 +2149,8 @@
         "dir": "SegmentControl",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/forms-segmentcontrol--docs",
         "storyTitle": "Forms/SegmentControl",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/SegmentControl"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/SegmentControl",
+        "storyFile": "components/SegmentControl/SegmentControl.stories.tsx"
       },
       "angular": {
         "selector": "ds-segment-control",
@@ -2195,7 +2219,8 @@
         "dir": "Select",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/forms-select--docs",
         "storyTitle": "Forms/Select",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Select"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Select",
+        "storyFile": "components/Select/Select.stories.tsx"
       },
       "angular": {
         "selector": "ds-select",
@@ -2275,7 +2300,8 @@
         "dir": "Slider",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/forms-slider--docs",
         "storyTitle": "Forms/Slider",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Slider"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Slider",
+        "storyFile": "components/Slider/Slider.stories.tsx"
       },
       "angular": {
         "selector": "ds-slider",
@@ -2352,7 +2378,8 @@
         "dir": "Switch",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/forms-switch--docs",
         "storyTitle": "Forms/Switch",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Switch"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Switch",
+        "storyFile": "components/Switch/Switch.stories.tsx"
       },
       "angular": {
         "selector": "ds-switch",
@@ -2417,7 +2444,8 @@
         "dir": "TagInput",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/forms-taginput--docs",
         "storyTitle": "Forms/TagInput",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/TagInput"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/TagInput",
+        "storyFile": "components/TagInput/TagInput.stories.tsx"
       },
       "angular": {
         "selector": "ds-tag-input",
@@ -2508,7 +2536,8 @@
         "dir": "UploadField",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/forms-uploadfield--docs",
         "storyTitle": "Forms/UploadField",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/UploadField"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/UploadField",
+        "storyFile": "components/UploadField/UploadField.stories.tsx"
       },
       "angular": {
         "selector": "ds-upload-field",
@@ -2595,7 +2624,8 @@
         "dir": "Calendar",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/dates-calendar--docs",
         "storyTitle": "Dates/Calendar",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Calendar"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Calendar",
+        "storyFile": "components/Calendar/Calendar.stories.tsx"
       },
       "angular": {
         "selector": "ds-calendar",
@@ -2716,7 +2746,8 @@
         "dir": "DatePicker",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/dates-datepicker--docs",
         "storyTitle": "Dates/DatePicker",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/DatePicker"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/DatePicker",
+        "storyFile": "components/DatePicker/DatePicker.stories.tsx"
       },
       "angular": {
         "selector": "ds-date-picker",
@@ -2781,7 +2812,8 @@
         "dir": "DateRangePicker",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/dates-daterangepicker--docs",
         "storyTitle": "Dates/DateRangePicker",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/DateRangePicker"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/DateRangePicker",
+        "storyFile": "components/DateRangePicker/DateRangePicker.stories.tsx"
       },
       "angular": {
         "selector": "ds-date-range-picker",
@@ -2938,7 +2970,8 @@
         "dir": "InputDate",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/dates-inputdate--docs",
         "storyTitle": "Dates/InputDate",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/InputDate"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/InputDate",
+        "storyFile": "components/InputDate/InputDate.stories.tsx"
       },
       "angular": {
         "selector": "ds-input-date",
@@ -3018,7 +3051,8 @@
         "dir": "TimePicker",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/dates-timepicker--docs",
         "storyTitle": "Dates/TimePicker",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/TimePicker"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/TimePicker",
+        "storyFile": "components/TimePicker/TimePicker.stories.tsx"
       },
       "angular": {
         "selector": "ds-time-picker",
@@ -3142,7 +3176,8 @@
         "dir": "AlertDialog",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/overlays-alertdialog--docs",
         "storyTitle": "Overlays/AlertDialog",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/AlertDialog"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/AlertDialog",
+        "storyFile": "components/AlertDialog/AlertDialog.stories.tsx"
       },
       "angular": {
         "selector": "ds-alert-dialog",
@@ -3197,7 +3232,8 @@
         "dir": "CommandPalette",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/overlays-commandpalette--docs",
         "storyTitle": "Overlays/CommandPalette",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/CommandPalette"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/CommandPalette",
+        "storyFile": "components/CommandPalette/CommandPalette.stories.tsx"
       },
       "angular": {
         "selector": "ds-command-palette",
@@ -3286,7 +3322,8 @@
         "dir": "ContextMenu",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/overlays-contextmenu--docs",
         "storyTitle": "Overlays/ContextMenu",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/ContextMenu"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/ContextMenu",
+        "storyFile": "components/ContextMenu/ContextMenu.stories.tsx"
       },
       "angular": {
         "selector": "ds-context-menu",
@@ -3341,7 +3378,8 @@
         "dir": "Dialog",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/overlays-dialog--docs",
         "storyTitle": "Overlays/Dialog",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Dialog"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Dialog",
+        "storyFile": "components/Dialog/Dialog.stories.tsx"
       },
       "angular": {
         "selector": "ds-dialog",
@@ -3474,7 +3512,8 @@
         "dir": "Drawer",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/overlays-drawer--docs",
         "storyTitle": "Overlays/Drawer",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Drawer"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Drawer",
+        "storyFile": "components/Drawer/Drawer.stories.tsx"
       },
       "angular": {
         "selector": "ds-drawer",
@@ -3571,7 +3610,8 @@
         "dir": "DropdownMenu",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/overlays-dropdownmenu--docs",
         "storyTitle": "Overlays/DropdownMenu",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/DropdownMenu"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/DropdownMenu",
+        "storyFile": "components/DropdownMenu/DropdownMenu.stories.tsx"
       },
       "angular": {
         "selector": "ds-dropdown-menu",
@@ -3704,7 +3744,8 @@
         "dir": "HoverCard",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/overlays-hovercard--docs",
         "storyTitle": "Overlays/HoverCard",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/HoverCard"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/HoverCard",
+        "storyFile": "components/HoverCard/HoverCard.stories.tsx"
       },
       "angular": {
         "selector": "ds-hover-card",
@@ -3798,7 +3839,8 @@
         "dir": "Popover",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/overlays-popover--docs",
         "storyTitle": "Overlays/Popover",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Popover"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Popover",
+        "storyFile": "components/Popover/Popover.stories.tsx"
       },
       "angular": {
         "selector": "ds-popover",
@@ -3924,7 +3966,8 @@
         "dir": "Sheet",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/overlays-sheet--docs",
         "storyTitle": "Overlays/Sheet",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Sheet"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Sheet",
+        "storyFile": "components/Sheet/Sheet.stories.tsx"
       },
       "angular": {
         "selector": "ds-sheet",
@@ -4050,7 +4093,8 @@
         "dir": "Tooltip",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/overlays-tooltip--docs",
         "storyTitle": "Overlays/Tooltip",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Tooltip"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Tooltip",
+        "storyFile": "components/Tooltip/Tooltip.stories.tsx"
       },
       "angular": {
         "selector": "ds-tooltip",
@@ -4145,7 +4189,8 @@
         "dir": "Alert",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/feedback-alert--docs",
         "storyTitle": "Feedback/Alert",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Alert"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Alert",
+        "storyFile": "components/Alert/Alert.stories.tsx"
       },
       "angular": {
         "selector": "ds-alert",
@@ -4257,7 +4302,8 @@
         "dir": "Banner",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/feedback-banner--docs",
         "storyTitle": "Feedback/Banner",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Banner"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Banner",
+        "storyFile": "components/Banner/Banner.stories.tsx"
       },
       "angular": {
         "selector": "ds-banner",
@@ -4327,7 +4373,8 @@
         "dir": "EmptyState",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/feedback-emptystate--docs",
         "storyTitle": "Feedback/EmptyState",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/EmptyState"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/EmptyState",
+        "storyFile": "components/EmptyState/EmptyState.stories.tsx"
       },
       "angular": {
         "selector": "ds-empty-state",
@@ -4411,7 +4458,8 @@
         "dir": "Progress",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/feedback-progress--docs",
         "storyTitle": "Feedback/Progress",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Progress"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Progress",
+        "storyFile": "components/Progress/Progress.stories.tsx"
       },
       "angular": {
         "selector": "ds-progress",
@@ -4475,7 +4523,8 @@
         "dir": "Progress",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/feedback-progresscircle--docs",
         "storyTitle": "Feedback/ProgressCircle",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Progress"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Progress",
+        "storyFile": "components/Progress/ProgressCircle.stories.tsx"
       },
       "angular": {
         "selector": "ds-progress-circle",
@@ -4562,7 +4611,8 @@
         "dir": "Skeleton",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/feedback-skeleton--docs",
         "storyTitle": "Feedback/Skeleton",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Skeleton"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Skeleton",
+        "storyFile": "components/Skeleton/Skeleton.stories.tsx"
       },
       "angular": {
         "selector": "ds-skeleton",
@@ -4638,7 +4688,8 @@
         "dir": "Spinner",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/feedback-spinner--docs",
         "storyTitle": "Feedback/Spinner",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Spinner"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Spinner",
+        "storyFile": "components/Spinner/Spinner.stories.tsx"
       },
       "angular": {
         "selector": "ds-spinner",
@@ -4713,7 +4764,8 @@
         "dir": "Toast",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/feedback-toaster--docs",
         "storyTitle": "Feedback/Toaster",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Toast"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Toast",
+        "storyFile": "components/Toast/Toast.stories.tsx"
       },
       "angular": {
         "selector": "ds-toaster",
@@ -4864,7 +4916,8 @@
         "dir": "Breadcrumbs",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/navigation-breadcrumbs--docs",
         "storyTitle": "Navigation/Breadcrumbs",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Breadcrumbs"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Breadcrumbs",
+        "storyFile": "components/Breadcrumbs/Breadcrumbs.stories.tsx"
       },
       "angular": {
         "selector": "ds-breadcrumbs",
@@ -4928,7 +4981,8 @@
         "dir": "Indexer",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/navigation-indexer--docs",
         "storyTitle": "Navigation/Indexer",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Indexer"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Indexer",
+        "storyFile": "components/Indexer/Indexer.stories.tsx"
       },
       "angular": {
         "selector": "ds-indexer",
@@ -4993,7 +5047,8 @@
         "dir": "Menubar",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/navigation-menubar--docs",
         "storyTitle": "Navigation/Menubar",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Menubar"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Menubar",
+        "storyFile": "components/Menubar/Menubar.stories.tsx"
       },
       "angular": {
         "selector": "ds-menubar",
@@ -5092,7 +5147,8 @@
         "dir": "PageHeader",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/navigation-pageheader--docs",
         "storyTitle": "Navigation/PageHeader",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/PageHeader"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/PageHeader",
+        "storyFile": "components/PageHeader/PageHeader.stories.tsx"
       },
       "angular": {
         "selector": "ds-page-header",
@@ -5168,7 +5224,8 @@
         "dir": "Pagination",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/navigation-pagination--docs",
         "storyTitle": "Navigation/Pagination",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Pagination"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Pagination",
+        "storyFile": "components/Pagination/Pagination.stories.tsx"
       },
       "angular": {
         "selector": "ds-pagination",
@@ -5244,7 +5301,8 @@
         "dir": "Pills",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/navigation-pills--docs",
         "storyTitle": "Navigation/Pills",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Pills"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Pills",
+        "storyFile": "components/Pills/Pills.stories.tsx"
       },
       "angular": {
         "selector": "ds-pills",
@@ -5324,7 +5382,8 @@
         "dir": "Sidebar",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/navigation-sidebar--docs",
         "storyTitle": "Navigation/Sidebar",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Sidebar"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Sidebar",
+        "storyFile": "components/Sidebar/Sidebar.stories.tsx"
       },
       "angular": {
         "selector": "ds-sidebar",
@@ -5378,7 +5437,8 @@
         "dir": "Steps",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/navigation-steps--docs",
         "storyTitle": "Navigation/Steps",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Steps"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Steps",
+        "storyFile": "components/Steps/Steps.stories.tsx"
       },
       "angular": {
         "selector": "ds-steps",
@@ -5469,7 +5529,8 @@
         "dir": "Tabs",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/navigation-tabs--docs",
         "storyTitle": "Navigation/Tabs",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Tabs"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Tabs",
+        "storyFile": "components/Tabs/Tabs.stories.tsx"
       },
       "angular": {
         "selector": "ds-tabs",
@@ -5615,7 +5676,8 @@
         "dir": "Toolbar",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/navigation-toolbar--docs",
         "storyTitle": "Navigation/Toolbar",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Toolbar"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Toolbar",
+        "storyFile": "components/Toolbar/Toolbar.stories.tsx"
       },
       "angular": {
         "selector": "ds-toolbar",
@@ -5669,7 +5731,8 @@
         "dir": "DataTable",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/data-datatable--docs",
         "storyTitle": "Data/DataTable",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/DataTable"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/DataTable",
+        "storyFile": "components/DataTable/DataTable.stories.tsx"
       },
       "angular": {
         "selector": "ds-data-table",
@@ -5744,7 +5807,8 @@
         "dir": "DescriptionList",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/data-descriptionlist--docs",
         "storyTitle": "Data/DescriptionList",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/DescriptionList"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/DescriptionList",
+        "storyFile": "components/DescriptionList/DescriptionList.stories.tsx"
       },
       "angular": {
         "selector": "ds-description-list",
@@ -5818,7 +5882,8 @@
         "dir": "Table",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/data-table--docs",
         "storyTitle": "Data/Table",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Table"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Table",
+        "storyFile": "components/Table/Table.stories.tsx"
       },
       "angular": {
         "selector": "ds-table",
@@ -5873,7 +5938,8 @@
         "dir": "Timeline",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/data-timeline--docs",
         "storyTitle": "Data/Timeline",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Timeline"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Timeline",
+        "storyFile": "components/Timeline/Timeline.stories.tsx"
       },
       "angular": {
         "selector": "ds-timeline",
@@ -5989,7 +6055,8 @@
         "dir": "Tree",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/data-tree--docs",
         "storyTitle": "Data/Tree",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Tree"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Tree",
+        "storyFile": "components/Tree/Tree.stories.tsx"
       },
       "angular": {
         "selector": "ds-tree",
@@ -6097,7 +6164,8 @@
         "dir": "Accordion",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/display-accordion--docs",
         "storyTitle": "Display/Accordion",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Accordion"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Accordion",
+        "storyFile": "components/Accordion/Accordion.stories.tsx"
       },
       "angular": {
         "selector": "ds-accordion",
@@ -6216,7 +6284,8 @@
         "dir": "Avatar",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/display-avatar--docs",
         "storyTitle": "Display/Avatar",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Avatar"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Avatar",
+        "storyFile": "components/Avatar/Avatar.stories.tsx"
       },
       "angular": {
         "selector": "ds-avatar",
@@ -6332,7 +6401,8 @@
         "dir": "Badge",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/display-badge--docs",
         "storyTitle": "Display/Badge",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Badge"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Badge",
+        "storyFile": "components/Badge/Badge.stories.tsx"
       },
       "angular": {
         "selector": "ds-badge",
@@ -6449,7 +6519,8 @@
         "dir": "Logo",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/display-brandlogo--docs",
         "storyTitle": "Display/BrandLogo",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Logo"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Logo",
+        "storyFile": "components/Logo/Logo.stories.tsx"
       },
       "angular": {
         "selector": "ds-brand-logo",
@@ -6515,7 +6586,8 @@
         "dir": "Card",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/display-card--docs",
         "storyTitle": "Display/Card",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Card"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Card",
+        "storyFile": "components/Card/Card.stories.tsx"
       },
       "angular": {
         "selector": "ds-card",
@@ -6570,7 +6642,8 @@
         "dir": "Carousel",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/display-carousel--docs",
         "storyTitle": "Display/Carousel",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Carousel"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Carousel",
+        "storyFile": "components/Carousel/Carousel.stories.tsx"
       },
       "angular": {
         "selector": "ds-carousel",
@@ -6636,7 +6709,8 @@
         "dir": "CodeSnippet",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/display-codesnippet--docs",
         "storyTitle": "Display/CodeSnippet",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/CodeSnippet"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/CodeSnippet",
+        "storyFile": "components/CodeSnippet/CodeSnippet.stories.tsx"
       },
       "angular": {
         "selector": "ds-code-snippet",
@@ -6725,7 +6799,8 @@
         "dir": "Text",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/display-heading--docs",
         "storyTitle": "Display/Heading",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Text"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Text",
+        "storyFile": "components/Text/Heading.stories.tsx"
       },
       "angular": {
         "selector": "h2[dsHeading]",
@@ -6821,7 +6896,8 @@
         "dir": "Icon",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/display-icon--docs",
         "storyTitle": "Display/Icon",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Icon"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Icon",
+        "storyFile": "components/Icon/Icon.stories.tsx"
       },
       "angular": {
         "selector": "ds-icon",
@@ -6913,7 +6989,8 @@
         "dir": "InfoTooltip",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/display-infotooltip--docs",
         "storyTitle": "Display/InfoTooltip",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/InfoTooltip"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/InfoTooltip",
+        "storyFile": "components/InfoTooltip/InfoTooltip.stories.tsx"
       },
       "angular": {
         "selector": "ds-info-tooltip",
@@ -6972,7 +7049,8 @@
         "dir": "Kbd",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/display-kbd--docs",
         "storyTitle": "Display/Kbd",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Kbd"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Kbd",
+        "storyFile": "components/Kbd/Kbd.stories.tsx"
       },
       "angular": {
         "selector": "kbd[dsKbd]",
@@ -7028,7 +7106,8 @@
         "dir": "KeyValue",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/display-keyvalue--docs",
         "storyTitle": "Display/KeyValue",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/KeyValue"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/KeyValue",
+        "storyFile": "components/KeyValue/KeyValue.stories.tsx"
       },
       "angular": {
         "selector": "ds-key-value",
@@ -7081,7 +7160,8 @@
         "dir": "PadaLogo",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/display-padalogo--docs",
         "storyTitle": "Display/PadaLogo",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/PadaLogo"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/PadaLogo",
+        "storyFile": "components/PadaLogo/PadaLogo.stories.tsx"
       },
       "angular": {
         "selector": "ds-pada-logo",
@@ -7149,7 +7229,8 @@
         "dir": "Separator",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/display-separator--docs",
         "storyTitle": "Display/Separator",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Separator"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Separator",
+        "storyFile": "components/Separator/Separator.stories.tsx"
       },
       "angular": {
         "selector": "ds-separator",
@@ -7209,7 +7290,8 @@
         "dir": "Stat",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/display-stat--docs",
         "storyTitle": "Display/Stat",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Stat"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Stat",
+        "storyFile": "components/Stat/Stat.stories.tsx"
       },
       "angular": {
         "selector": "ds-stat",
@@ -7378,7 +7460,8 @@
         "dir": "Tags",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/display-tags--docs",
         "storyTitle": "Display/Tags",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Tags"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Tags",
+        "storyFile": "components/Tags/Tags.stories.tsx"
       },
       "angular": {
         "selector": "ds-tags",
@@ -7448,7 +7531,8 @@
         "dir": "Text",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/display-text--docs",
         "storyTitle": "Display/Text",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Text"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Text",
+        "storyFile": "components/Text/Text.stories.tsx"
       },
       "angular": {
         "selector": "[dsText]",
@@ -7523,7 +7607,8 @@
         "dir": "AspectRatio",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/layout-aspectratio--docs",
         "storyTitle": "Layout/AspectRatio",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/AspectRatio"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/AspectRatio",
+        "storyFile": "components/AspectRatio/AspectRatio.stories.tsx"
       },
       "angular": {
         "selector": "ds-aspect-ratio",
@@ -7576,7 +7661,8 @@
         "dir": "Container",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/layout-container--docs",
         "storyTitle": "Layout/Container",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Container"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Container",
+        "storyFile": "components/Container/Container.stories.tsx"
       },
       "angular": {
         "selector": "ds-container",
@@ -7643,7 +7729,8 @@
         "dir": "Grid",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/layout-grid--docs",
         "storyTitle": "Layout/Grid",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Grid"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Grid",
+        "storyFile": "components/Grid/Grid.stories.tsx"
       },
       "angular": {
         "selector": "ds-grid",
@@ -7715,7 +7802,8 @@
         "dir": "List",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/layout-list--docs",
         "storyTitle": "Layout/List",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/List"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/List",
+        "storyFile": "components/List/List.stories.tsx"
       },
       "angular": {
         "selector": "ds-list",
@@ -7766,7 +7854,8 @@
         "dir": "Resizable",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/layout-resizable--docs",
         "storyTitle": "Layout/Resizable",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Resizable"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Resizable",
+        "storyFile": "components/Resizable/Resizable.stories.tsx"
       },
       "angular": {
         "selector": "ds-resizable",
@@ -7882,7 +7971,8 @@
         "dir": "ScrollArea",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/layout-scrollarea--docs",
         "storyTitle": "Layout/ScrollArea",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/ScrollArea"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/ScrollArea",
+        "storyFile": "components/ScrollArea/ScrollArea.stories.tsx"
       },
       "angular": {
         "selector": "ds-scroll-area",
@@ -7972,7 +8062,8 @@
         "dir": "Stack",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/layout-stack--docs",
         "storyTitle": "Layout/Stack",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Stack"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Stack",
+        "storyFile": "components/Stack/Stack.stories.tsx"
       },
       "angular": {
         "selector": "ds-stack",
@@ -8038,7 +8129,8 @@
         "dir": "Theme",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/layout-themeprovider--docs",
         "storyTitle": "Layout/ThemeProvider",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Theme"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Theme",
+        "storyFile": "components/Theme/Theme.stories.tsx"
       },
       "angular": {
         "selector": "ds-theme-provider",
@@ -8109,7 +8201,8 @@
         "dir": "FormLabel",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/legacy-formlabel--docs",
         "storyTitle": "Legacy/FormLabel",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/FormLabel"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/FormLabel",
+        "storyFile": "components/FormLabel/FormLabel.stories.tsx"
       },
       "angular": null,
       "tokens": {
@@ -8150,7 +8243,8 @@
         "dir": "Loader",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/legacy-loader--docs",
         "storyTitle": "Legacy/Loader",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Loader"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Loader",
+        "storyFile": "components/Loader/Loader.stories.tsx"
       },
       "angular": null,
       "tokens": {
@@ -8228,7 +8322,8 @@
         "dir": "Modal",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/legacy-modal--docs",
         "storyTitle": "Legacy/Modal",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Modal"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Modal",
+        "storyFile": "components/Modal/Modal.stories.tsx"
       },
       "angular": null,
       "tokens": {
@@ -8258,7 +8353,8 @@
         "dir": "Notification",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/legacy-notification--docs",
         "storyTitle": "Legacy/Notification",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Notification"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/Notification",
+        "storyFile": "components/Notification/Notification.stories.tsx"
       },
       "angular": null,
       "tokens": {
@@ -8309,7 +8405,8 @@
         "dir": "SideDrawer",
         "storybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com/?path=/docs/legacy-sidedrawer--docs",
         "storyTitle": "Legacy/SideDrawer",
-        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/SideDrawer"
+        "source": "https://github.com/supreeth-kashyap/pada/tree/main/projects/pada-ds/src/components/SideDrawer",
+        "storyFile": "components/SideDrawer/SideDrawer.stories.tsx"
       },
       "angular": null,
       "tokens": {

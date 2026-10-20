@@ -22,7 +22,7 @@
   --site-raised: light-dark(#fff, oklch(0.21 0.006 60));
   --site-ink: var(--pada-color-fg);
   --site-muted: var(--pada-color-fg-muted);
-  --site-faint: var(--pada-color-fg-subtle);
+  --site-faint: var(--pada-color-fg-muted);
   --site-line: var(--pada-color-border);
   --site-line-soft: color-mix(in oklch, var(--pada-color-border) 55%, transparent);
   --site-dot: color-mix(in oklch, var(--pada-color-fg) 13%, transparent);
@@ -245,7 +245,8 @@ html.js-reveal [data-reveal]:not(.is-in) {
 /* ------------------------------------------------------------------- CTAs */
 
 .cta {
-  --cta-bg: var(--pada-color-accent-solid);
+  /* The 600 step in both themes keeps white text above 4.5:1. */
+  --cta-bg: var(--pada-palette-accent-600);
   --cta-fg: var(--pada-color-accent-on-solid);
   --cta-border: transparent;
   display: inline-flex;
@@ -678,4 +679,40 @@ html.js-reveal [data-reveal]:not(.is-in) {
 .prose a {
   color: var(--site-accent-ink);
   text-underline-offset: 3px;
+}
+
+.search-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  margin-right: 6px;
+  padding: 0 8px 0 12px;
+  border: 1px solid var(--site-line);
+  border-radius: 999px;
+  background: color-mix(in oklch, var(--site-card) 70%, transparent);
+  color: var(--site-muted);
+  font: 500 13px/1 var(--pada-font-sans);
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.search-trigger:hover {
+  border-color: var(--pada-color-accent-border);
+  color: var(--site-ink);
+}
+
+@media (max-width: 1080px) {
+  .search-trigger span,
+  .search-trigger kbd {
+    display: none;
+  }
+
+  .search-trigger {
+    width: 38px;
+    padding: 0;
+    justify-content: center;
+    border: 0;
+    background: transparent;
+  }
 }

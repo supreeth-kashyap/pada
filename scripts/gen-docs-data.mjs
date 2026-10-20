@@ -170,8 +170,9 @@ async function tokensFor(files) {
   };
 }
 
+/** Story titles in `dir`, mapped to their file (relative to `dir`). */
 async function storyTitles(dir, pattern) {
-  const titles = new Set();
+  const titles = new Map();
   if (!existsSync(dir)) return null;
   const walk = async (current) => {
     for (const entry of await readdir(current, { withFileTypes: true })) {
@@ -180,7 +181,7 @@ async function storyTitles(dir, pattern) {
       else if (pattern.test(entry.name)) {
         const source = await readFile(full, 'utf8');
         const title = /title: '([A-Z][A-Za-z]*\/[A-Za-z]+)'/.exec(source);
-        if (title) titles.add(title[1]);
+        if (title) titles.set(title[1], path.relative(dir, full).split(path.sep).join('/'));
       }
     }
   };
@@ -263,7 +264,9 @@ for (const dir of await readdir(path.join(reactLib, 'src/components'))) {
 }
 const reactTitles = await storyTitles(path.join(reactLib, 'src'), /\.stories\.tsx$/);
 for (const c of components) {
-  if (c.react?.storyTitle && !reactTitles.has(c.react.storyTitle)) problems.push(`${c.slug}: no React story titled ${c.react.storyTitle}`);
+  if (!c.react?.storyTitle) continue;
+  if (!reactTitles.has(c.react.storyTitle)) problems.push(`${c.slug}: no React story titled ${c.react.storyTitle}`);
+  else c.react.storyFile = reactTitles.get(c.react.storyTitle);
 }
 if (existsSync(angularLib)) {
   const angularDirs = new Set(components.map((c) => c.angular?.dir).filter(Boolean));
