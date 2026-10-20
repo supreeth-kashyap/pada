@@ -28,7 +28,8 @@ const withPadaTheme: Decorator = (Story, context) => {
   );
 };
 
-const toolbar = (title: string, icon: string, items: string[]) => ({
+// Generic so each icon keeps its literal type, which the toolbar addon checks against its icon names.
+const toolbar = <Icon extends string>(title: string, icon: Icon, items: string[]) => ({
   description: title,
   toolbar: { title, icon, items, dynamicTitle: true },
 });
