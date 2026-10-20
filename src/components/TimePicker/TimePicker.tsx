@@ -102,6 +102,7 @@ export function TimePicker({
               <span className="time-picker-required" aria-hidden="true">
                 *
               </span>
+              {' '}
               <VisuallyHidden>(required)</VisuallyHidden>
             </>
           )}

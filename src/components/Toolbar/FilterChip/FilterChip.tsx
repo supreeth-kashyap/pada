@@ -55,7 +55,7 @@ export const FilterChip: React.FC<FilterChipProps> = ({
         ) : (
           <>
             <span className="filter-chip__label">{label}</span>
-            <span className="filter-chip__colon">:</span>
+            <span className="filter-chip__colon">:</span>{' '}
             <span className="filter-chip__value">{value}</span>
           </>
         )}
