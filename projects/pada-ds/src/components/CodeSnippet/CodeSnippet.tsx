@@ -1,13 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import './CodeSnippet.css';
 import { Button } from '../Button';
-import Prism from 'prismjs';
-import 'prismjs/components/prism-bash.js';
-import 'prismjs/components/prism-javascript.js';
-import 'prismjs/components/prism-typescript.js';
-import 'prismjs/components/prism-json.js';
-import 'prismjs/components/prism-yaml.js';
-import 'prismjs/components/prism-python.js';
+import Prism from './prismLanguages';
 
 export type CodeSnippetType = 'micro' | 'single-line' | 'multi-line';
 

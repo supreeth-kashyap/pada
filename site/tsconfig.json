@@ -2,8 +2,11 @@
   "extends": "../projects/pada-ds/tsconfig.app.json",
   "compilerOptions": {
     "tsBuildInfoFile": "../node_modules/.tmp/tsconfig.site.tsbuildinfo",
-    "baseUrl": ".",
-    "paths": { "@pada/*": ["../projects/pada-ds/src/*"] }
+    "paths": {
+      "@pada/*": ["../projects/pada-ds/src/*"],
+      "pada-ds": ["../projects/pada-ds/src/index.ts"],
+      "pada-ds/headless": ["../projects/pada-ds/src/headless/index.ts"]
+    }
   },
   "include": ["src", "../projects/pada-ds/src/types"]
 }

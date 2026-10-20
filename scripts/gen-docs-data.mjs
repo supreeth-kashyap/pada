@@ -280,8 +280,27 @@ if (problems.length) {
   process.exit(1);
 }
 
+// How many tokens each tier defines, for the tier diagrams.
+const tokensCss = await readFile(path.join(reactLib, 'src/styles/tokens.generated.css'), 'utf8');
+const definitions = new Map();
+for (const [, name, value] of tokensCss.matchAll(/^\s*(--pada-[a-z0-9-]+)\s*:\s*([^;]+);/gm)) {
+  if (!definitions.has(name)) definitions.set(name, value);
+}
+const defined = new Set(definitions.keys());
+const isDerived = (name) => /calc\(|color-mix\(|pow\(/.test(definitions.get(name));
+const KNOBS = ['--pada-accent-hue', '--pada-accent-chroma', '--pada-radius-base', '--pada-density', '--pada-type-base', '--pada-type-ratio', '--pada-motion-scale', '--pada-contrast'];
+const componentTokenNames = new Set(components.flatMap((c) => c.tokens.component.map((t) => t.name)));
+const tokenStats = {
+  reference: [...defined].filter((n) => n.startsWith('--pada-ref-')).length,
+  palette: [...defined].filter((n) => n.startsWith('--pada-palette-')).length,
+  semantic: [...defined].filter((n) => !n.startsWith('--pada-ref-') && !n.startsWith('--pada-palette-') && !KNOBS.includes(n) && !isDerived(n)).length,
+  derived: [...defined].filter((n) => !n.startsWith('--pada-ref-') && !n.startsWith('--pada-palette-') && !KNOBS.includes(n) && isDerived(n)).length,
+  knobs: KNOBS.length,
+  component: componentTokenNames.size,
+};
+
 const version = JSON.parse(await readFile(path.join(reactLib, 'package.json'), 'utf8')).version;
-const docs = { version, links: LINKS, categories: CATEGORIES, components };
+const docs = { version, links: LINKS, categories: CATEGORIES, tokenStats, components };
 const json = `${JSON.stringify(docs, null, 2)}\n`;
 
 if (check) {

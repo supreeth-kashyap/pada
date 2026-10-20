@@ -1,15 +1,20 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
-import './index.css'
-import '@pada/styles/tokens.generated.css';
-import '@pada/styles/base.css';
-import App from './demo/App'
+import { StrictMode } from 'react';
+import { createRoot, hydrateRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import 'pada-ds/tokens.css';
+import 'pada-ds/base.css';
+import './styles/site.css';
+import { App } from './App';
 
-createRoot(document.getElementById('root')!).render(
+const container = document.getElementById('root')!;
+const app = (
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL.replace(/\/$/, '')}>
       <App />
     </BrowserRouter>
-  </StrictMode>,
-)
+  </StrictMode>
+);
+
+// Prerendered pages hydrate; the dev server renders from scratch.
+if (container.firstElementChild) hydrateRoot(container, app);
+else createRoot(container).render(app);

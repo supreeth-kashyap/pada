@@ -22,6 +22,14 @@
     "Layout",
     "Legacy"
   ],
+  "tokenStats": {
+    "reference": 245,
+    "palette": 66,
+    "semantic": 418,
+    "derived": 75,
+    "knobs": 8,
+    "component": 354
+  },
   "components": [
     {
       "name": "Button",
