@@ -342,9 +342,9 @@ export const UploadField: React.FC<UploadFieldProps> = ({
 function Hints({ id, accept, maxSize, maxFiles }: { id: string; accept?: string; maxSize?: number; maxFiles?: number }) {
   return (
     <span id={id} className="upload-field-hints">
-      {accept && <span className="upload-field-hint">Supported type(s): {accept}</span>}
-      {maxSize && <span className="upload-field-hint">Max size: {formatFileSize(maxSize)}</span>}
-      {maxFiles && <span className="upload-field-hint">Max count: {maxFiles}</span>}
+      {accept && <span className="upload-field-hint">Supported type(s): {accept}</span>}{' '}
+      {maxSize && <span className="upload-field-hint">Max size: {formatFileSize(maxSize)}</span>}{' '}
+      {maxFiles && <span className="upload-field-hint">Max count: {maxFiles}</span>}{' '}
     </span>
   );
 }

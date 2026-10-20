@@ -11,8 +11,8 @@ export default defineConfig(({ command }) => ({
   build: {
     lib: {
       entry: {
-        pada: path.resolve(__dirname, 'src/index.ts'),
-        headless: path.resolve(__dirname, 'src/headless/index.ts'),
+        pada: path.resolve(import.meta.dirname, 'src/index.ts'),
+        headless: path.resolve(import.meta.dirname, 'src/headless/index.ts'),
       },
       fileName: (_format, entryName) => `${entryName}.js`,
       cssFileName: 'pada',

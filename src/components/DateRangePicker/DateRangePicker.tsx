@@ -153,6 +153,7 @@ export function DateRangePicker({
               <span className="date-range-picker-required" aria-hidden="true">
                 *
               </span>
+              {' '}
               <VisuallyHidden>(required)</VisuallyHidden>
             </>
           )}

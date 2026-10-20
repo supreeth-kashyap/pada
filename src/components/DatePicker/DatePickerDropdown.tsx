@@ -217,7 +217,6 @@ export const DatePickerDropdown = ({
             const isToday =
               index === today.getMonth() &&
               viewDate.getFullYear() === today.getFullYear();
-            const visualState = selected ? 'active' : inRange ? 'hover' : 'rest';
             
             // Show hover preview for range selection
             if (resolvedSelection === 'range' && rangeStart && !rangeEnd && hoveredMonth !== null) {
@@ -231,7 +230,8 @@ export const DatePickerDropdown = ({
                 inRange = true;
               }
             }
-            
+            const visualState = selected ? 'active' : inRange ? 'hover' : 'rest';
+
             return (
               <PickerBox
                 key={index}
@@ -284,7 +284,6 @@ export const DatePickerDropdown = ({
             const selected = isYearSelected(year, resolvedSelection, resolvedValue, rangeStart, rangeEnd);
             let inRange = isYearInRange(year, resolvedSelection, rangeStart, rangeEnd);
             const isCurrent = year === currentYear;
-            const visualState = selected ? 'active' : inRange ? 'hover' : 'rest';
             
             // Show hover preview for range selection
             if (resolvedSelection === 'range' && rangeStart && !rangeEnd && hoveredYear !== null) {
@@ -296,7 +295,8 @@ export const DatePickerDropdown = ({
                 inRange = true;
               }
             }
-            
+            const visualState = selected ? 'active' : inRange ? 'hover' : 'rest';
+
             return (
               <PickerBox
                 key={year}

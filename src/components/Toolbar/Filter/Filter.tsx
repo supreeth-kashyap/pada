@@ -142,7 +142,8 @@ export const Filter: React.FC<FilterProps> = ({
           {isActive ? (
             <span className="toolbar-filter__badge">
               {selectionCount}
-              <VisuallyHidden> selected</VisuallyHidden>
+              {' '}
+              <VisuallyHidden>selected</VisuallyHidden>
             </span>
           ) : (
             <span className="toolbar-filter__dash" aria-hidden="true">

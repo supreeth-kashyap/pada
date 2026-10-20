@@ -151,7 +151,8 @@ export const MoreFilter: React.FC<MoreFilterProps> = ({
           {isActive ? (
             <span className="more-filter__badge">
               {totalCount}
-              <VisuallyHidden> selected</VisuallyHidden>
+              {' '}
+              <VisuallyHidden>selected</VisuallyHidden>
             </span>
           ) : (
             <span className="more-filter__dash" aria-hidden="true">
@@ -191,7 +192,8 @@ export const MoreFilter: React.FC<MoreFilterProps> = ({
                       {count > 0 && (
                         <span className="more-filter__row-count">
                           {count}
-                          <VisuallyHidden> selected</VisuallyHidden>
+                          {' '}
+                          <VisuallyHidden>selected</VisuallyHidden>
                         </span>
                       )}
                       <Icon name="chevron_right" size={12} className="more-filter__row-chevron" />

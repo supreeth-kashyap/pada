@@ -8,6 +8,10 @@ updates:
     directory: /
     schedule:
       interval: monthly
+    ignore:
+      # typescript-eslint supports TypeScript < 6.1 only. Lift once it accepts 7.
+      - dependency-name: typescript
+        versions: [">=6.1.0"]
     groups:
       dev-dependencies:
         dependency-type: development

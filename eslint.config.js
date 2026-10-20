@@ -13,9 +13,16 @@ export default defineConfig([
     extends: [
       js.configs.recommended,
       tseslint.configs.recommended,
-      reactHooks.configs['recommended-latest'],
       reactRefresh.configs.vite,
     ],
+    plugins: { 'react-hooks': reactHooks },
+    // The two classic hook rules. eslint-plugin-react-hooks 7's preset also turns on the
+    // React Compiler rules (refs, set-state-in-effect, immutability …), which flag patterns
+    // these hooks use on purpose; adopting them is its own change.
+    rules: {
+      'react-hooks/rules-of-hooks': 'error',
+      'react-hooks/exhaustive-deps': 'warn',
+    },
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
