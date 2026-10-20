@@ -90,7 +90,7 @@ describe('FilterChip', () => {
     await user.click(screen.getByRole('button', { name: 'Remove filter Owner: Ada' }));
     expect(onRemove).toHaveBeenCalledOnce();
     expect(onClick).not.toHaveBeenCalled();
-    await user.click(screen.getByRole('button', { name: 'Owner : Ada' }));
+    await user.click(screen.getByRole('button', { name: 'Owner: Ada' }));
     expect(onClick).toHaveBeenCalledOnce();
     expect(await axeViolations()).toEqual([]);
   });

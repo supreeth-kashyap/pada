@@ -126,12 +126,14 @@ export const Step = ({
             onClick={handleClick}
           >
             {titleText}
-            <VisuallyHidden>{` (${STATUS_LABEL[status]})`}</VisuallyHidden>
+            {' '}
+            <VisuallyHidden>{`(${STATUS_LABEL[status]})`}</VisuallyHidden>
           </button>
         ) : (
           <span className="step__label">
             {titleText}
-            <VisuallyHidden>{` (${STATUS_LABEL[status]})`}</VisuallyHidden>
+            {' '}
+            <VisuallyHidden>{`(${STATUS_LABEL[status]})`}</VisuallyHidden>
           </span>
         )}
         {description && (
