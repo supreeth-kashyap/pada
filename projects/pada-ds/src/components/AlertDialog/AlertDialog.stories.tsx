@@ -4,7 +4,7 @@ import { Button } from '../Button';
 import { AlertDialog } from '.';
 
 const meta = {
-  title: 'Components/AlertDialog',
+  title: 'Overlays/AlertDialog',
   component: AlertDialog.Content,
   tags: ['autodocs'],
 } satisfies Meta<typeof AlertDialog.Content>;

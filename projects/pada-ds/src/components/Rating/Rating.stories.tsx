@@ -3,7 +3,7 @@ import { fn } from 'storybook/test';
 import { Rating } from './Rating';
 
 const meta = {
-  title: 'Components/Rating',
+  title: 'Forms/Rating',
   component: Rating,
   tags: ['autodocs'],
   args: { label: 'Your rating', name: 'rating', defaultValue: 3, onValueChange: fn() },

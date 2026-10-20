@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Text, TextFamily, TextSize, TextWeight } from '.';
 
 const meta = {
-  title: 'Foundation/Text',
+  title: 'Display/Text',
   component: Text,
   tags: ['autodocs'],
   args: { children: 'The quick brown fox jumps over the lazy dog', size: 'base' },

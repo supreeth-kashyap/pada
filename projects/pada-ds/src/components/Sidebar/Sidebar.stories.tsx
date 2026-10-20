@@ -5,7 +5,7 @@ import { Icon } from '../Icon';
 import { Sidebar } from './Sidebar';
 
 const meta = {
-  title: 'Components/Sidebar',
+  title: 'Navigation/Sidebar',
   component: Sidebar,
   tags: ['autodocs'],
   parameters: { layout: 'fullscreen' },

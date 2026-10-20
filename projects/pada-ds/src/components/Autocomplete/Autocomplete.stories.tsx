@@ -18,7 +18,7 @@ const people: AutocompleteOption[] = [
 ];
 
 const meta: Meta<typeof Autocomplete> = {
-  title: 'Components/Autocomplete',
+  title: 'Forms/Autocomplete',
   component: Autocomplete,
   tags: ['autodocs'],
   args: { label: 'Country', options: countries, onValueChange: fn() },

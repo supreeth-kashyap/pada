@@ -3,7 +3,7 @@ import { fn } from 'storybook/test';
 import { ColorPicker } from './ColorPicker';
 
 const meta = {
-  title: 'Components/ColorPicker',
+  title: 'Forms/ColorPicker',
   component: ColorPicker,
   tags: ['autodocs'],
   args: { label: 'Label colour', defaultValue: '#4f46e5', onValueChange: fn() },

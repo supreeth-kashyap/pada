@@ -16,7 +16,7 @@ const profile = (
 );
 
 const meta = {
-  title: 'Components/HoverCard',
+  title: 'Overlays/HoverCard',
   component: HoverCard,
   tags: ['autodocs'],
   args: { content: profile, side: 'top', arrow: true, children: <Link href="#">@grace</Link> },

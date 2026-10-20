@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { ProgressCircle } from './ProgressCircle';
 
 const meta = {
-  title: 'Components/ProgressCircle',
+  title: 'Feedback/ProgressCircle',
   component: ProgressCircle,
   tags: ['autodocs'],
   argTypes: { size: { control: 'inline-radio', options: ['sm', 'md', 'lg'] } },

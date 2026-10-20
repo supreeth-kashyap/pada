@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { RadioGroup } from './RadioGroup';
 
 const meta = {
-  title: 'Components/RadioGroup',
+  title: 'Forms/RadioGroup',
   component: RadioGroup,
   tags: ['autodocs'],
   args: {

@@ -3,7 +3,7 @@ import { fn } from 'storybook/test';
 import { RangeSlider } from './RangeSlider';
 
 const meta = {
-  title: 'Components/RangeSlider',
+  title: 'Forms/RangeSlider',
   component: RangeSlider,
   tags: ['autodocs'],
   args: {

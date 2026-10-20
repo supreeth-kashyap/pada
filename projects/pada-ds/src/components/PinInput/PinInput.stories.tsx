@@ -3,7 +3,7 @@ import { fn } from 'storybook/test';
 import { PinInput } from './PinInput';
 
 const meta = {
-  title: 'Components/PinInput',
+  title: 'Forms/PinInput',
   component: PinInput,
   tags: ['autodocs'],
   args: { label: 'Verification code', length: 6, name: 'code', onComplete: fn() },

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Timeline } from './Timeline';
 
 const meta = {
-  title: 'Components/Timeline',
+  title: 'Data/Timeline',
   component: Timeline,
   tags: ['autodocs'],
   args: {

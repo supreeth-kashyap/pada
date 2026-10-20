@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Stat } from './Stat';
 
 const meta = {
-  title: 'Components/Stat',
+  title: 'Display/Stat',
   component: Stat,
   tags: ['autodocs'],
   args: {

@@ -9,7 +9,7 @@ const sampleFiles: UploadedFile[] = [
 ];
 
 const meta = {
-  title: 'Components/UploadField',
+  title: 'Forms/UploadField',
   component: UploadField,
   tags: ['autodocs'],
   args: { label: 'Attachments', description: 'PDF up to 10 MB.', accept: 'application/pdf', maxSize: 10 * 1024 * 1024, onUpload: fn(), onFilesChange: fn() },

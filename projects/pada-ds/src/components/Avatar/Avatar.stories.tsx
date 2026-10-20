@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Avatar, AvatarGroup } from './Avatar';
 
 const meta = {
-  title: 'Components/Avatar',
+  title: 'Display/Avatar',
   component: Avatar,
   tags: ['autodocs'],
   args: { name: 'Grace Hopper' },

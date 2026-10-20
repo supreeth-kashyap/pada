@@ -3,7 +3,7 @@ import { fn } from 'storybook/test';
 import { IconButton } from './IconButton';
 
 const meta = {
-  title: 'Components/IconButton',
+  title: 'Actions/IconButton',
   component: IconButton,
   tags: ['autodocs'],
   args: { icon: 'edit_1', label: 'Edit', onClick: fn() },

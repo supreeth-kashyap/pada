@@ -3,7 +3,7 @@ import { Placeholder } from '../../stories/Placeholder';
 import { Container } from './Container';
 
 const meta = {
-  title: 'Components/Container',
+  title: 'Layout/Container',
   component: Container,
   tags: ['autodocs'],
   parameters: { layout: 'fullscreen' },

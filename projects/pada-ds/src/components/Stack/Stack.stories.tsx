@@ -4,7 +4,7 @@ import { Button } from '../Button';
 import { Stack } from './Stack';
 
 const meta = {
-  title: 'Components/Stack',
+  title: 'Layout/Stack',
   component: Stack,
   tags: ['autodocs'],
   parameters: { layout: 'padded' },

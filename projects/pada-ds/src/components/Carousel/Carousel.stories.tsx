@@ -9,7 +9,7 @@ const slides = ['Connect your data', 'Invite your team', 'Ship your first report
 ));
 
 const meta = {
-  title: 'Components/Carousel',
+  title: 'Display/Carousel',
   component: Carousel,
   tags: ['autodocs'],
   args: { label: 'Feature tour', children: slides },

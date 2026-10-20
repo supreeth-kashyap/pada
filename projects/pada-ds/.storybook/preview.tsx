@@ -62,7 +62,9 @@ const preview: Preview = {
       test: 'todo',
     },
     options: {
-      storySort: { order: ['Introduction', 'Foundation', 'Components'] },
+      storySort: {
+        order: ['Introduction', 'Docs', 'Actions', 'Forms', 'Dates', 'Overlays', 'Feedback', 'Navigation', 'Data', 'Display', 'Layout', 'Legacy'],
+      },
     },
   },
 };

@@ -3,7 +3,7 @@ import { fn } from 'storybook/test';
 import { Steps } from './Steps';
 
 const meta = {
-  title: 'Components/Steps',
+  title: 'Navigation/Steps',
   component: Steps,
   tags: ['autodocs'],
   parameters: { layout: 'padded' },

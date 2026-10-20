@@ -5,7 +5,7 @@ import { InputText } from '../InputText';
 import { Dialog } from '.';
 
 const meta = {
-  title: 'Components/Dialog',
+  title: 'Overlays/Dialog',
   component: Dialog.Content,
   tags: ['autodocs'],
   args: { size: 'md' },

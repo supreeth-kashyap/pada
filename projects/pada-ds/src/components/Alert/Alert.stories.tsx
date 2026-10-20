@@ -4,7 +4,7 @@ import { Button } from '../Button';
 import { Alert } from './Alert';
 
 const meta = {
-  title: 'Components/Alert',
+  title: 'Feedback/Alert',
   component: Alert,
   tags: ['autodocs'],
   parameters: { layout: 'padded' },

@@ -3,7 +3,7 @@ import { Badge } from '../Badge';
 import { KeyValue } from './KeyValue';
 
 const meta = {
-  title: 'Components/KeyValue',
+  title: 'Display/KeyValue',
   component: KeyValue,
   tags: ['autodocs'],
   args: { label: 'Owner', children: 'Grace Hopper' },

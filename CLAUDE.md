@@ -18,7 +18,7 @@ pada/
 │   ├── scripts/        token build and checks, API manifest, 1.x token codemod
 │   └── .storybook/
 ├── site/               the website: landing page and docs (npm workspace "pada-site")
-├── content/            docs content shared by the site and both Storybooks
+├── content/            docs content (components/*.md → docs.json) shared by the site and both Storybooks
 ├── docs/               contributing guide, migration guide, roadmap
 ├── scripts/            repo tooling: Angular token sync, consumer smoke test, package docs copy
 └── public/             brand assets served by Storybook and the site
@@ -81,5 +81,6 @@ are attributes that work on any element: `data-theme`, `data-accent`, `data-neut
 | `npm run build` | Library build: JS, types, tokens, manifest, llms files |
 | `npm run check:manifest` | `llms.txt` / `llms-full.txt` are up to date |
 | `npm run smoke:consumer` | Packs the library and installs it into a fresh Vite app |
+| `npm run docs:data` | Rebuilds `content/docs.json` from `content/components/*.md` (`npm test` checks it) |
 | `npm run storybook` | Storybook (composes the Angular Storybook) |
 | `npm run dev` / `npm run build:site` | The website |

@@ -9,7 +9,7 @@ const activity = Array.from({ length: 30 }, (_, i) => (
 ));
 
 const meta = {
-  title: 'Components/ScrollArea',
+  title: 'Layout/ScrollArea',
   component: ScrollArea,
   tags: ['autodocs'],
   args: { 'aria-label': 'Activity', maxHeight: 240, children: activity },

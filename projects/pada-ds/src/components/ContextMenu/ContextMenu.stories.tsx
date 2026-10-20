@@ -4,7 +4,7 @@ import { Placeholder } from '../../stories/Placeholder';
 import { ContextMenu } from '.';
 
 const meta = {
-  title: 'Components/ContextMenu',
+  title: 'Overlays/ContextMenu',
   component: ContextMenu.Root,
   tags: ['autodocs'],
 } satisfies Meta<typeof ContextMenu.Root>;

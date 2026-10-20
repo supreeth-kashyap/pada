@@ -3,7 +3,7 @@ import { fn } from 'storybook/test';
 import { List, ListItem } from '.';
 
 const meta = {
-  title: 'Components/List',
+  title: 'Layout/List',
   component: List,
   tags: ['autodocs'],
   args: {

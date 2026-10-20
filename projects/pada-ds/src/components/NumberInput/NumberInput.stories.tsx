@@ -3,7 +3,7 @@ import { fn } from 'storybook/test';
 import { NumberInput } from './NumberInput';
 
 const meta = {
-  title: 'Components/NumberInput',
+  title: 'Forms/NumberInput',
   component: NumberInput,
   tags: ['autodocs'],
   args: { label: 'Quantity', defaultValue: 1, min: 0, onValueChange: fn() },

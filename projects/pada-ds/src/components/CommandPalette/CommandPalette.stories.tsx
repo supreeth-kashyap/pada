@@ -14,7 +14,7 @@ const commands: Command[] = [
 ];
 
 const meta = {
-  title: 'Components/CommandPalette',
+  title: 'Overlays/CommandPalette',
   component: CommandPalette,
   tags: ['autodocs'],
   args: { commands, placeholder: 'Type a command or search…' },

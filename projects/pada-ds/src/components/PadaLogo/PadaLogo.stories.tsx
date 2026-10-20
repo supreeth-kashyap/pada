@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { PadaLogo } from './PadaLogo';
 
 const meta = {
-  title: 'Foundation/PadaLogo',
+  title: 'Display/PadaLogo',
   component: PadaLogo,
   tags: ['autodocs'],
   args: { variant: 'lockup', tone: 'color', size: 'lg' },

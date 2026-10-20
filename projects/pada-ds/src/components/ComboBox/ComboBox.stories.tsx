@@ -3,7 +3,7 @@ import { fn } from 'storybook/test';
 import { ComboBox } from './ComboBox';
 
 const meta = {
-  title: 'Components/ComboBox',
+  title: 'Forms/ComboBox',
   component: ComboBox,
   tags: ['autodocs'],
   args: {

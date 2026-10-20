@@ -5,7 +5,7 @@ import { Button } from '../Button';
 import { DropdownMenu } from '.';
 
 const meta = {
-  title: 'Components/DropdownMenu',
+  title: 'Overlays/DropdownMenu',
   component: DropdownMenu.Content,
   tags: ['autodocs'],
 } satisfies Meta<typeof DropdownMenu.Content>;

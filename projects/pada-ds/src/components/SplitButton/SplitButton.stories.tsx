@@ -4,7 +4,7 @@ import { DropdownMenu } from '../DropdownMenu';
 import { SplitButton } from '.';
 
 const meta = {
-  title: 'Components/SplitButton',
+  title: 'Actions/SplitButton',
   component: SplitButton.Root,
   tags: ['autodocs'],
   argTypes: {

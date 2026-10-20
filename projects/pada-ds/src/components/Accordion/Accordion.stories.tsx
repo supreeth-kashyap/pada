@@ -3,7 +3,7 @@ import { fn } from 'storybook/test';
 import { Accordion } from './Accordion';
 
 const meta = {
-  title: 'Components/Accordion',
+  title: 'Display/Accordion',
   component: Accordion,
   tags: ['autodocs'],
   parameters: { layout: 'padded' },

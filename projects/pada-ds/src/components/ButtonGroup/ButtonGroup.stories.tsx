@@ -3,7 +3,7 @@ import { Button } from '../Button';
 import { ButtonGroup } from './ButtonGroup';
 
 const meta = {
-  title: 'Components/ButtonGroup',
+  title: 'Actions/ButtonGroup',
   component: ButtonGroup,
   tags: ['autodocs'],
   argTypes: {

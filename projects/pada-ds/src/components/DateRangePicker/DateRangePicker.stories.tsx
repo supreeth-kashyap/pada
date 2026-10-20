@@ -13,7 +13,7 @@ const presets: DateRangePreset[] = [
 ];
 
 const meta = {
-  title: 'Components/DateRangePicker',
+  title: 'Dates/DateRangePicker',
   component: DateRangePicker,
   tags: ['autodocs'],
   argTypes: {

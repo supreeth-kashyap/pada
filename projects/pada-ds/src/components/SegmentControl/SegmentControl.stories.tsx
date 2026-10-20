@@ -3,7 +3,7 @@ import { fn } from 'storybook/test';
 import { SegmentControl } from './SegmentControl';
 
 const meta = {
-  title: 'Components/SegmentControl',
+  title: 'Forms/SegmentControl',
   component: SegmentControl,
   tags: ['autodocs'],
   args: {

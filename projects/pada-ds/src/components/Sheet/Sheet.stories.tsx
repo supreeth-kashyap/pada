@@ -5,7 +5,7 @@ import { Checkbox } from '../Checkbox';
 import { Sheet } from '.';
 
 const meta = {
-  title: 'Components/Sheet',
+  title: 'Overlays/Sheet',
   component: Sheet.Content,
   tags: ['autodocs'],
   args: { snapPoints: [0.45, 0.9], onSnapChange: fn() },

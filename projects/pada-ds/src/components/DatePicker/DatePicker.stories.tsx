@@ -3,7 +3,7 @@ import { fn } from 'storybook/test';
 import { DatePickerDropdown } from './DatePickerDropdown';
 
 const meta = {
-  title: 'Components/DatePicker',
+  title: 'Dates/DatePicker',
   component: DatePickerDropdown,
   tags: ['autodocs'],
   args: { onChange: fn() },

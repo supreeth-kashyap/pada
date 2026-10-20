@@ -3,7 +3,7 @@ import { Button } from '../Button';
 import { Tooltip } from './Tooltip';
 
 const meta = {
-  title: 'Components/Tooltip',
+  title: 'Overlays/Tooltip',
   component: Tooltip,
   tags: ['autodocs'],
   args: { content: 'Archive this record', position: 'top', children: <Button variant="secondary">Archive</Button> },

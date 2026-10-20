@@ -26,7 +26,7 @@ const files: TreeNode[] = [
 ];
 
 const meta = {
-  title: 'Components/Tree',
+  title: 'Data/Tree',
   component: Tree,
   tags: ['autodocs'],
   args: { 'aria-label': 'Project files', items: files, defaultExpanded: ['src'], onValueChange: fn() },

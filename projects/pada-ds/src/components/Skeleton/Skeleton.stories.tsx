@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Skeleton } from './Skeleton';
 
 const meta = {
-  title: 'Components/Skeleton',
+  title: 'Feedback/Skeleton',
   component: Skeleton,
   tags: ['autodocs'],
   args: { shape: 'text' },

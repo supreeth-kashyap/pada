@@ -3,7 +3,7 @@ import { fn } from 'storybook/test';
 import { Calendar } from './Calendar';
 
 const meta: Meta<typeof Calendar> = {
-  title: 'Components/Calendar',
+  title: 'Dates/Calendar',
   component: Calendar,
   tags: ['autodocs'],
   args: { onValueChange: fn() },

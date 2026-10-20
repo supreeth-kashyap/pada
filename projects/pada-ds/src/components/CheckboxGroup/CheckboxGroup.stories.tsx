@@ -9,7 +9,7 @@ const topics: CheckboxGroupOption[] = [
 ];
 
 const meta = {
-  title: 'Components/CheckboxGroup',
+  title: 'Forms/CheckboxGroup',
   component: CheckboxGroup,
   tags: ['autodocs'],
   argTypes: { orientation: { control: 'inline-radio', options: ['vertical', 'horizontal'] } },

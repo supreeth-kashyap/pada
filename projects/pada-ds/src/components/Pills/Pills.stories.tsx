@@ -3,7 +3,7 @@ import { fn } from 'storybook/test';
 import { Pills } from './Pills';
 
 const meta = {
-  title: 'Components/Pills',
+  title: 'Navigation/Pills',
   component: Pills,
   tags: ['autodocs'],
   args: {

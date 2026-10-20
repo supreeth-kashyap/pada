@@ -3,7 +3,7 @@ import { Button } from '../Button';
 import { Banner } from './Banner';
 
 const meta = {
-  title: 'Components/Banner',
+  title: 'Feedback/Banner',
   component: Banner,
   tags: ['autodocs'],
   parameters: { layout: 'padded' },

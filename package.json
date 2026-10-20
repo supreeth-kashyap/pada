@@ -18,14 +18,16 @@
     "build:site": "npm run build -w site",
     "check:manifest": "npm run check:manifest -w pada-ds",
     "lint": "eslint .",
-    "test": "npm test -w pada-ds",
+    "test": "npm test -w pada-ds && npm run docs:check",
     "tokens:check": "npm run tokens:check -w pada-ds",
     "check:tokens": "npm run tokens:check",
     "tokens:sync": "node ./scripts/sync-tokens-angular.mjs",
     "smoke:consumer": "node ./scripts/smoke-consumer.mjs",
     "storybook": "npm run storybook -w pada-ds",
     "build-storybook": "npm run build-storybook -w pada-ds",
-    "chromatic": "npm run chromatic -w pada-ds"
+    "chromatic": "npm run chromatic -w pada-ds",
+    "docs:data": "node ./scripts/gen-docs-data.mjs",
+    "docs:check": "node ./scripts/gen-docs-data.mjs --check"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

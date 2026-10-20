@@ -3,7 +3,7 @@ import { fn } from 'storybook/test';
 import { TagInput } from './TagInput';
 
 const meta = {
-  title: 'Components/TagInput',
+  title: 'Forms/TagInput',
   component: TagInput,
   tags: ['autodocs'],
   args: { label: 'Topics', placeholder: 'Add a topic…', defaultValue: ['design', 'react'], onValueChange: fn() },

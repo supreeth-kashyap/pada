@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { CodeSnippet } from './CodeSnippet';
 
 const meta = {
-  title: 'Components/CodeSnippet',
+  title: 'Display/CodeSnippet',
   component: CodeSnippet,
   tags: ['autodocs'],
   parameters: { layout: 'padded' },

@@ -72,7 +72,8 @@ Order the file root, variant tokens, children, then states:
 - [ ] ARIA attributes drive styling
 - [ ] Tests cover behaviour, keyboard, ARIA and axe; stories cover every variant
 - [ ] The Angular twin matches (or the difference is documented)
-- [ ] A content page exists in `content/components/` (docs site and Storybook)
+- [ ] A content page exists in `content/components/<name>.md` (docs site and Storybook), and
+      `npm run docs:data` has been run
 
 ## Before you push
 

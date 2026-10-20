@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { TimePicker } from './TimePicker';
 
 const meta = {
-  title: 'Components/TimePicker',
+  title: 'Dates/TimePicker',
   component: TimePicker,
   tags: ['autodocs'],
   argTypes: {

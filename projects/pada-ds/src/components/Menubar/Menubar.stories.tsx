@@ -4,7 +4,7 @@ import { fn } from 'storybook/test';
 import { Menubar } from '.';
 
 const meta = {
-  title: 'Components/Menubar',
+  title: 'Navigation/Menubar',
   component: Menubar.Root,
   tags: ['autodocs'],
   parameters: { layout: 'padded' },

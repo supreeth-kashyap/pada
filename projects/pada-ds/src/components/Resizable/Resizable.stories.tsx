@@ -6,7 +6,7 @@ import { Resizable } from '.';
 const panel = { height: '100%', boxSizing: 'border-box' } as const;
 
 const meta = {
-  title: 'Components/Resizable',
+  title: 'Layout/Resizable',
   component: Resizable.Root,
   tags: ['autodocs'],
   parameters: { layout: 'padded' },

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { InfoTooltip } from './InfoTooltip';
 
 const meta = {
-  title: 'Components/InfoTooltip',
+  title: 'Display/InfoTooltip',
   component: InfoTooltip,
   tags: ['autodocs'],
   argTypes: { position: { control: 'inline-radio', options: ['top', 'bottom', 'left', 'right'] } },

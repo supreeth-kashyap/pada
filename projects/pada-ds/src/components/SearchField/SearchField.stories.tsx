@@ -3,7 +3,7 @@ import { fn } from 'storybook/test';
 import { SearchField } from './SearchField';
 
 const meta = {
-  title: 'Components/SearchField',
+  title: 'Forms/SearchField',
   component: SearchField,
   tags: ['autodocs'],
   args: { placeholder: 'Search', onChange: fn(), onClear: fn() },

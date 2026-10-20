@@ -3,7 +3,7 @@ import { fn } from 'storybook/test';
 import { Slider } from './Slider';
 
 const meta = {
-  title: 'Components/Slider',
+  title: 'Forms/Slider',
   component: Slider,
   tags: ['autodocs'],
   args: { label: 'Volume', min: 0, max: 100, defaultValue: 50, onValueChange: fn() },

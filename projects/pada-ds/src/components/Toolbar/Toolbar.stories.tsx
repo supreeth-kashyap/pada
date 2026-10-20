@@ -5,7 +5,7 @@ import { SearchField } from '../SearchField';
 import { Toolbar } from './Toolbar';
 
 const meta = {
-  title: 'Components/Toolbar',
+  title: 'Navigation/Toolbar',
   component: Toolbar,
   tags: ['autodocs'],
   parameters: { layout: 'padded' },

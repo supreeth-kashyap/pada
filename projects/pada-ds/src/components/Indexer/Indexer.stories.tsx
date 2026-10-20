@@ -3,7 +3,7 @@ import { fn } from 'storybook/test';
 import { Indexer } from './Indexer';
 
 const meta = {
-  title: 'Components/Indexer',
+  title: 'Navigation/Indexer',
   component: Indexer,
   tags: ['autodocs'],
   args: {

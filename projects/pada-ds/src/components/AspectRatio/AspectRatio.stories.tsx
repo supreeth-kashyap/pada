@@ -3,7 +3,7 @@ import { Placeholder } from '../../stories/Placeholder';
 import { AspectRatio } from './AspectRatio';
 
 const meta = {
-  title: 'Components/AspectRatio',
+  title: 'Layout/AspectRatio',
   component: AspectRatio,
   tags: ['autodocs'],
   args: { ratio: 16 / 9 },

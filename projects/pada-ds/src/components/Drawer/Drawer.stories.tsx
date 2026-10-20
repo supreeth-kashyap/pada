@@ -4,7 +4,7 @@ import { Checkbox } from '../Checkbox';
 import { Drawer } from '.';
 
 const meta = {
-  title: 'Components/Drawer',
+  title: 'Overlays/Drawer',
   component: Drawer.Content,
   tags: ['autodocs'],
   args: { side: 'right', size: 'sm' },

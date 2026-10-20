@@ -3,7 +3,7 @@ import { fn } from 'storybook/test';
 import { TabPanel, Tabs } from './Tabs';
 
 const meta = {
-  title: 'Components/Tabs',
+  title: 'Navigation/Tabs',
   component: Tabs,
   tags: ['autodocs'],
   parameters: { layout: 'padded' },

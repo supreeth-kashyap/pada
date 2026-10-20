@@ -3,7 +3,7 @@ import { fn } from 'storybook/test';
 import { InputDate } from './InputDate';
 
 const meta = {
-  title: 'Components/InputDate',
+  title: 'Dates/InputDate',
   component: InputDate,
   tags: ['autodocs'],
   args: { label: 'Date of birth', onChange: fn() },

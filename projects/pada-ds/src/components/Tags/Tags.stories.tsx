@@ -4,7 +4,7 @@ import { Tags } from './Tags';
 const VARIANTS = ['neutral', 'primary', 'secondary', 'success', 'danger', 'royal'] as const;
 
 const meta = {
-  title: 'Components/Tags',
+  title: 'Display/Tags',
   component: Tags,
   tags: ['autodocs'],
   args: { children: 'Active', variant: 'success' },

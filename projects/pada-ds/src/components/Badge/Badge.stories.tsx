@@ -4,7 +4,7 @@ import { Badge, type BadgeTone } from './Badge';
 const TONES: BadgeTone[] = ['neutral', 'accent', 'success', 'warning', 'danger', 'info'];
 
 const meta = {
-  title: 'Components/Badge',
+  title: 'Display/Badge',
   component: Badge,
   tags: ['autodocs'],
   args: { children: 'Beta' },

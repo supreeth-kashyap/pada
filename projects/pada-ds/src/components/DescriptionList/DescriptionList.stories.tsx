@@ -24,7 +24,7 @@ const vendor: DescriptionListData = {
 };
 
 const meta = {
-  title: 'Components/DescriptionList',
+  title: 'Data/DescriptionList',
   component: DescriptionList,
   tags: ['autodocs'],
   args: { data: vendor },

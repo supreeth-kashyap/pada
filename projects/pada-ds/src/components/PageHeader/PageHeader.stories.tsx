@@ -4,7 +4,7 @@ import { Avatar } from '../Avatar';
 import { PageHeader } from './PageHeader';
 
 const meta = {
-  title: 'Components/PageHeader',
+  title: 'Navigation/PageHeader',
   component: PageHeader,
   tags: ['autodocs'],
   parameters: { layout: 'fullscreen' },

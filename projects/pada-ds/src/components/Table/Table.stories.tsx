@@ -65,7 +65,7 @@ function UsersTable() {
 }
 
 const meta = {
-  title: 'Components/Table',
+  title: 'Data/Table',
   component: Table,
   tags: ['autodocs'],
   parameters: { layout: 'padded' },

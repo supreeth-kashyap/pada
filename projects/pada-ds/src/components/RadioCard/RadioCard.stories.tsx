@@ -3,7 +3,7 @@ import { fn } from 'storybook/test';
 import { RadioCardGroup } from './RadioCard';
 
 const meta = {
-  title: 'Components/RadioCardGroup',
+  title: 'Forms/RadioCardGroup',
   component: RadioCardGroup,
   tags: ['autodocs'],
   parameters: { layout: 'padded' },

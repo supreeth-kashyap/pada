@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { InputTextArea } from './InputTextArea';
 
 const meta = {
-  title: 'Components/InputTextArea',
+  title: 'Forms/InputTextArea',
   component: InputTextArea,
   tags: ['autodocs'],
   args: { label: 'Feedback', rows: 4, placeholder: 'Tell us what you think…' },

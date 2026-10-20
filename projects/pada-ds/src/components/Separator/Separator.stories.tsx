@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Separator } from './Separator';
 
 const meta = {
-  title: 'Components/Separator',
+  title: 'Display/Separator',
   component: Separator,
   tags: ['autodocs'],
   argTypes: { orientation: { control: 'inline-radio', options: ['horizontal', 'vertical'] } },
