@@ -1,0 +1,6 @@
+/* Canvas background follows the active Pada theme instead of Storybook's white. */
+body.sb-show-main {
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-family-sans);
+}

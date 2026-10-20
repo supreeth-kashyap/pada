@@ -1,0 +1,22 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Introduction" />
+
+# Pada for React
+
+Stories for every `pada-ds` component, rendered from source.
+
+Use the toolbar to switch the theme axes that `ThemeProvider` exposes — **theme**, **accent**,
+**neutral**, **density**, **radius** and **contrast**. Every story picks them up, so each one
+can be checked across themes without extra variants.
+
+The **Accessibility** panel runs axe-core against the current story.
+
+```tsx
+import { Button, ThemeProvider } from 'pada-ds';
+import 'pada-ds/styles.css';
+
+<ThemeProvider theme="dark" accent="emerald">
+  <Button>Save</Button>
+</ThemeProvider>
+```
