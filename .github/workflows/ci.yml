@@ -26,3 +26,6 @@ jobs:
       # Packs the library and installs it into a fresh app, the way a consumer would.
       - run: npm run smoke:consumer
       - run: npm run build-storybook
+      # The website: typecheck, then build and prerender every page.
+      - run: npx tsc -p site/tsconfig.json --noEmit
+      - run: npm run build:site

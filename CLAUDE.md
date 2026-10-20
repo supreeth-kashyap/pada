@@ -83,4 +83,7 @@ are attributes that work on any element: `data-theme`, `data-accent`, `data-neut
 | `npm run smoke:consumer` | Packs the library and installs it into a fresh Vite app |
 | `npm run docs:data` | Rebuilds `content/docs.json` from `content/components/*.md` (`npm test` checks it) |
 | `npm run storybook` | Storybook (composes the Angular Storybook) |
-| `npm run dev` / `npm run build:site` | The website |
+| `npm run dev` / `npm run build:site` | The website (landing page and docs), prerendered into `site/dist` |
+| `npm run check -w site` | Every built page: console errors, axe, broken links (serve `site/dist` first) |
+| `npm run media -w site` | Re-record the landing-page loops and README GIFs |
+| `npm run storybook:sync -- ../pada-ds-angular` | Copy the Storybook Docs pages and docs blocks to Angular |

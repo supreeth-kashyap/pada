@@ -614,7 +614,7 @@
 
 .fake-btn.primary {
   border-color: transparent;
-  background: var(--pada-color-accent-solid);
+  background: var(--pada-palette-accent-600);
   color: var(--pada-color-accent-on-solid);
   animation: press 6s infinite;
 }
@@ -1016,7 +1016,7 @@
   translate: -50% 0;
   padding: 3px 10px;
   border-radius: 999px;
-  background: var(--site-accent);
+  background: var(--pada-palette-accent-600);
   color: var(--pada-color-accent-on-solid);
   font-family: var(--pada-font-mono);
   font-size: 11px;
