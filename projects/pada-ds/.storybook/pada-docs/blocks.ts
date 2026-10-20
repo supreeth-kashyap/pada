@@ -21,7 +21,8 @@ interface Entry {
   ai?: string;
 }
 
-const data = docs as unknown as { links: Record<string, string>; components: Entry[] };
+type LinkName = 'site' | 'reactStorybook' | 'angularStorybook' | 'reactRepo' | 'angularRepo' | 'reactNpm' | 'angularNpm' | 'figma';
+const data = docs as unknown as { links: { [K in LinkName]: string }; components: Entry[] };
 export const SITE = data.links.site;
 export const LINKS = data.links;
 
@@ -33,7 +34,7 @@ export function findEntry(title: string | undefined): Entry | undefined {
 
 const html = (markup: string) => ({ dangerouslySetInnerHTML: { __html: markup } });
 
-function Section({ title, children }: { title: string; children: ReactNode }) {
+function Section({ title, children }: { title: string; children?: ReactNode }) {
   return h('section', { className: 'pada-doc-section' }, h('h2', { className: 'pada-doc-h2' }, title), children);
 }
 

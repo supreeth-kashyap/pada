@@ -303,7 +303,10 @@ const tokenStats = {
 };
 
 const version = JSON.parse(await readFile(path.join(reactLib, 'package.json'), 'utf8')).version;
-const docs = { version, links: LINKS, categories: CATEGORIES, tokenStats, components };
+// Semantic colours only: the --pada-color-<hue>-<step> names are 1.x aliases of the reference ramps.
+const HUE_ALIAS = /^--pada-color-(slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-\d+$/;
+const colorTokens = [...defined].filter((n) => n.startsWith('--pada-color-') && !HUE_ALIAS.test(n));
+const docs = { version, links: LINKS, categories: CATEGORIES, tokenStats, colorTokens, components };
 const json = `${JSON.stringify(docs, null, 2)}\n`;
 
 if (check) {

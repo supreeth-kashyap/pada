@@ -1,0 +1,16 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { MotionScale } from '../../../.storybook/pada-docs/foundations';
+
+<Meta title="Docs/Foundations/Motion" />
+
+# Motion
+
+Quick, settled motion built on duration and easing tokens. Durations are multiplied by
+`--pada-motion-scale`, which is 0 under `prefers-reduced-motion` or `data-motion="reduced"`.
+Enter motion uses `@starting-style`; exits wait for their transition before the element leaves.
+
+<MotionScale />
+
+- `standard` for most changes, `enter` and `exit` for things appearing and leaving, `emphasized`
+  for large surfaces, `spring` for small playful moments.
+- Animate `opacity` and `transform`; avoid animating layout.

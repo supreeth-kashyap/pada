@@ -1,0 +1,13 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { ShadowScale } from '../../../.storybook/pada-docs/foundations';
+
+<Meta title="Docs/Foundations/Elevation" />
+
+# Elevation
+
+Shadows for surfaces that float above the page: menus and popovers use `md`, dialogs `xl`.
+
+<ShadowScale />
+
+Stacking uses the layer tokens, never hard-coded z-indexes: `--pada-z-base`, `-raised`, `-sticky`,
+`-dropdown`, `-overlay`, `-modal`, `-popover`, `-toast`, `-tooltip`.

@@ -1,0 +1,39 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { LINKS, SITE } from '../../.storybook/pada-docs/blocks';
+
+<Meta title="Docs/Introduction" />
+
+# Pada
+
+**One design system for React and Angular.** `pada-ds` and `pada-ds-angular` ship the same components,
+parts, keyboard behaviour, tokens and motion, released together under one version.
+
+This Storybook is the API reference: every component, its props (React) or inputs and outputs
+(Angular), its variants and a live playground. For when and how to use each component, read the
+[Pada docs site]({SITE}docs/).
+
+## How this Storybook is organised
+
+- **Docs**: getting started, theming, the token system, foundations and building with AI.
+- **Components**, by category: Actions, Forms, Dates, Overlays, Feedback, Navigation, Data, Display
+  and Layout. **Legacy** holds the deprecated 1.x components.
+- Every component has a **docs page** with best practices, a playground with controls, a prompt for
+  coding agents, the tokens it declares and its accessibility notes, followed by all its stories.
+
+## Try the theme axes
+
+The toolbar above the canvas switches **theme**, **accent**, **neutral**, **density**, **radius** and
+**contrast** for every story. They are the same `data-*` attributes you set in your app, so what you
+see here is what your users get.
+
+## Accessibility
+
+Every interactive component follows its WAI-ARIA Authoring Practices pattern. The **Accessibility**
+panel runs axe on the story you are viewing.
+
+## Links
+
+- Docs site: <a href={SITE}>{SITE}</a>
+- React: <a href={LINKS.reactRepo}>GitHub</a> · <a href={LINKS.reactNpm}>npm</a> · <a href={LINKS.reactStorybook}>Storybook</a>
+- Angular: <a href={LINKS.angularRepo}>GitHub</a> · <a href={LINKS.angularNpm}>npm</a> · <a href={LINKS.angularStorybook}>Storybook</a>
+- Figma: <a href={LINKS.figma}>community library</a>

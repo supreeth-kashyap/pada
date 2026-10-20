@@ -1,0 +1,40 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { ColorTokenTable, KnobTable, TierDiagram } from '../../.storybook/pada-docs/foundations';
+
+<Meta title="Docs/Tokens" />
+
+# Design tokens
+
+Every colour, size, radius, shadow, duration and layer is a `--pada-*` custom property, generated
+from one model and layered in five tiers. A component token points at a semantic or derived token,
+which points at a palette step, which points at a reference value:
+`--pada-button-bg` → `--pada-color-accent-solid` → `--pada-palette-accent-600` → `--pada-ref-indigo-600`.
+
+<TierDiagram />
+
+## Knobs
+
+Eight plain custom properties drive the derived tier. The theme attributes set them; set them
+directly for values in between. "Now" shows the value in this Storybook's current theme.
+
+<KnobTable />
+
+## Using tokens in your CSS
+
+Style custom UI with semantic tokens so it follows the theme, density and contrast:
+
+```css
+.panel {
+  padding: var(--pada-space-4);
+  border: 1px solid var(--pada-color-border);
+  border-radius: var(--pada-radius-xl);
+  background: var(--pada-color-surface);
+  color: var(--pada-color-fg);
+}
+```
+
+Don't read `--pada-ref-*` or `--pada-palette-*` directly.
+
+## Colour tokens
+
+<ColorTokenTable />

@@ -1,0 +1,88 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Docs/Getting started" />
+
+# Getting started
+
+## React
+
+```bash
+npm install pada-ds
+```
+
+Peer dependencies: `react` and `react-dom` 19. Import the styles once, then import components by name.
+
+```tsx
+import 'pada-ds/styles.css'; // tokens (light and dark) and component styles
+import 'pada-ds/base.css';   // optional: body background, colour and font
+import { Button, Dialog } from 'pada-ds';
+
+export function Profile() {
+  return (
+    <Dialog.Root>
+      <Dialog.Trigger asChild>
+        <Button>Edit profile</Button>
+      </Dialog.Trigger>
+      <Dialog.Content size="sm">
+        <Dialog.Header>
+          <Dialog.Title>Edit profile</Dialog.Title>
+        </Dialog.Header>
+        <Dialog.Body>…</Dialog.Body>
+      </Dialog.Content>
+    </Dialog.Root>
+  );
+}
+```
+
+## Angular
+
+```bash
+npm install pada-ds-angular
+```
+
+Peer dependencies: Angular 21 and the CDK. Add the styles to your global stylesheet:
+
+```scss
+// styles.scss
+@import 'pada-ds-angular/styles.css';
+@import 'pada-ds-angular/base.css'; // optional
+```
+
+```ts
+import { Component, signal } from '@angular/core';
+import { ButtonComponent, DialogParts } from 'pada-ds-angular';
+
+@Component({
+  selector: 'app-profile',
+  imports: [ButtonComponent, ...DialogParts],
+  template: `
+    <ds-dialog [(open)]="editing">
+      <button dsButton dsDialogTrigger>Edit profile</button>
+      <ds-dialog-content size="sm">
+        <ds-dialog-header>
+          <ds-dialog-title>Edit profile</ds-dialog-title>
+        </ds-dialog-header>
+        <ds-dialog-body>…</ds-dialog-body>
+      </ds-dialog-content>
+    </ds-dialog>
+  `,
+})
+export class Profile {
+  editing = signal(false);
+}
+```
+
+Components are standalone and OnPush, with signal inputs, `model()` two-way bindings and `output()`
+events. Form controls implement `ControlValueAccessor`.
+
+## Requirements
+
+- The tokens use `light-dark()`, `color-mix()` and relative colours: Chrome 123, Safari 18,
+  Firefox 128 or later.
+- Both packages support server rendering and ship TypeScript types.
+
+## Headless
+
+`pada-ds/headless` and `pada-ds-angular/headless` ship the behaviour without styles: state, keyboard
+handling, focus, ARIA and positioning, with state exposed as `data-state`, `data-side` and
+`data-disabled` attributes for you to style.

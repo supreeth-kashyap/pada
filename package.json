@@ -27,7 +27,8 @@
     "build-storybook": "npm run build-storybook -w pada-ds",
     "chromatic": "npm run chromatic -w pada-ds",
     "docs:data": "node ./scripts/gen-docs-data.mjs",
-    "docs:check": "node ./scripts/gen-docs-data.mjs --check"
+    "docs:check": "node ./scripts/gen-docs-data.mjs --check",
+    "storybook:sync": "node ./scripts/sync-storybook-angular.mjs"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

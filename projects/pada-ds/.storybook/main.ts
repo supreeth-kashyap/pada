@@ -2,7 +2,9 @@ import type { StorybookConfig } from '@storybook/react-vite';
 
 const config: StorybookConfig = {
   framework: '@storybook/react-vite',
-  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(ts|tsx)'],
+  // Docs pages (MDX) live in stories/docs, shared with the Angular Storybook; component stories
+  // sit next to their components.
+  stories: ['../stories/**/*.mdx', '../src/**/*.mdx', '../src/**/*.stories.@(ts|tsx)'],
   addons: ['@storybook/addon-docs', '@storybook/addon-a11y'],
   // The repo-root `public/` (logos, favicon) is served alongside the stories.
   staticDirs: ['../../../public'],

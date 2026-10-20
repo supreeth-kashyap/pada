@@ -3,6 +3,8 @@ import { ThemeProvider, type ThemeSettings } from '../src/components/Theme';
 import '../src/styles/tokens.generated.css';
 import '../src/styles/base.css';
 import './preview.css';
+import './pada-docs/pada-docs.css';
+import { PadaDocsPage } from './pada-docs/blocks';
 
 const ACCENTS = [
   'indigo', 'blue', 'sky', 'cyan', 'teal', 'emerald', 'green', 'lime', 'yellow', 'amber',
@@ -54,6 +56,8 @@ const preview: Preview = {
   },
   parameters: {
     layout: 'centered',
+    // Every component's docs page: best practices, playground, AI prompt, tokens, accessibility.
+    docs: { page: PadaDocsPage },
     controls: {
       matchers: { color: /(background|color)$/i, date: /Date$/i },
     },
@@ -63,7 +67,20 @@ const preview: Preview = {
     },
     options: {
       storySort: {
-        order: ['Introduction', 'Docs', 'Actions', 'Forms', 'Dates', 'Overlays', 'Feedback', 'Navigation', 'Data', 'Display', 'Layout', 'Legacy'],
+        order: [
+          'Docs',
+          ['Introduction', 'Getting started', 'Theming', 'Tokens', 'Foundations', ['Colour', 'Typography', 'Spacing & density', 'Radius', 'Elevation', 'Motion', 'Icons'], 'Use with AI', 'Legacy & migration'],
+          'Actions',
+          'Forms',
+          'Dates',
+          'Overlays',
+          'Feedback',
+          'Navigation',
+          'Data',
+          'Display',
+          'Layout',
+          'Legacy',
+        ],
       },
     },
   },

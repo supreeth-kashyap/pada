@@ -1,0 +1,59 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Docs/Theming" />
+
+# Theming
+
+Seven attributes re-theme every component. They work on `<html>` or on any element, and combine
+freely. The toolbar above the canvas sets them on the stories.
+
+| Attribute | Values | What it changes |
+| --- | --- | --- |
+| `data-theme` | `light`, `dark` (unset follows the OS) | Light or dark colours, through `light-dark()` |
+| `data-accent` | 22 hues, or `custom` | The accent palette; `custom` builds an OKLCH ramp from `--pada-accent-hue` |
+| `data-neutral` | `stone`, `slate`, `gray`, `zinc`, `neutral` | Surfaces, text and borders |
+| `data-density` | `compact`, `comfortable`, `spacious` | Spacing and control heights |
+| `data-radius` | `none`, `sm`, `md`, `lg`, `xl` | The base radius every corner derives from |
+| `data-motion` | `reduced`, `full` | Durations; defaults to the OS setting |
+| `data-contrast` | `standard`, `more` | Stronger borders and text; defaults to the OS setting |
+
+```html
+<html data-theme="dark" data-accent="emerald" data-density="compact" data-radius="lg">
+```
+
+## Scoped themes
+
+Attributes apply to the element and everything inside it: a dark sidebar, a compact table or a card
+in another accent can sit on the same page.
+
+```html
+<aside data-theme="dark" data-accent="rose">…</aside>
+```
+
+## Your brand colour
+
+```css
+:root {
+  --pada-accent-hue: 262; /* 0–360 */
+}
+```
+
+```html
+<html data-accent="custom">
+```
+
+## In code
+
+- React: `ThemeProvider` sets the attributes from props or state, shares them through `useTheme()`
+  and can remember the theme; `ThemeToggle` switches light and dark.
+- Angular: `ds-theme-provider` and `button[dsThemeToggle]`.
+
+## Restyle one component
+
+Reassign its component tokens on the element or an ancestor. Each component's docs page lists them.
+
+```css
+.checkout {
+  --pada-button-radius: var(--pada-radius-full);
+}
+```

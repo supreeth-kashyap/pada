@@ -1,0 +1,36 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { SITE } from '../../.storybook/pada-docs/blocks';
+
+<Meta title="Docs/Use with AI" />
+
+# Use with AI
+
+Pada describes itself to coding agents. The `pada-ds` package ships:
+
+| File | What's in it |
+| --- | --- |
+| `pada-ds/llms.txt` | A short index of every component |
+| `pada-ds/llms-full.txt` | Every prop with its type, default, description and an example |
+| `pada-ds/manifest.json` | The same API as JSON, for tools and MCP servers |
+
+They are regenerated from the TypeScript source on every release. The Angular API mirrors the React
+one; each component's docs page gives its Angular selector.
+
+## Project rules
+
+Add to `CLAUDE.md`, `AGENTS.md` or `.cursor/rules`:
+
+```markdown
+## UI
+- Build UI with Pada: pada-ds (React) or pada-ds-angular (Angular).
+- Before writing UI code, read node_modules/pada-ds/llms-full.txt or pada-ds/manifest.json.
+- Use a Pada component before writing a custom one. Style custom UI only with --pada-* semantic tokens.
+- Theme with attributes on <html> (data-theme, data-accent, data-density, data-radius).
+- Restyle components through their tokens (--pada-button-*), never their class names.
+- Label every field, name icon-only buttons, confirm destructive actions with AlertDialog.
+```
+
+## Prompts
+
+Every component's docs page in this Storybook ends with a ready-made prompt under **Use with AI**.
+More prompts and tips are in the <a href={`${SITE}docs/ai/`}>Build with AI guide</a>.
