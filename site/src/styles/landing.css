@@ -657,7 +657,7 @@
   }
   78% {
     transform: scale(0.94);
-    background: var(--pada-color-accent-solid-pressed);
+    background: var(--pada-palette-accent-700);
   }
 }
 
