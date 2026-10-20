@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test
+      - run: npm run check:tokens
+      - run: npm run build
+      - run: npm run check:manifest
+      # Packs the library and installs it into a fresh app, the way a consumer would.
+      - run: npm run smoke:consumer
+      - run: npm run build-storybook
