@@ -1,6 +1,8 @@
 # 07. Marketing site (`pada-site`)
 
-The landing page, docs entry point and blog live in a **new, separate repo**: `supreeth-kashyap/pada-site`.
+> **Update (October 2026):** the site lives in this repo, in the `site/` workspace, built with Vite + React and prerendered to static HTML, and deploys to GitHub Pages. It renders `pada-ds` from source and replaces the old `src/demo` app. The stack table and repo setup below are the original proposal, kept for the record.
+
+The landing page, docs entry point and blog were first planned for a **new, separate repo**: `supreeth-kashyap/pada-site`.
 
 ## 1. Stack
 

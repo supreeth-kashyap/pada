@@ -20,7 +20,7 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm test
-      - run: npm run check:tokens
+      - run: npm run tokens:check
       - run: npm run build
       - run: npm run check:manifest
       # Packs the library and installs it into a fresh app, the way a consumer would.

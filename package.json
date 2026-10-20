@@ -1,106 +1,31 @@
 {
-  "name": "pada-ds",
-  "private": false,
+  "name": "pada",
   "version": "1.2.0",
-  "description": "Pada design system for React: accessible styled components, headless parts and design tokens.",
+  "private": true,
+  "description": "Pada for React: the pada-ds library (projects/pada-ds) and the Pada website and docs (site).",
   "license": "MIT",
-  "author": "Supreeth Kashyap",
-  "homepage": "https://github.com/supreeth-kashyap/pada#readme",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/supreeth-kashyap/pada.git"
-  },
-  "bugs": {
-    "url": "https://github.com/supreeth-kashyap/pada/issues"
-  },
   "type": "module",
-  "main": "./dist/pada.js",
-  "module": "./dist/pada.js",
-  "types": "./dist/index.d.ts",
-  "sideEffects": [
-    "**/*.css"
-  ],
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/pada.js",
-      "default": "./dist/pada.js"
-    },
-    "./headless": {
-      "types": "./dist/headless/index.d.ts",
-      "import": "./dist/headless.js",
-      "default": "./dist/headless.js"
-    },
-    "./styles.css": "./dist/pada.css",
-    "./tokens.css": "./dist/tokens.css",
-    "./tokens.scss": "./dist/tokens.scss",
-    "./tokens.json": "./dist/tokens.json",
-    "./tokens": {
-      "types": "./dist/tokens.d.ts",
-      "import": "./dist/tokens.js",
-      "default": "./dist/tokens.js"
-    },
-    "./base.css": "./dist/base.css",
-    "./manifest.json": "./dist/manifest.json",
-    "./llms.txt": "./llms.txt",
-    "./llms-full.txt": "./llms-full.txt",
-    "./package.json": "./package.json"
-  },
-  "files": [
-    "dist",
-    "llms.txt",
-    "llms-full.txt",
-    "README.md",
-    "LICENSE",
-    "CHANGELOG.md",
-    "scripts/migrate-tokens.mjs",
-    "tokens/index.mjs",
-    "tokens/palette.mjs"
-  ],
-  "keywords": [
-    "react",
-    "design-system",
-    "components",
-    "ui",
-    "typescript",
-    "pada",
-    "design-tokens"
+  "workspaces": [
+    "projects/pada-ds",
+    "site"
   ],
   "engines": {
     "node": ">=18"
   },
-  "publishConfig": {
-    "access": "public"
-  },
   "scripts": {
-    "dev": "vite",
-    "clean": "rm -rf dist",
-    "build:types": "tsc -p tsconfig.package.json",
-    "build:styles": "vite build",
-    "build:tokens": "node ./scripts/build-tokens.mjs",
-    "build:manifest": "node ./scripts/gen-manifest.mjs",
-    "build": "npm run clean && npm run build:styles && npm run build:types && npm run build:tokens && npm run build:manifest",
-    "check:manifest": "node ./scripts/gen-manifest.mjs --check",
+    "dev": "npm run dev -w site",
+    "build": "npm run build -w pada-ds",
+    "build:site": "npm run build -w site",
+    "check:manifest": "npm run check:manifest -w pada-ds",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "test": "node --test scripts/*.test.mjs && vitest run",
-    "test:unit": "vitest run",
-    "test:watch": "vitest",
-    "check:tokens": "node ./scripts/build-tokens.mjs --check && node ./scripts/check-tokens.mjs",
-    "smoke:consumer": "node ./scripts/smoke-consumer.mjs",
-    "prepublishOnly": "npm run build",
+    "test": "npm test -w pada-ds",
+    "tokens:check": "npm run tokens:check -w pada-ds",
+    "check:tokens": "npm run tokens:check",
     "tokens:sync": "node ./scripts/sync-tokens-angular.mjs",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "chromatic": "chromatic --exit-zero-on-changes"
-  },
-  "dependencies": {
-    "@floating-ui/react-dom": "^2.1.9",
-    "prismjs": "^1.30.0"
-  },
-  "peerDependencies": {
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "smoke:consumer": "node ./scripts/smoke-consumer.mjs",
+    "storybook": "npm run storybook -w pada-ds",
+    "build-storybook": "npm run build-storybook -w pada-ds",
+    "chromatic": "npm run chromatic -w pada-ds"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
@@ -125,14 +50,10 @@
     "eslint-plugin-storybook": "^10.6.2",
     "globals": "^17.13.0",
     "jsdom": "^30.1.3",
-    "react-router-dom": "^7.15.1",
     "storybook": "^10.6.2",
     "typescript": "~6.0.3",
     "typescript-eslint": "^8.45.0",
     "vite": "^8.3.4",
     "vitest": "^5.0.5"
-  },
-  "bin": {
-    "pada-tokens-migrate": "./scripts/migrate-tokens.mjs"
   }
 }

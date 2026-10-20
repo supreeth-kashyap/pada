@@ -4,7 +4,7 @@ This file is copied verbatim into the Angular repo as `docs/roadmap/parity.md`. 
 
 Legend: ✅ the 2.0 version ships (headless + styled) · 🟡 partial · ⛔ missing · **Phase** = roadmap phase where the 2.0 version (headless + styled, both frameworks) lands.
 
-Status as of 2026-10-20. Every React component has an Angular 2.0 counterpart, and every Angular component has a React one except `ds-tag-group`. The React column records what `pada/src/components` ships today.
+Status as of 2026-10-20. Every React component has an Angular 2.0 counterpart, and every Angular component has a React one except `ds-tag-group`. The React column records what `pada/projects/pada-ds/src/components` ships today.
 
 ## 1. Existing React components
 

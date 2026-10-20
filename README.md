@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/supreeth-kashyap/pada/main/src/assets/pada-ds-cover-image.png" alt="Pada . design: unified design system for web" width="640">
+  <img src="https://raw.githubusercontent.com/supreeth-kashyap/pada/main/docs/assets/pada-ds-cover-image.png" alt="Pada . design: unified design system for web" width="640">
 </p>
 
 <p align="center">
@@ -140,13 +140,24 @@ To cut a release: bump the version, move the changes under a new heading in `CHA
 
 ## Development
 
+The repo is an npm workspace with the same shape as [pada-ds-angular](https://github.com/supreeth-kashyap/pada-ds-angular):
+
+```
+projects/pada-ds/   the library, published as pada-ds (components, headless, tokens, Storybook)
+site/               the website: landing page and docs
+docs/               contributing guide, migration guide, roadmap
+scripts/            repo tooling (Angular token sync, consumer smoke test)
+```
+
 ```bash
 npm install
-npm run dev           # demo app with a page per component
+npm run dev           # the website, rendering the library from source
 npm run storybook     # Storybook on http://localhost:6006
 npm test              # Vitest, Testing Library and axe
-npm run build         # library, types, tokens and the API manifest into dist/
+npm run build         # library, types, tokens and the API manifest into projects/pada-ds/dist/
 ```
+
+[CLAUDE.md](./CLAUDE.md) is the blueprint and [docs/contributing.md](./docs/contributing.md) walks through building a component.
 
 The package also ships a machine-readable API for AI coding agents: `pada-ds/manifest.json` (every component and prop), `llms.txt` (a short index) and `llms-full.txt` (props and an example per component).
 

@@ -1,0 +1,18 @@
+{
+  "name": "pada-site",
+  "version": "1.2.0",
+  "private": true,
+  "description": "The Pada website: landing page and documentation for pada-ds and pada-ds-angular.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "pada-ds": "*",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-router-dom": "^7.15.1"
+  }
+}
