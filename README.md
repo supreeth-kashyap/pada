@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/supreeth-kashyap/pada/main/src/assets/pada-ds-cover-image.png" alt="Pada . design: unified design system for web" width="640">
+  <img src="https://raw.githubusercontent.com/supreeth-kashyap/pada/main/docs/assets/pada-ds-cover-image.png" alt="Pada . design: unified design system for web" width="640">
 </p>
 
 <p align="center">
@@ -7,6 +7,16 @@
   <a href="https://github.com/supreeth-kashyap/pada/releases"><img src="https://img.shields.io/github/v/release/supreeth-kashyap/pada?color=f59e0b&label=release" alt="Latest release"></a>
   <a href="https://main--6ad73b69f7d2adf27e282417.chromatic.com"><img src="https://img.shields.io/badge/storybook-React%20%2B%20Angular-ff4785" alt="Storybook"></a>
   <a href="./LICENSE"><img src="https://img.shields.io/npm/l/pada-ds?color=78716c" alt="MIT licence"></a>
+  <a href="https://supreeth-kashyap.github.io/pada/"><img src="https://img.shields.io/badge/docs-website-0c0a09" alt="Website and docs"></a>
+</p>
+
+<p align="center">
+  <a href="https://supreeth-kashyap.github.io/pada/"><strong>Website</strong></a> ·
+  <a href="https://supreeth-kashyap.github.io/pada/docs/getting-started/">Getting started</a> ·
+  <a href="https://supreeth-kashyap.github.io/pada/docs/components/">Components</a> ·
+  <a href="https://supreeth-kashyap.github.io/pada/docs/tokens/">Tokens</a> ·
+  <a href="https://main--6ad73b69f7d2adf27e282417.chromatic.com">Storybook</a> ·
+  <a href="https://supreeth-kashyap.github.io/pada/changelog/">Changelog</a>
 </p>
 
 # Pada for React
@@ -21,6 +31,18 @@ Pada (पाद, Sanskrit for *foot*: the part that carries the weight) is a uni
 - **Styled or headless.** Use the styled components, or take the headless layer (behaviour, focus, ARIA and state attributes, no styles) and bring your own look.
 - **One token system.** Colour, type, space, radius, motion and elevation are `--pada-*` CSS custom properties. Light and dark, accent, density, radius and contrast are attributes you can set on any element.
 - **Built for design and code.** The [Figma library](https://www.figma.com/community/file/1619638623779328209) is free in the Figma Community, and [pada.design](https://supreeth-kashyap.notion.site/Pada-Design-System-2c6a6474ca5a80cea166ed78587299a2) covers the principles.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/supreeth-kashyap/pada/main/docs/assets/theme.gif" alt="Seven theme attributes re-theming Pada components live" width="720">
+</p>
+
+| Dialog | Command palette | Data table |
+|---|---|---|
+| ![Dialog opening, editing and saving](https://raw.githubusercontent.com/supreeth-kashyap/pada/main/docs/assets/dialog.gif) | ![Command palette filtering and running a command](https://raw.githubusercontent.com/supreeth-kashyap/pada/main/docs/assets/command-palette.gif) | ![Data table sorting and selecting rows](https://raw.githubusercontent.com/supreeth-kashyap/pada/main/docs/assets/data-table.gif) |
+
+## Documentation
+
+The [Pada website](https://supreeth-kashyap.github.io/pada/) has the guides (getting started, theming, tokens, foundations, headless, building with AI) and a page for every component: when to use it, best practices and accessibility, with a live preview and links to both Storybooks. Storybook is the API reference, with a playground and the tokens for each component.
 
 ## Packages
 
@@ -140,13 +162,28 @@ To cut a release: bump the version, move the changes under a new heading in `CHA
 
 ## Development
 
+The repo is an npm workspace with the same shape as [pada-ds-angular](https://github.com/supreeth-kashyap/pada-ds-angular):
+
+```
+projects/pada-ds/   the library, published as pada-ds (components, headless, tokens, Storybook)
+site/               the website: landing page and docs, prerendered for GitHub Pages
+content/            docs content for every component, shared by the site and both Storybooks
+docs/               contributing guide, migration guide, roadmap
+scripts/            repo tooling (Angular token and Storybook sync, docs data, consumer smoke test)
+```
+
 ```bash
 npm install
-npm run dev           # demo app with a page per component
+npm run dev           # the website, rendering the library from source
 npm run storybook     # Storybook on http://localhost:6006
 npm test              # Vitest, Testing Library and axe
-npm run build         # library, types, tokens and the API manifest into dist/
+npm run build         # library, types, tokens and the API manifest into projects/pada-ds/dist/
+npm run build:site    # the website into site/dist/ (SITE_BASE=/pada/ for GitHub Pages)
+npm run docs:data     # rebuild content/docs.json after editing content/components/*.md
+npm run storybook:sync -- ../pada-ds-angular   # copy the Storybook docs pages to Angular
 ```
+
+[CLAUDE.md](./CLAUDE.md) is the blueprint and [docs/contributing.md](./docs/contributing.md) walks through building a component.
 
 The package also ships a machine-readable API for AI coding agents: `pada-ds/manifest.json` (every component and prop), `llms.txt` (a short index) and `llms-full.txt` (props and an example per component).
 

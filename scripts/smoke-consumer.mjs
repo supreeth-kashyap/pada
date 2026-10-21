@@ -18,7 +18,8 @@ function run(command, args, options = {}) {
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const rootDir = path.resolve(__dirname, '..');
+// The published package lives in the pada-ds workspace; build and pack it from there.
+const rootDir = path.resolve(__dirname, '../projects/pada-ds');
 
 run('npm', ['run', 'build'], { cwd: rootDir });
 

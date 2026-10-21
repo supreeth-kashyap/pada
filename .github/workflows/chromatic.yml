@@ -28,8 +28,9 @@ jobs:
 
       - run: npm ci
 
-      # Builds Storybook via the build-storybook script and publishes it.
+      # Builds Storybook via the library's build-storybook script and publishes it.
       # Changes landing on main become the new accepted baseline.
       - run: npx chromatic --auto-accept-changes --exit-zero-on-changes
+        working-directory: projects/pada-ds
         env:
           CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}

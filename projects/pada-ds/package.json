@@ -1,0 +1,105 @@
+{
+  "name": "pada-ds",
+  "private": false,
+  "version": "1.2.0",
+  "description": "Pada design system for React: accessible styled components, headless parts and design tokens.",
+  "license": "MIT",
+  "author": "Supreeth Kashyap",
+  "homepage": "https://github.com/supreeth-kashyap/pada#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/supreeth-kashyap/pada.git"
+  },
+  "bugs": {
+    "url": "https://github.com/supreeth-kashyap/pada/issues"
+  },
+  "type": "module",
+  "main": "./dist/pada.js",
+  "module": "./dist/pada.js",
+  "types": "./dist/index.d.ts",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/pada.js",
+      "default": "./dist/pada.js"
+    },
+    "./headless": {
+      "types": "./dist/headless/index.d.ts",
+      "import": "./dist/headless.js",
+      "default": "./dist/headless.js"
+    },
+    "./styles.css": "./dist/pada.css",
+    "./tokens.css": "./dist/tokens.css",
+    "./tokens.scss": "./dist/tokens.scss",
+    "./tokens.json": "./dist/tokens.json",
+    "./tokens": {
+      "types": "./dist/tokens.d.ts",
+      "import": "./dist/tokens.js",
+      "default": "./dist/tokens.js"
+    },
+    "./base.css": "./dist/base.css",
+    "./manifest.json": "./dist/manifest.json",
+    "./llms.txt": "./llms.txt",
+    "./llms-full.txt": "./llms-full.txt",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "llms.txt",
+    "llms-full.txt",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md",
+    "scripts/migrate-tokens.mjs",
+    "tokens/index.mjs",
+    "tokens/palette.mjs"
+  ],
+  "keywords": [
+    "react",
+    "design-system",
+    "components",
+    "ui",
+    "typescript",
+    "pada",
+    "design-tokens"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build:types": "tsc -p tsconfig.lib.json",
+    "build:styles": "vite build",
+    "build:tokens": "node ./scripts/build-tokens.mjs",
+    "build:manifest": "node ./scripts/gen-manifest.mjs",
+    "build:docs": "node ../../scripts/copy-package-docs.mjs",
+    "build": "npm run clean && npm run build:styles && npm run build:types && npm run build:tokens && npm run build:manifest && npm run build:docs",
+    "check:manifest": "node ./scripts/gen-manifest.mjs --check",
+    "test": "node --test scripts/*.test.mjs && vitest run",
+    "test:unit": "vitest run",
+    "test:watch": "vitest",
+    "tokens:check": "node ./scripts/build-tokens.mjs --check && node ./scripts/check-tokens.mjs",
+    "check:tokens": "npm run tokens:check",
+    "prepublishOnly": "npm run build",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "chromatic": "chromatic --exit-zero-on-changes"
+  },
+  "dependencies": {
+    "@floating-ui/react-dom": "^2.1.9",
+    "prismjs": "^1.30.0"
+  },
+  "peerDependencies": {
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  },
+  "bin": {
+    "pada-tokens-migrate": "./scripts/migrate-tokens.mjs"
+  }
+}

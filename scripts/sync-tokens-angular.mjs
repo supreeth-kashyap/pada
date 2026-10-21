@@ -11,7 +11,8 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+// The built tokens and the version come from the pada-ds workspace.
+const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../projects/pada-ds');
 const target = process.argv[2];
 if (!target) {
   console.error('Usage: npm run tokens:sync -- <path to pada-ds-angular>');

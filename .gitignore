@@ -29,3 +29,9 @@ storybook-static
 
 # npm pack output
 *.tgz
+
+# Copied into the package by scripts/copy-package-docs.mjs
+projects/pada-ds/README.md
+projects/pada-ds/LICENSE
+projects/pada-ds/CHANGELOG.md
+dist-server

@@ -1,0 +1,18 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { TokenValue, TypeScale } from '../../../.storybook/pada-docs/foundations';
+
+<Meta title="Docs/Foundations/Typography" />
+
+# Typography
+
+Font sizes are steps on a modular scale: `--pada-type-base` (now <TokenValue name="--pada-type-base" />)
+times `--pada-type-ratio` (now <TokenValue name="--pada-type-ratio" />) to the power of the step.
+Change either knob and every size follows.
+
+<TypeScale />
+
+- Families: `--pada-font-sans`, `--pada-font-mono`, `--pada-font-serif`. Set them once to use your
+  brand fonts.
+- Weights: `--pada-font-weight-regular`, `-medium`, `-semibold`, `-bold`.
+- Line heights: `--pada-line-height-xs` to `-2xl`, paired with the sizes.
+- In components, use **Heading** for titles (it renders `h1`–`h6`) and **Text** for everything else.

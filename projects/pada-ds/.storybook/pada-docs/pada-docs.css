@@ -1,0 +1,417 @@
+/*
+ * Styles for Pada's Storybook docs blocks (pada-docs/blocks.ts and foundations.ts), shared by the
+ * React and the Angular Storybook. Everything reads --pada-* tokens. Synced to pada-ds-angular by
+ * scripts/sync-storybook-angular.mjs; edit it in the pada repo.
+ */
+
+.pada-doc-summary {
+  margin: 4px 0 12px;
+  color: #4a4a4a;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.pada-doc-legacy {
+  padding: 10px 14px;
+  border-left: 3px solid var(--pada-color-warning-solid, #d97706);
+  border-radius: 6px;
+  background: var(--pada-color-warning-subtle, #fef3c7);
+  color: var(--pada-color-warning-fg, #92400e);
+}
+
+.pada-doc-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 8px 0 20px;
+}
+
+.pada-doc-links a {
+  padding: 5px 12px;
+  border: 1px solid #e3e3e3;
+  border-radius: 999px;
+  color: #3730a3;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.pada-doc-links a:hover {
+  border-color: #a5b4fc;
+  background: #eef2ff;
+}
+
+.pada-doc-section {
+  margin-top: 32px;
+}
+
+.sbdocs h2.pada-doc-h2,
+.pada-doc-h2 {
+  margin: 0 0 12px;
+  padding: 0 0 8px;
+  border-bottom: 1px solid #ececec;
+  font-size: 22px;
+}
+
+.pada-doc-muted {
+  color: #6b6b6b;
+  font-size: 14px;
+}
+
+.pada-doc-list {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.pada-doc-list li {
+  margin: 6px 0;
+  line-height: 1.6;
+}
+
+.pada-doc-dodont {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 720px) {
+  .pada-doc-dodont {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pada-doc-dodont > div {
+  padding: 14px 16px;
+  border: 1px solid #e6e6e6;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.pada-doc-dodont > [data-kind='do'] {
+  border-top: 3px solid #16a34a;
+}
+
+.pada-doc-dodont > [data-kind='dont'] {
+  border-top: 3px solid #dc2626;
+}
+
+.sbdocs .pada-doc-dodont h3,
+.pada-doc-dodont h3 {
+  margin: 0 0 6px;
+  font-size: 15px;
+}
+
+.pada-doc-ai {
+  padding: 14px 16px;
+  border: 1px solid #c7d2fe;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #eef2ff, #fff 60%);
+}
+
+.pada-doc-ai p {
+  margin: 8px 0 0;
+  line-height: 1.6;
+}
+
+.pada-doc-ai-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: #3730a3;
+}
+
+.pada-doc-copy {
+  padding: 4px 12px;
+  border: 1px solid #d4d4d4;
+  border-radius: 999px;
+  background: #fff;
+  color: #1f1f1f;
+  font: 600 12px/1.6 inherit;
+  cursor: pointer;
+}
+
+.pada-doc-copy:hover {
+  border-color: #818cf8;
+}
+
+.pada-doc-table-wrap {
+  overflow-x: auto;
+  border: 1px solid #e6e6e6;
+  border-radius: 12px;
+}
+
+.pada-doc-scroll {
+  max-height: 520px;
+}
+
+.sbdocs .pada-doc-table,
+.pada-doc-table {
+  width: 100%;
+  margin: 0;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.pada-doc-table th,
+.pada-doc-table td {
+  padding: 8px 12px;
+  border: 0;
+  border-bottom: 1px solid #f0f0f0;
+  background: #fff;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.pada-doc-table thead th {
+  position: sticky;
+  top: 0;
+  background: #fafafa;
+  color: #737373;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.pada-doc-table tr:last-child td {
+  border-bottom: 0;
+}
+
+.pada-doc-swatch {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  border: 1px solid rgb(0 0 0 / 0.12);
+  border-radius: 5px;
+  vertical-align: middle;
+}
+
+.pada-doc-value {
+  color: #525252;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12px;
+}
+
+.pada-doc-reads {
+  margin: 12px 0;
+}
+
+.pada-doc-reads summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.pada-doc-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.pada-doc-filter {
+  width: min(360px, 100%);
+  margin-bottom: 10px;
+  padding: 8px 12px;
+  border: 1px solid #d4d4d4;
+  border-radius: 8px;
+  font: inherit;
+}
+
+/* Foundations */
+
+.pada-fd-ramps {
+  display: grid;
+  gap: 6px;
+}
+
+.pada-fd-ramp {
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  align-items: center;
+  gap: 12px;
+}
+
+.pada-fd-steps {
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.pada-fd-steps span {
+  height: 30px;
+}
+
+.pada-fd-intents {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 10px;
+}
+
+.pada-fd-intent {
+  display: grid;
+  gap: 6px;
+  padding: 12px;
+  border: 1px solid #e6e6e6;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.pada-fd-intent strong {
+  text-transform: capitalize;
+}
+
+.pada-fd-intent-row {
+  display: flex;
+  align-items: center;
+}
+
+.pada-fd-rows {
+  display: grid;
+  overflow: hidden;
+  border: 1px solid #e6e6e6;
+  border-radius: 12px;
+  background: var(--pada-color-surface, #fff);
+  color: var(--pada-color-fg, #1c1917);
+  font-family: var(--pada-font-sans);
+}
+
+.pada-fd-type,
+.pada-fd-space {
+  display: grid;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--pada-color-border-subtle, #f0f0f0);
+}
+
+.pada-fd-type {
+  grid-template-columns: 260px 1fr;
+  white-space: nowrap;
+}
+
+.pada-fd-type span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pada-fd-space {
+  grid-template-columns: 230px 1fr 70px;
+}
+
+.pada-fd-bar {
+  display: block;
+  height: 14px;
+  border-radius: 4px;
+  background: var(--pada-color-accent-solid, #4f46e5);
+}
+
+.pada-fd-tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 18px;
+  padding: 16px;
+  border-radius: 12px;
+  background: var(--pada-color-surface-sunken, #fafaf9);
+}
+
+.pada-fd-tile {
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+}
+
+.pada-fd-radius {
+  width: 72px;
+  height: 72px;
+  border: 2px solid var(--pada-color-accent-solid, #4f46e5);
+  background: var(--pada-color-accent-subtle, #eef2ff);
+}
+
+.pada-fd-shadow {
+  display: grid;
+  place-items: center;
+  height: 90px;
+  border-radius: 12px;
+  background: var(--pada-color-surface-raised, #fff);
+}
+
+.pada-fd-motion {
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+}
+
+.pada-fd-lane {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.pada-fd-track {
+  position: relative;
+  height: 24px;
+  border-radius: 999px;
+  background: var(--pada-color-surface-sunken, #f5f5f4);
+}
+
+.pada-fd-dot {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--pada-color-accent-solid, #4f46e5);
+  transition: left calc(900ms * var(--pada-motion-scale, 1));
+}
+
+.pada-fd-dot[data-moved] {
+  left: calc(100% - 20px);
+}
+
+.pada-fd-durations {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin-top: 8px;
+}
+
+.pada-fd-tiers {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pada-fd-tiers li {
+  display: flex;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid #e6e6e6;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.pada-fd-tiers p {
+  margin: 2px 0 6px;
+  color: #6b6b6b;
+  font-size: 13px;
+}
+
+.pada-fd-tier-num {
+  display: inline-grid;
+  flex: none;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #eef2ff;
+  color: #3730a3;
+  font-size: 12px;
+  font-weight: 600;
+}

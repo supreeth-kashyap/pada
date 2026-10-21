@@ -1,0 +1,17 @@
+import { Meta, IconGallery, IconItem } from '@storybook/addon-docs/blocks';
+import { Icon, iconNames } from '../../../src/components/Icon';
+
+<Meta title="Docs/Foundations/Icons" />
+
+# Icons
+
+The built-in set. Icons take the current text colour, size with `--pada-icon-size-*`, and are
+decorative (`aria-hidden`) unless you give them a label. Use **IconButton** for icon-only actions.
+
+<IconGallery>
+  {iconNames.map((name) => (
+    <IconItem key={name} name={name}>
+      <Icon name={name} size={20} />
+    </IconItem>
+  ))}
+</IconGallery>

@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+
+- **Website and docs.** A new site in `site/` (landing page, guides and a page for every component, with live previews), prerendered and deployed to GitHub Pages by `.github/workflows/site.yml`.
+- **Storybook.** New Docs pages: introduction, getting started, theming, tokens, foundations (colour, typography, spacing and density, radius, elevation, motion, icons), building with AI, and legacy and migration. Every component's docs page now shows best practices, a playground, an AI prompt, its tokens and its accessibility notes. Story titles use the same categories as Angular (`Actions/Button`, `Overlays/Dialog` …).
+- **Repository layout.** The library moved to `projects/pada-ds` (an npm workspace), mirroring `pada-ds-angular`. The published package is unchanged. `check:tokens` is now `tokens:check` (the old name still works).
+- **Fix: `CodeSnippet` in Vite 8 builds.** Prism's language files could run before Prism core, throwing "Prism is not defined" in production bundles built with Rolldown.
+- **Fix: `Progress` is named by its label.** The progressbar now has `aria-labelledby` pointing at `label`, as in Angular.
+
 ## 1.2.0 - 2026-10-20
 
 Pada 1.2 brings React to parity with Pada for Angular (`pada-ds-angular` 1.2.0, released alongside it): the same components, parts, keyboard behaviour, tokens and motion. Component APIs from 1.1 keep working; deprecated names stay until 3.0. Read the [upgrade guide](./docs/migration-2.0.md) for everything you might notice.

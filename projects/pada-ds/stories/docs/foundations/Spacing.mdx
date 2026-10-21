@@ -1,0 +1,18 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { ControlHeights, SpaceScale } from '../../../.storybook/pada-docs/foundations';
+
+<Meta title="Docs/Foundations/Spacing & density" />
+
+# Spacing & density
+
+Space is `n × 0.25rem × --pada-density`. `data-density` sets the density to 0.85 (compact), 1
+(comfortable) or 1.15 (spacious), so one attribute tightens or loosens every layout. Try the
+**Density** toolbar.
+
+<SpaceScale />
+
+## Control heights
+
+Buttons, inputs and selects share three heights, which follow density too.
+
+<ControlHeights />

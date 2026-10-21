@@ -1,0 +1,21 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { ColorRamps, IntentSwatches } from '../../../.storybook/pada-docs/foundations';
+
+<Meta title="Docs/Foundations/Colour" />
+
+# Colour
+
+## Intents
+
+Each intent (`accent`, `neutral`, `success`, `warning`, `danger`, `info`) has the same roles. Use the
+role that matches what you draw: `-solid` for filled controls, `-on-solid` for text on them, `-subtle`
+for tinted backgrounds, `-fg` for coloured text and icons, `-border` for outlines. They follow the
+toolbar's theme and accent.
+
+<IntentSwatches />
+
+## Reference ramps
+
+22 ramps from 50 to 950. Themes map them to the intents above; components never read them directly.
+
+<ColorRamps />
