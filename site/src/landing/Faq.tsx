@@ -20,16 +20,6 @@ const FAQ: { q: string; a: React.ReactNode }[] = [
     a: <>Yes. This website is prerendered with <code>pada-ds</code>, and the Angular library supports server rendering.</>,
   },
   {
-    q: 'I use Pada 1.x. How do I upgrade?',
-    a: (
-      <>
-        Component APIs keep working in 2.x and deprecated names stay until 3.0. The{' '}
-        <a href={`${links.reactRepo}/blob/main/docs/migration-2.0.md`} target="_blank" rel="noopener noreferrer">upgrade guide</a>{' '}
-        lists every change and includes a codemod for the 1.x token names.
-      </>
-    ),
-  },
-  {
     q: 'Is there a Figma library?',
     a: (
       <>

@@ -1,6 +1,6 @@
 {
   "name": "pada",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "private": true,
   "description": "Pada for React: the pada-ds library (projects/pada-ds) and the Pada website and docs (site).",
   "license": "MIT",

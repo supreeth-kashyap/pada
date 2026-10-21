@@ -14,12 +14,6 @@ related: Dialog, AlertDialog
 Modal is the Pada 1.x modal window. Since 2.0 it wraps **Dialog**, which adds a trigger, a
 description, a footer and sizes. It keeps working until 3.0.
 
-## Migrating
-
-- Replace `<Modal open onClose title>` with `Dialog.Root` (`open`, `onOpenChange`), `Dialog.Content`,
-  `Dialog.Header` and `Dialog.Title`.
-- Move buttons into `Dialog.Footer`.
-
 ## Use with AI
 
 ```text

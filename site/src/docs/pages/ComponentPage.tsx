@@ -1,5 +1,5 @@
 import { Link as RouterLink, useParams } from 'react-router-dom';
-import { Alert, Badge, CodeSnippet } from 'pada-ds';
+import { Alert, Badge } from 'pada-ds';
 import { componentByName, componentBySlug, links } from '../../lib/docs';
 import { ROUTES } from '../../lib/paths';
 import { CopyButton } from '../../shell/CopyButton';
@@ -28,16 +28,14 @@ export function ComponentPage() {
   const legacy = c.status === 'legacy';
   const toc: TocItem[] = [
     { id: 'preview', label: 'Preview' },
+    { id: 'use', label: 'Use it' },
     { id: 'overview', label: 'Overview' },
     ...(c.whenToUse ? [{ id: 'when-to-use', label: 'When to use' }] : []),
     ...(c.do ? [{ id: 'best-practices', label: 'Best practices' }] : []),
     ...(c.accessibility ? [{ id: 'accessibility', label: 'Accessibility' }] : []),
-    ...(c.migrating ? [{ id: 'migrating', label: 'Migrating' }] : []),
-    { id: 'use', label: 'Use it' },
     ...(c.related.length ? [{ id: 'related', label: 'Related' }] : []),
   ];
 
-  const reactImport = c.react ? `import { ${c.react.import} } from 'pada-ds';` : null;
   const replacement = c.replacedBy ? componentByName.get(c.replacedBy) : null;
 
   return (
@@ -82,33 +80,51 @@ export function ComponentPage() {
             {c.react?.storybook && (
               <a className="doc-link-card" href={c.react.storybook} {...ext}>
                 <Storybook size={16} />
-                <span>React Storybook<small>Props, variants and a playground</small></span>
+                <span>React Storybook</span>
                 <ExternalArrow size={14} />
               </a>
             )}
             {c.angular?.storybook && (
               <a className="doc-link-card" href={c.angular.storybook} {...ext}>
                 <Storybook size={16} />
-                <span>Angular Storybook<small>Inputs, outputs and a playground</small></span>
+                <span>Angular Storybook</span>
                 <ExternalArrow size={14} />
               </a>
             )}
             {c.react && (
               <a className="doc-link-card" href={c.react.source} {...ext}>
                 <Github size={16} />
-                <span>React source<small>pada-ds</small></span>
+                <span>React source</span>
                 <ExternalArrow size={14} />
               </a>
             )}
             {c.angular && (
               <a className="doc-link-card" href={c.angular.source} {...ext}>
                 <Github size={16} />
-                <span>Angular source<small>pada-ds-angular</small></span>
+                <span>Angular source</span>
                 <ExternalArrow size={14} />
               </a>
             )}
           </div>
         </section>
+
+        <DocSection id="use" title="Use it">
+          {c.ai && (
+            <div className="ai-prompt-card">
+              <div className="ai-prompt-head">
+                <Sparkle size={15} />
+                <strong>Prompt for your coding agent</strong>
+                <CopyButton text={c.ai} label="Copy prompt" />
+              </div>
+              <p>{c.ai}</p>
+            </div>
+          )}
+          <p className="muted small">
+            Props, variants and the full API are in Storybook, with a live playground. Coding agents can read them
+            from <code>pada-ds/llms-full.txt</code>.{' '}
+            <RouterLink to={ROUTES.ai} className="text-link">Build with AI <ArrowRight size={13} /></RouterLink>
+          </p>
+        </DocSection>
 
         <DocSection id="overview" title="Overview">
           <div className="doc-prose" dangerouslySetInnerHTML={{ __html: c.overview ?? '' }} />
@@ -152,33 +168,6 @@ export function ComponentPage() {
           </DocSection>
         )}
 
-        {c.migrating && (
-          <DocSection id="migrating" title="Migrating">
-            <Bullets items={c.migrating} />
-          </DocSection>
-        )}
-
-        <DocSection id="use" title="Use it">
-          <div className="use-grid">
-            {reactImport && <CodeSnippet code={reactImport} language="tsx" type="single-line" label="React" />}
-            {c.angular && <CodeSnippet code={c.angular.selector} language="html" type="single-line" label="Angular selector" />}
-          </div>
-          {c.ai && (
-            <div className="ai-prompt-card">
-              <div className="ai-prompt-head">
-                <Sparkle size={15} />
-                <strong>Prompt for your coding agent</strong>
-                <CopyButton text={c.ai} label="Copy prompt" />
-              </div>
-              <p>{c.ai}</p>
-            </div>
-          )}
-          <p className="muted small">
-            Props, variants and the full API are in Storybook, with a live playground. Coding agents can read them
-            from <code>pada-ds/llms-full.txt</code>.{' '}
-            <RouterLink to={ROUTES.ai} className="text-link">Build with AI <ArrowRight size={13} /></RouterLink>
-          </p>
-        </DocSection>
 
         {c.related.length > 0 && (
           <DocSection id="related" title="Related">

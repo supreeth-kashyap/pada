@@ -27,6 +27,7 @@ export const Copy = (p: IconProps) => <Svg {...p}><rect x="9" y="9" width="12" h
 export const Check = (p: IconProps) => <Svg strokeWidth={2.4} {...p}><path d="M5 12.5l4.5 4.5L19 7.5" /></Svg>;
 export const Sun = (p: IconProps) => <Svg {...p}><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" /></Svg>;
 export const Moon = (p: IconProps) => <Svg {...p}><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z" /></Svg>;
+export const ChevronDown = (p: IconProps) => <Svg {...p}><path d="m6 9 6 6 6-6" /></Svg>;
 export const Menu = (p: IconProps) => <Svg {...p}><path d="M4 7h16M4 12h16M4 17h16" /></Svg>;
 export const Sparkle = (p: IconProps) => <Svg {...p}><path d="M12 3l1.9 5.6L19.5 10.5 13.9 12.4 12 18l-1.9-5.6L4.5 10.5l5.6-1.9Z" /></Svg>;
 export const Keyboard = (p: IconProps) => <Svg {...p}><rect x="2" y="6" width="20" height="13" rx="2" /><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 15h10" /></Svg>;
@@ -44,5 +45,18 @@ export const Github = ({ size = 18, ...p }: IconProps) => (
 export const Storybook = ({ size = 18, ...p }: IconProps) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...p}>
     <path d="M16.7.4 16.5 4a.3.3 0 0 0 .4.2l1.4-1-.1 3.6 2.9-.2.4 17.9-17-1L3.4 3.2 16.7.4Zm-3.3 7.8c0 .5 3 .3 3.4-.1 0-3.1-1.7-4.8-4.7-4.8s-4.7 1.7-4.7 4.2c0 4.4 6 4.5 6 6.9 0 .7-.3 1.1-1.1 1.1-1 0-1.4-.5-1.3-2.2 0-.4-3.5-.5-3.6 0-.3 4.1 2.2 5.3 5 5.3 2.8 0 5-1.5 5-4.2 0-4.8-6.1-4.7-6.1-7.1 0-1 .7-1.1 1.1-1.1.5 0 1.3.1 1.2 1.9Z" />
+  </svg>
+);
+export const ReactLogo = ({ size = 18, ...p }: IconProps) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.3} aria-hidden="true" {...p}>
+    <circle cx="12" cy="12" r="1.9" fill="currentColor" stroke="none" />
+    <ellipse cx="12" cy="12" rx="10.5" ry="4.1" />
+    <ellipse cx="12" cy="12" rx="10.5" ry="4.1" transform="rotate(60 12 12)" />
+    <ellipse cx="12" cy="12" rx="10.5" ry="4.1" transform="rotate(120 12 12)" />
+  </svg>
+);
+export const AngularLogo = ({ size = 18, ...p }: IconProps) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...p}>
+    <path fillRule="evenodd" d="M12 1.5 2.3 5l1.5 12.8L12 22.5l8.2-4.7L21.7 5 12 1.5Zm0 2.6-6 13.4h2.3l1.2-3h5l1.2 3H18L12 4.1Zm0 4.6 1.8 4.1h-3.6L12 8.7Z" />
   </svg>
 );

@@ -15,11 +15,6 @@ FormLabel is the Pada 1.x label. Since 2.0, use **Field** (`Field.Root`, `Field.
 `Field.Control`, `Field.Description`, `Field.Error`), which also wires the control's id,
 description and error. It keeps working until 3.0.
 
-## Migrating
-
-- Wrap the control in `Field.Root`, replace FormLabel with `Field.Label`, and move help and error
-  text into `Field.Description` and `Field.Error`.
-
 ## Use with AI
 
 ```text

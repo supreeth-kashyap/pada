@@ -1,6 +1,7 @@
 /* ================================================================ DOCS SHELL */
 
-.docs {
+/* .docs.wrap: .wrap sets `padding: 0 gutter`, which would otherwise drop the vertical padding. */
+.docs.wrap {
   display: grid;
   grid-template-columns: 240px minmax(0, 1fr) 200px;
   gap: clamp(24px, 3vw, 48px);
@@ -10,7 +11,7 @@
 }
 
 @media (max-width: 1180px) {
-  .docs {
+  .docs.wrap {
     grid-template-columns: 220px minmax(0, 1fr);
   }
 
@@ -20,7 +21,7 @@
 }
 
 @media (max-width: 880px) {
-  .docs {
+  .docs.wrap {
     grid-template-columns: minmax(0, 1fr);
     padding-top: 16px;
   }
@@ -35,9 +36,26 @@
   position: sticky;
   top: calc(var(--site-header-h) + 16px);
   max-height: calc(100vh - var(--site-header-h) - 32px);
+  overflow-x: hidden;
   overflow-y: auto;
   overscroll-behavior: contain;
-  scrollbar-width: thin;
+  scrollbar-width: none;
+}
+
+.docs-sidebar::-webkit-scrollbar,
+.docs-toc::-webkit-scrollbar {
+  display: none;
+}
+
+/* A hairline between the navigation and the page. */
+.docs-sidebar {
+  padding-right: 16px;
+  border-right: 1px solid var(--site-line-soft);
+}
+
+.docs-nav .search-field {
+  width: 100%;
+  min-width: 0;
 }
 
 .docs-mobile-bar {
@@ -59,6 +77,7 @@
 .docs-nav {
   display: grid;
   gap: 18px;
+  min-width: 0;
   padding-bottom: 32px;
 }
 
@@ -93,6 +112,13 @@
   transition:
     background-color 0.15s,
     color 0.15s;
+}
+
+.docs-nav-group a > span:first-child {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .docs-nav-group a:hover {
@@ -268,6 +294,7 @@
 /* ------------------------------------------------------ live preview */
 
 .doc-preview-wrap {
+  container-type: inline-size;
   display: grid;
   gap: 12px;
   scroll-margin-top: calc(var(--site-header-h) + 16px);
@@ -308,15 +335,28 @@
 
 .doc-links {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-auto-columns: minmax(0, 1fr);
+  grid-auto-flow: column;
   gap: 10px;
 }
 
+/* Four across while the labels fit on one line, otherwise two by two: never one card left alone. */
+@container (max-width: 640px) {
+  .doc-links {
+    grid-auto-flow: row;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 .doc-link-card {
-  display: flex;
+  display: grid;
+  grid-template-areas:
+    'icon arrow'
+    'label label';
+  grid-template-columns: 1fr auto;
   align-items: center;
-  gap: 12px;
-  padding: 12px 14px;
+  row-gap: 10px;
+  padding: 12px 12px 14px;
   border: 1px solid var(--site-line);
   border-radius: 14px;
   background: var(--site-card);
@@ -335,18 +375,18 @@
 }
 
 .doc-link-card > span {
-  display: grid;
-  flex: 1;
-}
-
-.doc-link-card small {
-  color: var(--site-faint);
-  font-size: 12px;
-  font-weight: 400;
+  grid-area: label;
+  line-height: 1.3;
 }
 
 .doc-link-card svg:first-child {
+  grid-area: icon;
   color: var(--site-accent-ink);
+}
+
+.doc-link-card svg:last-child {
+  grid-area: arrow;
+  color: var(--site-faint);
 }
 
 /* ---------------------------------------------- usage and do / don't */
@@ -409,13 +449,6 @@
 
 .dodont-card[data-kind='dont'] .doc-list li::before {
   background: var(--pada-color-danger-solid);
-}
-
-.use-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 12px;
-  margin-bottom: 16px;
 }
 
 .ai-prompt-card {

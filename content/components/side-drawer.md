@@ -14,11 +14,6 @@ related: Drawer, Sheet
 SideDrawer is the Pada 1.x side panel. Since 2.0 it wraps **Drawer**, which adds a trigger, a title,
 other edges and padding. It keeps working until 3.0.
 
-## Migrating
-
-- Replace `<SideDrawer>` with `Drawer.Root` and `Drawer.Content side="right"`, and add a
-  `Drawer.Title`.
-
 ## Use with AI
 
 ```text

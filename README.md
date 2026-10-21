@@ -59,8 +59,6 @@ npm install pada-ds
 
 Peer dependencies: React 19 (`react` and `react-dom` `^19.1.1`). The tokens use `light-dark()`, `color-mix()` and relative colours, so they need a 2024-era browser (Chrome 123, Safari 18, Firefox 128 or later).
 
-Upgrading from 1.1? Component APIs keep working; the [upgrade guide](./docs/migration-2.0.md) lists everything you might notice, including a codemod for the 1.x token names.
-
 ## Quick start
 
 ```tsx
@@ -168,7 +166,7 @@ The repo is an npm workspace with the same shape as [pada-ds-angular](https://gi
 projects/pada-ds/   the library, published as pada-ds (components, headless, tokens, Storybook)
 site/               the website: landing page and docs, prerendered for GitHub Pages
 content/            docs content for every component, shared by the site and both Storybooks
-docs/               contributing guide, migration guide, roadmap
+docs/               contributing guide, roadmap
 scripts/            repo tooling (Angular token and Storybook sync, docs data, consumer smoke test)
 ```
 

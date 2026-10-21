@@ -15,12 +15,6 @@ Notification is the Pada 1.x notification. Since 2.0, render one **Toaster** and
 `toast.success()` …: toasts are queued, stacked, dismissed by swipe and paused on hover. It keeps
 working until 3.0.
 
-## Migrating
-
-- Add `<Toaster />` once at the app root.
-- Replace each rendered Notification with a `toast.<tone>({ title, description })` call where the
-  event happens.
-
 ## Use with AI
 
 ```text
