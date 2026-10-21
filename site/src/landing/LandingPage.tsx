@@ -1,6 +1,8 @@
 import { useReveal } from '../lib/useReveal';
 import { Hero } from './Hero';
 import { StatsStrip } from './StatsStrip';
+import { ResourceCards } from './ResourceCards';
+import { FigmaSection } from './FigmaSection';
 import { FrameworkSection } from './FrameworkSection';
 import { Features } from './Features';
 import { Playground } from './Playground';
@@ -18,11 +20,13 @@ export function LandingPage() {
   return (
     <main id="main" className="landing">
       <Hero />
+      <ResourceCards />
       <StatsStrip />
       <Features />
       <Playground />
       <TokenArchitecture />
       <FrameworkSection />
+      <FigmaSection />
       <MotionReel />
       <Gallery />
       <AccessibilitySection />

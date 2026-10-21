@@ -399,6 +399,150 @@
   }
 }
 
+/* ============================================================ RESOURCES */
+
+.resources {
+  position: relative;
+  z-index: 1;
+  margin-top: calc(-1 * clamp(28px, 4vw, 56px));
+  padding-bottom: clamp(32px, 4vw, 48px);
+}
+
+.resource-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.resource-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 100%;
+  padding: 14px 14px 14px 12px;
+  border: 1px solid var(--site-line-soft);
+  border-radius: var(--site-radius-sm);
+  background: color-mix(in oklch, var(--site-raised) 85%, transparent);
+  box-shadow: var(--site-shadow);
+  color: var(--site-ink);
+  text-decoration: none;
+  backdrop-filter: blur(8px);
+  transition:
+    transform 0.2s var(--site-ease),
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.resource-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--site-line);
+  box-shadow: var(--site-shadow-lg);
+}
+
+.resource-card[data-featured] {
+  border-color: color-mix(in oklch, var(--site-accent) 35%, var(--site-line-soft));
+  background:
+    radial-gradient(120% 140% at 0% 0%, color-mix(in oklch, var(--site-glow-accent) 70%, transparent), transparent 60%),
+    color-mix(in oklch, var(--site-raised) 85%, transparent);
+}
+
+.resource-icon {
+  position: relative;
+  display: inline-grid;
+  flex: none;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--site-line-soft);
+  border-radius: 11px;
+  background: var(--pada-color-surface-sunken);
+  color: var(--site-ink);
+}
+
+.resource-badge {
+  position: absolute;
+  right: -5px;
+  bottom: -5px;
+  display: inline-grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--site-line-soft);
+  border-radius: 50%;
+  background: var(--site-raised);
+}
+
+.brand-storybook {
+  color: #ff4785;
+}
+
+.resource-copy {
+  display: grid;
+  gap: 1px;
+  min-width: 0;
+}
+
+.resource-copy strong {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.resource-copy span {
+  overflow: hidden;
+  color: var(--site-muted);
+  font-size: 12.5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.resource-ext {
+  flex: none;
+  margin-left: auto;
+  align-self: flex-start;
+  color: var(--site-faint);
+  transition:
+    color 0.15s,
+    transform 0.2s var(--site-ease);
+}
+
+.resource-card:hover .resource-ext {
+  color: var(--site-accent-ink);
+  transform: translate(2px, -2px);
+}
+
+@media (max-width: 1100px) {
+  .resource-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .resource-grid li:first-child {
+    grid-column: span 3;
+  }
+}
+
+@media (max-width: 640px) {
+  .resource-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .resource-grid li:first-child {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 400px) {
+  .resource-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .resource-grid li:first-child {
+    grid-column: auto;
+  }
+}
+
 /* ========================================================= STATS STRIP */
 
 .stats-strip {
@@ -415,14 +559,71 @@
 }
 
 .stats-strip li {
+  position: relative;
   display: grid;
-  gap: 2px;
-  padding: 26px 20px;
+  gap: 4px;
+  align-content: start;
+  padding: 24px 20px 26px;
   border-left: 1px solid var(--site-line-soft);
+  transition: background-color 0.2s;
 }
 
 .stats-strip li:first-child {
   border-left: 0;
+}
+
+.stats-strip li:hover {
+  background: color-mix(in oklch, var(--site-glow-accent) 35%, transparent);
+}
+
+.stat-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.stat-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--pada-color-accent-subtle);
+  color: var(--site-accent-ink);
+  transition: transform 0.25s var(--site-ease);
+}
+
+.stats-strip li:hover .stat-icon {
+  transform: rotate(-6deg) scale(1.06);
+}
+
+/* The frameworks stat pairs both logos: React in the chip, Angular beside it. */
+.stat-head > .brand-angular {
+  display: inline-grid;
+  box-sizing: content-box;
+  padding: 9px;
+  border-radius: 10px;
+  background: var(--pada-color-neutral-subtle);
+}
+
+.stat-swatches {
+  display: inline-flex;
+  padding-left: 4px;
+}
+
+.stat-swatches i {
+  width: 16px;
+  height: 16px;
+  margin-left: -5px;
+  border: 2px solid var(--site-card);
+  border-radius: 50%;
+  background: var(--pada-palette-accent-500);
+  transition: margin 0.25s var(--site-ease);
+}
+
+.stats-strip li:hover .stat-swatches i {
+  margin-left: 1px;
 }
 
 .stats-strip strong {
@@ -432,7 +633,7 @@
   line-height: 1;
 }
 
-.stats-strip span {
+.stat-label {
   color: var(--site-muted);
   font-size: 13px;
 }
@@ -2090,6 +2291,317 @@
   font-size: 20px;
 }
 
+/* ========================================================= FIGMA KIT */
+
+.figma-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(28px, 4vw, 56px);
+  align-items: center;
+}
+
+@media (max-width: 960px) {
+  .figma-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.figma-copy .check-list code {
+  font-family: var(--pada-font-mono);
+}
+
+.figma-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.figma-window {
+  overflow: hidden;
+  border: 1px solid var(--site-line);
+  border-radius: var(--site-radius);
+  background: var(--site-raised);
+  box-shadow: var(--site-shadow-lg);
+  user-select: none;
+}
+
+.figma-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--pada-color-border);
+  background: var(--pada-color-surface-sunken);
+  font-size: 12.5px;
+}
+
+.figma-bar .dots {
+  display: inline-flex;
+  gap: 6px;
+  margin-right: 6px;
+}
+
+.figma-bar .dots i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--pada-color-border);
+}
+
+.figma-file {
+  font-weight: 600;
+}
+
+.figma-share {
+  margin-left: auto;
+  padding: 4px 10px;
+  border-radius: 7px;
+  background: var(--pada-palette-accent-600);
+  color: var(--pada-color-accent-on-solid);
+  font-weight: 600;
+}
+
+.figma-body {
+  display: grid;
+  grid-template-columns: 132px minmax(0, 1fr) 190px;
+  min-height: 340px;
+}
+
+.figma-layers,
+.figma-vars {
+  display: grid;
+  gap: 2px;
+  align-content: start;
+  padding: 12px 8px;
+  font-size: 12px;
+}
+
+.figma-layers {
+  border-right: 1px solid var(--site-line-soft);
+}
+
+.figma-vars {
+  gap: 8px;
+  padding-inline: 12px;
+  border-left: 1px solid var(--site-line-soft);
+}
+
+.figma-panel-title {
+  padding: 0 6px 6px;
+  color: var(--site-muted);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.figma-layer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 6px;
+  border-radius: 6px;
+  color: var(--site-ink);
+}
+
+.figma-layer i {
+  width: 10px;
+  height: 10px;
+  border: 1.5px solid #a259ff;
+  border-radius: 2px;
+  rotate: 45deg;
+  scale: 0.8;
+}
+
+.figma-layer[data-active] {
+  background: var(--pada-color-accent-subtle);
+  color: var(--site-accent-ink);
+}
+
+.figma-canvas {
+  position: relative;
+  display: grid;
+  gap: 48px;
+  align-content: center;
+  justify-items: center;
+  padding: 44px 20px;
+  background-color: var(--pada-color-surface-sunken);
+}
+
+.figma-frame {
+  position: relative;
+  padding: 22px;
+  border: 1.5px solid #0d99ff;
+  background: var(--site-card);
+}
+
+.figma-frame-b {
+  border-color: transparent;
+  box-shadow: 0 0 0 1px var(--site-line-soft);
+  animation: float 7s -2s ease-in-out infinite;
+}
+
+.figma-frame-name {
+  position: absolute;
+  bottom: calc(100% + 5px);
+  left: -1px;
+  color: #0d99ff;
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.figma-frame-b .figma-frame-name {
+  color: var(--site-muted);
+}
+
+.figma-frame-body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.figma-handle {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border: 1.5px solid #0d99ff;
+  background: #fff;
+}
+
+.h-tl {
+  top: -4px;
+  left: -4px;
+}
+
+.h-tr {
+  top: -4px;
+  right: -4px;
+}
+
+.h-bl {
+  bottom: -4px;
+  left: -4px;
+}
+
+.h-br {
+  right: -4px;
+  bottom: -4px;
+}
+
+.figma-cursor {
+  position: absolute;
+  right: 12%;
+  bottom: 12%;
+  display: flex;
+  align-items: flex-start;
+  gap: 2px;
+  animation: figma-cursor 6s ease-in-out infinite;
+}
+
+.figma-cursor svg {
+  fill: #a259ff;
+  stroke: #fff;
+  stroke-width: 1.2;
+}
+
+.figma-cursor span {
+  margin-top: 12px;
+  padding: 2px 7px;
+  border-radius: 4px 999px 999px;
+  background: #a259ff;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+@keyframes figma-cursor {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+
+  40% {
+    translate: -60px -70px;
+  }
+
+  60% {
+    translate: -60px -70px;
+  }
+}
+
+.figma-var {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.figma-var > span {
+  display: grid;
+  gap: 1px;
+  min-width: 0;
+}
+
+.figma-var b {
+  font-weight: 500;
+}
+
+.figma-var code {
+  overflow: hidden;
+  color: var(--site-muted);
+  font-size: 10.5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.figma-var i {
+  flex: none;
+  width: 14px;
+  height: 14px;
+  margin-top: 1px;
+  border: 1px solid var(--site-line);
+  border-radius: 4px;
+}
+
+.figma-var i[data-swatch='accent'] {
+  background: var(--pada-color-accent-solid);
+}
+
+.figma-var i[data-swatch='muted'] {
+  background: var(--pada-color-fg-muted);
+}
+
+.figma-var i[data-swatch='surface'] {
+  background: var(--pada-color-surface);
+}
+
+.figma-var i[data-swatch='radius'] {
+  border: 2px solid var(--site-muted);
+  border-color: var(--site-muted) var(--site-muted) transparent transparent;
+  border-radius: 0 6px 0 0;
+}
+
+@media (max-width: 640px) {
+  .figma-body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .figma-layers,
+  .figma-vars {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .figma-cursor,
+  .figma-frame-b {
+    animation: none;
+  }
+}
+
 /* ======================================================= SMALL SCREENS */
 
 .hero-grid > *,
@@ -2097,6 +2609,7 @@
 .pg-stage > *,
 .ta-grid > *,
 .framework-grid > *,
+.figma-grid > *,
 .a11y-grid > *,
 .ai-grid > *,
 .faq-grid > *,

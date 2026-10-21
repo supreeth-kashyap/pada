@@ -6,7 +6,7 @@ import { ROUTES } from '../lib/paths';
 import { ThemeSwitch } from './ThemeSwitch';
 import { SearchPalette } from './SearchPalette';
 import { LinksMenu } from './LinksMenu';
-import { ArrowRight, ChevronDown, Github, Menu, Storybook } from './icons';
+import { ArrowRight, ChevronDown, Figma, Github, Menu, Storybook } from './icons';
 
 const NAV = [
   { to: ROUTES.docs, label: 'Docs', end: true },
@@ -50,6 +50,16 @@ export function SiteHeader() {
         </nav>
         <div className="site-header-actions">
           <SearchPalette />
+          <a
+            className="icon-link hide-sm"
+            href={links.figma}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Figma kit"
+            title="Figma kit"
+          >
+            <Figma size={18} />
+          </a>
           <LinksMenu label="Storybook" react={links.reactStorybook} angular={links.angularStorybook}>
             <button type="button" className="icon-link hide-sm" aria-label="Storybook" title="Storybook">
               <Storybook size={17} />
@@ -79,6 +89,7 @@ export function SiteHeader() {
                       {item.label} <ArrowRight />
                     </RouterLink>
                   ))}
+                  <a href={links.figma} target="_blank" rel="noopener noreferrer">Figma kit <ArrowRight /></a>
                   <a href={links.reactStorybook} target="_blank" rel="noopener noreferrer">Storybook (React) <ArrowRight /></a>
                   <a href={links.angularStorybook} target="_blank" rel="noopener noreferrer">Storybook (Angular) <ArrowRight /></a>
                   <a href={links.reactRepo} target="_blank" rel="noopener noreferrer">GitHub (React) <ArrowRight /></a>
