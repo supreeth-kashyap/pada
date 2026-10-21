@@ -49,7 +49,7 @@ export function Overview() {
                 <tr>
                   <th scope="row">React 19</th>
                   <td><a href={links.reactNpm}>pada-ds</a></td>
-                  <td><a href={links.reactStorybook}><Storybook size={13} /> React + Angular</a></td>
+                  <td><a href={links.reactStorybook}><Storybook size={13} /> React</a></td>
                   <td><a href={links.reactRepo}>supreeth-kashyap/pada</a></td>
                 </tr>
                 <tr>

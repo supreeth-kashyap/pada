@@ -27,7 +27,7 @@ export function SiteFooter() {
           <div className="footer-col">
             <h2>Storybook</h2>
             <ul>
-              <li><a href={links.reactStorybook} {...ext}>React + Angular</a></li>
+              <li><a href={links.reactStorybook} {...ext}>React</a></li>
               <li><a href={links.angularStorybook} {...ext}>Angular</a></li>
               <li><a href={links.figma} {...ext}>Figma kit</a></li>
             </ul>

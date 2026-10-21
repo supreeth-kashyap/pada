@@ -5,7 +5,7 @@
 <p align="center">
   <a href="https://www.npmjs.com/package/pada-ds"><img src="https://img.shields.io/npm/v/pada-ds?color=4f46e5&label=npm" alt="npm version"></a>
   <a href="https://github.com/supreeth-kashyap/pada/releases"><img src="https://img.shields.io/github/v/release/supreeth-kashyap/pada?color=f59e0b&label=release" alt="Latest release"></a>
-  <a href="https://main--6ad73b69f7d2adf27e282417.chromatic.com"><img src="https://img.shields.io/badge/storybook-React%20%2B%20Angular-ff4785" alt="Storybook"></a>
+  <a href="https://main--6ad73b69f7d2adf27e282417.chromatic.com"><img src="https://img.shields.io/badge/storybook-React-ff4785" alt="Storybook"></a>
   <a href="./LICENSE"><img src="https://img.shields.io/npm/l/pada-ds?color=78716c" alt="MIT licence"></a>
   <a href="https://supreeth-kashyap.github.io/pada/"><img src="https://img.shields.io/badge/docs-website-0c0a09" alt="Website and docs"></a>
 </p>
@@ -48,7 +48,7 @@ The [Pada website](https://supreeth-kashyap.github.io/pada/) has the guides (get
 
 | | Package | Repository | Storybook |
 |---|---|---|---|
-| React | [`pada-ds`](https://www.npmjs.com/package/pada-ds) | [supreeth-kashyap/pada](https://github.com/supreeth-kashyap/pada) | [React + Angular](https://main--6ad73b69f7d2adf27e282417.chromatic.com) |
+| React | [`pada-ds`](https://www.npmjs.com/package/pada-ds) | [supreeth-kashyap/pada](https://github.com/supreeth-kashyap/pada) | [React](https://main--6ad73b69f7d2adf27e282417.chromatic.com) |
 | Angular | [`pada-ds-angular`](https://www.npmjs.com/package/pada-ds-angular) | [supreeth-kashyap/pada-ds-angular](https://github.com/supreeth-kashyap/pada-ds-angular) | [Angular](https://main--6ad72a0038bb5d0de784c60f.chromatic.com) |
 
 ## Installation
@@ -148,7 +148,7 @@ More than 90 components, the same in both packages. The [Storybook](https://main
 
 ## Storybook
 
-The [Pada Storybook](https://main--6ad73b69f7d2adf27e282417.chromatic.com) shows the React components and, through Storybook composition, the [Angular Storybook](https://main--6ad72a0038bb5d0de784c60f.chromatic.com) in the same sidebar. Both are published to Chromatic on every push to `main`. The toolbar switches every theme axis, and the Accessibility panel runs axe against the current story.
+The [React Storybook](https://main--6ad73b69f7d2adf27e282417.chromatic.com) shows the React components; the Angular components have their own [Angular Storybook](https://main--6ad72a0038bb5d0de784c60f.chromatic.com). Both are published to Chromatic on every push to `main`. The toolbar switches every theme axis, and the Accessibility panel runs axe against the current story.
 
 ## Releases
 
