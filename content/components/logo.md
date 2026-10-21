@@ -15,10 +15,6 @@ related: BrandLogo, PadaLogo
 Logo is the old name of **BrandLogo** (third-party logos by name). Pada's own logo is **PadaLogo**.
 The alias keeps working until 3.0.
 
-## Migrating
-
-- Rename `Logo` to `BrandLogo`; the props are the same.
-
 ## Use with AI
 
 ```text

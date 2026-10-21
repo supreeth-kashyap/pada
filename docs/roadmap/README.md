@@ -70,7 +70,7 @@ As of 2026-10-18, on the React branch `claude/pada-2` (unreleased). Each documen
 | 5. Wave 2 | 🟡 22 of 25 shipped and DateRangePicker partly (range selection, no two-month view or presets); TimePicker and CheckboxGroup to do | not started |
 | 7. Brand | 🟡 `PadaLogo`, favicon and Sidebar default done; exports, social card and Figma to do | not started |
 | 8. Site | not started | n/a |
-| 9. Release 2.0 | 🟡 [migration guide](../migration-2.0.md) and token codemod written; not published | not started |
+| 9. Release 2.0 | 🟡 token codemod written; not published | not started |
 
 ## How parity is kept
 

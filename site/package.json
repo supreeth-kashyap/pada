@@ -1,6 +1,6 @@
 {
   "name": "pada-site",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "private": true,
   "description": "The Pada website: landing page and documentation for pada-ds and pada-ds-angular.",
   "type": "module",

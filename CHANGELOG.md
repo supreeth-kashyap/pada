@@ -1,9 +1,11 @@
 # Changelog
 
-## Unreleased
+## 1.2.1 - 2026-10-21
 
-- **Website and docs.** A new site in `site/` (landing page, guides and a page for every component, with live previews), prerendered and deployed to GitHub Pages by `.github/workflows/site.yml`.
-- **Storybook.** New Docs pages: introduction, getting started, theming, tokens, foundations (colour, typography, spacing and density, radius, elevation, motion, icons), building with AI, and legacy and migration. Every component's docs page now shows best practices, a playground, an AI prompt, its tokens and its accessibility notes. Story titles use the same categories as Angular (`Actions/Button`, `Overlays/Dialog` …).
+- **Website and docs.** A new site in `site/` (landing page, guides and a page for every component, with live previews), prerendered and deployed to GitHub Pages by `.github/workflows/site.yml`. The header's Storybook and GitHub links open a menu to the React or the Angular destination, and component pages lead with the AI prompt under "Use it".
+- **Storybook is React only.** The React Storybook no longer composes the Angular one; each package has its own, and the website links to both.
+- **Removed the 2.0 migration guide.** `docs/migration-2.0.md`, the components' "Migrating" sections and the links to them are gone. The `pada-tokens-migrate` CLI still ships.
+- **Storybook.** New Docs pages: introduction, getting started, theming, tokens, foundations (colour, typography, spacing and density, radius, elevation, motion, icons), building with AI, and legacy components. Every component's docs page now shows best practices, a playground, an AI prompt, its tokens and its accessibility notes. Story titles use the same categories as Angular (`Actions/Button`, `Overlays/Dialog` …).
 - **Repository layout.** The library moved to `projects/pada-ds` (an npm workspace), mirroring `pada-ds-angular`. The published package is unchanged. `check:tokens` is now `tokens:check` (the old name still works).
 - **Fix: `CodeSnippet` in Vite 8 builds.** Prism's language files could run before Prism core, throwing "Prism is not defined" in production bundles built with Rolldown.
 - **Fix: `Progress` is named by its label.** The progressbar now has `aria-labelledby` pointing at `label`, as in Angular.
@@ -17,7 +19,7 @@
 
 ## 1.2.0 - 2026-10-20
 
-Pada 1.2 brings React to parity with Pada for Angular (`pada-ds-angular` 1.2.0, released alongside it): the same components, parts, keyboard behaviour, tokens and motion. Component APIs from 1.1 keep working; deprecated names stay until 3.0. Read the [upgrade guide](./docs/migration-2.0.md) for everything you might notice.
+Pada 1.2 brings React to parity with Pada for Angular (`pada-ds-angular` 1.2.0, released alongside it): the same components, parts, keyboard behaviour, tokens and motion. Component APIs from 1.1 keep working; deprecated names stay until 3.0.
 
 - **Releases.** Pushing a `v*` tag runs `.github/workflows/release.yml`: it checks the tag against `package.json`, publishes `pada-ds` to npm with provenance and `@supreeth-kashyap/pada-ds` to GitHub Packages, and creates the GitHub Release from this changelog.
 - **New components, matching Pada for Angular** (same parts, attributes, keyboard behaviour and tokens):
@@ -72,7 +74,7 @@ Pada 1.2 brings React to parity with Pada for Angular (`pada-ds-angular` 1.2.0, 
   - **Sizes.** Controlled with `sizes` / `onSizesChange`; `onSizesCommit` fires when a drag or key press ends, for saving the layout.
   - **Styled handle.** A 1px line with a wider invisible hit area. It thickens in the accent colour on hover, focus and drag, and `withGrip` adds a grip. Restyle through `--pada-resizable-*` tokens.
   - **Headless.** `pada-ds/headless` exports the same parts.
-- **Docs.** New [migration guide](./docs/migration-2.0.md) covering tokens, theming, deprecated APIs, the headless entry point and every behaviour or markup change. `docs/roadmap` has "As built" notes per area, a progress table and a React 2.0 column in the parity matrix.
+- **Docs.** `docs/roadmap` has "As built" notes per area, a progress table and a React 2.0 column in the parity matrix.
 - **Demo dark mode.** The demo shell and documentation pages now use semantic tokens instead of hard-coded colours. A theme toggle in the top-right corner follows the OS by default and remembers your choice. The Playground starts from the shell's theme.
 - **Fixed:** `ThemeToggle`:
   - Each toggle now has its own icon mask id. With two toggles on a page, they shared the first one's mask and could draw the wrong icon.

@@ -69,7 +69,7 @@ const preview: Preview = {
       storySort: {
         order: [
           'Docs',
-          ['Introduction', 'Getting started', 'Theming', 'Tokens', 'Foundations', ['Colour', 'Typography', 'Spacing & density', 'Radius', 'Elevation', 'Motion', 'Icons'], 'Use with AI', 'Legacy & migration'],
+          ['Introduction', 'Getting started', 'Theming', 'Tokens', 'Foundations', ['Colour', 'Typography', 'Spacing & density', 'Radius', 'Elevation', 'Motion', 'Icons'], 'Use with AI', 'Legacy'],
           'Actions',
           'Forms',
           'Dates',

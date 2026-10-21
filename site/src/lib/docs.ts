@@ -17,7 +17,6 @@ export interface DocComponent {
   do?: string[];
   dont?: string[];
   accessibility?: string[];
-  migrating?: string[];
   ai?: string;
 }
 

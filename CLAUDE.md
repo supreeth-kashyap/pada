@@ -19,7 +19,7 @@ pada/
 │   └── .storybook/
 ├── site/               the website: landing page and docs (npm workspace "pada-site")
 ├── content/            docs content (components/*.md → docs.json) shared by the site and both Storybooks
-├── docs/               contributing guide, migration guide, roadmap
+├── docs/               contributing guide, roadmap
 ├── scripts/            repo tooling: Angular token sync, consumer smoke test, package docs copy
 └── public/             brand assets served by Storybook and the site
 ```

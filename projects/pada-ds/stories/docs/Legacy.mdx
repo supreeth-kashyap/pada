@@ -1,10 +1,10 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 
-<Meta title="Docs/Legacy & migration" />
+<Meta title="Docs/Legacy" />
 
-# Legacy & migration
+# Legacy
 
-Pada 2.x keeps every 1.x component API working. Deprecated components are grouped under **Legacy**
+Older component APIs keep working. Deprecated components are grouped under **Legacy**
 (React only) and are removed in 3.0.
 
 | Deprecated | Use instead |
@@ -17,13 +17,3 @@ Pada 2.x keeps every 1.x component API working. Deprecated components are groupe
 | `Logo` | `BrandLogo` (Pada's own logo is `PadaLogo`) |
 | `Button split` / `onSplitClick` | `SplitButton` |
 
-## Token names
-
-The 1.x token names still work as aliases. A codemod renames them in your code:
-
-```bash
-npx pada-tokens-migrate src/ --dry-run   # list the changes
-npx pada-tokens-migrate src/             # rewrite in place
-```
-
-The full upgrade guide is `docs/migration-2.0.md` in the pada repository.

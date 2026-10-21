@@ -1,7 +1,7 @@
 {
   "name": "pada-ds",
   "private": false,
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Pada design system for React: accessible styled components, headless parts and design tokens.",
   "license": "MIT",
   "author": "Supreeth Kashyap",

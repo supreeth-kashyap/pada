@@ -33,7 +33,6 @@ export function ComponentPage() {
     ...(c.whenToUse ? [{ id: 'when-to-use', label: 'When to use' }] : []),
     ...(c.do ? [{ id: 'best-practices', label: 'Best practices' }] : []),
     ...(c.accessibility ? [{ id: 'accessibility', label: 'Accessibility' }] : []),
-    ...(c.migrating ? [{ id: 'migrating', label: 'Migrating' }] : []),
     ...(c.related.length ? [{ id: 'related', label: 'Related' }] : []),
   ];
 
@@ -166,12 +165,6 @@ export function ComponentPage() {
         {c.accessibility && (
           <DocSection id="accessibility" title="Accessibility">
             <Bullets items={c.accessibility} />
-          </DocSection>
-        )}
-
-        {c.migrating && (
-          <DocSection id="migrating" title="Migrating">
-            <Bullets items={c.migrating} />
           </DocSection>
         )}
 

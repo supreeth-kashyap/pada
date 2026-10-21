@@ -1,5 +1,5 @@
 {
-  "version": "1.2.0",
+  "version": "1.2.1",
   "links": {
     "site": "https://supreeth-kashyap.github.io/pada/",
     "reactStorybook": "https://main--6ad73b69f7d2adf27e282417.chromatic.com",
@@ -8344,9 +8344,6 @@
         ]
       },
       "overview": "<p>FormLabel is the Pada 1.x label. Since 2.0, use <strong>Field</strong> (<code>Field.Root</code>, <code>Field.Label</code>, <code>Field.Control</code>, <code>Field.Description</code>, <code>Field.Error</code>), which also wires the control's id, description and error. It keeps working until 3.0.</p>",
-      "migrating": [
-        "Wrap the control in <code>Field.Root</code>, replace FormLabel with <code>Field.Label</code>, and move help and error text into <code>Field.Description</code> and <code>Field.Error</code>."
-      ],
       "ai": "Replace Pada FormLabel with Field: wrap each control in Field.Root, use Field.Label, and move help text and errors into Field.Description and Field.Error."
     },
     {
@@ -8377,11 +8374,6 @@
         ]
       },
       "overview": "<p>Loader is the Pada 1.x loading indicator. Since 2.0, use <strong>Spinner</strong> for inline loading, <strong>ProgressCircle</strong> when progress is known, or <strong>Skeleton</strong> for content placeholders. It keeps working until 3.0.</p>",
-      "migrating": [
-        "Inline waits: <code>&lt;Spinner label=\"Loading\" /&gt;</code>.",
-        "Known progress: <code>&lt;ProgressCircle value={n} label=\"…\" /&gt;</code>.",
-        "First loads with a known layout: <code>Skeleton</code>."
-      ],
       "ai": "Replace Pada Loader usages: use Spinner for inline waits, ProgressCircle where a percentage is available, and Skeleton for initial page loads."
     },
     {
@@ -8424,9 +8416,6 @@
         ]
       },
       "overview": "<p>Logo is the old name of <strong>BrandLogo</strong> (third-party logos by name). Pada's own logo is <strong>PadaLogo</strong>. The alias keeps working until 3.0.</p>",
-      "migrating": [
-        "Rename <code>Logo</code> to <code>BrandLogo</code>; the props are the same."
-      ],
       "ai": "Rename every Pada Logo import and usage to BrandLogo; the props stay the same."
     },
     {
@@ -8454,10 +8443,6 @@
         "reads": []
       },
       "overview": "<p>Modal is the Pada 1.x modal window. Since 2.0 it wraps <strong>Dialog</strong>, which adds a trigger, a description, a footer and sizes. It keeps working until 3.0.</p>",
-      "migrating": [
-        "Replace <code>&lt;Modal open onClose title&gt;</code> with <code>Dialog.Root</code> (<code>open</code>, <code>onOpenChange</code>), <code>Dialog.Content</code>, <code>Dialog.Header</code> and <code>Dialog.Title</code>.",
-        "Move buttons into <code>Dialog.Footer</code>."
-      ],
       "ai": "Replace every Pada Modal in this file with Dialog (Dialog.Root, Dialog.Content, Dialog.Header, Dialog.Title, Dialog.Body, Dialog.Footer), keeping the same open state and close handlers."
     },
     {
@@ -8506,10 +8491,6 @@
         ]
       },
       "overview": "<p>Notification is the Pada 1.x notification. Since 2.0, render one <strong>Toaster</strong> and call <code>toast()</code> / <code>toast.success()</code> …: toasts are queued, stacked, dismissed by swipe and paused on hover. It keeps working until 3.0.</p>",
-      "migrating": [
-        "Add <code>&lt;Toaster /&gt;</code> once at the app root.",
-        "Replace each rendered Notification with a <code>toast.&lt;tone&gt;({ title, description })</code> call where the event happens."
-      ],
       "ai": "Remove Pada Notification components from this app: add one Toaster at the root and replace each notification with a toast.success / toast.danger call carrying the same title and description."
     },
     {
@@ -8537,9 +8518,6 @@
         "reads": []
       },
       "overview": "<p>SideDrawer is the Pada 1.x side panel. Since 2.0 it wraps <strong>Drawer</strong>, which adds a trigger, a title, other edges and padding. It keeps working until 3.0.</p>",
-      "migrating": [
-        "Replace <code>&lt;SideDrawer&gt;</code> with <code>Drawer.Root</code> and <code>Drawer.Content side=\"right\"</code>, and add a <code>Drawer.Title</code>."
-      ],
       "ai": "Replace Pada SideDrawer usages with Drawer.Root and Drawer.Content side=\"right\", adding a Drawer.Header with a Drawer.Title for each."
     }
   ]

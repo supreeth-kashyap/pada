@@ -39,7 +39,6 @@ const SECTION_KEYS = {
   'When not to use': 'whenNotToUse',
   'Best practices': 'bestPractices',
   Accessibility: 'accessibility',
-  Migrating: 'migrating',
   'Use with AI': 'ai',
 };
 
@@ -127,7 +126,7 @@ function shapeSections(raw, file) {
       const prompt = /```text\n([\s\S]*?)\n```/.exec(md);
       if (!prompt) throw new Error(`${file}: Use with AI needs a \`\`\`text block`);
       out.ai = prompt[1].replace(/\n/g, ' ');
-    } else if (key === 'whenToUse' || key === 'whenNotToUse' || key === 'accessibility' || key === 'migrating') {
+    } else if (key === 'whenToUse' || key === 'whenNotToUse' || key === 'accessibility') {
       out[key] = bulletList(md);
     } else {
       out[key] = renderMarkdown(md);

@@ -5,7 +5,8 @@ import { docs, links } from '../lib/docs';
 import { ROUTES } from '../lib/paths';
 import { ThemeSwitch } from './ThemeSwitch';
 import { SearchPalette } from './SearchPalette';
-import { ArrowRight, Github, Menu, Storybook } from './icons';
+import { LinksMenu } from './LinksMenu';
+import { ArrowRight, ChevronDown, Github, Menu, Storybook } from './icons';
 
 const NAV = [
   { to: ROUTES.docs, label: 'Docs', end: true },
@@ -41,18 +42,24 @@ export function SiteHeader() {
               {item.label}
             </NavLink>
           ))}
-          <a href={links.reactStorybook} target="_blank" rel="noopener noreferrer">
-            Storybook
-          </a>
+          <LinksMenu label="Storybook" react={links.reactStorybook} angular={links.angularStorybook}>
+            <button type="button" className="site-nav-menu">
+              Storybook <ChevronDown size={14} />
+            </button>
+          </LinksMenu>
         </nav>
         <div className="site-header-actions">
           <SearchPalette />
-          <a className="icon-link hide-sm" href={links.reactStorybook} target="_blank" rel="noopener noreferrer" aria-label="Storybook (opens in a new tab)" title="Storybook">
-            <Storybook size={17} />
-          </a>
-          <a className="icon-link hide-sm" href={links.reactRepo} target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in a new tab)" title="GitHub">
-            <Github size={18} />
-          </a>
+          <LinksMenu label="Storybook" react={links.reactStorybook} angular={links.angularStorybook}>
+            <button type="button" className="icon-link hide-sm" aria-label="Storybook" title="Storybook">
+              <Storybook size={17} />
+            </button>
+          </LinksMenu>
+          <LinksMenu label="GitHub" react={links.reactRepo} angular={links.angularRepo}>
+            <button type="button" className="icon-link hide-sm" aria-label="GitHub" title="GitHub">
+              <Github size={18} />
+            </button>
+          </LinksMenu>
           <ThemeSwitch />
           <Drawer.Root open={menuOpen} onOpenChange={setMenuOpen}>
             <Drawer.Trigger asChild>
@@ -74,7 +81,8 @@ export function SiteHeader() {
                   ))}
                   <a href={links.reactStorybook} target="_blank" rel="noopener noreferrer">Storybook (React) <ArrowRight /></a>
                   <a href={links.angularStorybook} target="_blank" rel="noopener noreferrer">Storybook (Angular) <ArrowRight /></a>
-                  <a href={links.reactRepo} target="_blank" rel="noopener noreferrer">GitHub <ArrowRight /></a>
+                  <a href={links.reactRepo} target="_blank" rel="noopener noreferrer">GitHub (React) <ArrowRight /></a>
+                  <a href={links.angularRepo} target="_blank" rel="noopener noreferrer">GitHub (Angular) <ArrowRight /></a>
                 </nav>
               </Drawer.Body>
             </Drawer.Content>

@@ -428,7 +428,8 @@ html.js-reveal [data-reveal]:not(.is-in) {
   margin-left: 8px;
 }
 
-.site-nav a {
+.site-nav a,
+.site-nav-menu {
   padding: 8px 12px;
   border-radius: 999px;
   color: var(--site-muted);
@@ -441,9 +442,62 @@ html.js-reveal [data-reveal]:not(.is-in) {
 }
 
 .site-nav a:hover,
-.site-nav a[aria-current='page'] {
+.site-nav a[aria-current='page'],
+.site-nav-menu:hover,
+.site-nav-menu[aria-expanded='true'] {
   color: var(--site-ink);
   background: var(--pada-color-neutral-subtle);
+}
+
+.site-nav-menu {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border: 0;
+  background: transparent;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.site-nav-menu svg {
+  transition: rotate 0.2s var(--site-ease);
+}
+
+.site-nav-menu[aria-expanded='true'] svg {
+  rotate: 180deg;
+}
+
+.icon-link[aria-expanded='true'] {
+  color: var(--site-ink);
+  background: var(--pada-color-neutral-subtle);
+}
+
+/* Header menus that split a destination into React and Angular. */
+.menu.links-menu {
+  --pada-menu-min-width: 11rem;
+}
+
+.links-menu .menu-item {
+  cursor: pointer;
+}
+
+.links-menu .menu-item-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.links-menu-ext {
+  margin-left: auto;
+  color: var(--site-faint);
+}
+
+.brand-react {
+  color: light-dark(#087ea4, #58c4dc);
+}
+
+.brand-angular {
+  color: light-dark(#dd0031, #ff4d6d);
 }
 
 .site-header-actions {
