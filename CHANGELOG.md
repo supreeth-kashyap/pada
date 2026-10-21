@@ -7,6 +7,13 @@
 - **Repository layout.** The library moved to `projects/pada-ds` (an npm workspace), mirroring `pada-ds-angular`. The published package is unchanged. `check:tokens` is now `tokens:check` (the old name still works).
 - **Fix: `CodeSnippet` in Vite 8 builds.** Prism's language files could run before Prism core, throwing "Prism is not defined" in production bundles built with Rolldown.
 - **Fix: `Progress` is named by its label.** The progressbar now has `aria-labelledby` pointing at `label`, as in Angular.
+- **Fix: text contrast meets WCAG AA (4.5:1) in both themes.**
+  - `--pada-color-<intent>-on-solid` now picks white or black from the fill's relative luminance instead of its OKLCH lightness, so text on any solid fill reaches at least 4.58:1 for every `data-accent`, including `custom`. Before, white text on green, teal, cyan, sky and orange fills (light) and on blue, red, rose and purple fills (dark) fell as low as 2.7:1.
+  - `-solid-hover` and `-solid-pressed` move away from the on-solid text instead of toward `--pada-color-fg`, so hover and pressed never lower contrast. In dark mode, fills under white text now darken on hover.
+  - Dark `-solid` is step 500 mixed 30% toward 600, so the default indigo keeps white text.
+  - Dark `--pada-color-fg-subtle` (calendar weekdays, outside-month days, code comments, placeholders) moves from step 500 toward 400 and reaches 4.6:1 on raised surfaces for every `data-neutral`.
+  - `Avatar` colours use step 800 for initials (pink, orange and sky were below 4.5:1).
+  - The website check now fails on any serious axe finding, including contrast inside library components.
 
 ## 1.2.0 - 2026-10-20
 
