@@ -274,7 +274,7 @@
   font-size: 14px;
 }
 
-.stage-ws span {
+.stage-ws strong + span {
   color: var(--pada-color-fg-muted);
   font-size: 12px;
 }

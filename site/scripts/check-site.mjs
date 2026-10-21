@@ -36,13 +36,8 @@ const exists = (href) => {
   return clean === '' || existsSync(path.join(distDir, clean, 'index.html')) || existsSync(path.join(distDir, clean));
 };
 
-// Contrast findings inside library components (dark-mode accent buttons, avatar initials, calendar
-// days, code comments) come from pada-ds tokens, not the site; they are reported as warnings.
-const LIBRARY = '.button, .avatar, .code-snippet, .calendar';
-
 const browser = await chromium.launch({ executablePath: process.env.CHROME || undefined });
 const problems = [];
-const warnings = new Set();
 for (const route of routes) {
   for (const colorScheme of ['light', 'dark']) {
     const page = await browser.newPage({ colorScheme, viewport: { width: 1280, height: 900 } });
@@ -53,35 +48,25 @@ for (const route of routes) {
     await page.evaluate(() => document.querySelectorAll('[data-reveal]').forEach((n) => n.classList.add('is-in')));
     await page.waitForTimeout(900); // let reveal transitions finish before measuring contrast
     await page.addScriptTag({ content: axeSource });
-    const violations = await page.evaluate(async (library) => {
+    const violations = await page.evaluate(async () => {
       // Live story previews are checked by Storybook's a11y addon, not here.
       // @ts-expect-error axe is injected above
       const result = await window.axe.run({ exclude: [['.doc-preview']] }, { resultTypes: ['violations'] });
       return result.violations
         .filter((v) => v.impact === 'serious' || v.impact === 'critical')
-        .flatMap((v) =>
-          v.nodes.map((n) => ({
-            id: v.id,
-            target: n.target.join(' '),
-            inLibrary: !!document.querySelector(n.target.join(' '))?.closest(library),
-          })),
-        );
-    }, LIBRARY);
+        .flatMap((v) => v.nodes.map((n) => ({ id: v.id, target: n.target.join(' ') })));
+    });
     const links = colorScheme === 'light'
       ? await page.$$eval('a[href^="/"]', (as) => as.map((a) => a.getAttribute('href')))
       : [];
     for (const href of new Set(links)) if (!exists(href)) problems.push(`${route}: broken link ${href}`);
-    for (const v of violations) {
-      if (v.id === 'color-contrast' && v.inLibrary) warnings.add(`library contrast (${colorScheme}): ${v.target.split(' > ').slice(-2).join(' > ')}`);
-      else problems.push(`${route} (${colorScheme}): axe ${v.id}: ${v.target}`);
-    }
+    for (const v of violations) problems.push(`${route} (${colorScheme}): axe ${v.id}: ${v.target}`);
     for (const e of errors) problems.push(`${route} (${colorScheme}): console ${e}`);
     await page.close();
   }
 }
 await browser.close();
 
-if (warnings.size) console.warn(`Known pada-ds findings (not failing):\n  ${[...warnings].join('\n  ')}\n`);
 if (problems.length) {
   console.error([...new Set(problems)].join('\n'));
   console.error(`\n${problems.length} problems on ${routes.length} pages`);

@@ -120,17 +120,28 @@ for (const intent of Object.keys(INTENTS)) {
 }
 
 // ── Tier 1 + 2: intent roles ─────────────────────────────────────────────────────────────────
-// Text on a solid fill is picked from the fill's own lightness with relative colour syntax:
-// white below OKLCH L 0.65, near-black above, so amber or lime accents stay readable.
-const onSolid = (solid) => `oklch(from ${v(solid)} clamp(0.15, (0.65 - l) * 1000, 1) 0 0)`;
+// Text on a solid fill is picked from the fill's WCAG relative luminance with relative colour
+// syntax: white below 0.179, black above. That is where white and black have equal contrast, so
+// the better of the two always reaches at least 4.58:1, for any fill and any data-accent. Channels
+// are clamped first because out-of-gamut fills (data-accent="custom") are clipped to sRGB on screen.
+const luminance = '(0.2126 * clamp(0, r, 1) + 0.7152 * clamp(0, g, 1) + 0.0722 * clamp(0, b, 1))';
+const onSolid = (solid) => {
+  const channel = `clamp(0, (0.179 - ${luminance}) * 100000, 1)`;
+  return `color(from ${v(solid)} srgb-linear ${channel} ${channel} ${channel})`;
+};
+// Hover and pressed fills move away from the on-solid text (darker under white text, lighter
+// under black), so they keep at least the contrast of the resting fill.
+const awayFromText = (intent) => `oklch(from ${v(`color-${intent}-on-solid`)} calc(1 - l) 0 0)`;
 for (const intent of Object.keys(INTENTS)) {
   const p = (step) => v(`palette-${intent}-${step}`);
   const role = (suffix, value, tier, description) =>
     add(`color-${intent}-${suffix}`, value, { tier, type: 'color', group: 'intent-role', description });
-  role('solid', ld(p(600), p(500)), 1, `Filled ${intent} backgrounds (buttons, selected states).`);
-  role('solid-hover', `color-mix(in oklch, ${v(`color-${intent}-solid`)}, ${v('color-fg')} 12%)`, 2, 'Hover on solid: 12% toward the foreground.');
-  role('solid-pressed', `color-mix(in oklch, ${v(`color-${intent}-solid`)}, ${v('color-fg')} 22%)`, 2, 'Pressed solid: 22% toward the foreground.');
-  role('on-solid', onSolid(`color-${intent}-solid`), 2, 'Text and icons on the solid fill, chosen by its lightness.');
+  // Dark mode uses step 500 nudged 30% toward 600, so indigo, violet and the other mid-tone
+  // accents keep white text.
+  role('solid', ld(p(600), `color-mix(in oklch, ${p(500)}, ${p(600)} 30%)`), 1, `Filled ${intent} backgrounds (buttons, selected states).`);
+  role('solid-hover', `color-mix(in oklch, ${v(`color-${intent}-solid`)}, ${awayFromText(intent)} 12%)`, 2, 'Hover on solid: 12% away from the on-solid text.');
+  role('solid-pressed', `color-mix(in oklch, ${v(`color-${intent}-solid`)}, ${awayFromText(intent)} 22%)`, 2, 'Pressed solid: 22% away from the on-solid text.');
+  role('on-solid', onSolid(`color-${intent}-solid`), 2, 'Text and icons on the solid fill: white or black, whichever has more contrast.');
   role('subtle', ld(p(50), p(950)), 1, `Tinted ${intent} backgrounds.`);
   role('subtle-hover', `color-mix(in oklch, ${v(`color-${intent}-subtle`)}, ${v(`color-${intent}-solid`)} 10%)`, 2, 'Hover on subtle: 10% toward the solid.');
   role('fg', ld(p(700), p(300)), 1, `${intent} text on surfaces.`);
@@ -156,7 +167,7 @@ const text = (name, value, tier, description) =>
   add(`color-${name}`, value, { tier, type: 'color', group: 'text', description });
 text('fg', ld(n(900), n(50)), 1, 'Primary text.');
 text('fg-muted', withContrast(ld(n(600), n(400)), 60), 2, 'Secondary text. Moves toward fg with the contrast knob.');
-text('fg-subtle', withContrast(ld(n(500), n(500)), 60), 2, 'Placeholders and tertiary text.');
+text('fg-subtle', withContrast(ld(n(500), `color-mix(in oklch, ${n(500)}, ${n(400)} 65%)`), 60), 2, 'Placeholders and tertiary text. At least 4.5:1 on every surface.');
 text('fg-disabled', ld(n(400), n(600)), 1, 'Disabled text.');
 text('fg-on-inverse', ld(v('ref-white'), n(900)), 1, 'Text on surface-inverse.');
 text('fg-link', v('color-accent-fg'), 1, 'Links.');
