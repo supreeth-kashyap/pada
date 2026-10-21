@@ -6,6 +6,14 @@
 @import './landing.css';
 @import './docs.css';
 
+/* Registered as a colour so light-dark() resolves on :root, in the page's scheme. Code snippets force
+   a dark scheme inside themselves; a plain token would flip to its dark value there. */
+@property --site-snippet-line {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: transparent;
+}
+
 :root {
   /* The site sets Pada's font tokens, which re-types every component too. */
   --pada-font-sans: 'Instrument Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -25,6 +33,7 @@
   --site-faint: var(--pada-color-fg-muted);
   --site-line: var(--pada-color-border);
   --site-line-soft: color-mix(in oklch, var(--pada-color-border) 55%, transparent);
+  --site-snippet-line: var(--pada-color-border);
   --site-dot: color-mix(in oklch, var(--pada-color-fg) 13%, transparent);
   --site-accent: var(--pada-color-accent-solid);
   --site-accent-ink: var(--pada-color-accent-fg);
@@ -141,6 +150,12 @@ pre {
   max-width: calc(var(--site-wrap) + 2 * var(--site-gutter));
   margin: 0 auto;
   padding: 0 var(--site-gutter);
+}
+
+/* Every code block on the site gets an edge, so it never melts into the page ground. */
+.code-snippet {
+  border: 1px solid var(--site-snippet-line);
+  box-shadow: var(--site-shadow);
 }
 
 .dot-ground {

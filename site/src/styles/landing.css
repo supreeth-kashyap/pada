@@ -1075,7 +1075,8 @@
   }
 }
 
-.pg-controls .select,
+.pg-controls .select-group,
+.pg-controls .select-trigger,
 .pg-controls .slider {
   width: 100%;
   min-width: 0;
