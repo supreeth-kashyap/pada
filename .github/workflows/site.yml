@@ -30,7 +30,7 @@ jobs:
         env:
           # The path the site is served from: "/pada/" for the project site, "/" for a custom domain.
           SITE_BASE: /pada/
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: site/dist
 
